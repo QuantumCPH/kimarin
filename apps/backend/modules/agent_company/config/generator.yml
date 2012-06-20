@@ -1,0 +1,18 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      AgentCompany
+    theme:            default
+    css:             /sf/sf_admin/css/admin_main.css
+    fields:
+        cvr_number: {name: Vat Number}
+    edit:
+      display: [name, cvr_number,address,post_code,country_id,contact_name,email, mobile_number,head_phone_number,sms_code,fax_number,website,status_id,company_type_id,commission_period_id,account_manager_id,agent_commission_package_id,is_prepaid]
+    list:
+      filters: [id, name, cvr_number ]
+      display: [id, name, cvr_number, contact_name, head_phone_number, status , registration_revenue_commissision ,refill_revenue_commissision,revenue_at_shop, registration_revenue,refill_revenue,revenue_at_shop,sms_code]
+      max_per_page: 500
+      object_actions:
+        _edit: ~
+        _delete: ~
+        #viewDetail : {label: view details, action: view}
