@@ -14,7 +14,7 @@ require_once(sfConfig::get('sf_lib_dir') . '/sms.class.php');
 class affiliateActions extends sfActions {
 
     private function getTargetUrl() {
-        return sfConfig::get('app_main_url') . "affiliate/";
+        return sfConfig::get('app_agent_url');
     }
 
     /**
@@ -35,7 +35,8 @@ class affiliateActions extends sfActions {
       
         $this->updateNews = NewupdatePeer::doSelect(new Criteria());
         $this->forward404Unless($this->getUser()->isAuthenticated());
-
+        $this->targetUrl = $this->getTargetUrl();
+        
         $c = new Criteria();
         $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
         $c->add(AgentCompanyPeer::ID, $agent_company_id);
@@ -436,7 +437,7 @@ class affiliateActions extends sfActions {
                   //  $this->getUser()->setCulture('de');
                     emailLib::sendRefillEmail($this->customer, $order);
                  //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% NOK.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount())));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount() , "%3%" => sfConfig::get('app_currency_code'))));
 //                                      echo 'rehcarged, redirecting';
                     $this->redirect('affiliate/receipts');
                 } else {
@@ -869,9 +870,9 @@ class affiliateActions extends sfActions {
             $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
             if ($getFirstnumberofMobile == 0) {
                 $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-                $TelintaMobile = '47' . $TelintaMobile;
+                $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
             } else {
-                $TelintaMobile = '47' . $this->customer->getMobileNumber();
+                $TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
             }
 
             $callbacklog = new CallbackLog();
@@ -1037,7 +1038,7 @@ class affiliateActions extends sfActions {
             $aph->setRemainingBalance($remainingbalance);
             $aph->save();
 
-            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Credit Card recharge of ') . $amount . $this->getContext()->getI18N()->__(' NOK is approved'));
+            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Credit Card recharge of %1%%2% is approved ',array("%1%" => $amount,"%2%" => sfConfig::get('app_currency_code'))));
             emailLib::sendAgentRefilEmail($this->agent, $agent_order);
             $this->redirect('affiliate/agentOrder');
         }
@@ -1134,11 +1135,13 @@ class affiliateActions extends sfActions {
 
        changeLanguageCulture::languageCulture($request,$this);
        $this->browser = new Browser();
+       $this->targetUrl = $this->getTargetUrl();
     
    } 
       public function executeChangenumber(sfWebRequest $request) {
             changeLanguageCulture::languageCulture($request, $this);
-
+            $this->targetUrl = $this->getTargetUrl();
+            
             $mobile = "";
             $existingNumber = $request->getParameter('existingNumber');
             $this->newNumber = $request->getParameter('newNumber');
@@ -1396,7 +1399,7 @@ class affiliateActions extends sfActions {
                     $transaction->save();
                     $this->customer = $order->getCustomer();
                     emailLib::sendChangeNumberEmail($this->customer, $order);
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% Mobile Number is changed successfully  with %2% NOK.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount())));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% Mobile Number is changed successfully  with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
 
                     $this->redirect('affiliate/receipts');
                 } else {
@@ -1419,7 +1422,7 @@ class affiliateActions extends sfActions {
                 
         $return_url = $this->getTargetUrl().'accountRefill';
         $cancel_url = $this->getTargetUrl().'thankyou/?accept=cancel';
-        $notify_url = 'http://customer.zapna.no/b2c.php/pScripts/agentRefillThankyou?orderid='.$order_id.'&amount='.$item_amount;
+        $notify_url = sfConfig::get('app_customer_url').'pScripts/agentRefillThankyou?orderid='.$order_id.'&amount='.$item_amount;
 
         $c = new Criteria;
         $c->add(AgentOrderPeer::AGENT_ORDER_ID, $order_id);

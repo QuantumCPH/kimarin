@@ -17,9 +17,9 @@
 <p>
 <?php echo __("With Resenumber you can receive cheap calls on this number while travelling abroad.") ?>
 <br/><br/>
-<?php echo __("The price of the package is: 10 NOK per. Month") ?>
+<?php echo __("The price of the package is: 10");echo sfConfig::get('app_currency_code'); echo __("per. Month") ?>
 <br/>
-<?php echo __("The activation price is: 30 NOK") ?>
+<?php echo __("The activation price is: 30") ?><?php echo sfConfig::get('app_currency_code')?>
 </p>
 	<script type="text/javascript">
 	    $(function() {
@@ -29,7 +29,7 @@
 	    });
 	</script>
       
-        <input type="checkbox" value="true" style="display:none" name="cbAcceptTerms" id="cbAcceptTerms"><input type="hidden" value="false" name="cbAcceptTerms">&nbsp;<a href="http://www.landncall.com/Test/index.php?option=com_content&view=article&id=72" target="_blank" style="display:none"><?php echo __("I accept the terms & conditions") ?></a>
+        <input type="checkbox" value="true" style="display:none" name="cbAcceptTerms" id="cbAcceptTerms" />
 
         <form method="post" id="form2" action=""><input type="hidden" value="True" name="performSubscription" id="performSubscription">
         <span class="submit3con submit3orange"><span class="submit3mo" style="display: none;">

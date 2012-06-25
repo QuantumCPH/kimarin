@@ -89,7 +89,7 @@ class agentUserActions extends sfActions {
                     //$this->redirect('@homepage');
 
         
-                     $this->redirect( sfConfig::get('app_main_url').'affiliate/report?show_summary=1');
+                     $this->redirect( $this->getTargetUrl().'report?show_summary=1');
 
 
                    
@@ -102,5 +102,8 @@ class agentUserActions extends sfActions {
         $this->getUser()->getAttributeHolder()->removeNamespace('agentsession');
         $this->getUser()->setAuthenticated(false);
         $this->redirect('@homepage');
+    }
+    private function getTargetUrl() {
+        return sfConfig::get('app_agent_url') . "affiliate/";
     }
 }

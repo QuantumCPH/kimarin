@@ -15,8 +15,16 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($userguide_list as $userguide): ?>
-    <tr>
+    <?php $incrment=1;
+    foreach ($userguide_list as $userguide): 
+         if($incrment%2==0){
+                 $class= 'class="even"';
+          }else{
+            $class= 'class="odd"';
+          }
+         $incrment++;
+    ?>
+    <tr  <?php echo $class;?>>
       <td><a href="<?php echo url_for('userguide/edit?id='.$userguide->getId()) ?>"><?php echo $userguide->getId() ?></a></td>
       <td><?php echo $userguide->getTitle() ?></td>
       <td><?php echo $userguide->getDescription() ?></td>

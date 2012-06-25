@@ -77,23 +77,23 @@ function countChar(str)
 <br/><br/>&nbsp;<br/>&nbsp;
 
 <center>
-    <h1 style="font-family: Verdana; font-size: 18px; line-height: 20px; align:center; padding-top: 10px;"> <?php echo __('Tell a friend about Zapna!') ?></h1>
+    <h1 style="font-family: Verdana; font-size: 18px; line-height: 20px; align:center; padding-top: 10px;"> <?php echo __('Tell a friend about %1%!',array('%1%'=>sfConfig::get('app_site_title'))); ?></h1>
 </center>
 	  
 
           
 
 <br/>
-<h3><?php echo __('Tell your friends about Zapna and earn extra balance!') ?></h3>
-<p style="align:justified;"><?php echo __('Tell your friends about Zapna and earn 10 NOK as soon as your friends have made their first payment with Zapna! Spread the word about Zapna and let your friends know about Zapna services.') ?></p>
+<h3><?php echo __('Tell your friends about %1% and earn extra balance!',array('%1%'=>sfConfig::get('app_site_title')));?></h3>
+<p style="align:justified;"><?php echo __('Tell your friends about %1% and earn 10%2% as soon as your friends have made their first payment with %1%! Spread the word about %1% and let your friends know about %1% services.',array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code')));?></p>
 <br/>
 <h3><?php echo __('How does it work?'); ?></h3>
-<p style="align:justified;"><?php echo __('You can tell your friends about Zapna in two simple ways:') ?><br />
+<p style="align:justified;"><?php echo __('You can tell your friends about %1% in two simple ways:',array('%1%'=>sfConfig::get('app_site_title'))); ?><br />
     
 <?php echo __('Fill out the fields below and click the Send Email button - your friend will receive an Email') ?></p>
 <br/>
 <h3><?php echo __("What you'll get from this?") ?></h3>
-<p style="align:justified;"><?php echo __("As soon as your friends have made their first payment with Zapna, you will automatically receive 10 NOK in your Zapna balance - so if 10 of your friends register on Zapna, youll gain 100 NOK in your account. Just share the news and enjoy this great new treat from Zapna.") ?> </p>
+<p style="align:justified;"><?php echo __("As soon as your friends have made their first payment with %1%, you will automatically receive 10%2% in your %1% balance - so if 10 of your friends register on %1%, youll gain 100%2% in your account. Just share the news and enjoy this great new treat from %1%.",array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code'))); ?> </p>
      <div class="split-form">
       <div class="fl col">
 	    <form  id="form1" method="POST" action="<?php echo url_for('customer/tellAFriend', true) ?>">
@@ -123,7 +123,7 @@ function countChar(str)
 
                     </tr>
                     <tr>
-                        <td  colspan="2" align="center"><textarea name="message" ><?php echo __("Smartsim use to make extremely cheap international calls (save up to 90%) and to cut prices when you are abroad (you'll save 30-80%). Right now costing Smartsim 99 NOK and you can call for the full amount. Smartsim has no monthly fee or hidden charges.") ?> </textarea></td>
+                        <td  colspan="2" align="center"><textarea name="message" ><?php echo __("Smartsim use to make extremely cheap international calls (save up to 90%) and to cut prices when you are abroad (you'll save 30-80%). Right now costing Smartsim 99%1% and you can call for the full amount. Smartsim has no monthly fee or hidden charges.",array('%1%'=>sfConfig::get('app_currency_code')));?> </textarea></td>
 
                     </tr>
                 </table><br />

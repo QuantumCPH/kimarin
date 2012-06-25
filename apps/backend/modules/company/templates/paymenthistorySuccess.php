@@ -22,7 +22,7 @@
     <th><?php echo __('Date & Time') ?></th>
     <th><?php echo __('Company & Name') ?></th>
     <th><?php echo __('Description') ?></th>
-    <th><?php echo __('Amount') ?> (NOK)</th>
+    <th><?php echo __('Amount') ?> (<?php sfConfig::get('app_currency_code');?>)</th>
 </tr>
 <?php 
 $amount_total = 0;
@@ -39,7 +39,7 @@ if($incrment%2==0){
 //                  
 $incrment++;
 ?>
-<tr  style="background-color:<?php echo $colorvalue;?>">
+<tr  <?php echo $class;?>>
     <td><?php echo  $transaction->getCreatedAt() ?></td>
     <td><?php echo ($transaction->getCompany()?$transaction->getCompany():'N/A')?></td>
     <td><?php echo __($transaction->getDescription()) ?></td>
@@ -53,7 +53,7 @@ $incrment++;
 <?php else: ?>
 <tr><td>&nbsp;</td>
     <td colspan="2" align="right"><strong><?php echo __('Total:') ?>&nbsp;&nbsp;</strong></td>
-    <td align="right"><?php echo format_number($amount_total);  ?> NOK</td>
+    <td align="right"><?php echo format_number($amount_total);  ?> <?php echo sfConfig::get('app_currency_code');?></td>
     
 </tr>	
 <?php endif; ?>

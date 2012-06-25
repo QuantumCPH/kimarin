@@ -109,7 +109,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 	
 </script>
  <?php
-                $lang =  'no';
+                $lang = sfConfig::get('app_language_symbol');
                 //$this->lang = $lang;
                 $countrylng = new Criteria();
                 $countrylng->add(EnableCountryPeer::LANGUAGE_SYMBOL, $lang);
@@ -160,10 +160,10 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
               
               
               <label class="fr ac">
-              	<span class="product_price_span"><?php echo $order->getProduct()->getRegistrationFee() ?> </span>NOK            	<br />
+              	<span class="product_price_span"><?php echo $order->getProduct()->getRegistrationFee() ?> </span><?php echo sfConfig::get('app_currency_code')?>            	<br />
               	<span id="extra_refill_span">
 					<?php echo $order->getProduct()->getPrice() ?>
-				</span>NOK
+				</span><?php echo sfConfig::get('app_currency_code')?>
 			  </label>
 
             </li>
@@ -202,11 +202,11 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
               <input type="hidden" id="vat" value="<?php echo $product_price_vat; ?>" />
                 <input type="hidden" id="postal" value="<?php  echo $postalcharge; ?>" />
               <label class="fr ac" >
-                  <?php echo $postalcharge;  ?>&nbsp; NOK
+                  <?php echo $postalcharge;  ?>&nbsp; <?php echo sfConfig::get('app_currency_code')?>
                 <br />
               	<span id="vat_span">
                     <?php echo format_number($product_price_vat) ?>
-              	</span>NOK
+              	</span><?php echo sfConfig::get('app_currency_code')?>
                 <br />
               	<?php //$total = $product_price + $extra_refill + $vat 
  //$order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*.25)     
@@ -214,7 +214,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
                 <?php $total = $product_price + $postalcharge + $product_price_vat ?>
               	<span id="total_span">
               	<?php echo format_number($total) ?>
-              	</span>NOK
+              	</span><?php echo sfConfig::get('app_currency_code')?>
               </label>
             </li>
 	
@@ -230,8 +230,8 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 		<input type="hidden" name="addfee" value="0" />-->
                 <input type="hidden" name="cmd" value="_xclick" /> 
                 <input type="hidden" name="no_note" value="1" />
-                <input type="hidden" name="lc" value="NO" />
-                <input type="hidden" name="currency_code" value="NOK" />
+                <input type="hidden" name="lc" value="<?php echo sfConfig::get('app_language_symbol')?>" />
+                <input type="hidden" name="currency_code" value="<?php echo sfConfig::get('app_currency_symbol')?>" />
                 <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest" />
                 <input type="hidden" name="firstName" value="<?php echo $order->getCustomer()->getFirstName();?>"  />
                 <input type="hidden" name="lastName" value="<?php echo $order->getCustomer()->getLastName();?>"  />
@@ -244,7 +244,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
            06
            24
            684-->
-         <input type="hidden" name="lang" value="no" />
+         <input type="hidden" name="lang" value="<?php echo sfConfig::get('app_language_symbol')?>" />
 	
 <!--     <input type="hidden" name="status" value="" />
 		<input type="hidden" name="cancelurl" value="<?php echo url_for('@epay_reject_url', true)  ?>?accept=cancel&subscriptionid=&lng=<?php echo  $sf_user->getCulture() ?>&orderid=<?php echo $order->getId(); ?>&amount=<?php echo $order->getExtraRefill(); ?>" />
@@ -270,7 +270,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
                                                                                                         'id'=>'user_attr_3',
 			  										'style'=>'width: 80px;'
 			  									)) 
-                                  ?>NOK
+                                  ?><?php echo sfConfig::get('app_currency_code')?>
             </li>
            <li id="user_attr_2_field">
               <label for="user_attr_2" style="margin-right: 90px;"><?php echo __('Auto refill amount:') ?></label>
@@ -283,7 +283,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
      ?>
             </li>
             <li id="" style="border-style:solid;border-width:3px;width: 320px; padding-left: 10px;">
-                <br /><b align="justfy">  <?php echo __('Zapna recommends to activate this service so you <br /> do not have to manually  refill when your account<br />  balance runs low. 100 or 200 NOK each  when the <br /> balances reaches 25 or 50 NOK. This facility is <br /> added to your account in minutes.')?></b>
+                <br /><b align="justfy">  <?php  echo __("%1% recommends to activate this service so you <br /> do not have to manually refill when your account<br /> balance runs low. 100 or 200%2% each  when the <br /> balances reaches 25 or 50%2% this facility is <br /> added to your account in minutes.",array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code')))?></b>
 
 
 

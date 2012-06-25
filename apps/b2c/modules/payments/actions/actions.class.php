@@ -16,7 +16,7 @@ require_once(sfConfig::get('sf_lib_dir') . '/payment.class.php');
  */
 class paymentsActions extends sfActions {
  private function getTargetUrl() {
-        return sfConfig::get('app_main_url');
+        return sfConfig::get('app_customer_url');
     }
     /**
      * Executes index action
@@ -120,7 +120,7 @@ class paymentsActions extends sfActions {
         $this->form = new PaymentForm();
 
 ///////////////////////postal charges section//////////////////////////////
-        $lang =  'no';
+        $lang =  sfConfig::get('app_language_symbol');
         $this->lang = $lang;
 
         $countrylng = new Criteria();
@@ -216,7 +216,7 @@ class paymentsActions extends sfActions {
 
         $this->redirectUnless($this->customer, '@customer_login');
         //check to see if transaction id is there
-        $lang =  'no';
+        $lang =  sfConfig::get('app_language_symbol');
         $this->lang = $lang;
         
         $countrylng = new Criteria();
@@ -273,351 +273,7 @@ class paymentsActions extends sfActions {
         return sfView::NONE;
     }
 
-    public function executeConfirmpayment(sfWebRequest $request) {
-        $Parameters=$request->getURI();
 
-        $Parameters=$Parameters.$request->getParameter('amount');
-        $email2 = new DibsCall();
-        $email2->setCallurl($Parameters);
-
-        $email2->save();
-        
-        $order_id = "";
-        $order_amount = "";
-        $order_id = $request->getParameter('order_id'); 
-        $order_amount = $request->getParameter('amount');
-        $ticket_id = "";
-        $this->getUser()->setCulture($request->getParameter('lng'));
-              
-
-        if ($order_id != '') {
-
-            $this->logMessage(print_r($_GET, true));
-
-            $is_transaction_ok = false;
-            $subscription_id = '';
-
-            $this->forward404Unless($order_id);
-            //$this->forward404Unless($order_id || $order_amount);
-            //get order object
-            $order = CustomerOrderPeer::retrieveByPK($order_id);
-
-
-            if (isset($ticket_id) && $ticket_id != "") {
-
-                $subscriptionvalue = 0;
-
-                $subscriptionvalue = $request->getParameter('subscriptionid');
-
-
-                if (isset($subscriptionvalue) && $subscriptionvalue > 1) {
-//  echo 'is autorefill activated';
-                    //auto_refill_amount
-                    $auto_refill_amount_choices = array_keys(ProductPeer::getRefillHashChoices());
-
-                    $auto_refill_amount = in_array($request->getParameter('user_attr_2'), $auto_refill_amount_choices) ? $request->getParameter('user_attr_2') : $auto_refill_amount_choices[0];
-                    $order->getCustomer()->setAutoRefillAmount($auto_refill_amount);
-
-
-                    //auto_refill_lower_limit
-                    $auto_refill_lower_limit_choices = array_keys(ProductPeer::getAutoRefillLowerLimitHashChoices());
-
-                    $auto_refill_min_balance = in_array($request->getParameter('user_attr_3'), $auto_refill_lower_limit_choices) ? $request->getParameter('user_attr_3') : $auto_refill_lower_limit_choices[0];
-                    $order->getCustomer()->setAutoRefillMinBalance($auto_refill_min_balance);
-
-                    $order->getCustomer()->setTicketval($ticket_id);
-                    $order->save();
-                    $auto_refill_amount = "refill amount" . $auto_refill_amount;
-                    $email2d = new DibsCall();
-                    $email2d->setCallurl($auto_refill_amount);
-                    $email2d->save();
-                    $minbalance = "min balance" . $auto_refill_min_balance;
-                    $email2dm = new DibsCall();
-                    $email2dm->setCallurl($minbalance);
-                    $email2dm->save();
-                }
-            }
-            //check to see if that customer has already purchased this product
-            $c = new Criteria();
-            $c->add(CustomerProductPeer::CUSTOMER_ID, $order->getCustomerId());
-            $c->addAnd(CustomerProductPeer::PRODUCT_ID, $order->getProductId());
-            $c->addJoin(CustomerProductPeer::CUSTOMER_ID, CustomerPeer::ID);
-            $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, sfConfig::get('app_status_new'), Criteria::NOT_EQUAL);
-
-            // echo 'retrieve order id: '.$order->getId().'<br />';
-
-            if (CustomerProductPeer::doCount($c) != 0) {
-
-                //Customer is already registered.
-                echo __('The customer is already registered');
-                //exit the script successfully
-                return sfView::NONE;
-            }
-
-            //set subscription id
-            //$order->getCustomer()->setSubscriptionId($subscription_id);
-            //set auto_refill amount
-            //if order is already completed > 404
-            $this->forward404Unless($order->getOrderStatusId() != sfConfig::get('app_status_completed'));
-            $this->forward404Unless($order);
-
-            //  echo 'processing order <br />';
-
-            $c = new Criteria;
-            $c->add(TransactionPeer::ORDER_ID, $order_id);
-            $transaction = TransactionPeer::doSelectOne($c);
-            $order_amount = $transaction->getAmount();
-            //  echo 'retrieved transaction<br />';
-
-            if ($transaction->getAmount() > $order_amount || $transaction->getAmount() < $order_amount) {
-                //error
-                $order->setOrderStatusId(sfConfig::get('app_status_error')); //error in amount
-                $transaction->setTransactionStatusId(sfConfig::get('app_status_error')); //error in amount
-                $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_error')); //error in amount
-                echo 'setting error <br /> ';
-            } else {
-                //TODO: remove it
-                $transaction->setAmount($order_amount);
-
-                $order->setOrderStatusId(sfConfig::get('app_status_completed')); //completed
-                $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed')); //completed
-                $transaction->setTransactionStatusId(3); //completed
-                // echo 'transaction=ok <br /> ';
-                $is_transaction_ok = true;
-            }
-
-                           
-
-            $order->setQuantity(1);
-            // $order->getCustomer()->getAgentCompany();
-            //set active agent_package in case customer
-            if ($order->getCustomer()->getAgentCompany()) {
-                $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
-                $transaction->setAgentCompanyId($order->getCustomer()->getReferrerId()); //completed
-            }
-
-            $order->save();
-            $transaction->save();
-            if ($is_transaction_ok) {
-
-                // echo 'Assigning Customer ID <br/>';
-                //set customer's proudcts in use
-                $customer_product = new CustomerProduct();
-
-                $customer_product->setCustomer($order->getCustomer());
-                $customer_product->setProduct($order->getProduct());
-
-                $customer_product->save();
-
-                //register to fonet
-                $this->customer = $order->getCustomer();
-
-                //Fonet::registerFonet($this->customer);
-                //recharge the extra_refill/initial balance of the prouduct
-                //Fonet::recharge($this->customer, $order->getExtraRefill());
-
-                $cc = new Criteria();
-                $cc->add(EnableCountryPeer::ID, $this->customer->getCountryId());
-                $country = EnableCountryPeer::doSelectOne($cc);
-
-                $mobile = $country->getCallingCode() . $this->customer->getMobileNumber();
-                
-                $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
-                if ($getFirstnumberofMobile == 0) {
-                    $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-                    $TelintaMobile = '47' . $TelintaMobile;
-                } else {
-                    $TelintaMobile = '47' . $this->customer->getMobileNumber();
-                }
-
-                
-                $uniqueId = $this->customer->getUniqueid();
-                echo $uniqueId."<br/>";
-                $uc = new Criteria();
-                $uc->add(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueId);
-                $selectedUniqueId = UniqueIdsPeer::doSelectOne($uc);
-                echo $selectedUniqueId->getStatus()."<br/>Baran";
-                
-                if($selectedUniqueId->getStatus()==0){
-                    echo "inside";
-                    $selectedUniqueId->setStatus(1);
-                    $selectedUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
-                    $selectedUniqueId->save();
-                    }else{
-                        $uc = new Criteria();
-                        $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
-                        $uc->addAnd(UniqueIdsPeer::STATUS, 0);
-                        $availableUniqueCount = UniqueIdsPeer::doCount($uc);
-                        $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
-
-                        if($availableUniqueCount  == 0){
-                            // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                            emailLib::sendUniqueIdsShortage();
-                            $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
-                        }
-                        $uniqueId = $availableUniqueId->getUniqueNumber();
-                        $this->customer->setUniqueid($uniqueId);
-                        $this->customer->save();
-                        $availableUniqueId->setStatus(1);
-                        $availableUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
-                        $availableUniqueId->save();
-                }
-
-
-
-             $callbacklog = new CallbackLog();
-                $callbacklog->setMobileNumber($TelintaMobile);
-                $callbacklog->setuniqueId($uniqueId);
-                $callbacklog->setCheckStatus(3);
-                $callbacklog->save();
-
-
-
-
-                $emailId = $this->customer->getEmail();
-                $OpeningBalance = $order->getExtraRefill();
-                $customerPassword = $this->customer->getPlainText();
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //Section For Telinta Add Cusomter
-             
-                    Telienta::ResgiterCustomer($this->customer, $OpeningBalance);
-                      // For Telinta Add Account
-               
-                   Telienta::createAAccount($TelintaMobile,$this->customer);
-                  // Telienta::createCBAccount($TelintaMobile, $this->customer);
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                //if the customer is invited, Give the invited customer a bonus of 10NOK
-                $invite_c = new Criteria();
-                $invite_c->add(InvitePeer::INVITE_NUMBER, $this->customer->getMobileNumber());
-                $invite_c->add(InvitePeer::INVITE_STATUS, 2);
-                $invite = InvitePeer::doSelectOne($invite_c);
-                if ($invite) {
-                    $invite->setInviteStatus(3);
-                    $sc = new Criteria();
-                    $sc->add(CustomerCommisionPeer::ID, 1);
-                    $commisionary = CustomerCommisionPeer::doSelectOne($sc);
-                    $comsion = $commisionary->getCommision();
-                    $products = new Criteria();
-                    $products->add(ProductPeer::ID, 2);
-                    $products = ProductPeer::doSelectOne($products);
-                    $extrarefill = $products->getInitialBalance();
-                    //if the customer is invited, Give the invited customer a bonus of 10NOK
-                    $inviteOrder = new CustomerOrder();
-                    $inviteOrder->setProductId(2);
-                    $inviteOrder->setQuantity(1);
-                    $inviteOrder->setOrderStatusId(3);
-                    $inviteOrder->setCustomerId($invite->getCustomerId());
-                    $inviteOrder->setExtraRefill($extrarefill);
-                    $inviteOrder->save();
-                    $OrderId = $inviteOrder->getId();
-                    // make a new transaction to show in payment history
-                    $transaction_i = new Transaction();
-                    $transaction_i->setAmount($comsion);
-                    $transaction_i->setDescription('Invitation Bonus');
-                    $transaction_i->setCustomerId($invite->getCustomerId());
-                    $transaction_i->setOrderId($OrderId);
-                    $transaction_i->setTransactionStatusId(3);
-
-                    $this->customers = CustomerPeer::retrieveByPK($invite->getCustomerId());
-
-                    //send Telinta query to update the balance of invite by 10NOK
-                    $getFirstnumberofMobile = substr($this->customers->getMobileNumber(), 0, 1);     // bcdef
-                    if ($getFirstnumberofMobile == 0) {
-                        $TelintaMobile = substr($this->customers->getMobileNumber(), 1);
-                        $TelintaMobile = '47' . $TelintaMobile;
-                    } else {
-                        $TelintaMobile = '47' . $this->customers->getMobileNumber();
-                    }
-                    $uniqueId = $this->customers->getUniqueid();
-                    $OpeningBalance = $comsion;
-                    //This is for Recharge the Customer
-                
-                         Telienta::recharge($this->customers, $OpeningBalance,"Tipsa en van " . $invite->getInviteNumber());
-
-                    //This is for Recharge the Account
-                  
-                    $transaction_i->save();
-                    $invite->save();
-
-                    $invitevar = $invite->getCustomerId();
-                    if (isset($invitevar)) {
-
-                           if($this->getUser()->getCulture()=='en'){
-
-                                  $subject ='Bonus awarded';
-                           }else{
-                                 $subject ='Bonus tildeles';
-                           }
-
-
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$subject);
-                    }
-                }
-            $lang = 'no';
-            $this->lang = $lang;
-
-            $countrylng = new Criteria();
-            $countrylng->add(EnableCountryPeer::LANGUAGE_SYMBOL, $lang);
-            $countrylng = EnableCountryPeer::doSelectOne($countrylng);
-            if ($countrylng) {
-                $countryName = $countrylng->getName();
-                $languageSymbol = $countrylng->getLanguageSymbol();
-                $lngId = $countrylng->getId();
-
-                $postalcharges = new Criteria();
-                $postalcharges->add(PostalChargesPeer::COUNTRY, $lngId);
-                $postalcharges->add(PostalChargesPeer::STATUS, 1);
-                $postalcharges = PostalChargesPeer::doSelectOne($postalcharges);
-                if ($postalcharges) {
-                    $postalcharge = $postalcharges->getCharges();
-                } else {
-                    $postalcharge = '';
-                }
-             }
-             //$product_price = $order->getProduct()->getPrice() - $order->getExtraRefill();
-            $product_price = $order->getProduct()->getPrice() - $order->getExtraRefill();
-
-            $product_price_vat = .25 * ($order->getProduct()->getRegistrationFee()+$postalcharge);
-                $message_body = $this->getPartial('payments/order_receipt', array(
-                            'customer' => $this->customer,
-                            'order' => $order,
-                            'transaction' => $transaction,
-                            'vat' => $product_price_vat,
-                            'postalcharge' => $postalcharge,
-                            'wrap' => true
-                        ));
-
-                $subject = $this->getContext()->getI18N()->__('Payment Confirmation');
-                $sender_email = sfConfig::get('app_email_sender_email', 'support@zapna.no');
-                $sender_name = sfConfig::get('app_email_sender_name', 'Zapna support');
-
-                $recepient_email = trim($this->customer->getEmail());
-                $recepient_name = sprintf('%s %s', $this->customer->getFirstName(), $this->customer->getLastName());
-
-
-                $agentid = $this->customer->getReferrerId();
-
-                $cp = new Criteria;
-                $cp->add(CustomerProductPeer::CUSTOMER_ID, $order->getCustomerId());
-                $customerproduct = CustomerProductPeer::doSelectOne($cp);
-                $productid = $customerproduct->getId();
-
-                $transactionid = $transaction->getId();
-                if (isset($agentid) && $agentid != "") {
-                    commissionLib::registrationCommissionCustomer($agentid, $productid, $transactionid);
-                }
-             
-                emailLib::sendCustomerRegistrationViaWebEmail($this->customer, $order);
-
-
-                $this->order = $order;
-            }//end if
-            else {
-                $this->logMessage('Error in transaction.');
-            } 
-        }
-        return sfView::NONE;
-    }
 
     public function executeCtpay(sfWebRequest $request) {
       
@@ -642,7 +298,7 @@ class paymentsActions extends sfActions {
         
         $return_url = $this->getTargetUrl();
         $cancel_url = $this->getTargetUrl().'payments/reject/orderid='.$order_id;
-        $notify_url = $this->getTargetUrl().'payments/confirmpayment?order_id='.$order_id.'&amount='.$item_amount;
+        $notify_url = $this->getTargetUrl().'pScripts/confirmpayment?order_id='.$order_id.'&amount='.$item_amount;
 
      
         $querystring = '';

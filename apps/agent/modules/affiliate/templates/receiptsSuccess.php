@@ -141,7 +141,8 @@
 		<td>
 		<?php echo $numberchange->getDescription() ?>
 		</td>
-		<td><a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for(sfConfig::get('app_main_url').'affiliate/printReceipt?tid='.$numberchange->getId(), true) ?>')"> <?php echo __('Receipt') ?></a>
+		<td>
+                    <a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for($targetUrl.'affiliate/printReceipt?tid='.$numberchange->getId(), true) ?>')"> <?php echo __('Receipt') ?></a>
 		</td>
 
 	</tr>

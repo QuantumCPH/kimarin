@@ -53,7 +53,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<p><?php echo __('Dear Customer') ?></p>
 	
 	<p>
-	<?php echo __('Thank you for ordering <b>%1%</b> and becoming Zapna Customer. We welcome you to a new and huge mobile world.', array('%1%'=>$order->getProduct()->getName())) ?>
+	<?php echo __('Thank you for ordering <b>%1%</b> and becoming %2% Customer. We welcome you to a new and huge mobile world.', array('%1%'=>$order->getProduct()->getName(), '%2%'=> sfConfig::get('app_site_title'))) ?>
 	</p>
 	
 	<p>
@@ -66,7 +66,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <?php endif; ?>
 <table width="600px">
     <tr style="border:0px solid #fff">
- <td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag('http://customer.zapna.no/images/zapna_logo_small.jpg');?></td>
+ <td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png');?></td>
     </tr>
 </table>
 <table class="receipt" cellspacing="0" width="600px">
@@ -95,7 +95,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td><?php echo __('Amount') ?>(NOK)</td>
+    <td><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code') ?>)</td>
   </tr>
   <tr> 
     <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
@@ -149,7 +149,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td><?php if($postalcharge && $order->getIsFirstOrder()){ echo format_number($transaction->getAmount()+$postalcharge); }else{ echo format_number($transaction->getAmount()); } ?> NOK</td>
+    <td><?php if($postalcharge && $order->getIsFirstOrder()){ echo format_number($transaction->getAmount()+$postalcharge); }else{ echo format_number($transaction->getAmount()); } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
 
   </tr>
 </table>
@@ -174,12 +174,12 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 <p>
 	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
-	<a href="mailto:support@zapna.no">support@Zapna.no</a>
+	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 </p>
 
 <p><?php echo __('Cheers') ?></p>
 
 <p>
 <?php echo __('Support') ?><br />
-Zapna ApS 
+<?php echo sfConfig::get('app_site_title')?>
 </p>

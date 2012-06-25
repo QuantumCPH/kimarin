@@ -101,8 +101,8 @@
                 <target>Senden Sie eine SMS weltweit zu den besten Preisen des Marktes</target>
             </trans-unit>
             <trans-unit id="25" translate="yes" reformat="yes" xml:space="default">
-                <source>International calls from 0 cents * With WLS, you can call the whole world.</source>
-                <target>Internationale Anrufe von 0 Cent * Mit WLS, können Sie die ganze Welt.</target>
+                <source>International calls from 0 cents * With %1%, you can call the whole world.</source>
+                <target>Internationale Anrufe von 0 Cent * Mit %1%, können Sie die ganze Welt.</target>
             </trans-unit>
             
             <trans-unit id="26" translate="yes" reformat="yes" xml:space="default">
@@ -359,16 +359,16 @@
                 <target>Es liegen noch keine SMS Aufzeichnungen zu zeigen.</target>
             </trans-unit>
             <trans-unit id="88" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell your friends about Wls &amp; earn extra balance!</source>
-                <target>Erzähle deinen Freunden von Wls &amp; verdienen Extra-Balance!</target>
+                <source>Tell your friends about %1% and earn extra balance!</source>
+                <target>Erzähle deinen Freunden von %1% &amp; verdienen Extra-Balance!</target>
             </trans-unit>
             <trans-unit id="89" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell your friends about Wls and earn 10 euro as soon as your friends have made their first payment with Wls! Spread the word about Wls and let your friends know about WLS2 services.</source>
-                <target>Erzähle deinen Freunden von Wls und verdienen 10 euro sobald Ihre Freunde ihre erste Zahlung mit Wls gemacht! Spread the word über Wls und lassen Sie Ihre Freunde über WLS2 Dienstleistungen.</target>
+                <source>Tell your friends about %1% and earn 10%2% as soon as your friends have made their first payment with %1%! Spread the word about %1% and let your friends know about %1% services.</source>
+                <target>Erzähle deinen Freunden von %1% und verdienen 10%2% sobald Ihre Freunde ihre erste Zahlung mit %1% gemacht! Spread the word über %1% und lassen Sie Ihre Freunde über %1% Dienstleistungen.</target>
             </trans-unit>
             <trans-unit id="90" translate="yes" reformat="yes" xml:space="default">
-                <source>You can tell your friends about Wls in two simple ways:</source>
-                <target>Sie können Ihre Freunde über Wls in zwei einfache Möglichkeiten, zu sagen:</target>
+                <source>You can tell your friends about %1% in two simple ways:</source>
+                <target>Sie können Ihre Freunde über %1% in zwei einfache Möglichkeiten, zu sagen:</target>
             </trans-unit>
             <trans-unit id="91" translate="yes" reformat="yes" xml:space="default">
                 <source>Fill out the fields below and click the Send Email button - your friend will receive an Email</source>
@@ -379,8 +379,8 @@
                 <target>Was Sie davon haben?</target>
             </trans-unit>
             <trans-unit id="93" translate="yes" reformat="yes" xml:space="default">
-                <source>As soon as your friends have made their first payment with Wls, youll automatically receive 10 euro in your Wls balance - so if 10 of your friends register on Wls, youll gain 100 euro in your account. Just share the news and enjoy this great new treat from Wls.</source>
-                <target>Sobald Ihre Freunde haben ihre erste Zahlung mit Wls, gemacht, youll erhalten automatisch 10 euro in Ihrem Wls Gleichgewicht - so, wenn 10 Ihrer Freunde auf Wls, youll gewinnen 100 euro in Ihrem Konto zu registrieren einfach teilen sich die Nachrichten und genießen Sie diese großartige neue zu behandeln. von Wls.</target>
+                <source>As soon as your friends have made their first payment with %1%, you will automatically receive 10%2% in your %1% balance - so if 10 of your friends register on %1%, youll gain 100%2% in your account. Just share the news and enjoy this great new treat from %1%.</source>
+                <target>Sobald Ihre Freunde haben ihre erste Zahlung mit %1%, gemacht, youll erhalten automatisch 10%2% in Ihrem %1% Gleichgewicht - so, wenn 10 Ihrer Freunde auf %1%, youll gewinnen 100%2% in Ihrem Konto zu registrieren einfach teilen sich die Nachrichten und genießen Sie diese großartige neue zu behandeln. von %1%.</target>
             </trans-unit>
       
             <trans-unit id="94" translate="yes" reformat="yes" xml:space="default">
@@ -400,8 +400,8 @@
                 <target>Ihre Nachricht</target>
             </trans-unit>
             <trans-unit id="98" translate="yes" reformat="yes" xml:space="default">
-                <source>Smartsim use to make extremely cheap international calls (save up to 90%) and to cut prices when you are abroad (you'll save 30-80%). Right now costing Smartsim 99 euro and you can call for the full amount. Smartsim has no monthly fee or hidden charges.</source>
-                <target>SmartSim nutzen, um extrem günstige internationale Anrufe (bis zu 90%) machen und die Preise zu senken, wenn Sie im Ausland (du wirst 30-80% sparen) sind. Im Moment kostet SmartSim 99 euro und Sie können den vollen Betrag nennen. SmartSim hat keine monatliche Grundgebühr oder versteckte Kosten.</target>
+                <source>Smartsim use to make extremely cheap international calls (save up to 90%) and to cut prices when you are abroad (you'll save 30-80%). Right now costing Smartsim 99%1% and you can call for the full amount. Smartsim has no monthly fee or hidden charges.</source>
+                <target>SmartSim nutzen, um extrem günstige internationale Anrufe (bis zu 90%) machen und die Preise zu senken, wenn Sie im Ausland (du wirst 30-80% sparen) sind. Im Moment kostet SmartSim 99%1% und Sie können den vollen Betrag nennen. SmartSim hat keine monatliche Grundgebühr oder versteckte Kosten.</target>
             </trans-unit>
             <trans-unit id="99" translate="yes" reformat="yes" xml:space="default">
                 <source>Send Email to join Smartsim</source>
@@ -701,8 +701,8 @@
                 <target>Gesendet wurde</target>
             </trans-unit>
             <trans-unit id="172" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell a friend about Wls!</source>
-                <target>Sagen ein Freund über Wls!</target>
+                <source>Tell a friend about %1%!</source>
+                <target>Sagen ein Freund über %1%!</target>
             </trans-unit>
             <trans-unit id="173" translate="yes" reformat="yes" xml:space="default">
                 <source>HI</source>
@@ -1021,9 +1021,25 @@
                 <source>Your settings have been saved.</source>
                 <target>Ihre Einstellungen wurden gespeichert.</target>
             </trans-unit>
- <trans-unit id="148" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="148" translate="yes" reformat="yes" xml:space="default">
                 <source>Active</source>
                 <target>Aktiv</target>
+            </trans-unit>
+            <trans-unit id="149" translate="yes" reformat="yes" xml:space="default">
+                <source>navigations</source>
+                <target>navigationen</target>
+            </trans-unit>
+            <trans-unit id="150" translate="yes" reformat="yes" xml:space="default">
+                <source>Other events</source>
+                <target>Weitere Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="151" translate="yes" reformat="yes" xml:space="default">
+                <source>Call</source>
+                <target>Rufen</target>
+            </trans-unit>
+            <trans-unit id="152" translate="yes" reformat="yes" xml:space="default">
+                <source>Search</source>
+                <target>Suche</target>
             </trans-unit>
         </body>
     </file>

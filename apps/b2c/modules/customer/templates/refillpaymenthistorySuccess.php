@@ -23,7 +23,7 @@
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                 <tr>
                   <td class="title"><?php echo __('Order Numer') ?></td>
-                  <td class="title" nowrap><?php echo __('Date &amp; time') ?></td>
+                  <td class="title" nowrap><?php echo __('Date & time') ?></td>
                   <td class="title"><?php echo __('Description') ?></td>
                   <td class="title"><?php echo __('Amount') ?></td>
                   <td class="title"><?php echo __('Type') ?></td>
@@ -52,7 +52,7 @@
 //                            }else if($lang=="en"){
 //                               // echo ('eur');
 //                            }else{
-                                echo ('NOK');
+                                echo sfConfig::get('app_currency_code');
 //                            } ?></td>
                   <td><a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')"><?php echo $transaction->getAmount()>=0?__('Paid'):__('Refund') ?></a></td>
 <!--                  <td nowrap="nowrap"><a href="#" style=" white-space: nowrap" class="receipt" onclick="iprint(preview_<?php echo $transaction->getId();?>);return false;"><?php echo __('Print'); ?>
@@ -88,7 +88,7 @@
 //                            }else if($lang=="en"){
 //                                echo ('eur');
 //                            }else{
-                                echo ('NOK');
+                                echo sfConfig::get('app_currency_code');
 //                            } ?></td>
                 </tr>	
                 <?php endif; ?>

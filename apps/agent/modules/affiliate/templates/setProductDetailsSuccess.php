@@ -124,10 +124,10 @@
                         </label>
 
 
-                        <label><?php echo $order->getProduct()->getRegistrationFee() ?> NOK
+                        <label><?php echo $order->getProduct()->getRegistrationFee() ?> <?php echo sfConfig::get('app_currency_code')?>
                             <br/>
                             <br/>
-                            <?php echo format_number($order->getProduct()->getPrice()) ?> NOK
+                            <?php echo format_number($order->getProduct()->getPrice()) ?> <?php echo sfConfig::get('app_currency_code')?>
                         </label>
 
 
@@ -173,12 +173,12 @@
                         <label class="fr ac" >
                             <span id="vat_span">
 <?php echo format_number($product_price_vat) ?>
-                            </span> NOK
+                            </span> <?php echo sfConfig::get('app_currency_code')?>
                             <br />
 <?php $total = $product_price + $product_price_vat ?>
                             <span id="total_span">
 <?php echo format_number($total) ?>
-                            </span> NOK
+                            </span> <?php echo sfConfig::get('app_currency_code')?>
                         </label>
                     </li>
 <?php if ($sf_user->hasFlash('error_message')): ?>

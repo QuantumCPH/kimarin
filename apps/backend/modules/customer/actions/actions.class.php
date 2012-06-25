@@ -290,9 +290,9 @@ public function executePaymenthistory(sfWebRequest $request)
         $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);
         if ($getFirstnumberofMobile == 0) {
             $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-            $this->TelintaMobile = '47' . $TelintaMobile;
+            $this->TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
         } else {
-            $this->TelintaMobile = '47' . $this->customer->getMobileNumber();
+            $this->TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
         }
 
         $this->numbername = $this->customer->getUniqueid();
@@ -388,7 +388,7 @@ public function executePaymenthistory(sfWebRequest $request)
                     $transaction->save();
                     $this->customer = $order->getCustomer();
                     emailLib::sendAdminRefillEmail($this->customer, $order);
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully charged with %2% NOK.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount())));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully charged with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(),"%3%" => sfConfig::get('app_currency_code'))));
 //                                        echo 'rehcarged, redirecting';
                     $this->redirect($this->getTargetURL() . 'customer/selectChargeCustomer');
                 } else {
@@ -467,7 +467,7 @@ public function executePaymenthistory(sfWebRequest $request)
                 $transaction->save();
                 $this->customer = $order->getCustomer();
                 emailLib::sendAdminRefillEmail($this->customer, $order);
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% NOK.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount())));
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
                 //                                        echo 'rehcarged, redirecting';
                 $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');
                 } else {
@@ -505,7 +505,7 @@ public function executePaymenthistory(sfWebRequest $request)
         $this->transactionDescriptions = TransactionDescriptionPeer::doSelect($ct);
     }
 public function getTargetURL() {
-        return sfConfig::get('backend_url');
+        return sfConfig::get('app_admin_url');
         //return $this->targetURL;
     }
 

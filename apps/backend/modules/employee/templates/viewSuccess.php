@@ -34,8 +34,8 @@
                             <div class="form-row">
 				  <label class="required">Employee Balance:</label>
 				  <div class="content">
-				  	<?php  echo (float) $balance;
-                        echo " NOK"; /*$mobileID= $employee->getCountryMobileNumber();
+				  	<?php  echo (float) $balance ." ";
+                        echo sfConfig::get('app_currency_code'); /*$mobileID= $employee->getCountryMobileNumber();
         $telintaGetBalance=0;
         $telintaGetBalance = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?action=getbalance&name=a'.$mobileID.'&type=account');
         $telintaGetBalance = str_replace('success=OK&Balance=', '', $telintaGetBalance);
@@ -67,7 +67,7 @@
         }
 
       echo  $balnc=(float)$telintaGetBalance+(float)$telintaGetBalance1+($telintaGetBalancerese>0)?(float)$telintaGetBalancerese:0;
-          echo " NOK";
+          echo sfConfig::get('app_currency_code');
                                 */                ?>
 				  </div>
 				</div>

@@ -16,8 +16,8 @@ class CompanyEmployeActivation {
 
     //put your code here
     //put your code here
-    private static $iParent = 82214;                //Company Resller ID on Telinta
-    private static $currency = 'NOK';
+    private static $iParent = 82829;                //Company Resller ID on Telinta
+    private static $currency = 'EUR';
     private static $a_iProduct = 11720;
     private static $CBProduct = 11748;
     private static $VoipProduct = 11749;
@@ -32,7 +32,7 @@ class CompanyEmployeActivation {
 
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Customer');
         
-        $vatNumber = "NOB2B" . $company->getVatNo();
+        $vatNumber = "KB2B" . $company->getVatNo();
 
         while (!$tCustomer && $retry_count < $max_retries) {
             try {
@@ -308,7 +308,7 @@ class CompanyEmployeActivation {
                                 'password' => 'asdf1asd',
                                 'h323_password' => 'asdf1asd',
                                 'activation_date' => date('Y-m-d'),
-                                'batch_name' => "NOB2B" . $company->getVatNo(),
+                                'batch_name' => "KB2B" . $company->getVatNo(),
                                 'follow_me_enabled' => $followMeEnabled
                                 )));
             } catch (SoapFault $e) {

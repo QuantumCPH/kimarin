@@ -197,11 +197,11 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
               
               
               <label class="fr ac">
-              	<span class="product_price_span"> <?php echo format_number($product_price) ?> </span>SEK
+              	<span class="product_price_span"> <?php echo format_number($product_price) ?> </span><?php echo sfConfig::get('app_currency_code')?>
               	<br />
               	<span id="extra_refill_span">
 					<?php echo format_number($extra_refill) ?>
-				</span> SEK
+				</span> <?php echo sfConfig::get('app_currency_code')?>
 			  </label>
 
             </li>
@@ -233,12 +233,12 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
               <label class="fr ac" >
               	<span id="vat_span">
               	<?php echo format_number($vat) ?>
-              	</span> SEK
+              	</span> <?php echo sfConfig::get('app_currency_code')?>
               <br />
               	<?php $total = $product_price + $extra_refill + $vat ?>
               	<span id="total_span">
               	<?php echo format_number($total) ?>
-              	</span> SEK
+              	</span> <?php echo sfConfig::get('app_currency_code')?>
               </label>
             </li>
 			
@@ -249,7 +249,6 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 			
 			define("DIBS_MD5KEY2","r!oRvYT8}L5%,7XFj~Rlr$+Y[W3t3vho");
 			define("DIBS_MD5KEY1","cBI&R8y*KsGD.o}1z^WF]HqK5,*R[Y^w");
-			//define("PATH_WEB","http://landncall.zerocall.com/");
 			$md5key   =  md5(DIBS_MD5KEY2.md5(DIBS_MD5KEY1.'merchant=90049676&orderid='.$order_id.'&currency=752&amount='.$total));
 		?>
 
@@ -294,7 +293,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
                                                                                                         'id'=>'user_attr_3',
 			  										'style'=>'width: 80px;'
 			  									)) 
-			  ?> NOK       
+			  ?> <?php echo sfConfig::get('app_currency_code')?>       
             </li>
            <li id="user_attr_2_field">
               <label for="user_attr_2" style="margin-right: 50px;"><?php echo __('Auto refill amount:') ?></label>
@@ -308,7 +307,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
             </li>
             <li id="" style="border-style:solid;border-width:3px;width: 295px; padding-left: 10px;">
                 <br /><b>Vad är automatisk påfyllnad?</b><br />
-                LandNCall rekommenderar att aktivera denna tjänst <br />
+                <?php echo sfConfig::get('app_site_title')?> rekommenderar att aktivera denna tjänst <br />
                 så slipper du fylla på manuellt då saldot börjar ta slut.<br />
                 100 eller 200 kronor dras när saldot på kontot når<br /> 
                 25 eller 50 kronor. Påfyllningsbeloppet adderas till<br />

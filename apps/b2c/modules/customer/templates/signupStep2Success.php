@@ -38,34 +38,13 @@ $md5key   =  md5(DIBS_MD5KEY2.md5(DIBS_MD5KEY1.'merchant=90049676&orderid='.$ord
   <input type="hidden" name="calcfee" value="yes" />
    <input type="hidden" name="account" value="YTIP" />
   <input type="hidden" name="md5key" value="<?php echo $md5key;?>">
-  <input type="hidden" name="cancelurl" value="http://landncall.zerocall.com/b2c.php/customer/signupStep2">
-  <input type="hidden" name="callbackurl" value="http://landncall.zerocall.com/b2c.php/customer/signupStep2">
-  <input type="hidden" name="accepturl" value="http://landncall.zerocall.com/b2c.php/customer/signupStep2">
+  <input type="hidden" name="cancelurl" value="<?php echo sfConfig::get('app_customer_url')?>customer/signupStep2">
+  <input type="hidden" name="callbackurl" value="<?php echo sfConfig::get('app_customer_url')?>customer/signupStep2">
+  <input type="hidden" name="accepturl" value="<?php echo sfConfig::get('app_customer_url')?>customer/signupStep2">
   <input type="submit" value="Click to call ticket_auth.cgi" style="display:none;" />
 
 </form>
 
-<!--<form action="https://payment.architrade.com/cgi-ssl/ticket_auth.cgi" method="post" id="frmarchitrade">
-  <input type="hidden" name="merchant" value="90049676" />
-  <input type="hidden" name="ticket" value="270000543" />
-  <input type="hidden" name="amount" value="500" />
-  <input type="hidden" name="currency" value="752" />
-  <input type="hidden" name="orderid" value="45676512" />
-  <input type="hidden" name="textreply" value="true" />
-  <input type="hidden" name="test" value="yes" />
-  <input type="hidden" name="calcfee" value="yes" />
-  <input type="hidden" name="md5key" value="<?php echo $md5key;?>">
-
-  <input type="hidden" name="cancelurl" value="http://landncall.zerocall.com/b2c.php/customer/signupStep2">
-  <input type="hidden" name="callbackurl" value="http://landncall.zerocall.com/b2c.php/customer/signupStep2">
-  <input type="hidden" name="accepturl" value="http://landncall.zerocall.com/b2c.php/customer/signupStep2">
-
-  <input type="hidden" name="uniqueoid" value="YES">
-
-
-
-  <input type="submit" value="Click to call ticket_auth.cgi" style="display:none" />
-</form>-->
 
 <script type="text/javascript">
 

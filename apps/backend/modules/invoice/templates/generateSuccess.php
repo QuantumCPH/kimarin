@@ -68,7 +68,7 @@ margin-top: 10px;
 <table class='invoice' width="100%">
 	<tr>
 		<td align="right" colspan="2">
-			<?php echo image_tag('/images/zapna_logo_small.jpg', 'absolute=true') ?>
+			<?php echo image_tag('/images/logo.png', 'absolute=true') ?>
 		</td>
 	</tr>
 	<tr>

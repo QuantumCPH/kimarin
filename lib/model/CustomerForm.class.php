@@ -41,7 +41,7 @@ class CustomerForm extends BaseCustomerForm
                 $mystring = @$_SERVER["HTTP_REFERER"];
                // Add As Per requirements - - - -
 
-                    $lngSymbol='no';
+                    $lngSymbol=sfConfig::get('app_language_symbol');
                 $countrylng = new Criteria();
                 $countrylng->add(EnableCountryPeer::LANGUAGE_SYMBOL, $lngSymbol);
                 $countrylng = EnableCountryPeer::doSelectOne($countrylng);

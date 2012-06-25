@@ -1,5 +1,5 @@
 <?php use_helper('I18N') ?>
-<div class="<?php echo __('navigation') ?>">
+<div class="<?php echo __('navigations') ?>">
 	<a href="<?php echo url_for('customer/dashboard', true) ?>" class="dashboard<?php echo ($selected=='dashboard')?'-s':'' ?>"><?php echo __('Dashboard') ?></a>
 	<a href="<?php echo sfConfig::get('app_epay_relay_script_url').url_for('customer/refill?customer_id='.$customer_id, true) ?>" class="refil<?php echo ($selected=='refill')?'-s':'' ?>"><?php echo __('Refil') ?></a>
 	<a href="<?php echo url_for('customer/callhistory', true) ?>" class="callhistory<?php echo ($selected=='callhistory')?'-s':'' ?>"><?php echo __('Call History') ?></a>

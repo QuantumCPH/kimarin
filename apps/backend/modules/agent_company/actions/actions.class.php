@@ -265,7 +265,7 @@ if ($order_id and $amount) {
     $aph->setRemainingBalance($remainingbalance);
     $aph->save();
 
-    $this->getUser()->setFlash('message', 'Your Selected Agent Company is Refill Successful ' . $amount . ' NOK is approved');
+    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Selected Agent Company is Refill Successful %1%%2% is approved',array('%1%'=>$amount,'%2%'=>sfConfig::get('app_currency_code'))));
 
     emailLib::sendAdminRefilEmail($this->agent, $agent_order);
 
@@ -399,7 +399,7 @@ public function executeAgentCompanyPayment(sfWebrequest $request) {
     $aph->setRemainingBalance($remainingbalance);
     $aph->save();
 
-    $this->getUser()->setFlash('message', 'Your Selected Agent Company is Charged Successfully ' . -$amount . ' NOK is approved');
+    $this->getUser()->setFlash('message', 'Your Selected Agent Company is Charged Successfully ' . -$amount . sfConfig::get('app_currency_code') .' is approved');
  
     emailLib::sendAdminRefilEmail($this->agent, $agent_order);
 

@@ -57,6 +57,7 @@ class employeeActions extends sfActions {
     public function executeView($request) {
         $this->employee = EmployeePeer::retrieveByPK($request->getParameter('id'));
         $mobilenumber= $this->employee->getCountryMobileNumber();
+        $balanceres = 0.00;
         $ct = new Criteria();
         $ct->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'a'.$mobilenumber);
         $ct->addAnd(TelintaAccountsPeer::STATUS, 3);
@@ -211,7 +212,7 @@ class employeeActions extends sfActions {
                     $voip_customer = $getvoipInfos->getCustomerId();
                    
 
-                    //$TelintaMobile = '46'.$this->customer->getMobileNumber();
+                    //$TelintaMobile = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
                   
 
                     //This Condtion for if IC Active
@@ -334,7 +335,7 @@ $companyCVR=$compny->getVatNo();
                     $voip_customer = $getvoipInfos->getCustomerId();
 
 
-                    //$TelintaMobile = '46'.$this->customer->getMobileNumber();
+                    //$TelintaMobile = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
 
 
                     //This Condtion for if IC Active

@@ -62,7 +62,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <?php endif; ?>
 <table class="receipt" cellspacing="0" width="600px">
 <tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <td colspan="4"> Zapna
+    <td colspan="4"> <?php echo sfConfig::get('app_site_title');?>
     </td>
   </tr>
   <tr>
@@ -86,7 +86,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td><?php echo __('Amount') ?>(NOK)</td>
+    <td><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
   </tr>
   <tr> 
     <td><?php echo $createddate ?></td>
@@ -115,7 +115,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td><?php echo format_number($subtotal) ?> NOK</td>
+    <td><?php echo format_number($subtotal) ?> <?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 </table>
 <?php if($wrap_content): ?>
@@ -139,12 +139,12 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 <p>
 	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
-	<a href="mailto:support@zapna.no">support@zapna.no</a>
+	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 </p>
 
 <p><?php echo __('Cheers') ?></p>
 
 <p>
 <?php echo __('Support') ?><br />
-Zapna
+<?php echo sfConfig::get('app_site_title');?>
 </p>

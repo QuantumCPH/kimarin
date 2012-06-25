@@ -24,7 +24,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
                if($pus==1){
                                  $Tes=ForumTel::getBalanceForumtel($customer->getId());
                                   echo   $amt=CurrencyConverter::convertUsdToSek($Tes);
-                              echo " NOK"  ;
+                              echo sfConfig::get('app_currency_code')  ;
                                    $getvoipInfo = new Criteria();
         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $customer->getId());
         $getvoipInfo->add(SeVoipNumberPeer::IS_ASSIGNED, 1);
@@ -38,7 +38,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
         }
                }else{
 
-        echo $customer_balance==-1?'&oslash;':number_format($customer_balance,2) ;echo " NOK";
+        echo $customer_balance==-1?'&oslash;':number_format($customer_balance,2) ;echo sfConfig::get('app_currency_code');
         //This Section For Get the Language Symbol For Set Currency -
         $getvoipInfo = new Criteria();
         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $customer->getId());
@@ -54,7 +54,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
    
       
 echo '&nbsp;';
-$lang="no";
+$lang=sfConfig::get('app_language_symbol');
                }?> <input type="button" class="butonsigninsmall" style="<?php if($voip_customer!=''){?> margin-left:63px;<?php }else{ ?>margin-left:43px;<?php }?>" name="button" onclick="window.location.href='<?php echo sfConfig::get('app_epay_relay_script_url').url_for('customer/refill?customer_id='.$customer->getId(), true) ?>'" style="cursor: pointer"  value="<?php echo __('Buy credit') ?>" ></span></div>
 
 
@@ -107,7 +107,7 @@ echo " ";   echo substr($Telintambs, 15,2);
                 $getFirstnumberofMobile = substr($unumber->getMobileNumber(), 0,1);     // bcdef
                 if($getFirstnumberofMobile==0){
                   $TelintaMobile = substr($unumber->getMobileNumber(), 1);
-                  $TelintaMobile =  '47'.$TelintaMobile ;
+                  $TelintaMobile =  sfConfig::get('app_country_code').$TelintaMobile ;
                 }else{
                   $TelintaMobile = ''.$unumber->getMobileNumber();
                 }

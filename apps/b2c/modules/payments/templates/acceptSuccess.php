@@ -7,7 +7,7 @@
 		echo __("Thank you for purchasing zer0call %1% package, you will receive package in few days. For any questions please feel free to contact us at"
 	  			, array('%1%'=>$order->getProduct()->getName()));
 	?>
-	<a href="mailto:support@zapna.no">support@zapna.no</a>.
+	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>.
 	</p>
   </div> <!-- end left-col -->
   <?php include_partial('customer/sidebar') ?>

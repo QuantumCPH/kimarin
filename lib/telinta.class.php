@@ -15,8 +15,8 @@ set_time_limit(10000000);
 
 class Telienta {
 
-    private static $currency = 'NOK';
-    private static $iParentRLandnCall = 82214;
+    private static $currency = 'EUR';
+    private static $iParentReseller = 82829;
     private static $iParentUS = 82214;
     private static $a_iProduct = 11720;
     private static $cb_iProduct = 11748;
@@ -32,11 +32,11 @@ class Telienta {
 
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Customer');
 
-        $uniqueid="NOB2C".$customer->getUniqueid();
+        $uniqueid="KB2C".$customer->getUniqueid();
         if ($USReseller) {
             $Parent = self::$iParentUS;
         } else {
-            $Parent = self::$iParentRLandnCall;
+            $Parent = self::$iParentReseller;
         }
         while (!$tCustomer && $retry_count < $max_retries) {
             try {
@@ -334,7 +334,7 @@ class Telienta {
         $retry_count = 0;
 
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Account');
-        $uniqueid="NOB2C".$customer->getUniqueid();
+        $uniqueid="KB2C".$customer->getUniqueid();
         $accountName = $accountType . $mobileNumber;
         while (!$account && $retry_count < $max_retries) {
             try {

@@ -13,7 +13,7 @@
 		echo __("For any questions please feel free to contact us at");
 		echo '</p>';
 	?>
-	<a href="mailto:support@zapna.no">support@zapna.no</a>.
+	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>.
 	</div>
   </div> <!-- end left-col -->
   <?php include_partial('customer/sidebar') ?>

@@ -41,7 +41,7 @@ use_helper('Number');
 
 <table width="600px">
 	<tr style="border:0px solid #fff">
-		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag('http://customer.zapna.no/images/zapna_logo_small.jpg',array('width' => '170'));?></td>
+		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
 	</tr>
 </table>
 <table class="receipt" cellspacing="0" width="600px">
@@ -75,7 +75,7 @@ use_helper('Number');
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td><?php echo __('Amount') ?>(NOK)</td>
+    <td><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</td>
   </tr>
   <tr>
     <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
@@ -108,14 +108,14 @@ use_helper('Number');
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td><?php echo format_number($subTotal+$vat) ?>NOK</td>
+    <td><?php echo format_number($subTotal+$vat) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
   <tr class="footer">
     <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;">
-    <?php echo __('Zapna - Postboks 5093 Majorstua - 0301 Oslo');?> </td>
+    <?php echo sfConfig::get('app_site_title');echo __(' - %1%',array('%1%' => sfConfig::get('app_postal_address_bottom')));?> </td>
   </tr>
 </table>
         

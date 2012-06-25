@@ -5,7 +5,7 @@
         <?php include_http_metas() ?>
         <?php include_metas() ?>
         <?php include_title() ?>
-         <link rel="shortcut icon" href="http://agent.zapna.no/images/favicon.ico" type="image/x-icon">
+         <link rel="shortcut icon" href="<?php echo sfConfig::get('app_web_url');?>images/favicon.ico" type="image/x-icon" />
         <?php
         $va = new Criteria();
         $va->add(AgentCompanyPeer::ID, $sf_user->getAttribute('agent_company_id', '', 'agentsession'));
@@ -87,7 +87,7 @@
         <div id="basic">
             <div id="header">
                 <div class="logo">
-                   <?php echo image_tag('/images/zapna_logo_small.jpg'); ?>
+                   <?php echo image_tag('/images/logo.jpg'); ?>
                 </div>
             </div>
             <div id="slogan">
@@ -254,9 +254,9 @@
 
 <?php if ($sf_user->isAuthenticated()): ?>
                                         <div class="clr"></div>
-                                        <p ><?php echo __('Provide this link to your customers while they signup with your reference.') ?>
-                                            <a href="http://agent.zapna.no/b2c.php/signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>">
-                        				http://agent.zapna.no/b2c.php/signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>
+                                        <p><?php echo __('Provide this link to your customers while they signup with your reference.') ?>
+                                            <a href="<?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>">
+                        				<?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>
                                             </a>
                                         </p>
 <?php endif; ?>

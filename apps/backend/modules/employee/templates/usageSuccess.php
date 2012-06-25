@@ -30,7 +30,7 @@ foreach ($callHistory->xdr_list as $xdr) {
                 <td><?php echo number_format($xdr->charged_quantity / 60, 2); ?></td>
                 <td><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>
                 <td><?php echo number_format($xdr->charged_amount, 2);
-            $amount_total+= number_format($xdr->charged_amount, 2); ?> NOK</td>
+            $amount_total+= number_format($xdr->charged_amount, 2); ?> <?php echo sfConfig::get('app_currency_code');?></td>
                 <td><?php
             $typecall = substr($xdr->account_id, 0, 1);
             if ($typecall == 'a') {
@@ -62,7 +62,7 @@ foreach ($callHistory->xdr_list as $xdr) {
                 <td><?php echo number_format($xdrcb->charged_quantity / 60, 2); ?></td>
                 <td><?php echo number_format($xdrcb->charged_amount / 4, 2); ?></td>
                 <td><?php echo number_format($xdrcb->charged_amount, 2);
-            $amount_total+= number_format($xdrcb->charged_amount, 2); ?> NOK</td>
+            $amount_total+= number_format($xdrcb->charged_amount, 2); ?> <?php echo sfConfig::get('app_currency_code');?></td>
                 <td><?php
             $typecall = substr($xdrcb->account_id, 0, 1);
             if ($typecall == 'a') {
@@ -106,7 +106,7 @@ foreach ($callHistoryres->xdr_list as $xdrres) {
         <td><?php echo number_format($xdrres->charged_quantity / 60, 2); ?></td>
         <td><?php echo number_format($xdrres->charged_amount / 4, 2); ?></td>
         <td><?php echo number_format($xdrres->charged_amount, 2);
-    $amount_total+= number_format($xdrres->charged_amount, 2); ?> NOK</td>
+    $amount_total+= number_format($xdrres->charged_amount, 2); ?> <?php echo sfConfig::get('app_currency_code');?></td>
         <td><?php
     $typecall = substr($xdrcb->account_id, 0, 1);
     if ($typecall == 'a') {
@@ -138,7 +138,7 @@ foreach ($callHistoryres->xdr_list as $xdrres) {
 <?php }else{ ?>
     <tr>
         <td colspan="4" align="right"><strong><?php echo __('Subtotal') ?></strong></td>
-        <td><?php echo number_format($amount_total, 2, ',', '') ?> NOK</td>
+        <td><?php echo number_format($amount_total, 2, ',', '') ?> <?php echo sfConfig::get('app_currency_code');?></td>
         <td>&nbsp;</td>
     </tr>
 <?php } ?>

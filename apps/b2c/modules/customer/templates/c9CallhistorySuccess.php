@@ -50,9 +50,9 @@
 					 ?>
 
 
-					  <td><?php echo number_format($callRecord->getUserCharge() * $exchange_rate, 2, ',', '')  ?> SEK</td>
+					  <td><?php echo number_format($callRecord->getUserCharge() * $exchange_rate, 2, ',', '')  ?> <?php echo sfConfig::get('app_currency_code')?></td>
 						<!--
-					  <td><?php echo number_format($callRecord->getUserBalance(), 2, ',', '')  ?> SEK</td>
+					  <td><?php echo number_format($callRecord->getUserBalance(), 2, ',', '')  ?> <?php echo sfConfig::get('app_currency_code')?></td>
 					  -->
 					</tr>
 					<?php $amount_total = $amount_total + $callRecord->getUserCharge()?> 
@@ -66,7 +66,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong><?php echo __('Subtotal') ?></strong></td>
-                     	<td><?php echo number_format($amount_total * $exchange_rate, 2, ',', '')  ?> SEK</td>            
+                     	<td><?php echo number_format($amount_total * $exchange_rate, 2, ',', '')  ?> <?php echo sfConfig::get('app_currency_code')?></td>            
                 	<td></td>
                 </tr>
                 <?php endif; ?>

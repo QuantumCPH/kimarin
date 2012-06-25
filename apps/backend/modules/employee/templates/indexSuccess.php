@@ -156,7 +156,7 @@
         }
         }
       echo  $balnc=(float)$telintaGetBalance+(float)$telintaGetBalancecb+(float)$telintaGetBalanceres;
-          echo " NOK";
+          echo sfConfig::get('app_currency_code');
                                                 ?></td>
 
       <?php } ?>
