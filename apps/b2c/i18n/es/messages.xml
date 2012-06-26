@@ -303,7 +303,7 @@
                 <target>Bestill Nummer</target>
             </trans-unit>
             <trans-unit id="75" translate="yes" reformat="yes" xml:space="default">
-                <source>Date & time</source>
+                <source>Date &amp; time</source>
                 <target>Dato og tid</target>
             </trans-unit>
             <trans-unit id="76" translate="yes" reformat="yes" xml:space="default">
@@ -590,7 +590,7 @@
             </trans-unit>
              <trans-unit id="145" translate="yes" reformat="yes" xml:space="default">
                 <source>%1% recommends to activate this service so you &lt;br /&gt; do not have to manually  refill when your account&lt;br /&gt;  balance runs low. 100 or 200%2% each  when the &lt;br /&gt; balances reaches 25 or 50%2%. This facility is &lt;br /&gt; added to your account in minutes.</source>
-                <target>%1%  to anbefaler å aktivere denne tjenesten slik at du &lt;br /&gt; trenger ikke å manuelt fylle når kontoen &lt;br /&gt;balanse kjører lav. 100 eller 200%2% hver da &lt;br /&gt; saldo når 25 eller 50%2%. Dette anlegget er &lt;br /&gt; lagt til kontoen din på minutter</target>
+                <target>%1% to anbefaler å aktivere denne tjenesten slik at du &lt;br /&gt; trenger ikke å manuelt fylle når kontoen &lt;br /&gt;balanse kjører lav. 100 eller 200%2% hver da &lt;br /&gt; saldo når 25 eller 50%2%. Dette anlegget er &lt;br /&gt; lagt til kontoen din på minutter</target>
             </trans-unit>
              <trans-unit id="146" translate="yes" reformat="yes" xml:space="default">
                 <source>Enter cell phone number</source>
@@ -1043,7 +1043,7 @@
             </trans-unit>
             <trans-unit id="256" translate="yes" reformat="yes" xml:space="default">
                 <source>Other events</source>
-                <target>Otros eventos</target>
+                <target>otros eventos</target>
             </trans-unit>
             <trans-unit id="257" translate="yes" reformat="yes" xml:space="default">
                 <source>Here you can join Option Package travel number. Simply press the Join button at the bottom of the page. After successful registration you will receive an email confirming the registration of additional package</source>
@@ -1079,7 +1079,7 @@
             </trans-unit>
             <trans-unit id="265" translate="yes" reformat="yes" xml:space="default">
                 <source>Search</source>
-                <target>Buscar</target>
+                <target>Søk</target>
             </trans-unit>
             <trans-unit id="266" translate="yes" reformat="yes" xml:space="default">
                 <source>To</source>
@@ -1101,11 +1101,11 @@
                 <source>Please Enter The Destination Number</source>
                 <target>Skriv inn målnummer</target>
             </trans-unit>
-            <trans-unit id="270" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="271" translate="yes" reformat="yes" xml:space="default">
                 <source>Please Enter The Message</source>
                 <target>Skriv inn melding</target>
             </trans-unit>
-            <trans-unit id="270" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="272" translate="yes" reformat="yes" xml:space="default">
                 <source>You do not have enough money in the account, you are kindly asked to refill</source>
                 <target>Du har ikke nok penger på konto, er du bes om å fylle</target>
             </trans-unit>

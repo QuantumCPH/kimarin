@@ -589,8 +589,8 @@
                 <target>Auto nachfüllen Menge:</target>
             </trans-unit>
              <trans-unit id="145" translate="yes" reformat="yes" xml:space="default">
-                <source>Wls 2 recommends to activate this service so you &lt;br /&gt; do not have to manually  refill when your account&lt;br /&gt;  balance runs low. 100 or 200 Euros each  when the &lt;br /&gt; balances reaches 25 or 50 Euro. This facility is &lt;br /&gt; added to your account in minutes.</source>
-                <target>WLS 2 empfiehlt, diesen Dienst zu aktivieren, damit &lt;br /&gt;Sie müssen nicht manuell nachfüllen, wenn&lt;br /&gt;Ihr Kontostand Neige. 100 oder 200 Euro jeweils, &lt;br /&gt;wenn die Salden erreicht 25 oder 50 Euro. Diese&lt;br /&gt; Einrichtung ist auf Ihr Konto in Minuten zugegeben.</target>
+                <source>%1% recommends to activate this service so you &lt;br /&gt; do not have to manually  refill when your account&lt;br /&gt;  balance runs low. 100 or 200%2% each  when the &lt;br /&gt; balances reaches 25 or 50%2%. This facility is &lt;br /&gt; added to your account in minutes.</source>
+                <target>%1% empfiehlt, diesen Dienst zu aktivieren, damit &lt;br /&gt;Sie müssen nicht manuell nachfüllen, wenn&lt;br /&gt;Ihr Kontostand Neige. 100 oder 200%2% jeweils, &lt;br /&gt;wenn die Salden erreicht 25 oder 50%2%. Diese&lt;br /&gt; Einrichtung ist auf Ihr Konto in Minuten zugegeben.</target>
             </trans-unit>
              <trans-unit id="146" translate="yes" reformat="yes" xml:space="default">
                 <source>Enter cell phone number</source>
