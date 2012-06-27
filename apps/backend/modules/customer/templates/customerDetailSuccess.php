@@ -79,15 +79,15 @@ $pus=0;
                        </tr>
                         <tr>
 		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Nationality</td>
-                          <td><?php echo  $customer->getNationality(); ?></td>
+                          <td><?php echo  $customer->getNationalityTitle(); ?></td>
                          </tr> 
                           <tr>
 		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Sim Types</td>
-                          <td><?php echo  $customer->getSimTypes(); ?></td>
+                          <td><?php echo  $customer->getSimType(); ?></td>
                          </tr>
                          <tr>
 		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Province</td>
-                          <td><?php echo  $customer->getProvince(); ?></td>
+                          <td><?php echo  $customer->getProvinceName(); ?></td>
                          </tr>
                          <tr>
 		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Preferred Language</td>
@@ -157,7 +157,7 @@ if(isset($val) && $val!=""){  ?>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Usage SMS Alerts</td>
                          <td>  <?php  echo ($customer->getUsageAlertSMS()==1)?"Yes":"No";     ?>   </td>
                         </tr  >
-<!--                         <tr style="background-color:#EEEEFF">
+                         <tr style="background-color:#EEEEFF">
                        <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Active No</td>
                         <td>  <?php  $unid   =  $customer->getUniqueid();
         if(isset($unid) && $unid!=""){
@@ -177,7 +177,7 @@ if(isset($val) && $val!=""){  ?>
                }
 
          }else{  }  ?> </td>
-                         </tr>-->
+                         </tr>
                          <?php  $uid=0;
                       $uid=$customer->getUniqueid();
                       if(isset($uid) && $uid>0){
@@ -193,7 +193,7 @@ if(isset($val) && $val!=""){  ?>
                       </tr>
 
                       <?php } ?>
-<!--                  <tr style="background-color:#EEEEFF">
+                  <tr style="background-color:#EEEEFF">
                        <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Resenummer </td>
                         <td>  <?php  $cuid   =  $customer->getId();
         if(isset($cuid) && $cuid!=""){
@@ -205,7 +205,7 @@ if(isset($val) && $val!=""){  ?>
             echo $vounumber->getNumber();
              }
          }else{  }  ?> </td>
-                         </tr>-->
+                         </tr>
 
 
 

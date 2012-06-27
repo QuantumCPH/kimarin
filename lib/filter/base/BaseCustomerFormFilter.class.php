@@ -17,7 +17,7 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'first_name'               => new sfWidgetFormFilterInput(),
       'last_name'                => new sfWidgetFormFilterInput(),
       'second_last_name'         => new sfWidgetFormFilterInput(),
-      'nationality_id'           => new sfWidgetFormFilterInput(),
+      'nationality_id'           => new sfWidgetFormPropelChoice(array('model' => 'Nationality', 'add_empty' => true)),
       'country_id'               => new sfWidgetFormPropelChoice(array('model' => 'Country', 'add_empty' => true)),
       'city'                     => new sfWidgetFormFilterInput(),
       'po_box_number'            => new sfWidgetFormFilterInput(),
@@ -52,23 +52,23 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'i_customer'               => new sfWidgetFormFilterInput(),
       'usage_alert_sms'          => new sfWidgetFormFilterInput(),
       'usage_alert_email'        => new sfWidgetFormFilterInput(),
-      'sim_type_id'              => new sfWidgetFormFilterInput(),
-      'preferred_language_id'    => new sfWidgetFormFilterInput(),
-      'province_id'              => new sfWidgetFormFilterInput(),
+      'sim_type_id'              => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
+      'preferred_language_id'    => new sfWidgetFormPropelChoice(array('model' => 'PreferredLanguages', 'add_empty' => true)),
+      'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
       'first_name'               => new sfValidatorPass(array('required' => false)),
       'last_name'                => new sfValidatorPass(array('required' => false)),
       'second_last_name'         => new sfValidatorPass(array('required' => false)),
-      'nationality_id'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'nationality_id'           => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Nationality', 'column' => 'id')),
       'country_id'               => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Country', 'column' => 'id')),
       'city'                     => new sfValidatorPass(array('required' => false)),
       'po_box_number'            => new sfValidatorPass(array('required' => false)),
       'mobile_number'            => new sfValidatorPass(array('required' => false)),
       'device_id'                => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Device', 'column' => 'id')),
       'email'                    => new sfValidatorPass(array('required' => false)),
-      'nie_passport_number'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'nie_passport_number'      => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'password'                 => new sfValidatorPass(array('required' => false)),
       'is_newsletter_subscriber' => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'created_at'               => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
@@ -96,9 +96,9 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'i_customer'               => new sfValidatorPass(array('required' => false)),
       'usage_alert_sms'          => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'usage_alert_email'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'sim_type_id'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'preferred_language_id'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'province_id'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'sim_type_id'              => new sfValidatorPropelChoice(array('required' => false, 'model' => 'SimTypes', 'column' => 'id')),
+      'preferred_language_id'    => new sfValidatorPropelChoice(array('required' => false, 'model' => 'PreferredLanguages', 'column' => 'id')),
+      'province_id'              => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Province', 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('customer_filters[%s]');
@@ -120,7 +120,7 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'first_name'               => 'Text',
       'last_name'                => 'Text',
       'second_last_name'         => 'Text',
-      'nationality_id'           => 'Number',
+      'nationality_id'           => 'ForeignKey',
       'country_id'               => 'ForeignKey',
       'city'                     => 'Text',
       'po_box_number'            => 'Text',
@@ -155,9 +155,9 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'i_customer'               => 'Text',
       'usage_alert_sms'          => 'Number',
       'usage_alert_email'        => 'Number',
-      'sim_type_id'              => 'Number',
-      'preferred_language_id'    => 'Number',
-      'province_id'              => 'Number',
+      'sim_type_id'              => 'ForeignKey',
+      'preferred_language_id'    => 'ForeignKey',
+      'province_id'              => 'ForeignKey',
     );
   }
 }

@@ -937,31 +937,31 @@
                 <target>Bonus vergeben</target>
             </trans-unit>
 
-    <trans-unit id="230" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="230" translate="yes" reformat="yes" xml:space="default">
                 <source>We hereby confirm that you have received commissions deposited into your account that you have referred a friend about Smartsim from Zapna.Go in to "Payment History" to see what you have earned.</source>
                 <target>Wir bestätigen hiermit, dass Sie erhielt Aufträge hinterlegt auf Ihr Konto, dass Sie einen Freund über SmartSim aus Zapna.Go in die auf "Zahlungsprotokoll" bezeichnet zu sehen, was Sie verdient haben.</target>
             </trans-unit>
 
-    <trans-unit id="231" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="231" translate="yes" reformat="yes" xml:space="default">
                 <source>Bonus Receiver</source>
                 <target>Bonus-Empfänger</target>
             </trans-unit>
-  <trans-unit id="232" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="232" translate="yes" reformat="yes" xml:space="default">
                 <source>Registered Friend</source>
                 <target>Registrierte Freund</target>
             </trans-unit>
 
- <trans-unit id="233" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="233" translate="yes" reformat="yes" xml:space="default">
                 <source>Registration</source>
                 <target>Anmeldung</target>
             </trans-unit>
 
- <trans-unit id="234" translate="yes" reformat="yes" xml:space="default">
+             <trans-unit id="234" translate="yes" reformat="yes" xml:space="default">
                 <source>Auto Refill</source>
                 <target>Automatische Nachfüllung</target>
             </trans-unit>
 
- <trans-unit id="235" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="235" translate="yes" reformat="yes" xml:space="default">
                 <source>Invitation Bonus</source>
                 <target>Einladung Bonus</target>
             </trans-unit>
@@ -1021,25 +1021,33 @@
                 <source>Your settings have been saved.</source>
                 <target>Ihre Einstellungen wurden gespeichert.</target>
             </trans-unit>
-            <trans-unit id="148" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="250" translate="yes" reformat="yes" xml:space="default">
                 <source>Active</source>
                 <target>Aktiv</target>
             </trans-unit>
-            <trans-unit id="149" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="251" translate="yes" reformat="yes" xml:space="default">
                 <source>navigations</source>
                 <target>navigationen</target>
             </trans-unit>
-            <trans-unit id="150" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="252" translate="yes" reformat="yes" xml:space="default">
                 <source>Other events</source>
                 <target>Weitere Veranstaltungen</target>
             </trans-unit>
-            <trans-unit id="151" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="253" translate="yes" reformat="yes" xml:space="default">
                 <source>Call</source>
                 <target>Rufen</target>
             </trans-unit>
-            <trans-unit id="152" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="254" translate="yes" reformat="yes" xml:space="default">
                 <source>Search</source>
                 <target>Suche</target>
+            </trans-unit>
+            <trans-unit id="255" translate="yes" reformat="yes" xml:space="default">
+                <source>The price of the package is: 10%1% per. Month</source>
+                <target>Prisen på pakken er: 10%1% pr. måned</target>
+            </trans-unit>
+            <trans-unit id="256" translate="yes" reformat="yes" xml:space="default">
+                <source>The activation price is: 30%1%</source>
+                <target>Aktiveringen Prisen er: 30%1%</target>
             </trans-unit>
         </body>
     </file>

@@ -531,6 +531,7 @@ class affiliateActions extends sfActions {
         if ($request->isMethod('post')) {
 
             $this->form = new CustomerForm();
+           
             $this->form->bind($request->getParameter("newCustomerForm"), $request->getFiles("newCustomerForm"));
             $this->form->setDefault('referrer_id', $referrer_id);
             unset($this->form['terms_conditions']);
@@ -540,7 +541,7 @@ class affiliateActions extends sfActions {
 //                        unset($this->form['terms_conditions']);
             // print_r($this->form);
             //  die;
-
+            
             $this->processForm($request, $this->form);
         } else {
 
@@ -597,11 +598,12 @@ class affiliateActions extends sfActions {
         //$customer['referrer_id']= $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
         $plainPws = $customer["password"];
 
-
+         
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-
-        if ($form->isValid()) {
-
+        
+         
+      //   var_dump($customer);die;
+        if ($form->isValid()) { 
             //     $customer->setPlainText($request->getParameter($form->getPassword()));
             $customer = $form->save();
             $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
@@ -844,6 +846,7 @@ class affiliateActions extends sfActions {
             $uniqueid = $request->getParameter('uniqueid');
             $uc = new Criteria();
             $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
+            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$this->customer->getSimTypeId());
             $uc->addAnd(UniqueIdsPeer::STATUS, 0);
             $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueid);
             $availableUniqueCount = UniqueIdsPeer::doCount($uc);
@@ -885,7 +888,7 @@ class affiliateActions extends sfActions {
 
             Telienta::ResgiterCustomer($this->customer, $order->getExtraRefill());
             Telienta::createAAccount($TelintaMobile, $this->customer);
-            //Telienta::createCBAccount($TelintaMobile, $this->customer);
+            Telienta::createCBAccount($TelintaMobile, $this->customer);
            
             emailLib::sendCustomerRegistrationViaAgentEmail($this->customer, $order);
           
@@ -1110,8 +1113,10 @@ class affiliateActions extends sfActions {
     public function executeValidateUniqueId(sfWebRequest $request) {
 
         $uniqueId = $request->getParameter('uniqueid');
+        $order = CustomerOrderPeer::retrieveByPK($request->getParameter('orderid'));
         $uc = new Criteria();
         $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
+        $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$order->getCustomer()->getSimTypeId());
         $uc->addAnd(UniqueIdsPeer::STATUS, 0);
         $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueId);
         $availableUniqueCount = UniqueIdsPeer::doCount($uc);
@@ -1120,7 +1125,7 @@ class affiliateActions extends sfActions {
         } else {
             echo "false";
         }
-
+//echo $order->getCustomer()->getSimTypeId();die;
         return sfView::NONE;
     }
   public function executeChangeCulture(sfWebRequest $request){

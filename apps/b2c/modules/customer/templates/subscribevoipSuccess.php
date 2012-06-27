@@ -17,10 +17,10 @@
 <p>
 <?php echo __("With Resenumber you can receive cheap calls on this number while travelling abroad.") ?>
 <br/><br/>
-<?php echo __("The price of the package is: 10");echo sfConfig::get('app_currency_code'); echo __("per. Month") ?>
+<?php echo __("The price of the package is: 10%1% per. Month", array("%1%"=>sfConfig::get('app_currency_code'))) ?>
 <br/>
-<?php echo __("The activation price is: 30") ?><?php echo sfConfig::get('app_currency_code')?>
-</p>
+<?php echo __("The activation price is: 30%1%",array("%1%"=>sfConfig::get('app_currency_code'))) ?>
+</p><br />
 	<script type="text/javascript">
 	    $(function() {
 	        $("#performSubscription").parents("form").bind("submit", function(e) {

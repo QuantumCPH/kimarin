@@ -2755,7 +2755,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
         public function executeConfirmpayment(sfWebRequest $request) {
         $Parameters=$request->getURI();
 
-        $Parameters=$Parameters.$request->getParameter('amount');
+       // $Parameters=$Parameters.$request->getParameter('amount');
         $email2 = new DibsCall();
         $email2->setCallurl($Parameters);
 
@@ -2963,7 +2963,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
                       // For Telinta Add Account
                
                    Telienta::createAAccount($TelintaMobile,$this->customer);
-                  // Telienta::createCBAccount($TelintaMobile, $this->customer);
+                   Telienta::createCBAccount($TelintaMobile, $this->customer);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //if the customer is invited, Give the invited customer a bonus of 10
                 $invite_c = new Criteria();

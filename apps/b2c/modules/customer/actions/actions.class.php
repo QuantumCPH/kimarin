@@ -41,7 +41,8 @@ class customerActions extends sfActions {
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
 
         if ($form->isValid()) {
-
+//            var_dump($customer);
+//            die;
             $customer = $form->save();
             $customer->setPlainText($plainPws);
             if (isset($refVal) && $refVal != '') {
@@ -68,11 +69,12 @@ class customerActions extends sfActions {
 
             $uc = new Criteria();
             $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+            $uc->add(UniqueIdsPeer::SIM_TYPE_ID,$customer->getSimTypeId());
             $uc->addAnd(UniqueIdsPeer::STATUS, 0);
             $availableUniqueCount = UniqueIdsPeer::doCount($uc);
             $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
 
-            if($availableUniqueCount  == 0){
+            if($availableUniqueCount  == 0){ echo $customer->getSimTypeId();
                 // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
                 emailLib::sendUniqueIdsShortage();
                 $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
@@ -367,7 +369,7 @@ class customerActions extends sfActions {
                 $order->setProductId(5);
                 $order->setCustomerId($customerids);
                 $order->setExtraRefill($voipcharges);
-                $order->setIsFirstOrder(1);
+               // $order->setIsFirstOrder(1);
                 $order->setOrderStatusId(3);
                 echo 'order' . $order->save();
 
@@ -375,7 +377,7 @@ class customerActions extends sfActions {
                 $this->customer = $customerids;
                 $transaction = new Transaction();
                 $transaction->setAmount($voipcharges);
-                $transaction->setDescription($this->getContext()->getI18N()->__('Transation for VoIP Purchase'));
+                $transaction->setDescription($this->getContext()->getI18N()->__('Transaction for VoIP Purchase'));
                 $transaction->setOrderId($order->getId());
                 $transaction->setCustomerId($customerids);
                 $transaction->setTransactionStatusId(3);
@@ -844,7 +846,7 @@ class customerActions extends sfActions {
         $this->form = new CustomerForm(CustomerPeer::retrieveByPK($this->customer->getId()));
       
 
-    unset($this->form['first_name']);
+                    unset($this->form['first_name']);
                     unset($this->form['last_name']);
                     unset($this->form['country_id']);
                     unset($this->form['city']);
@@ -875,7 +877,7 @@ class customerActions extends sfActions {
                     unset($this->form['ticketval']);
                     unset($this->form['to_date']);
                     unset($this->form['from_date']);
-                     unset($this->form['uniqueid']);
+                    unset($this->form['uniqueid']);
                     unset($this->form['plain_text']);
                     unset($this->form['ticketval']);
                     unset($this->form['to_date']);
@@ -884,6 +886,12 @@ class customerActions extends sfActions {
                     unset($this->form['terms_conditions']);
                     unset($this->form['manufacturer']);
                     unset($this->form['product']);
+                    unset($this->form['second_last_name']);
+                    unset($this->form['nie_passport_number']);
+                    unset($this->form['preferred_language_id']);
+                    unset($this->form['province_id']);
+                    unset($this->form['sim_type_id']);
+                    unset($this->form['nationality_id']);
                    //  unset($this->form['password']);
         // unset($this->form['password_confirm']);
         /////////////////////////////////////
@@ -968,6 +976,8 @@ class customerActions extends sfActions {
         unset($this->form['i_customer']);
         unset($this->form['usage_alert_sms']);
         unset($this->form['usage_alert_email']);
+        unset($this->form['sim_type_id']);
+        
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
         $getvoipInfo = new Criteria();
@@ -998,6 +1008,8 @@ class customerActions extends sfActions {
         }
        
         $this->form->getWidget('mobile_number')->setAttribute('readonly', 'readonly');
+        $this->form->getWidget('nie_passport_number')->setAttribute('readonly', 'readonly');
+        
         
     }
 
@@ -1006,21 +1018,29 @@ class customerActions extends sfActions {
     $this->target = $this->getTargetUrl();   
            
         
-        if ($request->isMethod('post') &&
-                $request->getParameter('mobile_number') != '' &&
-                $request->getParameter('password') != '') {
+        if ($request->isMethod('post') && $request->getParameter('mobile_number') != '' && $request->getParameter('password') != '') {
             $paswordval = $request->getParameter('password');
             $mobile_number = $request->getParameter('mobile_number');
             $password = sha1($request->getParameter('password'));
 
             $c = new Criteria();
-            $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
+            $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);            
             $c->add(CustomerPeer::PASSWORD, $password);
             $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $cnt = CustomerPeer::doCount($c);
+            if($cnt > 0){
+                $customer = CustomerPeer::doSelectOne($c);
+            }else{
+                $c = new Criteria();
+                $c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $mobile_number);          
+                $c->add(CustomerPeer::PASSWORD, $password);
+                $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+                
+                $customer = CustomerPeer::doSelectOne($c);
+            }
+            
 
-            $customer = CustomerPeer::doSelectOne($c);
-
-
+//die;
             if ($customer) {
 
                 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');

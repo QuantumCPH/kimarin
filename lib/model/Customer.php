@@ -98,7 +98,7 @@ class Customer extends BaseCustomer
             if($balance)
                return $balance;
         }
-        public function getNationality(){
+        public function getNationalityTitle(){
            $nationality_title = ""; 
            $cn = new Criteria();
            $cn->add(NationalityPeer::ID,$this->getNationalityId());
@@ -107,7 +107,7 @@ class Customer extends BaseCustomer
              return $nationality_title;
         }
         
-        public function getSimTypes(){
+        public function getSimType(){
             $simTypeTitle ="";
             $cst = new Criteria();
             $cst->add(SimTypesPeer::ID,$this->getSimTypeId());
@@ -125,7 +125,7 @@ class Customer extends BaseCustomer
             return $planguage;
         }
         
-        public function getProvince(){
+        public function getProvinceName(){
             $provinceName ="";
             $cpr = new Criteria();
             $cpr->add(ProvincePeer::ID,$this->getProvinceId());

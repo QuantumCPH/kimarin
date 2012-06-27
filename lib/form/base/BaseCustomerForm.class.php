@@ -16,7 +16,7 @@ class BaseCustomerForm extends BaseFormPropel
       'first_name'               => new sfWidgetFormInput(),
       'last_name'                => new sfWidgetFormInput(),
       'second_last_name'         => new sfWidgetFormInput(),
-      'nationality_id'           => new sfWidgetFormInput(),
+      'nationality_id'           => new sfWidgetFormPropelChoice(array('model' => 'Nationality', 'add_empty' => true)),
       'country_id'               => new sfWidgetFormPropelChoice(array('model' => 'Country', 'add_empty' => false)),
       'city'                     => new sfWidgetFormInput(),
       'po_box_number'            => new sfWidgetFormInput(),
@@ -51,9 +51,9 @@ class BaseCustomerForm extends BaseFormPropel
       'i_customer'               => new sfWidgetFormInput(),
       'usage_alert_sms'          => new sfWidgetFormInput(),
       'usage_alert_email'        => new sfWidgetFormInput(),
-      'sim_type_id'              => new sfWidgetFormInput(),
-      'preferred_language_id'    => new sfWidgetFormInput(),
-      'province_id'              => new sfWidgetFormInput(),
+      'sim_type_id'              => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
+      'preferred_language_id'    => new sfWidgetFormPropelChoice(array('model' => 'PreferredLanguages', 'add_empty' => true)),
+      'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -61,14 +61,14 @@ class BaseCustomerForm extends BaseFormPropel
       'first_name'               => new sfValidatorString(array('max_length' => 255)),
       'last_name'                => new sfValidatorString(array('max_length' => 255)),
       'second_last_name'         => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'nationality_id'           => new sfValidatorInteger(array('required' => false)),
+      'nationality_id'           => new sfValidatorPropelChoice(array('model' => 'Nationality', 'column' => 'id', 'required' => false)),
       'country_id'               => new sfValidatorPropelChoice(array('model' => 'Country', 'column' => 'id')),
       'city'                     => new sfValidatorString(array('max_length' => 255)),
       'po_box_number'            => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'mobile_number'            => new sfValidatorString(array('max_length' => 255)),
       'device_id'                => new sfValidatorPropelChoice(array('model' => 'Device', 'column' => 'id', 'required' => false)),
       'email'                    => new sfValidatorString(array('max_length' => 255)),
-      'nie_passport_number'      => new sfValidatorInteger(),
+      'nie_passport_number'      => new sfValidatorNumber(),
       'password'                 => new sfValidatorString(array('max_length' => 255)),
       'is_newsletter_subscriber' => new sfValidatorBoolean(array('required' => false)),
       'created_at'               => new sfValidatorDateTime(array('required' => false)),
@@ -96,9 +96,9 @@ class BaseCustomerForm extends BaseFormPropel
       'i_customer'               => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'usage_alert_sms'          => new sfValidatorInteger(array('required' => false)),
       'usage_alert_email'        => new sfValidatorInteger(array('required' => false)),
-      'sim_type_id'              => new sfValidatorInteger(),
-      'preferred_language_id'    => new sfValidatorInteger(),
-      'province_id'              => new sfValidatorInteger(),
+      'sim_type_id'              => new sfValidatorPropelChoice(array('model' => 'SimTypes', 'column' => 'id', 'required' => false)),
+      'preferred_language_id'    => new sfValidatorPropelChoice(array('model' => 'PreferredLanguages', 'column' => 'id', 'required' => false)),
+      'province_id'              => new sfValidatorPropelChoice(array('model' => 'Province', 'column' => 'id', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('customer[%s]');

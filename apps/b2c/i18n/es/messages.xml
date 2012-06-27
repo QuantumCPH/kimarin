@@ -1058,12 +1058,12 @@
                 <target>Med Resenumber kan du motta billige samtaler på dette nummeret når du reiser utenlands.</target>
             </trans-unit>
             <trans-unit id="260" translate="yes" reformat="yes" xml:space="default">
-                <source>The price of the package is: 10 NOK per. Month</source>
-                <target>Prisen på pakken er: 10 NOK pr. måned</target>
+                <source>The price of the package is: 10%1% per. Month</source>
+                <target>Prisen på pakken er: 10%1% pr. måned</target>
             </trans-unit>
             <trans-unit id="261" translate="yes" reformat="yes" xml:space="default">
-                <source>The activation price is: 30 NOK</source>
-                <target>Aktiveringen Prisen er: 30 NOK</target>
+                <source>The activation price is: 30%1%</source>
+                <target>Aktiveringen Prisen er: 30%1%</target>
             </trans-unit>
             <trans-unit id="262" translate="yes" reformat="yes" xml:space="default">
                 <source>To Number</source>

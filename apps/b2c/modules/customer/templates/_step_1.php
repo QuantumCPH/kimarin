@@ -66,6 +66,38 @@
             </li>
             <!--  end product -->
             <?php
+            $error_sim_type_id = false;;
+            if($form['sim_type_id']->hasError())
+            	$error_sim_type_id = true;
+            ?>
+            <li>
+             <?php echo $form['sim_type_id']->renderLabel() ?>
+             <?php echo $form['sim_type_id'] ?>
+             <?php if ($error_sim_type_id): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_sim_type_id?$form['sim_type_id']->renderError():'&nbsp;'?></div>
+            </li>
+            <!--  end sim type -->
+            <?php
+            $error_preferred_language_id = false;
+            if($form['preferred_language_id']->hasError())
+            	$error_preferred_language_id = true;
+            ?>
+            <li>
+             <?php echo $form['preferred_language_id']->renderLabel() ?>
+             <?php echo $form['preferred_language_id'] ?>
+             <?php if ($error_preferred_language_id): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_preferred_language_id?$form['preferred_language_id']->renderError():'&nbsp;'?></div>
+            </li>
+            <!--  end preferred language -->
+            <?php
             $error_first_name = false;;
             if($form['first_name']->hasError())
             	$error_first_name = true;
@@ -146,7 +178,29 @@
              <div class='inline-error'><?php echo $error_po_box_number?$form['po_box_number']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end pobox number -->
-            <?php
+           
+          </ul>
+
+      </div>
+      <div class="fr col">
+        <ul>
+           <?php
+            $error_province_id = false;;
+            if($form['province_id']->hasError())
+            	$error_province_id = true;
+            ?>
+            <li>
+             <?php echo $form['province_id']->renderLabel() ?>
+             <?php echo $form['province_id'] ?>
+             <?php if ($error_province_id): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_province_id?$form['province_id']->renderError():'&nbsp;'?></div>
+            </li>
+            <!-- end province -->
+           <?php
             $error_city = false;;
             if($form['city']->hasError())
             	$error_city = true;
@@ -162,6 +216,22 @@
              <div class='inline-error'><?php echo $error_city?$form['city']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end city -->
+            <?php
+            $error_nationality_id = false;
+            if($form['nationality_id']->hasError())
+            	$error_nationality_id = true;
+            ?>
+            <li>
+             <?php echo $form['nationality_id']->renderLabel() ?>
+             <?php echo $form['nationality_id'] ?>
+             <?php if ($error_nationality_id): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
+            </li>
+            <!-- end nationality -->
             <?php
             $error_country_id = false;;
             if($form['country_id']->hasError())
@@ -194,12 +264,6 @@
              <div class='inline-error'><?php echo $error_date_of_birth?$form['date_of_birth']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end date of birth -->
-          </ul>
-
-      </div>
-      <div class="fr col">
-        <ul>
-            
             <?php
             $error_password = false;;
             if($form['password']->hasError())

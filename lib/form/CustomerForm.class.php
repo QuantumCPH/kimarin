@@ -72,7 +72,31 @@ class CustomerForm extends BaseCustomerForm
     								'required'	=> 'Please choose a product',
     								'invalid'	=> 'Invalid product',
     							));
-
+        //-----------------For get the Sim Types---------------------
+            $this->widgetSchema['sim_type_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'SimTypes',
+                    'order_by' => array('Title','asc'),
+                    //'add_empty' => 'Choose a product',
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Preferred languages---------------------
+            $this->widgetSchema['preferred_language_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'PreferredLanguages',
+                    'order_by' => array('Language','asc')
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Province---------------------
+            $this->widgetSchema['province_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'Province',
+                    'order_by' => array('Province','asc')
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Nationality---------------------
+            $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'Nationality',
+                    'order_by' => array('Title','asc')
+            ));
+            //----------------------------------------------------------
     //date of birth
 	$years = range(1950, 2020);
 	$this->widgetSchema['date_of_birth']->setOption('years' , array_combine($years, $years));
@@ -210,7 +234,11 @@ class CustomerForm extends BaseCustomerForm
 			'device_id'=>'Mobile Model',
 			'password_confirm'=>'Retype password',
 			'date_of_birth'=>'Birth date <br />(dd-mm-yyyy)',
-                        'second_last_name'=> 'Second Family Name'
+                        'second_last_name'=> 'Second Family Name',
+                        'nie_passport_number'=>'N.I.E/Passport<br />Number', 
+                        'preferred_language_id'=>'Preferred Language', 
+                        'province_id'=>'Province',
+                        'nationality_id'=>'Nationality',
 		)
 	);
 	

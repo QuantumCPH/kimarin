@@ -66,7 +66,8 @@ class CustomerFormB2C extends CustomerForm
                     'nationality_id',
                     'province_id',
                     'preferred_language_id',
-                    'nie_passport_number'
+                    'nie_passport_number',
+                    'sim_type_id'
                 ));
 
 
@@ -83,7 +84,13 @@ class CustomerFormB2C extends CustomerForm
                         )
 		    )
 	    );
-
+            $this->mergePostValidator(
+		    new sfValidatorCallback (
+                        array (
+                                'callback'=> array(new CustomerForm, 'validateUniquePassportNo')
+                        )
+		    )
+	    );
             $this->mergePostValidator(
 	        new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_confirm', array(), array('invalid' => 'Passwords don\'t match'))
 	    );

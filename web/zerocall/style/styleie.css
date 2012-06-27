@@ -199,13 +199,13 @@ width:232px;
 .callhistory td{ padding:8px;border-bottom:1px solid #999999; font-size:12px;}
 .callhistory td small{ font-size:11px;}
 
-a.receipt{ background-image:url(../images/green-bullet.jpg); background-repeat:no-repeat; padding-left:15px; float:left; display:block; text-decoration:none;}
+a.receipt{ background-image:url(../images/next.png); background-repeat:no-repeat; padding-left:15px; float:left; display:block; text-decoration:none;}
 
 .split-form-sign-up{padding-top:20px; float:left; clear:both; width:750px; padding-bottom:30px; min-height:412px; background-color:FFFFFF; padding-top:20px; padding-left:30px; margin-bottom:10px;}
 .split-form-sign-up .col{width:314px; float: left; position: relative;height: 250px;}
 .split-form-sign-up ul{list-style:none;}
 .split-form-sign-up ul li{list-style:none; margin-bottom:10px; float:left; clear:both;width:350px; white-space:nowrap; z-index:100; position:relative;}
-.split-form-sign-up ul li label{width:130px; float:left; padding-top:3px; font-weight:bold; color:#0c74a5;; }
+.split-form-sign-up ul li label{width:140px; float:left; padding-top:3px; font-weight:bold; color:#0c74a5;; }
 .split-form-sign-up ul li input{width:130px; border:1px solid #999999; font-size:11px; padding:3px;}
 .split-form-sign-up ul li select{width:137px; border:1px solid #999999;font-size:11px; padding:3px; }
 

@@ -94,7 +94,7 @@ echo " ";   echo substr($Telintambs, 15,2);
 
 
 
-<!--        <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Active mobile No ') ?>:</span><span><?php
+        <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Active mobile No ') ?>:</span><span><?php
         
       
         if(isset($unid) && $unid!=""){
@@ -162,11 +162,11 @@ echo " ";   echo substr($Telintambs, 15,2);
                 }
            
           
-         }  ?></span></div>-->
+         }  ?></span></div>
 
 <?php } ?>
 <?php   if($pus==0){?>
-<!--
+
   <?php if($voip_customer!=''){?>
         
         
@@ -223,13 +223,13 @@ echo " ";   echo substr($Telintambs, 15,2);
                 <?php echo url_for('customer/unsubscribevoip?cid='.$customer->getId(), true) ?>
                     <?php }else{ ?>
                         <?php echo url_for('customer/subscribevoip?cid='.$customer->getId(), true) ?>
-                    <?php }?>" class="blackcolor submittexts" style="color: #333333; font-family: Trebuchet MS,Helvetica,sans-serif;font-weight: bold;text-decoration: none;"><?php
+                    <?php }?>" class="blackcolor submittexts" ><?php
             if($voip_customer!=''){ echo __('Disable'); }else{echo __('Enable');
                         } ?></a></b>
 			</td>
 		<td></td></tr>
 	</table>
-        -->
+        
     </div>
   </div>
 
