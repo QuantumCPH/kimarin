@@ -242,7 +242,7 @@ public function executePaymenthistory(sfWebRequest $request)
                 if($country_id){
                     $langSym = $country_id->getLanguageSymbol();
                 }else{
-                    $langSym = 'no';
+                    $langSym = sfConfig::get('app_languagsfCoe_symbol');
                 }
                 //--------------------------------------------------------
                 //$lang =  $this->getUser()->getAttribute('activelanguage');
@@ -306,6 +306,22 @@ public function executePaymenthistory(sfWebRequest $request)
          $this->editCust = CustomerPeer::doSelectOne($customer);
 
      }
+     /**** Get Preferred languages List****/
+     $cpl = new Criteria();
+     $planguages = PreferredLanguagesPeer::doSelect($cpl);
+     $this->planguages = $planguages;
+     
+     /**** Get Province List****/
+     $cpr = new Criteria();
+     $province = ProvincePeer::doSelect($cpr);
+     $this->province_list = $province;
+     
+     /**** Get Nationality ****/
+     $cn = new Criteria();
+     $nationality = NationalityPeer::doSelect($cn);
+     $this->nationality_list = $nationality;
+     
+     
      if($request->getParameter('customerID')){
       $dob = $request->getParameter('dy')."-".$request->getParameter('dm')."-".$request->getParameter('dd');
       $dob = date('Y-m-d',strtotime($dob));
@@ -319,6 +335,7 @@ public function executePaymenthistory(sfWebRequest $request)
       $customer = CustomerPeer::retrieveByPK($request->getParameter('customerID'));
       $customer->setFirstName($request->getParameter('firstName'));
       $customer->setLastName($request->getParameter('lastName'));
+      $customer->setSecondLastName($request->getParameter('secondlastName'));
       $customer->setAddress($request->getParameter('address'));
       $customer->setCity($request->getParameter('city'));
       $customer->setPoBoxNumber($request->getParameter('pob'));
@@ -326,6 +343,10 @@ public function executePaymenthistory(sfWebRequest $request)
       $customer->setDateOfBirth($dob);
       $customer->setUsageAlertEmail($usage_email);
       $customer->setUsageAlertSMS($usage_sms);
+      $customer->setProvinceId($request->getParameter("provinceid"));
+      $customer->setPreferredLanguageId($request->getParameter("pLanguageId"));
+      $customer->setNationalityId($request->getParameter("nationalityid"));
+              
 
       $customer->save();
 
@@ -541,7 +562,7 @@ public function executeCompletePaymenthistory(sfWebRequest $request)
                     if($country_id){
                     $langSym = $country_id->getLanguageSymbol();
                     }else{
-                    $langSym = 'no';
+                    $langSym = sfConfig::get('app_languagsfCoe_symbol');
                     }
                     //--------------------------------------------------------
                     //$lang =  $this->getUser()->getAttribute('activelanguage');

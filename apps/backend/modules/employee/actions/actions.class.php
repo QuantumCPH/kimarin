@@ -162,8 +162,8 @@ class employeeActions extends sfActions {
       $c1 = new Criteria();
       $c1->addAnd(CountryPeer::ID, $countryID);
       $this->country = CountryPeer::doSelectOne($c1);
-     $contrymobilenumber = $this->country->getCallingCode() . $mobileNo;
-     $employeMobileNumber=$contrymobilenumber;
+      $contrymobilenumber = $this->country->getCallingCode() . $mobileNo;
+      $employeMobileNumber=$contrymobilenumber;
 
         if(!CompanyEmployeActivation::telintaRegisterEmployeeCB($employeMobileNumber, $this->companys)){
             $this->getUser()->setFlash('messageError', 'Employee  Call Back account is not registered on Telinta please check email');

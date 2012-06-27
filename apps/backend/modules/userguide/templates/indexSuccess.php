@@ -1,5 +1,5 @@
 
- <div id="sf_admin_container"><h1><?php echo  __('Userguide List') ?></h1>
+ <div id="sf_admin_container"><h1><?php echo  __('Userguide List') ?></h1><br />
       
 <?php if($userguide_list){?>
      <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign">

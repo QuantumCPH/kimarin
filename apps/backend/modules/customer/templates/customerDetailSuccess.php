@@ -17,8 +17,8 @@ $pus=0;
 
 
                           <tr>
-                    <td width="11%" class="leftHeadign">Customer Balance</td>
-                     <td  ><?php
+                    <td width="17%" class="leftHeadign">Customer Balance</td>
+                     <td width="83%"  ><?php
                            $uniqueId=$customer->getUniqueid();
                          $cuid=$customer->getId();
 
@@ -61,16 +61,38 @@ $pus=0;
                     <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Last Name</td>
                        <td><?php echo  $customer->getLastName() ?></td>
                           </tr>
+                      <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Second Family Name</td>
+                    <td><?php echo  $customer->getSecondLastName() ?></td>
+                          </tr>    
                       <tr>
-		    <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Mobile Number</td>
+		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Mobile Number</td>
                       <td><?php echo  $customer->getMobileNumber() ?></td>
                          </tr>
+                        <tr>
+		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >N.I.E./Passport Number</td>
+                        <td><?php echo  $customer->getNiePassportNumber() ?></td>
+                         </tr>                         
                          <tr>
-
-		     <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Password</td>
+		           <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Password</td>
                          <td><?php echo  $customer->getPlainText() ?></td>
                        </tr>
-                         
+                        <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Nationality</td>
+                          <td><?php echo  $customer->getNationality(); ?></td>
+                         </tr> 
+                          <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Sim Types</td>
+                          <td><?php echo  $customer->getSimTypes(); ?></td>
+                         </tr>
+                         <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Province</td>
+                          <td><?php echo  $customer->getProvince(); ?></td>
+                         </tr>
+                         <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Preferred Language</td>
+                          <td><?php echo  $customer->getPreferredLanguage(); ?></td>
+                         </tr>
                        
 <?php
 $val="";
@@ -114,7 +136,7 @@ if(isset($val) && $val!=""){  ?>
                     <td id="sf_admin_list_th_date_of_birth" class="leftHeadign" >Date Of Birth</td>
                       <td><?php echo  $customer->getDateOfBirth() ?></td>
                       </tr>
-                         <tr>
+<!--                         <tr>
                       <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Auto Refill</td>
                         <?php if ($customer->getAutoRefillAmount()!=NULL && $customer->getAutoRefillAmount()>1){ ?>
                   <td>Yes</td>
@@ -122,7 +144,7 @@ if(isset($val) && $val!=""){  ?>
                       { ?>
                   <td>No</td>
                   <?php } ?>
-                        </tr>
+                        </tr>-->
                          <tr>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Unique ID</td>
                          <td>  <?php  echo $customer->getUniqueid();     ?>   </td>

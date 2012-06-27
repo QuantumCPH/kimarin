@@ -17,6 +17,7 @@ class BaseUniqueIdsForm extends BaseFormPropel
       'created_at'           => new sfWidgetFormDateTime(),
       'assigned_at'          => new sfWidgetFormDateTime(),
       'registration_type_id' => new sfWidgetFormInput(),
+      'sim_type_id'          => new sfWidgetFormInput(),
       'status'               => new sfWidgetFormInputCheckbox(),
     ));
 
@@ -26,6 +27,7 @@ class BaseUniqueIdsForm extends BaseFormPropel
       'created_at'           => new sfValidatorDateTime(),
       'assigned_at'          => new sfValidatorDateTime(),
       'registration_type_id' => new sfValidatorInteger(),
+      'sim_type_id'          => new sfValidatorInteger(array('required' => false)),
       'status'               => new sfValidatorBoolean(),
     ));
 

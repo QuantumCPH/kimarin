@@ -28,7 +28,27 @@
                  </div>
                 <label style="float:right;width:85px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:85px; <?php endif; ?>">ex. 0701234567</label>
             </li>
-            <!-- end mobile_number -->           
+            <!-- end mobile_number -->  
+            <?php 
+            $error_nie_passport_number = false;
+            if($form['nie_passport_number']->hasError())
+            $error_nie_passport_number = true;
+            ?>
+            <li>
+             <?php echo $form['nie_passport_number']->renderLabel() ?>
+             <?php echo $form['nie_passport_number'];
+              $emailWidget = new sfWidgetFormInput(array(), array('class' => 'required email'));?>
+             <?php if ($error_nie_passport_number): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+                
+             <div class='inline-error'><?php echo $error_nie_passport_number?$form['nie_passport_number']->renderError():'&nbsp;'?>
+                 </div>
+                <label style="float:right;width:85px;font-weight:normal;<?php if ($error_nie_passport_number): ?> margin-right:85px; <?php endif; ?>"></label>
+            </li>
+            <!-- end passport number --> 
             <?php
             $error_product = false;;
             if($form['product']->hasError())
@@ -77,6 +97,23 @@
              <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end last name -->
+            
+            <?php
+            $error_second_last_name = false;
+            if($form['second_last_name']->hasError())
+            	$error_second_last_name = true;
+            ?>
+            <li>
+             <?php echo $form['second_last_name']->renderLabel() ?>
+             <?php echo $form['second_last_name'] ?>
+             <?php if ($error_second_last_name): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
+            </li>
+            <!-- end second last name -->
             <?php
             $error_address = false;;
             if($form['address']->hasError())

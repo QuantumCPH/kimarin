@@ -29,7 +29,7 @@
 
                     </select>
                  &nbsp;
-               <span style="margin-left:10px;"><input type="submit" name="Search" value="Search" class="searchbtn" /></span>
+               <span style="margin-left:10px;"><input type="submit" name="Search" value="Search" class="searchbtn user_external_link" /></span>
                 </div>
 
             </div><br clear="all" />

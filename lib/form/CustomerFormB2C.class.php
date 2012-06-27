@@ -6,9 +6,9 @@ class CustomerFormB2C extends CustomerForm
             parent::configure();
 
                $context =  sfContext::getInstance();
-        $request = $context->getRequest();
+               $request = $context->getRequest();
 
-       $actionmodule=  $context->getActionName();
+               $actionmodule=  $context->getActionName();
 
 
 
@@ -62,11 +62,11 @@ class CustomerFormB2C extends CustomerForm
                     'telecom_operator_id',
                     'date_of_birth',
                     'manufacturer',
-
-              
-
-                
-               
+                    'second_last_name',
+                    'nationality_id',
+                    'province_id',
+                    'preferred_language_id',
+                    'nie_passport_number'
                 ));
 
 

@@ -100,7 +100,7 @@ use_helper('Number');
 
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':'25%' ?>)</td>
+    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
     <td>&nbsp;</td>
     <td><?php echo format_number($vat) ?></td>
   </tr>

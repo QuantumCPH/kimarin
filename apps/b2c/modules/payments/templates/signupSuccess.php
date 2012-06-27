@@ -150,7 +150,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 			  </label>
 
               <input type="hidden" id="product_price" value="<?php 
-              	$product_price_vat = ($order->getProduct()->getRegistrationFee()+$postalcharge)*.25;
+              	$product_price_vat = ($order->getProduct()->getRegistrationFee()+$postalcharge)*sfConfig::get('app_vat_percentage');
 
               	$product_price = ($order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee());
               	
@@ -193,7 +193,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 
               
               <?php echo __('Delivery and Returns') ?> <br />
-              <?php echo __('VAT') ?> (25%)<br />
+              <?php echo __('VAT') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
               <?php echo __('Total amount') ?>
 
 
@@ -209,7 +209,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
               	</span><?php echo sfConfig::get('app_currency_code')?>
                 <br />
               	<?php //$total = $product_price + $extra_refill + $vat 
- //$order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*.25)     
+ //$order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage'))     
                 ?>
                 <?php $total = $product_price + $postalcharge + $product_price_vat ?>
               	<span id="total_span">
@@ -217,7 +217,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
               	</span><?php echo sfConfig::get('app_currency_code')?>
               </label>
             </li>
-	
+	<li><input type="submit"  class="butonsigninsmall"  name="paybutan"  style="cursor: pointer;margin-left: 0px !important;" value="<?php echo __('Pay') ?>" /></li>  
           </ul>
         <!-- hidden fields -->
 		<?php echo $form->renderHiddenFields() ?>
@@ -253,7 +253,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 		      </div>
       <div class="fr col">
           
-        <ul>
+        <ul style="display: none;">
             <!-- auto fill -->
             <li>
               <label><?php echo __('Auto refill details:') ?></label>
@@ -290,9 +290,8 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
                 <br /><br />
                                 
             </li>
-            <li><input type="submit"  class="butonsigninsmall"  name="paybutan"  style="cursor: pointer;margin-left: 0px !important;" value="<?php echo __('Pay') ?>" /></li>
-        </ul>	
-       
+            
+        </ul>	       
       </div>
     </div>
   </div>

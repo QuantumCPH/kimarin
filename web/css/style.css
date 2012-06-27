@@ -5,6 +5,7 @@ body {
 	font-size:12px;
         padding:0px;
         margin:0px;
+        color:#0C74A5;
 }
 img{
     border: 0px;
@@ -48,7 +49,7 @@ a:hover{
 }
 #basic p {
 	font-size:13px;
-	color:#666666;
+	color:#0C74A5;
 	margin-bottom:20px;
 	border-bottom:solid 1px #dedede;
 	padding-bottom:10px;
@@ -343,7 +344,7 @@ margin-bottom:10px;
 .split-form-sign-up{padding-top:20px; float:left; clear:both; width:750px; padding-bottom:30px; min-height:382px; background-repeat:no-repeat; padding-top:20px; padding-left:30px; margin-bottom:10px;}
 .split-form-sign-up .col{width:351px; float: left; position: relative}
 .split-form-sign-up ul{list-style:none;}
-.split-form-sign-up ul li{list-style:none; margin-bottom:10px; clear:both;width:350px; white-space:nowrap;color:#000;}
+.split-form-sign-up ul li{list-style:none; margin-bottom:10px; clear:both;width:350px; white-space:nowrap;color:#0C74A5;}
 .split-form-sign-up ul li label{width:130px; float:left; padding-top:3px; font-weight:bold; }
 .split-form-sign-up ul li input{width:130px; border:1px solid #999999; font-size:11px; padding:3px;}
 .split-form-sign-up ul li select{width:137px; border:1px solid #999999;font-size:11px; padding:3px; }
@@ -548,7 +549,7 @@ tr.even{
     background-color:#FFFFFF !important;
 }
 tr.odd{
-    background-color:#F6E8C9 !important;
+    background-color:#f2f8f8 !important;
 }
 p.pTotal{    
     font-weight: bold;

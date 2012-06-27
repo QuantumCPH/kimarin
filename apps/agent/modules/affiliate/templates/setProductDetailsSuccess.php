@@ -132,7 +132,7 @@
 
 
                         <?php
-                            $product_price_vat = $order->getProduct()->getRegistrationFee() * .25;
+                            $product_price_vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
                             $product_price = ($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
                         ?>
                         </li>
@@ -167,7 +167,7 @@
                         </span>
                     </li>
                     <li>
-                        <label><?php echo __('VAT') ?> (25%)<br />
+                        <label><?php echo __('VAT') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
 <?php echo __('Total amount') ?></label>
 
                         <label class="fr ac" >

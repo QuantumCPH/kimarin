@@ -340,7 +340,7 @@
 <li><a href="#"
                 onmouseover="mopen('m1')"
                 onmouseout="mclosetime()"
-                <?php echo $modulName=="device" || $modulName=="manufacturer" || $modulName=="telecom_operator" || $modulName=="postal_charges" ||$modulName=="product" || $modulName=="enable_country" || $modulName=="city" || $modulName=="sms_text" || $modulName=="usage_alert" || $modulName=="usage_alert_sender" || $modulName=="telecom_operator" ?'class="current"':''?>
+                <?php echo $modulName=="device" || $modulName=="manufacturer" || $modulName=="telecom_operator" || $modulName=="postal_charges" ||$modulName=="product" || $modulName=="enable_country" || $modulName=="city" || $modulName=="sms_text" || $modulName=="simTypes" || $modulName=="nationality" || $modulName=="preferredLanguages" || $modulName=="province" || $modulName=="usage_alert" || $modulName=="usage_alert_sender" || $modulName=="telecom_operator" ?'class="current"':''?>
                 ><?php echo __('Settings') ?></a>
                 <div id="m1"
                     onmouseover="mcancelclosetime()"
@@ -390,10 +390,38 @@
                         }
                         ?>
                         <?php 
+                        if($actionName=='list' && $modulName=="province"){
+                          echo link_to(__('Province List'), 'province/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Province List'), 'province/index');
+                        }
+                        ?>
+                        <?php 
                         if($actionName=='list' && $modulName=="city"){
                           echo link_to(__('Cities'), 'city/index',array('class'=>'subSelect'));
                         }else{
                           echo link_to(__('Cities'), 'city/index'); 
+                        }
+                        ?>
+                        <?php 
+                        if($actionName=='list' && $modulName=="preferredLanguages"){
+                          echo link_to(__('Preferred Languages'), 'preferredLanguages/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Preferred Languages'), 'preferredLanguages/index');
+                        }
+                        ?>
+                        <?php 
+                        if($actionName=='list' && $modulName=="simTypes"){
+                          echo link_to(__('Sim Types'), 'simTypes/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Sim Types'), 'simTypes/index');
+                        }
+                        ?>
+                        <?php 
+                        if($actionName=='list' && $modulName=="nationality"){
+                          echo link_to(__('Nationality'), 'nationality/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Nationality'), 'nationality/index');
                         }
                         ?>
                         <?php 

@@ -123,7 +123,7 @@ class affiliateActions extends sfActions {
 
         if ($customer_order) {
             $vat = $customer_order->getIsFirstOrder() ?
-                    $customer_order->getProduct()->getRegistrationFee()  * .25 :
+                    $customer_order->getProduct()->getRegistrationFee()  * sfConfig::get('app_vat_percentage') :
                     0;
         }
         else
@@ -662,7 +662,7 @@ class affiliateActions extends sfActions {
         $transaction->setAgentCompanyId($customer->getReferrerId());
 
 
-        $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee()+ ($order->getProduct()->getRegistrationFee()*.25));
+        $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee()+ ($order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentage')));
         $transaction->setDescription('Registration');
 
         $transaction->setOrderId($order->getId());
@@ -746,7 +746,7 @@ class affiliateActions extends sfActions {
         // if transaction ok
         if ($is_transaction_completed) {
             $product_price = $order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee();
-            $product_price_vat = .25 * $order->getProduct()->getRegistrationFee();
+            $product_price_vat = sfConfig::get('app_vat_percentage') * $order->getProduct()->getRegistrationFee();
             $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
             ///////////////////////////commision calculation by agent product ///////////////////////////////////////
             $cp = new Criteria;

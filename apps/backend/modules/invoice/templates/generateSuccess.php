@@ -240,7 +240,7 @@ margin-top: 10px;
 				</tr>
 				<tr class="footer">
 					<td colspan="3">Moms udg&oslash;re</td>
-					<td align="right"><?php $vat = $total*.25; echo util::format_number($vat); ?></td>
+					<td align="right"><?php $vat = $total*sfConfig::get('app_vat_percentage'); echo util::format_number($vat); ?></td>
 				</tr>
 				<tr>
 					<td colspan="4" style="height:2px; background: black;"></td>

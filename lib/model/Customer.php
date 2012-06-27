@@ -98,5 +98,40 @@ class Customer extends BaseCustomer
             if($balance)
                return $balance;
         }
+        public function getNationality(){
+           $nationality_title = ""; 
+           $cn = new Criteria();
+           $cn->add(NationalityPeer::ID,$this->getNationalityId());
+           $nationality = NationalityPeer::doSelectOne($cn);
+             if(NationalityPeer::doCount($cn)>0) $nationality_title = $nationality->getTitle();
+             return $nationality_title;
+        }
+        
+        public function getSimTypes(){
+            $simTypeTitle ="";
+            $cst = new Criteria();
+            $cst->add(SimTypesPeer::ID,$this->getSimTypeId());
+            $simTypes = SimTypesPeer::doSelectOne($cst);
+              if(SimTypesPeer::doCount($cst)>0) $simTypeTitle = $simTypes->getTitle();
+            return $simTypeTitle;
+        }
+        
+        public function getPreferredLanguage(){
+            $planguage ="";
+            $cpl = new Criteria();
+            $cpl->add(PreferredLanguagesPeer::ID,$this->getPreferredLanguageId());
+            $languages = PreferredLanguagesPeer::doSelectOne($cpl);
+              if(PreferredLanguagesPeer::doCount($cpl)>0) $planguage = $languages->getLanguage();
+            return $planguage;
+        }
+        
+        public function getProvince(){
+            $provinceName ="";
+            $cpr = new Criteria();
+            $cpr->add(ProvincePeer::ID,$this->getProvinceId());
+            $province = ProvincePeer::doSelectOne($cpr);
+              if(ProvincePeer::doCount($cpr)>0) $provinceName = $province->getProvince();
+            return $provinceName;
+        }
 	    
 }

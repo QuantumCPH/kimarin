@@ -11,13 +11,13 @@ if($callbackdibs=='yes'){
 <?php include_stylesheets_for_form($form) ?>
 <?php include_javascripts_for_form($form);
 
-$product_price_vat = ($order->getProduct()->getPrice()-$order->getProduct()->getInitialBalance())*.20;
-//$product_price = ($order->getProduct()->getPrice()) - ($order->getProduct()->getPrice()*.20); echo $product_price;
+$product_price_vat = ($order->getProduct()->getPrice()-$order->getProduct()->getInitialBalance())*sfConfig::get('app_vat_percentage');
+//$product_price = ($order->getProduct()->getPrice()) - ($order->getProduct()->getPrice()*sfConfig::get('app_vat_percentage')); echo $product_price;
 $product_price = ($order->getProduct()->getPrice()-$order->getProduct()->getInitialBalance()) - $product_price_vat;
 
 //echo $product_price;
 $extra_refill = $order->getExtraRefill();
-$vat = .25 * ($product_price);
+$vat = sfConfig::get('app_vat_percentage') * ($product_price);
 $total = $product_price + $extra_refill + $vat;
 $customer_form = new CustomerForm();
 $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_balance'));

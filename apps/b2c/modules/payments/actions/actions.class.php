@@ -171,7 +171,7 @@ class paymentsActions extends sfActions {
         //$order->setExtraRefill($extra_refil_choices[0]);//minumum refill amount
         $order->setIsFirstOrder(1);
         $order->save();
-        $transaction->setAmount($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*.25));
+        $transaction->setAmount($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage')));
         //TODO: $transaction->setAmount($order->getProduct()->getPrice());
         $transaction->setDescription('Registration');
         $transaction->setOrderId($order->getId());
@@ -255,7 +255,7 @@ class paymentsActions extends sfActions {
         $customerorder = $customer_order->getIsFirstOrder();
         if ($customer_order) {
             $vat = $customer_order->getIsFirstOrder() ?
-                    ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * .25 : 0;
+                    ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage') : 0;
         }
         else
             die('Error retreiving');

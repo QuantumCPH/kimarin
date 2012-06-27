@@ -137,14 +137,14 @@ td.last{
    border-right: 0px !important; 
 }
 tr.headings{
-   background-color: #ffffff !important;
-   color:#0c74a5 !important; 
+   background-color: #0c74a5 !important;
+   color:#ffffff !important; 
 }
 tr.headings th{
    border-right: 1px solid #0c74a5 !important; 
    border-bottom: 1px solid #0c74a5 !important;
    text-align: left;
-   color:#0c74a5;
+   color:#ffffff;
 }
 tr.headings th.last{
    border-right: 0px !important; 
@@ -175,7 +175,7 @@ tr.even{
     background-color:#FFFFFF !important;
 }
 tr.odd{
-    background-color:#f6e8c9 !important;
+    background-color:#F2F8F8 !important;
 }
 .tblLogin label {
     color:#0c74a5;

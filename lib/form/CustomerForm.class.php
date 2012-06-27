@@ -204,26 +204,27 @@ class CustomerForm extends BaseCustomerForm
 			'po_box_number'=>'Post code',
 			'telecom_operator_id'=>'Telecom operator',
 			'manufacturer'=>'Mobile brand',
-                    'to_date'=>'To date',
-                    'from_date'=>'From date',
+                        'to_date'=>'To date',
+                        'from_date'=>'From date',
 			'country_id'=>'Country',
 			'device_id'=>'Mobile Model',
 			'password_confirm'=>'Retype password',
 			'date_of_birth'=>'Birth date <br />(dd-mm-yyyy)',
+                        'second_last_name'=> 'Second Family Name'
 		)
 	);
 	
 	//defaults
 	$this->setDefaults(array(
 		'is_newsletter_subscriber'=> true,
-		'country_id'=>53,
+		'country_id'=>sfConfig::get('app_country_code'),
 		'is_newsletter_subscriber'=>1,
 		'customer_status_id'=>1
 	));
 
         $decorator = new sidFormFormatter($this->widgetSchema, $this->validatorSchema);
-    $this->widgetSchema->addFormFormatter('custom', $decorator);
-    $this->widgetSchema->setFormFormatterName('custom'); 
+        $this->widgetSchema->addFormFormatter('custom', $decorator);
+        $this->widgetSchema->setFormFormatterName('custom'); 
 	
 	
   }
@@ -248,5 +249,23 @@ class CustomerForm extends BaseCustomerForm
   	}
 
   	return $values;
-	  }
+  }
+  
+  public function validateUniquePassportNo(sfValidatorBase $validator, $values)
+  {
+  	
+  	$c = new Criteria();
+  	
+  	$c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $values['nie_passport_number']);
+  	$c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
+  	 
+  	if (CustomerPeer::doCount($c)>=1)
+  	{
+  	      throw new sfValidatorErrorSchema($validator, array(
+	        'nie_passport_number' => new sfValidatorError($validator, 'N.I.E/Passport Number already registered.'),
+	      ));	
+  	}
+
+  	return $values;
+  }
 }

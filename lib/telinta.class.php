@@ -18,9 +18,9 @@ class Telienta {
     private static $currency = 'EUR';
     private static $iParentReseller = 82829;
     private static $iParentUS = 82214;
-    private static $a_iProduct = 11720;
-    private static $cb_iProduct = 11748;
-    private static $voip_iProduct = 11749;
+    private static $a_iProduct = 11803;
+    private static $cb_iProduct = 11804;
+    private static $voip_iProduct = 11805;
     private static $telintaSOAPUrl = "https://mybilling.telinta.com";
     private static $telintaSOAPUser = 'API_login';
     private static $telintaSOAPPassword = 'ee4eriny';
@@ -80,7 +80,7 @@ class Telienta {
         return self::createAccount($customer, $mobileNumber, 'cb',  $iProduct);
     }
 
-    public static function createReseNumberAccount($VOIPNumber, Customer $customer, $currentActiveNumber, $voip_iProduct=11749) {
+    public static function createReseNumberAccount($VOIPNumber, Customer $customer, $currentActiveNumber, $voip_iProduct=11805) {
 
         if (self::createAccount($customer, $VOIPNumber, '', $voip_iProduct, 'Y')) {
             $accounts = false;
@@ -357,7 +357,7 @@ class Telienta {
                                 )));
             } catch (SoapFault $e) {
                 if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                    emailLib::sendErrorInTelinta("Account Creation: " . $accountName . " Error!", "We have faced an issue in Customer Account Creation on telinta. this is the error for cusotmer with  id: " . $customer->getId() . " and on Account" . $accountName . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                    emailLib::sendErrorInTelinta("Account Creation: " . $accountName . " Error!", "We have faced an issue in Customer Account Creation on telinta. this is the error for cusotmer with  id: " . $customer->getId() . " and on Account " . $accountName . " error is " . $e->faultstring . "  <br/> Please Investigate.");
 
                     return false;
                 }

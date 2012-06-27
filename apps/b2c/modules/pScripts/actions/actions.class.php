@@ -1368,7 +1368,7 @@ public function executeSmsRegistration(sfWebrequest $request) {
     $this->customer = $customer;
     $transaction = new Transaction();
     $transaction->setAgentCompanyId($customer->getReferrerId());
-    $transaction->setAmount($order->getProduct()->getPrice() +$order->getProduct()->getRegistrationFee()+($order->getProduct()->getRegistrationFee()*.25));
+    $transaction->setAmount($order->getProduct()->getPrice() +$order->getProduct()->getRegistrationFee()+($order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentage')));
     $transaction->setDescription('Registration');
     $transaction->setOrderId($order->getId());
     $transaction->setCustomerId($customer->getId());
@@ -3056,7 +3056,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
              //$product_price = $order->getProduct()->getPrice() - $order->getExtraRefill();
             $product_price = $order->getProduct()->getPrice() - $order->getExtraRefill();
 
-            $product_price_vat = .25 * ($order->getProduct()->getRegistrationFee()+$postalcharge);
+            $product_price_vat = sfConfig::get('app_vat_percentage') * ($order->getProduct()->getRegistrationFee()+$postalcharge);
                 $message_body = $this->getPartial('payments/order_receipt', array(
                             'customer' => $this->customer,
                             'order' => $order,

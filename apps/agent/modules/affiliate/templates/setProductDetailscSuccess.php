@@ -145,7 +145,7 @@
 		
 		//$('#extra_refill_span').text(extra_refill); //update the vat span
 		
-		var vat = .25 * (parseFloat(product_price) * parseFloat(quantity));
+		var vat = <?php echo sfConfig::get('app_vat_percentage')?> * (parseFloat(product_price) * parseFloat(quantity));
 		//alert(vat);
 		jq('#vat').val(vat);
 		jq('#vat_span').text(vat);
@@ -200,7 +200,7 @@
               <label><?php echo __('Extra refill amount') ?></label>
 
               <input type="hidden" id="product_price" value="<?php 
-              	$product_price_vat = ($order->getProduct()->getPrice()-$order->getProduct()->getInitialBalance())*.20;
+              	$product_price_vat = ($order->getProduct()->getPrice()-$order->getProduct()->getInitialBalance())*sfConfig::get('app_vat_percentage');
               	//$product_price = ($order->getProduct()->getPrice()) - ($order->getProduct()->getPrice()*.20); echo $product_price; 
               	$product_price = ($order->getProduct()->getPrice()-$order->getProduct()->getInitialBalance()) - $product_price_vat;
               	
@@ -241,9 +241,9 @@
 			  </span>
             </li>
             <li>
-              <label>VAT (25%)<br />
+              <label>VAT (<?php echo sfConfig::get('app_vat')?>)<br />
               <?php echo __('Total amount') ?></label>
-              <input type="hidden" id="vat" value="<?php $vat = .25 * ($product_price); echo $vat; ?>" />
+              <input type="hidden" id="vat" value="<?php $vat = sfConfig::get('app_vat_percentage') * ($product_price); echo $vat; ?>" />
               <label class="fr ac" >
               	<span id="vat_span">
               	<?php echo format_number($vat) ?>
