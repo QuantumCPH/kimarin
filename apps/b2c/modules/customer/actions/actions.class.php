@@ -1047,6 +1047,8 @@ class customerActions extends sfActions {
                 $this->getUser()->setAttribute('customer_id', $customer->getId(), 'usersession');
                 $this->getUser()->setAuthenticated(true);
 
+                $lang = PreferredLanguagesPeer::retrieveByPK($customer->getPreferredLanguageId());
+                $this->getUser()->setCulture($lang->getLanguageCode());
 
 
 
