@@ -55,7 +55,17 @@ class affiliateActions extends sfActions {
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $c->addDescendingOrderByColumn(CustomerPeer::CREATED_AT);
         $customers = CustomerPeer::doSelect($c);
-
+ 
+        $startdate = $request->getParameter('startdate');
+        $enddate = $request->getParameter('enddate');
+        if($startdate !=''){
+          $startdate = date('Y-m-d 00:00:00',  strtotime($startdate)); 
+          $this->startdate = date('Y-m-d',strtotime($startdate));          
+        }
+        if($enddate !=''){
+          $enddate = date('Y-m-d 23:59:59',  strtotime($enddate));  
+          $this->enddate = date('Y-m-d',strtotime($enddate));
+        } 
 
 
         foreach ($customers as $customer) {
@@ -63,6 +73,10 @@ class affiliateActions extends sfActions {
             $tc = new Criteria();
             $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
             $tc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+            if($startdate!="" && $enddate!=""){
+               $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+               $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+            }
             $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             if (TransactionPeer::doSelectOne($tc)) {
                 $registrations[$i] = TransactionPeer::doSelectOne($tc);
@@ -79,6 +93,10 @@ class affiliateActions extends sfActions {
         $ar->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
         $ar->add(TransactionPeer::DESCRIPTION, 'Registration', Criteria::NOT_EQUAL);
         $ar->addAnd(TransactionPeer::DESCRIPTION, 'Fee for change number (' . $agent->getName() . ')', Criteria::NOT_EQUAL);
+        if($startdate!="" && $enddate!=""){
+               $ar->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+               $ar->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+        }
         $ar->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $ar->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
         $refills = TransactionPeer::doSelect($ar);
@@ -91,6 +109,10 @@ class affiliateActions extends sfActions {
         $cn = new Criteria();
         $cn->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
         $cn->addAnd(TransactionPeer::DESCRIPTION, 'Fee for change number (' . $agent->getName() . ')', Criteria::EQUAL);
+        if($startdate!="" && $enddate!=""){
+               $cn->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+               $cn->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+        }
         $cn->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $cn->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
         $numberchange = TransactionPeer::doSelect($cn);
