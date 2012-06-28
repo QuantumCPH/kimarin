@@ -622,7 +622,7 @@ class CustomerForm extends BaseCustomerForm
 			'device_id'=>'Mobile Model',
 			'password_confirm'=>'Retype password',
 			'date_of_birth'=>'Birth date <br />(dd-mm-yyyy)',
-                        'second_last_name'=>'Second Family Name',
+                        'second_last_name'=>'Middle Name',
                         'nie_passport_number'=>'N.I.E/Passport Number',  
                         'preferred_language_id'=>'Preferred Language', 
                         'province_id'=>'Province',

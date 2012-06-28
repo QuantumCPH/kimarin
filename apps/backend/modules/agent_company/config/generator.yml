@@ -5,10 +5,10 @@ generator:
     theme:            default
     css:             /sf/sf_admin/css/admin_main.css
     fields:
-        cvr_number: {name: Vat Number}
-    
+        cvr_number: {name: NIF/NIE Number}
+        name: {name: Company Name}        
     edit:
-      display: [name, cvr_number,address,post_code,country_id,contact_name,email, mobile_number,head_phone_number,sms_code,fax_number,website,status_id,company_type_id,commission_period_id,account_manager_id,agent_commission_package_id,is_prepaid]
+      display: [name,first_name,middle_name,last_name,cvr_number,kimarin_agent_id,address,post_code,province_id,nationality_id,contact_name,email, mobile_number,head_phone_number,sms_code,fax_number,website,status_id,company_type_id,commission_period_id,account_manager_id,agent_commission_package_id,is_prepaid]
     list:
       title: Agent Company List
       filters: [id, name, cvr_number ]

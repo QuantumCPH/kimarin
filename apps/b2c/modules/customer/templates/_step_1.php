@@ -114,6 +114,22 @@
             </li>
             <!-- end first name -->
             <?php
+            $error_second_last_name = false;
+            if($form['second_last_name']->hasError())
+            	$error_second_last_name = true;
+            ?>
+            <li>
+             <?php echo $form['second_last_name']->renderLabel() ?>
+             <?php echo $form['second_last_name'] ?>
+             <?php if ($error_second_last_name): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
+            </li>
+            <!-- end second last name -->
+            <?php
             $error_last_name = false;;
             if($form['last_name']->hasError())
             	$error_last_name = true;
@@ -130,22 +146,7 @@
             </li>
             <!-- end last name -->
             
-            <?php
-            $error_second_last_name = false;
-            if($form['second_last_name']->hasError())
-            	$error_second_last_name = true;
-            ?>
-            <li>
-             <?php echo $form['second_last_name']->renderLabel() ?>
-             <?php echo $form['second_last_name'] ?>
-             <?php if ($error_second_last_name): ?>
-             <span id="cardno_decl" class="alertstep1">
-			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
-			 </span>
-			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
-            </li>
-            <!-- end second last name -->
+            
             <?php
             $error_address = false;;
             if($form['address']->hasError())

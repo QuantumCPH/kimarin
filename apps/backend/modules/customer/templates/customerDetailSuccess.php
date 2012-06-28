@@ -20,10 +20,7 @@ $pus=0;
                     <td width="17%" class="leftHeadign">Customer Balance</td>
                      <td width="83%"  ><?php
                            $uniqueId=$customer->getUniqueid();
-                         $cuid=$customer->getId();
-
-                          
-
+                           $cuid=$customer->getId();
                                   $cp = new Criteria();
                                   $cp->add(CustomerProductPeer::CUSTOMER_ID, $cuid);
                                   $custmpr = CustomerProductPeer::doSelectOne($cp);
@@ -54,17 +51,18 @@ $pus=0;
                       </tr>
                      
                       <tr>
-                    <td id="sf_admin_list_th_first_name" class="leftHeadign" >First Name</td>
-                      <td><?php echo  $customer->getFirstName() ?></td>
-                        </tr>
+                        <td id="sf_admin_list_th_first_name" class="leftHeadign" >First Name</td>
+                        <td><?php echo  $customer->getFirstName() ?></td>
+                       </tr>
+                       <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Middle Name</td>
+                    <td><?php echo  $customer->getSecondLastName() ?></td>
+                          </tr> 
                       <tr >
                     <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Last Name</td>
                        <td><?php echo  $customer->getLastName() ?></td>
                           </tr>
-                      <tr >
-                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Second Family Name</td>
-                    <td><?php echo  $customer->getSecondLastName() ?></td>
-                          </tr>    
+                       
                       <tr>
 		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Mobile Number</td>
                       <td><?php echo  $customer->getMobileNumber() ?></td>

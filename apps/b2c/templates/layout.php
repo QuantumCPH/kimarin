@@ -10,7 +10,6 @@
 <?php use_javascript('../zerocall/js/jquery-1.4.2.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('../zerocall/js/jquery.jcarousel.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('../zerocall/js/carousel.js', '', array('absolute'=>true)) ?>
-<?php use_stylesheet('../zerocall/style/fonts.css') ?>
 <?php use_javascript('jquery.formatCurrency-1.3.0.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('i18n/jquery.formatCurrency.all.js', '', array('absolute'=>true)) ?>
     <?php use_javascript('jquery-ui-1.8.16.custom.min.js', '', array('absolute'=>true)) ?>
