@@ -1,0 +1,18 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Province
+    theme:            default
+    css:             /sf/sf_admin/css/admin_main.css
+    list:
+      title:          Province
+      display:        [id,province,country_id]
+      
+    edit:
+      title:          Province
+      actions:
+        _list: ~
+        _save: ~
+        _save_and_add: ~
+    create:
+      title:          Add Province

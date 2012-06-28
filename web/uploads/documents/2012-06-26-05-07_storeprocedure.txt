@@ -1,0 +1,21 @@
+DELIMITER $$
+
+USE `zerocall_integrated`$$
+
+DROP PROCEDURE IF EXISTS `getCallSpecificationSummary`$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getCallSpecificationSummary`(company_id INT, start_date DATETIME, end_date DATETIME)
+BEGIN
+	DECLARE company_billing_dur FLOAT;
+	CALL getBillingDur(company_id, company_billing_dur);
+	SELECT cdr_log.from_no, employee.first_name, employee.last_name, company.name AS company_name, cdr_log.description,
+		SUM(fn_getBillingSecs(cdr_log.dur_secs, company_billing_dur)/company_billing_dur) AS total_dur_secs, SUM(ROUND(cdr_log.sale_price, 2)) AS total_sale_price
+	FROM cdr_log LEFT JOIN employee ON cdr_log.from_employee_id = employee.id
+			LEFT JOIN company ON employee.company_id = company.id
+	WHERE employee.company_id = company_id AND 
+	(cdr_log.date BETWEEN TIMESTAMP(DATE(start_date)) AND ADDTIME(TIMESTAMP(DATE(end_date)),'23:59:59'))
+	GROUP BY cdr_log.from_no, cdr_log.description
+	ORDER BY employee.first_name, cdr_log.description;
+    END$$
+
+DELIMITER ;
