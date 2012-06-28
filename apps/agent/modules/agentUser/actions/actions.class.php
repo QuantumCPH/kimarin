@@ -89,8 +89,8 @@ class agentUserActions extends sfActions {
                     //$this->redirect('@homepage');
 
         
-                     $this->redirect( $this->getTargetUrl().'report?show_summary=1');
-
+                   //  $this->redirect( $this->getTargetUrl().'report?show_summary=1');
+                     $this->redirect( $this->getTargetUrl().'overview');
 
                    
                 }

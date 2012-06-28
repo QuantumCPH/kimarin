@@ -149,10 +149,10 @@
                     <ul id="sddm">
                         <li>
                         <?php
-                        if ($actionName == 'report' && $modulName == "affiliate" && $sf_request->getParameter('show_summary') == 1) {
-                            echo link_to(__('Overview'), 'affiliate/report?show_summary=1', array('class' => 'current'));
+                        if ($actionName == 'overview' && $modulName == "affiliate") {
+                            echo link_to(__('Overview'), 'affiliate/overview', array('class' => 'current'));
                         } else {
-                            echo link_to(__('Overview'), 'affiliate/report?show_summary=1');
+                            echo link_to(__('Overview'), 'affiliate/overview');
                         }
                         ?>
                     </li>
@@ -197,9 +197,9 @@
                             ?></li>
                         <li><?php
                             if ($modulName == "agentcompany" && $actionName == 'view' || $actionName == 'accountRefill' || $actionName == 'agentOrder' || $actionName == 'paymentHistory') {
-                                echo link_to(__('My Company Info'), 'agentcompany/view', array('class' => 'current'));
+                                echo link_to(__('Information'), 'agentcompany/view', array('class' => 'current'));
                             } else {
-                                echo link_to(__('My Company Info'), 'agentcompany/view');
+                                echo link_to(__('Information'), 'agentcompany/view');
                             }
                             ?></li>
     <!--                    <li><?php //echo link_to(__('Package Conversion'), 'affiliate/conversionform'); ?></li>-->
@@ -208,6 +208,13 @@
                                 echo link_to(__('Supporting Handsets'), 'affiliate/supportingHandset', array('class' => 'current'));
                             } else {
                                 echo link_to(__('Supporting Handsets'), 'affiliate/supportingHandset');
+                            }
+                            ?></li>
+                        <li><?php
+                            if ($modulName == "affiliate" && $actionName == 'nonSupportingHandset') {
+                                echo link_to(__('Non Supporting Handsets'), 'affiliate/nonSupportingHandset', array('class' => 'current'));
+                            } else {
+                                echo link_to(__('Non Supporting Handsets'), 'affiliate/nonSupportingHandset');
                             }
                             ?></li>
                         <li><?php

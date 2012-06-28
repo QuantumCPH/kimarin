@@ -35,47 +35,6 @@
     </div>
 </div>
 <div class="form-row">
-  <?php echo label_for('agent_company[first_name]', __($labels['agent_company{first_name}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('agent_company{first_name}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('agent_company{first_name}')): ?>
-    <?php echo form_error('agent_company{first_name}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($agent_company, 'getFirstName', array (
-  'size' => 80,
-  'control_name' => 'agent_company[first_name]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-<div class="form-row">
-  <?php echo label_for('agent_company[middle_name]', __($labels['agent_company{middle_name}'])) ?>
-  <div class="content<?php if ($sf_request->hasError('agent_company{middle_name}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('agent_company{middle_name}')): ?>
-    <?php echo form_error('agent_company{middle_name}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($agent_company, 'getMiddleName', array (
-  'size' => 80,
-  'control_name' => 'agent_company[middle_name]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-<div class="form-row">
-  <?php echo label_for('agent_company[last_name]', __($labels['agent_company{last_name}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('agent_company{last_name}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('agent_company{last_name}')): ?>
-    <?php echo form_error('agent_company{last_name}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($agent_company, 'getLastName', array (
-  'size' => 80,
-  'control_name' => 'agent_company[last_name]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-
-<div class="form-row">
   <?php echo label_for('agent_company[cvr_number]', "NIE/NIF/Vat Number", 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('agent_company{cvr_number}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('agent_company{cvr_number}')): ?>
@@ -118,7 +77,7 @@
 </div>
 
 
-<!--<div id="countrycity">
+<div id="countrycity">
 	<?php //include_partial('resort/countrycity', array('resort' => $resort, 'labels' => $labels)) ?>
 	<?php echo javascript_tag(
   			remote_function(array(
@@ -126,7 +85,7 @@
     			'url'     => 'agent_company/countrycity'. ($agent_company->getCountryId() != ''? '?country_id='.$agent_company->getCountryId().'&city_id='.$agent_company->getCityId() : ''),
   			))
 		) ?>
-</div>-->
+</div>
 <div class="form-row">
   <?php echo label_for('agent_company[nationality_id]', __($labels['agent_company{nationality_id}'])) ?>
   <div class="content<?php if ($sf_request->hasError('agent_company{nationality_id}')): ?> form-error<?php endif; ?>">
@@ -155,8 +114,8 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-<div class="form-row">
-  <?php echo label_for('agent_company[contact_name]', __($labels['agent_company{contact_name}']), 'class="required" ') ?>
+<!--<div class="form-row">
+  <?php echo label_for('agent_company[contact_name]', __($labels['agent_company{contact_name}'])) ?>
   <div class="content<?php if ($sf_request->hasError('agent_company{contact_name}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('agent_company{contact_name}')): ?>
     <?php echo form_error('agent_company{contact_name}', array('class' => 'form-error-msg')) ?>
@@ -167,8 +126,49 @@
   'control_name' => 'agent_company[contact_name]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+</div>-->
+<fieldset style="border:1px solid #0C74A5"><legend>Contact Person</legend>
+ <div class="form-row">
+  <?php echo label_for('agent_company[first_name]', __($labels['agent_company{first_name}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('agent_company{first_name}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('agent_company{first_name}')): ?>
+    <?php echo form_error('agent_company{first_name}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+  <?php $value = object_input_tag($agent_company, 'getFirstName', array (
+  'size' => 80,
+  'control_name' => 'agent_company[first_name]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+<div class="form-row">
+  <?php echo label_for('agent_company[middle_name]', __($labels['agent_company{middle_name}'])) ?>
+  <div class="content<?php if ($sf_request->hasError('agent_company{middle_name}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('agent_company{middle_name}')): ?>
+    <?php echo form_error('agent_company{middle_name}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($agent_company, 'getMiddleName', array (
+  'size' => 80,
+  'control_name' => 'agent_company[middle_name]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+<div class="form-row">
+  <?php echo label_for('agent_company[last_name]', __($labels['agent_company{last_name}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('agent_company{last_name}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('agent_company{last_name}')): ?>
+    <?php echo form_error('agent_company{last_name}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($agent_company, 'getLastName', array (
+  'size' => 80,
+  'control_name' => 'agent_company[last_name]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>   
+    
+</fieldset> <!-- end Contact person  -->
 <div class="form-row">
   <?php echo label_for('agent_company[email]', __($labels['agent_company{email}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('agent_company{email}')): ?> form-error<?php endif; ?>">

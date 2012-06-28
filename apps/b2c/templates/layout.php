@@ -38,7 +38,7 @@
                          <?php echo link_to(image_tag('/images/english.png'), 'customer/changeCulture?new=en'); ?>
 
              </div>
-<div id="wrap"><?php
+<div id="wrap"><?php //echo $sf_user->getCulture();
 // set alert if customer is not yet registered with fonet
 
 //$alert_fonet_customer = CustomerPeer::

@@ -6,7 +6,7 @@
 
 ?>
 
-<a href="#" onclick="showCompany()" title="company info" class="external_link"><?php echo __('Company info') ?></a>
+<a href="#" onclick="showCompany()" title="company info" class="external_link"><?php echo __('Agent/Company info') ?></a>
 
 <?php if($sf_user->isAuthenticated()): ?>
      <?php if($agent_company->getIsPrepaid()): ?>
@@ -31,7 +31,7 @@
 <?php endif; ?>
 <br/>
 <div id="company-info" style="display:block">
-<div id="sf_admin_container"><h1><?php echo __('Company info') ?></h1></div>
+<div id="sf_admin_container"><h1><?php echo __('Agent/Company info') ?></h1></div>
         
   <div class="borderDiv"> 
 
@@ -40,42 +40,55 @@
             <?php echo $agent_company->getName() ?>
       </div>
 
-      <label class="grid_2 required"><?php echo __('Vat Number:') ?></label>
+      <label class="grid_2 required"><?php echo __('NIE/NIF/Vat Number:') ?></label>
       <div class="grid_2 content">
             <?php echo $agent_company->getCVRNumber() ?>
       </div>
 
       <div class="clear"></div>
-
+      
+      <label class="grid_2 required"><?php echo __('Kimarin Agent ID:') ?></label>
+      <div class="grid_2 content">
+            <?php echo $agent_company->getKimarinAgentId(); ?>
+      </div>
+      
       <label class="grid_2 required"><?php echo __('Address:') ?></label>
       <div class="grid_2 content">
             <?php echo $agent_company->getAddress() ?>
       </div>
-
+      
+      <div class="clear"></div>
       <label class="grid_2 required"><?php echo __('Post Code:') ?></label>
       <div class="grid_2 content">
             <?php echo $agent_company->getPostCode() ?>
       </div>
 
-      <div class="clear"></div>
+      
 
-      <label class="grid_2 required"><?php echo __('Country:') ?></label>
+      <label class="grid_2 required"><?php echo __('Province:') ?></label>
       <div class="grid_2 content">
-            <?php echo $agent_company->getCountryName();?>
+            <?php echo $agent_company->getProvinceName();?>
       </div>
-
+      <div class="clear"></div>
+      
       <label class="grid_2 required"><?php echo __('City:') ?></label>
       <div class="grid_2 content">
             <?php echo $agent_company->getCity()?$agent_company->getCity()->getName():'N/A' ?>
       </div>
 
+      
+      <label class="grid_2 required"><?php echo __('Nationality:') ?></label>
+      <div class="grid_2 content">
+            <?php echo $agent_company->getNationalityTitle();?>
+      </div>
+      
       <div class="clear"></div>
-
+      
       <label class="grid_2 required"><?php echo __('Contact name:') ?></label>
       <div class="grid_2 content">
-            <?php echo $agent_company->getContactName() ?>
+            <?php echo $agent_company->getFirstName()." ".$agent_company->getMiddleName()." ".$agent_company->getLastName(); ?>
       </div>
-
+      
       <label class="grid_2 required"><?php echo __('Contact email:') ?></label>
       <div class="grid_2 content">
             <?php echo $agent_company->getEmail() ?>
@@ -87,12 +100,18 @@
       <div class="grid_2 content">
             <?php echo $agent_company->getHeadPhoneNumber() ?>
       </div>
-
+      
       <label class="grid_2 required"><?php echo __('Fax Number:') ?></label>
       <div class="grid_2 content">
             <?php echo $agent_company->getFaxNumber() ?>
+      </div>      
+      
+      <div class="clear"></div>
+      
+      <label class="grid_2 required"><?php echo __('Registered at:') ?></label>
+      <div class="grid_2 content">
+            <?php echo $agent_company->getCreatedAt() ?>
       </div>
-
       <div class="clear"></div>
 
 <!--      <label class="grid_2 required"><?php echo __('Company form:') ?></label>
@@ -112,10 +131,6 @@
 
       <div class="clear"></div>
 
-      <label class="grid_2 required"><?php echo __('Registered at:') ?></label>
-      <div class="grid_2 content">
-            <?php echo $agent_company->getCreatedAt() ?>
-      </div>
       <div class="clr"></div>
 </div>
 

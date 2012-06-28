@@ -173,7 +173,7 @@ class AgentCompany extends BaseAgentCompany
      */
 
 
-  public function getCountryName()
+    public function getCountryName()
     {
        $cc = new Criteria;
        $cc->add(EnableCountryPeer::ID,$this->getCountryId());
@@ -181,5 +181,21 @@ class AgentCompany extends BaseAgentCompany
        return $country->getName();
     }
    
+    public function getProvinceName(){
+            $provinceName ="";
+            $cpr = new Criteria();
+            $cpr->add(ProvincePeer::ID,$this->getProvinceId());
+            $province = ProvincePeer::doSelectOne($cpr);
+              if(ProvincePeer::doCount($cpr)>0) $provinceName = $province->getProvince();
+            return $provinceName;
+    } 
+    public function getNationalityTitle(){
+           $nationality_title = ""; 
+           $cn = new Criteria();
+           $cn->add(NationalityPeer::ID,$this->getNationalityId());
+           $nationality = NationalityPeer::doSelectOne($cn);
+             if(NationalityPeer::doCount($cn)>0) $nationality_title = $nationality->getTitle();
+             return $nationality_title;
+    }
     
 }

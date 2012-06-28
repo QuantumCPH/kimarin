@@ -14,8 +14,7 @@
 <div class="report_container">
    
 <?php if($sf_request->getParameter('show_summary')): ?>
-   
-
+  
 
 <?php endif; ?> <!-- end summary -->
 
@@ -198,7 +197,13 @@
 		<td align="right"><?php echo $agent->getBalance(); ?></td>
     </tr>
         <?php } ?>
-
+        <tr>
+            <td colspan="2">
+                <form name="datefilter" action="" method="post">
+                    
+                </form>
+            </td>
+        </tr>
 	<tr>
 		<td><b><?php echo __('Customers') ?></b> <?php echo __('registered with you:') ?></td>
 		<td align="right"><?php echo count($registrations) ?></td>

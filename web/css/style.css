@@ -237,7 +237,7 @@ margin-bottom:10px;
 }
 #menu{
     text-align: center;
-    width: 66%;
+    width: 74%;
     margin:0 auto;
 }
 #menu ul#sddm{
@@ -586,4 +586,17 @@ ul.changenumber li{
     font-size: 11px;
     float: right;
     margin-top:10px;
+}
+.tbldatefilter h1{
+   margin: 8px 0 0 0;
+   padding: 3px;
+   padding-left: 3px;
+   font-family: "Trebuchet MS", Arial, Verdana, sans-serif;
+   font-size: 17px;
+}
+.dateBox-pt label{
+    width:61px !important;
+}
+.dateBox-pt input{
+    margin:0 10px 0 6px !important;
 }
