@@ -51,8 +51,8 @@ class BaseCustomerForm extends BaseFormPropel
       'i_customer'               => new sfWidgetFormInput(),
       'usage_alert_sms'          => new sfWidgetFormInput(),
       'usage_alert_email'        => new sfWidgetFormInput(),
-      'sim_type_id'              => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
-      'preferred_language_id'    => new sfWidgetFormPropelChoice(array('model' => 'PreferredLanguages', 'add_empty' => true)),
+      'sim_type_id'              => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => false)),
+      'preferred_language_id'    => new sfWidgetFormPropelChoice(array('model' => 'PreferredLanguages', 'add_empty' => false)),
       'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
     ));
 
@@ -96,8 +96,8 @@ class BaseCustomerForm extends BaseFormPropel
       'i_customer'               => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'usage_alert_sms'          => new sfValidatorInteger(array('required' => false)),
       'usage_alert_email'        => new sfValidatorInteger(array('required' => false)),
-      'sim_type_id'              => new sfValidatorPropelChoice(array('model' => 'SimTypes', 'column' => 'id', 'required' => false)),
-      'preferred_language_id'    => new sfValidatorPropelChoice(array('model' => 'PreferredLanguages', 'column' => 'id', 'required' => false)),
+      'sim_type_id'              => new sfValidatorPropelChoice(array('model' => 'SimTypes', 'column' => 'id')),
+      'preferred_language_id'    => new sfValidatorPropelChoice(array('model' => 'PreferredLanguages', 'column' => 'id')),
       'province_id'              => new sfValidatorPropelChoice(array('model' => 'Province', 'column' => 'id', 'required' => false)),
     ));
 
