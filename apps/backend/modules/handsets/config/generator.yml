@@ -9,6 +9,6 @@ generator:
       display:        [id,brand_name,model_name,auto_reboot,dialer_mode,tested_by,comments,supported]
       names:
     edit:
-      title:          Edit %%brand_name%% %%model_name%% info
+      title:          Edit %%brand_name%% %%model_name%% handset
     create:
       title:          Add Handsets
