@@ -988,10 +988,11 @@ class affiliateActions extends sfActions {
         $this->browser = new Browser();
     }
     public function executeNonSupportingHandset(sfWebRequest $request) {
-        //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11 - Ahtsham
-      
-
-        $this->updateNews = NewupdatePeer::doSelect(new Criteria());
+        
+        $ch = new Criteria();
+        $ch->add(HandsetsPeer::SUPPORTED,0);
+        $nonsupported = HandsetsPeer::doSelect($ch);
+        $this->handsets = $nonsupported;
         $this->browser = new Browser();
     }
     public function executeAccountRefill(sfWebRequest $request) {

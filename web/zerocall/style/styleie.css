@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 * {margin:0px;padding:0px;}
-body {font-family:'Conv_Calibri'; font-size:14px; color:#0c74a5;background-color:FFFFFF;font-style: normal;}
+body {font-family:'Conv_Calibri'; font-size:14px; color:#0c74a5;background-color:#FFFFFF;font-style: normal;}
 #wrap {width:780px;margin:0px auto;background-color:#FFFFFF;}
 #header {width:780px;height:119px;}
 #logo {width:168px; height:79px; float:left;}
@@ -23,7 +23,7 @@ body {font-family:'Conv_Calibri'; font-size:14px; color:#0c74a5;background-color
 #price-calculator ul li.price{ font-size:18px; color:#fff; padding-bottom:10px;}
 #price-calculator ul li.price .fl{ float:left;}
 #price-calculator ul li.price .fr{ float:right;}
-.homepage-aux{ position: relative; width:780px; float:left; clear:both; margin-top:; background-image: url(../images/hp-aux.png); background-repeat:no-repeat; height:124px; margin-top:20px;}
+.homepage-aux{ position: relative; width:780px; float:left; clear:both;background-image: url(../images/hp-aux.png); background-repeat:no-repeat; height:124px; margin-top:20px;}
 .bliv-kunde-white{ background-image:url(../images/bliv-kunde.png); width:132px; height:50px; background-repeat:no-repeat; position:absolute; right:13px; top:38px;overflow:hidden; text-indent:9000em; white-space:nowrap;}
 #homepage-box-row{ width:780px; float:left; clear:both; overflow:hidden; margin-top:20px; margin-bottom:20px;}
 #homepage-box-row .box{ width:232px; height:106px; padding:10px; float:left; margin-right:11px;}
@@ -201,7 +201,7 @@ width:232px;
 
 a.receipt{ background-image:url(../images/next.png); background-repeat:no-repeat; padding-left:15px; float:left; display:block; text-decoration:none;}
 
-.split-form-sign-up{padding-top:20px; float:left; clear:both; width:750px; padding-bottom:30px; min-height:412px; background-color:FFFFFF; padding-top:20px; padding-left:30px; margin-bottom:10px;}
+.split-form-sign-up{padding-top:20px; float:left; clear:both; width:750px; padding-bottom:30px; min-height:412px; background-color:#FFFFFF; padding-top:20px; padding-left:30px; margin-bottom:10px;}
 .split-form-sign-up .col{width:314px; float: left; position: relative;height: 250px;}
 .split-form-sign-up ul{list-style:none;}
 .split-form-sign-up ul li{list-style:none; margin-bottom:10px; float:left; clear:both;width:350px; white-space:nowrap; z-index:100; position:relative;}
@@ -229,7 +229,7 @@ a.receipt{ background-image:url(../images/next.png); background-repeat:no-repeat
     padding-right:3px;
     padding-top:2px;
 }
-.loginbuttun{ width:77:!important; }
+.loginbuttun{ width:77px !important; }
 .split-form-sign-up ul li.buttonplacement{ position: relative; right:14px;}
 .split-form-sign-up ul li button{ background-image:url("../images/button-orange-big.png");border:0 none;color:#FFFFFF;font-size:22px;height:48px;margin-top:20px;padding-bottom:7px;padding-top:5px; width:132px;}
 
@@ -283,7 +283,7 @@ ul.paging {
 }
 
 ul.paging li {
-	float: float;
+	float: left;
 	padding: 3px;
 	border:1px solid #CC441A;
 	margin:0 5px;
@@ -350,7 +350,7 @@ clear:both;
 color:#0C74A5;
 float:left;
 font-size:11px;
-margin-bottom:10px;
+margin-bottom:7px;
 margin-top:5px;
 width:135px;
 }
@@ -475,7 +475,7 @@ ul li.error
 }
 
 #nav2, #nav2 ul {
-	display:blocl; list-style:none; float:left;  
+	display:block; list-style:none; float:left;  
 }
 #nav2 li {
 	float: left;
@@ -678,5 +678,5 @@ a.changePass{
    width: 62px;   
 }
 input[type=submit],input[type=button],textarea,option{
-   font-family:'Conv_Calibri',Sans-Serif;  
+   font-family:'Conv_Calibri';  
 }

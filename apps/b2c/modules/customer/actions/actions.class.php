@@ -19,10 +19,6 @@ class customerActions extends sfActions {
         return sfConfig::get('app_customer_url');
     }
 
-
-    
-
-
     public function executeTest(sfWebRequest $request) {
 
     }
