@@ -25,7 +25,7 @@
   <!--[if !IE]><!-->
       <?php use_stylesheet('../zerocall/style/style.css', 'last', array('absolute'=>true)) ?>
 
-<?php use_stylesheet('../sf/sf_admin/css/main.css', '', array('absolute'=>true)) ?>
+
   <?php use_stylesheet('ui-lightness/jquery-ui-1.8.16.custom.css', '', array('absolute'=>true)) ?>
   <!--<![endif]-->
   

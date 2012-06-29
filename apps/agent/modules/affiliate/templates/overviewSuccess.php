@@ -10,9 +10,9 @@
 		font-weight: normal;
 	}
 </style>
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<link href="<?php echo sfConfig::get('app_web_url');?>css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="<?php echo sfConfig::get('app_web_url');?>js/jquery.min.js"></script>
+  <script src="<?php echo sfConfig::get('app_web_url');?>js/jquery-ui.min.js"></script>
 <script>
 jQuery(function() {
       

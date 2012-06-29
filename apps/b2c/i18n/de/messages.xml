@@ -1049,6 +1049,10 @@
                 <source>The activation price is: 30%1%</source>
                 <target>El precio de activación es: 30%1%</target>
             </trans-unit>
+            <trans-unit id="257" translate="yes" reformat="yes" xml:space="default">
+                <source>N.I.E/Passport Number</source>
+                <target>N.I.E/Passnummer</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
