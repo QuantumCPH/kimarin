@@ -52,8 +52,8 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'i_customer'               => new sfWidgetFormFilterInput(),
       'usage_alert_sms'          => new sfWidgetFormFilterInput(),
       'usage_alert_email'        => new sfWidgetFormFilterInput(),
-      'sim_type_id'              => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
-      'preferred_language_id'    => new sfWidgetFormPropelChoice(array('model' => 'PreferredLanguages', 'add_empty' => true)),
+      'sim_type_id'              => new sfWidgetFormFilterInput(),
+      'preferred_language_id'    => new sfWidgetFormFilterInput(),
       'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
     ));
 
@@ -96,8 +96,8 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'i_customer'               => new sfValidatorPass(array('required' => false)),
       'usage_alert_sms'          => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'usage_alert_email'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'sim_type_id'              => new sfValidatorPropelChoice(array('required' => false, 'model' => 'SimTypes', 'column' => 'id')),
-      'preferred_language_id'    => new sfValidatorPropelChoice(array('required' => false, 'model' => 'PreferredLanguages', 'column' => 'id')),
+      'sim_type_id'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'preferred_language_id'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'province_id'              => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Province', 'column' => 'id')),
     ));
 
@@ -155,8 +155,8 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'i_customer'               => 'Text',
       'usage_alert_sms'          => 'Number',
       'usage_alert_email'        => 'Number',
-      'sim_type_id'              => 'ForeignKey',
-      'preferred_language_id'    => 'ForeignKey',
+      'sim_type_id'              => 'Number',
+      'preferred_language_id'    => 'Number',
       'province_id'              => 'ForeignKey',
     );
   }
