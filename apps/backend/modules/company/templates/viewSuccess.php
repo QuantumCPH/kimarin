@@ -24,8 +24,7 @@
 	<div class="form-row">
 				  <label class="required"><?php echo  __('Balance view:') ?> </label>
 				  <div class="content"><?php
-                                 echo $balance;
-          echo "NOK";
+                                 echo $balance ." ". sfConfig::get('app_currency_code');
                            ?>
 				   
 				  </div>

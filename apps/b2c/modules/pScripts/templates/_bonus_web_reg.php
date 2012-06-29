@@ -55,22 +55,22 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	
 	
 	<p>
-	<?php echo __('We hereby confirm that you have received commissions deposited into your account that you have referred a friend about Smartsim from Zapna.Go in to "Payment History" to see what you have earned.') ?>
+	<?php echo __('We hereby confirm that you have received commissions deposited into your account that you have referred a friend about Smartsim from %1%.Go in to "Payment History" to see what you have earned.',array('%1%'=>sfConfig::get('app_site_title'))); ?>
 	</p>
         <p>
-            <a href="mailto:support@zapna.no">support@zapna.no</a>
+            <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 	</p>
         <p>
 	<?php echo __('Yours sincerely,') ?>
 	</p>
         <p>
-	<?php echo __('zapna.no') ?>
+	<?php echo __(sfConfig::get('app_site_title')) ?>
 	</p>
 	<br />
 <?php endif; ?>
 <table width="600px">
 	<tr style="border:0px solid #fff">
-		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag('http://customer.zapna.no/images/zapna_logo_small.jpg',array('width' => '170'));?></td>
+		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_site_url').'images/logo.png',array('width' => '170'));?></td>
 	</tr>
 </table>
 

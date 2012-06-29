@@ -65,7 +65,7 @@ class agentcompanyActions extends sfActions
   private function executeDelete(sfWebRequest $request)
   {
       //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11 - Ahtsham
-     changeLanguageCulture::languageCulture($request,$this);
+    changeLanguageCulture::languageCulture($request,$this);
      
     $request->checkCSRFProtection();
 

@@ -10,8 +10,9 @@
         </div>
         <?php endif;?>
 </div>   <br />
-<div id="sf_admin_container"  style="border: 1px solid #D44D05;background-color: #FCD9C9;">
-   
+<div id="sf_admin_container">
+<div class="sf_admin_filters">
+    <fieldset>  
     <h1 style="margin-top: 0;"><?php echo __('Refill Customer') ?></h1><br />
     <form method="post" action="refillCustomer" id="agent_company_reill">
       <div class="form-row">
@@ -33,16 +34,17 @@
         <div class="form-row">
             <label for="agent_commission_agent_company_id"><strong>Refill Amount</strong></label>
             <div class="content">
-                <input type="text" name="refill_amount"  class="required number" min="0" />  NOK
+                <input type="text" name="refill_amount"  class="required number" min="0" />  <?php echo sfConfig::get('app_currency_code');?>
             </div>
         </div>
         <div class="form-row">
             <div class="content">
-                <input type="submit" name="Refill Customer" value="Refill Customer"  style='background: url("http://admin.zapna.no/sf/sf_admin/images/b.png") repeat-x scroll left center transparent;
-    border: 1px solid #D44D05 !important;color: #FFFFff;' />
+                <input type="submit" name="Refill Customer" value="Refill Customer" class="user_external_link" />
             </div>
         </div>
     </form>
+    </fieldset>
+   </div>  
 </div>
 
 

@@ -57,7 +57,7 @@ class emailLib{
             $email2->setReceipientName($recepient_agent_name);
             $email2->setReceipientEmail($recepient_agent_email);
             $email2->setAgentId($agent_company_id);
-             $email2->setEmailType('Zapna refill via agent');
+             $email2->setEmailType(sfConfig::get('app_site_title').' refill via agent');
             $email2->setMessage($message_body);
 
             $email2->save();
@@ -71,7 +71,7 @@ class emailLib{
             $email3->setReceipientName($sender_name);
             $email3->setReceipientEmail($sender_email);
             $email3->setAgentId($agent_company_id);
-            $email3->setEmailType('Zapna refill via agent');
+            $email3->setEmailType(sfConfig::get('app_site_title').' refill via agent');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -83,7 +83,7 @@ class emailLib{
             $email4->setReceipientName($sender_namecdu);
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
-            $email4->setEmailType('Zapna refill via agent');
+            $email4->setEmailType(sfConfig::get('app_site_title').' refill via agent');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
@@ -153,7 +153,7 @@ class emailLib{
             $email->setReceipientEmail($recepient_email);
             $email->setAgentId($agent_company_id);
             $email->setCutomerId($customer_id);
-            $email->setEmailType('Zapna refill via agent');
+            $email->setEmailType(sfConfig::get('app_site_title').' refill via agent');
             $email->setMessage($message_body);
             $email->save();
         }
@@ -168,7 +168,7 @@ class emailLib{
             $email2->setReceipientEmail($recepient_agent_email);
             $email2->setAgentId($agent_company_id);
             $email2->setCutomerId($customer_id);
-            $email2->setEmailType('Zapna refill via agent');
+            $email2->setEmailType(sfConfig::get('app_site_title').' refill via agent');
             $email2->setMessage($message_body);
 
             $email2->save();
@@ -183,7 +183,7 @@ class emailLib{
             $email3->setReceipientEmail($sender_email);
             $email3->setAgentId($agent_company_id);
             $email3->setCutomerId($customer_id);
-            $email3->setEmailType('Zapna refill via agent');
+            $email3->setEmailType(sfConfig::get('app_site_title').' refill via agent');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -196,7 +196,7 @@ class emailLib{
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Zapna refill via agent');
+            $email4->setEmailType(sfConfig::get('app_site_title').' refill via agent');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
@@ -225,7 +225,7 @@ class emailLib{
             $recepient_agent_email  = '';
             $recepient_agent_name = '';
         }
-        $vat = $order->getProduct()->getRegistrationFee()*.25;
+        $vat = $order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentage');
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/order_receipt', array(
@@ -256,7 +256,7 @@ class emailLib{
             $email->setReceipientEmail($recepient_email);
             $email->setAgentId($agent_company_id);
             $email->setCutomerId($customer_id);
-            $email->setEmailType('Zapna Customer registration via agent');
+            $email->setEmailType(sfConfig::get('app_site_title').' Customer registration via agent');
             $email->setMessage($message_body);
             $email->save();
         }
@@ -271,7 +271,7 @@ class emailLib{
             $email2->setReceipientEmail($recepient_agent_email);
             $email2->setAgentId($agent_company_id);
             $email2->setCutomerId($customer_id);
-            $email2->setEmailType('Zapna Customer registration via agent');
+            $email2->setEmailType(sfConfig::get('app_site_title').' Customer registration via agent');
             $email2->setMessage($message_body);
 
             $email2->save();
@@ -286,7 +286,7 @@ class emailLib{
             $email3->setReceipientEmail($sender_email);
             $email3->setAgentId($agent_company_id);
             $email3->setCutomerId($customer_id);
-            $email3->setEmailType('Zapna Customer registration via agent');
+            $email3->setEmailType(sfConfig::get('app_site_title').' Customer registration via agent');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -300,7 +300,7 @@ class emailLib{
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Zapna Customer registration via agent');
+            $email4->setEmailType(sfConfig::get('app_site_title').' Customer registration via agent');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
@@ -330,7 +330,7 @@ class emailLib{
             $email->setReceipientEmail($recepient_email);
             $email->setCutomerId($customer_id);
             $email->setAgentId($referrer_id);
-            $email->setEmailType('Zapna Forget Password');
+            $email->setEmailType(sfConfig::get('app_site_title').' Forget Password');
             $email->setMessage($message_body);
             $email->save();
         }
@@ -385,7 +385,7 @@ class emailLib{
             $email->setReceipientEmail($recepient_email);
             $email->setAgentId($referrer_id);
             $email->setCutomerId($customer_id);
-            $email->setEmailType('Zapna Customer Registration');
+            $email->setEmailType(sfConfig::get('app_site_title').' Customer Registration');
             $email->setMessage($message_body);
             $email->save();
         }
@@ -399,7 +399,7 @@ class emailLib{
             $email2->setReceipientEmail($recepient_agent_email);
             $email2->setAgentId($referrer_id);
             $email2->setCutomerId($customer_id);
-            $email2->setEmailType('Zapna Customer Registration');
+            $email2->setEmailType(sfConfig::get('app_site_title').' Customer Registration');
             $email2->setMessage($message_body);
             $email2->save();            
          endif;
@@ -413,7 +413,7 @@ class emailLib{
             $email3->setReceipientEmail($sender_email);
             $email3->setAgentId($referrer_id);
             $email3->setCutomerId($customer_id);
-            $email3->setEmailType('Zapna refill via agent');
+            $email3->setEmailType(sfConfig::get('app_site_title').' refill via agent');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -426,7 +426,7 @@ class emailLib{
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($referrer_id);
             $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Zapna refill via agent');
+            $email4->setEmailType(sfConfig::get('app_site_title').' refill via agent');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
@@ -455,7 +455,7 @@ class emailLib{
             $email->setReceipientName($recepient_name);
             $email->setCutomerId($customer_id);
             $email->setAgentId($referrer_id);
-            $email->setEmailType('Zapna Customer Auto Refill');
+            $email->setEmailType(sfConfig::get('app_site_title').' Customer Auto Refill');
 
             $email->save();
         endif;
@@ -469,7 +469,7 @@ class emailLib{
             $email2->setReceipientName($sender_name);
             $email2->setCutomerId($customer_id);
             $email2->setAgentId($referrer_id);
-            $email2->setEmailType('Zapna Customer Auto Refill');
+            $email2->setEmailType(sfConfig::get('app_site_title').' Customer Auto Refill');
             $email2->save();
          endif;
 ////////////////////////////////////////////////////////
@@ -482,7 +482,7 @@ class emailLib{
             $email3->setReceipientName($sender_namecdu);
             $email3->setCutomerId($customer_id);
             $email3->setAgentId($referrer_id);
-            $email3->setEmailType('Zapna Customer Auto Refill');
+            $email3->setEmailType(sfConfig::get('app_site_title').' Customer Auto Refill');
             $email3->save();
          endif;
     }
@@ -511,7 +511,7 @@ class emailLib{
             $email->setReceipientName($recepient_name);
             $email->setCutomerId($customer_id);
             $email->setAgentId($referrer_id);
-            $email->setEmailType('Zapna Customer Confirm Payment');
+            $email->setEmailType(sfConfig::get('app_site_title').' Customer Confirm Payment');
             
             $email->save();
         endif;
@@ -525,7 +525,7 @@ class emailLib{
             $email2->setReceipientName($sender_name);
             $email2->setCutomerId($customer_id);
             $email2->setAgentId($referrer_id);
-            $email2->setEmailType('Zapna Customer Confirm Payment');
+            $email2->setEmailType(sfConfig::get('app_site_title').' Customer Confirm Payment');
             $email2->save();
         endif;
             //send to cdu
@@ -537,7 +537,7 @@ class emailLib{
             $email3->setReceipientName($sender_namecdu);
             $email3->setCutomerId($customer_id);
             $email3->setAgentId($referrer_id);
-            $email3->setEmailType('Zapna Customer Confirm Payment');
+            $email3->setEmailType(sfConfig::get('app_site_title').' Customer Confirm Payment');
             $email3->save();
         endif;
                 
@@ -588,7 +588,7 @@ class emailLib{
             $email->setReceipientName($recepient_name);
             $email->setCutomerId($customer_id);
             //$email->setAgentId($referrer_id);
-            $email->setEmailType('Zapna Customer Confirm Bonus');
+            $email->setEmailType(sfConfig::get('app_site_title').' Customer Confirm Bonus');
 
             $email->save();
         endif;
@@ -602,7 +602,7 @@ class emailLib{
             $email2->setReceipientName($sender_name);
             $email2->setCutomerId($customer_id);
             //$email2->setAgentId($referrer_id);
-            $email2->setEmailType('Zapna Customer Confirm Bonus');
+            $email2->setEmailType(sfConfig::get('app_site_title').' Customer Confirm Bonus');
             $email2->save();
         endif;
         //////////////////////////////////////////////////////////////////
@@ -614,7 +614,7 @@ class emailLib{
             $email3->setReceipientEmail($sender_emailcdu);
             $email3->setCutomerId($customer_id);
             //$email3->setAgentId($referrer_id);
-            $email3->setEmailType('Zapna Customer Confirm Bonus');
+            $email3->setEmailType(sfConfig::get('app_site_title').' Customer Confirm Bonus');
             $email3->save();
         endif;
 
@@ -643,7 +643,7 @@ class emailLib{
             $recepient_agent_name = '';
         }
 
-          $lang = 'no';
+          $lang = sfConfig::get('app_language_symbol');
            // $this->lang = $lang;
 
             $countrylng = new Criteria();
@@ -665,7 +665,7 @@ class emailLib{
                 }
             }
 
-            $vat = ($order->getProduct()->getRegistrationFee()+$postalcharge)*.25;
+            $vat = ($order->getProduct()->getRegistrationFee()+$postalcharge)*sfConfig::get('app_vat_percentage');
             
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
@@ -698,7 +698,7 @@ class emailLib{
             $email->setReceipientName($recepient_name);
             $email->setReceipientEmail($recepient_email);
             $email->setCutomerId($customer_id);
-            $email->setEmailType('Zapna Customer registration via link');
+            $email->setEmailType(sfConfig::get('app_site_title').' Customer registration via link');
             $email->setMessage($message_body);
             $email->save();
         }
@@ -713,7 +713,7 @@ class emailLib{
             $email3->setReceipientName($sender_name);
             $email3->setReceipientEmail($sender_email);
             $email3->setCutomerId($customer_id);
-            $email3->setEmailType('Zapna Customer registration via link');
+            $email3->setEmailType(sfConfig::get('app_site_title').' Customer registration via link');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -726,7 +726,7 @@ class emailLib{
             $email4->setReceipientName($sender_namecdu);
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Zapna Customer registration via link');
+            $email4->setEmailType(sfConfig::get('app_site_title').' Customer registration via link');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
@@ -755,7 +755,7 @@ class emailLib{
             $recepient_agent_email  = '';
             $recepient_agent_name = '';
         }
-         $vat = ($order->getProduct()->getRegistrationFee())*.25;
+         $vat = ($order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage');
       sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('pScripts/order_receipt_sms', array(
                 'customer'=>$customer,
@@ -895,7 +895,7 @@ class emailLib{
             $email->setReceipientEmail($recepient_email);
             $email->setAgentId($agent_company_id);
             $email->setCutomerId($customer_id);
-            $email->setEmailType('Zapna Customer registration via APP');
+            $email->setEmailType(sfConfig::get('app_site_title').' Customer registration via APP');
             $email->setMessage($message_body);
             $email->save();
         }
@@ -910,7 +910,7 @@ class emailLib{
             $email2->setReceipientEmail($recepient_agent_email);
             $email2->setAgentId($agent_company_id);
             $email2->setCutomerId($customer_id);
-            $email2->setEmailType('Zapna Customer registration via APP');
+            $email2->setEmailType(sfConfig::get('app_site_title').' Customer registration via APP');
             $email2->setMessage($message_body);
 
             $email2->save();
@@ -925,7 +925,7 @@ class emailLib{
             $email3->setReceipientEmail($sender_email);
             $email3->setAgentId($agent_company_id);
             $email3->setCutomerId($customer_id);
-            $email3->setEmailType('Zapna Customer registration via APP');
+            $email3->setEmailType(sfConfig::get('app_site_title').' Customer registration via APP');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -939,7 +939,7 @@ class emailLib{
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Zapna Customer registration via APP');
+            $email4->setEmailType(sfConfig::get('app_site_title').' Customer registration via APP');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
@@ -952,7 +952,7 @@ public static function sendvoipemail(Customer $customer,$order,$transaction)
 
         //set vat
 	$vat = 0;
-	$subject = 'Bekräftelse - nytt resenummer frän Zapna';
+	$subject = 'Bekräftelse - nytt resenummer frän '.sfConfig::get('app_site_title');
         $recepient_email    = trim($customer->getEmail());
         $recepient_name     = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
         $customer_id        = trim($customer->getId());
@@ -997,7 +997,7 @@ public static function sendvoipemail(Customer $customer,$order,$transaction)
          $message_body = "<table width='600px'><tr style='border:0px solid #fff'><td colspan='4' align='right' style='text-align:right; border:0px solid #fff'>".image_tag('https://wls2.zerocall.com/images/zapna_logo_small.jpg',array('width'=>'170'))."</tr></table><table cellspacing='0' width='600px'><tr><td>Grattis till ditt nya resenummer. Detta nummer är alltid kopplat till den telefon där du har Smartsim aktiverat. Med resenumret blir du nådd utomlands då du har ett lokalt SIM-kort. Se prislistan för hur mycket det kostar att ta emot samtal.
 Ditt resenummer är $voipnumbers.<br/><br/>
 Med vänlig hälsning<br/><br/>
-Zapna<br/><a href='zapna.on'>zapna.on</a></td></tr></table>";
+".sfConfig::get('app_site_title')."<br/><a href='".sfConfig::get('app_site_url')."'>".sfConfig::get('app_site_url')."</a></td></tr></table>";
 
         //Support Information
         $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
@@ -1078,7 +1078,7 @@ Zapna<br/><a href='zapna.on'>zapna.on</a></td></tr></table>";
              $email->setReceipientEmail($recepient_email);
              $email->setCutomerId($customer_id);
              $email->setAgentId($referrer_id);
-             $email->setEmailType('wls Customer Balance');
+             $email->setEmailType(sfConfig::get('app_site_title').' Customer Balance');
              $email->setReceipientName($recepient_name);
              $email->save();
        endif;
@@ -1093,7 +1093,7 @@ Zapna<br/><a href='zapna.on'>zapna.on</a></td></tr></table>";
          $message_body = "<table width='600px'><tr style='border:0px solid #fff'><td colspan='4' align='right' style='text-align:right; border:0px solid #fff'></tr></table><table cellspacing='0' width='600px'><tr><td>
              ".$message." <br/><br/>
 Med vänlig hälsning<br/><br/>
-Zapna<br/><a href='http://wls2.zerocall.com'>wls2.zerocall.com</a></td></tr></table>";
+".sfConfig::get('app_site_title')."<br/><a href='".sfConfig::get('app_site_url')."'>".sfConfig::get('app_site_url')."</a></td></tr></table>";
 
         //Support Information
         $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
@@ -1137,7 +1137,7 @@ Zapna<br/><a href='http://wls2.zerocall.com'>wls2.zerocall.com</a></td></tr></ta
          $message_body = "<table width='600px'><tr style='border:0px solid #fff'><td colspan='4' align='right' style='text-align:right; border:0px solid #fff'></tr></table><table cellspacing='0' width='600px'><tr><td>
              ".$message." <br/><br/>
 Uniuqe Ids finsihed.<br/><br/>
-Zapna<br/><a href='http://www.wls2.zerocall.com.com'>wls2.zerocall.com.com</a></td></tr></table>";
+".sfConfig::get('app_site_title')."<br/><a href='".sfConfig::get('app_site_url')."'>".sfConfig::get('app_site_url')."</a></td></tr></table>";
 
         //Support Informationt
         $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
@@ -1182,7 +1182,7 @@ Zapna<br/><a href='http://www.wls2.zerocall.com.com'>wls2.zerocall.com.com</a></
          $message_body = "<table width='600px'><tr style='border:0px solid #fff'><td colspan='4' align='right' style='text-align:right; border:0px solid #fff'></tr></table><table cellspacing='0' width='600px'><tr><td>
              ".$message." <br/><br/>
 Uniuqe Id ".$uniqueid." has issue while assigning on ".$customer->getMobileNumber()."<br/><br/>
-Zapna<br/><a href='http://www.wls2.zerocall.com.com'>www.wls2.zerocall.com.com</a></td></tr></table>";
+".sfConfig::get('app_site_title')."<br/><a href='".sfConfig::get('app_site_url')."'>".sfConfig::get('app_site_url')."</a></td></tr></table>";
 
         //Support Informationt
         $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
@@ -1226,7 +1226,7 @@ Zapna<br/><a href='http://www.wls2.zerocall.com.com'>www.wls2.zerocall.com.com</
          $message_body = "<table width='600px'><tr style='border:0px solid #fff'><td colspan='4' align='right' style='text-align:right; border:0px solid #fff'></tr></table><table cellspacing='0' width='600px'><tr><td>
              ".$message." <br/><br/>
 Uniuqe Id ".$uniqueid." has issue while assigning on ".$customer->getMobileNumber()." in sms registration<br/><br/>
-Zapna<br/><a href='http://www.wls2.zerocall.com'>www.wls2.zerocall.com</a></td></tr></table>";
+".sfConfig::get('app_site_title')."<br/><a href='".sfConfig::get('app_site_url')."'>".sfConfig::get('app_site_url')."</a></td></tr></table>";
 
         //Support Informationt
         $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
@@ -1346,7 +1346,7 @@ public static function sendAdminRefilEmail(AgentCompany $agent,$agent_order)
             $email2->setReceipientName($recepient_agent_name);
             $email2->setReceipientEmail($recepient_agent_email);
             $email2->setAgentId($agent_company_id);
-             $email2->setEmailType('Zapna norway Agent refill via admin');
+             $email2->setEmailType(sfConfig::get('app_site_title').' Agent refill via admin');
             $email2->setMessage($message_body);
 
             $email2->save();
@@ -1360,7 +1360,7 @@ public static function sendAdminRefilEmail(AgentCompany $agent,$agent_order)
             $email3->setReceipientName($sender_name);
             $email3->setReceipientEmail($sender_email);
             $email3->setAgentId($agent_company_id);
-            $email3->setEmailType('Zapna norway Agent refill via admin');
+            $email3->setEmailType(sfConfig::get('app_site_title').' Agent refill via admin');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -1372,7 +1372,7 @@ public static function sendAdminRefilEmail(AgentCompany $agent,$agent_order)
             $email4->setReceipientName($sender_namecdu);
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
-            $email4->setEmailType('Zapna norway Agent refill via admin');
+            $email4->setEmailType(sfConfig::get('app_site_title').' Agent refill via admin');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
@@ -1538,7 +1538,7 @@ public static function sendAdminRefilEmail(AgentCompany $agent,$agent_order)
             $email->setReceipientEmail($recepient_email);
             $email->setAgentId($agent_company_id);
             $email->setCutomerId($customer_id);
-            $email->setEmailType('Zapna Norway refill/charge via admin');
+            $email->setEmailType(sfConfig::get('app_site_title').' refill/charge via admin');
             $email->setMessage($message_body);
             $email->save();
         }
@@ -1553,7 +1553,7 @@ public static function sendAdminRefilEmail(AgentCompany $agent,$agent_order)
             $email2->setReceipientEmail($recepient_agent_email);
             $email2->setAgentId($agent_company_id);
             $email2->setCutomerId($customer_id);
-            $email2->setEmailType('Zapna Norway  Refill/charge via admin');
+            $email2->setEmailType(sfConfig::get('app_site_title').' Refill/charge via admin');
             $email2->setMessage($message_body);
 
             $email2->save();
@@ -1568,7 +1568,7 @@ public static function sendAdminRefilEmail(AgentCompany $agent,$agent_order)
             $email3->setReceipientEmail($sender_email);
             $email3->setAgentId($agent_company_id);
             $email3->setCutomerId($customer_id);
-            $email3->setEmailType('Zapna Norway  Refill/charge via admin');
+            $email3->setEmailType(sfConfig::get('app_site_title').' Refill/charge via admin');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -1581,7 +1581,7 @@ public static function sendAdminRefilEmail(AgentCompany $agent,$agent_order)
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Zapna Norwayl Refill/charge via admin');
+            $email4->setEmailType(sfConfig::get('app_site_title').' Refill/charge via admin');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
@@ -1594,7 +1594,7 @@ public static function sendAdminRefilEmail(AgentCompany $agent,$agent_order)
             $email4->setReceipientEmail($rs_email);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Zapna Norway refill/charge via admin');
+            $email4->setEmailType(sfConfig::get('app_site_title').' refill/charge via admin');
             $email4->setMessage($message_body);
             $email4->save();
         endif;

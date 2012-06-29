@@ -10,6 +10,40 @@
 		font-weight: normal;
 	}
 </style>
+<link href="<?php echo sfConfig::get('app_web_url');?>css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="<?php echo sfConfig::get('app_web_url');?>js/jquery-1.6.2.min.js"></script>
+  <script src="<?php echo sfConfig::get('app_web_url');?>js/jquery-ui.min.js"></script>
+<script>
+jQuery(function() {
+      
+	jQuery( "#startdate" ).datepicker({ minDate: '-2m +0w',maxDate: '0m +0w', dateFormat: 'yy-mm-dd' });
+	jQuery( "#enddate" ).datepicker({ minDate: '-2m +0w',maxDate: '0m +0w', dateFormat: 'yy-mm-dd'});
+	
+		
+});
+</script>
+<div class="report_container">    
+    <table cellpadding="0" cellspacing="0" class="tbldatefilter">
+    <tr><td><h1><?php echo __('Date Filter') ?></h1></td></tr>
+    <tr>
+    <td>
+        <form action="" id="searchform" method="POST" name="searchform">
+        <div class="dateBox-pt">
+          <div class="formRow-pt" style="float:left;">
+            <label class="datelable">From:</label>
+            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo @$startdate ? $startdate : date('Y-m-d',strtotime('-15 days'));?>" />
+          </div>
+          <div class="formRow-pt" style="float:left;">
+              <label class="datelable">To:</label>
+            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$enddate ? $enddate : date('Y-m-d');?>" />
+          </div>
+           <span><input type="submit" name="søg" value="Search" class="datefilterBtn" /></span>
+        </div>
+        </form>
+    </td>
+        </tr>
+</table>
+</div>
 <div class="report_container">
   <div id="sf_admin_container"><h1><?php echo __('Registration Receipts') ?> (<?php echo (count($registrations));echo __(" receipts"); ?>)</h1></div>
         
@@ -141,7 +175,8 @@
 		<td>
 		<?php echo $numberchange->getDescription() ?>
 		</td>
-		<td><a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for(sfConfig::get('app_main_url').'affiliate/printReceipt?tid='.$numberchange->getId(), true) ?>')"> <?php echo __('Receipt') ?></a>
+		<td>
+                    <a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for($targetUrl.'affiliate/printReceipt?tid='.$numberchange->getId(), true) ?>')"> <?php echo __('Receipt') ?></a>
 		</td>
 
 	</tr>

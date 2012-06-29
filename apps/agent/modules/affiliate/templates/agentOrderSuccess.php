@@ -18,7 +18,7 @@
 	<tr>
 		<th style="text-align:left">&nbsp;</th>
 		<th style="text-align:left"><?php echo __('Date');?></th>
-		<th style="text-align:left"><?php echo __('Amount');?> (NOK)</th>
+		<th style="text-align:left"><?php echo __('Amount');?> (<?php echo sfConfig::get('app_currency_code');?>)</th>
 		<th style="text-align:left"><?php echo __('Show Reciept');?></th>
 
 	</tr>

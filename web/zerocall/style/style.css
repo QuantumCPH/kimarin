@@ -1,7 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 * {margin:0px;padding:0px;}
-body {font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;background-color:FFFFFF;}
 #wrap {width:780px;margin:0px auto;}
 #header {width:780px;height:119px;}
 #logo {width:168px; height:79px; float:left;}
@@ -23,7 +22,7 @@ body {font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;backg
 #price-calculator ul li.price{ font-size:18px; color:#fff; padding-bottom:10px;}
 #price-calculator ul li.price .fl{ float:left;}
 #price-calculator ul li.price .fr{ float:right;}
-.homepage-aux{ position: relative; width:780px; float:left; clear:both; margin-top:; background-image: url(../images/hp-aux.png); background-repeat:no-repeat; height:124px; margin-top:20px;}
+.homepage-aux{ position: relative; width:780px; float:left; clear:both; background-image: url(../images/hp-aux.png); background-repeat:no-repeat; height:124px; margin-top:20px;}
 .bliv-kunde-white{ background-image:url(../images/bliv-kunde.png); width:132px; height:50px; background-repeat:no-repeat; position:absolute; right:13px; top:38px;overflow:hidden; text-indent:9000em; white-space:nowrap;}
 #homepage-box-row{ width:780px; float:left; clear:both; overflow:hidden; margin-top:20px; margin-bottom:20px;}
 #homepage-box-row .box{ width:232px; height:106px; padding:10px; float:left; margin-right:11px;}
@@ -64,7 +63,7 @@ body {font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000;backg
 #login-modal h4{ margin-bottom:20px; font-size:14px;}
 .input{ width:140px; font-size:12px; padding:3px; border:1px solid #999999; margin-bottom:10px;}
 #login-modal label{ font-size:12px;}
-.loginbuttun{ background-image:url(../images/bg-login-btn.jpg); width:77px; height:28px;  font-size:13px; border:0px; color:#000000; padding-bottom:7px; padding-top:5px;font-weight:bold;}
+.loginbuttun{ background-image:url("../images/b.png"); width:77px; height:27px;  font-size:13px; border:0px; color:#ffffff; padding-bottom:7px; padding-top:4px;font-weight:normal;}
 #login-modal button{ background-image:url(../images/bg-login-btn.jpg); width:77px; height:28px;  font-size:13px; border:0px; color:#fff; padding-bottom:7px; padding-top:5px;}
 #login-modal p{ margin-bottom:18px;}
 .login-left{ float:left; width:152px;}
@@ -94,31 +93,97 @@ width:232px;
 .right-col .box a{ background-image:url(../images/bg-greenbutton-.png); background-position:0px 0px; color:#fff; font-size:11px; background-repeat:no-repeat; display:block; text-decoration:none; padding-left:5px;}
 .right-col .box a span{ background-image:url(../images/bg-greenbutton-.png); background-position:right top; background-repeat:no-repeat; display:block; padding:3px 5px 3px; }
 .right-col .box-last{ margin:0px;}
-.dash-nav{ width:520px; float:left;}
-.dash-nav a{ width:78px; height:58px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-sprite.gif); background-repeat:no-repeat; margin-right:7px;}
-.dash-nav a.dashboard{ background-position:0px 0px}
-.dash-nav a.dashboard:hover{ background-position:-85px 0px}
-.dash-nav a.dashboard-s{ background-position:-85px 0px}
+.navigations{ width:575px; float:left;}
+.navigations a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-sprite.gif); background-repeat:no-repeat; margin-right:0px;}
+.navigations a.dashboard{ background-position:0px 0px}
+.navigations a.dashboard:hover{ background-position:-90px 0px}
+.navigations a.dashboard-s{ background-position:-90px 0px}
 
-.dash-nav a.refil{ background-position:0px -57px}
-.dash-nav a.refil:hover{ background-position:-85px -57px}
-.dash-nav a.refil-s{ background-position:-85px -57px}
+.navigations a.refil{ background-position:0px -64px}
+.navigations a.refil:hover{ background-position:-90px -64px}
+.navigations a.refil-s{ background-position:-90px -64px}
 
-.dash-nav a.callhistory{ background-position:0px -115px}
-.dash-nav a.callhistory:hover{ background-position:-85px -115px}
-.dash-nav a.callhistory-s{ background-position:-85px -115px}
+.navigations a.callhistory{ background-position:0px -127px}
+.navigations a.callhistory:hover{ background-position:-90px -127px}
+.navigations a.callhistory-s{ background-position:-90px -127px}
 
-.dash-nav a.paymenthistory{ background-position:0px -172px}
-.dash-nav a.paymenthistory:hover{ background-position:-85px -172px}
-.dash-nav a.paymenthistory-s{ background-position:-85px -172px}
+.navigations a.paymenthistory{ background-position:0px -188px}
+.navigations a.paymenthistory:hover{ background-position:-90px -188px}
+.navigations a.paymenthistory-s{ background-position:-90px -188px}
 
-.dash-nav a.settings{ background-position:0px -229px}
-.dash-nav a.settings:hover{ background-position:-85px -229px}
-.dash-nav a.settings-s{ background-position:-85px -229px}
+.navigations a.settings{ background-position:0px -250px}
+.navigations a.settings:hover{ background-position:-90px -250px}
+.navigations a.settings-s{ background-position:-90px -250px}
 
-.dash-nav a.logout{ background-position:0px -287px}
-.dash-nav a.logout:hover{ background-position:-85px -287px}
-.dash-nav a.logout-s{ background-position:-85px -287px}
+.navigations a.websms{ background-position:0px -314px}
+.navigations a.websms:hover{ background-position:-90px -314px}
+.navigations a.websms-s{ background-position:-90px -314px}
+
+.navigations a.logout{ background-position:0px -382px}
+.navigations a.logout:hover{ background-position:-90px -382px}
+.navigations a.logout-s{ background-position:-90px -382px}
+
+/****** Spanish ********/
+.navegaciones{ width:575px; float:left;}
+.navegaciones a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-es.gif); background-repeat:no-repeat; margin-right:0px;}
+.navegaciones a.dashboard{ background-position:-5px 0px}
+.navegaciones a.dashboard:hover{ background-position:-90px 0px}
+.navegaciones a.dashboard-s{ background-position:-90px 0px}
+
+.navegaciones a.refil{ background-position:-5px -56px;}
+.navegaciones a.refil:hover{ background-position:-90px -56px}
+.navegaciones a.refil-s{ background-position:-90px -56px}
+
+.navegaciones a.callhistory{ background-position:-5px -112px;}
+.navegaciones a.callhistory:hover{ background-position:-90px -112px;}
+.navegaciones a.callhistory-s{ background-position:-90px -112px;}
+
+.navegaciones a.paymenthistory{ background-position:-5px -169px}
+.navegaciones a.paymenthistory:hover{ background-position:-90px -169px}
+.navegaciones a.paymenthistory-s{ background-position:-90px -169px}
+
+.navegaciones a.settings{ background-position:-5px -227px}
+.navegaciones a.settings:hover{ background-position:-90px -227px}
+.navegaciones a.settings-s{ background-position:-90px -227px}
+
+.navegaciones a.websms{ background-position:-5px -284px}
+.navegaciones a.websms:hover{ background-position:-90px -284px}
+.navegaciones a.websms-s{ background-position:-90px -284px}
+
+.navegaciones a.logout{ background-position:-3px -340px;}
+.navegaciones a.logout:hover{ background-position:-87px -340px}
+.navegaciones a.logout-s{ background-position:-87px -340px}
+
+/****** German ********/
+.navigationen{ width:575px; float:left;}
+.navigationen a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-de.gif); background-repeat:no-repeat; margin-right:0px;}
+.navigationen a.dashboard{ background-position:-5px 0px}
+.navigationen a.dashboard:hover{ background-position:-90px 0px}
+.navigationen a.dashboard-s{ background-position:-90px 0px}
+
+.navigationen a.refil{ background-position:-5px -56px;}
+.navigationen a.refil:hover{ background-position:-90px -56px}
+.navigationen a.refil-s{ background-position:-90px -56px}
+
+.navigationen a.callhistory{ background-position:-5px -113px;}
+.navigationen a.callhistory:hover{ background-position:-90px -113px;}
+.navigationen a.callhistory-s{ background-position:-90px -113px;}
+
+.navigationen a.paymenthistory{ background-position:-5px -169px}
+.navigationen a.paymenthistory:hover{ background-position:-90px -169px}
+.navigationen a.paymenthistory-s{ background-position:-90px -169px}
+
+.navigationen a.settings{ background-position:-5px -227px}
+.navigationen a.settings:hover{ background-position:-90px -227px}
+.navigationen a.settings-s{ background-position:-90px -227px}
+
+.navigationen a.websms{ background-position:-5px -283px}
+.navigationen a.websms:hover{ background-position:-87px -283px}
+.navigationen a.websms-s{ background-position:-87px -283px}
+
+.navigationen a.logout{ background-position:-3px -340px;}
+.navigationen a.logout:hover{ background-position:-87px -340px}
+.navigationen a.logout-s{ background-position:-87px -340px}
 
 
 
@@ -152,8 +217,8 @@ a.receipt{ background-image:url(../images/green-bullet.jpg); background-repeat:n
 .split-form-sign-up{padding-top:20px; float:left; clear:both; width:750px; padding-bottom:30px; min-height:412px; background-color:FFFFFF; padding-top:20px; padding-left:30px; margin-bottom:10px;}
 .split-form-sign-up .col{width:314px; float: left; position: relative;height: 250px;}
 .split-form-sign-up ul{list-style:none;}
-.split-form-sign-up ul li{list-style:none; margin-bottom:10px; float:left; clear:both;width:350px; white-space:nowrap; z-index:100; position:relative; color:#000;}
-.split-form-sign-up ul li label{width:130px; float:left; padding-top:1px; font-weight:bold; color:#000; }
+.split-form-sign-up ul li{list-style:none; margin-bottom:10px; float:left; clear:both;width:350px; white-space:nowrap; z-index:100; position:relative;}
+.split-form-sign-up ul li label{width:130px; float:left; padding-top:1px; font-weight:bold; }
 .split-form-sign-up ul li input{width:130px; border:1px solid #999999; font-size:11px; padding:3px;}
 .split-form-sign-up ul li select{width:137px; border:1px solid #999999;font-size:11px; padding:3px; }
 
@@ -162,14 +227,12 @@ a.receipt{ background-image:url(../images/green-bullet.jpg); background-repeat:n
 .split-form-sign-up ul li input.radbx{width:20px; padding:0px; border:0px; float:left;}
 .split-form-sign-up ul li.fr {width:285px; text-align:right;}
 .split-form-sign-up ul li.buttonplacement{ position: relative; right:14px;}
-.loginbuttun{ background-image:url(../images/bg-login-btn.jpg); width:77px; height:28px;  font-size:13px; border:0px; color:#333333; padding-bottom:7px; padding-top:5px;}
-.loginbuttun{ width:77:!important; }
 .split-form-sign-up ul li button{ background-image:url("../images/button-orange-big.png");border:0 none;bottom:-70px;color:#333333;font-size:22px;height:48px;margin-top:20px;padding-bottom:7px;padding-top:5px;width:132px;}
 
 .step-details{ width:100%; float:left; clear:both; padding-bottom:20px;}
-.step-details strong{ color:#000; font-size:18px;}
-.step-details span.active{ color:#000;}
-.step-details span.inactive{ color:#686868}
+.step-details strong{ color:#0c74a5; font-size:18px;}
+.step-details span.active{ color:#0c74a5;}
+.step-details span.inactive{ color:#ecb32e}
 
 .signup-steps{float:left; clear:both; width:780px; overflow:hidden;}
 .signup-steps small{ font-size:12px; display:block; padding-bottom:10px; float:left; width:100%;}
@@ -558,4 +621,7 @@ margin-top:12px;
 .dash-navg a.logout:hover{ background-position:-85px -287px}
 .dash-navg a.logout-s{ background-position:-85px -287px}
 
+input[type=submit],input[type=button],textarea,option{
+   font-family:'Conv_Calibri',Sans-Serif;  
+}
 

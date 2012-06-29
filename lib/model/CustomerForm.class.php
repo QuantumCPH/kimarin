@@ -29,6 +29,77 @@ class CustomerForm extends BaseCustomerForm
             $countrylngs = EnableCountryPeer::doSelectOne($enableCountry);
             $languageSymbol = $countrylngs->getLanguageSymbol();
             
+         ///// check if mobile number and nie/passport number already exist.   
+            $mobileno=000000000;
+            $passportnum = 0;
+               
+            if(isset($_REQUEST['customer']) && $_REQUEST['customer']!=""){
+               $mobileno=$_REQUEST['customer']['mobile_number']; 
+               $passportnum=$_REQUEST['customer']['nie_passport_number'];
+            }
+            $cpn = new Criteria();
+            $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
+            $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $countnie = CustomerPeer::doCount($cpn);
+
+             if(isset($countnie) &&  $countnie>=1){
+                $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+                    array(
+                        'model' => 'customer',
+                        'column' => 'nie_passport_number'
+                    ),array(
+                        'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
+                    ))
+                    ))
+                );
+             }
+             
+            $count=0;
+            $countc=0;
+            $mobile = new Criteria();
+            $mobile->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
+            $mobile->add(CustomerPeer::CUSTOMER_STATUS_ID, 1);
+            $count = CustomerPeer::doCount($mobile);
+
+            if(isset($count) &&  $count>=1){
+
+            $mobilec = new Criteria();
+            $mobilec->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
+            $mobilec->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $countc = CustomerPeer::doCount($mobilec);
+
+             if(isset($countc) &&  $countc>=1){
+              $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+                    array(
+                                    'model' => 'customer',
+                                    'column' => 'mobile_number'
+                    ),array(
+                                    'invalid' => sfContext::getInstance()->getI18N()->__('Mobile Number already existing.')
+                    ))
+                    ))
+                 );
+             }
+        
+            }else{
+                
+            $mobilec = new Criteria();
+            $mobilec->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
+            $mobilec->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $countc = CustomerPeer::doCount($mobilec);
+
+             if(isset($countc) &&  $countc>=1){
+                $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+                        array(
+                                        'model' => 'customer',
+                                        'column' => 'mobile_number'
+                        ),array(
+                                        'invalid' => sfContext::getInstance()->getI18N()->__('Mobile Number already existing.')
+                        ))
+                        ))
+                );
+             }
+           }
+            
         }elseif(sfConfig::get('sf_app')=='b2c'){
              //-----------------------------------
                $activelanguage = sfContext::getInstance()->getUser()->getAttribute('activelanguage', '');
@@ -41,7 +112,7 @@ class CustomerForm extends BaseCustomerForm
                 $mystring = @$_SERVER["HTTP_REFERER"];
                // Add As Per requirements - - - -
 
-                    $lngSymbol='no';
+                    $lngSymbol=sfConfig::get('app_language_symbol');
                 $countrylng = new Criteria();
                 $countrylng->add(EnableCountryPeer::LANGUAGE_SYMBOL, $lngSymbol);
                 $countrylng = EnableCountryPeer::doSelectOne($countrylng);
@@ -78,80 +149,39 @@ class CustomerForm extends BaseCustomerForm
 				array('invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid 8 to 14 digit mobile number.'))
 			)
 		)
-	);
+	  );
 
+         $this->validatorSchema['nie_passport_number'] = new sfValidatorAnd(
+  		array(
+  			$this->validatorSchema['nie_passport_number'],
+  			new sfValidatorString(
+  				array (
+  					'min_length'=>10,
 
+                                    ),
+                                array('min_length' => 'N.I.E/Passport No. "%value%" at least 10 characters.')
+
+  			),
+  			
+  		)
+  	); 	
 
 
 //        //This Code Add For Duplication Entery Again Task # 4.3 Date:01-18-11
-         $mobileno=000000000;
-
+        
            if(sfContext::getInstance()->getRouting()->getCurrentInternalUri()=='customer/passwordchange'){
 
 
           
              }else{
-
-                if(isset($_REQUEST['customer']) && $_REQUEST['customer']!=""){
-            $mobileno=$_REQUEST['customer']['mobile_number'];
-
-            }
+             
              }
           //$this->form->getValues('mobile_number');
    if(sfContext::getInstance()->getRouting()->getCurrentInternalUri()=='customer/settings'){
 
    }else{ 
-		$count=0;
-		$countc=0;
-		$mobile = new Criteria();
-		$mobile->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
-		$mobile->add(CustomerPeer::CUSTOMER_STATUS_ID, 1);
-		$count = CustomerPeer::doCount($mobile);
-
-    if(isset($count) &&  $count>=1){
-
-		$mobilec = new Criteria();
-		$mobilec->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
-		$mobilec->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-		$countc = CustomerPeer::doCount($mobilec);
-
-		 if(isset($countc) &&  $countc>=1){
-		  $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
-					array(
-							'model' => 'customer',
-							'column' => 'mobile_number'
-					),array(
-							'invalid' => sfContext::getInstance()->getI18N()->__('Mobile Number already existing.')
-					))
-					))
-				);
 		
-		 }
-
-
-
-        
-    }else{
-
-
-		$mobilec = new Criteria();
-		$mobilec->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
-		$mobilec->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-		$countc = CustomerPeer::doCount($mobilec);
-
-		 if(isset($countc) &&  $countc>=1){
-				$this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
-					array(
-							'model' => 'customer',
-							'column' => 'mobile_number'
-					),array(
-							'invalid' => sfContext::getInstance()->getI18N()->__('Mobile Number already existing.')
-					))
-					))
-				);
-		 }
-    }
-    
+                
 	}     
 	//pobox
 	//This Condtion for - Phone number is currently 8 digits but in Poland this is 10 digits - against New Feature - 02/28/11
@@ -232,6 +262,31 @@ class CustomerForm extends BaseCustomerForm
                                     //'add_empty' => 'Choose a product',
             ));
             //----------------------------------------------------------
+            //-----------------For get the Sim Types---------------------
+            $this->widgetSchema['sim_type_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'SimTypes',
+                    'order_by' => array('Title','asc'),
+                    //'add_empty' => 'Choose a product',
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Preferred languages---------------------
+            $this->widgetSchema['preferred_language_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'PreferredLanguages',
+                    'order_by' => array('Language','asc')
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Province---------------------
+            $this->widgetSchema['province_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'Province',
+                    'order_by' => array('Province','asc')
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Nationality---------------------
+            $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'Nationality',
+                    'order_by' => array('Title','asc')
+            ));
+            //----------------------------------------------------------
 
         } else if(sfConfig::get('sf_app')=='b2c'){          
 
@@ -290,6 +345,32 @@ class CustomerForm extends BaseCustomerForm
                     'order_by' => array('ProductOrder','asc'),
                                     'criteria'	=>	$product_criteria,
                                     //'add_empty' => 'Choose a product',
+            ));
+            //----------------------------------------------------------
+          
+            //-----------------For get the Sim Types---------------------
+            $this->widgetSchema['sim_type_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'SimTypes',
+                    'order_by' => array('Title','asc'),
+                    //'add_empty' => 'Choose a product',
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Preferred languages---------------------
+            $this->widgetSchema['preferred_language_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'PreferredLanguages',
+                    'order_by' => array('Language','asc')
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Province---------------------
+            $this->widgetSchema['province_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'Province',
+                    'order_by' => array('Province','asc')
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Nationality---------------------
+            $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'Nationality',
+                    'order_by' => array('Title','asc')
             ));
             //----------------------------------------------------------
         }
@@ -473,12 +554,12 @@ class CustomerForm extends BaseCustomerForm
   	$this->setWidget('password_confirm', $this->widgetSchema['password']);
   	
   	$this->widgetSchema->moveField('password_confirm', 'after', 'password'); 
- $this->widgetSchema->moveField('password_confirm', 'after', 'password');
-  $this->mergePostValidator(new sfValidatorSchemaCompare('password',
-                                  sfValidatorSchemaCompare::EQUAL, 'password_confirm',
-                                  array(),
-                                  array('invalid' => sfContext::getInstance()->getI18n()->__('The two passwords must be the same.'))
-                                          ));
+        $this->widgetSchema->moveField('password_confirm', 'after', 'password');
+        $this->mergePostValidator(new sfValidatorSchemaCompare('password',
+                                          sfValidatorSchemaCompare::EQUAL, 'password_confirm',
+                                          array(),
+                                          array('invalid' => sfContext::getInstance()->getI18n()->__('The two passwords must be the same.'))
+                                                  ));
 
 
     //terms and conditions
@@ -537,12 +618,18 @@ class CustomerForm extends BaseCustomerForm
 			'po_box_number'=>'Post code',
 			'telecom_operator_id'=>'Telecom operator',
 			'manufacturer'=>'Mobile brand',
-                    'to_date'=>'to date',
-                    'from_date'=>'from date',
+                        'to_date'=>'to date',
+                        'from_date'=>'from date',
 			'country_id'=>'Country',
 			'device_id'=>'Mobile Model',
 			'password_confirm'=>'Retype password',
 			'date_of_birth'=>'Birth date <br />(dd-mm-yyyy)',
+                        'second_last_name'=>'Middle Name',
+                        'nie_passport_number'=>'N.I.E/Passport Number',  
+                        'preferred_language_id'=>'Preferred Language', 
+                        'province_id'=>'Province',
+                        'sim_type_id'=>'Sim Type',
+                        'nationality_id'=>'Nationality'
 		)
 	);
 	
@@ -577,11 +664,28 @@ class CustomerForm extends BaseCustomerForm
   	if (CustomerPeer::doCount($c)>=1)
   	{
   	      throw new sfValidatorErrorSchema($validator, array(
-	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('Number already registered.')),
+	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('Mobile Number already registered.')),
 	      ));	
   	}
   	
   	return $values;
 	
+  }
+  public function validateUniquePassportNo(sfValidatorBase $validator, $values)
+  {
+  	
+  	$c = new Criteria();
+  	
+  	$c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $values['nie_passport_number']);
+  	$c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
+  	 
+  	if (CustomerPeer::doCount($c)>=1)
+  	{
+  	      throw new sfValidatorErrorSchema($validator, array(
+	        'nie_passport_number' => new sfValidatorError($validator, 'N.I.E/Passport Number already registered.'),
+	      ));	
+  	}
+
+  	return $values;
   }
 }

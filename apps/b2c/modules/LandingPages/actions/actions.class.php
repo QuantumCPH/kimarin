@@ -172,9 +172,9 @@ class LandingPagesActions extends sfActions
 
             <td>
 
-            <h3>Thankyou for Contacting Zapna.com</h3>
+            <h3>Thankyou for Contacting '.sfConfig::get('app_site_title').'</h3>
 
-            <p>Your message has been forwarded to the Zapna Support, you will be shortly contacted by them in this regards.<br/>
+            <p>Your message has been forwarded to the '.sfConfig::get('app_site_title').' Support, you will be shortly contacted by them in this regards.<br/>
             Your original message was:</p>
 
             <b>Date: '.date('D-M-Y').'</b><br/><br/>
@@ -207,7 +207,7 @@ class LandingPagesActions extends sfActions
                     src="https://seal.thawte.com/getthawteseal?host_name=zerocall.com&amp;size=S&amp;lang=en"></script>
 
 
-            Copyright &copy; Zapna 2010
+            Copyright &copy; '.sfConfig::get('app_site_title'). date('Y').'
 
             <br/>
 

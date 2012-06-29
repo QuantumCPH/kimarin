@@ -11,9 +11,12 @@ fields:
   agent_company{post_code}:
     required:
       msg:              The post code cannot be left blank.
-  agent_company{contact_name}:
+  agent_company{first_name}:
     required:
-      msg:              The contact name name cannot be left blank.
+      msg:              The first name name cannot be left blank.  
+  agent_company{last_name}:
+    required:
+      msg:              The last name name cannot be left blank.
   agent_company{email}:
     required:
       msg:              The  email cannot be left blank.

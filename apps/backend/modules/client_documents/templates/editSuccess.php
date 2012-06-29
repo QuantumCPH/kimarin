@@ -24,7 +24,7 @@ $qryObj = mysql_fetch_object($Qry);
 
 <div class="form-row">
   <label class="required" for="faqs_answer">Document File:</label>  <div class="content"> <input type="file"  value="" id="documentfile" name="documentfile" style="width: 240px;"><br /><br />
-  <a href="http://landncall.zerocall.com/uploads/documents/<?php echo $qryObj->filename;?>" target="_blank"><strong>Old Document File</strong></a> </div>
+  <a href="<?php echo sfConfig::get('app_web_url');?>uploads/documents/<?php echo $qryObj->filename;?>" target="_blank"><strong>Old Document File</strong></a> </div>
 </div>
 
 
@@ -42,7 +42,7 @@ $qryObj = mysql_fetch_object($Qry);
 </fieldset>
 
 <ul class="sf_admin_actions">
-  <li><input type="button" onclick="document.location.href='http://landncall.zerocall.com/backend_dev.php/client_documents';" value="list" class="sf_admin_action_list"></li>
+  <li><input type="button" onclick="document.location.href='<?php echo sfConfig::get('app_admin_url');?>/client_documents';" value="list" class="sf_admin_action_list"></li>
   <li><input type="submit" class="sf_admin_action_save" value="update" name="update"></li>
 </ul>
 

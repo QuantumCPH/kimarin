@@ -15,13 +15,9 @@ require_once(sfConfig::get('sf_lib_dir') . '/payment.class.php');
  * @version    SVN: $Id: actions.class.php,v 1.8 2010-09-19 22:20:12 orehman Exp $
  */
 class customerActions extends sfActions {
-  public function getTargetUrl() {
-        return sfConfig::get('app_main_url');
+    public function getTargetUrl() {
+        return sfConfig::get('app_customer_url');
     }
-
-
-    
-
 
     public function executeTest(sfWebRequest $request) {
 
@@ -41,7 +37,8 @@ class customerActions extends sfActions {
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
 
         if ($form->isValid()) {
-
+//            var_dump($customer);
+//            die;
             $customer = $form->save();
             $customer->setPlainText($plainPws);
             if (isset($refVal) && $refVal != '') {
@@ -68,11 +65,12 @@ class customerActions extends sfActions {
 
             $uc = new Criteria();
             $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+            $uc->add(UniqueIdsPeer::SIM_TYPE_ID,$customer->getSimTypeId());
             $uc->addAnd(UniqueIdsPeer::STATUS, 0);
             $availableUniqueCount = UniqueIdsPeer::doCount($uc);
             $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
 
-            if($availableUniqueCount  == 0){
+            if($availableUniqueCount  == 0){ echo $customer->getSimTypeId();
                 // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
                 emailLib::sendUniqueIdsShortage();
                 $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
@@ -83,9 +81,9 @@ class customerActions extends sfActions {
             $getFirstnumberofMobile = substr($mtnumber, 0, 1);     // bcdef
             if ($getFirstnumberofMobile == 0) {
                 $TelintaMobile = substr($mtnumber, 1);
-                $TelintaMobile = '47' . $TelintaMobile;
+                $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
             } else {
-                $TelintaMobile = '47' . $mtnumber;
+                $TelintaMobile = sfConfig::get('app_country_code') . $mtnumber;
             }
             //------save the callback data
             if ($id != NULL) {
@@ -260,7 +258,7 @@ class customerActions extends sfActions {
         if ($country_id) {
             $langSym = $country_id->getLanguageSymbol();
         } else {
-            $langSym = 'no';
+            $langSym = sfConfig::get('app_language_symbol');
         }
         //--------------------------------------------------------
         //$lang =  $this->getUser()->getAttribute('activelanguage');
@@ -274,13 +272,13 @@ class customerActions extends sfActions {
             $this->customer_balance = (double) Fonet::getBalance($this->customer);
         }
 
-        //echo  $TelintaMobile = '47'.$this->customer->getMobileNumber();
+        //echo  $TelintaMobile = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
         $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
         if ($getFirstnumberofMobile == 0) {
             $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-            $TelintaMobile = '47' . $TelintaMobile;
+            $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
         } else {
-            $TelintaMobile = '47' . $this->customer->getMobileNumber();
+            $TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
         }
         $emailId = $this->customer->getEmail();
         $uniqueId = $this->customer->getUniqueid();
@@ -328,7 +326,7 @@ class customerActions extends sfActions {
         if ($country_id) {
             $langSym = $country_id->getLanguageSymbol();
         } else {
-            $langSym = 'no';
+            $langSym = sfConfig::get('app_language_symbol');
         }
         //--------------------------------------------------------
         //$lang =  $this->getUser()->getAttribute('activelanguage');
@@ -342,13 +340,13 @@ class customerActions extends sfActions {
             $this->customer_balance = (double) Fonet::getBalance($this->customer);
         }
 
-        //echo  $TelintaMobile = '46'.$this->customer->getMobileNumber();
+        //echo  $TelintaMobile = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
         $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
         if ($getFirstnumberofMobile == 0) {
             $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-            $TelintaMobile = '47' . $TelintaMobile;
+            $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
         } else {
-            $TelintaMobile = '47' . $this->customer->getMobileNumber();
+            $TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
         }
         $emailId = $this->customer->getEmail();
         $uniqueId = $this->customer->getUniqueid();
@@ -361,14 +359,13 @@ class customerActions extends sfActions {
         if ($request->isMethod('post')) {
 
             if ($this->customer_balance > 40) {
-                //When the customer register to this – the account should be deducted for 30 NOK for activation + 10 N for monthly fee - Ahtsham Asghar
                 $voipcharges = "-40";
 
                 $order = new CustomerOrder();
                 $order->setProductId(5);
                 $order->setCustomerId($customerids);
                 $order->setExtraRefill($voipcharges);
-                $order->setIsFirstOrder(1);
+               // $order->setIsFirstOrder(1);
                 $order->setOrderStatusId(3);
                 echo 'order' . $order->save();
 
@@ -376,7 +373,7 @@ class customerActions extends sfActions {
                 $this->customer = $customerids;
                 $transaction = new Transaction();
                 $transaction->setAmount($voipcharges);
-                $transaction->setDescription($this->getContext()->getI18N()->__('Transation for VoIP Purchase'));
+                $transaction->setDescription($this->getContext()->getI18N()->__('Transaction for VoIP Purchase'));
                 $transaction->setOrderId($order->getId());
                 $transaction->setCustomerId($customerids);
                 $transaction->setTransactionStatusId(3);
@@ -399,10 +396,10 @@ class customerActions extends sfActions {
                     //$c->setLimit(1);
                     $c->add(SeVoipNumberPeer::IS_ASSIGNED, 0);
                     if (SeVoipNumberPeer::doCount($c) < 10) {
-                        emailLib::sendErrorInTelinta("Resenumber about to Finis", "Resenumbers in the Zapna Norway are lest then 10 . ");
+                        emailLib::sendErrorInTelinta("Resenumber about to Finis", "Resenumbers in the ".sfConfig::get('app_site_title')." are lest then 10 . ");
                     }
                     if (!$voip_customer = SeVoipNumberPeer::doSelectOne($c)) {
-                        emailLib::sendErrorInTelinta("Resenumber Finished", "Resenumbers in the Zapna Norway are finished. This error is faced by customer id: " . $customerids);
+                        emailLib::sendErrorInTelinta("Resenumber Finished", "Resenumbers in the ".sfConfig::get('app_site_title')." are finished. This error is faced by customer id: " . $customerids);
                         return false;
                     }
                 }
@@ -433,12 +430,12 @@ class customerActions extends sfActions {
                     $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
                     if ($getFirstnumberofMobile == 0) {
                         $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-                        $TelintaMobile = '47' . $TelintaMobile;
+                        $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
                     } else {
-                        $TelintaMobile = '47' . $this->customer->getMobileNumber();
+                        $TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
                     }
 
-                    //$TelintaMobile = '47'.$this->customer->getMobileNumber();
+                    //$TelintaMobile = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
                     $emailId = $this->customer->getEmail();
                     $uniqueId = $this->customer->getUniqueid();
 
@@ -472,8 +469,8 @@ class customerActions extends sfActions {
                 $this->customer = $customer;
                 $vat = 0;
                 $subject = $this->getContext()->getI18N()->__('Transation for VoIP Purchase');
-                $sender_email = sfConfig::get('app_email_sender_email', 'support@zapna.no');
-                $sender_name = sfConfig::get('app_email_sender_name', 'Zapna support');
+                $sender_email = sfConfig::get('app_email_sender_email', 'support@kimarin.es');
+                $sender_name = sfConfig::get('app_email_sender_name', 'Kimarin support');
 
                 $recepient_email = trim($this->customer->getEmail());
                 $recepient_name = sprintf('%s %s', $this->customer->getFirstName(), $this->customer->getLastName());
@@ -511,7 +508,6 @@ class customerActions extends sfActions {
                 emailLib::sendvoipemail($this->customer, $order, $transaction);
 
                 //------------------------------
-                //$this->redirect('http://landncall.zerocall.com/b2c.php/customer/voippurchased');
                 $this->redirect($this->getTargetUrl() .'customer/voippurchased');
             }
         }
@@ -671,9 +667,9 @@ class customerActions extends sfActions {
         $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);
         if ($getFirstnumberofMobile == 0) {
             $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-            $this->TelintaMobile = '46' . $TelintaMobile;
+            $this->TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
         } else {
-            $this->TelintaMobile = '46' . $this->customer->getMobileNumber();
+            $this->TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
         }
 
         $this->numbername = $this->customer->getUniqueid();
@@ -725,7 +721,7 @@ class customerActions extends sfActions {
         if ($country_id) {
             $langSym = $country_id->getLanguageSymbol();
         } else {
-            $langSym = 'no';
+            $langSym = sfConfig::get('app_language_symbol');
         }
         //--------------------------------------------------------
         //$lang =  $this->getUser()->getAttribute('activelanguage');
@@ -802,7 +798,7 @@ class customerActions extends sfActions {
         if ($country_id) {
             $langSym = $country_id->getLanguageSymbol();
         } else {
-            $langSym = 'no';
+            $langSym = sfConfig::get('app_language_symbol');
         }
         //--------------------------------------------------------
         //$lang =  $this->getUser()->getAttribute('activelanguage');
@@ -846,7 +842,7 @@ class customerActions extends sfActions {
         $this->form = new CustomerForm(CustomerPeer::retrieveByPK($this->customer->getId()));
       
 
-    unset($this->form['first_name']);
+                    unset($this->form['first_name']);
                     unset($this->form['last_name']);
                     unset($this->form['country_id']);
                     unset($this->form['city']);
@@ -877,7 +873,7 @@ class customerActions extends sfActions {
                     unset($this->form['ticketval']);
                     unset($this->form['to_date']);
                     unset($this->form['from_date']);
-                     unset($this->form['uniqueid']);
+                    unset($this->form['uniqueid']);
                     unset($this->form['plain_text']);
                     unset($this->form['ticketval']);
                     unset($this->form['to_date']);
@@ -886,6 +882,12 @@ class customerActions extends sfActions {
                     unset($this->form['terms_conditions']);
                     unset($this->form['manufacturer']);
                     unset($this->form['product']);
+                    unset($this->form['second_last_name']);
+                    unset($this->form['nie_passport_number']);
+                    unset($this->form['preferred_language_id']);
+                    unset($this->form['province_id']);
+                    unset($this->form['sim_type_id']);
+                    unset($this->form['nationality_id']);
                    //  unset($this->form['password']);
         // unset($this->form['password_confirm']);
         /////////////////////////////////////
@@ -970,6 +972,8 @@ class customerActions extends sfActions {
         unset($this->form['i_customer']);
         unset($this->form['usage_alert_sms']);
         unset($this->form['usage_alert_email']);
+        unset($this->form['sim_type_id']);
+        
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
         $getvoipInfo = new Criteria();
@@ -1000,6 +1004,8 @@ class customerActions extends sfActions {
         }
        
         $this->form->getWidget('mobile_number')->setAttribute('readonly', 'readonly');
+        $this->form->getWidget('nie_passport_number')->setAttribute('readonly', 'readonly');
+        
         
     }
 
@@ -1008,27 +1014,37 @@ class customerActions extends sfActions {
     $this->target = $this->getTargetUrl();   
            
         
-        if ($request->isMethod('post') &&
-                $request->getParameter('mobile_number') != '' &&
-                $request->getParameter('password') != '') {
+        if ($request->isMethod('post') && $request->getParameter('mobile_number') != '' && $request->getParameter('password') != '') {
             $paswordval = $request->getParameter('password');
             $mobile_number = $request->getParameter('mobile_number');
             $password = sha1($request->getParameter('password'));
 
             $c = new Criteria();
-            $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
+            $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);            
             $c->add(CustomerPeer::PASSWORD, $password);
             $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $cnt = CustomerPeer::doCount($c);
+            if($cnt > 0){
+                $customer = CustomerPeer::doSelectOne($c);
+            }else{
+                $c = new Criteria();
+                $c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $mobile_number);          
+                $c->add(CustomerPeer::PASSWORD, $password);
+                $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+                
+                $customer = CustomerPeer::doSelectOne($c);
+            }
+            
 
-            $customer = CustomerPeer::doSelectOne($c);
-
-
+//die;
             if ($customer) {
 
                 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
                 $this->getUser()->setAttribute('customer_id', $customer->getId(), 'usersession');
                 $this->getUser()->setAuthenticated(true);
 
+                $lang = PreferredLanguagesPeer::retrieveByPK($customer->getPreferredLanguageId());
+                $this->getUser()->setCulture($lang->getLanguageCode());
 
 
 
@@ -1102,7 +1118,7 @@ class customerActions extends sfActions {
             $customer->setPassword($new_password);
             $message_body = $this->getContext()->getI18N()->__('Hi') . ' ' . $customer->getFirstName() . '!';
             $message_body .= '<br /><br />';
-            $message_body .= $this->getContext()->getI18N()->__('Your password has been changed. Please use the following information to login to your Zapna account.');
+            $message_body .= $this->getContext()->getI18N()->__('Your password has been changed. Please use the following information to login to your %1% account.',array('%1%'=>sfConfig::get('app_site_title')));
             $message_body .= '<br /><br />';
             $message_body .= sprintf($this->getContext()->getI18N()->__('Mobile Number: %s'), $customer->getMobileNumber());
             $message_body .= '<br />';
@@ -1369,12 +1385,12 @@ public function executeSmsHistory(sfWebrequest $request){
             $invite->setMessage($message);
             $invite->save();
 
-            $subject = $this->getContext()->getI18N()->__("Zapna invitation");
+            $subject = $this->getContext()->getI18N()->__("%1% invitation",array('%1%' => sfConfig::get('app_site_title')));
 
             $name = $this->customer->getFirstName() . ' ' . $this->customer->getLastName();
-            $message_body = $this->getContext()->getI18N()->__('Hi ') . $recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation is sent to you with the reference of") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("a user of Smartsim from the Zapna.");
+            $message_body = $this->getContext()->getI18N()->__('Hi ') . $recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation is sent to you with the reference of") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("a user of Smartsim from the %1%.",array('%1%' => sfConfig::get('app_site_title')));
 
-            $message_body_end = $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . ' <a  href="http://customer.zapna.no/b2c.php/customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Accept") . '</a><br/>'. $this->getContext()->getI18N()->__('Read more').' <a href="http://www.zapna.no">www.zapna.no</a>';
+            $message_body_end = $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . ' <a  href="'.sfConfig::get('app_customer_url').'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Accept") . '</a><br/>'. $this->getContext()->getI18N()->__('Read more').' <a href="'.sfConfig::get('app_site_url').'">'.sfConfig::get('app_site_url').'</a>';
 
             //send email
             if ($recepient_name != ''):
@@ -1670,9 +1686,9 @@ public function executeSmsHistory(sfWebrequest $request){
             $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
             if ($getFirstnumberofMobile == 0) {
                 $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-                $TelintaMobile = '47' . $TelintaMobile;
+                $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
             } else {
-                $TelintaMobile = '47' . $this->customer->getMobileNumber();
+                $TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
             }
             $uniqueId = $this->customer->getUniqueid();
             $OpeningBalance = $order->getExtraRefill();

@@ -11,7 +11,7 @@
         jq("#payment").validate({
             rules: {
                 uniqueid: {
-                    remote: "<?php echo $target; ?>validateUniqueId"
+                    remote: "<?php echo $target; ?>affiliate/validateUniqueId?orderid=<?php echo $order->getId();?>"
                 }
             }
         });
@@ -124,15 +124,15 @@
                         </label>
 
 
-                        <label><?php echo $order->getProduct()->getRegistrationFee() ?> NOK
+                        <label><?php echo $order->getProduct()->getRegistrationFee() ?> <?php echo sfConfig::get('app_currency_code')?>
                             <br/>
                             <br/>
-                            <?php echo format_number($order->getProduct()->getPrice()) ?> NOK
+                            <?php echo format_number($order->getProduct()->getPrice()) ?> <?php echo sfConfig::get('app_currency_code')?>
                         </label>
 
 
                         <?php
-                            $product_price_vat = $order->getProduct()->getRegistrationFee() * .25;
+                            $product_price_vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
                             $product_price = ($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
                         ?>
                         </li>
@@ -167,18 +167,18 @@
                         </span>
                     </li>
                     <li>
-                        <label><?php echo __('VAT') ?> (25%)<br />
+                        <label><?php echo __('VAT') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
 <?php echo __('Total amount') ?></label>
 
                         <label class="fr ac" >
                             <span id="vat_span">
 <?php echo format_number($product_price_vat) ?>
-                            </span> NOK
+                            </span> <?php echo sfConfig::get('app_currency_code')?>
                             <br />
 <?php $total = $product_price + $product_price_vat ?>
                             <span id="total_span">
 <?php echo format_number($total) ?>
-                            </span> NOK
+                            </span> <?php echo sfConfig::get('app_currency_code')?>
                         </label>
                     </li>
 <?php if ($sf_user->hasFlash('error_message')): ?>

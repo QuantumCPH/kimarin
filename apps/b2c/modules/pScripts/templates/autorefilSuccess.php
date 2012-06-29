@@ -38,9 +38,9 @@ if(isset($id) && $id>0){  ?>
          <input type="hidden" name="lang" value="sv" />
 		<input type="hidden" name="HTTP_COOKIE" value="<?php getenv("HTTP_COOKIE");?>" />
 
-		<input type="hidden" name="cancelurl" value="http://landncall.zerocall.com/b2c.php/" />
+		<input type="hidden" name="cancelurl" value="<?php echo sfConfig::get('app_customer_url')?>" />
                 <input type="hidden" name="callbackurl" value="<?php echo $relay_script_url.url_for('@dibs_autoaccept_url', true);  ?>?accept=yes&subscriptionid=&orderid=<?php echo $order_id; ?>&amount=<?php echo $total; ?>">
-		<input type="hidden" name="accepturl" id="accepturl"  value="http://landncall.zerocall.com/b2c.php/">
+		<input type="hidden" name="accepturl" id="accepturl"  value="<?php echo sfConfig::get('app_customer_url')?>" />
 		    
            
             <input type="submit"  class="settingbuttonstep"  name="submit"  style="cursor: pointer;" value="Pay">

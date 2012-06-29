@@ -17,13 +17,10 @@ $pus=0;
 
 
                           <tr>
-                    <td width="11%" class="leftHeadign">Customer Balance</td>
-                     <td  ><?php
+                    <td width="17%" class="leftHeadign">Customer Balance</td>
+                     <td width="83%"  ><?php
                            $uniqueId=$customer->getUniqueid();
-                         $cuid=$customer->getId();
-
-                          
-
+                           $cuid=$customer->getId();
                                   $cp = new Criteria();
                                   $cp->add(CustomerProductPeer::CUSTOMER_ID, $cuid);
                                   $custmpr = CustomerProductPeer::doSelectOne($cp);
@@ -36,12 +33,12 @@ $pus=0;
                if($pus==1){
                             $Tes=ForumTel::getBalanceForumtel($customer->getId());
                                echo  $amt=CurrencyConverter::convertUsdToSek($Tes);
-   echo " NOK";
+   echo sfConfig::get('app_currency_code');
                             }else{
 
 
         echo  $customer_balance;
-          echo " NOK";
+          echo sfConfig::get('app_currency_code');
                             }
                           
                      ?> </td>
@@ -54,23 +51,46 @@ $pus=0;
                       </tr>
                      
                       <tr>
-                    <td id="sf_admin_list_th_first_name" class="leftHeadign" >First Name</td>
-                      <td><?php echo  $customer->getFirstName() ?></td>
-                        </tr>
+                        <td id="sf_admin_list_th_first_name" class="leftHeadign" >First Name</td>
+                        <td><?php echo  $customer->getFirstName() ?></td>
+                       </tr>
+                       <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Middle Name</td>
+                    <td><?php echo  $customer->getSecondLastName() ?></td>
+                          </tr> 
                       <tr >
                     <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Last Name</td>
                        <td><?php echo  $customer->getLastName() ?></td>
                           </tr>
+                       
                       <tr>
-		    <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Mobile Number</td>
+		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Mobile Number</td>
                       <td><?php echo  $customer->getMobileNumber() ?></td>
                          </tr>
+                        <tr>
+		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >N.I.E./Passport Number</td>
+                        <td><?php echo  $customer->getNiePassportNumber() ?></td>
+                         </tr>                         
                          <tr>
-
-		     <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Password</td>
+		           <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Password</td>
                          <td><?php echo  $customer->getPlainText() ?></td>
                        </tr>
-                         
+                        <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Nationality</td>
+                          <td><?php echo  $customer->getNationalityTitle(); ?></td>
+                         </tr> 
+                          <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Sim Types</td>
+                          <td><?php echo  $customer->getSimType(); ?></td>
+                         </tr>
+                         <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Province</td>
+                          <td><?php echo  $customer->getProvinceName(); ?></td>
+                         </tr>
+                         <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Preferred Language</td>
+                          <td><?php echo  $customer->getPreferredLanguage(); ?></td>
+                         </tr>
                        
 <?php
 $val="";
@@ -114,7 +134,7 @@ if(isset($val) && $val!=""){  ?>
                     <td id="sf_admin_list_th_date_of_birth" class="leftHeadign" >Date Of Birth</td>
                       <td><?php echo  $customer->getDateOfBirth() ?></td>
                       </tr>
-                         <tr>
+<!--                         <tr>
                       <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Auto Refill</td>
                         <?php if ($customer->getAutoRefillAmount()!=NULL && $customer->getAutoRefillAmount()>1){ ?>
                   <td>Yes</td>
@@ -122,7 +142,7 @@ if(isset($val) && $val!=""){  ?>
                       { ?>
                   <td>No</td>
                   <?php } ?>
-                        </tr>
+                        </tr>-->
                          <tr>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Unique ID</td>
                          <td>  <?php  echo $customer->getUniqueid();     ?>   </td>
@@ -135,7 +155,7 @@ if(isset($val) && $val!=""){  ?>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Usage SMS Alerts</td>
                          <td>  <?php  echo ($customer->getUsageAlertSMS()==1)?"Yes":"No";     ?>   </td>
                         </tr  >
-<!--                         <tr style="background-color:#EEEEFF">
+                         <tr style="background-color:#EEEEFF">
                        <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Active No</td>
                         <td>  <?php  $unid   =  $customer->getUniqueid();
         if(isset($unid) && $unid!=""){
@@ -155,7 +175,7 @@ if(isset($val) && $val!=""){  ?>
                }
 
          }else{  }  ?> </td>
-                         </tr>-->
+                         </tr>
                          <?php  $uid=0;
                       $uid=$customer->getUniqueid();
                       if(isset($uid) && $uid>0){
@@ -171,7 +191,7 @@ if(isset($val) && $val!=""){  ?>
                       </tr>
 
                       <?php } ?>
-<!--                  <tr style="background-color:#EEEEFF">
+                  <tr style="background-color:#EEEEFF">
                        <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Resenummer </td>
                         <td>  <?php  $cuid   =  $customer->getId();
         if(isset($cuid) && $cuid!=""){
@@ -183,7 +203,7 @@ if(isset($val) && $val!=""){  ?>
             echo $vounumber->getNumber();
              }
          }else{  }  ?> </td>
-                         </tr>-->
+                         </tr>
 
 
 

@@ -14,7 +14,7 @@ require_once(sfConfig::get('sf_lib_dir') . '/sms.class.php');
 class affiliateActions extends sfActions {
 
     private function getTargetUrl() {
-        return sfConfig::get('app_main_url') . "affiliate/";
+        return sfConfig::get('app_agent_url');
     }
 
     /**
@@ -35,7 +35,8 @@ class affiliateActions extends sfActions {
       
         $this->updateNews = NewupdatePeer::doSelect(new Criteria());
         $this->forward404Unless($this->getUser()->isAuthenticated());
-
+        $this->targetUrl = $this->getTargetUrl();
+        
         $c = new Criteria();
         $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
         $c->add(AgentCompanyPeer::ID, $agent_company_id);
@@ -54,7 +55,17 @@ class affiliateActions extends sfActions {
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $c->addDescendingOrderByColumn(CustomerPeer::CREATED_AT);
         $customers = CustomerPeer::doSelect($c);
-
+ 
+        $startdate = $request->getParameter('startdate');
+        $enddate = $request->getParameter('enddate');
+        if($startdate !=''){
+          $startdate = date('Y-m-d 00:00:00',  strtotime($startdate)); 
+          $this->startdate = date('Y-m-d',strtotime($startdate));          
+        }
+        if($enddate !=''){
+          $enddate = date('Y-m-d 23:59:59',  strtotime($enddate));  
+          $this->enddate = date('Y-m-d',strtotime($enddate));
+        } 
 
 
         foreach ($customers as $customer) {
@@ -62,6 +73,10 @@ class affiliateActions extends sfActions {
             $tc = new Criteria();
             $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
             $tc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+            if($startdate!="" && $enddate!=""){
+               $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+               $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+            }
             $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             if (TransactionPeer::doSelectOne($tc)) {
                 $registrations[$i] = TransactionPeer::doSelectOne($tc);
@@ -78,6 +93,10 @@ class affiliateActions extends sfActions {
         $ar->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
         $ar->add(TransactionPeer::DESCRIPTION, 'Registration', Criteria::NOT_EQUAL);
         $ar->addAnd(TransactionPeer::DESCRIPTION, 'Fee for change number (' . $agent->getName() . ')', Criteria::NOT_EQUAL);
+        if($startdate!="" && $enddate!=""){
+               $ar->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+               $ar->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+        }
         $ar->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $ar->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
         $refills = TransactionPeer::doSelect($ar);
@@ -90,6 +109,10 @@ class affiliateActions extends sfActions {
         $cn = new Criteria();
         $cn->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
         $cn->addAnd(TransactionPeer::DESCRIPTION, 'Fee for change number (' . $agent->getName() . ')', Criteria::EQUAL);
+        if($startdate!="" && $enddate!=""){
+               $cn->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+               $cn->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+        }
         $cn->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $cn->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
         $numberchange = TransactionPeer::doSelect($cn);
@@ -122,7 +145,7 @@ class affiliateActions extends sfActions {
 
         if ($customer_order) {
             $vat = $customer_order->getIsFirstOrder() ?
-                    $customer_order->getProduct()->getRegistrationFee()  * .25 :
+                    $customer_order->getProduct()->getRegistrationFee()  * sfConfig::get('app_vat_percentage') :
                     0;
         }
         else
@@ -436,7 +459,7 @@ class affiliateActions extends sfActions {
                   //  $this->getUser()->setCulture('de');
                     emailLib::sendRefillEmail($this->customer, $order);
                  //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% NOK.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount())));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount() , "%3%" => sfConfig::get('app_currency_code'))));
 //                                      echo 'rehcarged, redirecting';
                     $this->redirect('affiliate/receipts');
                 } else {
@@ -530,6 +553,7 @@ class affiliateActions extends sfActions {
         if ($request->isMethod('post')) {
 
             $this->form = new CustomerForm();
+           
             $this->form->bind($request->getParameter("newCustomerForm"), $request->getFiles("newCustomerForm"));
             $this->form->setDefault('referrer_id', $referrer_id);
             unset($this->form['terms_conditions']);
@@ -539,7 +563,7 @@ class affiliateActions extends sfActions {
 //                        unset($this->form['terms_conditions']);
             // print_r($this->form);
             //  die;
-
+            
             $this->processForm($request, $this->form);
         } else {
 
@@ -596,11 +620,12 @@ class affiliateActions extends sfActions {
         //$customer['referrer_id']= $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
         $plainPws = $customer["password"];
 
-
+         
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-
-        if ($form->isValid()) {
-
+        
+         
+      //   var_dump($customer);die;
+        if ($form->isValid()) { 
             //     $customer->setPlainText($request->getParameter($form->getPassword()));
             $customer = $form->save();
             $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
@@ -661,7 +686,7 @@ class affiliateActions extends sfActions {
         $transaction->setAgentCompanyId($customer->getReferrerId());
 
 
-        $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee()+ ($order->getProduct()->getRegistrationFee()*.25));
+        $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee()+ ($order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentage')));
         $transaction->setDescription('Registration');
 
         $transaction->setOrderId($order->getId());
@@ -745,7 +770,7 @@ class affiliateActions extends sfActions {
         // if transaction ok
         if ($is_transaction_completed) {
             $product_price = $order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee();
-            $product_price_vat = .25 * $order->getProduct()->getRegistrationFee();
+            $product_price_vat = sfConfig::get('app_vat_percentage') * $order->getProduct()->getRegistrationFee();
             $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
             ///////////////////////////commision calculation by agent product ///////////////////////////////////////
             $cp = new Criteria;
@@ -843,6 +868,7 @@ class affiliateActions extends sfActions {
             $uniqueid = $request->getParameter('uniqueid');
             $uc = new Criteria();
             $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
+            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$this->customer->getSimTypeId());
             $uc->addAnd(UniqueIdsPeer::STATUS, 0);
             $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueid);
             $availableUniqueCount = UniqueIdsPeer::doCount($uc);
@@ -869,9 +895,9 @@ class affiliateActions extends sfActions {
             $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
             if ($getFirstnumberofMobile == 0) {
                 $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-                $TelintaMobile = '47' . $TelintaMobile;
+                $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
             } else {
-                $TelintaMobile = '47' . $this->customer->getMobileNumber();
+                $TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
             }
 
             $callbacklog = new CallbackLog();
@@ -884,7 +910,7 @@ class affiliateActions extends sfActions {
 
             Telienta::ResgiterCustomer($this->customer, $order->getExtraRefill());
             Telienta::createAAccount($TelintaMobile, $this->customer);
-            //Telienta::createCBAccount($TelintaMobile, $this->customer);
+            Telienta::createCBAccount($TelintaMobile, $this->customer);
            
             emailLib::sendCustomerRegistrationViaAgentEmail($this->customer, $order);
           
@@ -961,7 +987,14 @@ class affiliateActions extends sfActions {
         $this->updateNews = NewupdatePeer::doSelect(new Criteria());
         $this->browser = new Browser();
     }
-
+    public function executeNonSupportingHandset(sfWebRequest $request) {
+        
+        $ch = new Criteria();
+        $ch->add(HandsetsPeer::SUPPORTED,0);
+        $nonsupported = HandsetsPeer::doSelect($ch);
+        $this->handsets = $nonsupported;
+        $this->browser = new Browser();
+    }
     public function executeAccountRefill(sfWebRequest $request) {
 
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11 - Ahtsham
@@ -1037,7 +1070,7 @@ class affiliateActions extends sfActions {
             $aph->setRemainingBalance($remainingbalance);
             $aph->save();
 
-            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Credit Card recharge of ') . $amount . $this->getContext()->getI18N()->__(' NOK is approved'));
+            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Credit Card recharge of %1%%2% is approved ',array("%1%" => $amount,"%2%" => sfConfig::get('app_currency_code'))));
             emailLib::sendAgentRefilEmail($this->agent, $agent_order);
             $this->redirect('affiliate/agentOrder');
         }
@@ -1109,8 +1142,10 @@ class affiliateActions extends sfActions {
     public function executeValidateUniqueId(sfWebRequest $request) {
 
         $uniqueId = $request->getParameter('uniqueid');
+        $order = CustomerOrderPeer::retrieveByPK($request->getParameter('orderid'));
         $uc = new Criteria();
         $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
+        $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$order->getCustomer()->getSimTypeId());
         $uc->addAnd(UniqueIdsPeer::STATUS, 0);
         $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueId);
         $availableUniqueCount = UniqueIdsPeer::doCount($uc);
@@ -1119,7 +1154,7 @@ class affiliateActions extends sfActions {
         } else {
             echo "false";
         }
-
+//echo $order->getCustomer()->getSimTypeId();die;
         return sfView::NONE;
     }
   public function executeChangeCulture(sfWebRequest $request){
@@ -1134,11 +1169,13 @@ class affiliateActions extends sfActions {
 
        changeLanguageCulture::languageCulture($request,$this);
        $this->browser = new Browser();
+       $this->targetUrl = $this->getTargetUrl();
     
    } 
       public function executeChangenumber(sfWebRequest $request) {
             changeLanguageCulture::languageCulture($request, $this);
-
+            $this->targetUrl = $this->getTargetUrl();
+            
             $mobile = "";
             $existingNumber = $request->getParameter('existingNumber');
             $this->newNumber = $request->getParameter('newNumber');
@@ -1396,7 +1433,7 @@ class affiliateActions extends sfActions {
                     $transaction->save();
                     $this->customer = $order->getCustomer();
                     emailLib::sendChangeNumberEmail($this->customer, $order);
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% Mobile Number is changed successfully  with %2% NOK.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount())));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% Mobile Number is changed successfully  with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
 
                     $this->redirect('affiliate/receipts');
                 } else {
@@ -1419,7 +1456,7 @@ class affiliateActions extends sfActions {
                 
         $return_url = $this->getTargetUrl().'accountRefill';
         $cancel_url = $this->getTargetUrl().'thankyou/?accept=cancel';
-        $notify_url = 'http://customer.zapna.no/b2c.php/pScripts/agentRefillThankyou?orderid='.$order_id.'&amount='.$item_amount;
+        $notify_url = sfConfig::get('app_customer_url').'pScripts/agentRefillThankyou?orderid='.$order_id.'&amount='.$item_amount;
 
         $c = new Criteria;
         $c->add(AgentOrderPeer::AGENT_ORDER_ID, $order_id);
@@ -1455,6 +1492,153 @@ class affiliateActions extends sfActions {
 	return sfView::NONE;
 	//exit();
 
+        }
+    }
+    
+    public function executeOverview(sfWebRequest $request) {
+                  
+        $this->forward404Unless($this->getUser()->isAuthenticated());
+        $nc = new Criteria();
+        $nc->addDescendingOrderByColumn(NewupdatePeer::STARTING_DATE);
+        $this->updateNews = NewupdatePeer::doSelect($nc);
+        //verify if agent is already logged in
+        $ca = new Criteria();
+        $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $agent = AgentCompanyPeer::doSelectOne($ca);
+        $this->forward404Unless($agent);
+        $this->agent = $agent;
+        
+        $startdate = $request->getParameter('startdate');
+        $enddate = $request->getParameter('enddate');
+        if($startdate !=''){
+          $startdate = date('Y-m-d 00:00:00',  strtotime($startdate)); 
+          $this->startdate = date('Y-m-d',strtotime($startdate));          
+        }
+        if($enddate !=''){
+          $enddate = date('Y-m-d 23:59:59',  strtotime($enddate));  
+          $this->enddate = date('Y-m-d',strtotime($enddate));
+        }
+        //get All customer registrations from customer table
+        try {
+        $c = new Criteria();
+        $c->add(CustomerPeer::REFERRER_ID, $agent_company_id);
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $c->add(CustomerPeer::REGISTRATION_TYPE_ID, 4, Criteria::NOT_EQUAL);
+        $c->addDescendingOrderByColumn(CustomerPeer::CREATED_AT);
+        $customers = CustomerPeer::doSelect($c);
+        $registration_sum = 0.00;
+        $registration_commission = 0.00;
+        $registrations = array();
+        $comregistrations = array();
+        $i = 1;
+        foreach ($customers as $customer) {
+        $tc = new Criteria();
+        //echo $customer->getId();
+        $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
+        $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+        $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
+        if($startdate!="" && $enddate!=""){
+           $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+           $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+        }
+        if (TransactionPeer::doSelectOne($tc)) {
+        $registrations[$i] = TransactionPeer::doSelectOne($tc);
+        }
+           $i = $i + 1;        
+        }
+        
+        if (count($registrations) >= 1) {
+        
+          foreach ($registrations as $registration) {
+            $registration_sum = $registration_sum + $registration->getAmount();
+            if ($registration != NULL) {
+                $coc = new Criteria();
+                $coc->add(CustomerOrderPeer::ID, $registration->getOrderId());
+                $customer_order = CustomerOrderPeer::doSelectOne($coc);
+                $registration_commission = $registration_commission + ($registration->getCommissionAmount());
+            }
+          }
+        }
+        $this->registrations = $registrations;
+        $this->registration_revenue = $registration_sum;
+        $this->registration_commission = $registration_commission;
+        $cc = new Criteria();
+        $cc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+        $cc->addAnd(TransactionPeer::DESCRIPTION, 'Refill');
+        $cc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+        if($startdate!="" && $enddate!=""){
+           $cc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+           $cc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+        }
+        $cc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+        $refills = TransactionPeer::doSelect($cc);
+        $refill_sum = 0.00;
+        $refill_com = 0.00;
+        foreach ($refills as $refill) {
+        $refill_sum = $refill_sum + $refill->getAmount();
+        $refill_com = $refill_com + $refill->getCommissionAmount();
+        }
+        $this->refills = $refills;
+        $this->refill_revenue = $refill_sum;
+        $this->refill_com = $refill_com;
+        $efc = new Criteria();
+        $efc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+        $efc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+        if($startdate!="" && $enddate!=""){
+           $efc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+           $efc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+        }
+        $efc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+        $ef = TransactionPeer::doSelect($efc);
+        $ef_sum = 0.00;
+        $ef_com = 0.00;
+        foreach ($ef as $efo) {
+        $description = substr($efo->getDescription(), 0, 26);
+        $stringfinds = 'Refill via agent';
+        if (strstr($efo->getDescription(), $stringfinds)) {
+        //if($description== 'LandNCall AB Refill via agent ')
+        $ef_sum = $ef_sum + $efo->getAmount();
+        $ef_com = $ef_com + $efo->getCommissionAmount();
+        }
+        }
+        $this->ef = $ef;
+        $this->ef_sum = $ef_sum;
+        $this->ef_com = $ef_com;
+        /////////// SMS Registrations
+        $cs = new Criteria();
+        $cs->add(CustomerPeer::REFERRER_ID, $agent_company_id);
+        $cs->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $cs->add(CustomerPeer::REGISTRATION_TYPE_ID, 4);
+        $cs->addDescendingOrderByColumn(CustomerPeer::CREATED_AT);
+        $sms_customers = CustomerPeer::doSelect($cs);
+        $sms_registrations = array();
+        $sms_registration_earnings = 0.0;
+        $sms_commission_earnings = 0.0;
+        $i = 1;
+        foreach ($sms_customers as $sms_customer) {
+        $tc = new Criteria();
+        $tc->add(TransactionPeer::CUSTOMER_ID, $sms_customer->getId());
+        $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+        $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
+        if($startdate!="" && $enddate!=""){
+           $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+           $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);   
+        }
+        $sms_registrations[$i] = TransactionPeer::doSelectOne($tc);
+        if (count($sms_registrations) >= 1) {
+        $sms_registration_earnings = $sms_registration_earnings + $sms_registrations[$i]->getAmount();
+        $sms_commission_earnings = $sms_commission_earnings + $sms_registrations[$i]->getCommissionAmount();
+        }
+        $i = $i + 1;
+        }
+        $this->sms_registrations = $sms_registrations;
+        $this->sms_registration_earnings = $sms_registration_earnings;
+        $this->sms_commission_earnings = $sms_commission_earnings;
+        ////////// End SMS registrations
+        $this->sf_request = $request;
+        
+        } catch (Exception $e) {
+           echo $e->getMessage();
         }
     }
 }

@@ -5,7 +5,7 @@
         <?php include_http_metas() ?>
         <?php include_metas() ?>
         <?php include_title() ?>
-         <link rel="shortcut icon" href="http://agent.zapna.no/images/favicon.ico" type="image/x-icon">
+         <link rel="shortcut icon" href="<?php echo sfConfig::get('app_web_url');?>images/favicon.ico" type="image/x-icon" />
         <?php
         $va = new Criteria();
         $va->add(AgentCompanyPeer::ID, $sf_user->getAttribute('agent_company_id', '', 'agentsession'));
@@ -87,7 +87,7 @@
         <div id="basic">
             <div id="header">
                 <div class="logo">
-                   <?php echo image_tag('/images/zapna_logo_small.jpg'); ?>
+                   <?php echo image_tag('/images/logo.jpg'); ?>
                 </div>
             </div>
             <div id="slogan">
@@ -149,10 +149,10 @@
                     <ul id="sddm">
                         <li>
                         <?php
-                        if ($actionName == 'report' && $modulName == "affiliate" && $sf_request->getParameter('show_summary') == 1) {
-                            echo link_to(__('Overview'), 'affiliate/report?show_summary=1', array('class' => 'current'));
+                        if ($actionName == 'overview' && $modulName == "affiliate") {
+                            echo link_to(__('Overview'), 'affiliate/overview', array('class' => 'current'));
                         } else {
-                            echo link_to(__('Overview'), 'affiliate/report?show_summary=1');
+                            echo link_to(__('Overview'), 'affiliate/overview');
                         }
                         ?>
                     </li>
@@ -197,17 +197,24 @@
                             ?></li>
                         <li><?php
                             if ($modulName == "agentcompany" && $actionName == 'view' || $actionName == 'accountRefill' || $actionName == 'agentOrder' || $actionName == 'paymentHistory') {
-                                echo link_to(__('My Company Info'), 'agentcompany/view', array('class' => 'current'));
+                                echo link_to(__('Information'), 'agentcompany/view', array('class' => 'current'));
                             } else {
-                                echo link_to(__('My Company Info'), 'agentcompany/view');
+                                echo link_to(__('Information'), 'agentcompany/view');
                             }
                             ?></li>
     <!--                    <li><?php //echo link_to(__('Package Conversion'), 'affiliate/conversionform'); ?></li>-->
-                        <li><?php
+<!--                        <li><?php
                             if ($modulName == "affiliate" && $actionName == 'supportingHandset') {
                                 echo link_to(__('Supporting Handsets'), 'affiliate/supportingHandset', array('class' => 'current'));
                             } else {
                                 echo link_to(__('Supporting Handsets'), 'affiliate/supportingHandset');
+                            }
+                            ?></li>-->
+                        <li><?php
+                            if ($modulName == "affiliate" && $actionName == 'nonSupportingHandset') {
+                                echo link_to(__('Non Supporting Handsets'), 'affiliate/nonSupportingHandset', array('class' => 'current'));
+                            } else {
+                                echo link_to(__('Non Supporting Handsets'), 'affiliate/nonSupportingHandset');
                             }
                             ?></li>
                         <li><?php
@@ -254,9 +261,9 @@
 
 <?php if ($sf_user->isAuthenticated()): ?>
                                         <div class="clr"></div>
-                                        <p ><?php echo __('Provide this link to your customers while they signup with your reference.') ?>
-                                            <a href="http://agent.zapna.no/b2c.php/signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>">
-                        				http://agent.zapna.no/b2c.php/signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>
+                                        <p><?php echo __('Provide this link to your customers while they signup with your reference.') ?>
+                                            <a href="<?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>">
+                        				<?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>
                                             </a>
                                         </p>
 <?php endif; ?>

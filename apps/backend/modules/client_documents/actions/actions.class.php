@@ -14,9 +14,9 @@ class client_documentsActions extends sfActions
   {
   	$DB_Server 	= "localhost";
 	$DB_Username 	= "root";
-	$DB_Password 	= "@wsxzaQ1";
-        //$DB_Password 	= "";
-	$DB_DBName   	= "norway";
+	//$DB_Password 	= "@wsxzaQ1";
+        $DB_Password 	= "";
+	$DB_DBName   	= "kimarin";
 	$success= mysql_pconnect($DB_Server, $DB_Username, $DB_Password);	
 	mysql_select_db($DB_DBName);
             
@@ -32,9 +32,9 @@ class client_documentsActions extends sfActions
   	
 	$DB_Server 	= "localhost";
 	$DB_Username 	= "root";
-	$DB_Password 	= "@wsxzaQ1";
-        //$DB_Password 	= "";
-	$DB_DBName   	= "norway";
+	//$DB_Password 	= "@wsxzaQ1";
+        $DB_Password 	= "";
+	$DB_DBName   	= "kimarin";
 	$success= mysql_pconnect($DB_Server, $DB_Username, $DB_Password);	
 	mysql_select_db($DB_DBName);
 	
@@ -67,9 +67,9 @@ class client_documentsActions extends sfActions
 	$this->editId = $EditId;
   	$DB_Server 	= "localhost";
 	$DB_Username 	= "root";
-	$DB_Password 	= "@wsxzaQ1";
-        //$DB_Password 	= "";
-	$DB_DBName   	= "norway";
+	//$DB_Password 	= "@wsxzaQ1";
+        $DB_Password 	= "";
+	$DB_DBName   	= "kimarin";
 	$success= mysql_pconnect($DB_Server, $DB_Username, $DB_Password);	
 	mysql_select_db($DB_DBName);
 	$editid = $request->getParameter('id');	
@@ -107,9 +107,9 @@ class client_documentsActions extends sfActions
   {
   	$DB_Server 	= "localhost";
 	$DB_Username 	= "root";
-	$DB_Password 	= "@wsxzaQ1";
-        //$DB_Password 	= "";
-	$DB_DBName   	= "norway";
+	//$DB_Password 	= "@wsxzaQ1";
+        $DB_Password 	= "";
+	$DB_DBName   	= "kimarin";
 	$success= mysql_pconnect($DB_Server, $DB_Username, $DB_Password);	
 	mysql_select_db($DB_DBName);
 	

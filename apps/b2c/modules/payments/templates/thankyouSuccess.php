@@ -8,11 +8,11 @@
 	<div align="center" style="margin:20px auto">
 	<?php
 		echo "<p>";
-                echo __("Thank you for registeration your account at Zapna. You will soon receive a delivery confirmation");
+                echo __("Thank you for registeration your account at %1% . You will soon receive a delivery confirmation",array('%1%'=>sfConfig::get('app_site_title')));
                 echo "</p>";
                 echo "<p>";
 		echo __("If you have any questions please feel free to contact our customer support center at");
-                echo " <a href=mailto:support@zapna.no>support@zapna.no</a></p>";
+                echo " <a href='mailto:".sfConfig::get('app_support_email_id')."'>".sfConfig::get('app_support_email_id')."</a></p>";
                
 	?>
 	.

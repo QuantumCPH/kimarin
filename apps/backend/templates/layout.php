@@ -4,7 +4,7 @@
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
-  <link rel="shortcut icon" href="http://admin.zapna.no/images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="<?php echo sfConfig::get('app_web_url');?>images/favicon.ico" type="image/x-icon" />
     
     <script type="text/javascript">
     <!--
@@ -61,7 +61,7 @@
     
       $modulName = $sf_context->getModuleName();
    
-     $actionName = $sf_context->getActionName();
+      $actionName = $sf_context->getActionName();
 //     echo $modulName;
 //     echo '<br />';
 //     echo $actionName;
@@ -69,7 +69,7 @@
   	<div id="wrapper">
   	<div id="header">  
          <div class="logo">
-  		<?php echo image_tag('/images/zapna_logo_small.jpg') ?>
+  		<?php echo image_tag('/images/logo.jpg') ?>
             </div>       
             <div class="clr"></div>
   	</div>
@@ -118,7 +118,7 @@
             <li>
                 <a href="#"
                 onmouseover="mopen('m5')"
-                onmouseout="mclosetime()" <?php echo $modulName=='customer'? 'class = "current"':''?>><?php echo __('Zapna') ?></a>
+                onmouseout="mclosetime()" <?php echo $modulName=='customer'? 'class = "current"':''?>><?php echo __(sfConfig::get('app_site_title')) ?></a>
                 <div id="m5"
                     onmouseover="mcancelclosetime()"
                     onmouseout="mclosetime()">
@@ -174,7 +174,7 @@
                     ?>
 
                     <?php 
-                     if($actionName=="selectCompany"){  
+                     if($actionName=="selectCompany" && $modulName=="agent_commission"){  
                        echo link_to(__('Agent Per Product'), 'agent_commission/selectCompany', array('class'=>'subSelect'));
                      }else{
                        echo link_to(__('Agent Per Product'), 'agent_commission/selectCompany'); 
@@ -340,7 +340,7 @@
 <li><a href="#"
                 onmouseover="mopen('m1')"
                 onmouseout="mclosetime()"
-                <?php echo $modulName=="device" || $modulName=="manufacturer" || $modulName=="telecom_operator" || $modulName=="postal_charges" ||$modulName=="product" || $modulName=="enable_country" || $modulName=="city" || $modulName=="sms_text" || $modulName=="usage_alert" || $modulName=="usage_alert_sender" || $modulName=="telecom_operator" ?'class="current"':''?>
+                <?php echo $modulName=="device" || $modulName=="manufacturer" || $modulName=="telecom_operator" || $modulName=="postal_charges" ||$modulName=="product" || $modulName=="enable_country" || $modulName=="city" || $modulName=="sms_text" || $modulName=="simTypes" || $modulName=="nationality" || $modulName=="preferredLanguages" || $modulName=="handsets" || $modulName=="province" || $modulName=="usage_alert" || $modulName=="usage_alert_sender" || $modulName=="telecom_operator" ?'class="current"':''?>
                 ><?php echo __('Settings') ?></a>
                 <div id="m1"
                     onmouseover="mcancelclosetime()"
@@ -351,7 +351,7 @@
                         <?php
                         // As per Omair Instruction - He need these changes - kmmalik - 08/17/2011
                          //echo link_to('<b>Zerocall Setting</b>', '') ?>
-                        <a href="javascript:;" class="label"><b><?php echo __('Zapna Setting') ?></b></a>
+                        <a href="javascript:;" class="label"><b><?php echo __('%1% Setting',array('%1%'=> sfConfig::get('app_site_title'))) ?></b></a>
                         <?php 
 //                        if($actionName=='list' && $modulName=="device"){
 //                          echo link_to(__('Mobile Models'), 'device/index',array('class'=>'subSelect'));
@@ -390,10 +390,45 @@
                         }
                         ?>
                         <?php 
+                        if($actionName=='list' && $modulName=="province"){
+                          echo link_to(__('Province List'), 'province/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Province List'), 'province/index');
+                        }
+                        ?>
+                        <?php 
                         if($actionName=='list' && $modulName=="city"){
                           echo link_to(__('Cities'), 'city/index',array('class'=>'subSelect'));
                         }else{
                           echo link_to(__('Cities'), 'city/index'); 
+                        }
+                        ?>
+                        <?php 
+                        if($actionName=='list' && $modulName=="preferredLanguages"){
+                          echo link_to(__('Preferred Languages'), 'preferredLanguages/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Preferred Languages'), 'preferredLanguages/index');
+                        }
+                        ?>
+                        <?php 
+                        if($actionName=='list' && $modulName=="simTypes"){
+                          echo link_to(__('Sim Types'), 'simTypes/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Sim Types'), 'simTypes/index');
+                        }
+                        ?>
+                        <?php 
+                        if($actionName=='list' && $modulName=="handsets"){
+                          echo link_to(__('Handsets'), 'handsets/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Handsets'), 'handsets/index');
+                        }
+                        ?>
+                        <?php 
+                        if($actionName=='list' && $modulName=="nationality"){
+                          echo link_to(__('Nationality'), 'nationality/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Nationality'), 'nationality/index');
                         }
                         ?>
                         <?php 
@@ -571,7 +606,7 @@ jQuery(function(){
                         jQuery('#error').val("error");
                 }else{
 		//check the username exists or not from ajax
-		jQuery.post("http://admin.zapna.no/backend.php/company/vat",{ vat_no:val } ,function(data)
+		jQuery.post("<?php echo sfConfig::get('app_admin_url');?>company/vat",{ vat_no:val } ,function(data)
         {//alert(data);
 		  if(data=='no') //if username not avaiable
 		  {
@@ -619,7 +654,7 @@ jQuery(function(){
                         jQuery('#error').val("error");
                 }else{
 
-		jQuery.post("http://admin.zapna.no/backend.php/employee/mobile",{ mobile_no: val} ,function(data)
+		jQuery.post("<?php echo sfConfig::get('app_admin_url');?>employee/mobile",{ mobile_no: val} ,function(data)
         {
 		  if(data=='no') //if username not avaiable
 		  {

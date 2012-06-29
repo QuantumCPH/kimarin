@@ -10,7 +10,11 @@
                 <?php echo $sf_user->getFlash('message') ?>
         </div>
         <?php endif;?>
-    <h1><?php echo __('Charge Agent Company') ?></h1><br />
+</div>    
+<div id="sf_admin_container">
+   <div class="sf_admin_filters">  
+       <fieldset>     
+    <h1 style="margin-top: 0;"><?php echo __('Charge Agent Company') ?></h1><br />
     <form method="post" action="chargeAgentCompany" id="agent_company_charge">
         <div class="form-row">
              <label for="agent_commission_agent_company_id"><strong>Agent Company</strong></label>
@@ -36,15 +40,18 @@
         <div class="form-row">
             <label for="agent_commission_agent_company_id"><strong>Charge Amount</strong></label>
             <div class="content">
-                <input type="text" name="charge_amount"  class="required number" />  NOK
+                <input type="text" name="charge_amount"  class="required number" />  <?php sfConfig::get('app_currency_code');?>
             </div>
         </div>
         <div class="form-row">
             <div class="content">
-                <input type="submit" name="Refill Agent Company" value="Chareg Agent Company" />
+                <input type="submit" name="Refill Agent Company" value="Chareg Agent Company" class="user_external_link" />
             </div>
         </div>
     </form>
+       </fieldset>
+   </div>  
+</div>
 </div>
 
 

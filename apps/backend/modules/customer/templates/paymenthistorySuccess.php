@@ -14,7 +14,7 @@
                        <th width="15%"  align="left"><?php echo __('Order Numer') ?></th>
                           <th width="25%"  align="left"><?php echo __('Date &amp; Time') ?></th>
                           <th width="50%"  align="left"><?php echo __('Description') ?></th>
-                          <th width="10%" align="left"><?php echo __('Amount') ?>(NOK)</th>
+                          <th width="10%" align="left"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</th>
                               </tr>
                 <?php 
                 $amount_total = 0;
@@ -36,13 +36,8 @@
                   <td><?php echo $transaction->getDescription() ?></td>
                   <td><?php echo $transaction->getAmount(); $amount_total += $transaction->getAmount() ?>
                             <?php
-//                            if($lang=="pl"){
-//                                echo ('plz');
-//                            }else if($lang=="en"){
-//                                echo ('eur');
-//                            }else{
-                                echo ('NOK');
-//                            } ?></td>
+                                echo (sfConfig::get('app_currency_code'));
+                          ?></td>
                 
                 </tr>
                 <?php endforeach; ?>
@@ -55,13 +50,8 @@
                 	<td colspan="3" align="right"><strong>Total</strong></td>
                 	<td><?php echo format_number($amount_total) ?>
                             <?php 
-//                            if($lang=="pl"){
-//                                echo ('plz');
-//                            }else if($lang=="en"){
-//                                echo ('eur');
-//                            }else{
-                                echo ('NOK');
-//                            } ?></td>
+                                echo (sfConfig::get('app_currency_code'));
+                       ?></td>
                 	
                 </tr>	
                 <?php endif; ?>

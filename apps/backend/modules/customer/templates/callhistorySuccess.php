@@ -46,7 +46,7 @@ if($pus==1){
         <th  width="20%"  align="left"><?php echo __('To Number') ?></th>
         <th  width="20%"  align="left"><?php echo __('From Number') ?></th>
         <th width="10%"   align="left"><?php echo __('Duration') ?></th>
-        <th width="20%"   align="left"><?php echo __('Cost') ?> (NOK)</th>
+        <th width="20%"   align="left"><?php echo __('Cost') ?> (<?php echo sfConfig::get('app_currency_code');?>)</th>
         <th width="10%"   align="left"><?php echo __('Type') ?></th>
     </tr>
         <?php
@@ -166,7 +166,7 @@ if($pus==1){
                         <tr class="headings">
                             <th class="title"><?php echo __('Date &amp; time') ?></th>
                             <th class="title" width="40%"><?php echo __('Description') ?></th>
-                                <th class="title"><?php echo __('Amount') ?> NOK</th>
+                                <th class="title"><?php echo __('Amount') ?> <?php echo sfConfig::get('app_currency_code');?></th>
                             </tr>
                         <?php
                         $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 1);
@@ -223,7 +223,7 @@ if($pus==1){
                     <th  width="20%"  align="left"><?php echo __('Phone Number') ?></th>
                     <th width="10%"   align="left"><?php echo __('Duration') ?></th>
                     <th  width="10%"  align="left"><?php echo __('VAT') ?></th>
-                    <th width="20%"   align="left"><?php echo __('Cost') ?> NOK</th>
+                    <th width="20%"   align="left"><?php echo __('Cost') ?> <?php echo sfConfig::get('app_currency_code');?></th>
                    
                     <th  width="20%"   align="left">Call Type</th>
                   </tr>
@@ -240,9 +240,9 @@ if($pus==1){
 $getFirstnumberofMobile = substr($customer->getMobileNumber(), 0,1);
 if($getFirstnumberofMobile==0){
     $TelintaMobile = substr($customer->getMobileNumber(), 1);
-    $TelintaMobile =  '47'.$TelintaMobile ;
+    $TelintaMobile =  sfConfig::get('app_country_code').$TelintaMobile ;
 }else{
-    $TelintaMobile = '47'.$customer->getMobileNumber();
+    $TelintaMobile = sfConfig::get('app_country_code').$customer->getMobileNumber();
 }
 $numbername=$customer->getUniqueid();
 
@@ -279,7 +279,7 @@ echo  date('i:s',$callval);
 }       ?></td>
                                     <td><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>
                                     <td><?php echo number_format($xdr->charged_amount, 2);
-                                $amount_total+= number_format($xdr->charged_amount, 2); ?> NOK</td>
+                                $amount_total+= number_format($xdr->charged_amount, 2); ?> <?php echo sfConfig::get('app_currency_code');?></td>
                                    
                                     <td><?php
                                 $typecall = substr($xdr->account_id, 0, 1);
@@ -320,9 +320,9 @@ echo  date('i:s',$callval);
                     <tr>
                         <td colspan="4" align="right"><strong><?php echo __('Subtotal') ?></strong></td>
                         <!--
-                        <td><?php echo format_number($amount_total - $amount_total * .20) ?> SEK</td>
+                        <td><?php echo format_number($amount_total - $amount_total * sfConfig::get('app_vat_percentage')) ?> <?php echo sfConfig::get('app_currency_code')?></td>
                                         	 -->
-                        <td><?php echo number_format($amount_total, 2, ',', '') ?> NOK</td>
+                        <td><?php echo number_format($amount_total, 2, ',', '') ?> <?php echo sfConfig::get('app_currency_code');?></td>
                     <td>&nbsp;</td>
                 </tr>
         <?php endif;

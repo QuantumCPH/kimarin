@@ -23,6 +23,11 @@
             </td>
         </tr>
         <tr>
+            <td style="padding: 5px;">Second Family Name</td>
+            <td style="padding: 5px;"><input type="text" name="secondlastName" value="<?php echo $editCust->getSecondLastName();?>" />
+            </td>
+        </tr>
+        <tr>
             <td style="padding: 5px;">Address</td>
             <td style="padding: 5px;"><input type="text" name="address" value="<?php echo $editCust->getAddress();?>" />
             </td>
@@ -30,6 +35,21 @@
         <tr>
             <td style="padding: 5px;">City</td>
             <td style="padding: 5px;"><input type="text" name="city" value="<?php echo $editCust->getCity();?>" />
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">Province</td>
+            <td style="padding: 5px;">
+                <select name="provinceid">
+                    <option value="">--Select--</option>
+                <?php
+                  foreach($province_list as $province){
+               ?>
+                    <option value="<?php echo $province->getId();?>" <?php echo ($editCust->getProvinceId()==$province->getId())?'selected="selected"':'';?>><?php echo $province->getProvince();?></option>
+               <?php       
+                  }
+                ?>
+                </select>
             </td>
         </tr>
         <tr>
@@ -41,7 +61,37 @@
             <td style="padding: 5px;">Email</td>
             <td style="padding: 5px;"><input type="text" name="email" value="<?php echo $editCust->getEmail();?>" />
             </td>
-        </tr> 
+        </tr>
+         <tr>
+            <td style="padding: 5px;">Nationality</td>
+            <td style="padding: 5px;">
+                <select name="nationalityid">
+                    <option value="">--Select--</option>
+                <?php
+                  foreach($nationality_list as $nationality){
+               ?>
+                    <option value="<?php echo $nationality->getId();?>" <?php echo ($nationality->getId()==$editCust->getNationalityId())?'selected="selected"':'';?>><?php echo $nationality->getTitle();?></option>
+               <?php       
+                  }
+                ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">Preferred Language</td>
+            <td style="padding: 5px;">
+                <select name="pLanguageId">
+                    <option value="">--Select--</option>
+                <?php
+                  foreach($planguages as $language){
+               ?>
+                    <option value="<?php echo $language->getId();?>" <?php echo ($language->getId()==$editCust->getPreferredLanguageId())?'selected="selected"':'';?>><?php echo $language->getLanguage();?></option>
+               <?php       
+                  }
+                ?>
+                </select>
+            </td>
+        </tr>
         <tr>
             <td style="padding: 5px;">Date Of Birth</td>
             <td style="padding: 5px;">

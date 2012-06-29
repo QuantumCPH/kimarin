@@ -521,17 +521,17 @@ float:left;
 </style>
 
 
-<script type="text/javascript" src="http://customer.zerocall.com/js/../zerocall/js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="http://customer.zerocall.com/js/../zerocall/js/cufon-yui.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/../zerocall/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/../zerocall/js/cufon-yui.js"></script>
 
-<script type="text/javascript" src="http://customer.zerocall.com/js/../zerocall/js/Barmeno_400-Barmeno_400.font.js"></script>
-<script type="text/javascript" src="http://customer.zerocall.com/js/../zerocall/js/Barmeno-Medium_400.font.js"></script>
-<script type="text/javascript" src="http://customer.zerocall.com/js/../zerocall/js/cufon-replace.js"></script>
-<script type="text/javascript" src="http://customer.zerocall.com/js/../zerocall/js/jquery.jcarousel.min.js"></script>
-<script type="text/javascript" src="http://customer.zerocall.com/js/../zerocall/js/carousel.js"></script>
-<script type="text/javascript" src="http://customer.zerocall.com/js/jquery.formatCurrency-1.3.0.min.js"></script>
-<script type="text/javascript" src="http://customer.zerocall.com/js/i18n/jquery.formatCurrency.all.js"></script>
-<script type="text/javascript" src="http://customer.zerocall.com/js/../zerocall/js/jquery.validate.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/../zerocall/js/Barmeno_400-Barmeno_400.font.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/../zerocall/js/Barmeno-Medium_400.font.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/../zerocall/js/cufon-replace.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/../zerocall/js/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/../zerocall/js/carousel.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/jquery.formatCurrency-1.3.0.min.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/i18n/jquery.formatCurrency.all.js"></script>
+<script type="text/javascript" src="<?php echo sfConfig::get('app_web_url');?>js/../zerocall/js/jquery.validate.js"></script>
 
 
 
@@ -746,8 +746,8 @@ float:left;
 		<input type="hidden" name="amount" id="total" value="<?php echo $order->getExtraRefill() ?>"/>
         <input type="hidden" name="merchantnumber" value="8884184" />
 		<input type="hidden" name="currency" value="<?php echo sfConfig::get('app_epay_currency')?>"/>               
-		<input type="hidden" name="accepturl" value="http://customer.zerocall.com/b2c.php/pScripts/mobAccepted"/>
-		<input type="hidden" name="declineurl" value="http://customer.zerocall.com/b2c.php/pScripts/appRefill?customer_id=<?php echo $customer->getId(); ?>"/>
+		<input type="hidden" name="accepturl" value="<?php echo sfConfig::get('app_customer_url')?>pScripts/mobAccepted"/>
+		<input type="hidden" name="declineurl" value="<?php echo sfConfig::get('app_customer_url')?>pScripts/appRefill?customer_id=<?php echo $customer->getId(); ?>"/>
                 <input type="hidden" name="instantCapture" value="1"/>
 		<input type="hidden" name="cardholder" value="" />
 		<input type="hidden" name="description" value="" />

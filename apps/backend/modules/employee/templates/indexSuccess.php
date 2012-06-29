@@ -31,7 +31,7 @@
 <br/>
 <table width="950"  style="border: 1px;" class="sf_admin_list" cellspacing="0">
   <thead>
-      <tr>
+      <tr class="thheading">
       
       <th align="left"  id="sf_admin_list_th_name">Company</th>
       <th align="left"  id="sf_admin_list_th_name">First name</th>
@@ -156,7 +156,7 @@
         }
         }
       echo  $balnc=(float)$telintaGetBalance+(float)$telintaGetBalancecb+(float)$telintaGetBalanceres;
-          echo " NOK";
+          echo sfConfig::get('app_currency_code');
                                                 ?></td>
 
       <?php } ?>

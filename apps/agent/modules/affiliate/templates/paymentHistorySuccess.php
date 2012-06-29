@@ -18,8 +18,8 @@
    
   <tr>
     <th width="25%"><?php echo __('Transaction Type') ?></th>
-    <th width="25%"><?php echo __('Amount') ?> (NOK) </th>
-    <th width="25%"><?php echo __('Remaining Balance') ?> (NOK)</th>
+    <th width="25%"><?php echo __('Amount') ?> (<?php echo sfConfig::get('app_currency_code')?>) </th>
+    <th width="25%"><?php echo __('Remaining Balance') ?> (<?php echo sfConfig::get('app_currency_code')?>)</th>
     <th width="25%"><?php echo __('Date') ?> </th>
       
   </tr>

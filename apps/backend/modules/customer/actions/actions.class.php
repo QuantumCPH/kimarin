@@ -242,7 +242,7 @@ public function executePaymenthistory(sfWebRequest $request)
                 if($country_id){
                     $langSym = $country_id->getLanguageSymbol();
                 }else{
-                    $langSym = 'no';
+                    $langSym = sfConfig::get('app_languagsfCoe_symbol');
                 }
                 //--------------------------------------------------------
                 //$lang =  $this->getUser()->getAttribute('activelanguage');
@@ -290,9 +290,9 @@ public function executePaymenthistory(sfWebRequest $request)
         $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);
         if ($getFirstnumberofMobile == 0) {
             $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
-            $this->TelintaMobile = '47' . $TelintaMobile;
+            $this->TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
         } else {
-            $this->TelintaMobile = '47' . $this->customer->getMobileNumber();
+            $this->TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
         }
 
         $this->numbername = $this->customer->getUniqueid();
@@ -306,6 +306,22 @@ public function executePaymenthistory(sfWebRequest $request)
          $this->editCust = CustomerPeer::doSelectOne($customer);
 
      }
+     /**** Get Preferred languages List****/
+     $cpl = new Criteria();
+     $planguages = PreferredLanguagesPeer::doSelect($cpl);
+     $this->planguages = $planguages;
+     
+     /**** Get Province List****/
+     $cpr = new Criteria();
+     $province = ProvincePeer::doSelect($cpr);
+     $this->province_list = $province;
+     
+     /**** Get Nationality ****/
+     $cn = new Criteria();
+     $nationality = NationalityPeer::doSelect($cn);
+     $this->nationality_list = $nationality;
+     
+     
      if($request->getParameter('customerID')){
       $dob = $request->getParameter('dy')."-".$request->getParameter('dm')."-".$request->getParameter('dd');
       $dob = date('Y-m-d',strtotime($dob));
@@ -319,6 +335,7 @@ public function executePaymenthistory(sfWebRequest $request)
       $customer = CustomerPeer::retrieveByPK($request->getParameter('customerID'));
       $customer->setFirstName($request->getParameter('firstName'));
       $customer->setLastName($request->getParameter('lastName'));
+      $customer->setSecondLastName($request->getParameter('secondlastName'));
       $customer->setAddress($request->getParameter('address'));
       $customer->setCity($request->getParameter('city'));
       $customer->setPoBoxNumber($request->getParameter('pob'));
@@ -326,6 +343,10 @@ public function executePaymenthistory(sfWebRequest $request)
       $customer->setDateOfBirth($dob);
       $customer->setUsageAlertEmail($usage_email);
       $customer->setUsageAlertSMS($usage_sms);
+      $customer->setProvinceId($request->getParameter("provinceid"));
+      $customer->setPreferredLanguageId($request->getParameter("pLanguageId"));
+      $customer->setNationalityId($request->getParameter("nationalityid"));
+              
 
       $customer->save();
 
@@ -388,7 +409,7 @@ public function executePaymenthistory(sfWebRequest $request)
                     $transaction->save();
                     $this->customer = $order->getCustomer();
                     emailLib::sendAdminRefillEmail($this->customer, $order);
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully charged with %2% NOK.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount())));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully charged with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(),"%3%" => sfConfig::get('app_currency_code'))));
 //                                        echo 'rehcarged, redirecting';
                     $this->redirect($this->getTargetURL() . 'customer/selectChargeCustomer');
                 } else {
@@ -467,7 +488,7 @@ public function executePaymenthistory(sfWebRequest $request)
                 $transaction->save();
                 $this->customer = $order->getCustomer();
                 emailLib::sendAdminRefillEmail($this->customer, $order);
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% NOK.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount())));
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
                 //                                        echo 'rehcarged, redirecting';
                 $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');
                 } else {
@@ -505,7 +526,7 @@ public function executePaymenthistory(sfWebRequest $request)
         $this->transactionDescriptions = TransactionDescriptionPeer::doSelect($ct);
     }
 public function getTargetURL() {
-        return sfConfig::get('backend_url');
+        return sfConfig::get('app_admin_url');
         //return $this->targetURL;
     }
 
@@ -541,7 +562,7 @@ public function executeCompletePaymenthistory(sfWebRequest $request)
                     if($country_id){
                     $langSym = $country_id->getLanguageSymbol();
                     }else{
-                    $langSym = 'no';
+                    $langSym = sfConfig::get('app_languagsfCoe_symbol');
                     }
                     //--------------------------------------------------------
                     //$lang =  $this->getUser()->getAttribute('activelanguage');

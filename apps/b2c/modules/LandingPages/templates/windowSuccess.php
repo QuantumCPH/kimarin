@@ -15,7 +15,7 @@
 color:orange;
 font-family:sans-serif;
 font-weight:450;Height:250px;width:400;text-align: center;
-"><b>Til dig som rejser for din virksomhed <br/> <a href="http://customer.zerocall.com/b2c/LandingPages/B2B?visitor=<?php echo $visitor->getId() ?>"> (KLIK HER)</a></b></td>
+"><b>Til dig som rejser for din virksomhed <br/> <a href="<?php echo sfConfig::get('app_customer_url')?>LandingPages/B2B?visitor=<?php echo $visitor->getId() ?>"> (KLIK HER)</a></b></td>
  
                 <td style="background-image:url('<?php echo _compute_public_path('line_bg','zerocall/images','jpg')?>');
 font-family:sans-serif;
@@ -25,7 +25,7 @@ font-weight:10;Height:250px;width:5
 color:orange;
 font-family:sans-serif;
 font-weight:450;Height:250px;width:450;text-align: center;
-"> <b>Til dig som selv betaler for din telefonregning <br/> <a href="http://customer.zerocall.com/b2c/LandingPages/B2C?visitor=<?php echo $visitor->getId() ?>">(KLIK HER)</a></b></td>
+"> <b>Til dig som selv betaler for din telefonregning <br/> <a href="<?php echo sfConfig::get('app_customer_url')?>LandingPages/B2C?visitor=<?php echo $visitor->getId() ?>">(KLIK HER)</a></b></td>
             </tr>
         </table>
         
@@ -34,7 +34,7 @@ font-weight:450;Height:250px;width:450;text-align: center;
  <hr style="width:800px;color:#e77714">
  </div>
  <br/>
-<div id="cite" class="fl">Copyright &copy; Zapna 2010</div>
+<div id="cite" class="fl">Copyright &copy; <?php echo sfConfig::get('app_site_title')?> 2010</div>
 <div style="width:800px;text-align: right" id="sec" class="fr"><script type="text/javascript"
 	src="https://seal.thawte.com/getthawteseal?host_name=zerocall.com&amp;size=S&amp;lang=en"></script>
 </div>

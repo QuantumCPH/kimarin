@@ -29,7 +29,7 @@
 
                     </select>
                  &nbsp;
-               <span style="margin-left:10px;"><input type="submit" name="Search" value="Search" class="searchbtn" /></span>
+               <span style="margin-left:10px;"><input type="submit" name="Search" value="Search" class="searchbtn user_external_link" /></span>
                 </div>
 
             </div><br clear="all" />
@@ -43,7 +43,7 @@
       <th  width="15%"  class="title"><?php echo __('Order Numer') ?></th>
       <th  width="20%" class="title"><?php echo __('Date &amp; Time') ?></th>
       <th  width="55%" class="title"><?php echo __('Description') ?></th>
-      <th width="10%" class="title"><?php echo __('Amount') ?>(NOK)</th>       
+      <th width="10%" class="title"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</th>       
     </tr>
                 <?php 
                 $amount_total = 0;
@@ -69,7 +69,7 @@
 //                            }else if($lang=="en"){
 //                                echo ('eur');
 //                            }else{
-                                echo ('NOK');
+                                echo (sfConfig::get('app_currency_code'));
 //                            } ?></td>
                 
                 </tr>
@@ -88,7 +88,7 @@
 //                            }else if($lang=="en"){
 //                                echo ('eur');
 //                            }else{
-                                echo ('NOK');
+                                echo (sfConfig::get('app_currency_code'));
 //                            } ?></td>
                 </tr>	
                 <?php endif; ?>

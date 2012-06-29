@@ -63,7 +63,7 @@ margin-top: 10px;
 <table class='invoice' width="100%">
 	<tr>
 		<td align="right" colspan="2">
-			<?php echo image_tag('/images/zapna_logo_small.jpg', 'absolute=true') ?>
+			<?php echo image_tag('/images/logo.png', 'absolute=true') ?>
 		</td>
 	</tr>
 	<tr>
@@ -226,7 +226,7 @@ margin-top: 10px;
 				</tr>
 				<tr class="footer">
 					<td colspan="3">Moms udg&oslash;re</td>
-					<td align="right"><?php $vat = $total*.25; echo format_number(util::format_number($vat)); ?></td>
+					<td align="right"><?php $vat = $total*sfConfig::get('app_vat_percentage'); echo format_number(util::format_number($vat)); ?></td>
 				</tr>
 				<tr>
 					<td colspan="4" style="height:2px; background: black;"></td>

@@ -66,6 +66,6 @@
 
 </tr>
     <?php } ?></table><div class="submitBtn">
-<input  type="submit" name="submit" value="Update" class="UpdateBtn" style="float:right;"  />
+<input  type="submit" name="submit" value="Update" class="user_external_link" style="float:right;"  />
       </div>
 </form></div>

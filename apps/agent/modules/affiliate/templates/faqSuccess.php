@@ -1,4 +1,4 @@
-<div id="sf_admin_container"><h1><?php echo __('Zapna &#8211; FAQ') ?></h1></div>
+<div id="sf_admin_container"><h1><?php echo sfConfig::get('app_site_title');echo __(' &#8211; FAQ') ?></h1></div>
         
  <div class="borderDiv">
 

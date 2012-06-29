@@ -1,6 +1,6 @@
 <table cellspacing="0" class="sf_admin_list">
 <thead>
-<tr>
+<tr class="thheading">
 <?php include_partial('list_th_tabular') ?>
   <th id="sf_admin_list_th_sf_actions"><?php echo __('Actions') ?></th>
 </tr>

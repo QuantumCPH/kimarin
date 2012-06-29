@@ -58,7 +58,7 @@
   	<div id="wrapper">
   	<div id="header">
   		<p style="float: right">
-  		<?php echo image_tag('/images/zapna_logo_small.jpg') ?>
+  		<?php echo image_tag('/images/logo.png') ?>
   		</p>
   	</div>
     <?php if($sf_user->isAuthenticated()): ?>

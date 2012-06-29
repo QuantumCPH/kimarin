@@ -31,8 +31,42 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_mobile_number?$form['mobile_number']->renderError():'&nbsp;'?></div>
             </li>
-         
-       
+            <?php
+            $error_nie_passport_number = false;
+            if($form['nie_passport_number']->hasError())
+            	$error_mobile_number = true;
+            ?>
+            <li>
+             <?php echo $form['nie_passport_number']->renderLabel() ?>
+             <?php echo $form['nie_passport_number'] ?>
+             <?php if ($error_nie_passport_number): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_nie_passport_number?$form['nie_passport_number']->renderError():'&nbsp;'?></div>
+            </li>
+            
+            <li>
+              <label for="customer_sim_type">Sim Type</label><input type="text" value="<?php echo $customer->getSimType();?>" readonly="readonly" />
+            </li>
+            <?php
+            $error_preferred_language_id = false;
+            if($form['preferred_language_id']->hasError())
+            	$error_preferred_language_id = true;
+            ?>
+            <li><br />
+             <?php echo $form['preferred_language_id']->renderLabel() ?>
+             <?php echo $form['preferred_language_id'] ?>
+             <?php if ($error_preferred_language_id): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_preferred_language_id?$form['preferred_language_id']->renderError():'&nbsp;'?></div>
+            </li>
+            <!--  end preferred language -->
+            <!--  end sim type -->
 
 <!--            <li>
             <label class="required"><?php echo __("Active Mobile No") ?></label>
@@ -98,6 +132,22 @@
              <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
             </li>
             <?php
+            $error_second_last_name = false;
+            if($form['second_last_name']->hasError())
+            	$error_second_last_name = true;
+            ?>
+            <li>
+             <?php echo $form['second_last_name']->renderLabel() ?>
+             <?php echo $form['second_last_name'] ?>
+             <?php if ($error_second_last_name): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
+            </li>
+            <!-- end second last name -->
+            <?php
             $error_address = false;;
             if($form['address']->hasError())
             	$error_address = true;
@@ -119,10 +169,22 @@
       </div>
       <div class="fr col">
         <ul>
-            
-           
-            
-            <!-- end pobox number -->
+            <?php
+            $error_province_id = false;;
+            if($form['province_id']->hasError())
+            	$error_province_id = true;
+            ?>
+            <li>
+             <?php echo $form['province_id']->renderLabel() ?>
+             <?php echo $form['province_id'] ?>
+             <?php if ($error_province_id): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_province_id?$form['province_id']->renderError():'&nbsp;'?></div>
+            </li>
+            <!-- end province -->
             <?php
             $error_city = false;;
             if($form['city']->hasError())
@@ -139,6 +201,22 @@
              <div class='inline-error'><?php echo $error_city?$form['city']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end city -->
+            <?php
+            $error_nationality_id = false;;
+            if($form['nationality_id']->hasError())
+            	$error_nationality_id = true;
+            ?>
+            <li>
+             <?php echo $form['nationality_id']->renderLabel() ?>
+             <?php echo $form['nationality_id'] ?>
+             <?php if ($error_nationality_id): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
+            </li>
+            <!-- end nationality -->
             <?php
             $error_country_id = false;;
             if($form['country_id']->hasError())

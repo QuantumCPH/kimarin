@@ -64,14 +64,14 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
      
     <div  style="width:500px;">
     <div style="float:left;width:250px;font-weight:bold;"> <?php echo __('You have selected automatic replenishment when the pot is below:');?> </div>
-    <div  style="margin-left: 20px;float:left;width:100px;font-weight:bold;"> <?php echo   $customer_form->getObject()->getAutoRefillMinBalance() ?> NOK</div>
+    <div  style="margin-left: 20px;float:left;width:100px;font-weight:bold;"> <?php echo   $customer_form->getObject()->getAutoRefillMinBalance() ?> <?php echo sfConfig::get('app_currency_code')?></div>
     <div  style="float:left;width:150px;"></div> 
     </div>
   
     <div  style="width:500px;clear:both;">
                <br />
     <div  style="float:left;width:250px;font-weight:bold; "><?php echo __('The pot is filled in with:');?></div>
-    <div  style="margin-left: 20px;float:left;width:100px;font-weight:bold;">  <?php echo   $customer_form->getObject()->getAutoRefillAmount() ?> NOK</div>
+    <div  style="margin-left: 20px;float:left;width:100px;font-weight:bold;">  <?php echo   $customer_form->getObject()->getAutoRefillAmount() ?> <?php echo sfConfig::get('app_currency_code')?></div>
     <div class="clr"></div><br />
     <div style="margin-top: 61px; text-align: left; width: 134px;">
     <form method="post" action="<?php echo $target; ?>customer/deActivateAutoRefill">
@@ -129,7 +129,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
 			  										'name'=>'user_attr_3',
 			  										'style'=>'width: 80px;'
 			  									)) 
-			  ?>  NOK
+			  ?>  <?php echo sfConfig::get('app_currency_code')?>
             </li>
             
             
@@ -139,7 +139,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
 			  													'name'=>'user_attr_2',
                                                                                                                                 'style'=>'width: 80px;'
 			  												)); 
-			  ?>  NOK&nbsp;
+			  ?>  <?php echo sfConfig::get('app_currency_code')?>&nbsp;
             </li> 
         </ul>
             </div>
@@ -171,7 +171,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
             <?php } ?>
             <li id="selectAmt">
               <label for="extra_refill" class="extra_refill"><?php echo __('Select amount to be loaded:') ?></label>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<?php echo $form['extra_refill']?>  NOK
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<?php echo $form['extra_refill']?>  <?php echo sfConfig::get('app_currency_code')?>
             </li>
 
             <?php if($sf_user->hasFlash('error_message')): ?>
@@ -190,8 +190,8 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
         
         <input type="hidden" name="cmd" value="_xclick" /> 
         <input type="hidden" name="no_note" value="1" />
-        <input type="hidden" name="lc" value="NO" />
-        <input type="hidden" name="currency_code" value="NOK" />
+        <input type="hidden" name="lc" value="<?php echo sfConfig::get('app_language_symbol')?>" />
+        <input type="hidden" name="currency_code" value="<?php echo sfConfig::get('app_currency_symbol')?>" />
         <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest" />
         <input type="hidden" name="firstName" value="<?php echo $order->getCustomer()->getFirstName();?>"  />
         <input type="hidden" name="lastName" value="<?php echo $order->getCustomer()->getLastName();?>"  />

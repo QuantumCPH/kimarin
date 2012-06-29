@@ -14,7 +14,7 @@
 	<div class="login-left">
 	<h4  style="text-align:left;"><?php echo __('Log into your pages') ?></h4>
 	<form method="post" id="login_form" action="<?php echo $target; ?>customer/login">
-	<label  style="text-align:left;"><?php echo __('Enter cell phone number') ?></label><br />
+	<label  style="text-align:left;"><?php echo __('Enter Cell Phone/N.I.E/Passport No.') ?></label><br />
 	<input type="text"  class="input"  name="mobile_number" id="mobile_number" />
 	<p style="color: red; margin-bottom:1px; position: relative; top: -2px;">
 	<?php

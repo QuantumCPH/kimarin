@@ -72,7 +72,31 @@ class CustomerForm extends BaseCustomerForm
     								'required'	=> 'Please choose a product',
     								'invalid'	=> 'Invalid product',
     							));
-
+        //-----------------For get the Sim Types---------------------
+            $this->widgetSchema['sim_type_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'SimTypes',
+                    'order_by' => array('Title','asc'),
+                    //'add_empty' => 'Choose a product',
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Preferred languages---------------------
+            $this->widgetSchema['preferred_language_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'PreferredLanguages',
+                    'order_by' => array('Language','asc')
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Province---------------------
+            $this->widgetSchema['province_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'Province',
+                    'order_by' => array('Province','asc')
+            ));
+            //----------------------------------------------------------
+            //-----------------For get the Nationality---------------------
+            $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
+                    'model' => 'Nationality',
+                    'order_by' => array('Title','asc')
+            ));
+            //----------------------------------------------------------
     //date of birth
 	$years = range(1950, 2020);
 	$this->widgetSchema['date_of_birth']->setOption('years' , array_combine($years, $years));
@@ -204,26 +228,31 @@ class CustomerForm extends BaseCustomerForm
 			'po_box_number'=>'Post code',
 			'telecom_operator_id'=>'Telecom operator',
 			'manufacturer'=>'Mobile brand',
-                    'to_date'=>'To date',
-                    'from_date'=>'From date',
+                        'to_date'=>'To date',
+                        'from_date'=>'From date',
 			'country_id'=>'Country',
 			'device_id'=>'Mobile Model',
 			'password_confirm'=>'Retype password',
 			'date_of_birth'=>'Birth date <br />(dd-mm-yyyy)',
+                        'second_last_name'=> 'Middle Name',
+                        'nie_passport_number'=>'N.I.E/Passport<br />Number', 
+                        'preferred_language_id'=>'Preferred Language', 
+                        'province_id'=>'Province',
+                        'nationality_id'=>'Nationality',
 		)
 	);
 	
 	//defaults
 	$this->setDefaults(array(
 		'is_newsletter_subscriber'=> true,
-		'country_id'=>53,
+		'country_id'=>sfConfig::get('app_country_code'),
 		'is_newsletter_subscriber'=>1,
 		'customer_status_id'=>1
 	));
 
         $decorator = new sidFormFormatter($this->widgetSchema, $this->validatorSchema);
-    $this->widgetSchema->addFormFormatter('custom', $decorator);
-    $this->widgetSchema->setFormFormatterName('custom'); 
+        $this->widgetSchema->addFormFormatter('custom', $decorator);
+        $this->widgetSchema->setFormFormatterName('custom'); 
 	
 	
   }
@@ -248,5 +277,23 @@ class CustomerForm extends BaseCustomerForm
   	}
 
   	return $values;
-	  }
+  }
+  
+  public function validateUniquePassportNo(sfValidatorBase $validator, $values)
+  {
+  	
+  	$c = new Criteria();
+  	
+  	$c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $values['nie_passport_number']);
+  	$c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
+  	 
+  	if (CustomerPeer::doCount($c)>=1)
+  	{
+  	      throw new sfValidatorErrorSchema($validator, array(
+	        'nie_passport_number' => new sfValidatorError($validator, 'N.I.E/Passport Number already registered.'),
+	      ));	
+  	}
+
+  	return $values;
+  }
 }

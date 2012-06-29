@@ -63,21 +63,12 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <?php endif; ?>
 <table class="receipt" cellspacing="0" width="600px">
 <tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <td colspan="4">Zapna ApS 
+    <td colspan="4"><?php echo sfConfig::get('app_site_title')?>
     </td>
   </tr>
   <tr>
   <td colspan="4" class="payer_summary">
-	Telefonv&atilde;gen 30
-	<br />
-	126 37 H&atilde;gersten
-	<br />
-	
-	<br />
-	Tel:      +46 85 17 81 100
-	<br />	
-	<br />
-	Cvr:     32068219
+	<?php echo sfConfig::get('app_postal_address_top');?>
 	<br />  </td>
   </tr>
   <tr bgcolor="#CCCCCC" class="receipt_header"> 
@@ -92,7 +83,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td><?php echo __('Amount') ?>(NOK)</td>
+    <td><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code') ?>)</td>
   </tr>
   <tr> 
     <td><?php echo $createddate ?></td>
@@ -105,7 +96,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
             }
     ?></td>
     <td>1</td>
-    <td><?php echo format_number($subtotal=$transaction) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?>NOK</td>
+    <td><?php echo format_number($subtotal=$transaction) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code') ?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
@@ -118,7 +109,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':'25%' ?>)</td>
+    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
     <td>&nbsp;</td>
     <td><?php echo format_number($vat) ?></td>
   </tr>
@@ -126,19 +117,19 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td><?php echo format_number($subtotal) ?>NOK</td>
+    <td><?php echo format_number($subtotal) ?><?php echo sfConfig::get('app_currency_code') ?></td>
   </tr>
 </table>
 
 
 <p>
 	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
-	<a href="mailto:support@zapna.no">support@zapna.no</a>
+	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 </p>
 
 <p><?php echo __('Cheers') ?></p>
 
 <p>
 <?php echo __('Support') ?><br />
-Zapna ApS 
+<?php echo sfConfig::get('app_site_title')?> 
 </p>

@@ -52,7 +52,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<p><?php echo __('Dear Customer') ?></p>
 	
 	<p>
-	<?php echo __('Thank you for ordering <b>%1%</b> and becoming Zapna Customer. We welcome you to a new and huge mobile world. ', array('%1%'=>$order->getProduct()->getName())); echo __('Your customer number is '); ?>  <?php echo $customer->getUniqueid();?>. <?php echo __(' There, you can use in your dealings with customer service')?>
+	<?php echo __('Thank you for ordering <b>%1%</b> and becoming %2% Customer. We welcome you to a new and huge mobile world. ',array('%1%'=>$order->getProduct()->getName(),'%2%'=>sfConfig::get('app_site_title'))); echo __('Your customer number is '); ?>  <?php echo $customer->getUniqueid();?>. <?php echo __(' There, you can use in your dealings with customer service')?>
 
 	</p>
 	
@@ -67,7 +67,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table width="600px">
 <tr style="border:0px solid #fff">
 
-		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag('http://customer.zapna.no/images/zapna_logo_small.jpg',array('width' => '170'));?></td>
+		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
 
 	</tr>
 </table>
@@ -109,7 +109,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td><?php echo __('Amount') ?>(NOK)</td>
+    <td><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</td>
   </tr>
 <?php if($customerorder){?>  
   <tr> 
@@ -151,7 +151,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':'25%' ?>)</td>
+    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
     <td>&nbsp;</td>
     <td><?php echo format_number($vat) ?></td>
   </tr>
@@ -183,7 +183,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>  
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':'25%' ?>)</td>
+    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
     <td>&nbsp;</td>
     <td><?php echo format_number($vat) ?></td>
   </tr>
@@ -193,14 +193,14 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td><?php echo format_number($transaction->getAmount()); ?>NOK</td>
+    <td><?php echo format_number($transaction->getAmount()); ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
   <tr class="footer">
     <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;"> 
-    <?php echo __('Zapna - Postboks 5093 Majorstua - 0301 Oslo')?> </td>
+    <?php echo __('%2% - %1%',array('%1%'=>sfConfig::get('app_postal_address_bottom'),'%2%'=>sfConfig::get('app_site_title')))?> </td>
   </tr>
 </table>
 <?php if($wrap_content): ?>
@@ -224,14 +224,14 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 <p style="font-weight: bold;">
 	<?php echo __('If you have any questions please feel free to contact our customer support center at'); ?>
-	<a href="mailto:support@zapna.no">support@zapna.no</a>
+	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 </p>
 
 <p style="font-weight: bold;"><?php echo __('Cheers') ?></p>
 
 <p style="font-weight: bold;">
 
-<?php echo __('Support') ?>&nbsp;Zapna
+<?php echo __('%1% Support',array('%1%'=>sfConfig::get('app_site_title'))) ?>&nbsp;
 
 </p>
 
