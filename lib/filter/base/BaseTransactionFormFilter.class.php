@@ -22,6 +22,7 @@ class BaseTransactionFormFilter extends BaseFormFilterPropel
       'created_at'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'agent_company_id'      => new sfWidgetFormFilterInput(),
       'commission_amount'     => new sfWidgetFormFilterInput(),
+      'transaction_from'      => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -33,6 +34,7 @@ class BaseTransactionFormFilter extends BaseFormFilterPropel
       'created_at'            => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'agent_company_id'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'commission_amount'     => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'transaction_from'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('transaction_filters[%s]');
@@ -59,6 +61,7 @@ class BaseTransactionFormFilter extends BaseFormFilterPropel
       'created_at'            => 'Date',
       'agent_company_id'      => 'Number',
       'commission_amount'     => 'Number',
+      'transaction_from'      => 'Number',
     );
   }
 }

@@ -16,6 +16,8 @@ class BaseTransactionDescriptionForm extends BaseFormPropel
       'title'                  => new sfWidgetFormInput(),
       'transaction_type_id'    => new sfWidgetFormPropelChoice(array('model' => 'TransactionType', 'add_empty' => true)),
       'transaction_section_id' => new sfWidgetFormPropelChoice(array('model' => 'TransactionSection', 'add_empty' => true)),
+      'b2c'                    => new sfWidgetFormInputCheckbox(),
+      'b2b'                    => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -23,6 +25,8 @@ class BaseTransactionDescriptionForm extends BaseFormPropel
       'title'                  => new sfValidatorString(array('max_length' => 255)),
       'transaction_type_id'    => new sfValidatorPropelChoice(array('model' => 'TransactionType', 'column' => 'id', 'required' => false)),
       'transaction_section_id' => new sfValidatorPropelChoice(array('model' => 'TransactionSection', 'column' => 'sectionId', 'required' => false)),
+      'b2c'                    => new sfValidatorBoolean(array('required' => false)),
+      'b2b'                    => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('transaction_description[%s]');
