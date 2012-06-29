@@ -68,7 +68,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<?php echo __('Yours sincerely,') ?>
 	</p>
         <p>
-	<?php echo __('Zapn APs') ?>
+	<?php echo __(sfConfig::get('app_site_title')) ?>
 	</p>
 	<br />
 <?php endif; ?>

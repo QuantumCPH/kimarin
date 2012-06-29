@@ -3088,24 +3088,8 @@ if(($caltype!="IC") && ($caltype!="hc")){
              
                 emailLib::sendCustomerRegistrationViaWebEmail($this->customer, $order);
 
-                $sms_text=$this->getContext()->getI18N()->__('Your are successfully registered with %1%. 
-		  					',array('%1%',sfConfig::get('app_site_title')));
-                $number = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
-                $data = array(
-                          'S' => 'H',
-                          'UN'=>'zapna1',
-                          'P'=>'Zapna2010',
-                          'DA'=>$number,
-                          'SA' =>'Zapna',
-                          'M'=>$sms_text,
-                          'ST'=>'5'
-                    );
-
-                $queryString = http_build_query($data,'', '&');
-                $queryString=smsCharacter::smsCharacterReplacement($queryString);
-                echo $sms_text;
-                $res = file_get_contents('http://sms1.cardboardfish.com:9001/HTTPSMS?'.$queryString);               
-                echo $res;
+                $zeroCallOutSMSObject = new ZeroCallOutSMS();
+                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
                 $this->order = $order;
             }//end if
             else {
