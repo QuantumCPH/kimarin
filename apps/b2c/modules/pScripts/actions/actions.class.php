@@ -3090,7 +3090,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
 
                 $sms_text=$this->getContext()->getI18N()->__('Your are successfully registered with %1%. 
 		  					',array('%1%',sfConfig::get('app_site_title')));
-                $number = $this->customer->getMobileNumber();
+                $number = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
                 $data = array(
                           'S' => 'H',
                           'UN'=>'zapna1',

@@ -40,6 +40,17 @@
             <td style="padding: 5px;"> <input type="text" name="country_code" id="employee_country_code"   class="required digits"   value="<?php echo $employee->getCountryCode(); ?>" size="25"  /> </td>
         </tr>-->
         <tr>
+        <td style="padding: 5px;">SIM Type:</td>
+        <td style="padding: 5px;"> 
+           <select name="sim_type_id" id="employee_sim_type_id"    class="required"  style="width:190px;">
+                 <option value="">Select SIM Type</option>
+            <?php foreach($simtypes as $simtype){  ?>
+                    <option value="<?php echo $simtype->getId(); ?>" <?php echo ($employee->getSimTypeId()==$simtype->getId())?"selected='selected'":''?>><?php echo $simtype->getTitle();?></option>
+            <?php   }  ?>
+           </select>
+        </td>
+      </tr>
+        <tr>
             <td style="padding: 5px;">Mobile number:</td>
             <td style="padding: 5px;"> <input type="text" name="mobile_number" id="employee_mobile_number"   class="required digits"   value="<?php echo $employee->getMobileNumber(); ?>"   size="25"  minlength="8" readonly="" /> </td>
         </tr>
