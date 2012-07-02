@@ -42,12 +42,7 @@
         <tr>
         <td style="padding: 5px;">SIM Type:</td>
         <td style="padding: 5px;"> 
-           <select name="sim_type_id" id="employee_sim_type_id"    class="required"  style="width:190px;">
-                 <option value="">Select SIM Type</option>
-            <?php foreach($simtypes as $simtype){  ?>
-                    <option value="<?php echo $simtype->getId(); ?>" <?php echo ($employee->getSimTypeId()==$simtype->getId())?"selected='selected'":''?>><?php echo $simtype->getTitle();?></option>
-            <?php   }  ?>
-           </select>
+           <?php echo $employee->getSimType() ?>
         </td>
       </tr>
         <tr>
