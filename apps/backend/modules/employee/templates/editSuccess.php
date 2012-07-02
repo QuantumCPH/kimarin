@@ -40,6 +40,12 @@
             <td style="padding: 5px;"> <input type="text" name="country_code" id="employee_country_code"   class="required digits"   value="<?php echo $employee->getCountryCode(); ?>" size="25"  /> </td>
         </tr>-->
         <tr>
+        <td style="padding: 5px;">SIM Type:</td>
+        <td style="padding: 5px;"> 
+           <?php echo $employee->getSimType() ?>
+        </td>
+      </tr>
+        <tr>
             <td style="padding: 5px;">Mobile number:</td>
             <td style="padding: 5px;"> <input type="text" name="mobile_number" id="employee_mobile_number"   class="required digits"   value="<?php echo $employee->getMobileNumber(); ?>"   size="25"  minlength="8" readonly="" /> </td>
         </tr>

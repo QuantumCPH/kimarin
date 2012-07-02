@@ -466,8 +466,8 @@ class pScriptsActions extends sfActions
 		  				if ($this->is_mobile_number_exists($sms->getMobileNumber()))
 		  				{
 		  					$message = $this->getContext()->getI18N()->__('
-		  						You mobile number is already registered with LandNCall AB.
-		  					');
+		  						You mobile number is already registered with %1%.
+		  					',array('%1%'=>sfConfig::get('app_site_title')));
 
 		  					echo $message;
 		  					SMS::send($message, $sms->getMobileNumber());
@@ -475,7 +475,7 @@ class pScriptsActions extends sfActions
 		  				}
 
                                               //This Function For Get the Enable Country Id =
-                                              $calingcode = '45';
+                                              $calingcode = sfConfig::get("app_country_code");
                                               $countryId = $this->getEnableCountryId($calingcode);
                                               
 			  			//create a customer
@@ -550,7 +550,7 @@ class pScriptsActions extends sfActions
                                               $customerPassword = $this->customer->getPlainText();
 
                                               //Section For Telinta Add Cusomter
-                                              $telintaRegisterCus = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?reseller=R_LandNcall&action=add&name='.$uniqueId.'&currency='.sfConfig::get('app_currency_symbol').'&opening_balance=0&credit_limit=0&enable_dialingrules=Yes&int_dial_pre=00&email='.$emailId.'&type=customer');
+                                              $telintaRegisterCus = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?reseller=R_WLS_Kimarin_ES&action=add&name='.$uniqueId.'&currency='.sfConfig::get('app_currency_symbol').'&opening_balance=0&credit_limit=0&enable_dialingrules=Yes&int_dial_pre=00&email='.$emailId.'&type=customer');
 
                                               // For Telinta Add Account
                                               $telintaAddAccount = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?type=account&action=activate&name='.$uniqueId.'&customer='.$uniqueId.'&opening_balance=-'.$OpeningBalance.'&product=YYYLandncall_Forwarding&outgoing_default_r_r=2034&activate_follow_me=Yes&follow_me_number=0&billing_model=1&password='.$customerPassword);
@@ -703,8 +703,8 @@ class pScriptsActions extends sfActions
 		  				if ($this->is_mobile_number_exists($sms->getMobileNumber()))
 		  				{
 		  					$message = $this->getContext()->getI18N()->__('
-		  						You mobile number is already registered with LandNCall AB.
-		  					');
+		  						You mobile number is already registered with %1%.
+		  					',array('%1%',sfConfig::get('app_site_title')));
 
 		  					echo $message;
 		  					SMS::send($message, $sms->getMobileNumber());
@@ -712,7 +712,7 @@ class pScriptsActions extends sfActions
 		  				}
 
                                                 //This Function For Get the Enable Country Id =
-                                                $calingcode = '45';
+                                                $calingcode = sfConfig::get("app_country_code");
                                                 $countryId = $this->getEnableCountryId($calingcode);
 
 			  			//create a customer
@@ -773,11 +773,11 @@ class pScriptsActions extends sfActions
 			  			Fonet::registerFonet($customer);
 
 			  			$message = $this->getContext()->getI18N()->__('
-			  			You have been registered to LandNCall AB.' /* \n
+			  			You have been registered to %1%.' /* \n
 			  			You can use following login information to access your account.\n
 			  			Email: '. $customer->getEmail(). '\n' .
 			  			'Password: ' . $password */
-			  			);
+			  			,array('%1%',sfConfig::get('app_site_title')));
 
 			  			echo $message;
 			  			SMS::send($message, $sms->getMobileNumber());
@@ -1191,7 +1191,7 @@ public function executeBalanceEmail(sfWebRequest $request)
             {
                 $email_msg .= "\r\n balance < 10 && balance > 0";
                 $subject= 'Test Email: Balance Email ' ;
-                $message_body= "Test Email:  Your balance is 0 ".sfConfig::get('app_currency_symbol').", please refill otherwise your account will be closed. \r\n - LandNCall AB Support \r\n Company Contact Info";
+                $message_body= "Test Email:  Your balance is 0 ".sfConfig::get('app_currency_symbol').", please refill otherwise your account will be closed. \r\n - ".sfConfig::get('app_site_title')." Support \r\n Company Contact Info";
 
                 //This Seciton For Make The Log History When Complete registration complete - Agent
                 //echo sfConfig::get('sf_data_dir');
@@ -1805,7 +1805,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request){
         $sms_text="Hej,
                     Ditt Smartsim är nu aktiverat och du kan börja spara pengar på din utlandstelefoni.
                     Med vänlig hälsning
-                    LandNCall";
+                    ".sfConfig::get('app_site_title');
         
         
                             
@@ -1847,9 +1847,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request){
      
                      
         $sms_text="Hej,
-                    Ditt telefonnummer är inte registrerat hos LandNCall. Vänligen registrera telefonen eller kontakta support på support@landncall.com
+                    Ditt telefonnummer är inte registrerat hos ".sfConfig::get('app_site_title').". Vänligen registrera telefonen eller kontakta support på support@landncall.com
                     MVH
-                    LandNCall";
+                    ".sfConfig::get('app_site_title');
   $sm = new Criteria();
                     $sm->add(SmsTextPeer::ID, 2);
                     $smstext = SmsTextPeer::doSelectOne($sm);
@@ -1982,7 +1982,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request){
                     $sms_text="Hej,
 Ditt Smartsim är nu aktiverat och du kan börja spara pengar på din utlandstelefoni.
 Med vänlig hälsning
-LandNCall";
+".sfConfig::get('app_site_title');
                     $sm = new Criteria();
                     $sm->add(SmsTextPeer::ID, 3);
                     $smstext = SmsTextPeer::doSelectOne($sm);
@@ -2064,9 +2064,9 @@ if(($caltype!="IC") && ($caltype!="hc")){
       if(!$cus){
 
         $sms_text="Hej,
-                    Ditt telefonnummer är inte registrerat hos LandNCall. Vänligen registrera telefonen eller kontakta support på support@landncall.com
+                    Ditt telefonnummer är inte registrerat hos ".sfConfig::get('app_site_title').". Vänligen registrera telefonen eller kontakta support på ".sfConfig::get('app_support_email_id')."
                     MVH
-                    LandNCall";
+                    ".sfConfig::get('app_site_title');
 
         $data = array(
                   'S' => 'H',
@@ -3088,7 +3088,8 @@ if(($caltype!="IC") && ($caltype!="hc")){
              
                 emailLib::sendCustomerRegistrationViaWebEmail($this->customer, $order);
 
-
+                $zeroCallOutSMSObject = new ZeroCallOutSMS();
+                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
                 $this->order = $order;
             }//end if
             else {

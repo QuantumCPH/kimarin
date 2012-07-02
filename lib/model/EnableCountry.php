@@ -2,8 +2,7 @@
 
 class EnableCountry extends BaseEnableCountry
 {
-    function  __toString() {
-
-        return $this->name;
-    }
+    public function __toString(){
+	return $this->getName();
+	}
 }

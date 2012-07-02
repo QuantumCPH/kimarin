@@ -957,6 +957,10 @@ class affiliateActions extends sfActions {
 
             emailLib::sendCustomerRegistrationViaAgentEmail($this->customer, $order);
 
+            $zeroCallOutSMSObject = new ZeroCallOutSMS();
+            $zeroCallOutSMSObject->toCustomerAfterReg($customer_product->getProductId(), $this->customer);
+            
+
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $this->customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
             $this->redirect('affiliate/receipts');
         }
@@ -1028,10 +1032,12 @@ class affiliateActions extends sfActions {
     }
 
     public function executeNonSupportingHandset(sfWebRequest $request) {
-        //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11 - Ahtsham
 
-
-        $this->updateNews = NewupdatePeer::doSelect(new Criteria());
+        
+        $ch = new Criteria();
+        $ch->add(HandsetsPeer::SUPPORTED,0);
+        $nonsupported = HandsetsPeer::doSelect($ch);
+        $this->handsets = $nonsupported;
         $this->browser = new Browser();
     }
 

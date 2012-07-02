@@ -13,4 +13,12 @@ class Employee extends BaseEmployee
 		else
 			0;
 	}
+        public function getSimType(){
+            $simTypeTitle ="";
+            $cst = new Criteria();
+            $cst->add(SimTypesPeer::ID,$this->getSimTypeId());
+            $simTypes = SimTypesPeer::doSelectOne($cst);
+              if(SimTypesPeer::doCount($cst)>0) $simTypeTitle = $simTypes->getTitle();
+            return $simTypeTitle;
+        }
 }

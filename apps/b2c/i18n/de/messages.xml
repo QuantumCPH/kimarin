@@ -124,7 +124,7 @@
             </trans-unit>
             <trans-unit id="30" translate="yes" reformat="yes" xml:space="default">
                 <source>first name</source>
-                <target>primero nombre</target>
+                <target>Primero nombre</target>
             </trans-unit>
             <trans-unit id="31" translate="yes" reformat="yes" xml:space="default">
                 <source>last name</source>
@@ -546,7 +546,7 @@
             </trans-unit>
                <trans-unit id="134" translate="yes" reformat="yes" xml:space="default">
                 <source>Telecom operator</source>
-                <target>El operador de telecomunicaciones</target>
+                <target>El operador de&lt;br /&gt;telecomunicaciones</target>
             </trans-unit>
                <trans-unit id="135" translate="yes" reformat="yes" xml:space="default">
                 <source>I accept all terms and conditions</source>
@@ -554,7 +554,7 @@
             </trans-unit>
                <trans-unit id="136" translate="yes" reformat="yes" xml:space="default">
                 <source>Next</source>
-                <target>Próximo</target>
+                <target>Nächste</target>
             </trans-unit>
                <trans-unit id="137" translate="yes" reformat="yes" xml:space="default">
                 <source>We are sorry we have difficulties in our database, please try again in 2 hours</source>
@@ -566,7 +566,7 @@
             </trans-unit>
                <trans-unit id="139" translate="yes" reformat="yes" xml:space="default">
                 <source>Pay</source>
-                <target>Pagar</target>
+                <target>Zahlen</target>
             </trans-unit>
             <trans-unit id="140" translate="yes" reformat="yes" xml:space="default">
                 <source>Delivery and Returns</source>
@@ -593,8 +593,8 @@
                 <target>%1% recomienda para activar este servicio por lo que &lt;br /&gt;Sno tienen que rellenar manualmente cuando su cuenta &lt;br /&gt; el equilibrio comienza a agotarse. 100 o 200%2% cada cuando el &lt;br /&gt; saldos alcanza los 25 o 50%2%. Este servicio es  &lt;br /&gt; Añadido a su cuenta en minutos.</target>
             </trans-unit>
              <trans-unit id="146" translate="yes" reformat="yes" xml:space="default">
-                <source>Enter cell phone number</source>
-                <target>Ingrese el número del teléfono celular</target>
+                <source>Enter Cell Phone/N.I.E/Passport No.</source>
+                <target>Eingeben Handy/N.I.E/Pass Nr.</target>
             </trans-unit>
              <trans-unit id="147" translate="yes" reformat="yes" xml:space="default">
                 <source>Send</source>
@@ -1052,6 +1052,42 @@
             <trans-unit id="257" translate="yes" reformat="yes" xml:space="default">
                 <source>N.I.E/Passport Number</source>
                 <target>N.I.E/Passnummer</target>
+            </trans-unit>
+            <trans-unit id="258" translate="yes" reformat="yes" xml:space="default">
+                <source>Sim Type</source>
+                <target>SIM Typ</target>
+            </trans-unit>
+            <trans-unit id="259" translate="yes" reformat="yes" xml:space="default">
+                <source>Preferred Language</source>
+                <target>Bevorzugte Sprache</target>
+            </trans-unit>
+            <trans-unit id="260" translate="yes" reformat="yes" xml:space="default">
+                <source>Middle Name</source>
+                <target>Zweiter Vorname</target>
+            </trans-unit>
+            <trans-unit id="261" translate="yes" reformat="yes" xml:space="default">
+                <source>Mobile Number already registered.</source>
+                <target>Handynummer bereits registriert</target>
+            </trans-unit>
+            <trans-unit id="262" translate="yes" reformat="yes" xml:space="default">
+                <source>N.I.E/Passport Number already existing.</source>
+                <target>N.I.E/Passnummer bereits bestehenden.</target>
+            </trans-unit>
+            <trans-unit id="263" translate="yes" reformat="yes" xml:space="default">
+                <source>N.I.E/Passport Number already registered.</source>
+                <target>N.I.E/Passnummer bereits registriert</target>
+            </trans-unit>
+            <trans-unit id="264" translate="yes" reformat="yes" xml:space="default">
+                <source>Nationality</source>
+                <target>Nationalität</target>
+            </trans-unit>
+            <trans-unit id="265" translate="yes" reformat="yes" xml:space="default">
+                <source>Province</source>
+                <target>Provinz</target>
+            </trans-unit>
+            <trans-unit id="266" translate="yes" reformat="yes" xml:space="default">
+                <source>Your are successfully registered with %1%</source>
+                <target>Ihr werden erfolgreich mit %1% registriert</target>
             </trans-unit>
         </body>
     </file>

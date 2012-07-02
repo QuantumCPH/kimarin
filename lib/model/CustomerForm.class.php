@@ -29,6 +29,77 @@ class CustomerForm extends BaseCustomerForm
             $countrylngs = EnableCountryPeer::doSelectOne($enableCountry);
             $languageSymbol = $countrylngs->getLanguageSymbol();
             
+         ///// check if mobile number and nie/passport number already exist.   
+            $mobileno=000000000;
+            $passportnum = 0;
+               
+            if(isset($_REQUEST['customer']) && $_REQUEST['customer']!=""){
+               $mobileno=$_REQUEST['customer']['mobile_number']; 
+               $passportnum=$_REQUEST['customer']['nie_passport_number'];
+            }
+            $cpn = new Criteria();
+            $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
+            $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $countnie = CustomerPeer::doCount($cpn);
+
+             if(isset($countnie) &&  $countnie>=1){
+                $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+                    array(
+                        'model' => 'customer',
+                        'column' => 'nie_passport_number'
+                    ),array(
+                        'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
+                    ))
+                    ))
+                );
+             }
+             
+            $count=0;
+            $countc=0;
+            $mobile = new Criteria();
+            $mobile->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
+            $mobile->add(CustomerPeer::CUSTOMER_STATUS_ID, 1);
+            $count = CustomerPeer::doCount($mobile);
+
+            if(isset($count) &&  $count>=1){
+
+            $mobilec = new Criteria();
+            $mobilec->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
+            $mobilec->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $countc = CustomerPeer::doCount($mobilec);
+
+             if(isset($countc) &&  $countc>=1){
+              $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+                    array(
+                                    'model' => 'customer',
+                                    'column' => 'mobile_number'
+                    ),array(
+                                    'invalid' => sfContext::getInstance()->getI18N()->__('Mobile Number already existing.')
+                    ))
+                    ))
+                 );
+             }
+        
+            }else{
+                
+            $mobilec = new Criteria();
+            $mobilec->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
+            $mobilec->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $countc = CustomerPeer::doCount($mobilec);
+
+             if(isset($countc) &&  $countc>=1){
+                $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+                        array(
+                                        'model' => 'customer',
+                                        'column' => 'mobile_number'
+                        ),array(
+                                        'invalid' => sfContext::getInstance()->getI18N()->__('Mobile Number already existing.')
+                        ))
+                        ))
+                );
+             }
+           }
+            
         }elseif(sfConfig::get('sf_app')=='b2c'){
              //-----------------------------------
                $activelanguage = sfContext::getInstance()->getUser()->getAttribute('activelanguage', '');
@@ -97,89 +168,20 @@ class CustomerForm extends BaseCustomerForm
 
 
 //        //This Code Add For Duplication Entery Again Task # 4.3 Date:01-18-11
-         $mobileno=000000000;
-         $passportnum = 0;
+        
            if(sfContext::getInstance()->getRouting()->getCurrentInternalUri()=='customer/passwordchange'){
 
 
           
              }else{
-
-                if(isset($_REQUEST['customer']) && $_REQUEST['customer']!=""){
-                   $mobileno=$_REQUEST['customer']['mobile_number'];
-                   $passportnum=$_REQUEST['customer']['nie_passport_number'];
-                }
+             
              }
           //$this->form->getValues('mobile_number');
    if(sfContext::getInstance()->getRouting()->getCurrentInternalUri()=='customer/settings'){
 
    }else{ 
-		$count=0;
-		$countc=0;
-		$mobile = new Criteria();
-		$mobile->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
-		$mobile->add(CustomerPeer::CUSTOMER_STATUS_ID, 1);
-		$count = CustomerPeer::doCount($mobile);
-
-             if(isset($count) &&  $count>=1){
-
-		$mobilec = new Criteria();
-		$mobilec->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
-		$mobilec->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-		$countc = CustomerPeer::doCount($mobilec);
-
-		 if(isset($countc) &&  $countc>=1){
-		  $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
-					array(
-							'model' => 'customer',
-							'column' => 'mobile_number'
-					),array(
-							'invalid' => sfContext::getInstance()->getI18N()->__('Mobile Number already existing.')
-					))
-					))
-				);
 		
-		 }
-
-
-
-        
-            }else{
-
-
-		$mobilec = new Criteria();
-		$mobilec->add(CustomerPeer::MOBILE_NUMBER, $mobileno);
-		$mobilec->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-		$countc = CustomerPeer::doCount($mobilec);
-
-		 if(isset($countc) &&  $countc>=1){
-				$this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
-					array(
-							'model' => 'customer',
-							'column' => 'mobile_number'
-					),array(
-							'invalid' => sfContext::getInstance()->getI18N()->__('Mobile Number already existing.')
-					))
-					))
-				);
-		 }
-           }
-                $cpn = new Criteria();
-		$cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
-		$cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-		$countnie = CustomerPeer::doCount($cpn);
-
-		 if(isset($countnie) &&  $countnie>=1){
-				$this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
-					array(
-							'model' => 'customer',
-							'column' => 'nie_passport_number'
-					),array(
-							'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
-					))
-					))
-				);
-		 }
+                
 	}     
 	//pobox
 	//This Condtion for - Phone number is currently 8 digits but in Poland this is 10 digits - against New Feature - 02/28/11
@@ -662,7 +664,7 @@ class CustomerForm extends BaseCustomerForm
   	if (CustomerPeer::doCount($c)>=1)
   	{
   	      throw new sfValidatorErrorSchema($validator, array(
-	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('Number already registered.')),
+	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('Mobile Number already registered.')),
 	      ));	
   	}
   	

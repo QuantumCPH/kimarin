@@ -1,26 +1,22 @@
-<?php if(isset($_REQUEST['message']) && $_REQUEST['message']!=""){ 
-    
-    if($_REQUEST['message']=="error"){ ?>
-        
-        
-<div class="save-ok">
-<h2>Employee is not added and  registered on tilinta please check email </h2>
-</div>
+
+<div id="sf_admin_container">
+<?php if(isset($_REQUEST['message']) && $_REQUEST['message']!=""){     
+    if($_REQUEST['message']=="error"){ ?> 
+        <div class="save-ok">
+        <h2>Employee is not added and  registered on tilinta please check email </h2>
+        </div>
         
   <?php }else{  ?>
-
-
-
-<div class="save-ok">
-<h2>Employee is added successfully</h2>
-</div>
-<?php  }  }   ?>
+        <div class="save-ok">
+        <h2>Employee is added successfully</h2>
+        </div>
+<?php  }  
+}   ?>
 <?php if ($sf_user->hasFlash('messageError')): ?>
-<div style="color:#FF0000">
- <?php echo __($sf_user->getFlash('messageError')) ?>
-</div>
-<?php endif; ?>
-<div id="sf_admin_container">
+  <div>
+   <span style="color:#FF0000"><?php echo __($sf_user->getFlash('messageError')) ?></span>
+  <div>
+<?php endif; ?><br />
 <h1>New My employee</h1>
 <form id="sf_admin_form" name="sf_admin_edit_form" method="post" enctype="multipart/form-data" action="saveEmployee">
     <div id="sf_admin_content">
@@ -47,10 +43,21 @@
         <td style="padding: 5px;">Country Code:</td>
         <td style="padding: 5px;"> <input type="text" name="country_code" id="employee_country_code"   size="25"   class="required digits" /> </td>
                 </tr>-->
-                 <tr>
+      <tr>
+        <td style="padding: 5px;">SIM Type:</td>
+        <td style="padding: 5px;"> 
+           <select name="sim_type_id" id="employee_sim_type_id"    class="required"  style="width:190px;">
+                 <option value="">Select SIM Type</option>
+            <?php foreach($simtypes as $simtype){  ?>
+                    <option value="<?php echo $simtype->getId(); ?>"><?php echo $simtype->getTitle();   ?></option>
+            <?php   }  ?>
+           </select>
+        </td>
+      </tr>
+      <tr>
         <td style="padding: 5px;">Mobile number:</td>
         <td style="padding: 5px;"> <input type="text" name="mobile_number" id="employee_mobile_number"  size="25"   class="required digits"  minlength="8" /><span id="msgbox" style="display:none"></span> </td>
-                </tr>
+      </tr>
                  <tr>
         <td style="padding: 5px;">Email:</td>
         <td style="padding: 5px;"> <input type="text" name="email" id="employee_email"   class="required email"  size="25" /> </td>

@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="da" lang="da">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <?php include_http_metas() ?>
     <?php include_metas() ?>
@@ -340,7 +340,7 @@
 <li><a href="#"
                 onmouseover="mopen('m1')"
                 onmouseout="mclosetime()"
-                <?php echo $modulName=="device" || $modulName=="manufacturer" || $modulName=="telecom_operator" || $modulName=="postal_charges" ||$modulName=="product" || $modulName=="enable_country" || $modulName=="city" || $modulName=="sms_text" || $modulName=="simTypes" || $modulName=="nationality" || $modulName=="preferredLanguages" || $modulName=="province" || $modulName=="usage_alert" || $modulName=="usage_alert_sender" || $modulName=="telecom_operator" ?'class="current"':''?>
+                <?php echo $modulName=="device" || $modulName=="manufacturer" || $modulName=="telecom_operator" || $modulName=="postal_charges" ||$modulName=="product" || $modulName=="enable_country" || $modulName=="city" || $modulName=="sms_text" || $modulName=="simTypes" || $modulName=="nationality" || $modulName=="preferredLanguages" || $modulName=="handsets" || $modulName=="province" || $modulName=="usage_alert" || $modulName=="usage_alert_sender" || $modulName=="telecom_operator" ?'class="current"':''?>
                 ><?php echo __('Settings') ?></a>
                 <div id="m1"
                     onmouseover="mcancelclosetime()"
@@ -415,6 +415,13 @@
                           echo link_to(__('Sim Types'), 'simTypes/index',array('class'=>'subSelect'));
                         }else{
                           echo link_to(__('Sim Types'), 'simTypes/index');
+                        }
+                        ?>
+                        <?php 
+                        if($actionName=='list' && $modulName=="handsets"){
+                          echo link_to(__('Handsets'), 'handsets/index',array('class'=>'subSelect'));
+                        }else{
+                          echo link_to(__('Handsets'), 'handsets/index');
                         }
                         ?>
                         <?php 

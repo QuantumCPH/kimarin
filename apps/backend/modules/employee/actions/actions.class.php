@@ -27,7 +27,9 @@ class employeeActions extends sfActions {
         $e = new Criteria();
         $e->add(EmployeePeer::ID, $request->getParameter('id'));
         $this->employee = EmployeePeer::doSelectOne($e);
-
+        
+        $cst = new Criteria();
+        $this->simtypes = SimTypesPeer::doSelect($cst);
 
         $c = new Criteria();
         $this->companys = CompanyPeer::doSelect($c);
@@ -130,12 +132,15 @@ class employeeActions extends sfActions {
     public function executeAdd($request) {
 
        $this->companyval=$request->getParameter('company_id');
-   
+       
         $c = new Criteria();
         $this->companys = CompanyPeer::doSelect($c);
+        
+        $cst = new Criteria();
+        $this->simtypes = SimTypesPeer::doSelect($cst);
 
         $pr = new Criteria();
-       $pr->add(ProductPeer::ID, 4);
+        $pr->add(ProductPeer::ID, 4);
         $this->products = ProductPeer::doSelect($pr);
     }
 
@@ -269,6 +274,7 @@ class employeeActions extends sfActions {
         $employee->setMobileNumber($request->getParameter('mobile_number'));
         $employee->setEmail($request->getParameter('email'));
         $employee->setProductId($request->getParameter('productid'));
+        $employee->setSimTypeId($request->getParameter('sim_type_id'));
        // $employee->setProductPrice($request->getParameter('price'));
         $employee->save();
         $this->getUser()->setFlash('messageAdd', 'Employee has been Add Sucessfully '.(isset($msg)?"and ".$msg:''));
@@ -288,8 +294,8 @@ class employeeActions extends sfActions {
 
                 $compny=CompanyPeer::doSelectOne($c);
 
-$companyCVR=$compny->getVatNo();
-  $rtype=$request->getParameter('registration_type');
+       $companyCVR=$compny->getVatNo();
+       $rtype=$request->getParameter('registration_type');
 
       $employee = EmployeePeer::retrieveByPk($request->getParameter('id'));
        $contrymobilenumber=$employee->getCountryMobileNumber();
@@ -407,6 +413,7 @@ $companyCVR=$compny->getVatNo();
         $employee->setPassword($request->getParameter('password'));*/
         //$employee->setRegistrationType($rtype);
         $employee->setProductId($request->getParameter('productid'));
+        
       //  $employee->setProductPrice($request->getParameter('price'));
         $employee->setDeleted($request->getParameter('deleted'));
         $employee->save();

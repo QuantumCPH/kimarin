@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd"[]>
 <xliff version="1.0">
-    <file source-language="EN" target-language="no" datatype="plaintext" original="messages" date="2010-07-22T17:23:11Z" product-name="messages" xml:space="default">
+    <file source-language="EN" target-language="es" datatype="plaintext" original="messages" date="2010-07-22T17:23:11Z" product-name="messages" xml:space="default">
         <header />
         <body>
             <trans-unit id="1" translate="yes" reformat="yes" xml:space="default">
@@ -546,7 +546,7 @@
             </trans-unit>
                <trans-unit id="134" translate="yes" reformat="yes" xml:space="default">
                 <source>Telecom operator</source>
-                <target>El operador de telecomunicaciones</target>
+                <target>El operador de&lt;br /&gt;telecomunicaciones</target>
             </trans-unit>
                <trans-unit id="135" translate="yes" reformat="yes" xml:space="default">
                 <source>I accept all terms and conditions</source>
@@ -562,7 +562,7 @@
             </trans-unit>
                <trans-unit id="138" translate="yes" reformat="yes" xml:space="default">
                 <source>Minimum 6 digits</source>
-                <targetMínimo 6 dígitos</target>
+                <target>Mínimo 6 dígitos</target>
             </trans-unit>
                <trans-unit id="139" translate="yes" reformat="yes" xml:space="default">
                 <source>Pay</source>
@@ -593,8 +593,8 @@
                 <target>%1% recomienda para activar este servicio por lo que &lt;br /&gt;Sno tienen que rellenar manualmente cuando su cuenta &lt;br /&gt; el equilibrio comienza a agotarse. 100 o 200%2% cada cuando el &lt;br /&gt; saldos alcanza los 25 o 50%2%. Este servicio es  &lt;br /&gt; Añadido a su cuenta en minutos</target>
             </trans-unit>
              <trans-unit id="146" translate="yes" reformat="yes" xml:space="default">
-                <source>Enter cell phone number</source>
-                <target>Ingrese el número del teléfono celular</target>
+                <source>Enter Cell Phone/N.I.E/Passport No.</source>
+                <target>Entrar Celular / N.I.E / Pasaporte No.</target>
             </trans-unit>
              <trans-unit id="147" translate="yes" reformat="yes" xml:space="default">
                 <source>Send</source>
@@ -931,37 +931,31 @@
                 <source>Terms And Condition</source>
                 <target>Términos y condiciones</target>
             </trans-unit>
-
               <trans-unit id="229" translate="yes" reformat="yes" xml:space="default">
                 <source>Bonus awarded</source>
                 <target>Bono recibió</target>
             </trans-unit>
-
-    <trans-unit id="230" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="230" translate="yes" reformat="yes" xml:space="default">
                 <source>We hereby confirm that you have received commissions deposited into your account that you have referred a friend about Smartsim from %1%.Go in to "Payment History" to see what you have earned.</source>
                 <target>Por la presente confirmamos que ha recibido comisiones depositados en su cuenta que usted se ha referido a un amigo acerca de SmartSim %1%.Ir a "Historial de pagos" para ver lo que has ganado.</target>
             </trans-unit>
-
-    <trans-unit id="231" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="231" translate="yes" reformat="yes" xml:space="default">
                 <source>Bonus Receiver</source>
                 <target>Bono Receptor</target>
             </trans-unit>
-  <trans-unit id="232" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="232" translate="yes" reformat="yes" xml:space="default">
                 <source>Registered Friend</source>
                 <target>Rmigo de registro</target>
             </trans-unit>
-
- <trans-unit id="233" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="233" translate="yes" reformat="yes" xml:space="default">
                 <source>Registration</source>
                 <target>Registro</target>
             </trans-unit>
-
- <trans-unit id="234" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="234" translate="yes" reformat="yes" xml:space="default">
                 <source>Auto Refill</source>
                 <target>Auto Repuesto</target>
             </trans-unit>
-
- <trans-unit id="235" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="235" translate="yes" reformat="yes" xml:space="default">
                 <source>Invitation Bonus</source>
                 <target>Auto Repuesto</target>
             </trans-unit>
@@ -1108,6 +1102,46 @@
             <trans-unit id="272" translate="yes" reformat="yes" xml:space="default">
                 <source>You do not have enough money in the account, you are kindly asked to refill</source>
                 <target>Usted no tiene suficiente dinero en la cuenta, se le ruega para volver a llenar</target>
+            </trans-unit>
+            <trans-unit id="273" translate="yes" reformat="yes" xml:space="default">
+                <source>N.I.E/Passport Number</source>
+                <target>N.I.E/Número de&lt;br /&gt;pasaporte</target>
+            </trans-unit>
+            <trans-unit id="274" translate="yes" reformat="yes" xml:space="default">
+                <source>Sim Type</source>
+                <target>Tipo de SIM</target>
+            </trans-unit>
+            <trans-unit id="275" translate="yes" reformat="yes" xml:space="default">
+                <source>Preferred Language</source>
+                <target>Idioma preferido</target>
+            </trans-unit>
+            <trans-unit id="276" translate="yes" reformat="yes" xml:space="default">
+                <source>Middle Name</source>
+                <target>Segundo Nombre</target>
+            </trans-unit>
+            <trans-unit id="277" translate="yes" reformat="yes" xml:space="default">
+                <source>Mobile Number already registered.</source>
+                <target>Número de móvil ya está registrado.</target>
+            </trans-unit>
+            <trans-unit id="278" translate="yes" reformat="yes" xml:space="default">
+                <source>N.I.E/Passport Number already existing.</source>
+                <target>N.I.E/Número de pasaporte ya existentes.</target>
+            </trans-unit>
+            <trans-unit id="279" translate="yes" reformat="yes" xml:space="default">
+                <source>N.I.E/Passport Number already registered.</source>
+                <target>N.I.E/Número de pasaporte ya está registrado.</target>
+            </trans-unit>
+            <trans-unit id="280" translate="yes" reformat="yes" xml:space="default">
+                <source>Nationality</source>
+                <target>Nacionalidad</target>
+            </trans-unit>
+            <trans-unit id="280" translate="yes" reformat="yes" xml:space="default">
+                <source>Province</source>
+                <target>Provincia</target>
+            </trans-unit>
+            <trans-unit id="281" translate="yes" reformat="yes" xml:space="default">
+                <source>Your are successfully registered with %1%</source>
+                <target>Usted ha registrado con éxito %1%</target>
             </trans-unit>
         </body>
     </file>

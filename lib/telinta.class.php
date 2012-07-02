@@ -32,7 +32,7 @@ class Telienta {
 
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Customer');
 
-        $uniqueid="KB2C".$customer->getUniqueid();
+        $uniqueid="KB2C".$customer->getId().$customer->getUniqueid();
         if ($USReseller) {
             $Parent = self::$iParentUS;
         } else {

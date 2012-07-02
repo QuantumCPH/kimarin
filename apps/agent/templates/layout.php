@@ -203,13 +203,13 @@
                             }
                             ?></li>
     <!--                    <li><?php //echo link_to(__('Package Conversion'), 'affiliate/conversionform'); ?></li>-->
-                        <li><?php
+<!--                        <li><?php
                             if ($modulName == "affiliate" && $actionName == 'supportingHandset') {
                                 echo link_to(__('Supporting Handsets'), 'affiliate/supportingHandset', array('class' => 'current'));
                             } else {
                                 echo link_to(__('Supporting Handsets'), 'affiliate/supportingHandset');
                             }
-                            ?></li>
+                            ?></li>-->
                         <li><?php
                             if ($modulName == "affiliate" && $actionName == 'nonSupportingHandset') {
                                 echo link_to(__('Non Supporting Handsets'), 'affiliate/nonSupportingHandset', array('class' => 'current'));
