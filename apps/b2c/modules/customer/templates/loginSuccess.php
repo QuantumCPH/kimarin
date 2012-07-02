@@ -65,12 +65,12 @@
               $class = 'class="text1"';
           }
         ?>    
-	<p <?php echo $class;?>><?php echo __('Write e-mail address you used for registration.<br />Your password will be sent to you via this email.') ?></p>
+            <label <?php echo $class;?>><?php echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
 	<input   class="input"  type="text" name="email" id="forgot_password_email" /><br />
 	<?php if ($sf_user->hasFlash('send_password_error_message')): ?>
 	<p style="color: red; margin:6px auto;"><?php echo $sf_user->getFlash('send_password_error_message') ?></p>
 	<?php endif;?>
-        <input  style="cursor: pointer;"  class="loginbuttun"  type="submit" name="submit" value="<?php echo __('Send');?>">
+        <input  style="cursor: pointer;"  class="loginbuttun"  type="submit" name="submit" value="<?php echo __('Send');?>" />
 <!--	<button style="cursor: pointer;">Send</button>-->
 	<script language="javascript" type="text/javascript">
 		jq = jQuery.noConflict();

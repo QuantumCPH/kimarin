@@ -15,3 +15,4 @@ Cufon.replace('.callhistoryheadings h2', { fontFamily: 'Calibri Bold' });
 Cufon.replace('#wrap', { fontFamily: 'Calibri' });
 Cufon.replace('.dashboard h2', { fontFamily: 'Calibri Bold' });
 Cufon.replace('.login-left h4', { fontFamily: 'Calibri Bold' });
+Cufon.replace('.login-right h4', { fontFamily: 'Calibri Bold' });

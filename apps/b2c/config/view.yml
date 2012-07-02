@@ -9,7 +9,7 @@ default:
     #language:     en
     #robots:       index, follow
 
-  stylesheets:    [ ../zerocall/style/style.css]
+  stylesheets:    [ ../zerocall/style/styleie.css, ../zerocall/style/style.css]
 
   javascripts:    [../zerocall/js/jquery-1.4.2.min.js, ../zerocall/js/jquery.jcarousel.min.js, ../zerocall/js/carousel.js, jquery.formatCurrency-1.3.0.min.js, i18n/jquery.formatCurrency.all.js]
 

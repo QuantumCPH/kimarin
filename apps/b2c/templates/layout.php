@@ -17,8 +17,6 @@
 <?php use_javascript('i18n/jquery.formatCurrency.all.js', '', array('absolute'=>true)) ?>
     <?php use_javascript('jquery-ui-1.8.16.custom.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('jquery.corner.js');?>    
-
-<link rel="stylesheet" type="text/css" href="<?php echo sfConfig::get('app_web_url');?>zerocall/style/styleie.css" />
 </head>
 <body>
     <div style="vertical-align: top;float: right;">
@@ -38,13 +36,14 @@
 <!-- end header --> <?php echo $sf_content; ?></div>
 <!-- end wrap -->
 
-<script type="text/javascript"> 	
-     $(document).ready(function()
+<script type="text/javascript"> 
+    jq1 = jQuery.noConflict();
+     jq1(document).ready(function()
      {
-        $('.sidebar_button').corner('round 5px');
-        $('.butonsigninsmall').corner('round 5px');
-        $('.buton').corner('round 5px');
-        $('.loginbuttun').corner('round 5px');
+        jq1('.sidebar_button').corner('round 5px');
+        jq1('.butonsigninsmall').corner('round 5px');
+        jq1('.buton').corner('round 5px');
+        jq1('.loginbuttun').corner('round 5px');
         
      }); 
 </script>
