@@ -32,7 +32,7 @@
                     <div class="dateBox-pt">
                         <div class="formRow-pt" style="float:left;">
                             <label class="datelable">From:</label>
-                            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo @$startdate ? $startdate : date('Y-m-d', strtotime('-15 days')); ?>" />
+                            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo date('Y-m-d', strtotime(@$startdate)); ?>" />
                         </div>
                         <div class="formRow-pt" style="float:left;">
                             <label class="datelable">To:</label>
