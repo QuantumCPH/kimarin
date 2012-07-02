@@ -413,7 +413,7 @@ class employeeActions extends sfActions {
         $employee->setPassword($request->getParameter('password'));*/
         //$employee->setRegistrationType($rtype);
         $employee->setProductId($request->getParameter('productid'));
-        $employee->setSimTypeId($request->getParameter('sim_type_id'));
+        
       //  $employee->setProductPrice($request->getParameter('price'));
         $employee->setDeleted($request->getParameter('deleted'));
         $employee->save();

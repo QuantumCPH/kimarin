@@ -84,7 +84,12 @@
 				  	<?php echo $employee->getMobileNumber() ?>
 				  </div>
 				</div>
-
+                                <div class="form-row">
+				  <label class="required">SIM Type</label>
+				  <div class="content">
+				  	<?php echo $employee->getSimType(); ?>
+				  </div>
+				</div>
 				<div class="form-row">
 				  <label class="required">Product:</label>
 				  <div class="content">
