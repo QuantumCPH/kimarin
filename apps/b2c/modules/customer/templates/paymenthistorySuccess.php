@@ -12,8 +12,7 @@
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Övrig historik')) ) ?>
   <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'callhistory', 'customer_id'=>$customer->getId())) ?>
-      <div class="split-form-btn" style="">
-          
+      <div class="split-form-btn" style="">         
           
           <input type="button" class="butonsigninsmall"  name="button" onclick="window.location.href='<?php echo url_for('customer/callhistory', true); ?>'" style="cursor: pointer"  value="<?php echo __('Samtalshistorik') ?>" >
                      
