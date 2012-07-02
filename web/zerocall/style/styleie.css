@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 * {margin:0px;padding:0px;}
-body {font-family:'Conv_Calibri'; font-size:14px; color:#0c74a5;background-color:#FFFFFF;font-style: normal;}
+body {font-size:14px; color:#0c74a5;background-color:#FFFFFF;font-style: normal;}
 #wrap {width:780px;margin:0px auto;background-color:#FFFFFF;}
 #header {width:780px;height:119px;}
 #logo {width:168px; height:79px; float:left;}
