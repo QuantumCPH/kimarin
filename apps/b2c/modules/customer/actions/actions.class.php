@@ -547,16 +547,20 @@ class customerActions extends sfActions {
         if (isset($getvoipInfos)) {
             $voipnumbers = $getvoipInfos->getNumber();
             $voipnumbers = substr($voipnumbers, 2);
-           $voip_customer = $getvoipInfos->getCustomerId();
+            $voip_customer = $getvoipInfos->getCustomerId();
           
             $getvoipInfos->setIsAssigned(3);
             $getvoipInfos->save();
            
-             $res = new Criteria();
-                    $res->add(TelintaAccountsPeer::ACCOUNT_TITLE, $voipnumbers);
-                    $res->addAnd(TelintaAccountsPeer::STATUS, 3);
-                    $telintaAccountres = TelintaAccountsPeer::doSelectOne($res);
-                    Telienta::terminateAccount($telintaAccountres);
+                $res = new Criteria();
+                $res->add(TelintaAccountsPeer::ACCOUNT_TITLE, $voipnumbers);
+                $res->addAnd(TelintaAccountsPeer::STATUS, 3);
+                if(TelintaAccountsPeer::doCount($res) > 0){
+                $telintaAccountres = TelintaAccountsPeer::doSelectOne($res);
+                  Telienta::terminateAccount($telintaAccountres);
+                }else{
+                  $this->redirect('customer/dashboard');  
+                }
         }
     }
 

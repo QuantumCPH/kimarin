@@ -63,7 +63,7 @@
 #login-modal h4{ margin-bottom:20px; font-size:14px;}
 .input{ width:140px; font-size:12px; padding:3px; border:1px solid #999999; margin-bottom:10px;}
 #login-modal label{ font-size:12px;}
-.loginbuttun{ background-image:url("../images/b.png"); width:77px; height:27px;  font-size:13px; border:0px; color:#ffffff; padding-bottom:7px; padding-top:4px;font-weight:normal;}
+.loginbuttun{ background-image:url("../images/b.png"); width:77px; height:27px;  font-size:13px; border:0px; color:#ffffff; padding-bottom:4px; padding-top:4px;font-weight:normal;}
 #login-modal button{ background-image:url(../images/bg-login-btn.jpg); width:77px; height:28px;  font-size:13px; border:0px; color:#fff; padding-bottom:7px; padding-top:5px;}
 #login-modal p{ margin-bottom:18px;}
 .login-left{ float:left; width:152px;}
@@ -199,7 +199,8 @@ width:232px;
 .split-form ul li input.chkbx{width:20px; padding:0px; border:0px}
 .split-form ul li.fr {float:right;width:250px; text-align:right;}
 .buton{ background-image:url(../images/btn-dashboard.jpg);border:0px;color:#333333;font-size:22px;width:133px; height:36px; margin-top:20px;float:left;font-weight:bold;}
-
+.butonsigninsmall{ background-image:url("../images/btn-dashboard.jpg");border:0 none;color:#333333;font-size:14px;height:36px;font-weight:bold; outline:none;}
+.butonsignin{  background-image:url("../images/button-orange-big.png");border:0 none;color:#333333;font-size:22px;height:48px;width:132px;float:right;margin-right:40px;}
 .settingbutton{ background-image:url(../images/btn-dashboard.jpg);border:0 none;color:#000;font-size:22px;width:133px; height:36px; margin-top:20px;}
 .dashboard-info{min-height:400px; float:left; width:100%;}
 .dashboard-info-text{ width:100%; padding-top:20px; font-size:15px;}
@@ -613,6 +614,7 @@ margin-top:12px;
 .dash-navg a.paymenthistory-s{ background-position:-85px -172px}
 
 .dash-navg a.settings{ background-position:0px -229px}
+
 .dash-navg a.settings:hover{ background-position:-85px -229px}
 .dash-navg a.settings-s{ background-position:-85px -229px}
 
@@ -621,6 +623,6 @@ margin-top:12px;
 .dash-navg a.logout-s{ background-position:-85px -287px}
 
 input[type=submit],input[type=button],textarea,option{
-   font-family:'Conv_Calibri',Sans-Serif;  
+/*   font-family:'Conv_Calibri',Sans-Serif;  */
 }
 
