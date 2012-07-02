@@ -10,7 +10,41 @@
 		font-weight: normal;
 	}
 </style>
+<link href="<?php echo sfConfig::get('app_web_url'); ?>css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="<?php echo sfConfig::get('app_web_url'); ?>js/jquery.min.js"></script>
+<script src="<?php echo sfConfig::get('app_web_url'); ?>js/jquery-ui.min.js"></script>
+<script>
+    jQuery(function() {
 
+        jQuery( "#startdate" ).datepicker({ dateFormat: 'yy-mm-dd' });
+        jQuery( "#enddate" ).datepicker({ dateFormat: 'yy-mm-dd'});
+
+
+    });
+</script>
+<div class="report_container">
+
+    <table cellpadding="0" cellspacing="0" class="tbldatefilter">
+        <tr><td><h1><?php echo __('Date Filter') ?></h1></td></tr>
+        <tr>
+            <td>
+                <form action="" id="searchform" method="POST" name="searchform">
+                    <div class="dateBox-pt">
+                        <div class="formRow-pt" style="float:left;">
+                            <label class="datelable">From:</label>
+                            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo @$startdate ? $startdate : date('Y-m-d', strtotime('-15 days')); ?>" />
+                        </div>
+                        <div class="formRow-pt" style="float:left;">
+                            <label class="datelable">To:</label>
+                            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$enddate ? $enddate : date('Y-m-d'); ?>" />
+                        </div>
+                        <span><input type="submit" name="søg" value="Search" class="datefilterBtn" /></span>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
 <div class="report_container">
    
 <?php if($sf_request->getParameter('show_summary')): ?>
