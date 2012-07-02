@@ -10,6 +10,10 @@
 <?php use_javascript('../zerocall/js/jquery-1.4.2.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('../zerocall/js/jquery.jcarousel.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('../zerocall/js/carousel.js', '', array('absolute'=>true)) ?>
+<?php use_javascript('../zerocall/js/cufon-yui.js', '', array('absolute'=>true)) ?>
+<?php use_javascript('../zerocall/js/calibri.cufonfonts.js', '', array('absolute'=>true)) ?>
+<?php use_javascript('../zerocall/js/cufon-replace.js', '', array('absolute'=>true)) ?>
+
 <?php use_javascript('jquery.formatCurrency-1.3.0.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('i18n/jquery.formatCurrency.all.js', '', array('absolute'=>true)) ?>
     <?php use_javascript('jquery-ui-1.8.16.custom.min.js', '', array('absolute'=>true)) ?>
@@ -27,7 +31,7 @@
 
 
   <?php use_stylesheet('ui-lightness/jquery-ui-1.8.16.custom.css', '', array('absolute'=>true)) ?>
-  <!--<![endif]-->
+ <!--<![endif]-->
   
 </head>
 <body>
@@ -49,8 +53,10 @@
 <!-- end wrap -->
 
 <script type="text/javascript"> 	
+    Cufon.now(); 
      $(document).ready(function()
      {
+        $('.submitBtn').corner('round 5px');
         $('.sidebar_button').corner('round 5px');
         $('.butonsigninsmall').corner('round 5px');
         $('.buton').corner('round 5px');

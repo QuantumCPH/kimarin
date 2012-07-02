@@ -263,8 +263,8 @@
                 <target>Olvidó su contraseña?</target>
             </trans-unit>
             <trans-unit id="65" translate="yes" reformat="yes" xml:space="default">
-                <source>Write e-mail address you used for registration.&lt;br /&gt;Your password will be sent to you via this email.</source>
-                <target>Escribir dirección de correo electrónico que usó para registrarse. &lt;br /&gt; Su contraseña le será enviada a usted a través de este e-mail.</target>
+                <source>Write e-mail address you used for registration.&lt;br /&gt;&lt;br /&gt;Your password will be sent to you via this email.</source>
+                <target>Escribir dirección de correo electrónico que usó para registrarse. &lt;br /&gt;&lt;br /&gt; Su contraseña le será enviada a usted a través de este e-mail.</target>
             </trans-unit>
             <trans-unit id="66" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid email address.</source>

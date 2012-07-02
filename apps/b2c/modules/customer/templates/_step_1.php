@@ -26,7 +26,7 @@
                 
              <div class='inline-error'><?php echo $error_mobile_number?$form['mobile_number']->renderError():'&nbsp;'?>
                  </div>
-                <label style="float:right;width:85px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:85px; <?php endif; ?>">ex. 0701234567</label>
+                <label style="float:right;width:85px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:85px; <?php else: ?>margin-right: 73px;<?php endif; ?>">ex. 0701234567</label>
             </li>
             <!-- end mobile_number -->  
             <?php 
@@ -279,7 +279,7 @@
 			 </span>
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_password?$form['password']->renderError():'&nbsp;'?></div>
-             <label style="float:right;width:95px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:85px; <?php endif; ?>"><?php echo __('Minimum 6 digits') ?></label>
+             <label style="float:right;width:95px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:85px;<?php else:?>margin-right: 73px; <?php endif; ?>"><?php echo __('Minimum 6 digits') ?></label>
             </li>
             <!-- end password -->
             <?php
