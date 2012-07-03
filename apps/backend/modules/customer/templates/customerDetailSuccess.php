@@ -191,7 +191,7 @@ if(isset($val) && $val!=""){  ?>
                       </tr>
 
                       <?php } ?>
-                  <tr style="background-color:#EEEEFF">
+               <!--   <tr style="background-color:#EEEEFF">
                        <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Resenummer </td>
                         <td>  <?php  $cuid   =  $customer->getId();
         if(isset($cuid) && $cuid!=""){
@@ -203,7 +203,7 @@ if(isset($val) && $val!=""){  ?>
             echo $vounumber->getNumber();
              }
          }else{  }  ?> </td>
-                         </tr>
+                         </tr> -->
 
 
 
