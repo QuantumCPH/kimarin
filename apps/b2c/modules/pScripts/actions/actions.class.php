@@ -6,6 +6,7 @@ require_once(sfConfig::get('sf_lib_dir').'/ForumTel.php');
 require_once(sfConfig::get('sf_lib_dir').'/commissionLib.php');
 require_once(sfConfig::get('sf_lib_dir').'/curl_http_client.php');
 require_once(sfConfig::get('sf_lib_dir').'/smsCharacterReplacement.php');
+require_once(sfConfig::get('sf_lib_dir') . '/zerocall_out_sms.php');
 /**
  * scripts actions.
  *
@@ -2926,6 +2927,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
                         $uc = new Criteria();
                         $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
                         $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+                        $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$this->customer->getSimTypeId());
                         $availableUniqueCount = UniqueIdsPeer::doCount($uc);
                         $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
 
