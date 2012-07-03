@@ -6,6 +6,7 @@ require_once(sfConfig::get('sf_lib_dir').'/ForumTel.php');
 require_once(sfConfig::get('sf_lib_dir').'/commissionLib.php');
 require_once(sfConfig::get('sf_lib_dir').'/curl_http_client.php');
 require_once(sfConfig::get('sf_lib_dir').'/smsCharacterReplacement.php');
+require_once(sfConfig::get('sf_lib_dir') . '/zerocall_out_sms.php');
 /**
  * scripts actions.
  *
