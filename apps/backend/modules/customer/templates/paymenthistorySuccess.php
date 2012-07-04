@@ -14,7 +14,7 @@
                        <th width="15%"  align="left"><?php echo __('Order Numer') ?></th>
                           <th width="25%"  align="left"><?php echo __('Date &amp; Time') ?></th>
                           <th width="50%"  align="left"><?php echo __('Description') ?></th>
-                          <th width="10%" align="left"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</th>
+                          <th width="10%" align="right"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</th>
                               </tr>
                 <?php 
                 $amount_total = 0;
@@ -34,7 +34,7 @@
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td><?php echo  $transaction->getCreatedAt() ?></td>
                   <td><?php echo $transaction->getDescription() ?></td>
-                  <td><?php echo $transaction->getAmount(); $amount_total += $transaction->getAmount() ?>
+                  <td  align="right"><?php echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount() ?>
                             <?php
                                 echo (sfConfig::get('app_currency_code'));
                           ?></td>
@@ -48,7 +48,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong>Total</strong></td>
-                	<td><?php echo format_number($amount_total) ?>
+                        <td  align="right"><?php echo number_format($amount_total,2); ?>
                             <?php 
                                 echo (sfConfig::get('app_currency_code'));
                        ?></td>

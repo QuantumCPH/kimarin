@@ -42,7 +42,7 @@ class AgentCompany extends BaseAgentCompany
         $per=$sum;
        }
 
-       return $per;
+       return number_format($per,2);
 
 
        
@@ -65,7 +65,7 @@ class AgentCompany extends BaseAgentCompany
         $per=$sum;
        }
 
-       return $per;
+       return number_format($per,2);
 
     }
     public function getRevenueAtShopCommissision()
@@ -96,7 +96,7 @@ class AgentCompany extends BaseAgentCompany
            }
        }
 
-       return $per;
+       return number_format($per,2);
 
     }
     /*today code */
@@ -114,8 +114,8 @@ class AgentCompany extends BaseAgentCompany
         //$per=($sum*8)/100;
        }
 
-       return $sum;
 
+  return number_format($sum,2);
 
 
     }
@@ -136,7 +136,7 @@ class AgentCompany extends BaseAgentCompany
         //$per=($sum*10)/100;
        }
 
-       return $sum;
+       return number_format($sum,2);
 
     }
     public function getRevenueAtShop()
@@ -165,7 +165,7 @@ class AgentCompany extends BaseAgentCompany
            }
        }
 
-       return $sum;
+      return number_format($sum,2);
 
     }
     /*****
