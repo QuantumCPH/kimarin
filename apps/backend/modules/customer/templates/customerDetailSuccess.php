@@ -155,6 +155,9 @@ if(isset($val) && $val!=""){  ?>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Usage SMS Alerts</td>
                          <td>  <?php  echo ($customer->getUsageAlertSMS()==1)?"Yes":"No";     ?>   </td>
                         </tr  >
+                          <tr><td  id="sf_admin_list_th_auto_refill" class="leftHeadign" >Comments</td>
+                  <td><?php echo $customer->getComments(); ?></td>
+                </tr>
                          <tr style="background-color:#EEEEFF">
                        <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Active No</td>
                         <td>  <?php  $unid   =  $customer->getUniqueid();
