@@ -1135,13 +1135,21 @@
                 <source>Nationality</source>
                 <target>Nacionalidad</target>
             </trans-unit>
-            <trans-unit id="280" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="281" translate="yes" reformat="yes" xml:space="default">
                 <source>Province</source>
                 <target>Provincia</target>
             </trans-unit>
-            <trans-unit id="281" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="282" translate="yes" reformat="yes" xml:space="default">
                 <source>Your are successfully registered with %1%</source>
                 <target>Usted ha registrado con éxito %1%</target>
+            </trans-unit>
+             <trans-unit id="283" translate="yes" reformat="yes" xml:space="default">
+                <source>Active mobile No</source>
+                <target>Sin móvil activo</target>
+            </trans-unit>
+              <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
+                <source>sim type</source>
+                <target>Sim Tipo</target>
             </trans-unit>
         </body>
     </file>

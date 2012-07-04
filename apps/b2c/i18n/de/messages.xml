@@ -5,12 +5,12 @@
         <header />
         <body>
             <trans-unit id="1" translate="yes" reformat="yes" xml:space="default">
-                <source>Login</source>
-                <target>Iniciar sesión</target>
+               <source>Login</source>
+                <target>einloggen</target>
             </trans-unit>
             <trans-unit id="2" translate="yes" reformat="yes" xml:space="default">
                 <source>Log on on my side</source>
-                <target>Inicie sesión en el de mi lado</target>
+                <target>Melden Sie sich auf meiner Seite</target>
             </trans-unit>
             <trans-unit id="3" translate="yes" reformat="yes" xml:space="default">
                 <source>Email</source>
