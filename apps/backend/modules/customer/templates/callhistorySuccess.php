@@ -178,7 +178,7 @@ if($pus==1){
                             <tr>
                                 <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo $xdr->CLD; ?></td>
-                                <td><?php echo $xdr->charged_amount; ?></td>
+                                <td><?php echo  number_format($xdr->charged_amount,2); ?></td>
                             </tr>
                             <?php } }else {
 
@@ -186,7 +186,7 @@ if($pus==1){
 
                             } ?>
                         </table><br/><br/>
-
+<!--
                            <h1><?php echo 'Payment History'; ?> </h1>
                     <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign" border='0'>
                         <tr class="headings">
@@ -204,14 +204,14 @@ if($pus==1){
                             <tr>
                                 <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo $xdr->CLD; ?></td>
-                                <td><?php echo $xdr->charged_amount*-1; ?></td>
+                                <td><?php echo number_format($xdr->charged_amount*-1,2); ?></td>
                             </tr>
                             <?php } }else {
 
                                 echo __('There are currently no call records to show.');
 
                             } ?>
-                        </table><br/><br/>
+                        </table><br/><br/>-->
 
 
 
