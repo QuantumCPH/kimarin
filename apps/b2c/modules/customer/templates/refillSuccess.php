@@ -169,9 +169,9 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
             	<?php echo $form['extra_refill']->renderError() ?>
             </li>
             <?php } ?>
-            <li id="selectAmt">
-              <label for="extra_refill" class="extra_refill"><?php echo __('Select amount to be loaded:') ?></label>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<?php echo $form['extra_refill']?>  <?php echo sfConfig::get('app_currency_code')?>
+            <li id="selectAmt" class="refilselect">
+              <label for="extra_refill" ><?php echo __('Select amount to be loaded:') ?></label>
+              <span style="margin-left:99px;"><?php echo $form['extra_refill']?></span>  <?php echo sfConfig::get('app_currency_code')?>
             </li>
 
             <?php if($sf_user->hasFlash('error_message')): ?>
