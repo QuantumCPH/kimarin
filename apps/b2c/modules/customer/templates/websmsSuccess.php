@@ -38,7 +38,16 @@ return true;}
 
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Websms') ) ) ?>
 
-
+<?php 
+		 //echo $res_cbf;
+ if($msgSent!=''){
+   if($msgSent=="Yes" && trim($res_cbf)!="Response from CBF is:"){ ?>
+    <?php echo "<div class='alert_bar'>".__("Message has been sent").'</div>'; ?>
+    <?php }elseif(trim($res_cbf)=="Response from CBF is:"){?>
+    <?php echo "<div class='alert_bar'>".__("Your message unfortunately not sent, try again").'</div>'; ?>
+   <?php }
+		  
+  } ?>
 <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'', 'customer_id'=>$customer->getId())) ?>
 	<div class="split-form">
@@ -67,15 +76,7 @@ return true;}
        </li>
        
        <li>
-       <?php 
-		 //echo $res_cbf;
-		 if($msgSent!=''){
-		  if($msgSent=="Yes" && trim($res_cbf)!="Response from CBF is:"){ ?>
-          <?php echo "<label style='color:#339933; white-space:nowrap'><b>".__("Message has been sent").'</b></label>'; ?>
-          <?php }elseif(trim($res_cbf)=="Response from CBF is:"){?>
-          <?php echo "<label style='color:#F00; white-space:nowrap'><b>".__("Your message unfortunately not sent, try again").'</b></label>'; ?>
-          <?php }
-		  } ?><br /><br />
+       <br /><br />
                   <table cellspacing="0" class="summary" width="480">
         <tr bgcolor="#f0f0f0">
             <td>
