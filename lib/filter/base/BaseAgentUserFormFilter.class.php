@@ -19,6 +19,7 @@ class BaseAgentUserFormFilter extends BaseFormFilterPropel
       'password'         => new sfWidgetFormFilterInput(),
       'status_id'        => new sfWidgetFormPropelChoice(array('model' => 'Status', 'add_empty' => true)),
       'created_at'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'comments'         => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -27,6 +28,7 @@ class BaseAgentUserFormFilter extends BaseFormFilterPropel
       'password'         => new sfValidatorPass(array('required' => false)),
       'status_id'        => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Status', 'column' => 'id')),
       'created_at'       => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'comments'         => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('agent_user_filters[%s]');
@@ -50,6 +52,7 @@ class BaseAgentUserFormFilter extends BaseFormFilterPropel
       'password'         => 'Text',
       'status_id'        => 'ForeignKey',
       'created_at'       => 'Date',
+      'comments'         => 'Text',
     );
   }
 }

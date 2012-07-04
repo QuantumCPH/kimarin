@@ -55,6 +55,7 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'sim_type_id'              => new sfWidgetFormFilterInput(),
       'preferred_language_id'    => new sfWidgetFormFilterInput(),
       'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
+      'comments'                 => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -99,6 +100,7 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'sim_type_id'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'preferred_language_id'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'province_id'              => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Province', 'column' => 'id')),
+      'comments'                 => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('customer_filters[%s]');
@@ -158,6 +160,7 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'sim_type_id'              => 'Number',
       'preferred_language_id'    => 'Number',
       'province_id'              => 'ForeignKey',
+      'comments'                 => 'Text',
     );
   }
 }
