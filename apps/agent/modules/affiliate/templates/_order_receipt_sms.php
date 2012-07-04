@@ -68,16 +68,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr>
   <td colspan="4" class="payer_summary">
-	<?php echo __('XXXXXXXXXXXXXXXXXXXXXXXXXX');?>
-	<br />
-	<?php echo __('XXXXXXX XXXXXXXXX XXXXX');?>
-	<br />
-	
-	<br />
-	<?php echo __('Tel: XXXXX XXXXXXX XXXX');?>
-	<br />	
-	<br />
-	<?php echo __('CVR: XXXXX XXXXXXX XXXXX');?>
+	   <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')));?> 
 	<br />
   </td>
   </tr>
