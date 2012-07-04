@@ -25,7 +25,7 @@
                   <td class="title"><?php echo __('Order Numer') ?></td>
                   <td class="title" nowrap><?php echo __('Date & time') ?></td>
                   <td class="title"><?php echo __('Description') ?></td>
-                  <td class="title"><?php echo __('Amount') ?></td>
+                  <td class="title" align="right"><?php echo __('Amount') ?></td>
                   <td class="title"><?php echo __('Type') ?></td>
                   <td class="title"></td>
                 </tr>
@@ -45,7 +45,7 @@
                           echo __($transaction->getDescription());  
                         } 
                   }?></td>
-                  <td><?php echo $transaction->getAmount(); $amount_total += $transaction->getAmount() ?>
+                  <td align="right"><?php echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount() ?>
                             <?php 
 //                            if($lang=="pl"){
 //                               // echo ('plz');
@@ -81,7 +81,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong>Total</strong></td>
-                	<td colspan="3"><?php echo format_number($amount_total) ?>
+                        <td colspan="3"  align="right"><?php echo number_format($amount_total,2) ?>
                             <?php 
 //                            if($lang=="pl"){
 //                                echo ('plz');
