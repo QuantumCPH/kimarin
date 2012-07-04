@@ -76,6 +76,7 @@ echo "    ";   echo substr($Telintambs, 7,2);
 echo " ";   echo substr($Telintambs, 9,2);
 echo " ";   echo substr($Telintambs, 11,2);
 echo " ";   echo substr($Telintambs, 13,2);
+echo " ";   echo substr($Telintambs, 15,2);
           
 
 
@@ -94,7 +95,7 @@ echo " ";   echo substr($Telintambs, 15,2);
 
 
 
-        <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Active mobile No ') ?>:</span><span><?php
+        <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Active mobile No') ?>:</span><span><?php
         
       
         if(isset($unid) && $unid!=""){
