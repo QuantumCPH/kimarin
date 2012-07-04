@@ -4,6 +4,7 @@ require_once(sfConfig::get('sf_lib_dir') . '/Browser.php');
 require_once(sfConfig::get('sf_lib_dir') . '/emailLib.php');
 require_once(sfConfig::get('sf_lib_dir') . '/changeLanguageCulture.php');
 require_once(sfConfig::get('sf_lib_dir') . '/sms.class.php');
+require_once(sfConfig::get('sf_lib_dir') . '/zerocall_out_sms.php');
 
 /**
  * affiliate actions.

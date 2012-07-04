@@ -6,6 +6,7 @@ require_once(sfConfig::get('sf_lib_dir') . '/changeLanguageCulture.php');
 require_once(sfConfig::get('sf_lib_dir') . '/parsecsv.lib.php');
 require_once(sfConfig::get('sf_lib_dir') . '/telinta.class.php');
 require_once(sfConfig::get('sf_lib_dir') . '/payment.class.php');
+require_once(sfConfig::get('sf_lib_dir') . '/zerocall_out_sms.php');
 /**
  * customer actions.
  *
