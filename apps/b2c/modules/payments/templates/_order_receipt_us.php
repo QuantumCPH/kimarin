@@ -147,7 +147,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer">
     <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;"> 
-    <?php echo sfConfig::get('app_site_title');echo __(' - %1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
+    <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
   </tr>
 </table>
 <?php if($wrap_content): ?>
