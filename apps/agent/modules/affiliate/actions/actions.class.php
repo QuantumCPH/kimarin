@@ -970,7 +970,7 @@ class affiliateActions extends sfActions {
 
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $this->customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
             
-        }
+        } die('here');
         $this->redirect('affiliate/receipts');
     }
 
