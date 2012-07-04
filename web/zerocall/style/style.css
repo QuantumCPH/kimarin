@@ -635,3 +635,6 @@ input[type=submit],input[type=button],textarea,option{
 /*   font-family:'Conv_Calibri',Sans-Serif;  */
 }
 
+img{
+    border:none !important;
+}
