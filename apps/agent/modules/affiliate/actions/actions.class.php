@@ -773,10 +773,10 @@ class affiliateActions extends sfActions {
 
 
         //debug form value
-        $order_id = $request->getParameter('orderid');
+echo        $order_id = $request->getParameter('orderid');
         //$request->getParameter('amount');
-        $order_amount = ((double) $request->getParameter('amount'));
-
+echo        $order_amount = ((double) $request->getParameter('amount'));
+die;
         $this->forward404Unless($order_id || $order_amount);
 
 
