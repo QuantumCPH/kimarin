@@ -37,7 +37,7 @@
 <body>
     <div style="vertical-align: top;float: right;">
 
-                        <?php echo link_to(image_tag('/images/german.png'), 'customer/changeCulture?new=de'); ?>
+                        <?php //echo link_to(image_tag('/images/german.png'), 'customer/changeCulture?new=de'); ?>
                         <?php echo link_to(image_tag('/images/spain.png'), 'customer/changeCulture?new=es'); ?>
                          <?php echo link_to(image_tag('/images/english.png'), 'customer/changeCulture?new=en'); ?>
 

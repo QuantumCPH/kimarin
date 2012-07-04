@@ -247,12 +247,12 @@ $sf_user->setCulture('en');
 
 
 <?php if ($sf_user->isAuthenticated() && $sf_user->getAttribute('username', '', 'agentsession')): ?>
-                                       <div class="clr"></div> 
-                                        <p><?php echo __('Provide this link to your customers while they signup with your reference.') ?>
-                                            <a href="<?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>">
-                        				<?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>
-                                            </a>
-                                        </p>
+       <div class="clr"></div> 
+        <p><?php echo __('Provide this link to your customers while they signup with your reference.') ?>
+            <a href="<?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>">
+                        <?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>
+            </a>
+        </p>
 <?php endif; ?>
 
 <?php echo $sf_content ?>
