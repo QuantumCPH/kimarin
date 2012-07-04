@@ -153,6 +153,11 @@
                 
             </td>
         </tr>
+            <tr>
+            <td>Comments:</td>
+            <td><textarea name="comments"  id="customer_comments"><?php echo $editCust->getComments(); ?></textarea>
+                </td>
+        </tr>
         </table>
         <ul class="sf_admin_actions"><li><input class="sf_admin_action_create" type="submit" name="submit"  value="update" /></li></ul>
         
