@@ -1330,9 +1330,8 @@ public static function sendAdminRefilEmail(AgentCompany $agent,$agent_order)
 
        //Support Information
         $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'jan.larsson@landncall.com');
-        $sender_name = sfConfig::get('app_email_sender_name', 'LandNCall AB');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'LandNCall AB');
+        $sender_name = sfConfig::get('app_email_sender_name', sfConfig::get('app_site_title'));
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', sfConfig::get('app_site_title'));
 
         //------------------Sent The Email To Customer
 
