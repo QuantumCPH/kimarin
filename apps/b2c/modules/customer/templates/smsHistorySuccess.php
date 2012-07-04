@@ -55,7 +55,7 @@
                   <tr>
                     <td class="title"><?php echo __('Date & time') ?></td>
                     <td class="title" width="40%"><?php echo __('Phone Number') ?></td>                    
-                    <td class="title"><?php echo __('Cost <small>(Incl. VAT)</small>') ?></td>
+                    <td class="title" align="right"><?php echo __('Cost <small>(Incl. VAT)</small>') ?></td>
                   </tr>
 
                 <?php
@@ -73,7 +73,7 @@
                   $amt = $country->getCbfRate();
                   
                   ?>
-                  <td><?php $amount_total += $amt; echo number_format($amt, 2, ',', '') ?> <?php echo sfConfig::get('app_currency_code')?></td>
+                  <td align="right"><?php $amount_total += $amt; echo number_format($amt, 2, ',', '') ?> <?php echo sfConfig::get('app_currency_code')?></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php if(count($smsRecords)==0): ?>
@@ -86,7 +86,7 @@
                 	<!--
                 	<td><?php echo format_number($amount_total-$amount_total*sfConfig::get('app_vat_percentage')) ?> <?php echo sfConfig::get('app_currency_code')?></td>
                 	 -->
-                         <td><?php echo number_format($amount_total, 2, ',', '') ?> <?php echo sfConfig::get('app_currency_code')?></td>
+                         <td align="right"><?php echo number_format($amount_total, 2, ',', '') ?> <?php echo sfConfig::get('app_currency_code')?></td>
                 </tr>
                 <?php endif; ?>
               </table>
