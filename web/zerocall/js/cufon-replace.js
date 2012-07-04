@@ -25,3 +25,4 @@ Cufon.set('fontSize', '13px').replace('table.callhistory td.title', { fontFamily
 Cufon.set('fontSize', '11px').replace('.right-col .box', { fontFamily: 'Calibri'});
 Cufon.set('fontSize', '13px').replace('.right-col  h4', { fontFamily: 'Calibri Bold'});
 Cufon.set('fontSize', '12px').replace('.split-form-sign-up ul li', { fontFamily: 'Calibri'});
+Cufon.set('fontSize', '13px').replace('span.requiretofill', { fontFamily: 'Calibri'});

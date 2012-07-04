@@ -91,10 +91,12 @@
                 </div>
             </div>
             <div id="slogan">
+
                 <h1 style=""><?php echo __('Agent Portal'); ?></h1>
 <?php if ($sf_user->getAttribute('username', '', 'agentsession')) {
 $sf_user->setCulture('en');
     ?>
+ 
                 <div id="loggedInUser">
                     <?php echo __('Logged in as:') ?><b>&nbsp;<?php echo $sf_user->getAttribute('username', '', 'agentsession') ?></b><br />
                     <?php
