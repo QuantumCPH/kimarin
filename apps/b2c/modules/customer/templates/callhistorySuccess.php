@@ -190,7 +190,7 @@
                             } ?>
                         </table><br/><br/>
 
-                                           <div class="callhistoryheadings"><h2><?php echo __("Payment History"); ?> </h2></div><br />
+<!--                                           <div class="callhistoryheadings"><h2><?php echo __("Payment History"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
                             <td class="title"><?php echo __('Date & time') ?></td>
@@ -214,7 +214,7 @@
                                 echo __('There are currently no call records to show.');
 
                             } ?>
-                        </table><br/><br/>
+                        </table><br/><br/>-->
                     <div class="callhistoryheadings"><h2><?php echo __("Call"); ?> </h2></div><br />
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                             <tr>
@@ -222,7 +222,7 @@
                                 <td class="title" width="40%"><?php echo __('Phone Number') ?></td>
                                 <td class="title"><?php echo __('Duration') ?></td>
                                 <td class="title"><?php echo __('VAT') ?></td>
-                                <td class="title"><?php echo __('Cost') ?></td>
+                                <td class="title" align="right"><?php echo __('Cost') ?></td>
                                 <td class="title"><?php echo __('Call Type') ?></td>
                             </tr>
 
@@ -257,8 +257,8 @@
 
                                     echo date('i:s', $callval);
                                 } ?></td>
-                            <td><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>
-                            <td><?php echo number_format($xdr->charged_amount, 2);
+                            <td align="right"><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>
+                            <td align="right"><?php echo number_format($xdr->charged_amount, 2);
                                 $amount_total+= number_format($xdr->charged_amount, 2); ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                             <td><?php
                                 $typecall = substr($xdr->account_id, 0, 1);
@@ -300,7 +300,7 @@
                                         <!--
                                         <td><?php echo format_number($amount_total - $amount_total * sfConfig::get('app_vat_percentage')) ?> <?php sfConfig::get('app_currency_code')?></td>
                                     	 -->
-                                        <td><?php echo number_format($amount_total, 2, ',', '') ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
+                                        <td align="right"><?php echo number_format($amount_total, 2, ',', '') ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                                         <td>&nbsp;</td>
                                     </tr>
 <?php
