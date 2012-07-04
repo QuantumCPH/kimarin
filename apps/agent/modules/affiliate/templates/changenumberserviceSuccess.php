@@ -50,7 +50,7 @@ jQuery(function(){
                 <select name="countrycode" id="countrycode" >
                     <?php
                     $enableCountry = new Criteria();
-                    $enableCountry->add(CountryPeer::CALLING_CODE, 47);
+                    $enableCountry->add(CountryPeer::CALLING_CODE, sfConfig::get('app_country_code'));
                     $country = CountryPeer::doSelectOne($enableCountry);
                     ?>
                         <option value="<?php echo $country->getCallingCode(); ?>"><?php echo $country->getName(); ?></option>
