@@ -4,6 +4,7 @@ require_once(sfConfig::get('sf_lib_dir') . '/Browser.php');
 require_once(sfConfig::get('sf_lib_dir') . '/emailLib.php');
 require_once(sfConfig::get('sf_lib_dir') . '/changeLanguageCulture.php');
 require_once(sfConfig::get('sf_lib_dir') . '/sms.class.php');
+require_once(sfConfig::get('sf_lib_dir') . '/zerocall_out_sms.php');
 
 /**
  * affiliate actions.
@@ -776,7 +777,10 @@ class affiliateActions extends sfActions {
         $order_id = $request->getParameter('orderid');
         //$request->getParameter('amount');
         $order_amount = ((double) $request->getParameter('amount'));
-
+//        echo $order_id;
+//        echo '<br />';
+//        echo $order_amount;
+//die;
         $this->forward404Unless($order_id || $order_amount);
 
 
@@ -964,13 +968,14 @@ class affiliateActions extends sfActions {
 
             emailLib::sendCustomerRegistrationViaAgentEmail($this->customer, $order);
 
-            $zeroCallOutSMSObject = new ZeroCallOutSMS();
-            $zeroCallOutSMSObject->toCustomerAfterReg($customer_product->getProductId(), $this->customer);
+//            $zeroCallOutSMSObject = new ZeroCallOutSMS();
+//            $zeroCallOutSMSObject->toCustomerAfterReg($customer_product->getProductId(), $this->customer);
             
 
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $this->customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
             $this->redirect('affiliate/receipts');
-        }
+        }// die('here');
+        
     }
 
     public function executeFaq(sfWebRequest $request) {

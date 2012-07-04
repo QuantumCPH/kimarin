@@ -37,7 +37,7 @@ $pus=0;
                             }else{
 
 
-        echo  $customer_balance;
+        echo   number_format($customer_balance,2);
           echo sfConfig::get('app_currency_code');
                             }
                           

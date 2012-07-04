@@ -91,8 +91,12 @@
                 </div>
             </div>
             <div id="slogan">
-                <h1 style="padding-left: 340px;"><?php echo __('CRM/Billing/Agent Portal'); ?></h1>
-<?php if ($sf_user->getAttribute('username', '', 'agentsession')) { ?>
+
+                <h1 style=""><?php echo __('Agent Portal'); ?></h1>
+<?php if ($sf_user->getAttribute('username', '', 'agentsession')) {
+$sf_user->setCulture('en');
+    ?>
+ 
                 <div id="loggedInUser">
                     <?php echo __('Logged in as:') ?><b>&nbsp;<?php echo $sf_user->getAttribute('username', '', 'agentsession') ?></b><br />
                     <?php
@@ -109,32 +113,14 @@
             </div>
 
             <?php
-//                $enableCountry = new Criteria();
-//                $enableCountry->add(EnableCountryPeer::STATUS, '1');
-//
-//                $form = new sfFormLanguage(
-//                $sf_user,
-//                array('languages' => array('en', 'da','pl','sv'))
-//                );
-//                $widgetSchema = $form->getWidgetSchema();
-//                $widgetSchema['language']->setAttribute('style', "width:85px");
-//                $widgetSchema['language']->setAttribute('onChange', "this.form.submit();");
-//                $widgetSchema['language']->setAttribute('onChange', "this.form.submit();");
-//                $widgetSchema['language']->setLabel(false);
             ?>
-                <!--                <div style="position:absolute; left: 846px; top: 54px;">
-                                  <form action="">
-            <?php echo $form; ?>
-                                    <input type="hidden" value="<?php echo $sf_user->getAttribute('product_ids') ?>" name="pid" />
-                                    <input type="hidden" value="<?php echo $sf_user->getAttribute('cusid') ?>" name="cid" />
-                                </form>
-                                </div>-->
+ 
 
                 <div class="clr"></div>
-                <div id="menu">
+              
                     <!--                <h1>menu</h1>-->
                 <?php
-                if ($sf_user->isAuthenticated()) {
+                if ($sf_user->isAuthenticated() && $sf_user->getAttribute('username', '', 'agentsession')) {
                     $modulName = $sf_context->getModuleName();
                     $actionName = $sf_context->getActionName();
                     // print_r($request->getPathInfoArray());
@@ -146,7 +132,7 @@
                     //$routing = $sf_context->getInstance()->getRouting();
                     //echo $routing;
                 ?>
-                    <ul id="sddm">
+                 <div id="menu">     <ul id="sddm">
                         <li>
                         <?php
                         if ($actionName == 'overview' && $modulName == "affiliate") {
@@ -235,9 +221,10 @@
                         <li class="last"><?php echo link_to(__('Logout'), 'agentUser/logout'); ?></li>
 
                     </ul>
-<?php } ?>
-                <div class="clr"></div>
+                      <div class="clr"></div>
             </div>
+<?php } ?>
+              
             <div id="content">
 <?php if ($sf_user->hasFlash('message')): ?>
                             <div id="info-message" class="grid_9 save-ok">
@@ -259,8 +246,8 @@
 <?php endif; ?>
 
 
-<?php if ($sf_user->isAuthenticated()): ?>
-                                        <div class="clr"></div>
+<?php if ($sf_user->isAuthenticated() && $sf_user->getAttribute('username', '', 'agentsession')): ?>
+                                       <div class="clr"></div> 
                                         <p><?php echo __('Provide this link to your customers while they signup with your reference.') ?>
                                             <a href="<?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>">
                         				<?php echo sfConfig::get('app_customer_url');?>signup/step1?ref=<?php echo $sf_user->getAttribute('agent_company_id', '', 'agentsession') ?>

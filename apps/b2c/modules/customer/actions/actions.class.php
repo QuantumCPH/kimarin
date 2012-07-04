@@ -6,6 +6,7 @@ require_once(sfConfig::get('sf_lib_dir') . '/changeLanguageCulture.php');
 require_once(sfConfig::get('sf_lib_dir') . '/parsecsv.lib.php');
 require_once(sfConfig::get('sf_lib_dir') . '/telinta.class.php');
 require_once(sfConfig::get('sf_lib_dir') . '/payment.class.php');
+require_once(sfConfig::get('sf_lib_dir') . '/zerocall_out_sms.php');
 /**
  * customer actions.
  *
@@ -1300,15 +1301,15 @@ class customerActions extends sfActions {
 
             $messages = array();
             if (strlen($message) < 142) {
-                $messages[1] = $message . "-Sent by Zapna-";
+                $messages[1] = $message . "-Sent by Kimarin-";
             } else if (strlen($message) > 142 and strlen($message) < 302) {
 
-                $messages[1] = substr($message, 1, 142) . "-Sent by zapna-";
-                $messages[2] = substr($message, 143) . "-Sent by Zapna-";
+                $messages[1] = substr($message, 1, 142) . "-Sent by Kimarin-";
+                $messages[2] = substr($message, 143) . "-Sent by Kimarin-";
             } else if (strlen($message) > 382) {
-                $messages[1] = substr($message, 1, 142) . "-Sent by Zapan-";
-                $messages[2] = substr($message, 143, 302) . "-Sent by Zapna-";
-                $messages[3] = substr($message, 303, 432) . "-Sent by Zapna-";
+                $messages[1] = substr($message, 1, 142) . "-Sent by Kimarin-";
+                $messages[2] = substr($message, 143, 302) . "-Sent by Kimarin-";
+                $messages[3] = substr($message, 303, 432) . "-Sent by Kimarin-";
             }
 
             foreach ($messages as $sms_text) {

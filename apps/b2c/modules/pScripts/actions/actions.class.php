@@ -2619,7 +2619,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
     }
     
     public function executeCalbackrefill(sfWebRequest $request) {
-        $this->getUser()->setCulture($request->getParameter('lng'));
+      //  $this->getUser()->setCulture($request->getParameter('lng'));
         $Parameters=$request->getURI();
         $order_id = $request->getParameter("order_id");
         
@@ -2767,7 +2767,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $order_id = $request->getParameter('order_id'); 
         $order_amount = $request->getParameter('amount');
         $ticket_id = "";
-        $this->getUser()->setCulture($request->getParameter('lng'));
+      //  $this->getUser()->setCulture($request->getParameter('lng'));
               
 
         if ($order_id != '') {
@@ -3090,8 +3090,8 @@ if(($caltype!="IC") && ($caltype!="hc")){
              
                 emailLib::sendCustomerRegistrationViaWebEmail($this->customer, $order);
 
-                $zeroCallOutSMSObject = new ZeroCallOutSMS();
-                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
+//                $zeroCallOutSMSObject = new ZeroCallOutSMS();
+//                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
                 $this->order = $order;
             }//end if
             else {

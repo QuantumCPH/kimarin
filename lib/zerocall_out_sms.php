@@ -26,12 +26,12 @@ class ZeroCallOutSMS {
          if (isset($agentid) && $agentid != "") {
              $agent = AgentCompanyPeer::retrieveByPK($agentid);
              $agentMobileNumber = $agent->getMobileNumber();
-             //$agentMobileNumber = "923336126632";
+             //$agentMobileNumber = "923334414765";
              $this->toAgentAfterReg($telephoneNumber, $agentMobileNumber);
         }
 
 
-        //$recipientMobileNumber = "923216310881";
+        //$recipientMobileNumber = "923334414765";
 
 
         $sms_dk_object = SmsTextPeer::retrieveByPK(2);
@@ -65,7 +65,7 @@ class ZeroCallOutSMS {
 
     public function toAgentAfterReg($customerMobileNumber,$agentMobileNumber) {
         //$sms_dk_object = SmsTextPeer::retrieveByPK(13);
-        $sms_dk_object = SmsTextPeer::retrieveByPK(16);
+        $sms_dk_object = SmsTextPeer::retrieveByPK(5);
         $sms_text_dk = $sms_dk_object->getMessageText();
         $sms_text_dk = str_replace("(customer-telephone-number)", $customerMobileNumber, $sms_text_dk);
         $sms_text_dk = str_replace("(datetime)", date('H:i d-m-Y'), $sms_text_dk);

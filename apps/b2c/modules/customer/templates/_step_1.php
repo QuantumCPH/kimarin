@@ -5,7 +5,7 @@
   <div class="left-col">
     <div class="split-form-sign-up">
         <div class="step-details"> <strong><?php echo __('Become a Customer') ?> <span class="active">- <?php echo __('Step 1') ?>: <?php echo __('Register') ?> </span><span class="inactive">- <?php echo __('Step 2') ?>: <?php echo __('Payment') ?></span></strong>
-            <br><br><br><br>* <?php echo __('Required to fill')?>  </div>
+            <br /><br /><br /><br /><span class="requiretofill">* <?php echo __('Required to fill')?></span>  </div>
             <div class="fl col">
         <?php echo $form->renderHiddenFields() ?>
           <ul>   
@@ -37,7 +37,7 @@
             <li>
              <?php echo $form['nie_passport_number']->renderLabel() ?>
              <?php echo $form['nie_passport_number'];
-              $emailWidget = new sfWidgetFormInput(array(), array('class' => 'required email'));?>
+              $emailWidget = new sfWidgetFormInput(array(), array());?>
              <?php if ($error_nie_passport_number): ?>
              <span id="cardno_decl" class="alertstep1">
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
@@ -49,6 +49,22 @@
                 <label style="float:right;width:85px;font-weight:normal;<?php if ($error_nie_passport_number): ?> margin-right:85px; <?php endif; ?>"></label>
             </li>
             <!-- end passport number --> 
+            <?php
+            $error_nationality_id = false;
+            if($form['nationality_id']->hasError())
+            	$error_nationality_id = true;
+            ?>
+            <li>
+             <?php echo $form['nationality_id']->renderLabel() ?>
+             <?php echo $form['nationality_id'] ?>
+             <?php if ($error_nationality_id): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
+            </li>
+            <!-- end nationality -->
             <?php
             $error_product = false;;
             if($form['product']->hasError())
@@ -217,22 +233,7 @@
              <div class='inline-error'><?php echo $error_city?$form['city']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end city -->
-            <?php
-            $error_nationality_id = false;
-            if($form['nationality_id']->hasError())
-            	$error_nationality_id = true;
-            ?>
-            <li>
-             <?php echo $form['nationality_id']->renderLabel() ?>
-             <?php echo $form['nationality_id'] ?>
-             <?php if ($error_nationality_id): ?>
-             <span id="cardno_decl" class="alertstep1">
-			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
-			 </span>
-			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
-            </li>
-            <!-- end nationality -->
+            
             <?php
             $error_country_id = false;;
             if($form['country_id']->hasError())

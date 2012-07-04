@@ -47,10 +47,10 @@
     
         unique =  jQuery("#uniqueid").val();
         //alert(unique[0]);
-//        if(unique == "" || unique.length != 6 || unique[0] !='1'){
-//            alert("<?php //echo __('Please enter the valid Unique ID with 6 digits')?>");
-//            return false;
-//        }
+        if(unique == "" || unique.length < 6 ){
+            alert("<?php echo __('Please enter the valid Unique ID with 6 digits')?>");
+            return false;
+        }
 
 
         calc();
@@ -124,10 +124,10 @@
                         </label>
 
 
-                        <label><?php echo $order->getProduct()->getRegistrationFee() ?> <?php echo sfConfig::get('app_currency_code')?>
+                        <label><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?> <?php echo sfConfig::get('app_currency_code')?>
                             <br/>
                             <br/>
-                            <?php echo format_number($order->getProduct()->getPrice()) ?> <?php echo sfConfig::get('app_currency_code')?>
+                            <?php echo number_format(format_number($order->getProduct()->getPrice()),2); ?> <?php echo sfConfig::get('app_currency_code')?>
                         </label>
 
 
@@ -172,12 +172,12 @@
 
                         <label class="fr ac" >
                             <span id="vat_span">
-<?php echo format_number($product_price_vat) ?>
+<?php echo number_format($product_price_vat,2); ?>
                             </span> <?php echo sfConfig::get('app_currency_code')?>
                             <br />
 <?php $total = $product_price + $product_price_vat ?>
                             <span id="total_span">
-<?php echo format_number($total) ?>
+<?php echo number_format($total,2); ?>
                             </span> <?php echo sfConfig::get('app_currency_code')?>
                         </label>
                     </li>
@@ -195,7 +195,7 @@
 <?php echo $form->renderHiddenFields() ?>
 
                             <input type="hidden" name="orderid" value="<?php echo $order_id ?>"/>
-                                <input type="hidden" name="amount" id="total" value="<?php echo $total ?>"/>
+                                <input type="hidden" name="amount" id="total" value="<?php echo number_format($total,2); ?>"/>
 
                             </div>
                             <div class="fr col">

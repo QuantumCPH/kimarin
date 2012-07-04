@@ -53,20 +53,20 @@
             <td style="padding: 5px;">Email:</td>
             <td style="padding: 5px;"> <input type="text" name="email" id="employee_email"   class="required"   value="<?php echo $employee->getEmail(); ?>"  size="25" /> </td>
         </tr>
-       <?php  $varval = $employee->getRegistrationType();
-                if (isset($varval) && $varval == "1") { ?>  
-        <tr>
+       <?php // $varval = $employee->getRegistrationType();
+              //  if (isset($varval) && $varval == "1") { ?>
+<!--        <tr>
             <td style="padding: 5px;">Rese number:</td>
             <td  style="padding: 5px;">
                 <select name="registration_type" id="employee_company_id"   >
                   <option value="3"  <?php  $varval = $employee->getRegistrationType();
                 if (isset($varval) && $varval == "1") { ?>  selected="selected" <?php  } ?> > yes</option>
                 </select> </td>
-        </tr>
-  <?php }else{ ?>
+        </tr>-->
+  <?php //}else{ ?>
 
 
-          <tr>
+<!--          <tr>
             <td style="padding: 5px;">Rese number:</td>
             <td  style="padding: 5px;">
                 <select name="registration_type" id="employee_company_id"   >
@@ -75,9 +75,10 @@
                     <option value="1"  <?php  $varval = $employee->getRegistrationType();
                 if (isset($varval) && $varval == "1") { ?>  selected="selected" <?php  } ?> > yes</option>
                 </select> </td>
-        </tr>
+        </tr>-->
         
-        <?php  } ?>
+        <?php // } ?>
+                   <input type="hidden" name="registration_type" value="0" >
          <!-- <tr>
             <td>App code:</td>
             <td> <input type="text" name="app_code" id="employee_app_code"  value="<?php //echo $employee->getAppCode(); ?>"  size="25" /></td>
@@ -103,7 +104,11 @@
                 </select></td>
         </tr>
 
-
+ <tr>
+            <td>Comments:</td>
+            <td><textarea name="comments"  id="employee_comments" style="width: 542px !important; height: 230px !important;"><?php echo $employee->getComments(); ?></textarea>
+                </td>
+        </tr>
 <!--        <tr>
             <td style="padding: 5px;">Product Price:</td>
             <td style="padding: 5px;"> <input type="text" name="price" id="employee_password"   class="required"  value="<?php //echo $employee->getProductPrice(); ?>"  size="25" />  </td>
