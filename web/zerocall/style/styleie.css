@@ -720,3 +720,6 @@ input[type=submit],input[type=button],textarea,option{
 .textes{
     height:40px ;
 }
+img{
+    border:none !important;
+}
