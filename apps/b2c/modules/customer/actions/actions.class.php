@@ -1838,10 +1838,10 @@ public function executeSmsHistory(sfWebrequest $request){
 
 
         if($item_amount=="") $item_amount = $request->getParameter('extra_refill');
-        
+           $lang=$this->getUser()->getCulture();
         $return_url = $this->getTargetUrl().'customer/refillAccept';
         $cancel_url = $this->getTargetUrl().'customer/refillReject/';
-        $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?order_id='.$order_id.'&amountval='.$item_amount;
+        $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
 
      
         $querystring = '';

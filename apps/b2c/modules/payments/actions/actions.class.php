@@ -303,10 +303,11 @@ class paymentsActions extends sfActions {
         $order_id = $request->getParameter('item_number');
         $item_amount = $request->getParameter('amount');
         
-        
+        $lang=$this->getUser()->getCulture();
+      
         $return_url = $this->getTargetUrl();
         $cancel_url = $this->getTargetUrl().'payments/reject/orderid='.$order_id;
-        $notify_url = $this->getTargetUrl().'pScripts/confirmpayment?order_id='.$order_id.'&amount='.$item_amount;
+        $notify_url = $this->getTargetUrl().'pScripts/confirmpayment?lang='.$lang.'&order_id='.$order_id.'&amount='.$item_amount;
 
      
         $querystring = '';
