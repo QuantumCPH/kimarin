@@ -192,6 +192,12 @@
 					<?php endif; ?>
 				  </div>
 				</div>
+                                  <div class="form-row">
+				  <label class="required">Comments:</label>
+				  <div class="content">
+				  	<?php echo $company->getComments(); ?>
+				  </div>
+				</div>	
 			</fieldset>
 		</div>
 	
