@@ -37,7 +37,7 @@ return true;}
 
 
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Websms') ) ) ?>
-
+<br />
 <?php 
 		 //echo $res_cbf;
  if($msgSent!=''){
@@ -48,6 +48,7 @@ return true;}
    <?php }
 		  
   } ?>
+<br />
 <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'', 'customer_id'=>$customer->getId())) ?>
 	<div class="split-form">
