@@ -39,7 +39,7 @@
       <th align="left"  id="sf_admin_list_th_name">product</th>
     
       <th align="left" id="sf_admin_list_th_name">Mobile number</th>
-       <th align="left">Resenumber</th>
+<!--       <th align="left">Resenumber</th>-->
        <?php  if(isset($companyval) && $companyval!=""){  ?>
         <th align="left"  id="sf_admin_list_th_name">Employee balance</th>
         <?php } ?>
@@ -97,21 +97,21 @@
       <td>
            <?php
 
+//
+//                            $empid=$employee->getRegistrationType();
+//                          if(isset($empid) && $empid==1){ ?>
 
-                            $empid=$employee->getRegistrationType();
-                          if(isset($empid) && $empid==1){ ?>
 
-
-				  	<?php    $voip = new Criteria();
-        $voip->add(SeVoipNumberPeer::CUSTOMER_ID, $employee->getCountryMobileNumber());
-        $voip->addAnd(SeVoipNumberPeer::IS_ASSIGNED, 1);
-        $voipv = SeVoipNumberPeer::doSelectOne($voip);
-
-                         if(isset ($voipv)){echo $voipv->getNumber();} ?>
+				   <?php    $voip = new Criteria();
+//        $voip->add(SeVoipNumberPeer::CUSTOMER_ID, $employee->getCountryMobileNumber());
+//        $voip->addAnd(SeVoipNumberPeer::IS_ASSIGNED, 1);
+//        $voipv = SeVoipNumberPeer::doSelectOne($voip);
+//
+//                         if(isset ($voipv)){echo $voipv->getNumber();} ?>
 				 
 
 
-                            <?php  }else{echo "No";} ?>
+                            <?php  //}else{echo "No";} ?>
 </td>
  <?php  if(isset($companyval) && $companyval!=""){  ?>
       <td> <?php  $mobileID= $employee->getCountryMobileNumber();

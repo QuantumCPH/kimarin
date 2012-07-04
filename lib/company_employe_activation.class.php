@@ -70,7 +70,8 @@ class CompanyEmployeActivation {
         $c = new Criteria();
         $c->addAnd(ProductPeer::ID, $productId);
         $product = ProductPeer::doSelectOne($c);
-        return self::createAccount($company, $employeMobileNumber, 'a', $product->getBillingProductId());
+        $product = BillingProductsPeer::retrieveByPK($product->getBillingProductId());
+        return self::createAccount($company, $employeMobileNumber, 'a', $product->getAIproduct());
     }
 
     public static function telintaRegisterEmployeeCB($employeMobileNumber, Company $company) {
