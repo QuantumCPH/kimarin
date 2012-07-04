@@ -3090,8 +3090,8 @@ if(($caltype!="IC") && ($caltype!="hc")){
              
                 emailLib::sendCustomerRegistrationViaWebEmail($this->customer, $order);
 
-                $zeroCallOutSMSObject = new ZeroCallOutSMS();
-                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
+//                $zeroCallOutSMSObject = new ZeroCallOutSMS();
+//                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
                 $this->order = $order;
             }//end if
             else {
