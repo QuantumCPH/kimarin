@@ -2620,6 +2620,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
     
     public function executeCalbackrefill(sfWebRequest $request) {
       //  $this->getUser()->setCulture($request->getParameter('lng'));
+        $this->getUser()->setCulture($request->getParameter('lang'));
         $Parameters=$request->getURI();
         $order_id = $request->getParameter("order_id");
         
@@ -2754,6 +2755,8 @@ if(($caltype!="IC") && ($caltype!="hc")){
         return sfView::NONE;
     }
         public function executeConfirmpayment(sfWebRequest $request) {
+
+         $this->getUser()->setCulture($request->getParameter('lang'));
         $Parameters=$request->getURI();
 
        // $Parameters=$Parameters.$request->getParameter('amount');

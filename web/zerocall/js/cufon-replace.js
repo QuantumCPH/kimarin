@@ -7,6 +7,7 @@ Cufon.replace('.luk', { fontFamily: 'Calibri' });
 Cufon.replace('#inner-page', { fontFamily: 'Calibri' });
 Cufon.replace('.split-form ul li button', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '14px').replace('.dashboard-info-text', { fontFamily: 'Calibri' });
+Cufon.set('fontSize', '14px').replace('.refilselect', { fontFamily: 'Calibri' });
 Cufon.replace('.dashboard-info button', { fontFamily: 'Calibri' });
 Cufon.replace('.callhistory tbody td.title', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '17px').replace('.step-details strong', { fontFamily: 'Calibri Bold' });
