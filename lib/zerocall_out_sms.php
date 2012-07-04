@@ -65,7 +65,7 @@ class ZeroCallOutSMS {
 
     public function toAgentAfterReg($customerMobileNumber,$agentMobileNumber) {
         //$sms_dk_object = SmsTextPeer::retrieveByPK(13);
-        $sms_dk_object = SmsTextPeer::retrieveByPK(16);
+        $sms_dk_object = SmsTextPeer::retrieveByPK(5);
         $sms_text_dk = $sms_dk_object->getMessageText();
         $sms_text_dk = str_replace("(customer-telephone-number)", $customerMobileNumber, $sms_text_dk);
         $sms_text_dk = str_replace("(datetime)", date('H:i d-m-Y'), $sms_text_dk);

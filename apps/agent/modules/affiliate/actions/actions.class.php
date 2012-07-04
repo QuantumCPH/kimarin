@@ -968,8 +968,8 @@ class affiliateActions extends sfActions {
 
             emailLib::sendCustomerRegistrationViaAgentEmail($this->customer, $order);
 
-            $zeroCallOutSMSObject = new ZeroCallOutSMS();
-            $zeroCallOutSMSObject->toCustomerAfterReg($customer_product->getProductId(), $this->customer);
+//            $zeroCallOutSMSObject = new ZeroCallOutSMS();
+//            $zeroCallOutSMSObject->toCustomerAfterReg($customer_product->getProductId(), $this->customer);
             
 
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $this->customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
