@@ -23,11 +23,11 @@ jQuery(function() {
 });
 </script>
 <div class="report_container">    
-    <table cellpadding="0" cellspacing="0" class="tbldatefilter">
+    <table cellpadding="0" cellspacing="0" class="tbldatefilter" align="center">
     <tr><td><h1><?php echo __('Date Filter') ?></h1></td></tr>
     <tr>
     <td>
-        <form action="" id="searchform" method="POST" name="searchform">
+        <form action="" id="searchform" method="POST" name="searchform" >
         <div class="dateBox-pt">
           <div class="formRow-pt" style="float:left;">
             <label class="datelable">From:</label>
