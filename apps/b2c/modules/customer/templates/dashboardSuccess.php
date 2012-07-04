@@ -165,9 +165,9 @@ echo " ";   echo substr($Telintambs, 15,2);
          }  ?></span></div>
 
 <?php } ?>
-<?php   if($pus==0){?>
+<?php   if($pus==5){?>
 
-  <?php if($voip_customer!=''){?>
+  <?php if($voip_customer!=''){ ?>
         
         
                 <div class="fl cb dashboard-info-text"><span><?php echo __('Resenummer ') ?>:</span><span><?php  $TelintaMobile="";    $TelintaMobile=$voipnumbers;
@@ -195,9 +195,9 @@ echo " ";   echo substr($Telintambs, 15,2);
                         <?php echo url_for('customer/subscribevoip?cid='.$customer->getId(), true) ?>
                     <?php }?>'" style="cursor: pointer"  value="<?php if($voip_customer!=''){ echo __('Disable'); }else{echo __('Enable');} ?>" ></div>
         <?php }  }else{ ?>
-	 <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Your Status:') ?>:</span><span> <?php echo __('Active')?>
+<!--	 <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Your Status:') ?>:</span><span> <?php echo __('Active')?>
 
-        </span></div>
+        </span></div>-->
 <?php   } ?>
         <p>&nbsp;</p>
         <br/><br/>
