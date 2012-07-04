@@ -42,7 +42,7 @@ return true;}
 		 //echo $res_cbf;
  if($msgSent!=''){
    if($msgSent=="Yes" && trim($res_cbf)!="Response from CBF is:"){ ?>
-    <?php echo "<div class='alert_bar'>".__("Message has been sent").'</div>'; ?>
+    <?php echo "<div class='sms_alert_bar'>".__("Message has been sent").'</div>'; ?>
     <?php }elseif(trim($res_cbf)=="Response from CBF is:"){?>
     <?php echo "<div class='alert_bar'>".__("Your message unfortunately not sent, try again").'</div>'; ?>
    <?php }
