@@ -160,10 +160,8 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
               
               
               <label class="fr ac">
-              	<span class="product_price_span"><?php echo $order->getProduct()->getRegistrationFee() ?> </span><?php echo sfConfig::get('app_currency_code')?>            	<br />
-              	<span id="extra_refill_span">
-					<?php echo $order->getProduct()->getPrice() ?>
-				</span><?php echo sfConfig::get('app_currency_code')?>
+              	<span class="product_price_span"><?php echo  number_format($order->getProduct()->getRegistrationFee(),2) ?></span><?php echo sfConfig::get('app_currency_code')?>            	<br />
+              	<span id="extra_refill_span"><?php echo  number_format($order->getProduct()->getPrice(),2); ?></span><?php echo sfConfig::get('app_currency_code')?>
 			  </label>
 
             </li>
@@ -202,10 +200,10 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
               <input type="hidden" id="vat" value="<?php echo $product_price_vat; ?>" />
                 <input type="hidden" id="postal" value="<?php  echo $postalcharge; ?>" />
               <label class="fr ac" >
-                  <?php echo $postalcharge;  ?>&nbsp; <?php echo sfConfig::get('app_currency_code')?>
+                  <?php echo  number_format($postalcharge,2);  ?>&nbsp; <?php echo sfConfig::get('app_currency_code')?>
                 <br />
               	<span id="vat_span">
-                    <?php echo format_number($product_price_vat) ?>
+                    <?php echo  number_format($product_price_vat,2); ?>
               	</span><?php echo sfConfig::get('app_currency_code')?>
                 <br />
               	<?php //$total = $product_price + $extra_refill + $vat 
@@ -213,7 +211,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
                 ?>
                 <?php $total = $product_price + $postalcharge + $product_price_vat ?>
               	<span id="total_span">
-              	<?php echo format_number($total) ?>
+              	<?php echo  number_format($total,2) ?>
               	</span><?php echo sfConfig::get('app_currency_code')?>
               </label>
             </li>
