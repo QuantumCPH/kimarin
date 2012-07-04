@@ -24,7 +24,7 @@
 </script>
 <div class="report_container">
 
-    <table cellpadding="0" cellspacing="0" class="tbldatefilter">
+    <table cellpadding="0" cellspacing="0" class="tbldatefilter" align="center">
         <tr><td><h1><?php echo __('Date Filter') ?></h1></td></tr>
         <tr>
             <td>
