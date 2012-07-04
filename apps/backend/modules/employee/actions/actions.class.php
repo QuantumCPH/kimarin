@@ -140,7 +140,7 @@ class employeeActions extends sfActions {
         $this->simtypes = SimTypesPeer::doSelect($cst);
 
         $pr = new Criteria();
-        $pr->add(ProductPeer::ID, 4);
+        $pr->add(ProductPeer::IS_IN_B2B, 1);
         $this->products = ProductPeer::doSelect($pr);
     }
 

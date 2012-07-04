@@ -85,7 +85,7 @@ class Telienta {
     }
 
     public static function createCBAccount($mobileNumber, Customer $customer,$iProduct=11804) {
-        return self::createAccount($customer, $mobileNumber, 'cb',  $iProduct);
+        return true; //self::createAccount($customer, $mobileNumber, 'cb',  $iProduct);
     }
 
     public static function createReseNumberAccount($VOIPNumber, Customer $customer, $currentActiveNumber, $voip_iProduct=11805) {
