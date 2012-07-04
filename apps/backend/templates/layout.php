@@ -78,7 +78,8 @@
                <?php //echo link_to(image_tag('/images/german.png'), 'user/changeCulture?new=de'); ?>
                <?php //echo link_to(image_tag('/images/english.png'), 'user/changeCulture?new=en'); ?>
             </div>
-      <?php if($sf_user->isAuthenticated()): ?>
+      <?php if($sf_user->isAuthenticated()): 
+          $sf_user->setCulture('en'); ?>
      <div class="topNav" align="center">  
       <ul id="sddm">
              <li><a href="#"
