@@ -717,3 +717,6 @@ input[type=submit],input[type=button],textarea,option{
     padding-top:9px;
     font-size:14px;
 }
+.textes{
+    height:40px ;
+}
