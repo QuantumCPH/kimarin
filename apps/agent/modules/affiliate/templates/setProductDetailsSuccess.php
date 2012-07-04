@@ -47,10 +47,10 @@
     
         unique =  jQuery("#uniqueid").val();
         //alert(unique[0]);
-//        if(unique == "" || unique.length != 6 || unique[0] !='1'){
-//            alert("<?php //echo __('Please enter the valid Unique ID with 6 digits')?>");
-//            return false;
-//        }
+        if(unique == "" || unique.length < 6 ){
+            alert("<?php echo __('Please enter the valid Unique ID with 6 digits')?>");
+            return false;
+        }
 
 
         calc();
