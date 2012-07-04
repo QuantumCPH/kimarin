@@ -76,11 +76,12 @@ class Telienta {
         $c = new Criteria();
         $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
         $c->addJoin(CustomerProductPeer::PRODUCT_ID,ProductPeer::ID, Criteria::LEFT_JOIN);
+        $c->addJoin(ProductPeer::BILLING_PRODUCT_ID,  BillingProductsPeer::ID, Criteria::LEFT_JOIN);
         $c->addAnd(CustomerProductPeer::STATUS_ID, 3);
         $c->addAnd(CustomerPeer::ID, $customer->getId());
-        $product = ProductPeer::doSelectOne($c);
+        $product = BillingProductsPeer::doSelectOne($c);
 
-        return self::createAccount($customer, $mobileNumber, 'a', $product->getBillingProductId());
+        return self::createAccount($customer, $mobileNumber, 'a', $product->getAIproduct());
     }
 
     public static function createCBAccount($mobileNumber, Customer $customer,$iProduct=11804) {
