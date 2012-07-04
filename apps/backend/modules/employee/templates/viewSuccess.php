@@ -112,16 +112,16 @@
                            $empid=$employee->getRegistrationType();
                           if(isset($empid) && $empid==1){ ?>
 
-                            <div class="form-row">
+<!--                            <div class="form-row">
 				  <label class="required">Resenumber:</label>
 				  <div class="content">
 				  	<?php    $voip = new Criteria();
         $voip->addAnd(SeVoipNumberPeer::CUSTOMER_ID, $employee->getCountryMobileNumber());
         $voipv = SeVoipNumberPeer::doSelectOne($voip);
 
-                         echo $voipv->getNumber(); ?>
+                        // echo $voipv->getNumber(); ?>
 				  </div>
-				</div>
+				</div>-->
 
 
                             <?php  } ?>

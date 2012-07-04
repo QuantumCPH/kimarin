@@ -120,6 +120,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
+  <?php if($order->getProduct()->getPrice() > 0){?>
   <tr>
     <td></td>
     <td>
@@ -131,6 +132,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right"><?php echo number_format($order->getProduct()->getPrice(),2); ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
+ <?php } ?> 
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>

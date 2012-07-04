@@ -76,6 +76,7 @@ echo "    ";   echo substr($Telintambs, 7,2);
 echo " ";   echo substr($Telintambs, 9,2);
 echo " ";   echo substr($Telintambs, 11,2);
 echo " ";   echo substr($Telintambs, 13,2);
+echo " ";   echo substr($Telintambs, 15,2);
           
 
 
@@ -94,7 +95,7 @@ echo " ";   echo substr($Telintambs, 15,2);
 
 
 
-        <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Active mobile No ') ?>:</span><span><?php
+        <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Active mobile No') ?>:</span><span><?php
         
       
         if(isset($unid) && $unid!=""){
@@ -139,7 +140,7 @@ echo " ";   echo substr($Telintambs, 15,2);
                 $getFirstnumberofMobile = substr($customer->getMobileNumber(), 0,1);     // bcdef
                 if($getFirstnumberofMobile==0){
                     $TelintaMobile = substr($customer->getMobileNumber(), 1);
-                   $TelintaMobile =  '0047'.$TelintaMobile ;
+                   $TelintaMobile =  '0034'.$TelintaMobile ;
   $Telintambs=$TelintaMobile;
 
  echo substr($Telintambs, 0,4); echo " ";   echo substr($Telintambs, 4,3);
@@ -149,7 +150,7 @@ echo " ";   echo substr($Telintambs, 11,2);
 echo " ";   echo substr($Telintambs, 13,2);
 echo " ";   echo substr($Telintambs, 15,2);
                 }else{
-                  $TelintaMobile = '0047'.$customer->getMobileNumber();
+                  $TelintaMobile = '0034'.$customer->getMobileNumber();
 
                     $Telintambs=$TelintaMobile;
 
