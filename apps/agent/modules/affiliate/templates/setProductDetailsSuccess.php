@@ -112,11 +112,11 @@
                         <label><?php echo $order->getProduct()->getName() ?> <?php echo __('details') ?>:</label>
                     </li>
                     <li>
-                        <label><?php echo __('Unique Id') ?>:</label>
+                        <label style="text-align:left"><?php echo __('Unique Id') ?>:</label>
                         <input type="text" id="uniqueid" value="" name="uniqueid"/>
                     </li>
                     <li>
-                        <label>
+                        <label style="text-align:left">
                             <?php echo __('Registration Fee') ?>
                             <br/>
                             <br/>
@@ -124,7 +124,7 @@
                         </label>
 
 
-                        <label><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?> <?php echo sfConfig::get('app_currency_code')?>
+                        <label style="width:180px; padding-right: 0px"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?> <?php echo sfConfig::get('app_currency_code')?>
                             <br/>
                             <br/>
                             <?php echo number_format(format_number($order->getProduct()->getPrice()),2); ?> <?php echo sfConfig::get('app_currency_code')?>
@@ -167,10 +167,10 @@
                         </span>
                     </li>
                     <li>
-                        <label><?php echo __('VAT') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
+                        <label style="text-align:left"><?php echo __('VAT') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
 <?php echo __('Total amount') ?></label>
 
-                        <label class="fr ac" >
+                        <label class="fr ac" style="width:180px; padding-right: 0px" >
                             <span id="vat_span">
 <?php echo number_format($product_price_vat,2); ?>
                             </span> <?php echo sfConfig::get('app_currency_code')?>

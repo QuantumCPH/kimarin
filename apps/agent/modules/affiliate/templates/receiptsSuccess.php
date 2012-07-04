@@ -30,11 +30,11 @@ jQuery(function() {
         <form action="" id="searchform" method="POST" name="searchform" >
         <div class="dateBox-pt">
           <div class="formRow-pt" style="float:left;">
-            <label class="datelable">From:</label>
+            <label class="datelable" style="text-align:left">From:</label>
             <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo  date('Y-m-d',strtotime(@$startdate));?>" />
           </div>
           <div class="formRow-pt" style="float:left;">
-              <label class="datelable">To:</label>
+              <label class="datelable" style="text-align:left">To:</label>
             <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$enddate ? $enddate : date('Y-m-d');?>" />
           </div>
            <span><input type="submit" name="søg" value="Search" class="datefilterBtn" /></span>
