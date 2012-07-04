@@ -777,10 +777,10 @@ class affiliateActions extends sfActions {
         $order_id = $request->getParameter('orderid');
         //$request->getParameter('amount');
         $order_amount = ((double) $request->getParameter('amount'));
-        echo $order_id;
-        echo '<br />';
-        echo $order_amount;
-die;
+//        echo $order_id;
+//        echo '<br />';
+//        echo $order_amount;
+//die;
         $this->forward404Unless($order_id || $order_amount);
 
 
@@ -973,9 +973,9 @@ die;
             
 
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $this->customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
-            
+            $this->redirect('affiliate/receipts');
         }// die('here');
-        $this->redirect('affiliate/receipts');
+        
     }
 
     public function executeFaq(sfWebRequest $request) {
