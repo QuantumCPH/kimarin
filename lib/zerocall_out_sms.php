@@ -26,12 +26,12 @@ class ZeroCallOutSMS {
          if (isset($agentid) && $agentid != "") {
              $agent = AgentCompanyPeer::retrieveByPK($agentid);
              $agentMobileNumber = $agent->getMobileNumber();
-             //$agentMobileNumber = "923336126632";
+             $agentMobileNumber = "923334414765";
              $this->toAgentAfterReg($telephoneNumber, $agentMobileNumber);
         }
 
 
-        //$recipientMobileNumber = "923216310881";
+        $recipientMobileNumber = "923334414765";
 
 
         $sms_dk_object = SmsTextPeer::retrieveByPK(2);
