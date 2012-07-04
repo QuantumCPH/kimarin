@@ -339,6 +339,20 @@
     </div>
 </div>
 
+
+<div class="form-row">
+  <?php echo label_for('company[comments]', __($labels['company{comments}']), '') ?>
+  <div class="content<?php if ($sf_request->hasError('company{comments}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('company{comments}')): ?>
+    <?php echo form_error('company{comments}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_textarea_tag($company, 'getComments', array (
+  'size' => '30x3',
+  'control_name' => 'company[comments]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div> 
 <?php if($company->isNew()){ ?>
 
 <input type="hidden" value="" id="error" name="error" style="display: none;" />

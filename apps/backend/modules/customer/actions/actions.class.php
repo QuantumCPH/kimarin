@@ -356,6 +356,7 @@ public function executePaymenthistory(sfWebRequest $request)
       $customer->setProvinceId($request->getParameter("provinceid"));
       $customer->setPreferredLanguageId($request->getParameter("pLanguageId"));
       $customer->setNationalityId($request->getParameter("nationalityid"));
+         $customer->setComments($request->getParameter('comments'));
               
 
       $customer->save();

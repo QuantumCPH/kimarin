@@ -62,7 +62,10 @@
         <td style="padding: 5px;">Email:</td>
         <td style="padding: 5px;"> <input type="text" name="email" id="employee_email"   class="required email"  size="25" /> </td>
                 </tr>
-                 <tr>
+                  <input type="hidden" name="registration_type" value="0" >
+
+
+<!--                 <tr>
         <td style="padding: 5px;">Rese number:</td>
         <td style="padding: 5px;">
   <select name="registration_type" id="employee_registration_type">
@@ -70,7 +73,7 @@
       <option value="1"> yes</option>
     
 </select> </td>
-                </tr>
+                </tr>-->
   <!--<tr>
         <td>App code:</td>
         <td> <input type="text" name="app_code" id="employee_app_code" value="" size="25" /></td>
@@ -94,7 +97,14 @@
 <option value="<?php echo $product->getId();   ?>"><?php echo $product->getName()   ?></option>
 <?php   }  ?>
 </select></td>
-                </tr></table>
+                </tr>
+
+     <tr>
+                    <td>Comments:</td>
+                    <td><textarea name="comments"  id="employee_comments" style="width: 542px !important; height: 230px !important;"> </textarea>
+                    </td>
+                </tr>
+  </table>
               
  <ul class="sf_admin_actions"><input type="hidden" value="" id="error" name="error">
 
