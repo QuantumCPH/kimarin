@@ -44,6 +44,7 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'is_prepaid'                  => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'balance'                     => new sfWidgetFormFilterInput(),
       'invoice_method_id'           => new sfWidgetFormFilterInput(),
+      'comments'                    => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -77,6 +78,7 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'is_prepaid'                  => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'balance'                     => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'invoice_method_id'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'comments'                    => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('agent_company_filters[%s]');
@@ -125,6 +127,7 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'is_prepaid'                  => 'Boolean',
       'balance'                     => 'Number',
       'invoice_method_id'           => 'Number',
+      'comments'                    => 'Text',
     );
   }
 }
