@@ -42,7 +42,15 @@ class paymentsActions extends sfActions {
     }
 
     public function executeReject(sfWebRequest $request) {
-      
+        
+        $Parameters=$request->getURI();
+
+       // $Parameters=$Parameters.$request->getParameter('amount');
+        $email2 = new DibsCall();
+        $email2->setCallurl($Parameters);
+
+        $email2->save();
+        
         //get the order_id
         $order_id = $request->getParameter('orderid');
         //$error_text = substr($request->getParameter('errortext'), 0, strpos($request->getParameter('errortext'), '!'));

@@ -151,20 +151,20 @@ class CustomerForm extends BaseCustomerForm
 		)
 	  );
 
-         $this->validatorSchema['nie_passport_number'] = new sfValidatorAnd(
-  		array(
-  			$this->validatorSchema['nie_passport_number'],
-  			new sfValidatorString(
-  				array (
-  					'min_length'=>10,
-
-                                    ),
-                                array('min_length' => 'N.I.E/Passport No. "%value%" at least 10 characters.')
-
-  			),
-  			
-  		)
-  	); 	
+//         $this->validatorSchema['nie_passport_number'] = new sfValidatorAnd(
+//  		array(
+//  			$this->validatorSchema['nie_passport_number'],
+//  			new sfValidatorString(
+//  				array (
+//  					'min_length'=>10,
+//
+//                                    ),
+//                                array('min_length' => 'N.I.E/Passport No. "%value%" at least 10 characters.')
+//
+//  			),
+//  			
+//  		)
+//  	); 	
 
 
 //        //This Code Add For Duplication Entery Again Task # 4.3 Date:01-18-11
