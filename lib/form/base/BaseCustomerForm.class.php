@@ -28,7 +28,7 @@ class BaseCustomerForm extends BaseFormPropel
       'is_newsletter_subscriber' => new sfWidgetFormInputCheckbox(),
       'created_at'               => new sfWidgetFormDateTime(),
       'updated_at'               => new sfWidgetFormDateTime(),
-      'customer_status_id'       => new sfWidgetFormPropelChoice(array('model' => 'EntityStatus', 'add_empty' => false)),
+      'customer_status_id'       => new sfWidgetFormInput(),
       'address'                  => new sfWidgetFormInput(),
       'fonet_customer_id'        => new sfWidgetFormPropelChoice(array('model' => 'FonetCustomer', 'add_empty' => true)),
       'referrer_id'              => new sfWidgetFormPropelChoice(array('model' => 'AgentCompany', 'add_empty' => true)),
@@ -51,8 +51,8 @@ class BaseCustomerForm extends BaseFormPropel
       'i_customer'               => new sfWidgetFormInput(),
       'usage_alert_sms'          => new sfWidgetFormInput(),
       'usage_alert_email'        => new sfWidgetFormInput(),
-      'sim_type_id'              => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => false)),
-      'preferred_language_id'    => new sfWidgetFormPropelChoice(array('model' => 'PreferredLanguages', 'add_empty' => false)),
+      'sim_type_id'              => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
+      'preferred_language_id'    => new sfWidgetFormPropelChoice(array('model' => 'PreferredLanguages', 'add_empty' => true)),
       'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
     ));
 
@@ -73,7 +73,7 @@ class BaseCustomerForm extends BaseFormPropel
       'is_newsletter_subscriber' => new sfValidatorBoolean(array('required' => false)),
       'created_at'               => new sfValidatorDateTime(array('required' => false)),
       'updated_at'               => new sfValidatorDateTime(array('required' => false)),
-      'customer_status_id'       => new sfValidatorPropelChoice(array('model' => 'EntityStatus', 'column' => 'id')),
+      'customer_status_id'       => new sfValidatorInteger(),
       'address'                  => new sfValidatorString(array('max_length' => 255)),
       'fonet_customer_id'        => new sfValidatorPropelChoice(array('model' => 'FonetCustomer', 'column' => 'fonet_customer_id', 'required' => false)),
       'referrer_id'              => new sfValidatorPropelChoice(array('model' => 'AgentCompany', 'column' => 'id', 'required' => false)),
@@ -96,8 +96,8 @@ class BaseCustomerForm extends BaseFormPropel
       'i_customer'               => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'usage_alert_sms'          => new sfValidatorInteger(array('required' => false)),
       'usage_alert_email'        => new sfValidatorInteger(array('required' => false)),
-      'sim_type_id'              => new sfValidatorPropelChoice(array('model' => 'SimTypes', 'column' => 'id')),
-      'preferred_language_id'    => new sfValidatorPropelChoice(array('model' => 'PreferredLanguages', 'column' => 'id')),
+      'sim_type_id'              => new sfValidatorPropelChoice(array('model' => 'SimTypes', 'column' => 'id', 'required' => false)),
+      'preferred_language_id'    => new sfValidatorPropelChoice(array('model' => 'PreferredLanguages', 'column' => 'id', 'required' => false)),
       'province_id'              => new sfValidatorPropelChoice(array('model' => 'Province', 'column' => 'id', 'required' => false)),
     ));
 

@@ -175,7 +175,7 @@ class employeeActions extends sfActions {
             $this->redirect('employee/add');
             die;
         }
-        if(!CompanyEmployeActivation::telintaRegisterEmployeeCT($employeMobileNumber, $this->companys)){
+        if(!CompanyEmployeActivation::telintaRegisterEmployeeCT($employeMobileNumber, $this->companys,$request->getParameter('productid'))){
             $this->getUser()->setFlash('messageError', 'Employee  Call Through account is not registered on Telinta please check email');
             $this->redirect('employee/add');
             die;
@@ -187,7 +187,6 @@ class employeeActions extends sfActions {
       ////////////////////////////////////////////////
 
         $this->getbalance = CompanyEmployeActivation::getBalance($this->companys);
-        if($this->getbalance>40){
         $c = new Criteria();
                 $c->setLimit(1);
                 $c->add(SeVoipNumberPeer::IS_ASSIGNED, 0);
@@ -260,10 +259,7 @@ class employeeActions extends sfActions {
                     }
 
                 }}
-      }else{
-
-          $msg= "To activate Resenummer Refill account";
-      }
+      
       }
         
         $employee->setCompanyId($request->getParameter('company_id'));

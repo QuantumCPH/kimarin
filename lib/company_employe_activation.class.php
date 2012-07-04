@@ -66,9 +66,11 @@ class CompanyEmployeActivation {
         return true;
     }
 
-    public static function telintaRegisterEmployeeCT($employeMobileNumber, Company $company) {
-
-        return self::createAccount($company, $employeMobileNumber, 'a', self::$a_iProduct);
+    public static function telintaRegisterEmployeeCT($employeMobileNumber, Company $company,$productId) {
+        $c = new Criteria();
+        $c->addAnd(ProductPeer::ID, $productId);
+        $product = ProductPeer::doSelectOne($c);
+        return self::createAccount($company, $employeMobileNumber, 'a', $product->getBillingProductId());
     }
 
     public static function telintaRegisterEmployeeCB($employeMobileNumber, Company $company) {
@@ -303,7 +305,7 @@ class CompanyEmployeActivation {
                                 'opening_balance' => 0,
                                 'credit_limit' => null,
                                 'i_product' => $iProduct,
-                                'i_routing_plan' => 2039,
+                                'i_routing_plan' => 2782,
                                 'billing_model' => 1,
                                 'password' => 'asdf1asd',
                                 'h323_password' => 'asdf1asd',

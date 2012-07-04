@@ -73,7 +73,14 @@ class Telienta {
     }
 
     public static function createAAccount($mobileNumber, Customer $customer) {
-        return self::createAccount($customer, $mobileNumber, 'a', self::$a_iProduct);
+        $c = new Criteria();
+        $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
+        $c->addJoin(CustomerProductPeer::PRODUCT_ID,ProductPeer::ID, Criteria::LEFT_JOIN);
+        $c->addAnd(CustomerProductPeer::STATUS_ID, 3);
+        $c->addAnd(CustomerPeer::ID, $customer->getId());
+        $product = ProductPeer::doSelectOne($c);
+
+        return self::createAccount($customer, $mobileNumber, 'a', $product->getBillingProductId());
     }
 
     public static function createCBAccount($mobileNumber, Customer $customer,$iProduct=11804) {
@@ -334,7 +341,7 @@ class Telienta {
         $retry_count = 0;
 
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Account');
-        $uniqueid="KB2C".$customer->getUniqueid();
+        $uniqueid="KB2C".$customer->getId().$customer->getUniqueid();
         $accountName = $accountType . $mobileNumber;
         while (!$account && $retry_count < $max_retries) {
             try {
@@ -347,7 +354,7 @@ class Telienta {
                                 'opening_balance' => 0,
                                 'credit_limit' => null,
                                 'i_product' => $iProduct,
-                                'i_routing_plan' => 2034,
+                                'i_routing_plan' => 2782,
                                 'billing_model' => 1,
                                 'password' => 'asdf1asd',
                                 'h323_password' => 'asdf1asd',
