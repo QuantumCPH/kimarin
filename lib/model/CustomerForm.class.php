@@ -37,22 +37,25 @@ class CustomerForm extends BaseCustomerForm
                $mobileno=$_REQUEST['customer']['mobile_number']; 
                $passportnum=$_REQUEST['customer']['nie_passport_number'];
             }
-            $cpn = new Criteria();
-            $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
-            $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-            $countnie = CustomerPeer::doCount($cpn);
+            if($passportnum!="" && $passportnum!=0){
+                $cpn = new Criteria();
+                $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
+                $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+                $countnie = CustomerPeer::doCount($cpn);
 
-             if(isset($countnie) &&  $countnie>=1){
-                $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
-                    array(
-                        'model' => 'customer',
-                        'column' => 'nie_passport_number'
-                    ),array(
-                        'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
-                    ))
-                    ))
-                );
-             }
+                 if(isset($countnie) &&  $countnie>=1){
+                    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+                        array(
+                            'model' => 'customer',
+                            'column' => 'nie_passport_number'
+                        ),array(
+                            'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
+                        ))
+                        ))
+                    );
+                 }
+            }
+                
              
             $count=0;
             $countc=0;
@@ -675,17 +678,17 @@ class CustomerForm extends BaseCustomerForm
   {
   	
   	$c = new Criteria();
-  	
-  	$c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $values['nie_passport_number']);
-  	$c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
-  	 
-  	if (CustomerPeer::doCount($c)>=1)
-  	{
-  	      throw new sfValidatorErrorSchema($validator, array(
-	        'nie_passport_number' => new sfValidatorError($validator, 'N.I.E/Passport Number already registered.'),
-	      ));	
-  	}
+  	if($values['nie_passport_number']!="" && $values['nie_passport_number']!=0){
+            $c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $values['nie_passport_number']);
+            $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
 
+            if (CustomerPeer::doCount($c)>=1)
+            {
+                  throw new sfValidatorErrorSchema($validator, array(
+                    'nie_passport_number' => new sfValidatorError($validator, 'N.I.E/Passport Number already registered.'),
+                  ));	
+            }
+        }
   	return $values;
   }
 }
