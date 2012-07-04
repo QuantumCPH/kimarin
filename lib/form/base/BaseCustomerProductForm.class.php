@@ -16,6 +16,7 @@ class BaseCustomerProductForm extends BaseFormPropel
       'customer_id' => new sfWidgetFormPropelChoice(array('model' => 'Customer', 'add_empty' => false)),
       'product_id'  => new sfWidgetFormPropelChoice(array('model' => 'Product', 'add_empty' => false)),
       'created_at'  => new sfWidgetFormDateTime(),
+      'status_id'   => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -23,6 +24,7 @@ class BaseCustomerProductForm extends BaseFormPropel
       'customer_id' => new sfValidatorPropelChoice(array('model' => 'Customer', 'column' => 'id')),
       'product_id'  => new sfValidatorPropelChoice(array('model' => 'Product', 'column' => 'id')),
       'created_at'  => new sfValidatorDateTime(),
+      'status_id'   => new sfValidatorInteger(),
     ));
 
     $this->widgetSchema->setNameFormat('customer_product[%s]');
