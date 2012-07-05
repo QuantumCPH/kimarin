@@ -3103,5 +3103,23 @@ if(($caltype!="IC") && ($caltype!="hc")){
         }
         return sfView::NONE;
     }
+   public function executeEmailTest(sfWebRequest $request) {
 
+        $order_id = $request->getParameter('orderId');
+
+       $order=CustomerOrderPeer::retrieveByPK($order_id);
+           $customer=CustomerPeer::retrieveByPK($order->getCustomerId());
+
+                if($order->getIsFirstOrder()){
+      emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
+
+                }else{
+                 $c = new Criteria;
+               $c->add(TransactionPeer::ORDER_ID, $order_id);
+                $transaction = TransactionPeer::doSelectOne($c);
+                   emailLib::sendCustomerRefillEmail($customer, $order, $transaction);
+                }
+      return sfView::NONE;
+
+       }
 }
