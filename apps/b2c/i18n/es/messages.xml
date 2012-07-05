@@ -1147,9 +1147,9 @@
                 <source>Active mobile No</source>
                 <target>Sin móvil activo</target>
             </trans-unit>
-              <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
-                <source>sim type</source>
-                <target>Sim Tipo</target>
+              <trans-unit id="284" translate="yes" reformat="yes" xml:space="default">
+                <source>Sms Charges</source>
+                <target>Sms Cargos</target>
             </trans-unit>
         </body>
     </file>
