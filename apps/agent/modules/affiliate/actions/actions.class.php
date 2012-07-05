@@ -1061,7 +1061,7 @@ class affiliateActions extends sfActions {
 
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11 - Ahtsham
 
-        $this->target = $this->getTargetUrl();
+        $this->target = $this->getTargetUrl().'/affiliate/';
         $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
@@ -1515,7 +1515,7 @@ class affiliateActions extends sfActions {
         }
     }
 
-    public function executeAgentRefil(sfWebRequest $request) {
+    public function executeAgentRefil(sfWebRequest $request) { 
         $order_id = $request->getParameter('item_number');
         $item_amount = $request->getParameter('amount');
 
