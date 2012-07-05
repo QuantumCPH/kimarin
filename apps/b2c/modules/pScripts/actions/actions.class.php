@@ -23,7 +23,7 @@ class pScriptsActions extends sfActions
   *
   * @param sfRequest $request A request object
   */
-  
+  private $currentCulture;
 
 
     public function executeMobAccepted(sfWebRequest $request)
@@ -209,7 +209,9 @@ class pScriptsActions extends sfActions
 
 
             //Send Email to User/Agent/Support --- when Customer Refilll --- 01/15/11
+            $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerRefillEmail($this->customer,$order,$transaction);
+            $this->updatePreferredCulture();
     $this->setLayout(false);
 	}
 
@@ -2417,9 +2419,10 @@ if(($caltype!="IC") && ($caltype!="hc")){
   					));
 
 
+            $this->setPreferredCulture($this->customer);
 
             emailLib::sendCustomerRefillEmail($this->customer,$order,$transaction); 
-          
+            $this->updatePreferredCulture();
           
             }    
   }    
@@ -2557,7 +2560,10 @@ if(($caltype!="IC") && ($caltype!="hc")){
                         if ($customer->getUsageAlertEmail()) {
                             echo "Email Active<br/>";
                             $message = '<img src="'.sfConfig::get('app_web_url').'images/logo.png" /><br>' . $usageAlert->getEmailAlertMessage() . '<br>Hilsen <br>' . $senderName;
+                            $this->setPreferredCulture($customer);
+
                             emailLib::sendCustomerBalanceEmail($customer, $message);
+                            $this->updatePreferredCulture();
                             $msgSentE->setAlertSent(1);
                         }
                         $msgSentE->save();
@@ -2745,8 +2751,9 @@ if(($caltype!="IC") && ($caltype!="hc")){
                     ));
 
 
-
+                    $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerRefillEmail($this->customer, $order, $transaction);
+            $this->updatePreferredCulture();
         }
 
         $order->setExeStatus(1);
@@ -3026,6 +3033,9 @@ if(($caltype!="IC") && ($caltype!="hc")){
                     $invitevar = $invite->getCustomerId();
                     if (isset($invitevar)) {
 
+
+                    $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
+                    $this->setPreferredCulture($inviterCustomer);
                            if($this->getUser()->getCulture()=='en'){
 
                                   $subject ='Bonus awarded';
@@ -3033,8 +3043,9 @@ if(($caltype!="IC") && ($caltype!="hc")){
                                  $subject ='Bonus tildeles';
                            }
 
-
+                        
                         emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$subject);
+                        $this->updatePreferredCulture();
                     }
                 }
             $lang = sfConfig::get('app_language_symbol');
@@ -3090,9 +3101,9 @@ if(($caltype!="IC") && ($caltype!="hc")){
                 if (isset($agentid) && $agentid != "") {
                     commissionLib::registrationCommissionCustomer($agentid, $productid, $transactionid);
                 }
-             
+                $this->setPreferredCulture($this->customer);
                 emailLib::sendCustomerRegistrationViaWebEmail($this->customer, $order);
-
+                $this->updatePreferredCulture();
 //                $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
                 $this->order = $order;
@@ -3104,6 +3115,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
         return sfView::NONE;
     }
    public function executeEmailTest(sfWebRequest $request) {
+
 
         $order_id = $request->getParameter('orderId');
 
@@ -3122,4 +3134,14 @@ if(($caltype!="IC") && ($caltype!="hc")){
       return sfView::NONE;
 
        }
+
+    private function setPreferredCulture(Customer $customer){
+      $this->currentCulture = $this->getUser()->getCulture();
+      $preferredLang = PreferredLanguagesPeer::retrieveByPK($customer->getPreferredLanguageId());
+      $this->getUser()->setCulture($preferredLang->getLanguageCode());
+    }
+    private function updatePreferredCulture(){
+       $this->getUser()->setCulture($this->currentCulture);
+    }
+
 }
