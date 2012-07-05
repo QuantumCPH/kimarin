@@ -512,8 +512,8 @@ class affiliateActions extends sfActions {
                     $this->customer = $order->getCustomer();
                     //  $this->getUser()->setCulture('de');
                     $this->setPreferredCulture($this->customer);
-                    emailLib::sendRefillEmail($this->customer, $order);
-                    $this->updatePreferredCulture();
+                        emailLib::sendRefillEmail($this->customer, $order);
+                    //$this->updatePreferredCulture();
                     //   $this->getUser()->setCulture('en');
                     $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
 //                                      echo 'rehcarged, redirecting';
