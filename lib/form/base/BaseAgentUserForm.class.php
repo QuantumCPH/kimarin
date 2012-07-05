@@ -18,6 +18,7 @@ class BaseAgentUserForm extends BaseFormPropel
       'password'         => new sfWidgetFormInput(),
       'status_id'        => new sfWidgetFormPropelChoice(array('model' => 'Status', 'add_empty' => true)),
       'created_at'       => new sfWidgetFormDateTime(),
+      'comments'         => new sfWidgetFormTextarea(),
     ));
 
     $this->setValidators(array(
@@ -27,6 +28,7 @@ class BaseAgentUserForm extends BaseFormPropel
       'password'         => new sfValidatorString(array('max_length' => 150)),
       'status_id'        => new sfValidatorPropelChoice(array('model' => 'Status', 'column' => 'id', 'required' => false)),
       'created_at'       => new sfValidatorDateTime(array('required' => false)),
+      'comments'         => new sfValidatorString(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('agent_user[%s]');
