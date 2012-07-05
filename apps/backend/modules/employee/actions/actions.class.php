@@ -170,18 +170,23 @@ class employeeActions extends sfActions {
       $contrymobilenumber = $this->country->getCallingCode() . $mobileNo;
       $employeMobileNumber=$contrymobilenumber;
 
-        if(!CompanyEmployeActivation::telintaRegisterEmployeeCB($employeMobileNumber, $this->companys)){
-            $this->getUser()->setFlash('messageError', 'Employee  Call Back account is not registered on Telinta please check email');
-            $this->redirect('employee/add');
-            die;
-        }
+//        if(!CompanyEmployeActivation::telintaRegisterEmployeeCB($employeMobileNumber, $this->companys)){
+//            $this->getUser()->setFlash('messageError', 'Employee  Call Back account is not registered on Telinta please check email');
+//            $this->redirect('employee/add');
+//            die;
+//        }
         if(!CompanyEmployeActivation::telintaRegisterEmployeeCT($employeMobileNumber, $this->companys,$request->getParameter('productid'))){
             $this->getUser()->setFlash('messageError', 'Employee  Call Through account is not registered on Telinta please check email');
             $this->redirect('employee/add');
             die;
         }
 
-     
+       $product= ProductPeer::retrieveByPK($request->getParameter('productid'));
+       $chrageamount=$product->getRegistrationFee()+$product->getRegistrationFee()*sfConfig::get('app_vat_percentage');
+       $emplyeeProductFeeDescription="Registration Fee Including Vat";
+        CompanyEmployeActivation::charge($company,$chrageamount,$emplyeeProductFeeDescription);
+
+
      $rtype=$request->getParameter('registration_type');
       if($rtype==1){
       ////////////////////////////////////////////////
