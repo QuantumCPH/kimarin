@@ -284,7 +284,7 @@
 </div>
 
 
-
+<!--
 <div class="form-row">
   <?php echo label_for('agent_company[commission_period_id]', __($labels['agent_company{commission_period_id}']), '') ?>
   <div class="content<?php if ($sf_request->hasError('agent_company{commission_period_id}')): ?> form-error<?php endif; ?>">
@@ -298,7 +298,7 @@
   'include_blank' => true,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+</div>-->
 
 <div class="form-row">
   <?php echo label_for('agent_company[account_manager_id]', __($labels['agent_company{account_manager_id}']), '') ?>
