@@ -309,7 +309,7 @@ class paymentsActions extends sfActions {
         $cancel_url = $this->getTargetUrl().'payments/reject?orderid='.$order_id;
         $notify_url = $this->getTargetUrl().'pScripts/confirmpayment?lang='.$lang.'&order_id='.$order_id.'&amount='.$item_amount;
 
-       $email2 = new DibsCall();
+        $email2 = new DibsCall();
         $email2->setCallurl($notify_url);
 
         $email2->save();

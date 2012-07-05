@@ -2625,24 +2625,32 @@ if(($caltype!="IC") && ($caltype!="hc")){
     }
     
     public function executeCalbackrefill(sfWebRequest $request) {
-      //  $this->getUser()->setCulture($request->getParameter('lng'));
-        $this->getUser()->setCulture($request->getParameter('lang'));
+        
         $Parameters=$request->getURI();
-        $order_id = $request->getParameter("order_id");
         
         $email2 = new DibsCall();
         $email2->setCallurl($Parameters);
-
         $email2->save();
-
-
+        
+        // call back url $p="es_297_100"; lang_orderid_amount
+        
+        $callbackparameters = $request->getParameter("p");
+        $params = explode("_",$callbackparameters);
+        
+        $lang = $params[0];
+        $order_id = $params[1];
+        $order_amount   = $params[2];
+        
+        $this->getUser()->setCulture($lang);
+        
+        //$order_id = $request->getParameter("order_id");
         $this->forward404Unless($order_id);
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
         $this->forward404Unless($order);
         
-        $order_amount = ((double) $request->getParameter('amount'));
-        $this->forward404Unless($order);
+        //$order_amount = ((double) $request->getParameter('amount'));
+        
         $c = new Criteria;
         $c->add(TransactionPeer::ORDER_ID, $order_id);
         $transaction = TransactionPeer::doSelectOne($c);
