@@ -102,6 +102,8 @@ class Customer extends BaseCustomer
            $nationality_title = ""; 
            $cn = new Criteria();
            $cn->add(NationalityPeer::ID,$this->getNationalityId());
+           $cn->addAscendingOrderByColumn(NationalityPeer::TITLE);
+
            $nationality = NationalityPeer::doSelectOne($cn);
              if(NationalityPeer::doCount($cn)>0) $nationality_title = $nationality->getTitle();
              return $nationality_title;
@@ -111,6 +113,7 @@ class Customer extends BaseCustomer
             $simTypeTitle ="";
             $cst = new Criteria();
             $cst->add(SimTypesPeer::ID,$this->getSimTypeId());
+            $cst->addAscendingOrderByColumn(SimTypesPeer::TITLE);
             $simTypes = SimTypesPeer::doSelectOne($cst);
               if(SimTypesPeer::doCount($cst)>0) $simTypeTitle = $simTypes->getTitle();
             return $simTypeTitle;
@@ -120,6 +123,7 @@ class Customer extends BaseCustomer
             $planguage ="";
             $cpl = new Criteria();
             $cpl->add(PreferredLanguagesPeer::ID,$this->getPreferredLanguageId());
+            $cpl->addAscendingOrderByColumn(PreferredLanguagesPeer::LANGUAGE);
             $languages = PreferredLanguagesPeer::doSelectOne($cpl);
               if(PreferredLanguagesPeer::doCount($cpl)>0) $planguage = $languages->getLanguage();
             return $planguage;
@@ -129,6 +133,7 @@ class Customer extends BaseCustomer
             $provinceName ="";
             $cpr = new Criteria();
             $cpr->add(ProvincePeer::ID,$this->getProvinceId());
+            $cpr->addAscendingOrderByColumn(ProvincePeer::PROVINCE);
             $province = ProvincePeer::doSelectOne($cpr);
               if(ProvincePeer::doCount($cpr)>0) $provinceName = $province->getProvince();
             return $provinceName;
