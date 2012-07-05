@@ -140,7 +140,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
           <ul>
             <!-- payment details -->
             <li>
-              <label><?php echo $order->getProduct()->getName() ?> <?php echo __('Payment details') ?>:</label>
+              <label class="prodname"><?php echo $order->getProduct()->getName() ?> <?php echo __('Payment details') ?>:</label>
             </li>
             <li>
               <label> <?php echo __('Registration Fee') ?> <br />
