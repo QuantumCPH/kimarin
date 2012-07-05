@@ -31,4 +31,6 @@ Cufon.set('fontSize', '12px').replace('.split-form-sign-up ul li', { fontFamily:
 Cufon.set('fontSize', '13px').replace('span.requiretofill', { fontFamily: 'Calibri'});
 Cufon.set('fontSize', '13px').replace('.col', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '15px').replace('.prodname', { fontFamily: 'Calibri' });
+Cufon.set('fontSize', '14px').replace('.tipafriend  h3', { fontFamily: 'Calibri Bold'});
+Cufon.set('fontSize', '16px').replace('.tipafriend  h1', { fontFamily: 'Calibri Bold'});
 

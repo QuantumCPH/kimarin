@@ -219,11 +219,11 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                             <tr>
                                 <td width="8%" class="title"><?php echo __('Date & time') ?></td>
-                                <td class="title" width="40%"><?php echo __('Phone Number') ?></td>
-                                <td width="8%" class="title"><?php echo __('Duration') ?></td>
-                                <td width="4%" class="title"><?php echo __('VAT') ?></td>
-                                <td width="29%" align="right" class="title"><?php echo __('Cost') ?></td>
-                                <td width="11%" class="title"><?php echo __('Call Type') ?></td>
+                                <td class="title" width="31%"><?php echo __('Phone Number') ?></td>
+                                <td width="15%" class="title"><?php echo __('Duration') ?></td>
+                                <td width="5%" class="title"><?php echo __('VAT') ?></td>
+                                <td width="17%" align="right" class="title"><?php echo __('Cost') ?></td>
+                              <td width="24%" class="title"><?php echo __('Call Type') ?></td>
                           </tr>
 
 <?php
