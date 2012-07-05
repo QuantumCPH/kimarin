@@ -218,13 +218,13 @@
                     <div class="callhistoryheadings"><h2><?php echo __("Call"); ?> </h2></div><br />
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                             <tr>
-                                <td class="title"><?php echo __('Date & time') ?></td>
+                                <td width="8%" class="title"><?php echo __('Date & time') ?></td>
                                 <td class="title" width="40%"><?php echo __('Phone Number') ?></td>
-                                <td class="title"><?php echo __('Duration') ?></td>
-                                <td class="title"><?php echo __('VAT') ?></td>
-                                <td class="title" align="right"><?php echo __('Cost') ?></td>
-                                <td class="title"><?php echo __('Call Type') ?></td>
-                            </tr>
+                                <td width="8%" class="title"><?php echo __('Duration') ?></td>
+                                <td width="4%" class="title"><?php echo __('VAT') ?></td>
+                                <td width="29%" align="right" class="title"><?php echo __('Cost') ?></td>
+                                <td width="11%" class="title"><?php echo __('Call Type') ?></td>
+                          </tr>
 
 <?php
                             $amount_total = 0;
@@ -296,12 +296,7 @@
                                 </tr>
 <?php else: ?>
                                     <tr>
-                                        <td colspan="4" align="right"><strong><?php echo __('Subtotal') ?></strong></td>
-                                        <!--
-                                        <td><?php echo format_number($amount_total - $amount_total * sfConfig::get('app_vat_percentage')) ?> <?php sfConfig::get('app_currency_code')?></td>
-                                    	 -->
-                                        <td align="right"><?php echo number_format($amount_total, 2, ',', '') ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
-                                        <td>&nbsp;</td>
+                                        <td colspan="4" align="right"><strong><?php echo __('Subtotal') ?></strong></td><td align="right"><?php echo number_format($amount_total, 2, ',', '') ?><?php echo sfConfig::get('app_currency_code')?></td><td>&nbsp;</td>
                                     </tr>
 <?php
                                     endif;

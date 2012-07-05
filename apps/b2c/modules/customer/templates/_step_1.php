@@ -335,19 +335,12 @@
           <li class="fr"><img src="<?php echo image_path('../zerocall/images/moto-flipout.png') ?>" alt=" " /></li>
            -->
           <!-- end device -->
-          <li>
-              <?php
-            $error_terms_conditions = false;;
+          <li><?php  $error_terms_conditions = false;;
             if($form['terms_conditions']->hasError())
             	$error_terms_conditions = true;
-            ?>
-            <?php if($error_terms_conditions) { ?>
-            <span class="error">
+            ?><?php if($error_terms_conditions) { ?><span class="error">
             	<?php echo $form['terms_conditions']->renderError() ?>
-            </span>
-            <?php } ?>
-             <?php echo $form['terms_conditions'] ?>
-             <span><a href="../customer/termsAndCondition" target="_blank" style="outline:none"><?php echo $form['terms_conditions']->renderHelp() ?></a></span>             
+            </span><?php } ?><?php echo $form['terms_conditions'] ?><span><a href="../customer/termsAndCondition" target="_blank" style="outline:none"><?php echo $form['terms_conditions']->renderHelp() ?></a></span>             
           </li>
           <li>
              <?php
