@@ -2770,9 +2770,8 @@ if(($caltype!="IC") && ($caltype!="hc")){
         return sfView::NONE;
     }
         public function executeConfirmpayment(sfWebRequest $request) {
-
-         $this->getUser()->setCulture($request->getParameter('lang'));
-        $Parameters=$request->getURI();
+         
+        $Parameters = $request->getURI();
 
        // $Parameters=$Parameters.$request->getParameter('amount');
         $email2 = new DibsCall();
@@ -2782,8 +2781,17 @@ if(($caltype!="IC") && ($caltype!="hc")){
         
         $order_id = "";
         $order_amount = "";
-        $order_id = $request->getParameter('order_id'); 
-        $order_amount = $request->getParameter('amount');
+        
+        // call back url $p="es_297_100"; lang_orderid_amount
+        
+        $callbackparameters = $request->getParameter("p");
+        $params = explode("-",$callbackparameters);
+        
+        $lang = $params[0];
+        $order_id = $params[1];
+        $order_amount   = $params[2];        
+        $this->getUser()->setCulture($lang);
+        
         $ticket_id = "";
       //  $this->getUser()->setCulture($request->getParameter('lng'));
               
