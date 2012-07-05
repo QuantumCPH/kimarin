@@ -77,7 +77,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php //echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
+    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
   </tr>
   <tr>
     <td><?php echo $agent_order->getCreatedAt('m-d-Y') ?></td>
@@ -85,7 +85,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         
     </td>
     <td>1<?php //echo $agent_order->getQuantity() ?></td>
-    <td><?php echo format_number($subtotal = $agent_order->getAmount()) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $agent_order->getAmount(),2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
@@ -94,19 +94,19 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td><?php echo format_number($subtotal) ?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal,2) ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
     <td><?php echo __('VAT') ?> (<?php echo '0%' ?>)</td>
     <td>&nbsp;</td>
-    <td><?php echo format_number(0.00) ?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format(0,2) ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td><?php echo format_number($agent_order->getAmount()) ?> <?php echo sfConfig::get('app_currency_code')?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($agent_order->getAmount(),2) ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
 </table>
 <?php if($wrap_content): ?>
