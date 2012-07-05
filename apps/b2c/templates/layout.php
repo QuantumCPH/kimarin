@@ -38,8 +38,8 @@
     <div style="vertical-align: top;float: right;">
 
                         <?php //echo link_to(image_tag('/images/german.png'), 'customer/changeCulture?new=de'); ?>
-                        <?php echo link_to(image_tag('/images/spain.png'), 'customer/changeCulture?new=es'); ?>
-                         <?php echo link_to(image_tag('/images/english.png'), 'customer/changeCulture?new=en'); ?>
+                        <?php echo link_to(image_tag('/images/lang_spa1.png'), 'customer/changeCulture?new=es', array('id'=>'lang_spa')); ?>
+                         <?php echo link_to(image_tag('/images/lang_eng1.png'), 'customer/changeCulture?new=en'); ?>
 
              </div>
 <div id="wrap"><?php //echo $sf_user->getCulture();
