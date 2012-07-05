@@ -60,8 +60,8 @@
             <?php } ?>
             <tr>
                 <td><b><?php echo __('Customers') ?></b> <?php echo __('registered with you:') ?></td>
-                <td align="right"><?php echo count($registrations) ?><?php echo sfConfig::get('app_currency_code');?></td>
-            </tr>
+                <td align="right"><?php echo count($registrations) ?></td>
+          </tr>
             <tr>
                 <td colspan="2"></td>
             </tr>
