@@ -8,7 +8,8 @@ Cufon.replace('#inner-page', { fontFamily: 'Calibri' });
 Cufon.replace('.split-form ul li button', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '14px').replace('.dashboard-info-text', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '14px').replace('.refilselect', { fontFamily: 'Calibri' });
-Cufon.set('fontSize', '14px').replace('.col', { fontFamily: 'Calibri' });
+
+
 Cufon.replace('.dashboard-info button', { fontFamily: 'Calibri' });
 Cufon.replace('.callhistory tbody td.title', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '17px').replace('.step-details strong', { fontFamily: 'Calibri Bold' });
@@ -28,3 +29,6 @@ Cufon.set('fontSize', '11px').replace('.right-col .box', { fontFamily: 'Calibri'
 Cufon.set('fontSize', '13px').replace('.right-col  h4', { fontFamily: 'Calibri Bold'});
 Cufon.set('fontSize', '12px').replace('.split-form-sign-up ul li', { fontFamily: 'Calibri'});
 Cufon.set('fontSize', '13px').replace('span.requiretofill', { fontFamily: 'Calibri'});
+Cufon.set('fontSize', '13px').replace('.col', { fontFamily: 'Calibri' });
+Cufon.set('fontSize', '15px').replace('.prodname', { fontFamily: 'Calibri' });
+
