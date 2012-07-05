@@ -10,8 +10,8 @@ class Payment {
 
     //put your code here
 
-    private static $PaypalEmail   = 'ak@zapna.com'; //'ak@zapna.com';  //'paypal@example.com';
-    private static $environment   = "live";      //live             //sandbox
+    private static $PaypalEmail   = 'paypal@example.com'; //'ak@zapna.com';  //'paypal@example.com';
+    private static $environment   = "sandbox";      //live             //sandbox
     
     public static function SendPayment($querystring){
         
