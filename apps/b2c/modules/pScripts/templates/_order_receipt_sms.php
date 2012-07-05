@@ -16,6 +16,7 @@ use_helper('Number');
 	
 	table.receipt td, table.receipt th {
 		padding:5px;
+                font-size: 14px;
 	}
 	
 	table.receipt th {
