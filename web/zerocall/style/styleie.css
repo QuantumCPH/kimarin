@@ -723,3 +723,6 @@ input[type=submit],input[type=button],textarea,option{
 img{
     border:none !important;
 }
+#lang_spa {
+    background-image: url("../images/lang_spa.png");
+}

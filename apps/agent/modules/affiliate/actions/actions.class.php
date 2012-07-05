@@ -15,6 +15,8 @@ require_once(sfConfig::get('sf_lib_dir') . '/zerocall_out_sms.php');
  */
 class affiliateActions extends sfActions {
 
+    private $currentCulture;
+    
     private function getTargetUrl() {
         return sfConfig::get('app_agent_url');
     }
@@ -509,7 +511,9 @@ class affiliateActions extends sfActions {
                     $transaction->save();
                     $this->customer = $order->getCustomer();
                     //  $this->getUser()->setCulture('de');
-                    emailLib::sendRefillEmail($this->customer, $order);
+                    $this->setPreferredCulture($this->customer);
+                        emailLib::sendRefillEmail($this->customer, $order);
+                    $this->updatePreferredCulture();
                     //   $this->getUser()->setCulture('en');
                     $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
 //                                      echo 'rehcarged, redirecting';
@@ -965,9 +969,9 @@ class affiliateActions extends sfActions {
             Telienta::ResgiterCustomer($this->customer, $order->getExtraRefill());
             Telienta::createAAccount($TelintaMobile, $this->customer);
             Telienta::createCBAccount($TelintaMobile, $this->customer);
-
+            $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerRegistrationViaAgentEmail($this->customer, $order);
-
+            $this->updatePreferredCulture();
 //            $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //            $zeroCallOutSMSObject->toCustomerAfterReg($customer_product->getProductId(), $this->customer);
             
@@ -1057,7 +1061,7 @@ class affiliateActions extends sfActions {
 
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11 - Ahtsham
 
-        $this->target = $this->getTargetUrl();
+        $this->target = $this->getTargetUrl().'affiliate/';
         $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
@@ -1132,6 +1136,7 @@ class affiliateActions extends sfActions {
             emailLib::sendAgentRefilEmail($this->agent, $agent_order);
             $this->redirect('affiliate/agentOrder');
         }
+        $this->redirect('affiliate/agentOrder');
     }
 
     public function executeAgentOrder(sfRequest $request) {
@@ -1491,7 +1496,9 @@ class affiliateActions extends sfActions {
                 $order->save();
                 $transaction->save();
                 $this->customer = $order->getCustomer();
+                $this->setPreferredCulture($this->customer);
                 emailLib::sendChangeNumberEmail($this->customer, $order);
+                $this->updatePreferredCulture();
                 $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% Mobile Number is changed successfully  with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
 
                 $this->redirect('affiliate/receipts');
@@ -1509,12 +1516,12 @@ class affiliateActions extends sfActions {
         }
     }
 
-    public function executeAgentRefil(sfWebRequest $request) {
+    public function executeAgentRefil(sfWebRequest $request) { 
         $order_id = $request->getParameter('item_number');
         $item_amount = $request->getParameter('amount');
 
-        $return_url = $this->getTargetUrl() . 'accountRefill';
-        $cancel_url = $this->getTargetUrl() . 'thankyou/?accept=cancel';
+        $return_url = $this->getTargetUrl() . 'affiliate/accountRefill';
+        $cancel_url = $this->getTargetUrl() . 'affiliate/thankyou/?accept=cancel';
         $notify_url = sfConfig::get('app_customer_url') . 'pScripts/agentRefillThankyou?orderid=' . $order_id . '&amount=' . $item_amount;
 
         $c = new Criteria;
@@ -1851,5 +1858,13 @@ class affiliateActions extends sfActions {
 
         $this->setLayout(false);
     }
+    private function setPreferredCulture(Customer $customer) {
+        $this->currentCulture = $this->getUser()->getCulture();
+        $preferredLang = PreferredLanguagesPeer::retrieveByPK($customer->getPreferredLanguageId());
+        $this->getUser()->setCulture($preferredLang->getLanguageCode());
+    }
 
+    private function updatePreferredCulture() {
+        $this->getUser()->setCulture($this->currentCulture);
+    }
 }

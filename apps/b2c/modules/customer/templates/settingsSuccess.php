@@ -167,7 +167,7 @@
           </ul>
                     
       </div>
-      <div class="fr col">
+            <div class="fr col"><span>&nbsp;</span>
         <ul>
             <?php
             $error_province_id = false;;

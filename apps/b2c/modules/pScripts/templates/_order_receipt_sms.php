@@ -16,6 +16,7 @@ use_helper('Number');
 	
 	table.receipt td, table.receipt th {
 		padding:5px;
+                font-size: 14px;
 	}
 	
 	table.receipt th {
@@ -96,7 +97,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td align="right"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
+    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
   </tr>
   <tr>
     <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
@@ -107,7 +108,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr>
     <td></td>
@@ -118,7 +119,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right"><?php echo number_format($order->getProduct()->getPrice(),2); ?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($order->getProduct()->getPrice(),2); ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
@@ -127,20 +128,20 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right"><?php echo number_format($subTotal = $order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee(),2) ?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($subTotal = $order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee(),2) ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
 
   <tr class="footer">
     <td>&nbsp;</td>
     <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
     <td>&nbsp;</td>
-    <td align="right"><?php echo number_format($vat,2) ?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td align="right"><?php echo number_format($subTotal+$vat,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($subTotal+$vat,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
 </table>
 <?php if($wrap_content): ?>
