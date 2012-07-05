@@ -1519,8 +1519,8 @@ class affiliateActions extends sfActions {
         $order_id = $request->getParameter('item_number');
         $item_amount = $request->getParameter('amount');
 
-        $return_url = $this->getTargetUrl() . 'accountRefill';
-        $cancel_url = $this->getTargetUrl() . 'thankyou/?accept=cancel';
+        $return_url = $this->getTargetUrl() . 'affiliate/accountRefill';
+        $cancel_url = $this->getTargetUrl() . 'affiliate/thankyou/?accept=cancel';
         $notify_url = sfConfig::get('app_customer_url') . 'pScripts/agentRefillThankyou?orderid=' . $order_id . '&amount=' . $item_amount;
 
         $c = new Criteria;
