@@ -21,7 +21,7 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'cvr_number'                  => new sfWidgetFormFilterInput(),
       'ean_number'                  => new sfWidgetFormFilterInput(),
       'kimarin_agent_id'            => new sfWidgetFormFilterInput(),
-      'nationality_id'              => new sfWidgetFormFilterInput(),
+      'nationality_id'              => new sfWidgetFormPropelChoice(array('model' => 'Nationality', 'add_empty' => true)),
       'address'                     => new sfWidgetFormFilterInput(),
       'post_code'                   => new sfWidgetFormFilterInput(),
       'country_id'                  => new sfWidgetFormPropelChoice(array('model' => 'Country', 'add_empty' => true)),
@@ -44,6 +44,7 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'is_prepaid'                  => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'balance'                     => new sfWidgetFormFilterInput(),
       'invoice_method_id'           => new sfWidgetFormFilterInput(),
+      'comments'                    => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -54,7 +55,7 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'cvr_number'                  => new sfValidatorPass(array('required' => false)),
       'ean_number'                  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'kimarin_agent_id'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'nationality_id'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'nationality_id'              => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Nationality', 'column' => 'id')),
       'address'                     => new sfValidatorPass(array('required' => false)),
       'post_code'                   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'country_id'                  => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Country', 'column' => 'id')),
@@ -63,8 +64,8 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'contact_name'                => new sfValidatorPass(array('required' => false)),
       'email'                       => new sfValidatorPass(array('required' => false)),
       'mobile_number'               => new sfValidatorPass(array('required' => false)),
-      'head_phone_number'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'fax_number'                  => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'head_phone_number'           => new sfValidatorPass(array('required' => false)),
+      'fax_number'                  => new sfValidatorPass(array('required' => false)),
       'website'                     => new sfValidatorPass(array('required' => false)),
       'status_id'                   => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Status', 'column' => 'id')),
       'company_type_id'             => new sfValidatorPropelChoice(array('required' => false, 'model' => 'CompanyType', 'column' => 'id')),
@@ -77,6 +78,7 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'is_prepaid'                  => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'balance'                     => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'invoice_method_id'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'comments'                    => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('agent_company_filters[%s]');
@@ -102,7 +104,7 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'cvr_number'                  => 'Text',
       'ean_number'                  => 'Number',
       'kimarin_agent_id'            => 'Number',
-      'nationality_id'              => 'Number',
+      'nationality_id'              => 'ForeignKey',
       'address'                     => 'Text',
       'post_code'                   => 'Number',
       'country_id'                  => 'ForeignKey',
@@ -111,8 +113,8 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'contact_name'                => 'Text',
       'email'                       => 'Text',
       'mobile_number'               => 'Text',
-      'head_phone_number'           => 'Number',
-      'fax_number'                  => 'Number',
+      'head_phone_number'           => 'Text',
+      'fax_number'                  => 'Text',
       'website'                     => 'Text',
       'status_id'                   => 'ForeignKey',
       'company_type_id'             => 'ForeignKey',
@@ -125,6 +127,7 @@ class BaseAgentCompanyFormFilter extends BaseFormFilterPropel
       'is_prepaid'                  => 'Boolean',
       'balance'                     => 'Number',
       'invoice_method_id'           => 'Number',
+      'comments'                    => 'Text',
     );
   }
 }

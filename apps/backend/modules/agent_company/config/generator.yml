@@ -17,5 +17,5 @@ generator:
       max_per_page: 500
       object_actions:
         _edit: ~
-        _delete: ~
+      
         #viewDetail : {label: view details, action: view}

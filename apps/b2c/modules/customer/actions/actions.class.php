@@ -1326,7 +1326,9 @@ class customerActions extends sfActions {
 
 
                 if (CARBORDFISH_SMS::Send($destination, $sms_text, $this->customer->getMobileNumber())) {
-                    Telienta::charge($this->customer, $amt);
+                    $description="Sms Charges";
+
+                    Telienta::charge($this->customer, $amt,$description);
                     $this->msgSent = "Yes";
                     $this->balance = (double) Telienta::getBalance($this->customer);
                 }
@@ -1840,7 +1842,7 @@ public function executeSmsHistory(sfWebrequest $request){
         if($item_amount=="") $item_amount = $request->getParameter('extra_refill');
            $lang=$this->getUser()->getCulture();
         $return_url = $this->getTargetUrl().'customer/refillAccept';
-        $cancel_url = $this->getTargetUrl().'customer/refillReject/';
+        $cancel_url = $this->getTargetUrl().'customer/refillReject?orderid='.$order_id;
         $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
 
      

@@ -140,30 +140,13 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
           <ul>
             <!-- payment details -->
             <li>
-              <label><?php echo $order->getProduct()->getName() ?> <?php echo __('Payment details') ?>:</label>
+              <label class="prodname"><?php echo $order->getProduct()->getName() ?> <?php echo __('Payment details') ?>:</label>
             </li>
             <li>
-              <label>
-                                <?php echo __('Registration Fee') ?>
-              	<br />
-				<?php echo __('Product Price') ?>
-			  </label>
-
-              <input type="hidden" id="product_price" value="<?php 
-              	$product_price_vat = ($order->getProduct()->getRegistrationFee()+$postalcharge)*sfConfig::get('app_vat_percentage');
-
-              	$product_price = ($order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee());
-              	
-              	echo $product_price;
+              <label> <?php echo __('Registration Fee') ?> <br />
+				<?php echo __('Product Price') ?> </label><label class="fr ac"><span class="product_price_span"><?php echo  number_format($order->getProduct()->getRegistrationFee(),2);?></span><?php echo sfConfig::get('app_currency_code')?><br /><span id="extra_refill_span"><?php echo  number_format($order->getProduct()->getPrice(),2); ?></span><?php echo sfConfig::get('app_currency_code')?></label><input type="hidden" id="product_price" value="<?php  $product_price_vat = ($order->getProduct()->getRegistrationFee()+$postalcharge)*sfConfig::get('app_vat_percentage');$product_price = ($order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee());echo $product_price;
               	?>" />
               <input type="hidden" id="extra_refill" value="<?php $extra_refill = $order->getExtraRefill(); echo $extra_refill; ?>" />
-              
-              
-              <label class="fr ac">
-              	<span class="product_price_span"><?php echo  number_format($order->getProduct()->getRegistrationFee(),2) ?></span><?php echo sfConfig::get('app_currency_code')?>            	<br />
-              	<span id="extra_refill_span"><?php echo  number_format($order->getProduct()->getPrice(),2); ?></span><?php echo sfConfig::get('app_currency_code')?>
-			  </label>
-
             </li>
             <?php
             $error_quantity = false;;
@@ -196,24 +179,8 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 
 
 
-              </label>
-              <input type="hidden" id="vat" value="<?php echo $product_price_vat; ?>" />
-                <input type="hidden" id="postal" value="<?php  echo $postalcharge; ?>" />
-              <label class="fr ac" >
-                  <?php echo  number_format($postalcharge,2);  ?>&nbsp; <?php echo sfConfig::get('app_currency_code')?>
-                <br />
-              	<span id="vat_span">
-                    <?php echo  number_format($product_price_vat,2); ?>
-              	</span><?php echo sfConfig::get('app_currency_code')?>
-                <br />
-              	<?php //$total = $product_price + $extra_refill + $vat 
- //$order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage'))     
-                ?>
-                <?php $total = $product_price + $postalcharge + $product_price_vat ?>
-              	<span id="total_span">
-              	<?php echo  number_format($total,2) ?>
-              	</span><?php echo sfConfig::get('app_currency_code')?>
-              </label>
+              </label><input type="hidden" id="vat" value="<?php echo $product_price_vat; ?>" /><input type="hidden" id="postal" value="<?php  echo $postalcharge; ?>" /><label class="fr ac" > <?php echo  number_format($postalcharge,2);  ?><?php echo sfConfig::get('app_currency_code')?><br /><span id="vat_span">
+                    <?php echo  number_format($product_price_vat,2); ?></span><?php echo sfConfig::get('app_currency_code')?><br /><?php $total = $product_price + $postalcharge + $product_price_vat ?><span id="total_span"><?php echo  number_format($total,2) ?></span><?php echo sfConfig::get('app_currency_code')?></label>
             </li>
 	<li><input type="submit"  class="butonsigninsmall"  name="paybutan"  style="cursor: pointer;margin-left: 0px !important;" value="<?php echo __('Pay') ?>" /></li>  
           </ul>
