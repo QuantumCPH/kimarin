@@ -75,14 +75,10 @@ function countChar(str)
   
 <br/>
 <br/><br/>&nbsp;<br/>&nbsp;
-
+<div class="tipafriend">
 <center>
     <h1 style="font-family: Verdana; font-size: 18px; line-height: 20px; align:center; padding-top: 10px;"> <?php echo __('Tell a friend about %1%!',array('%1%'=>sfConfig::get('app_site_title'))); ?></h1>
 </center>
-	  
-
-          
-
 <br/>
 <h3><?php echo __('Tell your friends about %1% and earn extra balance!',array('%1%'=>sfConfig::get('app_site_title')));?></h3>
 <p style="align:justified;"><?php echo __('Tell your friends about %1% and earn 10%2% as soon as your friends have made their first payment with %1%! Spread the word about %1% and let your friends know about %1% services.',array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code')));?></p>
@@ -94,7 +90,8 @@ function countChar(str)
 <br/>
 <h3><?php echo __("What you'll get from this?") ?></h3>
 <p style="align:justified;"><?php echo __("As soon as your friends have made their first payment with %1%, you will automatically receive 10%2% in your %1% balance - so if 10 of your friends register on %1%, youll gain 100%2% in your account. Just share the news and enjoy this great new treat from %1%.",array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code'))); ?> </p>
-     <div class="split-form">
+</div>
+<div class="split-form">
       <div class="fl col">
 	    <form  id="form1" method="POST" action="<?php echo url_for('customer/tellAFriend', true) ?>">
                 <table>
@@ -102,11 +99,7 @@ function countChar(str)
                         <td><?php echo __("Your Friend's Name") ?></td>
                         <td><?php echo __("Your Friend's Phone Number") ?></td>
                     </tr>
-                    <tr>
-                        <td><input type="text" name="name" />&nbsp;
-                        </td>
-                        <td><input type="text" name="phone" /><br />ex. 0701234567
-                        </td>
+                    <tr><td><input type="text" name="name" /><br /><span>&nbsp;</span></td><td><input type="text" name="phone" /><br />ex. 0701234567</td>
                     </tr>
                     <tr> 
                         <td ><?php echo __("Your Friend's Email") ?></td>
