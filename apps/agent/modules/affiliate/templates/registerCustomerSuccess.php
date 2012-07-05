@@ -361,7 +361,7 @@
          
           <?php } else{ ?>
           
-          <li class="fr buttonplacement">
+          <li class="fr buttonplacement" style="margin-left:-10px ">
           <button onclick="$('#newCustomerForm').submit();" style="cursor: pointer; left: -115px;"><?php echo __('Next') ?></button>
           </li>
           <?php } ?>
