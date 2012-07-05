@@ -2635,7 +2635,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
         // call back url $p="es_297_100"; lang_orderid_amount
         
         $callbackparameters = $request->getParameter("p");
-        $params = explode("_",$callbackparameters);
+        $params = explode("-",$callbackparameters);
         
         $lang = $params[0];
         $order_id = $params[1];
