@@ -1136,6 +1136,7 @@ class affiliateActions extends sfActions {
             emailLib::sendAgentRefilEmail($this->agent, $agent_order);
             $this->redirect('affiliate/agentOrder');
         }
+        $this->redirect('affiliate/agentOrder');
     }
 
     public function executeAgentOrder(sfRequest $request) {
