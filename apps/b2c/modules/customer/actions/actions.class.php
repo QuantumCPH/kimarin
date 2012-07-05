@@ -16,6 +16,9 @@ require_once(sfConfig::get('sf_lib_dir') . '/zerocall_out_sms.php');
  * @version    SVN: $Id: actions.class.php,v 1.8 2010-09-19 22:20:12 orehman Exp $
  */
 class customerActions extends sfActions {
+    
+    private $currentCulture;
+
     public function getTargetUrl() {
         return sfConfig::get('app_customer_url');
     }
@@ -506,7 +509,9 @@ class customerActions extends sfActions {
 
 
                 //Send Email to User/Agent/Support --- when Customer Refilll --- 01/15/11
+                $this->setPreferredCulture($this->customer);
                 emailLib::sendvoipemail($this->customer, $order, $transaction);
+                $this->updatePreferredCulture();
 
                 //------------------------------
                 $this->redirect($this->getTargetUrl() .'customer/voippurchased');
@@ -1156,7 +1161,9 @@ class customerActions extends sfActions {
             file_put_contents($invite_data_file, $invite2, FILE_APPEND);
 
             //Send Email to User --- when Forget Password Request Come --- 01/15/11
+            $this->setPreferredCulture($customer);
             emailLib::sendForgetPasswordEmail($customer, $message, $subject);
+            $this->updatePreferredCulture();
 
             $this->getUser()->setFlash('send_password_message', $this->getContext()->getI18N()->__('Your account details have been sent to your email address.'));
         }
@@ -1380,7 +1387,7 @@ public function executeSmsHistory(sfWebrequest $request){
         if ($request->isMethod('post')) {
 
             //$this->form = new ContactForm();
-
+            $this->setPreferredCulture($this->customer);
             $recepient_email = $request->getParameter('email');
             $recepient_name = $request->getParameter('name');
 
@@ -1409,6 +1416,7 @@ public function executeSmsHistory(sfWebrequest $request){
 
                 $email->save();
             endif;
+            $this->updatePreferredCulture();
         }
     }
 
@@ -1874,5 +1882,14 @@ public function executeSmsHistory(sfWebrequest $request){
 	//exit();
 
         }
-    }   
+    }
+
+    private function setPreferredCulture(Customer $customer){
+      $this->currentCulture = $this->getUser()->getCulture();
+      $preferredLang = PreferredLanguagesPeer::retrieveByPK($customer->getPreferredLanguageId());
+      $this->getUser()->setCulture($preferredLang->getLanguageCode());
+    }
+    private function updatePreferredCulture(){
+       $this->getUser()->setCulture($this->currentCulture);
+    }
 }
