@@ -1852,7 +1852,10 @@ public function executeSmsHistory(sfWebrequest $request){
         $return_url = $this->getTargetUrl().'customer/refillAccept';
         $cancel_url = $this->getTargetUrl().'customer/refillReject?orderid='.$order_id;
         $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
+  $email2 = new DibsCall();
+        $email2->setCallurl($notify_url);
 
+        $email2->save();
      
         $querystring = '';
         if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])){
