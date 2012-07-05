@@ -296,11 +296,7 @@
                                 </tr>
 <?php else: ?>
                                     <tr>
-                                        <td colspan="4" align="right"><strong><?php echo __('Subtotal') ?></strong></td>
-                                        <!--
-                                        <td><?php echo format_number($amount_total - $amount_total * sfConfig::get('app_vat_percentage')) ?> <?php sfConfig::get('app_currency_code')?></td>
-                                    	 -->
-                                        <td align="right"><?php echo number_format($amount_total, 2, ',', '') ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
+                                        <td colspan="4" align="right"><strong><?php echo __('Subtotal') ?></strong></td><td align="right"><?php echo number_format($amount_total, 2, ',', '') ?><?php echo sfConfig::get('app_currency_code')?></td>
                                         <td>&nbsp;</td>
                                     </tr>
 <?php
