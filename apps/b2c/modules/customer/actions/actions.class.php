@@ -1854,7 +1854,7 @@ public function executeSmsHistory(sfWebrequest $request){
         $cancel_url = $this->getTargetUrl().'customer/refillReject?orderid='.$order_id;
      //   $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
         
-        $callbackparameters = $lang.'_'.$order_id.'_'.$item_amount;
+        $callbackparameters = $lang.'-'.$order_id.'-'.$item_amount;
         $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?p='.$callbackparameters; 
         
         $email2 = new DibsCall();
