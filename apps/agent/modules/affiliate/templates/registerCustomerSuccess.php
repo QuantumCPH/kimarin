@@ -344,7 +344,7 @@
             	<?php echo $form['is_newsletter_subscriber']->renderError() ?>
             </li>
             <?php } ?>
-            <li>
+            <li style="margin-left: -15px">
              <?php echo $form['is_newsletter_subscriber'] ?>
              <span><?php echo $form['is_newsletter_subscriber']->renderHelp() ?></span>
             </li>
@@ -362,7 +362,7 @@
           <?php } else{ ?>
           
           <li class="fr buttonplacement">
-          <button onclick="$('#newCustomerForm').submit();" style="cursor: pointer; left: -115px"><?php echo __('Next') ?></button>
+          <button onclick="$('#newCustomerForm').submit();" style="cursor: pointer; left: -115px;"><?php echo __('Next') ?></button>
           </li>
           <?php } ?>
         </ul>
