@@ -248,14 +248,13 @@
 			<td >
 			<?php echo BaseUtil::format_number($number_change->getAmount()) ?>
 			</td>
-                        <?php if ( $number_change->getAmount() == 0) {?>
-                            <td ><?php echo '10.00' ?>
-			</td>
-                        <?php }else{ ?>
+                        <?php //if ( $number_change->getAmount() == 0) {?>
+<!--                            <td ><?php //echo '10.00' ?></td>-->
+                        <?php //}else{ ?>
 
 			<td ><?php echo BaseUtil::format_number($number_change->getCommissionAmount()) ?>
 			</td>
-                        <?php } ?>
+                        <?php //} ?>
 
 		</tr>
 		<?php endforeach; ?>
