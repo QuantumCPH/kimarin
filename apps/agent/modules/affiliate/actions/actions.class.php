@@ -440,8 +440,8 @@ class affiliateActions extends sfActions {
                 $transaction->setAmount($extra_refill);
 
                 //get agent name
-                //$transaction->setDescription($this->getContext()->getI18N()->__('Refill via agent') . '(' . $agent->getName() . ')');
-                $transaction->setDescription('Refill');
+                $transaction->setDescription($this->getContext()->getI18N()->__('Refill via agent') . '(' . $agent->getName() . ')');
+                //$transaction->setDescription('Refill');
                 $transaction->setAgentCompanyId($agent->getId());
 
                 $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
