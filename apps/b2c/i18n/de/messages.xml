@@ -101,8 +101,8 @@
                 <target>Senden Sie eine SMS weltweit zu den besten Preisen des Marktes</target>
             </trans-unit>
             <trans-unit id="25" translate="yes" reformat="yes" xml:space="default">
-                <source>International calls from 0 cents * With WLS, you can call the whole world.</source>
-                <target>Internationale Anrufe von 0 Cent * Mit WLS, können Sie die ganze Welt.</target>
+                <source>International calls from 0 cents * With %1%, you can call the whole world.</source>
+                <target>Internationale Anrufe von 0 Cent * Mit %1%, können Sie die ganze Welt.</target>
             </trans-unit>
             
             <trans-unit id="26" translate="yes" reformat="yes" xml:space="default">
@@ -263,8 +263,8 @@
                 <target>Passwort vergessen?</target>
             </trans-unit>
             <trans-unit id="65" translate="yes" reformat="yes" xml:space="default">
-                <source>Write e-mail address you used for registration.&lt;br /&gt;Your password will be sent to you via this email.</source>
-                <target>Schreiben Sie eine E-Mail-Adresse bei der Registrierung verwendet. &lt;br /&gt; Ihr Passwort wird Ihnen per Diese E-Mail gesendet werden.</target>
+                <source>Write e-mail address you used for registration.&lt;br /&gt;&lt;br /&gt;Your password will be sent to you via this email.</source>
+                <target>&lt;br /&gt;Schreiben Sie eine E-Mail-Adresse bei der Registrierung verwendet.&lt;br /&gt;&lt;br /&gt;Ihr Passwort wird Ihnen per Diese E-Mail gesendet werden.</target>
             </trans-unit>
             <trans-unit id="66" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid email address.</source>
@@ -359,16 +359,16 @@
                 <target>Es liegen noch keine SMS Aufzeichnungen zu zeigen.</target>
             </trans-unit>
             <trans-unit id="88" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell your friends about Wls &amp; earn extra balance!</source>
-                <target>Erzähle deinen Freunden von Wls &amp; verdienen Extra-Balance!</target>
+                <source>Tell your friends about %1% and earn extra balance!</source>
+                <target>Erzähle deinen Freunden von %1% &amp; verdienen Extra-Balance!</target>
             </trans-unit>
             <trans-unit id="89" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell your friends about Wls and earn 10 euro as soon as your friends have made their first payment with Wls! Spread the word about Wls and let your friends know about WLS2 services.</source>
-                <target>Erzähle deinen Freunden von Wls und verdienen 10 euro sobald Ihre Freunde ihre erste Zahlung mit Wls gemacht! Spread the word über Wls und lassen Sie Ihre Freunde über WLS2 Dienstleistungen.</target>
+                <source>Tell your friends about %1% and earn 10%2% as soon as your friends have made their first payment with %1%! Spread the word about %1% and let your friends know about %1% services.</source>
+                <target>Erzähle deinen Freunden von %1% und verdienen 10%2% sobald Ihre Freunde ihre erste Zahlung mit %1% gemacht! Spread the word über %1% und lassen Sie Ihre Freunde über %1% Dienstleistungen.</target>
             </trans-unit>
             <trans-unit id="90" translate="yes" reformat="yes" xml:space="default">
-                <source>You can tell your friends about Wls in two simple ways:</source>
-                <target>Sie können Ihre Freunde über Wls in zwei einfache Möglichkeiten, zu sagen:</target>
+                <source>You can tell your friends about %1% in two simple ways:</source>
+                <target>Sie können Ihre Freunde über %1% in zwei einfache Möglichkeiten, zu sagen:</target>
             </trans-unit>
             <trans-unit id="91" translate="yes" reformat="yes" xml:space="default">
                 <source>Fill out the fields below and click the Send Email button - your friend will receive an Email</source>
@@ -379,8 +379,8 @@
                 <target>Was Sie davon haben?</target>
             </trans-unit>
             <trans-unit id="93" translate="yes" reformat="yes" xml:space="default">
-                <source>As soon as your friends have made their first payment with Wls, youll automatically receive 10 euro in your Wls balance - so if 10 of your friends register on Wls, youll gain 100 euro in your account. Just share the news and enjoy this great new treat from Wls.</source>
-                <target>Sobald Ihre Freunde haben ihre erste Zahlung mit Wls, gemacht, youll erhalten automatisch 10 euro in Ihrem Wls Gleichgewicht - so, wenn 10 Ihrer Freunde auf Wls, youll gewinnen 100 euro in Ihrem Konto zu registrieren einfach teilen sich die Nachrichten und genießen Sie diese großartige neue zu behandeln. von Wls.</target>
+                <source>As soon as your friends have made their first payment with %1%, you will automatically receive 10%2% in your %1% balance - so if 10 of your friends register on %1%, youll gain 100%2% in your account. Just share the news and enjoy this great new treat from %1%.</source>
+                <target>Sobald Ihre Freunde haben ihre erste Zahlung mit %1%, gemacht, erhalten Sie automatisch 10%2% in Ihrem %1% Gleichgewicht - so, wenn 10 Ihrer Freunde auf %1%, youll gewinnen 100%2% in Ihrem Konto zu registrieren einfach teilen sich die Nachrichten und genießen Sie diese großartige neue zu behandeln. von %1%.</target>
             </trans-unit>
       
             <trans-unit id="94" translate="yes" reformat="yes" xml:space="default">
@@ -400,8 +400,8 @@
                 <target>Ihre Nachricht</target>
             </trans-unit>
             <trans-unit id="98" translate="yes" reformat="yes" xml:space="default">
-                <source>Smartsim use to make extremely cheap international calls (save up to 90%) and to cut prices when you are abroad (you'll save 30-80%). Right now costing Smartsim 99 euro and you can call for the full amount. Smartsim has no monthly fee or hidden charges.</source>
-                <target>SmartSim nutzen, um extrem günstige internationale Anrufe (bis zu 90%) machen und die Preise zu senken, wenn Sie im Ausland (du wirst 30-80% sparen) sind. Im Moment kostet SmartSim 99 euro und Sie können den vollen Betrag nennen. SmartSim hat keine monatliche Grundgebühr oder versteckte Kosten.</target>
+                <source>Smartsim use to make extremely cheap international calls (save up to 90%) and to cut prices when you are abroad (you'll save 30-80%). Right now costing Smartsim 99%2% and you can call for the full amount. Smartsim has no monthly fee or hidden charges.</source>
+                <target>SmartSim nutzen, um extrem günstige internationale Anrufe (bis zu 90%) machen und die Preise zu senken, wenn Sie im Ausland (du wirst 30-80% sparen) sind. Im Moment kostet SmartSim 99%2% und Sie können den vollen Betrag nennen. SmartSim hat keine monatliche Grundgebühr oder versteckte Kosten.</target>
             </trans-unit>
             <trans-unit id="99" translate="yes" reformat="yes" xml:space="default">
                 <source>Send Email to join Smartsim</source>
@@ -589,8 +589,8 @@
                 <target>Auto nachfüllen Menge:</target>
             </trans-unit>
              <trans-unit id="145" translate="yes" reformat="yes" xml:space="default">
-                <source>Wls 2 recommends to activate this service so you &lt;br /&gt; do not have to manually  refill when your account&lt;br /&gt;  balance runs low. 100 or 200 Euros each  when the &lt;br /&gt; balances reaches 25 or 50 Euro. This facility is &lt;br /&gt; added to your account in minutes.</source>
-                <target>WLS 2 empfiehlt, diesen Dienst zu aktivieren, damit &lt;br /&gt;Sie müssen nicht manuell nachfüllen, wenn&lt;br /&gt;Ihr Kontostand Neige. 100 oder 200 Euro jeweils, &lt;br /&gt;wenn die Salden erreicht 25 oder 50 Euro. Diese&lt;br /&gt; Einrichtung ist auf Ihr Konto in Minuten zugegeben.</target>
+                <source>%1% recommends to activate this service so you &lt;br /&gt; do not have to manually  refill when your account&lt;br /&gt;  balance runs low. 100 or 200%2% each  when the &lt;br /&gt; balances reaches 25 or 50%2%. This facility is &lt;br /&gt; added to your account in minutes.</source>
+                <target>%1% empfiehlt, diesen Dienst zu aktivieren, damit &lt;br /&gt;Sie müssen nicht manuell nachfüllen, wenn&lt;br /&gt;Ihr Kontostand Neige. 100 oder 200%2% jeweils, &lt;br /&gt;wenn die Salden erreicht 25 oder 50%2%. Diese&lt;br /&gt; Einrichtung ist auf Ihr Konto in Minuten zugegeben.</target>
             </trans-unit>
              <trans-unit id="146" translate="yes" reformat="yes" xml:space="default">
                 <source>Enter cell phone number</source>
@@ -701,8 +701,8 @@
                 <target>Gesendet wurde</target>
             </trans-unit>
             <trans-unit id="172" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell a friend about Wls!</source>
-                <target>Sagen ein Freund über Wls!</target>
+                <source>Tell a friend about %1%!</source>
+                <target>Sagen ein Freund über %1%!</target>
             </trans-unit>
             <trans-unit id="173" translate="yes" reformat="yes" xml:space="default">
                 <source>HI</source>
@@ -748,8 +748,8 @@
                 <target>SmartSim mit Topf</target>
             </trans-unit>
             <trans-unit id="183" translate="yes" reformat="yes" xml:space="default">
-                <source>Thank you for ordering &lt;b&gt;%1%&lt;/b&gt; and becoming wls2 Customer. We welcome you to a new and huge mobile world. </source>
-                <target>Vielen Dank für Ihre Bestellung &lt;b&gt;%1%&lt;/b&gt; und immer wls2 Kunden. Wir begrüßen Sie zu einem neuen und riesigen mobilen Welt. </target>
+                <source>Thank you for ordering &lt;b&gt;%1%&lt;/b&gt; and becoming %1% Customer. We welcome you to a new and huge mobile world. </source>
+                <target>Vielen Dank für Ihre Bestellung &lt;b&gt;%1%&lt;/b&gt; und immer %1% Kunden. Wir begrüßen Sie zu einem neuen und riesigen mobilen Welt. </target>
             </trans-unit>
             <trans-unit id="184" translate="yes" reformat="yes" xml:space="default">
                 <source>Your customer number is </source>
@@ -772,20 +772,20 @@
                 <target>Danke für den Kauf zer0call%1%-Paket erhalten Sie Paket in wenigen Tagen erhalten. Bei Fragen wenden Sie sich bitte mit uns in Verbindung</target>
             </trans-unit>
             <trans-unit id="189" translate="yes" reformat="yes" xml:space="default">
-                <source></source>
-                <target></target>
+                <source>Please enter a valid mobile/n.i.e/passport number.</source>
+                <target>Bitte geben Sie eine gültige mobile/n.i.e/Passnummer.</target>
             </trans-unit>
             <trans-unit id="190" translate="yes" reformat="yes" xml:space="default">
-                <source>Thank you for ordering &lt;b&gt;%1%&lt;/b&gt; and becoming wls2 Customer. We welcome you to a new and huge mobile world.</source>
-                <target>Vielen Dank für Ihre Bestellung &lt;b&gt;%1%&lt;/b&gt; und immer wls2 Kunden. Wir begrüßen Sie zu einem neuen und riesigen mobilen Welt.</target>
+                <source>Thank you for ordering &lt;b&gt;%1%&lt;/b&gt; and becoming %1% Customer. We welcome you to a new and huge mobile world.</source>
+                <target>Vielen Dank für Ihre Bestellung &lt;b&gt;%1%&lt;/b&gt; und immer %1% Kunden. Wir begrüßen Sie zu einem neuen und riesigen mobilen Welt.</target>
             </trans-unit>
             <trans-unit id="191" translate="yes" reformat="yes" xml:space="default">
                 <source>Your Password have been saved.</source>
                 <target>Ihr Passwort gespeichert wurden.</target>
             </trans-unit>
             <trans-unit id="192" translate="yes" reformat="yes" xml:space="default">
-                <source>WLS2 invitation</source>
-                <target>WLS2 Einladung</target>
+                <source>%1% invitation</source>
+                <target>%1% Einladung</target>
             </trans-unit>
             <trans-unit id="193" translate="yes" reformat="yes" xml:space="default">
                 <source>Hi </source>
@@ -796,8 +796,8 @@
                 <target>Diese Einladung wird Ihnen mit der Referenz der gesendeten</target>
             </trans-unit>
             <trans-unit id="195" translate="yes" reformat="yes" xml:space="default">
-                <source>a user of Smartsim from the WLS2.</source>
-                <target>Ein Benutzer des SmartSim aus dem WLS2.</target>
+                <source>a user of Smartsim from the %1%.</source>
+                <target>Ein Benutzer des SmartSim aus dem %1%.</target>
             </trans-unit>
             <trans-unit id="196" translate="yes" reformat="yes" xml:space="default">
                 <source>Please click accept to start saving money immediately with Smartsim.</source>
@@ -816,8 +816,8 @@
                 <target>Lesen Sie mehr</target>
             </trans-unit>
             <trans-unit id="200" translate="yes" reformat="yes" xml:space="default">
-                <source>Your password has been changed. Please use the following information to login to your WLS2 account.</source>
-                <target>Ihr Passwort wurde geändert. Bitte verwenden Sie die folgenden Informationen zu Ihrem WLS2 Account einloggen.</target>
+                <source>Your password has been changed. Please use the following information to login to your %1% account.</source>
+                <target>Ihr Passwort wurde geändert. Bitte verwenden Sie die folgenden Informationen zu Ihrem %1% Account einloggen.</target>
             </trans-unit>
             <trans-unit id="201" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number: %s</source>
@@ -864,11 +864,11 @@
                 <target>Passwörter stimmen nicht überein</target>
             </trans-unit>
             <trans-unit id="212" translate="yes" reformat="yes" xml:space="default">
-                <source>Thank you for registeration your account at WLS. You will soon receive a delivery confirmation</source>
-                <target>Vielen Dank für Register tion Ihr Konto bei WLS. Sie Geschäfts-oder Firmenwert in Kürze eine Auslieferungsbestätigung</target>
+                <source>Thank you for registeration your account at %1%. You will soon receive a delivery confirmation</source>
+                <target>Vielen Dank für Register tion Ihr Konto bei %1%. Sie Geschäfts-oder Firmenwert in Kürze eine Auslieferungsbestätigung</target>
             </trans-unit>
             <trans-unit id="213" translate="yes" reformat="yes" xml:space="default">
-                <source>print</source>
+                <source>Print</source>
                 <target>Drucken</target>
             </trans-unit>
             <trans-unit id="214" translate="yes" reformat="yes" xml:space="default">
@@ -937,31 +937,31 @@
                 <target>Bonus vergeben</target>
             </trans-unit>
 
-    <trans-unit id="230" translate="yes" reformat="yes" xml:space="default">
-                <source>We hereby confirm that you have received commissions deposited into your account that you have referred a friend about Smartsim from wls.Go in to "Payment History" to see what you have earned.</source>
-                <target>Wir bestätigen hiermit, dass Sie erhielt Aufträge hinterlegt auf Ihr Konto, dass Sie einen Freund über SmartSim aus wls.Go in die auf "Zahlungsprotokoll" bezeichnet zu sehen, was Sie verdient haben.</target>
+            <trans-unit id="230" translate="yes" reformat="yes" xml:space="default">
+                <source>We hereby confirm that you have received commissions deposited into your account that you have referred a friend about Smartsim from %1%.Go in to "Payment History" to see what you have earned.</source>
+                <target>Wir bestätigen hiermit, dass Sie erhielt Aufträge hinterlegt auf Ihr Konto, dass Sie einen Freund über SmartSim aus %1%.Go in die auf "Zahlungsprotokoll" bezeichnet zu sehen, was Sie verdient haben.</target>
             </trans-unit>
 
-    <trans-unit id="231" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="231" translate="yes" reformat="yes" xml:space="default">
                 <source>Bonus Receiver</source>
                 <target>Bonus-Empfänger</target>
             </trans-unit>
-  <trans-unit id="232" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="232" translate="yes" reformat="yes" xml:space="default">
                 <source>Registered Friend</source>
                 <target>Registrierte Freund</target>
             </trans-unit>
 
- <trans-unit id="233" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="233" translate="yes" reformat="yes" xml:space="default">
                 <source>Registration</source>
                 <target>Anmeldung</target>
             </trans-unit>
 
- <trans-unit id="234" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="234" translate="yes" reformat="yes" xml:space="default">
                 <source>Auto Refill</source>
                 <target>Automatische Nachfüllung</target>
             </trans-unit>
 
- <trans-unit id="235" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="235" translate="yes" reformat="yes" xml:space="default">
                 <source>Invitation Bonus</source>
                 <target>Einladung Bonus</target>
             </trans-unit>
@@ -1021,9 +1021,145 @@
                 <source>Your settings have been saved.</source>
                 <target>Ihre Einstellungen wurden gespeichert.</target>
             </trans-unit>
- <trans-unit id="148" translate="yes" reformat="yes" xml:space="default">
-                <source>Active</source>
-                <target>Aktiv</target>
+            <trans-unit id="250" translate="yes" reformat="yes" xml:space="default">
+                <source>Refund</source>
+                <target>Erstatten</target>
+            </trans-unit>
+            <trans-unit id="251" translate="yes" reformat="yes" xml:space="default">
+                <source>The customer is already registered</source>
+                <target>Der Kunde ist bereits registriert</target>
+            </trans-unit>
+            <trans-unit id="252" translate="yes" reformat="yes" xml:space="default">
+                <source>Call</source>
+                <target>Rufen</target>
+            </trans-unit>
+            <trans-unit id="253" translate="yes" reformat="yes" xml:space="default">
+                <source>There are currently no call records to show.</source>
+                <target>Es liegen noch keine Anruflisten zu zeigen,.</target>
+            </trans-unit>
+            <trans-unit id="254" translate="yes" reformat="yes" xml:space="default">
+                <source>Other events</source>
+                <target>Weitere Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="255" translate="yes" reformat="yes" xml:space="default">
+                <source>Here you can join Option Package travel number. Simply press the Join button at the bottom of the page. After successful registration you will receive an email confirming the registration of additional package</source>
+                <target>Hier können Sie beitreten Option Pauschalreisen Nummer. Drücken Sie einfach die Schaltfläche Verbinden am unteren Rand der Seite. Nach erfolgreicher Anmeldung erhalten Sie eine E-Mail zur Bestätigung der Registrierung von zusätzlichen Paket</target>
+            </trans-unit>
+            <trans-unit id="256" translate="yes" reformat="yes" xml:space="default">
+                <source>What is Resenumber</source>
+                <target>Was ist Resenumber</target>
+            </trans-unit>
+            <trans-unit id="257" translate="yes" reformat="yes" xml:space="default">
+                <source>With Resenumber you can receive cheap calls on this number while travelling abroad.</source>
+                <target>Mit Resenumber Sie empfangen können günstige Anrufe auf dieser Nummer auf Reisen im Ausland.</target>
+            </trans-unit>
+            <trans-unit id="258" translate="yes" reformat="yes" xml:space="default">
+                <source>Package price is: 10%1% per. Month</source>
+                <target>Paketpreis ist: 10%1% pro. Monat</target>
+            </trans-unit>
+            <trans-unit id="259" translate="yes" reformat="yes" xml:space="default">
+                <source>The activation price is: 30%1%</source>
+                <target>Die Aktivierung Preis beträgt: 30%1%</target>
+            </trans-unit>
+            <trans-unit id="260" translate="yes" reformat="yes" xml:space="default">
+                <source>To Number</source>
+                <target>Zur Anzahl</target>
+            </trans-unit>
+            <trans-unit id="261" translate="yes" reformat="yes" xml:space="default">
+                <source>From Number</source>
+                <target>von Nummer</target>
+            </trans-unit>
+            <trans-unit id="262" translate="yes" reformat="yes" xml:space="default">
+                <source>Cost</source>
+                <target>Kosten</target>
+            </trans-unit>
+            <trans-unit id="263" translate="yes" reformat="yes" xml:space="default">
+                <source>Search</source>
+                <target>Suche</target>
+            </trans-unit>
+            <trans-unit id="264" translate="yes" reformat="yes" xml:space="default">
+                <source>To</source>
+                <target>Zu</target>
+            </trans-unit>
+            <trans-unit id="265" translate="yes" reformat="yes" xml:space="default">
+                <source>From</source>
+                <target>Aus</target>
+            </trans-unit>
+            <trans-unit id="266" translate="yes" reformat="yes" xml:space="default">
+                <source>Manual payment</source>
+                <target>Manuelle Zahlung</target>
+            </trans-unit>
+            <trans-unit id="267" translate="yes" reformat="yes" xml:space="default">
+                <source>Charge</source>
+                <target>Gebühr</target>
+            </trans-unit>
+            <trans-unit id="268" translate="yes" reformat="yes" xml:space="default">
+                <source>Please Enter The Destination Number</source>
+                <target>Bitte Geben Sie die Zielrufnummer</target>
+            </trans-unit>
+            <trans-unit id="269" translate="yes" reformat="yes" xml:space="default">
+                <source>Please Enter The Message</source>
+                <target>Bitte Geben Sie die Nachricht</target>
+            </trans-unit>
+            <trans-unit id="270" translate="yes" reformat="yes" xml:space="default">
+                <source>You do not have enough money in the account, you are kindly asked to refill</source>
+                <target>Sie haben nicht genug Geld auf dem Konto, sind Sie herzlich zum Nachfüllen aufgefordert</target>
+            </trans-unit>
+            <trans-unit id="271" translate="yes" reformat="yes" xml:space="default">
+                <source>N.I.E/Passport Number</source>
+                <target>N.I.E/Passnummer</target>
+            </trans-unit>
+            <trans-unit id="272" translate="yes" reformat="yes" xml:space="default">
+                <source>Sim Type</source>
+                <target>Sim-Typ</target>
+            </trans-unit>
+            <trans-unit id="273" translate="yes" reformat="yes" xml:space="default">
+                <source>Preferred Language</source>
+                <target>Bevorzugte Sprache</target>
+            </trans-unit>
+            <trans-unit id="274" translate="yes" reformat="yes" xml:space="default">
+                <source>Middle Name</source>
+                <target>Zweiter Vorname</target>
+            </trans-unit>
+            <trans-unit id="275" translate="yes" reformat="yes" xml:space="default">
+                <source>Mobile Number already registered.</source>
+                <target>Mobile Number bereits registriert.</target>
+            </trans-unit>
+            <trans-unit id="276" translate="yes" reformat="yes" xml:space="default">
+                <source>N.I.E/Passport Number already existing.</source>
+                <target>N.I.E/Passnummer bereits bestehenden.</target>
+            </trans-unit>
+            <trans-unit id="277" translate="yes" reformat="yes" xml:space="default">
+                <source>N.I.E/Passport Number already registered.</source>
+                <target>N.I.E/Passnummer bereits registriert.</target>
+            </trans-unit>
+            <trans-unit id="278" translate="yes" reformat="yes" xml:space="default">
+                <source>Nationality</source>
+                <target>Nationalität</target>
+            </trans-unit>
+            <trans-unit id="279" translate="yes" reformat="yes" xml:space="default">
+                <source>Province</source>
+                <target>Provinz</target>
+            </trans-unit>
+            <trans-unit id="280" translate="yes" reformat="yes" xml:space="default">
+                <source>Your are successfully registered with %1%</source>
+                <target>Werden erfolgreich mit unseren registriert %1%</target>
+            </trans-unit>
+            <trans-unit id="283" translate="yes" reformat="yes" xml:space="default">
+                <source>Active mobile No</source>
+                <target>Aktive mobile Nein</target>
+            </trans-unit>
+            <trans-unit id="284" translate="yes" reformat="yes" xml:space="default">
+                <source>Sms Charges</source>
+                <target>SMS-Gebühren</target>
+            </trans-unit>
+            <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
+                <source>Enter Cell Phone/N.I.E/Passport No.</source>
+                <target>Geben Sie Handy/N.I.E/Pass Nr.</target>
+            </trans-unit>
+            <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
+                <source>navigations</source>
+                <target>navigationen</target>
             </trans-unit>
         </body>
     </file>
