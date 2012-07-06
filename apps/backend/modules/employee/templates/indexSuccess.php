@@ -94,7 +94,7 @@
 
       </td>
       <td><?php echo $employee->getMobileNumber() ?></td>
-      <td>
+<!--      <td>-->
            <?php
 
 //
@@ -112,7 +112,7 @@
 
 
                             <?php  //}else{echo "No";} ?>
-</td>
+<!--</td>-->
  <?php  if(isset($companyval) && $companyval!=""){  ?>
       <td> <?php  $mobileID= $employee->getCountryMobileNumber();
        
