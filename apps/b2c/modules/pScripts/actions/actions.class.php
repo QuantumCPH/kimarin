@@ -2593,8 +2593,14 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $email2->setCallurl($Parameters);
         $email2->save();
         
-        $order_id = $request->getParameter('orderid');
-        $amount = $request->getParameter('amount');
+        //$order_id = $request->getParameter('orderid');
+        //$amount = $request->getParameter('amount');
+        
+        $callbackparameters = $request->getParameter("p");
+        $params = explode("-",$callbackparameters);        
+        
+        $order_id = $params[0];
+        $order_amount   = $params[1];       
        
         if ($order_id) {
             $c = new Criteria();
@@ -2620,7 +2626,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
             $aph->setRemainingBalance($remainingbalance);
             $aph->save();
             
-            emailLib::sendAgentRefilEmail($this->agent, $agent_order);
+           // emailLib::sendAgentRefilEmail($this->agent, $agent_order);
         }
     }
     

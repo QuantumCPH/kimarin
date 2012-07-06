@@ -1517,12 +1517,15 @@ class affiliateActions extends sfActions {
     }
 
     public function executeAgentRefil(sfWebRequest $request) { 
+        
         $order_id = $request->getParameter('item_number');
         $item_amount = $request->getParameter('amount');
 
         $return_url = $this->getTargetUrl() . 'affiliate/accountRefill';
         $cancel_url = $this->getTargetUrl() . 'affiliate/thankyou/?accept=cancel';
-        $notify_url = sfConfig::get('app_customer_url') . 'pScripts/agentRefillThankyou?orderid=' . $order_id . '&amount=' . $item_amount;
+        
+        $callbackparameters = $order_id.'-'.$item_amount;
+        $notify_url = sfConfig::get('app_customer_url') . 'pScripts/agentRefillThankyou?p='.$callbackparameters;
 
         $c = new Criteria;
         $c->add(AgentOrderPeer::AGENT_ORDER_ID, $order_id);
