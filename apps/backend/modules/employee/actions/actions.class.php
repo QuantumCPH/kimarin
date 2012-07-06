@@ -60,6 +60,7 @@ class employeeActions extends sfActions {
         $this->employee = EmployeePeer::retrieveByPK($request->getParameter('id'));
         $mobilenumber= $this->employee->getCountryMobileNumber();
         $balanceres = 0.00;
+        $balancecb=0.00;
         $ct = new Criteria();
         $ct->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'a'.$mobilenumber);
         $ct->addAnd(TelintaAccountsPeer::STATUS, 3);
@@ -67,12 +68,12 @@ class employeeActions extends sfActions {
         $account_info = CompanyEmployeActivation::getAccountInfo($telintaAccount->getIAccount());
         $balance = $account_info->account_info->balance;
 
-        $cb = new Criteria();
+        /*$cb = new Criteria();
         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb'.$mobilenumber);
         $cb->addAnd(TelintaAccountsPeer::STATUS, 3);
         $telintaAccountcb = TelintaAccountsPeer::doSelectOne($cb);
         $account_infocb = CompanyEmployeActivation::getAccountInfo($telintaAccountcb->getIAccount());
-        $balancecb = $account_infocb->account_info->balance;
+        $balancecb = $account_infocb->account_info->balance;*/
 
         $getvoipInfo = new Criteria();
         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $mobilenumber);
@@ -184,7 +185,7 @@ class employeeActions extends sfActions {
        $product= ProductPeer::retrieveByPK($request->getParameter('productid'));
        $chrageamount=$product->getRegistrationFee()+$product->getRegistrationFee()*sfConfig::get('app_vat_percentage');
        //$emplyeeProductFeeDescription="Registration Fee Including Vat";,$emplyeeProductFeeDescription
-        CompanyEmployeActivation::charge($company,$chrageamount);
+        CompanyEmployeActivation::charge($this->companys,$chrageamount);
 
 
      $rtype=$request->getParameter('registration_type');
@@ -557,12 +558,12 @@ class employeeActions extends sfActions {
         $telintaAccount = TelintaAccountsPeer::doSelectOne($ct);
         $this->callHistory = CompanyEmployeActivation::getAccountCallHistory($telintaAccount->getIAccount(), $fromdate, $todate);
         
-        $cb = new Criteria();
+       /*$cb = new Criteria();
         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb'.$mobilenumber);
         $cb->addAnd(TelintaAccountsPeer::STATUS, 3);
         $telintaAccountcb = TelintaAccountsPeer::doSelectOne($cb);
         $this->callHistorycb = CompanyEmployeActivation::getAccountCallHistory($telintaAccountcb->getIAccount(), $fromdate, $todate);
-
+        
         $getvoipInfo = new Criteria();
         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $contrymobilenumber);
         $getvoipInfo->addAnd(SeVoipNumberPeer::IS_ASSIGNED, 1);
@@ -576,7 +577,7 @@ class employeeActions extends sfActions {
             $res->addAnd(TelintaAccountsPeer::STATUS, 3);
             $telintaAccountres = TelintaAccountsPeer::doSelectOne($res);
             $this->callHistoryres = CompanyEmployeActivation::getAccountCallHistory($telintaAccountres->getIAccount(), $fromdate, $todate);
-        }
+        }*/
        
     }
 

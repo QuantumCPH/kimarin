@@ -365,6 +365,27 @@ class affiliateActions extends sfActions {
             $this->sms_registration_earnings = $sms_registration_earnings;
             $this->sms_commission_earnings = $sms_commission_earnings;
             ////////// End SMS registrations
+
+
+            $nc = new Criteria();
+            $nc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+            $nc->addAnd(TransactionPeer::DESCRIPTION, 'Fee for change number (' . $agent->getName() . ')');
+            $nc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+            $nc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+            $number_changes = TransactionPeer::doSelect($nc);
+
+            $numberChange_earnings = 0.00;
+            $numberChange_commission = 0.00;
+            foreach ($number_changes as $number_change) {
+                $numberChange_earnings = $numberChange_earnings + $number_change->getAmount();
+                $numberChange_commission = $numberChange_commission + $number_change->getCommissionAmount();
+            }
+            $this->number_changes = $number_changes;
+            $this->numberChange_earnings = $numberChange_earnings;
+            $this->numberChange_commission = $numberChange_commission;
+
+
+
             $this->sf_request = $request;
         } catch (Exception $e) {
             echo $e->getMessage();
