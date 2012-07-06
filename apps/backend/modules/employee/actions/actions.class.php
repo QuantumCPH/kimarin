@@ -60,6 +60,7 @@ class employeeActions extends sfActions {
         $this->employee = EmployeePeer::retrieveByPK($request->getParameter('id'));
         $mobilenumber= $this->employee->getCountryMobileNumber();
         $balanceres = 0.00;
+        $balancecb=0.00;
         $ct = new Criteria();
         $ct->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'a'.$mobilenumber);
         $ct->addAnd(TelintaAccountsPeer::STATUS, 3);
@@ -67,12 +68,12 @@ class employeeActions extends sfActions {
         $account_info = CompanyEmployeActivation::getAccountInfo($telintaAccount->getIAccount());
         $balance = $account_info->account_info->balance;
 
-        $cb = new Criteria();
+        /*$cb = new Criteria();
         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb'.$mobilenumber);
         $cb->addAnd(TelintaAccountsPeer::STATUS, 3);
         $telintaAccountcb = TelintaAccountsPeer::doSelectOne($cb);
         $account_infocb = CompanyEmployeActivation::getAccountInfo($telintaAccountcb->getIAccount());
-        $balancecb = $account_infocb->account_info->balance;
+        $balancecb = $account_infocb->account_info->balance;*/
 
         $getvoipInfo = new Criteria();
         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $mobilenumber);
