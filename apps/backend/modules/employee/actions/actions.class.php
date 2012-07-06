@@ -576,8 +576,8 @@ class employeeActions extends sfActions {
             $res->add(TelintaAccountsPeer::ACCOUNT_TITLE, $voipnumbers);
             $res->addAnd(TelintaAccountsPeer::STATUS, 3);
             $telintaAccountres = TelintaAccountsPeer::doSelectOne($res);
-            $this->callHistoryres = CompanyEmployeActivation::getAccountCallHistory($telintaAccountres->getIAccount(), $fromdate, $todate);*/
-        }
+            $this->callHistoryres = CompanyEmployeActivation::getAccountCallHistory($telintaAccountres->getIAccount(), $fromdate, $todate);
+        }*/
        
     }
 
