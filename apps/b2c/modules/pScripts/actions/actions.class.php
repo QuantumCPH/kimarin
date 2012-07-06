@@ -2626,7 +2626,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
             $aph->setRemainingBalance($remainingbalance);
             $aph->save();
             
-           // emailLib::sendAgentRefilEmail($this->agent, $agent_order);
+            emailLib::sendAgentRefilEmail($this->agent, $agent_order);
         }
     }
     
