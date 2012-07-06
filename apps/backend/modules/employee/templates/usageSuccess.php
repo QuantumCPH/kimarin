@@ -52,7 +52,7 @@ foreach ($callHistory->xdr_list as $xdr) {
             $callRecords = 1;
         }
 
-        foreach ($callHistorycb->xdr_list as $xdrcb) {
+       /* foreach ($callHistorycb->xdr_list as $xdrcb) {
         ?>
 
 
@@ -128,10 +128,10 @@ foreach ($callHistoryres->xdr_list as $xdrres) {
      $callRecordsrese = 1;
  }
 }
-}
+}*/ /*and $callRecordscb==0 and $callRecordsrese==0*/
 ?>
 
-<?php if($callRecords==0 and $callRecordscb==0 and $callRecordsrese==0){ ?>
+<?php if($callRecords==0){ ?>
     <tr>
         <td colspan="6"><p><?php echo __('There are currently no call records to show.') ?></p></td>
     </tr>
