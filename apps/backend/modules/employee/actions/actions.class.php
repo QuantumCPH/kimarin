@@ -184,7 +184,7 @@ class employeeActions extends sfActions {
        $product= ProductPeer::retrieveByPK($request->getParameter('productid'));
        $chrageamount=$product->getRegistrationFee()+$product->getRegistrationFee()*sfConfig::get('app_vat_percentage');
        //$emplyeeProductFeeDescription="Registration Fee Including Vat";,$emplyeeProductFeeDescription
-        CompanyEmployeActivation::charge($company,$chrageamount);
+        CompanyEmployeActivation::charge($this->companys,$chrageamount);
 
 
      $rtype=$request->getParameter('registration_type');
