@@ -60,13 +60,13 @@
         <?php //echo $sf_user->getCulture();
           if($sf_user->getCulture()=='en'){
               $class = 'class="texten"';
-              $style = 'style ="display:block;height:96px;"';
+              $style = 'style ="display:block;height:96px;width: 148px;"';
           }elseif($sf_user->getCulture()=='de'){
               $class = 'class="textde"';
-              $style = 'style ="display:block;height:107px;"';
+              $style = 'style ="display:block;height:107px;width: 148px;"';
           }else{
               $class = 'class="textes"';
-              $style = 'style ="display:block;height:94px;"';
+              $style = 'style ="display:block;height:94px;width: 148px;"';
           }
         ?>    
             <label <?php echo $class;?> <?php echo $style;?>><?php echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
