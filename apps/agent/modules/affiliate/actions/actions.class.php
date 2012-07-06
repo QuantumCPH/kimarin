@@ -1347,14 +1347,14 @@ class affiliateActions extends sfActions {
                 /////////////////////////////////////////////////////////////////////////////////////////////////
                 $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 ///////////////////////////commision calculation by agent product ///////////////////////////////////////
-                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'usersession');
+                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
                 $cp = new Criteria;
                 $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
                 $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
                 $agentproductcount = AgentProductPeer::doCount($cp);
                 if ($agentproductcount > 0) {
                     $p = new Criteria;
-                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'usersession'));
+                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
                     $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
 
                     $agentproductcomesion = AgentProductPeer::doSelectOne($p);
@@ -1483,7 +1483,7 @@ class affiliateActions extends sfActions {
                     $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
                     $amount = -$amount;
                     $aph = new AgentPaymentHistory();
-                    $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'usersession'));
+                    $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
                     $aph->setCustomerId($transaction->getCustomerId());
                     $aph->setExpeneseType(6);
                     $aph->setAmount($amount);
