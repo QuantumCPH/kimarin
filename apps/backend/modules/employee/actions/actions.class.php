@@ -558,12 +558,12 @@ class employeeActions extends sfActions {
         $telintaAccount = TelintaAccountsPeer::doSelectOne($ct);
         $this->callHistory = CompanyEmployeActivation::getAccountCallHistory($telintaAccount->getIAccount(), $fromdate, $todate);
         
-        $cb = new Criteria();
+       /*$cb = new Criteria();
         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb'.$mobilenumber);
         $cb->addAnd(TelintaAccountsPeer::STATUS, 3);
         $telintaAccountcb = TelintaAccountsPeer::doSelectOne($cb);
         $this->callHistorycb = CompanyEmployeActivation::getAccountCallHistory($telintaAccountcb->getIAccount(), $fromdate, $todate);
-
+        
         $getvoipInfo = new Criteria();
         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $contrymobilenumber);
         $getvoipInfo->addAnd(SeVoipNumberPeer::IS_ASSIGNED, 1);
@@ -576,7 +576,7 @@ class employeeActions extends sfActions {
             $res->add(TelintaAccountsPeer::ACCOUNT_TITLE, $voipnumbers);
             $res->addAnd(TelintaAccountsPeer::STATUS, 3);
             $telintaAccountres = TelintaAccountsPeer::doSelectOne($res);
-            $this->callHistoryres = CompanyEmployeActivation::getAccountCallHistory($telintaAccountres->getIAccount(), $fromdate, $todate);
+            $this->callHistoryres = CompanyEmployeActivation::getAccountCallHistory($telintaAccountres->getIAccount(), $fromdate, $todate);*/
         }
        
     }
