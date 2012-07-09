@@ -422,6 +422,7 @@ class customerActions extends autocustomerActions {
             $validated = false;
             $mobile_number = $request->getParameter('mobile_number');
             $extra_refill = $request->getParameter('refill_amount');
+            $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
             $transaction = new Transaction();
             $order = new CustomerOrder();
@@ -466,7 +467,7 @@ class customerActions extends autocustomerActions {
                 $transaction->setDescription($request->getParameter('transaction_description'));
                 $transaction->setTransactionFrom('2');
                 $transaction->save();
-                Telienta::recharge($customer, $transaction->getAmount(), $request->getParameter('transaction_description'));
+                Telienta::recharge($customer, $transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1), $request->getParameter('transaction_description'));
                 //set status
                 $order->setOrderStatusId(3);
                 $transaction->setTransactionStatusId(3);
