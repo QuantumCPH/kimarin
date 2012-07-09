@@ -299,8 +299,8 @@
                 <target>Rufen Geschichte</target>
             </trans-unit>
             <trans-unit id="74" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Numer</source>
-                <target>Auftrag Numer</target>
+                <source>Order Number</source>
+                <target>Bestell-Nummer</target>
             </trans-unit>
             <trans-unit id="75" translate="yes" reformat="yes" xml:space="default">
                 <source>Date &amp; time</source>
