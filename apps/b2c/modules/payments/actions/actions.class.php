@@ -268,7 +268,7 @@ class paymentsActions extends sfActions {
         else
             die('Error retreiving');
 
-        if($transaction->getDescription()=="Refill"){
+        if(strstr($transaction->getDescription(),"Refill")){
             $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
         }
 
