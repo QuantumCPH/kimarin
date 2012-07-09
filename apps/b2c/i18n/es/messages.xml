@@ -661,8 +661,8 @@
                 <target>Permitir</target>
             </trans-unit>
             <trans-unit id="162" translate="yes" reformat="yes" xml:space="default">
-                <source>Cost &lt;small&gt;(Incl. VAT)&lt;/small&gt;</source>
-                <target>Costo &lt;small&gt;(Incl. IVA)&lt;/small&gt;</target>
+                <source>Cost &lt;small&gt;(Ex. VAT)&lt;/small&gt;</source>
+                <target>Costo &lt;small&gt;(Ex. IVA)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
                 <source>Call Type</source>
