@@ -18,6 +18,8 @@ Cufon.set('fontSize', '13px').replace('.split-form ul li', { fontFamily: 'Calibr
 /*Cufon.replace('#wrap', { fontFamily: 'Calibri' });*/
 Cufon.replace('.login-left h4', { fontFamily: 'Calibri Bold' });
 Cufon.replace('.login-right h4', { fontFamily: 'Calibri Bold' });
+Cufon.replace('.login-left label', { fontFamily: 'Calibri' });
+Cufon.replace('.login-right label', { fontFamily: 'Calibri' });
 Cufon.replace('.loginbuttun', { fontFamily: 'Calibri'});
 Cufon.replace('input[type=submit]', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '17px').replace('.dashboard h2', { fontFamily: 'Calibri Bold' });
@@ -34,4 +36,5 @@ Cufon.set('fontSize', '15px').replace('.prodname', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '14px').replace('.tipafriend  h3', { fontFamily: 'Calibri Bold'});
 Cufon.set('fontSize', '16px').replace('.tipafriend  h1', { fontFamily: 'Calibri Bold'});
 Cufon.set('fontSize', '13px').replace('.tipafriend  p', { fontFamily: 'Calibri'});
+Cufon.set('fontSize', '14px').replace('.maintext', { fontFamily: 'Calibri'});
 

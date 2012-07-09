@@ -137,6 +137,12 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
     <div class="split-form-sign-up">
       <div class="step-details"> <strong><?php echo __('Become a Customer') ?> <span class="inactive">- <?php echo __('Step 1') ?>: <?php echo __('Register') ?> </span><span class="active">- <?php echo __('Step 2') ?>: <?php echo __('Payment') ?></span></strong> </div>
       <div class="fl col">
+          <p style="color: red; margin-bottom:1px; position: relative; top: -2px;">
+	<?php
+	if ($sf_user->hasFlash('error_payment')): ?>
+	<?php echo $sf_user->getFlash('error_payment'); ?>
+	<?php
+        endif;?>&nbsp;</p>
           <ul>
             <!-- payment details -->
             <li>

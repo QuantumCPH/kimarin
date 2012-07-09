@@ -2638,7 +2638,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $email2->setCallurl($Parameters);
         $email2->save();
         
-        // call back url $p="es_297_100"; lang_orderid_amount
+        // call back url $p="es-297-100"; lang_orderid_amount
         
         $callbackparameters = $request->getParameter("p");
         $params = explode("-",$callbackparameters);
@@ -2788,7 +2788,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $order_id = "";
         $order_amount = "";
         
-        // call back url $p="es_297_100"; lang_orderid_amount
+        // call back url $p="es-297-100"; lang-orderid-amount
         
         $callbackparameters = $request->getParameter("p");
         $params = explode("-",$callbackparameters);
