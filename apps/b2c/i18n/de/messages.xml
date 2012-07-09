@@ -661,8 +661,8 @@
                 <target>Ermöglichen</target>
             </trans-unit>
             <trans-unit id="162" translate="yes" reformat="yes" xml:space="default">
-                <source>Cost &lt;small&gt;(Incl. VAT)&lt;/small&gt;</source>
-                <target>Kosten &lt;small&gt;(Incl. Mehrwertsteuer)&lt;/small&gt;</target>
+                <source>Cost &lt;small&gt;(Ex. VAT)&lt;/small&gt;</source>
+                <target>Kosten &lt;small&gt;(Ohne. Mehrwertsteuer)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
                 <source>Call Type</source>
@@ -927,7 +927,7 @@
                 <source>No customer is registered with this email.</source>
                 <target>Kein Kunde ist mit dieser E-Mail registriert.</target>
             </trans-unit>
-              <trans-unit id="228" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="228" translate="yes" reformat="yes" xml:space="default">
                 <source>Terms And Condition</source>
                 <target>Bedingungen und den Zustand</target>
             </trans-unit>

@@ -661,8 +661,8 @@
                 <target>Permitir</target>
             </trans-unit>
             <trans-unit id="162" translate="yes" reformat="yes" xml:space="default">
-                <source>Cost &lt;small&gt;(Incl. VAT)&lt;/small&gt;</source>
-                <target>Costo &lt;small&gt;(Incl. IVA)&lt;/small&gt;</target>
+                <source>Cost &lt;small&gt;(Ex. VAT)&lt;/small&gt;</source>
+                <target>Costo &lt;small&gt;(Ex. IVA)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
                 <source>Call Type</source>
@@ -917,7 +917,7 @@
             </trans-unit>
             <trans-unit id="225" translate="yes" reformat="yes" xml:space="default">
                 <source> has been sent</source>
-                <target> Se ha enviado</target>
+                <target> se ha enviado</target>
             </trans-unit>
             <trans-unit id="226" translate="yes" reformat="yes" xml:space="default">
                 <source>Your account details have been sent to your email address.</source>
@@ -1159,6 +1159,7 @@
                 <source>This field is required</source>
                 <target>Este campo es obligatorio</target>
             </trans-unit>
+           
         </body>
     </file>
 </xliff>
