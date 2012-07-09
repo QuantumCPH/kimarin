@@ -18,11 +18,10 @@
 	<input type="text"  class="input"  name="mobile_number" id="mobile_number" />
 	<p style="color: red; margin-bottom:1px; position: relative; top: -2px;">
 	<?php
-	if ($sf_user->hasFlash('error_message')): 
-		echo $sf_user->getFlash('error_message');
-	endif;?>
-	&nbsp;
-	</p>
+	if ($sf_user->hasFlash('error_message')): ?>
+	<?php echo $sf_user->getFlash('error_message'); ?>
+	<?php
+        endif;?>&nbsp;</p>
 	<label style="text-align:left;"><?php echo __('Password') ?></label><br />
         <input  class="input" type="password" name="password" id="password" /><br />
         <span>
@@ -39,7 +38,7 @@
 			
 			if (!valid) { // if email is not valid
 				jq('#login_form #mobile_number').focus();
-				alert('<?php echo __('Please enter a valid mobile number.') ?>');
+				alert('<?php echo __('Please enter a valid mobile/n.i.e/passport number.') ?>');
 				return false;			
 			}
 			
@@ -61,10 +60,13 @@
         <?php //echo $sf_user->getCulture();
           if($sf_user->getCulture()=='en'){
               $class = 'class="texten"';
-              $style = 'style ="display:block;height:96px;"';
+              $style = 'style ="display:block;height:96px;width: 148px;"';
+          }elseif($sf_user->getCulture()=='de'){
+              $class = 'class="textde"';
+              $style = 'style ="display:block;height:107px;width: 148px;"';
           }else{
               $class = 'class="textes"';
-              $style = 'style ="display:block;height:94px;"';
+              $style = 'style ="display:block;height:94px;width: 148px;"';
           }
         ?>    
             <label <?php echo $class;?> <?php echo $style;?>><?php echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>

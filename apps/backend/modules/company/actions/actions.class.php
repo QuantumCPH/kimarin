@@ -151,14 +151,14 @@ class companyActions extends sfActions {
             $company->setCreditLimit('5000');
             $company->save();
 
-            $transaction = new CompanyTransaction();
-            $transaction->setAmount(5000);
-            $transaction->setCompanyId($company->getId());
-            $transaction->setExtraRefill(5000);
-            $transaction->setTransactionStatusId(3);
-            $transaction->setPaymenttype(1); //Registered
-            $transaction->setDescription('Company Registered');
-            $transaction->save();
+//            $transaction = new CompanyTransaction();
+//            $transaction->setAmount(5000);
+//            $transaction->setCompanyId($company->getId());
+//            $transaction->setExtraRefill(5000);
+//            $transaction->setTransactionStatusId(3);
+//            $transaction->setPaymenttype(1); //Registered
+//            $transaction->setDescription('Company Registered');
+//            $transaction->save();
         } elseif (!$company->isNew()) {
             $update_customer['i_customer']=$company->getICustomer();
             $update_customer['credit_limit']=($company->getCreditLimit()!='')?$company->getCreditLimit():'0';

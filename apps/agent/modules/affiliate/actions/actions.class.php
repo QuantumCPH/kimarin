@@ -86,6 +86,7 @@ class affiliateActions extends sfActions {
                 $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
             }
             $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+            $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
             if (TransactionPeer::doSelectOne($tc)) {
                 $registrations[$i] = TransactionPeer::doSelectOne($tc);
             }
@@ -365,6 +366,27 @@ class affiliateActions extends sfActions {
             $this->sms_registration_earnings = $sms_registration_earnings;
             $this->sms_commission_earnings = $sms_commission_earnings;
             ////////// End SMS registrations
+
+
+            $nc = new Criteria();
+            $nc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+            $nc->addAnd(TransactionPeer::DESCRIPTION, 'Fee for change number (' . $agent->getName() . ')');
+            $nc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+            $nc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+            $number_changes = TransactionPeer::doSelect($nc);
+
+            $numberChange_earnings = 0.00;
+            $numberChange_commission = 0.00;
+            foreach ($number_changes as $number_change) {
+                $numberChange_earnings = $numberChange_earnings + $number_change->getAmount();
+                $numberChange_commission = $numberChange_commission + $number_change->getCommissionAmount();
+            }
+            $this->number_changes = $number_changes;
+            $this->numberChange_earnings = $numberChange_earnings;
+            $this->numberChange_commission = $numberChange_commission;
+
+
+
             $this->sf_request = $request;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -440,8 +462,8 @@ class affiliateActions extends sfActions {
                 $transaction->setAmount($extra_refill);
 
                 //get agent name
-                //$transaction->setDescription($this->getContext()->getI18N()->__('Refill via agent') . '(' . $agent->getName() . ')');
-                $transaction->setDescription('Refill');
+                $transaction->setDescription($this->getContext()->getI18N()->__('Refill via agent') . '(' . $agent->getName() . ')');
+                //$transaction->setDescription('Refill');
                 $transaction->setAgentCompanyId($agent->getId());
 
                 $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
@@ -1061,7 +1083,7 @@ class affiliateActions extends sfActions {
 
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11 - Ahtsham
 
-        $this->target = $this->getTargetUrl();
+        $this->target = $this->getTargetUrl().'affiliate/';
         $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
@@ -1136,6 +1158,7 @@ class affiliateActions extends sfActions {
             emailLib::sendAgentRefilEmail($this->agent, $agent_order);
             $this->redirect('affiliate/agentOrder');
         }
+        $this->redirect('affiliate/agentOrder');
     }
 
     public function executeAgentOrder(sfRequest $request) {
@@ -1346,14 +1369,14 @@ class affiliateActions extends sfActions {
                 /////////////////////////////////////////////////////////////////////////////////////////////////
                 $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 ///////////////////////////commision calculation by agent product ///////////////////////////////////////
-                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'usersession');
+                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
                 $cp = new Criteria;
                 $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
                 $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
                 $agentproductcount = AgentProductPeer::doCount($cp);
                 if ($agentproductcount > 0) {
                     $p = new Criteria;
-                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'usersession'));
+                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
                     $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
 
                     $agentproductcomesion = AgentProductPeer::doSelectOne($p);
@@ -1482,7 +1505,7 @@ class affiliateActions extends sfActions {
                     $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
                     $amount = -$amount;
                     $aph = new AgentPaymentHistory();
-                    $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'usersession'));
+                    $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
                     $aph->setCustomerId($transaction->getCustomerId());
                     $aph->setExpeneseType(6);
                     $aph->setAmount($amount);
@@ -1515,13 +1538,16 @@ class affiliateActions extends sfActions {
         }
     }
 
-    public function executeAgentRefil(sfWebRequest $request) {
+    public function executeAgentRefil(sfWebRequest $request) { 
+        
         $order_id = $request->getParameter('item_number');
         $item_amount = $request->getParameter('amount');
 
-        $return_url = $this->getTargetUrl() . 'accountRefill';
-        $cancel_url = $this->getTargetUrl() . 'thankyou/?accept=cancel';
-        $notify_url = sfConfig::get('app_customer_url') . 'pScripts/agentRefillThankyou?orderid=' . $order_id . '&amount=' . $item_amount;
+        $return_url = $this->getTargetUrl() . 'affiliate/accountRefill';
+        $cancel_url = $this->getTargetUrl() . 'affiliate/thankyou/?accept=cancel';
+        
+        $callbackparameters = $order_id.'-'.$item_amount;
+        $notify_url = sfConfig::get('app_customer_url') . 'pScripts/agentRefillThankyou?p='.$callbackparameters;
 
         $c = new Criteria;
         $c->add(AgentOrderPeer::AGENT_ORDER_ID, $order_id);

@@ -106,7 +106,7 @@ return true;}
                 <input type="text" name="number" id="number" size="15" maxlength="13" onkeydown="isHex(this.value)">
  
             </td>
-            <td align="left" style="margin-left:15px;">
+            <td align="left" style="padding-left:5px;">
                <?php echo __("Characters") ?> <span id="chars">0/432</span>
                 
             </td>

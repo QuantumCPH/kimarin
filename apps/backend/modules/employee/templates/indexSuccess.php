@@ -94,7 +94,7 @@
 
       </td>
       <td><?php echo $employee->getMobileNumber() ?></td>
-      <td>
+<!--      <td>-->
            <?php
 
 //
@@ -112,7 +112,7 @@
 
 
                             <?php  //}else{echo "No";} ?>
-</td>
+<!--</td>-->
  <?php  if(isset($companyval) && $companyval!=""){  ?>
       <td> <?php  $mobileID= $employee->getCountryMobileNumber();
        
@@ -123,14 +123,14 @@
         $accountInfo = CompanyEmployeActivation::getAccountInfo($telintaAccount->getIAccount());
         $telintaGetBalance = $accountInfo->account_info->balance;
        
-        
+        /*
         $cb = new Criteria();
         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb'.$mobileID);
         $cb->addAnd(TelintaAccountsPeer::STATUS, 3);
         $telintaAccountcb = TelintaAccountsPeer::doSelectOne($cb);
         $accountInfocb = CompanyEmployeActivation::getAccountInfo($telintaAccountcb->getIAccount());
         $telintaGetBalancecb = $accountInfocb->account_info->balance;
-        
+        */
 
          $regtype=$employee->getRegistrationType();
         

@@ -216,6 +216,61 @@
         </div>
 	<?php endif; ?>
 
+        <?php if (count($number_changes)>0): ?>
+	<div id="sf_admin_container"><h1><?php echo __('Mobile Number Change Earnings') ?></h1></div>
+
+        <div class="borderDiv">
+           <table cellspacing="0" cellpadding="2" width="100%">
+		<tr>
+			<th>&nbsp;</th>
+			<th><?php echo __('Date') ?> </th>
+			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Number Change Amount') ?></th>
+			<th><?php echo __('Commission Earned') ?></th>
+		</tr>
+		<?php
+		$i = 0;
+		foreach($number_changes as $number_change):
+		?>
+		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
+			<td><?php echo ++$i ?>.</td>
+                        <td><?php echo $number_change->getCreatedAt() ?></td>
+			<td><?php
+				$customer = CustomerPeer::retrieveByPK($number_change->getCustomerId());
+				//$customer2 = CustomerPeer::retrieveByPK(72);
+				//echo $customer2->getFirstName();
+				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				?>
+			</td>
+
+
+
+			<td >
+			<?php echo BaseUtil::format_number($number_change->getAmount()) ?>
+			</td>
+                        <?php //if ( $number_change->getAmount() == 0) {?>
+<!--                            <td ><?php //echo '10.00' ?></td>-->
+                        <?php //}else{ ?>
+
+			<td ><?php echo BaseUtil::format_number($number_change->getCommissionAmount()) ?>
+			</td>
+                        <?php //} ?>
+
+		</tr>
+		<?php endforeach; ?>
+                </table>
+              <table width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+		<td align="right"><strong><?php echo __('Total Number Change Sales:') ?></strong></td><td align="right"> <?php echo $i ?></td>
+		</tr>
+		<tr>
+		<td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo $numberChange_earnings; ?></td>
+		</tr>
+		<tr>
+		<td align="right"><strong><?php echo __('Total Commission Earned:') ?> </strong></td><td align="right"> <?php echo $numberChange_commission; ?></td>
+		</tr>
+	</table></div>
+	<?php endif; ?>
 
 
         <?php else: ?>

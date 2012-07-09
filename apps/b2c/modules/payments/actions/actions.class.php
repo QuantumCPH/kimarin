@@ -301,22 +301,25 @@ class paymentsActions extends sfActions {
     public function executeTransaction(sfWebRequest $request)
     {
         $order_id = $request->getParameter('item_number');
-        $item_amount = $request->getParameter('amount');
+        $item_amount = $request->getParameter('amount');        
+        
         
         $lang=$this->getUser()->getCulture();
       
         $return_url = $this->getTargetUrl();
         $cancel_url = $this->getTargetUrl().'payments/reject?orderid='.$order_id;
-        $notify_url = $this->getTargetUrl().'pScripts/confirmpayment?lang='.$lang.'&order_id='.$order_id.'&amount='.$item_amount;
-
-       $email2 = new DibsCall();
+        
+        $callbackparameters = $lang.'-'.$order_id.'-'.$item_amount;
+        $notify_url = $this->getTargetUrl().'pScripts/confirmpayment?p='.$callbackparameters;        
+        
+        $email2 = new DibsCall();
         $email2->setCallurl($notify_url);
 
         $email2->save();
+        
+        
         $querystring = '';
-        if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])){
-
-	
+     
         $order = CustomerOrderPeer::retrieveByPK($order_id);
         $item_name = $order->getProduct()->getName();
         
@@ -339,7 +342,5 @@ class paymentsActions extends sfActions {
         }
 	return sfView::NONE;
 	//exit();
-
-        }
     }   
 }
