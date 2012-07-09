@@ -87,7 +87,7 @@ use_helper('Number');
     ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($transaction->getAmount(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($subTotal = $transaction->getAmount()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
@@ -96,7 +96,7 @@ use_helper('Number');
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php    $subTotal = $transaction->getAmount(); echo number_format($subTotal,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php    echo number_format($subTotal,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 
   <tr class="footer">

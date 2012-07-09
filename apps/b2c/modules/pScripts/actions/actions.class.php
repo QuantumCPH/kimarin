@@ -2724,7 +2724,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
 
              echo $unidc;
              echo "<br/>";
-             $OpeningBalance = $OpeningBalance/1.18;
+             $OpeningBalance = $OpeningBalance/(sfConfig::get('app_vat_percentage')+1);
             Telienta::recharge($this->customer, $OpeningBalance,'Refill');
             
             $getvoipInfo = new Criteria();
