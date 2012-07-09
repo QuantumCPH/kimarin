@@ -86,6 +86,7 @@ class affiliateActions extends sfActions {
                 $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
             }
             $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+            $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
             if (TransactionPeer::doSelectOne($tc)) {
                 $registrations[$i] = TransactionPeer::doSelectOne($tc);
             }

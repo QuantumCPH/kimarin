@@ -187,6 +187,15 @@ class employeeActions extends sfActions {
        //$emplyeeProductFeeDescription="Registration Fee Including Vat";,$emplyeeProductFeeDescription
         CompanyEmployeActivation::charge($this->companys,$chrageamount);
 
+        $transaction = new CompanyTransaction();
+        $transaction->setAmount(-$chrageamount);
+        $transaction->setCompanyId($request->getParameter('company_id'));
+        $transaction->setExtraRefill(-$chrageamount);
+        $transaction->setTransactionStatusId(3);
+        $transaction->setPaymenttype(4); //Product Registration Fee
+        $transaction->setDescription('Product Registration Fee');
+        $transaction->save();
+
 
      $rtype=$request->getParameter('registration_type');
       if($rtype==1){
