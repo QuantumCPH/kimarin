@@ -917,7 +917,7 @@
             </trans-unit>
             <trans-unit id="225" translate="yes" reformat="yes" xml:space="default">
                 <source> has been sent</source>
-                <target> Se ha enviado</target>
+                <target> se ha enviado</target>
             </trans-unit>
             <trans-unit id="226" translate="yes" reformat="yes" xml:space="default">
                 <source>Your account details have been sent to your email address.</source>
