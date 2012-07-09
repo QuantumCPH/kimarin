@@ -1151,9 +1151,6 @@
                 <source>Sms Charges</source>
                 <target>Sms Cargos</target>
             </trans-unit>
-
-
-
             <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
                 <source>Web SMS</source>
                 <target>Web SMS</target>
@@ -1161,7 +1158,7 @@
             <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
                 <source>This field is required</source>
                 <target>Este campo es obligatorio</target>
-
+            </trans-unit>
            
         </body>
     </file>
