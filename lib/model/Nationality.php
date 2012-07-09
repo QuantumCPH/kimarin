@@ -4,6 +4,9 @@ class Nationality extends BaseNationality
 {
    public function __toString()
     {
-      return $this->getTitle();
+
+      return __($this->getTitle());
+
+      
     }
 }

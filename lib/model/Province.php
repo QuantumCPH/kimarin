@@ -4,6 +4,6 @@ class Province extends BaseProvince
 {
       public function __toString()
     {
-      return $this->getProvince();
+      return __($this->getProvince());
     }
 }

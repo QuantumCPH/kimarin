@@ -150,7 +150,7 @@ class companyActions extends sfActions {
             //var_dump($company);
             $company->setCreditLimit('5000');
             $company->save();
-
+          
 //            $transaction = new CompanyTransaction();
 //            $transaction->setAmount(5000);
 //            $transaction->setCompanyId($company->getId());
