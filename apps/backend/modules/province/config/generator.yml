@@ -10,9 +10,6 @@ generator:
       
     edit:
       title:          Province
-      actions:
-        _list: ~
-        _save: ~
-        _save_and_add: ~
+      
     create:
       title:          Add Province

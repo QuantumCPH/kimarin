@@ -10,9 +10,7 @@ generator:
       
     edit:
       title:          Nationality
-      actions:
-        _list: ~
-        _save: ~
-        _save_and_add: ~
+      
+        
     create:
       title:          Add Nationality 

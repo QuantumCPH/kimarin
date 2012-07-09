@@ -264,7 +264,7 @@
             </trans-unit>
             <trans-unit id="65" translate="yes" reformat="yes" xml:space="default">
                 <source>Write e-mail address you used for registration.&lt;br /&gt;&lt;br /&gt;Your password will be sent to you via this email.</source>
-                <target>&lt;br /&gt;Schreiben Sie eine E-Mail-Adresse bei der Registrierung verwendet.&lt;br /&gt;&lt;br /&gt;Ihr Passwort wird Ihnen per Diese E-Mail gesendet werden.</target>
+                <target>&lt;br /&gt;Schreiben Sie eine E-Mail-Adresse bei der Registrierung verwendet.&lt;br /&gt;Ihr Passwort wird Ihnen per Diese E-Mail gesendet werden.</target>
             </trans-unit>
             <trans-unit id="66" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid email address.</source>
@@ -837,7 +837,7 @@
             </trans-unit>
             <trans-unit id="205" translate="yes" reformat="yes" xml:space="default">
                 <source>password "%value%" at least six characters.</source>
-                <target>password "%value%" mindestens sechs Zeichen lang sein.</target>
+                <target>Passwort "%value%" mindestens sechs Zeichen.</target>
             </trans-unit>
             <trans-unit id="206" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid Email address. </source>
