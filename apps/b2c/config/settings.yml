@@ -30,7 +30,7 @@ all:
     escaping_strategy:      false            # Determines how variables are made available to templates. Accepted values: on, off.
     escaping_method:        ESC_SPECIALCHARS # Function or helper used for escaping. Accepted values: ESC_RAW, ESC_ENTITIES, ESC_JS, ESC_JS_NO_ENTITIES, and ESC_SPECIALCHARS.
     i18n:                   on
-    default_culture:        es_ES
+    default_culture:        en
     charset:                utf-8
 #all:
 #  .actions:
