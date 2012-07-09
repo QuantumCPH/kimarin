@@ -2664,10 +2664,12 @@ if(($caltype!="IC") && ($caltype!="hc")){
         
         $order->setOrderStatusId(sfConfig::get('app_status_completed', 3)); //completed
         $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
-        if ($transaction->getAmount() > $order_amount) {
+        if ($transaction->getAmount() > ($order_amount*1.18)) {
             //error
             $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
+            $transaction->save();
+            die;
         } else if ($transaction->getAmount() < $order_amount) {
             //$extra_refill_amount = $order_amount;
             $order->setExtraRefill($order_amount);
