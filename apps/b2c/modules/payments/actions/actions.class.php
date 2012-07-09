@@ -67,7 +67,7 @@ class paymentsActions extends sfActions {
 
         $order->setOrderStatusId(4); //cancelled
 
-        $this->getUser()->setFlash('error_message',
+        $this->getUser()->setFlash('error_payment',
                 $error_text
         );
 

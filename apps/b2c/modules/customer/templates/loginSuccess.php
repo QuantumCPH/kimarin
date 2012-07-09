@@ -7,7 +7,7 @@
 		<?php echo $sf_user->getFlash('send_password_message') ?>
 	</div>
 	<?php endif;?>
-            <div style="width:500px; margin-top: 15px;"><?php echo __('Hello and welcome to Smartsim - my pages. To log in, use your customer number which is your mobile number and password. On my pages you can see what calls you made, fill the pot, and more.'); //echo $target; ?></div>
+            <div class="maintext" style="width:500px; margin-top: 15px;"><?php echo __('Hello and welcome to Smartsim - my pages. To log in, use your customer number which is your mobile number and password. On my pages you can see what calls you made, fill the pot, and more.'); //echo $target; ?></div>
   <div class="left-col" style="padding-left:210px;text-align:left;">
     <?php //include_partial('customer/navigation', array('selected'=>'', 'customer_id'=>$customer->getId())) ?>
 	<div id="login-modal" style="background-repeat: repeat-x; width: 470px; margin-top: 16px; background: none;">
@@ -60,13 +60,13 @@
         <?php //echo $sf_user->getCulture();
           if($sf_user->getCulture()=='en'){
               $class = 'class="texten"';
-              $style = 'style ="display:block;height:96px;width: 148px;"';
+              $style = 'style ="display:block;height:85px;width: 148px;"';
           }elseif($sf_user->getCulture()=='de'){
               $class = 'class="textde"';
-              $style = 'style ="display:block;height:107px;width: 148px;"';
+              $style = 'style ="display:block;height:101px;width: 148px;"';
           }else{
               $class = 'class="textes"';
-              $style = 'style ="display:block;height:94px;width: 148px;"';
+              $style = 'style ="display:block;height:88px;width: 148px;"';
           }
         ?>    
             <label <?php echo $class;?> <?php echo $style;?>><?php echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
