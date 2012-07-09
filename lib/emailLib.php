@@ -322,6 +322,8 @@ class emailLib {
 
         //set vat
         $vat = $transaction->getAmount() - ($transaction->getAmount()/(floor(sfConfig::get('app_vat_percentage'))+1));
+        echo $vat;
+        die;
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
