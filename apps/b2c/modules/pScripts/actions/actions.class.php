@@ -2664,16 +2664,16 @@ if(($caltype!="IC") && ($caltype!="hc")){
         
         $order->setOrderStatusId(sfConfig::get('app_status_completed', 3)); //completed
         $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
-        if ($transaction->getAmount() > ($order_amount*1.18)) {
+        if ($transaction->getAmount() > ($order_amount*(sfConfig::get('app_vat_percentage')+1))) {
             //error
             $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if ($transaction->getAmount() < ($order_amount*(sfConfig::get('app_vat_percentage')+1))) {
             //$extra_refill_amount = $order_amount;
-            $order->setExtraRefill($order_amount);
-            $transaction->setAmount($order_amount);
+            $order->setExtraRefill($order_amount*(sfConfig::get('app_vat_percentage')+1));
+            $transaction->setAmount($order_amount*(sfConfig::get('app_vat_percentage')+1));
         }
         //set active agent_package in case customer was registerred by an affiliate
         if ($order->getCustomer()->getAgentCompany()) {
