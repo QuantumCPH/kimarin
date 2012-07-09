@@ -19,6 +19,8 @@ Cufon.set('fontSize', '13px').replace('.split-form ul li', { fontFamily: 'Calibr
 Cufon.replace('.login-left h4', { fontFamily: 'Calibri Bold' });
 Cufon.replace('.login-right h4', { fontFamily: 'Calibri Bold' });
 Cufon.replace('.login-left label', { fontFamily: 'Calibri' });
+Cufon.replace('.login-left .error_msg', { fontFamily: 'Calibri' });
+Cufon.replace('.login-right .error_msg', { fontFamily: 'Calibri' });
 Cufon.replace('.login-right label', { fontFamily: 'Calibri' });
 Cufon.replace('.loginbuttun', { fontFamily: 'Calibri'});
 Cufon.replace('input[type=submit]', { fontFamily: 'Calibri' });

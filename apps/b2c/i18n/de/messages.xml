@@ -264,7 +264,7 @@
             </trans-unit>
             <trans-unit id="65" translate="yes" reformat="yes" xml:space="default">
                 <source>Write e-mail address you used for registration.&lt;br /&gt;&lt;br /&gt;Your password will be sent to you via this email.</source>
-                <target>&lt;br /&gt;Schreiben Sie eine E-Mail-Adresse bei der Registrierung verwendet.&lt;br /&gt;Ihr Passwort wird Ihnen per Diese E-Mail gesendet werden.</target>
+                <target>Schreiben Sie eine E-Mail-Adresse bei der Registrierung verwendet.&lt;br /&gt;Ihr Passwort wird Ihnen per Diese E-Mail gesendet werden.</target>
             </trans-unit>
             <trans-unit id="66" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid email address.</source>
@@ -1145,21 +1145,33 @@
                 <source>Your are successfully registered with %1%</source>
                 <target>Werden erfolgreich mit unseren registriert %1%</target>
             </trans-unit>
-            <trans-unit id="283" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="281" translate="yes" reformat="yes" xml:space="default">
                 <source>Active mobile No</source>
                 <target>Aktive mobile Nein</target>
             </trans-unit>
-            <trans-unit id="284" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="282" translate="yes" reformat="yes" xml:space="default">
                 <source>Sms Charges</source>
                 <target>SMS-Gebühren</target>
             </trans-unit>
-            <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="283" translate="yes" reformat="yes" xml:space="default">
                 <source>Enter Cell Phone/N.I.E/Passport No.</source>
                 <target>Geben Sie Handy/N.I.E/Pass Nr.</target>
             </trans-unit>
-            <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="284" translate="yes" reformat="yes" xml:space="default">
                 <source>navigations</source>
                 <target>navigationen</target>
+            </trans-unit>
+            <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
+                <source>Invalid mobile number or password.</source>
+                <target>Ungültige Handynummer oder Passwort.</target>
+            </trans-unit>
+            <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
+                <source>Web SMS</source>
+                <target>Web SMS</target>
+            </trans-unit>
+            <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
+                <source>This field is required</source>
+                <target>Dieses Feld ist obligatorisch</target>
             </trans-unit>
         </body>
     </file>
