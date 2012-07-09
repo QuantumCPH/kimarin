@@ -1151,6 +1151,10 @@
                 <source>Sms Charges</source>
                 <target>Sms Cargos</target>
             </trans-unit>
+              <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
+                <source>Spanish</source>
+                <target>Spin</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
