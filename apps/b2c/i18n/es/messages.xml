@@ -320,8 +320,8 @@
             </trans-unit>
 
             <trans-unit id="79" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Numer</source>
-                <target>Orden Número</target>
+                <source>Order Number</source>
+                <target>Número de pedido</target>
             </trans-unit>
 
             <trans-unit id="80" translate="yes" reformat="yes" xml:space="default">
