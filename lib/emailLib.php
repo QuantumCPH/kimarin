@@ -323,9 +323,9 @@ class emailLib {
         //set vat
         echo "transction amount:" .$transaction->getAmount()."<br/>";
         echo "app vat percentage:" .floor(sfConfig::get('app_vat_percentage'))."<br/>";
-        echo "app var percentage with plus one:".(floor(sfConfig::get('app_vat_percentage'))+1)."<br/>";
+        echo "app var percentage with plus one:".(sfConfig::get('app_vat_percentage')+1)."<br/>";
 
-        $vat = $transaction->getAmount() - ($transaction->getAmount()/(floor(sfConfig::get('app_vat_percentage'))+1));
+        $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
         echo $vat;
         die;
         $subject = __('Payment Confirmation');
