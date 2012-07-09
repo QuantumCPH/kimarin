@@ -2708,7 +2708,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
 
              echo $unidc;
              echo "<br/>";
-
+             $OpeningBalance = $OpeningBalance/1.18;
             Telienta::recharge($this->customer, $OpeningBalance,'Refill');
             
             $getvoipInfo = new Criteria();
