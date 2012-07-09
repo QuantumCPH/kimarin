@@ -48,7 +48,7 @@
                   <td align="right"><?php
 
 
-                  if($transaction->getDescription()=="Refill"){
+                  if(strstr($transaction->getDescription(),"Refill")){
 
                     echo number_format($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1),2); $amount_total += $transaction->getAmount();
                       }else{
