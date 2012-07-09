@@ -264,7 +264,7 @@
             </trans-unit>
             <trans-unit id="65" translate="yes" reformat="yes" xml:space="default">
                 <source>Write e-mail address you used for registration.&lt;br /&gt;&lt;br /&gt;Your password will be sent to you via this email.</source>
-                <target>Escribir dirección de correo electrónico que usó para registrarse.&lt;br /&gt;&lt;br /&gt;Su contraseña le será enviada a usted a través de este e-mail.</target>
+                <target>Escribir dirección de correo electrónico que usó para registrarse. Su contraseña le será enviada a usted a través de este e-mail.</target>
             </trans-unit>
             <trans-unit id="66" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid email address.</source>
@@ -865,7 +865,7 @@
             </trans-unit>
             <trans-unit id="212" translate="yes" reformat="yes" xml:space="default">
                 <source>Thank you for registeration your account at %1%. You will soon receive a delivery confirmation</source>
-                <target>Gracias por su cuenta en registeration WLS. En breve recibirá una confirmación de entrega</target>
+                <target>Gracias por su cuenta en registeration %1%. En breve recibirá una confirmación de entrega</target>
             </trans-unit>
             <trans-unit id="213" translate="yes" reformat="yes" xml:space="default">
                 <source>Print</source>
@@ -1147,14 +1147,22 @@
                 <source>Active mobile No</source>
                 <target>Sin móvil activo</target>
             </trans-unit>
-              <trans-unit id="284" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="284" translate="yes" reformat="yes" xml:space="default">
                 <source>Sms Charges</source>
                 <target>Sms Cargos</target>
             </trans-unit>
-              <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
-                <source>Spanish</source>
-                <target>Spin</target>
+
+
+
+            <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
+                <source>Web SMS</source>
+                <target>Web SMS</target>
             </trans-unit>
+            <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
+                <source>This field is required</source>
+                <target>Este campo es obligatorio</target>
+
+           
         </body>
     </file>
 </xliff>

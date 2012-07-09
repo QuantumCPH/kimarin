@@ -46,7 +46,7 @@ function countChar(str)
 	    .submit { margin-left: 125px; margin-top: 10px;}
 	    .label { display: block; float: left; width: 90px; text-align: right; margin-right: 5px; }
 	    .form-row { padding: 5px 0; clear: both; width: 700px; }
-	    label.error { width: 250px; display: block; float: left; color: red; padding-left: 10px; }
+	    label.error { width: 250px; display: block; float: left; color: red; padding-left: 0px; }
 	    input[type=text], text { width: 200px;  }
             input[type=textarea], textarea { width: 400px;  }
 	    textarea { height: 80px; }
@@ -99,17 +99,16 @@ function countChar(str)
                         <td><?php echo __("Your Friend's Name") ?></td>
                         <td><?php echo __("Your Friend's Phone Number") ?></td>
                     </tr>
-                    <tr><td><input type="text" name="name" /><br /><span>&nbsp;</span></td><td><input type="text" name="phone" /><br />ex. 0701234567</td>
+                    <tr><td><input type="text" name="name" /><span>&nbsp;</span></td><td><input type="text" name="phone" /><br />ex. 0701234567</td>
                     </tr>
                     <tr> 
                         <td ><?php echo __("Your Friend's Email") ?></td>
-                    
                         <td ><?php //echo __("Your Friend's Country") ?></td>
                     </tr>
                     
                     <tr> 
                         <td ><input type="text" name="email" /></td>
-                        <td style="display:none;" ><input type="text" name="country" value="Norway" disabled /></td>
+                        <td style="display:none;" ><input type="text" name="country" value="Spain" disabled /></td>
                     </tr>
                     <tr>
                         <td  colspan="2" align="center"><?php echo __("Your Message") ?></td>
@@ -117,7 +116,6 @@ function countChar(str)
                     </tr>
                     <tr>
                         <td  colspan="2" align="center"><textarea name="message" ><?php echo __("Smartsim use to make extremely cheap international calls (save up to 90%) and to cut prices when you are abroad (you'll save 30-80%). Right now costing Smartsim 99%1% and you can call for the full amount. Smartsim has no monthly fee or hidden charges.",array('%1%'=>sfConfig::get('app_currency_code')));?> </textarea></td>
-
                     </tr>
                 </table><br />
                 <input type="submit" class="butonsigninsmall" style="margin-left: 0px !important;" name="submit" value="<?php echo __('Send Email to join Smartsim') ?>" />

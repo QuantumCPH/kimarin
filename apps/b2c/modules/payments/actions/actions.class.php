@@ -67,7 +67,7 @@ class paymentsActions extends sfActions {
 
         $order->setOrderStatusId(4); //cancelled
 
-        $this->getUser()->setFlash('error_message',
+        $this->getUser()->setFlash('error_payment',
                 $error_text
         );
 
@@ -268,6 +268,9 @@ class paymentsActions extends sfActions {
         else
             die('Error retreiving');
 
+        if($transaction->getDescription()=="Refill"){
+            $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
+        }
 
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,

@@ -45,7 +45,16 @@
                           echo __($transaction->getDescription());  
                         } 
                   }?></td>
-                  <td align="right"><?php echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount() ?>
+                  <td align="right"><?php
+
+
+                  if($transaction->getDescription()=="Refill"){
+
+                    echo number_format($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1),2); $amount_total += $transaction->getAmount();
+                      }else{
+                    echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount();
+
+                      }?>
                             <?php 
 //                            if($lang=="pl"){
 //                               // echo ('plz');

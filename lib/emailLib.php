@@ -321,7 +321,9 @@ class emailLib {
     public static function sendCustomerRefillEmail(Customer $customer, $order, $transaction) {
 
         //set vat
-        $vat = 0;
+        
+
+        $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
