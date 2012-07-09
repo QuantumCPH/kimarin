@@ -22,7 +22,7 @@
               <!--Always use tables for tabular data-->
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                 <tr>
-                  <td class="title"><?php echo __('Order Numer') ?></td>
+                  <td class="title"><?php echo __('Order Number') ?></td>
                   <td class="title" nowrap><?php echo __('Date & time') ?></td>
                   <td class="title"><?php echo __('Description') ?></td>
                   <td class="title" align="right"><?php echo __('Amount') ?></td>
@@ -89,7 +89,7 @@
                 </tr>
                 <?php else: ?>
                 <tr>
-                	<td colspan="3" align="right"><strong>Total</strong></td>
+                	<td colspan="3" align="right"><strong><?php echo __('Total') ?></strong></td>
                         <td colspan="3"  align="right"><?php echo number_format($amount_total,2) ?>
                             <?php 
 //                            if($lang=="pl"){
