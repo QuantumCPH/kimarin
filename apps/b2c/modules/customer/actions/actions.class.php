@@ -1031,17 +1031,18 @@ class customerActions extends sfActions {
 
             $c = new Criteria();
             $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);            
-            $c->add(CustomerPeer::PASSWORD, $password);
-            $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $c->addAnd(CustomerPeer::PASSWORD, $password);
+            $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $c->addAnd(CustomerPeer::BLOCK,0);
             $cnt = CustomerPeer::doCount($c);
             if($cnt > 0){
                 $customer = CustomerPeer::doSelectOne($c);
             }else{
                 $c = new Criteria();
                 $c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $mobile_number);          
-                $c->add(CustomerPeer::PASSWORD, $password);
-                $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-                
+                $c->addAnd(CustomerPeer::PASSWORD, $password);
+                $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+                $c->addAnd(CustomerPeer::BLOCK,0);
                 $customer = CustomerPeer::doSelectOne($c);
             }
             
@@ -1925,7 +1926,7 @@ public function executeSmsHistory(sfWebrequest $request){
                     $accountInfo['blocked']="Y";
                     Telienta::updateAccount($accountInfo);
                     }
-                    $customer->setCustomerStatusId(7);
+                    $customer->setBlock(1);
                     $customer->save();
                     $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Konto er deaktivert.'));
                     $this->getUser()->getAttributeHolder()->removeNameSpace('usersession');
