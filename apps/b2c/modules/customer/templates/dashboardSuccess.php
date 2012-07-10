@@ -233,11 +233,11 @@ echo " ";   echo substr($Telintambs, 15,2);
   <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
 		<tr>
                     <td ><form name=myform action="<?php echo url_for('customer/blockCustomer', true) ?>">
-                            <input  class="butonsigninsmall" style="padding: 5px 5px 5px 5px;" type=submit value="Try it now"
-onClick="if(confirm('Er du sikker på at du vil blokkere din konto?'))
-alert('på at du vil blokkere din konto!');
-else alert('A wise decision!')">
-</form><a  style="text-decoration: none;" href="<?php echo url_for('customer/blockCustomer', true) ?>" onClick="alert('<?php  echo __('Er du sikker på at du vil blokkere din konto');  ?>'); return true"><span class="butonsigninsmall" style="padding: 5px 5px 5px 5px;">Block konto</span></a></td>
+                            <input  class="butonsigninsmall" style="padding: 5px 5px 5px 5px;" type=submit value="Block Account"
+onClick="if(confirm('Are you sure you want to block your account'))
+alert('your account will be blocked');
+">
+</form> </td>
                 </tr></table>
     </div>
   </div>
