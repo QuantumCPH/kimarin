@@ -179,6 +179,13 @@ class customerActions extends autocustomerActions {
     public function executeAllRegisteredCustomer(sfWebRequest $request) {
         $c = new Criteria();
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+         $c->addAnd(CustomerPeer::BLOCK,0);
+        $this->customers = CustomerPeer::doSelect($c);
+    }
+ public function executeAllBlockedCustomer(sfWebRequest $request) {
+        $c = new Criteria();
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+         $c->addAnd(CustomerPeer::BLOCK,1);
         $this->customers = CustomerPeer::doSelect($c);
     }
 
@@ -188,6 +195,7 @@ class customerActions extends autocustomerActions {
         $c = new Criteria();
         $c->add(CustomerPeer::ID, $id);
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $c->addAnd(CustomerPeer::BLOCK,0);
         $this->customer = CustomerPeer::doSelectOne($c);
 
 //$this->customer_balance =Telienta::getBalance($this->customer->getUniqueid());
