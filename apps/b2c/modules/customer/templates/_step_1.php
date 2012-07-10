@@ -5,7 +5,7 @@
   <div class="left-col">
     <div class="split-form-sign-up">
         <div class="step-details"> <strong><?php echo __('Become a Customer') ?> <span class="active">- <?php echo __('Step 1') ?>: <?php echo __('Register') ?> </span><span class="inactive">- <?php echo __('Step 2') ?>: <?php echo __('Payment') ?></span></strong>
-            <br /><br /><br /><br /><span class="requiretofill">* <?php echo __('Required to fill')?></span>  </div>
+            <br /><br /><br /><br /><span class="requiretofill">* <?php echo __('You must fill in this field.')?></span>  </div>
             <div class="fl col">
         <?php echo $form->renderHiddenFields() ?>
           <ul>   
@@ -338,7 +338,7 @@
           <li><?php  $error_terms_conditions = false;;
             if($form['terms_conditions']->hasError())
             	$error_terms_conditions = true;
-            ?><?php if($error_terms_conditions) { ?><span class="error">
+            ?><?php if($error_terms_conditions) { ?><span class="inline-error" style="float:none !important;">
             	<?php echo $form['terms_conditions']->renderError() ?>
             </span><?php } ?><?php echo $form['terms_conditions'] ?><span><a href="../customer/termsAndCondition" target="_blank" style="outline:none"><?php echo $form['terms_conditions']->renderHelp() ?></a></span>             
           </li>

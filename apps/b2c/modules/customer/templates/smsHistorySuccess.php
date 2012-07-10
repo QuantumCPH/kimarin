@@ -2,7 +2,7 @@
 <?php use_helper('Number') ?>
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('SMS History')) ) ?>
 <div class="alert_bar">
-	<?php echo __('SMS history is updated after every 5-10 minutes.') ?>
+	<?php echo __('Your SMS history will be updated 5 - 10 minutes after you have sent your SMS.') ?>
 </div>
   <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'websms', 'customer_id'=>$customer->getId())) ?>
@@ -53,9 +53,9 @@
             <li>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                   <tr>
-                    <td class="title"><?php echo __('Date & time') ?></td>
-                    <td class="title" width="40%"><?php echo __('Phone Number') ?></td>                    
-                    <td class="title" align="right"><?php echo __('Cost <small>(Ex. VAT)</small>') ?></td>
+                    <td class="title"><?php echo __('Date and time') ?></td>
+                    <td class="title" width="40%"><?php echo __('Destination number') ?></td>                    
+                    <td class="title" align="right" style="padding-right: 20px;"><?php echo __('Cost <small style="display:none">(Ex. VAT)</small>') ?></td>
                   </tr>
 
                 <?php
@@ -82,7 +82,7 @@
                 </tr>
                 <?php else: ?>
                 <tr>
-                	<td colspan="2" align="right"><strong><?php echo __('Subtotal') ?></strong></td>
+                	<td colspan="2" align="right"><strong><?php echo __('Total') ?></strong></td>
                 	<!--
                 	<td><?php echo format_number($amount_total-$amount_total*sfConfig::get('app_vat_percentage')) ?> <?php echo sfConfig::get('app_currency_code')?></td>
                 	 -->

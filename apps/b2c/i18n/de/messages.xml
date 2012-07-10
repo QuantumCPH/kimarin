@@ -13,7 +13,7 @@
                 <target>Melden Sie sich auf meiner Seite</target>
             </trans-unit>
             <trans-unit id="3" translate="yes" reformat="yes" xml:space="default">
-                <source>Email</source>
+                <source>E-mail</source>
                 <target>E-Mail</target>
             </trans-unit>
             <trans-unit id="4" translate="yes" reformat="yes" xml:space="default">
@@ -73,11 +73,11 @@
                 <target>Höhe</target>
             </trans-unit>
             <trans-unit id="18" translate="yes" reformat="yes" xml:space="default">
-                <source>Subtotal</source>
+                <source>Total</source>
                 <target>Zwischensumme</target>
             </trans-unit>
             <trans-unit id="19" translate="yes" reformat="yes" xml:space="default">
-                <source>VAT</source>
+                <source>IVA</source>
                 <target>Mehrwertsteuer</target>
             </trans-unit>
             <trans-unit id="20" translate="yes" reformat="yes" xml:space="default">
@@ -97,16 +97,16 @@
                 <target>Unterstützung</target>
             </trans-unit>
             <trans-unit id="24" translate="yes" reformat="yes" xml:space="default">
-                <source>Send SMS worldwide at the best prices of market</source>
+                <source>Send SMS worldwide at affordable prices.</source>
                 <target>Senden Sie eine SMS weltweit zu den besten Preisen des Marktes</target>
             </trans-unit>
             <trans-unit id="25" translate="yes" reformat="yes" xml:space="default">
-                <source>International calls from 0 cents * With %1%, you can call the whole world.</source>
-                <target>Internationale Anrufe von 0 Cent * Mit %1%, können Sie die ganze Welt.</target>
+                <source>Save up to 80 % on international calls from Spanish mobile telephone.</source>
+                <target>Internationale Anrufe von 0 Cent * Mit Kimarin, können Sie die ganze Welt.</target>
             </trans-unit>
             
             <trans-unit id="26" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell a friend</source>
+                <source>Invite a friend</source>
                 <target>Sagen ein Freund</target>
             </trans-unit>
       
@@ -139,7 +139,7 @@
                 <target>Postfachnummer.</target>
             </trans-unit>
             <trans-unit id="34" translate="yes" reformat="yes" xml:space="default">
-                <source>city</source>
+                <source>Town/city</source>
                 <target>Stadt</target>
             </trans-unit>
             <trans-unit id="35" translate="yes" reformat="yes" xml:space="default">
@@ -147,7 +147,7 @@
                 <target>Land-ID</target>
             </trans-unit>
             <trans-unit id="36" translate="yes" reformat="yes" xml:space="default">
-                <source>date of birth</source>
+                <source>Date of birth</source>
                 <target>Geburtsdatum</target>
             </trans-unit>
             <trans-unit id="37" translate="yes" reformat="yes" xml:space="default">
@@ -195,7 +195,7 @@
                 <target>Zwischensumme</target>
             </trans-unit>
             <trans-unit id="48" translate="yes" reformat="yes" xml:space="default">
-                <source>Customer Number</source>
+                <source>Customer number</source>
                 <target>Kundennummer</target>
             </trans-unit>
             <trans-unit id="49" translate="yes" reformat="yes" xml:space="default">
@@ -227,7 +227,7 @@
                 <target>Ermöglichen</target>
             </trans-unit>
             <trans-unit id="56" translate="yes" reformat="yes" xml:space="default">
-                <source>Login to your account</source>
+                <source>MY ACCOUNT</source>
                 <target>Einloggen auf Ihr Konto</target>
             </trans-unit>
             <trans-unit id="57" translate="yes" reformat="yes" xml:space="default">
@@ -239,7 +239,7 @@
                 <target>Hallo und herzlich willkommen SmartSim - meine Seiten. Um sich anzumelden, nutzen Sie Ihre Kundennummer, die Ihre Handy-Nummer und das Passwort ist. Auf meiner Seiten, die Sie sehen können, was Anrufe gemacht, füllen Sie den Topf, und vieles mehr.</target>
             </trans-unit>
             <trans-unit id="59" translate="yes" reformat="yes" xml:space="default">
-                <source>Log into your pages</source>
+                <source>Enter MY ACCOUNT</source>
                 <target>Melden Sie sich bei Ihrer Seiten</target>
             </trans-unit>
             <trans-unit id="60" translate="yes" reformat="yes" xml:space="default">
@@ -255,7 +255,7 @@
                 <target>Bitte geben Sie eine gültige Handynummer.</target>
             </trans-unit>
             <trans-unit id="63" translate="yes" reformat="yes" xml:space="default">
-                <source>Please enter a password.</source>
+                <source>Please enter your password.</source>
                 <target>Bitte geben Sie ein Passwort.</target>
             </trans-unit>
             <trans-unit id="64" translate="yes" reformat="yes" xml:space="default">
@@ -279,7 +279,7 @@
                 <target>Altes Passwort</target>
             </trans-unit>
             <trans-unit id="69" translate="yes" reformat="yes" xml:space="default">
-                <source>Old Password Is not Correct.</source>
+                <source>Your old password is not correct.</source>
                 <target>Altes Passwort ist nicht korrekt.</target>
             </trans-unit>
             <trans-unit id="70" translate="yes" reformat="yes" xml:space="default">
@@ -303,7 +303,7 @@
                 <target>Bestell-Nummer</target>
             </trans-unit>
             <trans-unit id="75" translate="yes" reformat="yes" xml:space="default">
-                <source>Date &amp; time</source>
+                <source>Date and time</source>
                 <target>Datum Uhrzeit</target>
             </trans-unit>
             <trans-unit id="76" translate="yes" reformat="yes" xml:space="default">
@@ -359,11 +359,11 @@
                 <target>Es liegen noch keine SMS Aufzeichnungen zu zeigen.</target>
             </trans-unit>
             <trans-unit id="88" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell your friends about %1% and earn extra balance!</source>
+                <source>Recommend %1% to your friends and earn extra airtime.</source>
                 <target>Erzähle deinen Freunden von %1% &amp; verdienen Extra-Balance!</target>
             </trans-unit>
             <trans-unit id="89" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell your friends about %1% and earn 10%2% as soon as your friends have made their first payment with %1%! Spread the word about %1% and let your friends know about %1% services.</source>
+                <source>%1% will add 10%2% of airtime to your account balance for each new customer you invite and who registers as a %1% customer.</source>
                 <target>Erzähle deinen Freunden von %1% und verdienen 10%2% sobald Ihre Freunde ihre erste Zahlung mit %1% gemacht! Spread the word über %1% und lassen Sie Ihre Freunde über %1% Dienstleistungen.</target>
             </trans-unit>
             <trans-unit id="90" translate="yes" reformat="yes" xml:space="default">
@@ -375,36 +375,36 @@
                 <target>Füllen Sie die Felder unten ein und klicken Sie auf die Schaltfläche E-Mail senden - Ihr Freund eine E-Mail erhalten</target>
             </trans-unit>
             <trans-unit id="92" translate="yes" reformat="yes" xml:space="default">
-                <source>What you'll get from this?</source>
+                <source>Your benefits.</source>
                 <target>Was Sie davon haben?</target>
             </trans-unit>
             <trans-unit id="93" translate="yes" reformat="yes" xml:space="default">
-                <source>As soon as your friends have made their first payment with %1%, you will automatically receive 10%2% in your %1% balance - so if 10 of your friends register on %1%, youll gain 100%2% in your account. Just share the news and enjoy this great new treat from %1%.</source>
+                <source>%1% will automatically add 10.00%2% of free airtime to your account balance, when your friend has registered as a %1% customer and paid for the Starter Package.</source>
                 <target>Sobald Ihre Freunde haben ihre erste Zahlung mit %1%, gemacht, erhalten Sie automatisch 10%2% in Ihrem %1% Gleichgewicht - so, wenn 10 Ihrer Freunde auf %1%, youll gewinnen 100%2% in Ihrem Konto zu registrieren einfach teilen sich die Nachrichten und genießen Sie diese großartige neue zu behandeln. von %1%.</target>
             </trans-unit>
       
             <trans-unit id="94" translate="yes" reformat="yes" xml:space="default">
-                <source>Your Friend's Name</source>
+                <source>Your friend's full name</source>
                 <target>Name des Freundes</target>
             </trans-unit>
             <trans-unit id="95" translate="yes" reformat="yes" xml:space="default">
-                <source>Your Friend's Phone Number</source>
+                <source>Your friend's Spanish mobile number</source>
                 <target>Ihr Freund die Telefonnummer</target>
             </trans-unit>
             <trans-unit id="96" translate="yes" reformat="yes" xml:space="default">
-                <source>Your Friend's Email</source>
+                <source>Your friend's e-mail address</source>
                 <target>Ihre Email des Freundes</target>
             </trans-unit>
             <trans-unit id="97" translate="yes" reformat="yes" xml:space="default">
-                <source>Your Message</source>
+                <source>Your message</source>
                 <target>Ihre Nachricht</target>
             </trans-unit>
             <trans-unit id="98" translate="yes" reformat="yes" xml:space="default">
-                <source>Smartsim use to make extremely cheap international calls (save up to 90%) and to cut prices when you are abroad (you'll save 30-80%). Right now costing Smartsim 99%2% and you can call for the full amount. Smartsim has no monthly fee or hidden charges.</source>
+                <source>You can save up to 80% on international calls from your Spanish mobile telephone if you are registered as a %1% customer. It is easy to register and use, and you do not need to change your mobile number or mobile service provider. Please go to %1%'s web site: www.kimarineurope.com and read more.</source>
                 <target>SmartSim nutzen, um extrem günstige internationale Anrufe (bis zu 90%) machen und die Preise zu senken, wenn Sie im Ausland (du wirst 30-80% sparen) sind. Im Moment kostet SmartSim 99%2% und Sie können den vollen Betrag nennen. SmartSim hat keine monatliche Grundgebühr oder versteckte Kosten.</target>
             </trans-unit>
             <trans-unit id="99" translate="yes" reformat="yes" xml:space="default">
-                <source>Send Email to join Smartsim</source>
+                <source>Send invitation</source>
                 <target>Senden Sie E-Mail an SmartSim beitreten</target>
             </trans-unit>
       
@@ -425,11 +425,11 @@
                 <target>Bei Fragen wenden Sie sich bitte mit uns in Verbindung</target>
             </trans-unit>
             <trans-unit id="104" translate="yes" reformat="yes" xml:space="default">
-                <source>Your Current Balance is:</source>
+                <source>Your account balance is:</source>
                 <target>Ihren aktuellen Kontostand ist:</target>
             </trans-unit>
             <trans-unit id="105" translate="yes" reformat="yes" xml:space="default">
-                <source>1 SMS constitutes 142 characters</source>
+                <source>Messages from 1 to 142 characters will be considered as 1 SMS</source>
                 <target>1 SMS stellt 142 Zeichen</target>
             </trans-unit>
             <trans-unit id="106" translate="yes" reformat="yes" xml:space="default">
@@ -437,11 +437,11 @@
                 <target>Nachricht bis zu 302 Zeichen werden als 2 SMS in Betracht gezogen werden</target>
             </trans-unit>
             <trans-unit id="107" translate="yes" reformat="yes" xml:space="default">
-                <source>Message upto 432 characters will be considered as 3 SMS</source>
+                <source>Messages from 303 to 432 characters will be considered as 3 SMS</source>
                 <target>Nachricht bis zu 432 Zeichen werden als 3 SMS in Betracht gezogen werden</target>
             </trans-unit>
             <trans-unit id="108" translate="yes" reformat="yes" xml:space="default">
-                <source>Any Text written above character limit will be automatically truncated</source>
+                <source>Messages with more than 432 characters will be truncated automatically.</source>
                 <target>Jeder Text über Zeichen-Grenze geschrieben wird automatisch abgeschnitten</target>
             </trans-unit>
             <trans-unit id="109" translate="yes" reformat="yes" xml:space="default">
@@ -449,15 +449,15 @@
                 <target>SMS anfallen</target>
             </trans-unit>
             <trans-unit id="110" translate="yes" reformat="yes" xml:space="default">
-                <source>Message has been sent</source>
+                <source>Your message has been sent.</source>
                 <target>Nachricht wurde gesendet</target>
             </trans-unit>
             <trans-unit id="111" translate="yes" reformat="yes" xml:space="default">
-                <source>Your message unfortunately not sent, try again</source>
+                <source>Your message has not been sent, please try again.</source>
                 <target>Ihre Nachricht leider nicht gesendet werden, versuchen Sie es erneut</target>
             </trans-unit>
             <trans-unit id="112" translate="yes" reformat="yes" xml:space="default">
-                <source>Destination Number&lt;br /&gt;(without leading 0)</source>
+                <source>Destination number&lt;br /&gt;(without leading 0)</source>
                 <target>Zielnummer &lt;br /&gt; (ohne führenden 0)</target>
             </trans-unit>
             <trans-unit id="113" translate="yes" reformat="yes" xml:space="default">
@@ -477,7 +477,7 @@
                 <target>Armaturenbrett</target>
             </trans-unit>
             <trans-unit id="117" translate="yes" reformat="yes" xml:space="default">
-                <source>Buy credit</source>
+                <source>Refill your account</source>
                 <target>Guthaben kaufen</target>
             </trans-unit>
             <trans-unit id="118" translate="yes" reformat="yes" xml:space="default">
@@ -485,7 +485,7 @@
                 <target>Registrieren</target>
             </trans-unit>
             <trans-unit id="119" translate="yes" reformat="yes" xml:space="default">
-                <source>Required to fill</source>
+                <source>You must fill in this field.</source>
                 <target>Müssen ausgefüllt werden</target>
             </trans-unit>
             <trans-unit id="120" translate="yes" reformat="yes" xml:space="default">
@@ -509,7 +509,7 @@
                 <target>Zugabe Nachfüllung Menge</target>
             </trans-unit>
             <trans-unit id="125" translate="yes" reformat="yes" xml:space="default">
-                <source>Mobile number</source>
+                <source>Mobile number 0034</source>
                 <target>Handynummer</target>
             </trans-unit>
             <trans-unit id="126" translate="yes" reformat="yes" xml:space="default">
@@ -529,47 +529,47 @@
                 <target>Adresse</target>
             </trans-unit>
                <trans-unit id="130" translate="yes" reformat="yes" xml:space="default">
-                <source>Post code</source>
+                <source>Postcode</source>
                 <target>Code posten</target>
             </trans-unit>
                <trans-unit id="131" translate="yes" reformat="yes" xml:space="default">
                 <source>City</source>
                 <target>Stadt</target>
             </trans-unit>
-               <trans-unit id="132" translate="yes" reformat="yes" xml:space="default">
-                <source>Birth date &lt;br /&gt;(dd-mm-yyyy)</source>
+            <trans-unit id="132" translate="yes" reformat="yes" xml:space="default">
+                <source>Date of birth &lt;br /&gt;(dd-mm-yyyy)</source>
                 <target>Geburtsdatum &lt;br /&gt;(dd-mm-jjjj)</target>
             </trans-unit>
-               <trans-unit id="133" translate="yes" reformat="yes" xml:space="default">
-                <source>Retype password</source>
+            <trans-unit id="133" translate="yes" reformat="yes" xml:space="default">
+                <source>Confirm password</source>
                 <target>Passwort wiederholen</target>
             </trans-unit>
-               <trans-unit id="134" translate="yes" reformat="yes" xml:space="default">
-                <source>Telecom operator</source>
+            <trans-unit id="134" translate="yes" reformat="yes" xml:space="default">
+                <source>Mobile service provider</source>
                 <target>Telekom-Betreiber</target>
             </trans-unit>
-               <trans-unit id="135" translate="yes" reformat="yes" xml:space="default">
-                <source>I accept all terms and conditions</source>
+            <trans-unit id="135" translate="yes" reformat="yes" xml:space="default">
+                <source>Please check this box to confirm that you have&lt;br /&gt;read and accept the 1 terms and conditions.</source>
                 <target>Ich akzeptiere alle Bedingungen und Konditionen</target>
             </trans-unit>
-               <trans-unit id="136" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="136" translate="yes" reformat="yes" xml:space="default">
                 <source>Next</source>
                 <target>Nächste</target>
             </trans-unit>
-               <trans-unit id="137" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="137" translate="yes" reformat="yes" xml:space="default">
                 <source>We are sorry we have difficulties in our database, please try again in 2 hours</source>
                 <target>Es tut uns leid wir Schwierigkeiten in unserer Datenbank haben, bitte versuchen Sie es erneut in 2 Stunden</target>
             </trans-unit>
-               <trans-unit id="138" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="138" translate="yes" reformat="yes" xml:space="default">
                 <source>Minimum 6 digits</source>
                 <target>Mindestens 6-stellig</target>
             </trans-unit>
-               <trans-unit id="139" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="139" translate="yes" reformat="yes" xml:space="default">
                 <source>Pay</source>
                 <target>Zahlen</target>
             </trans-unit>
             <trans-unit id="140" translate="yes" reformat="yes" xml:space="default">
-                <source>Delivery and Returns</source>
+                <source>Delivery charges</source>
                 <target>Liefer-und Versandkosten</target>
             </trans-unit>
              <trans-unit id="141" translate="yes" reformat="yes" xml:space="default">
@@ -621,7 +621,7 @@
                 <target>Bequemste Weg, um den Pot zu füllen Um die automatische &lt;br /&gt; ermöglichen Füllung (unten). dann brauchen Sie Mach dir keine Sorgen über die Topf leer ist. &lt;br /&gt; Besonders wichtig in solchen Reise ins Ausland, wenn es schwierig sein kann, in sonstiger Weise zu füllen.</target>
             </trans-unit>
               <trans-unit id="153" translate="yes" reformat="yes" xml:space="default">
-                <source>Manual filling:</source>
+                <source>Manual refill.</source>
                 <target>Manuelle Befüllung:</target>
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
@@ -629,7 +629,7 @@
                 <target>Wählen Sie den Betrag geladen werden:</target>
             </trans-unit>
               <trans-unit id="147" translate="yes" reformat="yes" xml:space="default">
-                <source>Load</source>
+                <source>Refill</source>
                 <target>Laden</target>
             </trans-unit>
               <trans-unit id="155" translate="yes" reformat="yes" xml:space="default">
@@ -661,7 +661,7 @@
                 <target>Ermöglichen</target>
             </trans-unit>
             <trans-unit id="162" translate="yes" reformat="yes" xml:space="default">
-                <source>Cost &lt;small&gt;(Ex. VAT)&lt;/small&gt;</source>
+                <source>Cost &lt;small style="display:none"&gt;(Ex. VAT)&lt;/small&gt;</source>
                 <target>Kosten &lt;small&gt;(Ohne. Mehrwertsteuer)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
@@ -681,27 +681,27 @@
                 <target>Kennwort ändern</target>
             </trans-unit>
             <trans-unit id="167" translate="yes" reformat="yes" xml:space="default">
-                <source>Update</source>
+                <source>Save</source>
                 <target>Aktualisierung</target>
             </trans-unit>
             <trans-unit id="168" translate="yes" reformat="yes" xml:space="default">
-                <source>SMS history is updated after every 5-10 minutes.</source>
+                <source>Your SMS history will be updated 5 - 10 minutes after you have sent your SMS.</source>
                 <target>SMS Geschichte ist nach jeder 50-10 Minuten aktualisiert.</target>
             </trans-unit>
             <trans-unit id="169" translate="yes" reformat="yes" xml:space="default">
-                <source>How does it work?</source>
+                <source>How?</source>
                 <target>Wie funktioniert es?</target>
             </trans-unit>
             <trans-unit id="170" translate="yes" reformat="yes" xml:space="default">
-                <source>the invitation to</source>
+                <source>Your invitation to</source>
                 <target>Der Einladung zur</target>
             </trans-unit>
             <trans-unit id="171" translate="yes" reformat="yes" xml:space="default">
-                <source>has been sent</source>
+                <source>has been sent.</source>
                 <target>Gesendet wurde</target>
             </trans-unit>
             <trans-unit id="172" translate="yes" reformat="yes" xml:space="default">
-                <source>Tell a friend about %1%!</source>
+                <source>Invite a friend to register as a %1% customer.</source>
                 <target>Sagen ein Freund über %1%!</target>
             </trans-unit>
             <trans-unit id="173" translate="yes" reformat="yes" xml:space="default">
@@ -772,7 +772,7 @@
                 <target>Danke für den Kauf zer0call%1%-Paket erhalten Sie Paket in wenigen Tagen erhalten. Bei Fragen wenden Sie sich bitte mit uns in Verbindung</target>
             </trans-unit>
             <trans-unit id="189" translate="yes" reformat="yes" xml:space="default">
-                <source>Please enter a valid mobile/n.i.e/passport number.</source>
+                <source>Enter a valid mobile number.</source>
                 <target>Bitte geben Sie eine gültige mobile/n.i.e/Passnummer.</target>
             </trans-unit>
             <trans-unit id="190" translate="yes" reformat="yes" xml:space="default">
@@ -836,7 +836,7 @@
                 <target>Bitte akzeptieren Sie die Bedingungen und Konditionen</target>
             </trans-unit>
             <trans-unit id="205" translate="yes" reformat="yes" xml:space="default">
-                <source>password "%value%" at least six characters.</source>
+                <source>Your password "%value%" must be 6 digits or characters.</source>
                 <target>Passwort "%value%" mindestens sechs Zeichen.</target>
             </trans-unit>
             <trans-unit id="206" translate="yes" reformat="yes" xml:space="default">
@@ -852,7 +852,7 @@
                 <target>Bitte geben Sie eine gültige 8 bis 14 stellige Handy-Nummer.</target>
             </trans-unit>
             <trans-unit id="209" translate="yes" reformat="yes" xml:space="default">
-                <source>Please complete the fields</source>
+                <source>You must fill in this field</source>
                 <target>Bitte füllen Sie die Felder</target>
             </trans-unit>
             <trans-unit id="210" translate="yes" reformat="yes" xml:space="default">
@@ -860,7 +860,7 @@
                 <target>Die beiden Passwörter müssen gleich sein.</target>
             </trans-unit>
             <trans-unit id="211" translate="yes" reformat="yes" xml:space="default">
-                <source>Passwords don't match</source>
+                <source>The passwords don't match.</source>
                 <target>Passwörter stimmen nicht überein</target>
             </trans-unit>
             <trans-unit id="212" translate="yes" reformat="yes" xml:space="default">
@@ -880,7 +880,7 @@
                 <target>Balance Ausgabe</target>
             </trans-unit>
              <trans-unit id="216" translate="yes" reformat="yes" xml:space="default">
-                <source>Please enter a valid Email address.</source>
+                <source>Please enter a valid e-mail address.</source>
                 <target>Bitte geben Sie eine gültige E-Mail-Adresse.</target>
             </trans-unit>
             <trans-unit id="217" translate="yes" reformat="yes" xml:space="default">
@@ -920,11 +920,11 @@
                 <target> wurde verschickt</target>
             </trans-unit>
             <trans-unit id="226" translate="yes" reformat="yes" xml:space="default">
-                <source>Your account details have been sent to your email address.</source>
+                <source>Your account details have been sent to your e-mail address.</source>
                 <target>Ihre Kontodaten haben, um Ihre E-Mail-Adresse gesendet.</target>
             </trans-unit>
             <trans-unit id="227" translate="yes" reformat="yes" xml:space="default">
-                <source>No customer is registered with this email.</source>
+                <source>No customer is registered with this e-mail address.</source>
                 <target>Kein Kunde ist mit dieser E-Mail registriert.</target>
             </trans-unit>
             <trans-unit id="228" translate="yes" reformat="yes" xml:space="default">
@@ -970,11 +970,11 @@
                 <target>Ausloggen</target>
             </trans-unit>
             <trans-unit id="237" translate="yes" reformat="yes" xml:space="default">
-                <source>Registration Fee</source>
+                <source>Registration fee</source>
                 <target>Anmeldegebühr</target>
             </trans-unit>
             <trans-unit id="238" translate="yes" reformat="yes" xml:space="default">
-                <source>Product Price</source>
+                <source>Product price</source>
                 <target>Produkt Preis</target>
             </trans-unit>
             <trans-unit id="239" translate="yes" reformat="yes" xml:space="default">
@@ -998,7 +998,7 @@
                 <target>Passwort anfordern</target>
             </trans-unit>
             <trans-unit id="244" translate="yes" reformat="yes" xml:space="default">
-                <source>Payment is unfortunately not accepted because your information is incorrect, please try again by entering correct credit card information</source>
+                <source>Your payment has not been accepted, due to incorrect payment information. Please enter the correct payment information.</source>
                 <target>Zahlung leider nicht akzeptiert wird, weil Ihre Daten nicht korrekt, bitte versuchen Sie es erneut durch die Eingabe korrekt Kreditkarten-Informationen</target>
             </trans-unit>
             <trans-unit id="245" translate="yes" reformat="yes" xml:space="default">
@@ -1018,7 +1018,7 @@
                 <target>Automatische Regenerierung ist</target>
             </trans-unit>
             <trans-unit id="249" translate="yes" reformat="yes" xml:space="default">
-                <source>Your settings have been saved.</source>
+                <source>Your settings changes have been saved.</source>
                 <target>Ihre Einstellungen wurden gespeichert.</target>
             </trans-unit>
             <trans-unit id="250" translate="yes" reformat="yes" xml:space="default">
@@ -1026,8 +1026,8 @@
                 <target>Erstatten</target>
             </trans-unit>
             <trans-unit id="251" translate="yes" reformat="yes" xml:space="default">
-                <source>The customer is already registered</source>
-                <target>Der Kunde ist bereits registriert</target>
+                <source>The customer is already registered.</source>
+                <target>Der Kunde ist bereits registriert.</target>
             </trans-unit>
             <trans-unit id="252" translate="yes" reformat="yes" xml:space="default">
                 <source>Call</source>
@@ -1094,35 +1094,35 @@
                 <target>Gebühr</target>
             </trans-unit>
             <trans-unit id="268" translate="yes" reformat="yes" xml:space="default">
-                <source>Please Enter The Destination Number</source>
+                <source>Please enter the destination number.</source>
                 <target>Bitte Geben Sie die Zielrufnummer</target>
             </trans-unit>
             <trans-unit id="269" translate="yes" reformat="yes" xml:space="default">
-                <source>Please Enter The Message</source>
+                <source>Please enter your message.</source>
                 <target>Bitte Geben Sie die Nachricht</target>
             </trans-unit>
             <trans-unit id="270" translate="yes" reformat="yes" xml:space="default">
-                <source>You do not have enough money in the account, you are kindly asked to refill</source>
+                <source>Your %1% account balance is low. Please refill your %1% account. Thank you.</source>
                 <target>Sie haben nicht genug Geld auf dem Konto, sind Sie herzlich zum Nachfüllen aufgefordert</target>
             </trans-unit>
             <trans-unit id="271" translate="yes" reformat="yes" xml:space="default">
-                <source>N.I.E/Passport Number</source>
+                <source>N.I.E. or passport&lt;br /&gt;number</source>
                 <target>N.I.E/Passnummer</target>
             </trans-unit>
             <trans-unit id="272" translate="yes" reformat="yes" xml:space="default">
-                <source>Sim Type</source>
+                <source>SIM type</source>
                 <target>Sim-Typ</target>
             </trans-unit>
             <trans-unit id="273" translate="yes" reformat="yes" xml:space="default">
-                <source>Preferred Language</source>
+                <source>Preferred language</source>
                 <target>Bevorzugte Sprache</target>
             </trans-unit>
             <trans-unit id="274" translate="yes" reformat="yes" xml:space="default">
-                <source>Middle Name</source>
+                <source>Middle name</source>
                 <target>Zweiter Vorname</target>
             </trans-unit>
             <trans-unit id="275" translate="yes" reformat="yes" xml:space="default">
-                <source>Mobile Number already registered.</source>
+                <source>This mobile number is already registered to a 1 customer.</source>
                 <target>Mobile Number bereits registriert.</target>
             </trans-unit>
             <trans-unit id="276" translate="yes" reformat="yes" xml:space="default">
@@ -1130,11 +1130,11 @@
                 <target>N.I.E/Passnummer bereits bestehenden.</target>
             </trans-unit>
             <trans-unit id="277" translate="yes" reformat="yes" xml:space="default">
-                <source>N.I.E/Passport Number already registered.</source>
+                <source>This N.I.E. or passport number is already registered to a 1 customer.</source>
                 <target>N.I.E/Passnummer bereits registriert.</target>
             </trans-unit>
             <trans-unit id="278" translate="yes" reformat="yes" xml:space="default">
-                <source>Nationality</source>
+                <source>Country of citizenship</source>
                 <target>Nationalität</target>
             </trans-unit>
             <trans-unit id="279" translate="yes" reformat="yes" xml:space="default">
@@ -1154,7 +1154,7 @@
                 <target>SMS-Gebühren</target>
             </trans-unit>
             <trans-unit id="283" translate="yes" reformat="yes" xml:space="default">
-                <source>Enter Cell Phone/N.I.E/Passport No.</source>
+                <source>Enter your mobile number</source>
                 <target>Geben Sie Handy/N.I.E/Pass Nr.</target>
             </trans-unit>
             <trans-unit id="284" translate="yes" reformat="yes" xml:space="default">
@@ -1170,8 +1170,828 @@
                 <target>Web SMS</target>
             </trans-unit>
             <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
-                <source>This field is required</source>
+                <source>You must fill in this field.</source>
                 <target>Dieses Feld ist obligatorisch</target>
+            </trans-unit>
+            <trans-unit id="288" translate="yes" reformat="yes" xml:space="default">
+                <source>Afghanistan</source>
+                <target>Afghanistan</target>
+            </trans-unit>
+			<trans-unit id="289" translate="yes" reformat="yes" xml:space="default">
+                <source>Albania</source>
+                <target>Albanien</target>
+            </trans-unit>
+			<trans-unit id="290" translate="yes" reformat="yes" xml:space="default">
+                <source>Algeria</source>
+                <target>Algerien</target>
+            </trans-unit>
+			<trans-unit id="291" translate="yes" reformat="yes" xml:space="default">
+                <source>Andorra</source>
+                <target>Andorra</target>
+            </trans-unit>
+			<trans-unit id="292" translate="yes" reformat="yes" xml:space="default">
+                <source>Angola</source>
+                <target>Angola</target>
+            </trans-unit>
+			<trans-unit id="293" translate="yes" reformat="yes" xml:space="default">
+                <source>Antigua and Barbuda</source>
+                <target>Antigua und Barbuda</target>
+            </trans-unit>
+			<trans-unit id="294" translate="yes" reformat="yes" xml:space="default">
+                <source>Argentina</source>
+                <target>Argentinien</target>
+            </trans-unit>
+			<trans-unit id="295" translate="yes" reformat="yes" xml:space="default">
+                <source>Armenia</source>
+                <target>Armenien</target>
+            </trans-unit>
+			<trans-unit id="296" translate="yes" reformat="yes" xml:space="default">
+                <source>Australia</source>
+                <target>Australien</target>
+            </trans-unit>
+			<trans-unit id="297" translate="yes" reformat="yes" xml:space="default">
+                <source>Austria</source>
+                <target>Österreich</target>
+            </trans-unit>
+			<trans-unit id="298" translate="yes" reformat="yes" xml:space="default">
+                <source>Azerbaijan</source>
+                <target>Aserbaidschan</target>
+            </trans-unit>
+			<trans-unit id="299" translate="yes" reformat="yes" xml:space="default">
+                <source>Bahamas</source>
+                <target>Bahamas</target>
+            </trans-unit>
+			<trans-unit id="300" translate="yes" reformat="yes" xml:space="default">
+                <source>Bahrain</source>
+                <target>Bahrein</target>
+            </trans-unit>
+			<trans-unit id="301" translate="yes" reformat="yes" xml:space="default">
+                <source>Bangladesh</source>
+                <target>Bangladesch</target>
+            </trans-unit>
+			<trans-unit id="302" translate="yes" reformat="yes" xml:space="default">
+                <source>Barbados</source>
+                <target>Barbados</target>
+            </trans-unit>
+			<trans-unit id="303" translate="yes" reformat="yes" xml:space="default">
+                <source>Belarus</source>
+                <target>Weißrussland</target>
+            </trans-unit>
+			<trans-unit id="304" translate="yes" reformat="yes" xml:space="default">
+                <source>Belgium</source>
+                <target>Belgien</target>
+            </trans-unit>
+			<trans-unit id="305" translate="yes" reformat="yes" xml:space="default">
+                <source>Belize</source>
+                <target>Belize</target>
+            </trans-unit>
+			<trans-unit id="306" translate="yes" reformat="yes" xml:space="default">
+                <source>Benin</source>
+                <target>Benin</target>
+            </trans-unit>
+			<trans-unit id="307" translate="yes" reformat="yes" xml:space="default">
+                <source>Bhutan</source>
+                <target>Bhutan</target>
+            </trans-unit>
+			<trans-unit id="308" translate="yes" reformat="yes" xml:space="default">
+                <source>Bolivia</source>
+                <target>Bolivien</target>
+            </trans-unit>
+			<trans-unit id="309" translate="yes" reformat="yes" xml:space="default">
+                <source>Bosnia-Herzegovina</source>
+                <target>Bosnien-Herzegowina</target>
+            </trans-unit>
+			<trans-unit id="310" translate="yes" reformat="yes" xml:space="default">
+                <source>Botswana</source>
+                <target>Botswana</target>
+            </trans-unit>
+			<trans-unit id="311" translate="yes" reformat="yes" xml:space="default">
+                <source>Brazil</source>
+                <target>Brasilien</target>
+            </trans-unit>
+			<trans-unit id="312" translate="yes" reformat="yes" xml:space="default">
+                <source>Brunei</source>
+                <target>Brunei</target>
+            </trans-unit>
+			<trans-unit id="313" translate="yes" reformat="yes" xml:space="default">
+                <source>Bulgaria</source>
+                <target>Bulgarien</target>
+				</trans-unit>
+				<trans-unit id="314" translate="yes" reformat="yes" xml:space="default">
+                <source>Burkina Faso</source>
+                <target>Burkina Faso</target>
+            </trans-unit>
+			<trans-unit id="315" translate="yes" reformat="yes" xml:space="default">
+                <source>Burundi</source>
+                <target>Burundi</target>
+            </trans-unit>
+			<trans-unit id="316" translate="yes" reformat="yes" xml:space="default">
+                <source>Cambodia</source>
+                <target>Kambodscha</target>
+            </trans-unit>
+			<trans-unit id="317" translate="yes" reformat="yes" xml:space="default">
+                <source>Cameroon</source>
+                <target>Kamerun</target>
+            </trans-unit>
+			<trans-unit id="318" translate="yes" reformat="yes" xml:space="default">
+                <source>Canada</source>
+                <target>Kanada</target>
+            </trans-unit>
+			<trans-unit id="319" translate="yes" reformat="yes" xml:space="default">
+                <source>Cape Verde</source>
+                <target>CKap Verde</target>
+            </trans-unit>
+			<trans-unit id="320" translate="yes" reformat="yes" xml:space="default">
+                <source>Central African Republic</source>
+                <target>Zentralafrikanische Republik</target>
+            </trans-unit>
+			<trans-unit id="321" translate="yes" reformat="yes" xml:space="default">
+                <source>Chad</source>
+                <target>Tschad</target>
+            </trans-unit>
+			<trans-unit id="322" translate="yes" reformat="yes" xml:space="default">
+                <source>Chile</source>
+                <target>Chile</target>
+			</trans-unit>
+			<trans-unit id="323" translate="yes" reformat="yes" xml:space="default">
+                <source>China</source>
+                <target>China</target>
+            </trans-unit>
+			<trans-unit id="324" translate="yes" reformat="yes" xml:space="default">
+                <source>Colombia</source>
+                <target>Kolumbien</target>
+            </trans-unit>
+			<trans-unit id="325" translate="yes" reformat="yes" xml:space="default">
+                <source>Comoros</source>
+                <target>Komoren</target>
+            </trans-unit>
+			<trans-unit id="326" translate="yes" reformat="yes" xml:space="default">
+                <source>Congo</source>
+                <target>Kongo</target>
+            </trans-unit>
+			<trans-unit id="327" translate="yes" reformat="yes" xml:space="default">
+                <source>Costa Rica</source>
+                <target>Costa Rica</target>
+            </trans-unit>
+			<trans-unit id="328" translate="yes" reformat="yes" xml:space="default">
+                <source>Croatia</source>
+                <target>Kroatien</target>
+            </trans-unit>
+			<trans-unit id="329" translate="yes" reformat="yes" xml:space="default">
+                <source>Cuba</source>
+                <target>Kuba</target>
+            </trans-unit>
+			<trans-unit id="330" translate="yes" reformat="yes" xml:space="default">
+                <source>Cyprus</source>
+                <target>Zypern</target>
+            </trans-unit>
+			<trans-unit id="331" translate="yes" reformat="yes" xml:space="default">
+                <source>Czech Republic</source>
+                <target>Tschechische Republik</target>
+			</trans-unit>
+			</trans-unit>
+			<trans-unit id="332" translate="yes" reformat="yes" xml:space="default">
+                <source>Democratic Republic of the Congo</source>
+                <target>Demokratische Republik Kongo</target>
+            </trans-unit>
+			<trans-unit id="333" translate="yes" reformat="yes" xml:space="default">
+                <source>Denmark</source>
+                <target>Dänemark</target>
+            </trans-unit>
+			<trans-unit id="334" translate="yes" reformat="yes" xml:space="default">
+                <source>Djibouti</source>
+                <target>Dschibuti</target>
+            </trans-unit>
+			<trans-unit id="335" translate="yes" reformat="yes" xml:space="default">
+                <source>Dominica</source>
+                <target>Dominica</target>
+            </trans-unit>
+			<trans-unit id="336" translate="yes" reformat="yes" xml:space="default">
+                <source>Dominican Republic</source>
+                <target>Demokanische Republik</target>
+            </trans-unit>
+			<trans-unit id="337" translate="yes" reformat="yes" xml:space="default">
+                <source>East Timor</source>
+                <target>Ost-Timor</target>
+            </trans-unit>
+			<trans-unit id="338" translate="yes" reformat="yes" xml:space="default">
+                <source>Ecuador</source>
+                <target>Ecuador</target>
+            </trans-unit>
+			<trans-unit id="339" translate="yes" reformat="yes" xml:space="default">
+                <source>Egypt</source>
+                <target>Ägypten</target>
+			</trans-unit>
+			</trans-unit>
+			<trans-unit id="340" translate="yes" reformat="yes" xml:space="default">
+                <source>El Salvador</source>
+                <target>El Salvador</target>
+            </trans-unit>
+			<trans-unit id="341" translate="yes" reformat="yes" xml:space="default">
+                <source>Equatorial Guinea</source>
+                <target>Äquatorial-Guinea</target>
+            </trans-unit>
+			<trans-unit id="342" translate="yes" reformat="yes" xml:space="default">
+                <source>Eritrea</source>
+                <target>Eritrea</target>
+            </trans-unit>
+			<trans-unit id="343" translate="yes" reformat="yes" xml:space="default">
+                <source>Estonia</source>
+                <target>Estland</target>
+            </trans-unit>
+			<trans-unit id="344" translate="yes" reformat="yes" xml:space="default">
+                <source>Ethiopia</source>
+                <target>Äthiopien</target>
+            </trans-unit>
+			<trans-unit id="345" translate="yes" reformat="yes" xml:space="default">
+                <source>Fiji</source>
+                <target>Fidschi</target>
+            </trans-unit>
+			<trans-unit id="346" translate="yes" reformat="yes" xml:space="default">
+                <source>Finland</source>
+                <target>Finnland</target>
+            </trans-unit>
+			<trans-unit id="347" translate="yes" reformat="yes" xml:space="default">
+                <source>France</source>
+                <target>Frankreich</target>
+			</trans-unit>
+			<trans-unit id="348" translate="yes" reformat="yes" xml:space="default">
+                <source>Gabon</source>
+                <target>Gabun</target>
+            </trans-unit>
+			<trans-unit id="349" translate="yes" reformat="yes" xml:space="default">
+                <source>Gambia</source>
+                <target>Gambia</target>
+            </trans-unit>
+			<trans-unit id="350" translate="yes" reformat="yes" xml:space="default">
+                <source>Georgia</source>
+                <target>Georgien</target>
+            </trans-unit>
+			<trans-unit id="351" translate="yes" reformat="yes" xml:space="default">
+                <source>Germany</source>
+                <target>Deutschland</target>
+            </trans-unit>
+			<trans-unit id="352" translate="yes" reformat="yes" xml:space="default">
+                <source>Ghana</source>
+                <target>Ghana</target>
+            </trans-unit>
+			<trans-unit id="353" translate="yes" reformat="yes" xml:space="default">
+                <source>Greece</source>
+                <target>Griechenland</target>
+            </trans-unit>
+			<trans-unit id="354" translate="yes" reformat="yes" xml:space="default">
+                <source>Grenada</source>
+                <target>Granada</target>
+            </trans-unit>
+			<trans-unit id="355" translate="yes" reformat="yes" xml:space="default">
+                <source>Guatemala</source>
+                <target>Guatemala</target>
+            </trans-unit>
+			<trans-unit id="356" translate="yes" reformat="yes" xml:space="default">
+                <source>Guinea</source>
+                <target>Guinea</target>
+            </trans-unit>
+			<trans-unit id="357" translate="yes" reformat="yes" xml:space="default">
+                <source>Guinea-Bissau</source>
+                <target>Guinea-Bissau</target>
+            </trans-unit>
+			<trans-unit id="358" translate="yes" reformat="yes" xml:space="default">
+                <source>Guyana</source>
+                <target>Guyana</target>
+            </trans-unit>
+			<trans-unit id="359" translate="yes" reformat="yes" xml:space="default">
+                <source>Haiti</source>
+                <target>Haiti</target>
+            </trans-unit>
+			<trans-unit id="360" translate="yes" reformat="yes" xml:space="default">
+                <source>Honduras</source>
+                <target>Honduras</target>
+            </trans-unit>
+			<trans-unit id="361" translate="yes" reformat="yes" xml:space="default">
+                <source>Hungary</source>
+                <target>Ungarn</target>
+            </trans-unit>
+			<trans-unit id="362" translate="yes" reformat="yes" xml:space="default">
+                <source>Iceland</source>
+                <target>Island</target>
+            </trans-unit>
+			<trans-unit id="363" translate="yes" reformat="yes" xml:space="default">
+                <source>India</source>
+                <target>Indien</target>
+            </trans-unit>
+			<trans-unit id="364" translate="yes" reformat="yes" xml:space="default">
+                <source>Indonesia</source>
+                <target>Indonesien</target>
+            </trans-unit>
+			<trans-unit id="365" translate="yes" reformat="yes" xml:space="default">
+                <source>Iran</source>
+                <target>Iran</target>
+            </trans-unit>
+			<trans-unit id="366" translate="yes" reformat="yes" xml:space="default">
+                <source>Iraq</source>
+                <target>Irak</target>
+            </trans-unit>
+			<trans-unit id="367" translate="yes" reformat="yes" xml:space="default">
+                <source>Ireland</source>
+                <target>Irland</target>
+            </trans-unit>
+			<trans-unit id="368" translate="yes" reformat="yes" xml:space="default">
+                <source>Israel</source>
+                <target>Israel</target>
+            </trans-unit>
+			<trans-unit id="369" translate="yes" reformat="yes" xml:space="default">
+                <source>Italy</source>
+                <target>Italien</target>
+            </trans-unit>
+			<trans-unit id="370" translate="yes" reformat="yes" xml:space="default">
+                <source>Ivory Coast</source>
+                <target>Elfenbeinküste</target>
+            </trans-unit>
+			<trans-unit id="371" translate="yes" reformat="yes" xml:space="default">
+                <source>Jamaica</source>
+                <target>Jamaika</target>
+            </trans-unit>
+			<trans-unit id="372" translate="yes" reformat="yes" xml:space="default">
+                <source>Japan</source>
+                <target>Japan</target>
+            </trans-unit>
+			<trans-unit id="373" translate="yes" reformat="yes" xml:space="default">
+                <source>Jordan</source>
+                <target>Jordanien</target>
+			</trans-unit>
+			<trans-unit id="374" translate="yes" reformat="yes" xml:space="default">
+                <source>Kazakhstan</source>
+                <target>Kasachstan</target>
+            </trans-unit>
+			<trans-unit id="375" translate="yes" reformat="yes" xml:space="default">
+                <source>Kenya</source>
+                <target>Kenia</target>
+            </trans-unit>
+			<trans-unit id="376" translate="yes" reformat="yes" xml:space="default">
+                <source>Kiribati</source>
+                <target>Kiribati</target>
+            </trans-unit>
+			<trans-unit id="377" translate="yes" reformat="yes" xml:space="default">
+                <source>Kuwait</source>
+                <target>Kuwait</target>
+            </trans-unit>
+			<trans-unit id="378" translate="yes" reformat="yes" xml:space="default">
+                <source>Kyrgyzstan</source>
+                <target>Kirgisistan</target>
+            </trans-unit>
+			<trans-unit id="379" translate="yes" reformat="yes" xml:space="default">
+                <source>Laos</source>
+                <target>Laos</target>
+            </trans-unit>
+			<trans-unit id="380" translate="yes" reformat="yes" xml:space="default">
+                <source>Latvia</source>
+                <target>Lettland</target>
+            </trans-unit>
+			<trans-unit id="381" translate="yes" reformat="yes" xml:space="default">
+                <source>Lebanon</source>
+                <target>Libanon</target>
+			</trans-unit>	         
+			<trans-unit id="382" translate="yes" reformat="yes" xml:space="default">
+                <source>Lesotho</source>
+			    <target>Lesotho</target>
+			</trans-unit>	
+			<trans-unit id="383" translate="yes" reformat="yes" xml:space="default">
+                <source>Liberia</source>
+                <target>Liberia</target>
+            </trans-unit>
+			<trans-unit id="384" translate="yes" reformat="yes" xml:space="default">
+                <source>Libya</source>
+                <target>Libyen</target>
+            </trans-unit>
+			<trans-unit id="385" translate="yes" reformat="yes" xml:space="default">
+                <source>Liechtenstein</source>
+                <target>Liechtenstein</target>
+            </trans-unit>
+			<trans-unit id="386" translate="yes" reformat="yes" xml:space="default">
+                <source>Lithuania</source>
+                <target>Litauen</target>
+            </trans-unit>
+			<trans-unit id="387" translate="yes" reformat="yes" xml:space="default">
+                <source>Luxembourg</source>
+                <target>Luxemburg</target>
+            </trans-unit>
+			<trans-unit id="388" translate="yes" reformat="yes" xml:space="default">
+                <source>Macedonia</source>
+                <target>Mazedonien</target>
+            </trans-unit>
+			<trans-unit id="389" translate="yes" reformat="yes" xml:space="default">
+                <source>Madagascar</source>
+                <target>Madagaskar</target>
+            </trans-unit>
+			<trans-unit id="390" translate="yes" reformat="yes" xml:space="default">
+                <source>Malawi</source>
+                <target>Malawi</target>
+            </trans-unit>
+			<trans-unit id="391" translate="yes" reformat="yes" xml:space="default">
+                <source>Malaysia</source>
+                <target>Malaysia</target>
+			</trans-unit>
+			<trans-unit id="392" translate="yes" reformat="yes" xml:space="default">
+                <source>Maldives</source>
+                <target>Malediven</target>
+            </trans-unit>
+			<trans-unit id="393" translate="yes" reformat="yes" xml:space="default">
+                <source>Mali</source>
+                <target>Malí</target>
+            </trans-unit>
+			<trans-unit id="394" translate="yes" reformat="yes" xml:space="default">
+                <source>Malta</source>
+                <target>Malta</target>
+            </trans-unit>
+			<trans-unit id="395" translate="yes" reformat="yes" xml:space="default">
+                <source>Marshall Islands</source>
+                <target>Marshall-Inseln</target>
+            </trans-unit>
+			<trans-unit id="396" translate="yes" reformat="yes" xml:space="default">
+                <source>Mauritania</source>
+                <target>Mauretanien</target>
+            </trans-unit>
+			<trans-unit id="397" translate="yes" reformat="yes" xml:space="default">
+                <source>Mauritius</source>
+                <target>Mauritius</target>
+            </trans-unit>
+			<trans-unit id="398" translate="yes" reformat="yes" xml:space="default">
+                <source>Mexico</source>
+                <target>Mexiko</target>
+            </trans-unit>
+			<trans-unit id="399" translate="yes" reformat="yes" xml:space="default">
+                <source>Micronesia</source>
+                <target>Mikronesien</target>
+			</trans-unit>
+			</trans-unit>
+			<trans-unit id="400" translate="yes" reformat="yes" xml:space="default">
+                <source>Moldova</source>
+                <target>Moldawien</target>
+            </trans-unit>
+			<trans-unit id="401" translate="yes" reformat="yes" xml:space="default">
+                <source>Monaco</source>
+                <target>Monaco</target>
+            </trans-unit>
+			<trans-unit id="402" translate="yes" reformat="yes" xml:space="default">
+                <source>Mongolia</source>
+                <target>Mongolei</target>
+            </trans-unit>
+			<trans-unit id="403" translate="yes" reformat="yes" xml:space="default">
+                <source>Montenegro</source>
+                <target>Montenegro</target>
+            </trans-unit>
+			<trans-unit id="404" translate="yes" reformat="yes" xml:space="default">
+                <source>Morocco</source>
+                <target>Marokko</target>
+            </trans-unit>
+			<trans-unit id="405" translate="yes" reformat="yes" xml:space="default">
+                <source>Mozambique</source>
+                <target>Mosambik</target>
+            </trans-unit>
+			<trans-unit id="406" translate="yes" reformat="yes" xml:space="default">
+                <source>Myanmar</source>
+                <target>Myanmar</target>
+            </trans-unit>
+			<trans-unit id="407" translate="yes" reformat="yes" xml:space="default">
+                <source>Namibia</source>
+                <target>Namibia</target>
+			</trans-unit>
+			<trans-unit id="408" translate="yes" reformat="yes" xml:space="default">
+                <source>Nauru</source>
+                <target>Nauru</target>
+            </trans-unit>
+			<trans-unit id="409" translate="yes" reformat="yes" xml:space="default">
+                <source>Nepal</source>
+                <target>Nepal</target>
+            </trans-unit>
+			<trans-unit id="410" translate="yes" reformat="yes" xml:space="default">
+                <source>Netherlands</source>
+                <target>Niederlande</target>
+            </trans-unit>
+			<trans-unit id="411" translate="yes" reformat="yes" xml:space="default">
+                <source>New Zealand</source>
+                <target>Neuseeland</target>
+            </trans-unit>
+			<trans-unit id="412" translate="yes" reformat="yes" xml:space="default">
+                <source>Nicaragua</source>
+                <target>Nicaragua</target>
+            </trans-unit>
+			<trans-unit id="413" translate="yes" reformat="yes" xml:space="default">
+                <source>Niger</source>
+                <target>Níger</target>
+            </trans-unit>
+			<trans-unit id="417" translate="yes" reformat="yes" xml:space="default">
+                <source>Nigeria</source>
+                <target>Nigeria</target>
+            </trans-unit>
+			<trans-unit id="415" translate="yes" reformat="yes" xml:space="default">
+                <source>North Korea</source>
+                <target>Nordkorea</target>
+			</trans-unit>
+			</trans-unit>
+			<trans-unit id="416" translate="yes" reformat="yes" xml:space="default">
+                <source>Norway</source>
+                <target>Norwegen</target>
+            </trans-unit>
+			<trans-unit id="417" translate="yes" reformat="yes" xml:space="default">
+                <source>Oman</source>
+                <target>Oman</target>
+            </trans-unit>
+			<trans-unit id="418" translate="yes" reformat="yes" xml:space="default">
+                <source>Pakistan</source>
+                <target>Pakistán</target>
+            </trans-unit>
+			<trans-unit id="419" translate="yes" reformat="yes" xml:space="default">
+                <source>Palau</source>
+                <target>Palau</target>
+            </trans-unit>
+			<trans-unit id="420" translate="yes" reformat="yes" xml:space="default">
+                <source>Palestine</source>
+                <target>Palästina</target>
+            </trans-unit>
+			<trans-unit id="421" translate="yes" reformat="yes" xml:space="default">
+                <source>Panama</source>
+                <target>Panama</target>
+            </trans-unit>
+			<trans-unit id="422" translate="yes" reformat="yes" xml:space="default">
+                <source>Papua New Guinea</source>
+                <target>Papua-Neuguinea</target>
+            </trans-unit>
+			<trans-unit id="423" translate="yes" reformat="yes" xml:space="default">
+                <source>Paraguay</source>
+                <target>Paraguay</target>
+			</trans-unit>
+			<trans-unit id="424" translate="yes" reformat="yes" xml:space="default">
+                <source>Peru</source>
+                <target>Peru</target>
+            </trans-unit>
+			<trans-unit id="425" translate="yes" reformat="yes" xml:space="default">
+                <source>Philippines</source>
+                <target>Philippinen</target>
+            </trans-unit>
+			<trans-unit id="426" translate="yes" reformat="yes" xml:space="default">
+                <source>Poland</source>
+                <target>Polen</target>
+            </trans-unit>
+			<trans-unit id="427" translate="yes" reformat="yes" xml:space="default">
+                <source>Portugal</source>
+                <target>Portugal</target>
+            </trans-unit>
+			<trans-unit id="428" translate="yes" reformat="yes" xml:space="default">
+                <source>Qatar</source>
+                <target>Katar</target>
+            </trans-unit>
+			<trans-unit id="429" translate="yes" reformat="yes" xml:space="default">
+                <source>Romania</source>
+                <target>Rumänien</target>
+            </trans-unit>
+			<trans-unit id="430" translate="yes" reformat="yes" xml:space="default">
+                <source>Russia</source>
+                <target>Russland</target>
+            </trans-unit>
+			<trans-unit id="431" translate="yes" reformat="yes" xml:space="default">
+                <source>Rwanda</source>
+                <target>Ruanda</target>
+			</trans-unit>
+			<trans-unit id="432" translate="yes" reformat="yes" xml:space="default">
+                <source>Saint Kitts and Nevis</source>
+                <target>St. Kitts und Nevis</target>
+            </trans-unit>
+			<trans-unit id="433" translate="yes" reformat="yes" xml:space="default">
+                <source>Saint Lucia</source>
+                <target>Saint Lucia</target>
+            </trans-unit>
+			<trans-unit id="434" translate="yes" reformat="yes" xml:space="default">
+                <source>Saint Vincent and the Grenadines</source>
+                <target>Saint Vincent und Grenadinen</target>
+            </trans-unit>
+			<trans-unit id="435" translate="yes" reformat="yes" xml:space="default">
+                <source>San Marino</source>
+                <target>San Marino</target>
+            </trans-unit>
+			<trans-unit id="436" translate="yes" reformat="yes" xml:space="default">
+                <source>São Tomé and Príncipe</source>
+                <target>Sao Tome und Principe</target>
+            </trans-unit>
+			<trans-unit id="437" translate="yes" reformat="yes" xml:space="default">
+                <source>Saudi Arabia</source>
+                <target>Saudi-Arabien</target>
+            </trans-unit>
+			<trans-unit id="438" translate="yes" reformat="yes" xml:space="default">
+                <source>Senegal</source>
+                <target>Senegal</target>
+            </trans-unit>
+			<trans-unit id="439" translate="yes" reformat="yes" xml:space="default">
+                <source>Serbia</source>
+                <target>Serbien</target>
+			</trans-unit>
+			<trans-unit id="440" translate="yes" reformat="yes" xml:space="default">
+                <source>Seychelles</source>
+                <target>Seychellen</target>
+			</trans-unit>
+			<trans-unit id="441" translate="yes" reformat="yes" xml:space="default">
+                <source>Sierra Leone</source>
+                <target>Sierra Leone</target>
+            </trans-unit>
+			<trans-unit id="442" translate="yes" reformat="yes" xml:space="default">
+                <source>Singapore</source>
+                <target>Singapur</target>
+            </trans-unit>
+			<trans-unit id="443" translate="yes" reformat="yes" xml:space="default">
+                <source>Slovakia</source>
+                <target>Slowakei</target>
+            </trans-unit>
+			<trans-unit id="444" translate="yes" reformat="yes" xml:space="default">
+                <source>Slovenia</source>
+                <target>Slowenien</target>
+            </trans-unit>
+			<trans-unit id="445" translate="yes" reformat="yes" xml:space="default">
+                <source>Solomon Islands</source>
+                <target>Salomon-Inseln</target>
+            </trans-unit>
+			<trans-unit id="446" translate="yes" reformat="yes" xml:space="default">
+                <source>Somalia</source>
+                <target>Somalia</target>
+            </trans-unit>
+			<trans-unit id="447" translate="yes" reformat="yes" xml:space="default">
+                <source>South Africa</source>
+                <target>Südafrika</target>
+            </trans-unit>
+			<trans-unit id="448" translate="yes" reformat="yes" xml:space="default">
+                <source>South Korea</source>
+                <target>Südkorea</target>
+			</trans-unit>
+			<trans-unit id="449" translate="yes" reformat="yes" xml:space="default">
+                <source>Spain</source>
+                <target>Spanien</target>
+            </trans-unit>
+			<trans-unit id="450" translate="yes" reformat="yes" xml:space="default">
+                <source>Sri Lanka</source>
+                <target>Sri Lanka</target>
+            </trans-unit>
+			<trans-unit id="451" translate="yes" reformat="yes" xml:space="default">
+                <source>Sudan</source>
+                <target>Sudan</target>
+            </trans-unit>
+			<trans-unit id="452" translate="yes" reformat="yes" xml:space="default">
+                <source>Suriname</source>
+                <target>Suriname</target>
+            </trans-unit>
+			<trans-unit id="453" translate="yes" reformat="yes" xml:space="default">
+                <source>Swaziland</source>
+                <target>Swasiland</target>
+            </trans-unit>
+			<trans-unit id="454" translate="yes" reformat="yes" xml:space="default">
+                <source>Sweden</source>
+                <target>Schweden</target>
+            </trans-unit>
+			<trans-unit id="455" translate="yes" reformat="yes" xml:space="default">
+                <source>Switzerland</source>
+                <target>Schweiz</target>
+			</trans-unit>
+			<trans-unit id="456" translate="yes" reformat="yes" xml:space="default">
+                <source>Syria</source>
+                <target>Siria</target>
+            </trans-unit>
+			<trans-unit id="457" translate="yes" reformat="yes" xml:space="default">
+                <source>Taiwan</source>
+                <target>Taiwan</target>
+			</trans-unit>
+			<trans-unit id="458" translate="yes" reformat="yes" xml:space="default">
+                <source>Tajikistan</source>
+                <target>Tadschikistan</target>
+            </trans-unit>
+			<trans-unit id="459" translate="yes" reformat="yes" xml:space="default">
+                <source>Tanzania</source>
+                <target>Tanzania</target>
+            </trans-unit>
+			<trans-unit id="460" translate="yes" reformat="yes" xml:space="default">
+                <source>Thailand</source>
+                <target>Thailand</target>
+            </trans-unit>
+			<trans-unit id="461" translate="yes" reformat="yes" xml:space="default">
+                <source>Togo</source>
+                <target>Togo</target>
+            </trans-unit>
+			<trans-unit id="462" translate="yes" reformat="yes" xml:space="default">
+                <source>Tonga</source>
+                <target>Tonga</target>
+            </trans-unit>
+			<trans-unit id="463" translate="yes" reformat="yes" xml:space="default">
+                <source>Trinidad and Tobago</source>
+                <target>Trinidad and Tobago</target>
+            </trans-unit>
+			<trans-unit id="464" translate="yes" reformat="yes" xml:space="default">
+                <source>Tunisia</source>
+                <target>Tunesien</target>
+            </trans-unit>
+			<trans-unit id="465" translate="yes" reformat="yes" xml:space="default">
+                <source>Turkey</source>
+                <target>Türkei</target>
+			</trans-unit>
+			<trans-unit id="466" translate="yes" reformat="yes" xml:space="default">
+                <source>Turkmenistan</source>
+                <target>Turkmenistan</target>
+			</trans-unit>
+			<trans-unit id="467" translate="yes" reformat="yes" xml:space="default">
+                <source>Tuvalu</source>
+                <target>Tuvalu</target>
+            </trans-unit>
+			<trans-unit id="468" translate="yes" reformat="yes" xml:space="default">
+                <source>Uganda</source>
+                <target>Uganda</target>
+            </trans-unit>
+			<trans-unit id="469" translate="yes" reformat="yes" xml:space="default">
+                <source>Ukraine</source>
+                <target>Ukraine</target>
+            </trans-unit>
+			<trans-unit id="470" translate="yes" reformat="yes" xml:space="default">
+                <source>United Arab Emirates</source>
+                <target>Vereinigte Arabische Emiraten</target>
+            </trans-unit>
+			<trans-unit id="471" translate="yes" reformat="yes" xml:space="default">
+                <source>United Kingdom</source>
+                <target>Großbritannien</target>
+            </trans-unit>
+			<trans-unit id="472" translate="yes" reformat="yes" xml:space="default">
+                <source>Uruguay</source>
+                <target>Uruguay</target>
+            </trans-unit>
+			<trans-unit id="473" translate="yes" reformat="yes" xml:space="default">
+                <source>USA</source>
+                <target>USA</target>
+            </trans-unit>
+			<trans-unit id="474" translate="yes" reformat="yes" xml:space="default">
+                <source>Uzbekistan</source>
+                <target>Uzbekistan</target>
+			</trans-unit>
+			<trans-unit id="475" translate="yes" reformat="yes" xml:space="default">
+                <source>Vanuatu</source>
+                <target>Vanuatu</target>
+			</trans-unit>
+			<trans-unit id="476" translate="yes" reformat="yes" xml:space="default">
+                <source>Vatican</source>
+                <target>Vatikan</target>
+            </trans-unit>
+			<trans-unit id="477" translate="yes" reformat="yes" xml:space="default">
+                <source>Venezuela</source>
+                <target>Venezuela</target>
+            </trans-unit>
+			<trans-unit id="478" translate="yes" reformat="yes" xml:space="default">
+                <source>Vietnam</source>
+                <target>Vietnam</target>
+            </trans-unit>
+			<trans-unit id="479" translate="yes" reformat="yes" xml:space="default">
+                <source>Western Samoa</source>
+                <target>West-Samoa</target>
+            </trans-unit>
+			<trans-unit id="480" translate="yes" reformat="yes" xml:space="default">
+                <source>Yemen</source>
+                <target>Jemen</target>
+            </trans-unit>
+			<trans-unit id="481" translate="yes" reformat="yes" xml:space="default">
+                <source>Zambia</source>
+                <target>Sambia</target>
+            </trans-unit>
+			<trans-unit id="482" translate="yes" reformat="yes" xml:space="default">
+                <source>Zimbabwe</source>
+                <target>Simbabwe</target>
+            </trans-unit>
+			<trans-unit id="483" translate="yes" reformat="yes" xml:space="default">
+                <source>Stateless</source>
+                <target>Staatenlos</target>
+			</trans-unit>
+			<trans-unit id="484" translate="yes" reformat="yes" xml:space="default">
+                <source>Other</source>
+                <target>Andere</target>
+			</trans-unit>
+             <trans-unit id="485" translate="yes" reformat="yes" xml:space="default">
+                <source>New password</source>
+                <target>Kennwort</target>
+            </trans-unit>
+            <trans-unit id="486" translate="yes" reformat="yes" xml:space="default">
+                <source>Destination number</source>
+                <target>Telefonnummer</target>
+            </trans-unit>
+            <trans-unit id="487" translate="yes" reformat="yes" xml:space="default">
+                <source>Welcome to MY ACCOUNT. Here you can:</source>
+                <target>Willkommen auf mein Konto. Hier können Sie:</target>
+            </trans-unit>
+            <trans-unit id="488" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill your account.</source>
+                <target>Füllen Sie Ihren Account.</target>
+            </trans-unit>
+            <trans-unit id="489" translate="yes" reformat="yes" xml:space="default">
+                <source>Change your settings.</source>
+                <target>Ändern Sie Ihre Einstellungen.</target>
+            </trans-unit>
+            <trans-unit id="490" translate="yes" reformat="yes" xml:space="default">
+                <source>See your payment and call history.</source>
+                <target>Sehen Sie Ihre Zahlungs-und Anrufliste.</target>
+            </trans-unit>
+            <trans-unit id="491" translate="yes" reformat="yes" xml:space="default">
+                <source>Order other products.</source>
+                <target>Bestellen Weitere Produkte.</target>
             </trans-unit>
         </body>
     </file>

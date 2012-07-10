@@ -42,9 +42,9 @@ return true;}
 		 //echo $res_cbf;
  if($msgSent!=''){
    if($msgSent=="Yes" && trim($res_cbf)!="Response from CBF is:"){ ?>
-    <?php echo "<div class='sms_alert_bar'>".__("Message has been sent").'</div>'; ?>
+    <?php echo "<div class='sms_alert_bar'>".__("Your message has been sent.").'</div>'; ?>
     <?php }elseif(trim($res_cbf)=="Response from CBF is:"){?>
-    <?php echo "<div class='alert_bar'>".__("Your message unfortunately not sent, try again").'</div>'; ?>
+    <?php echo "<div class='alert_bar'>".__("Your message has not been sent, please try again.").'</div>'; ?>
    <?php }
 		  
   } ?>
@@ -61,17 +61,17 @@ return true;}
    <?php }else{ ?>
                 
                 <h3 style="width: 400px;"><?php echo __("Your Current Balance is:") ?> <?php echo $balance ?> <?php echo sfConfig::get('app_currency_code')?></h3>
-                <?php echo __("You do not have enough money in the account, you are kindly asked to refill");?> <b><a href="<?php echo url_for('customer/refill', true) ?><?php echo "/customer_id/".$customer->getId()?>">her</a></b>
+                <?php echo __("Your %1% account balance is low. Please refill your %1% account. Thank you.",array("%1%"=>sfConfig::get("app_site_title")));?> <b><a href="<?php echo url_for('customer/refill', true) ?><?php echo "/customer_id/".$customer->getId()?>">her</a></b>
 <?php }?>
        <ul>
         <li>  </li>
         
         <li bgcolor="f0f0f0">
             <?php echo __("NOTICE:");?> <br />
-		  - <?php echo __("1 SMS constitutes 142 characters") ?><br />
-		  - <?php echo __("Message upto 302 characters will be considered as 2 sms") ?> <br />
-		  - <?php echo __("Message upto 432 characters will be considered as 3 SMS") ?> <br />
-		  - <?php echo __("Any Text written above character limit will be automatically truncated") ?> <br />
+		  - <?php echo __("Messages from 1 to 142 characters will be considered as 1 SMS") ?><br />
+		  - <?php echo __("Messages from 143 to 302 characters will be considered as 2 SMS ") ?> <br />
+		  - <?php echo __("Messages from 303 to 432 characters will be considered as 3 SMS") ?> <br />
+		  - <?php echo __("Messages with more than 432 characters will be truncated automatically.") ?> <br />
           - <?php echo __("SMS charges may apply") ?> <br />
 		  
        </li>
@@ -100,7 +100,7 @@ return true;}
         </tr>
         <tr bgcolor="#ffffff">
             <td valign="top">
-                <label for="destination"><?php echo __("Destination Number<br />(without leading 0)") ?></label>
+                <label for="destination"><?php echo __("Destination number<br />(without leading 0)") ?></label>
             </td>
             <td align="left" style="width:115px;">
                 <input type="text" name="number" id="number" size="15" maxlength="13" onkeydown="isHex(this.value)">
@@ -138,11 +138,11 @@ return true;}
             <br />
             <input type="submit" class="buton" name="submit"  value="<?php echo __("Send SMS") ?>" onclick="
                             if(document.getElementById('number').value==''){
-                                alert('<?php echo __("Please Enter The Destination Number") ?>');
+                                alert('<?php echo __("Please enter the destination number.") ?>');
                                 document.getElementById('number').focus();
                                 return false;
                             }else if(document.getElementById('message').value==''){
-                                alert('<?php echo __("Please Enter The Message") ?>');
+                                alert('<?php echo __("Please enter your message.") ?>');
                                 document.getElementById('message').focus();
                                 return false;
                             }else{

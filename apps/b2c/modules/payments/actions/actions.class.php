@@ -54,7 +54,7 @@ class paymentsActions extends sfActions {
         //get the order_id
         $order_id = $request->getParameter('orderid');
         //$error_text = substr($request->getParameter('errortext'), 0, strpos($request->getParameter('errortext'), '!'));
-        $error_text = $this->getContext()->getI18N()->__('Payment is unfortunately not accepted because your information is incorrect, please try again by entering correct credit card information');
+        $error_text = $this->getContext()->getI18N()->__('Your payment has not been accepted, due to incorrect payment information. Please enter the correct payment information.');
 
         $this->forward404Unless($order_id);
 
