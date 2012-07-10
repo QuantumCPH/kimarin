@@ -22,8 +22,8 @@
               <!--Always use tables for tabular data-->
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                 <tr>
-                  <td class="title"><?php echo __('Order Number') ?></td>
-                  <td class="title" nowrap><?php echo __('Date & time') ?></td>
+                  <td class="title"><?php echo __('Order number') ?></td>
+                  <td class="title" nowrap><?php echo __('Date and time') ?></td>
                   <td class="title"><?php echo __('Description') ?></td>
                   <td class="title" align="right"><?php echo __('Amount') ?></td>
                   <td class="title"><?php echo __('Type') ?></td>

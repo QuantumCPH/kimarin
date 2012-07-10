@@ -85,7 +85,7 @@
                 <target>Gesamt</target>
             </trans-unit>
             <trans-unit id="21" translate="yes" reformat="yes" xml:space="default">
-                <source>If you have any questions please feel free to contact our customer support center at</source>
+                <source>If you have any inquiries please contact %1% Customer Support.</source>
                 <target>Wenn Sie Fragen haben, wenden Sie sich bitte an unser Kundendienst-Center in Verbindung setzen</target>
             </trans-unit>
             <trans-unit id="22" translate="yes" reformat="yes" xml:space="default">
@@ -320,8 +320,8 @@
             </trans-unit>
 
             <trans-unit id="79" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Numer</source>
-                <target>Bestellnummer</target>
+                <source>Order Number</source>
+                <target>Bestell-Nummer</target>
             </trans-unit>
 
             <trans-unit id="80" translate="yes" reformat="yes" xml:space="default">
@@ -569,7 +569,7 @@
                 <target>Zahlen</target>
             </trans-unit>
             <trans-unit id="140" translate="yes" reformat="yes" xml:space="default">
-                <source>Delivery and Returns</source>
+                <source>Delivery charges</source>
                 <target>Liefer-und Versandkosten</target>
             </trans-unit>
              <trans-unit id="141" translate="yes" reformat="yes" xml:space="default">
@@ -713,7 +713,7 @@
                 <target>Vielen Dank für Ihre Bestellung von &lt;b&gt;%1%&lt;/b&gt;.</target>
             </trans-unit>
             <trans-unit id="175" translate="yes" reformat="yes" xml:space="default">
-                <source>Your goods will be shipped today. You should have delivery within two days. Your customer number is </source>
+                <source>The products you have ordered will be sent by mail shortly. Your customer number is </source>
                 <target>Ihre Ware wird ausgeliefert heute. Sie sollten über die Lieferung innerhalb von zwei Tagen. Ihre Kunden-Nummer ist </target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
@@ -970,11 +970,11 @@
                 <target>Ausloggen</target>
             </trans-unit>
             <trans-unit id="237" translate="yes" reformat="yes" xml:space="default">
-                <source>Registration Fee</source>
+                <source>Registration fee</source>
                 <target>Anmeldegebühr</target>
             </trans-unit>
             <trans-unit id="238" translate="yes" reformat="yes" xml:space="default">
-                <source>Product Price</source>
+                <source>Product price</source>
                 <target>Produkt Preis</target>
             </trans-unit>
             <trans-unit id="239" translate="yes" reformat="yes" xml:space="default">
@@ -1179,6 +1179,30 @@
             <trans-unit id="289" translate="yes" reformat="yes" xml:space="default">
                 <source>This field is required</source>
                 <target>Dieses Feld ist obligatorisch</target>
+            </trans-unit>
+            <trans-unit id="290" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill by Kimarin Customer Support</source>
+                <target>Nachfüllung der Kunde durch Admin</target>
+            </trans-unit>
+            <trans-unit id="291" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill via agent</source>
+                <target>Nachfüllung über Agenten</target>
+            </trans-unit>
+            <trans-unit id="292" translate="yes" reformat="yes" xml:space="default">
+                <source>Fee for change of number</source>
+                <target>Gebühr für Änderungsnummer</target>
+            </trans-unit>
+            <trans-unit id="293" translate="yes" reformat="yes" xml:space="default">
+                <source>E-mail</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="294" translate="yes" reformat="yes" xml:space="default">
+                <source>Telephone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="295" translate="yes" reformat="yes" xml:space="default">
+                <source>Agent name</source>
+                <target>Verkäufer</target>
             </trans-unit>
         </body>
     </file>

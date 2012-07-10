@@ -1126,7 +1126,7 @@ class customerActions extends sfActions {
             //echo $new_password.''.$customer->getPassword();
             $customer->setPlainText($new_password);
             $customer->setPassword($new_password);
-            $message_body = $this->getContext()->getI18N()->__('Hi') . ' ' . $customer->getFirstName() . '!';
+            $message_body = /*$this->getContext()->getI18N()->__('Hi') . ' ' .*/ $customer->getFirstName() . '!';
             $message_body .= '<br /><br />';
             $message_body .= $this->getContext()->getI18N()->__('Your password has been changed. Please use the following information to enter MY ACCOUNT.',array('%1%'=>sfConfig::get('app_site_title')));
             $message_body .= '<br /><br />';
@@ -1402,7 +1402,7 @@ public function executeSmsHistory(sfWebrequest $request){
             $subject = $this->getContext()->getI18N()->__("%1% invitation",array('%1%' => sfConfig::get('app_site_title')));
 
             $name = $this->customer->getFirstName() . ' ' . $this->customer->getLastName();
-            $message_body = $this->getContext()->getI18N()->__('Hi ') . $recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation has been sent to you by") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("who is a registered %1% customer.",array('%1%' => sfConfig::get('app_site_title')));
+            $message_body = /*$this->getContext()->getI18N()->__('Hi ') . */$recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation has been sent to you by") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("who is a registered %1% customer.",array('%1%' => sfConfig::get('app_site_title')));
 
             $message_body_end = /*$this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="'.sfConfig::get('app_customer_url').'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.",array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>'. $this->getContext()->getI18N()->__('Read more').' <a href="'.sfConfig::get('app_site_url').'">'.sfConfig::get('app_site_url').'</a>';
 

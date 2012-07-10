@@ -85,7 +85,7 @@
                 <target>Totalizado</target>
             </trans-unit>
             <trans-unit id="21" translate="yes" reformat="yes" xml:space="default">
-                <source>If you have any questions please feel free to contact our customer support center at</source>
+                <source>If you have any inquiries please contact %1% Customer Support.</source>
                 <target>Si usted tiene alguna pregunta no dude en ponerse en contacto con nuestro centro de soporte al cliente en</target>
             </trans-unit>
             <trans-unit id="22" translate="yes" reformat="yes" xml:space="default">
@@ -713,7 +713,7 @@
                 <target>Gracias por su orden de &lt;b&gt;%1%&lt;/b&gt;.</target>
             </trans-unit>
             <trans-unit id="175" translate="yes" reformat="yes" xml:space="default">
-                <source>Your goods will be shipped today. You should have delivery within two days. Your customer number is </source>
+                <source>The products you have ordered will be sent by mail shortly. Your customer number is </source>
                 <target>Sus bienes serán enviados hoy. Usted debe tener la entrega dentro de dos días. Su número de cliente es </target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
@@ -957,18 +957,18 @@
             </trans-unit>
             <trans-unit id="235" translate="yes" reformat="yes" xml:space="default">
                 <source>Invitation Bonus</source>
-                <target>Auto Repuesto</target>
+                <target>Einladung Bonus</target>
             </trans-unit>
             <trans-unit id="236" translate="yes" reformat="yes" xml:space="default">
                 <source>Logout</source>
                 <target>Cerrar sesión</target>
             </trans-unit>
             <trans-unit id="237" translate="yes" reformat="yes" xml:space="default">
-                <source>Registration Fee</source>
+                <source>Registration fee</source>
                 <target>Cuota de inscripción</target>
             </trans-unit>
             <trans-unit id="238" translate="yes" reformat="yes" xml:space="default">
-                <source>Product Price</source>
+                <source>Product price</source>
                 <target>Precio del producto</target>
             </trans-unit>
             <trans-unit id="239" translate="yes" reformat="yes" xml:space="default">
@@ -1170,6 +1170,30 @@
             <trans-unit id="289" translate="yes" reformat="yes" xml:space="default">
                 <source>This field is required</source>
                 <target>Este campo es obligatorio</target>
+            </trans-unit>
+            <trans-unit id="290" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill by Kimarin Customer Support</source>
+                <target>Vuelva a llenar el cliente por Admin</target>
+            </trans-unit>
+            <trans-unit id="291" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill via agent</source>
+                <target>Recarga a través de agente</target>
+            </trans-unit>
+            <trans-unit id="292" translate="yes" reformat="yes" xml:space="default">
+                <source>Fee for change of number</source>
+                <target>Tasa de cambio de número</target>
+            </trans-unit>
+            <trans-unit id="293" translate="yes" reformat="yes" xml:space="default">
+                <source>E-mail</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="294" translate="yes" reformat="yes" xml:space="default">
+                <source>Telephone</source>
+                <target>teléfono</target>
+            </trans-unit>
+            <trans-unit id="295" translate="yes" reformat="yes" xml:space="default">
+                <source>Agent name</source>
+                <target>nombre del agente</target>
             </trans-unit>
         </body>
     </file>
