@@ -1918,7 +1918,7 @@ public function executeSmsHistory(sfWebrequest $request){
                     $c = new Criteria;
                     $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
                     $c->add(TelintaAccountsPeer::STATUS,3);
-                    $tilentAccounts = TransactionPeer::doSelect($c);
+                    $tilentAccounts = TelintaAccountsPeer::doSelect($c);
 
                     foreach($tilentAccounts as $tilentAccount){
                     $accountInfo['i_account']=$tilentAccount->getIAccount();
