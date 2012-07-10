@@ -2020,6 +2020,22 @@
             <trans-unit id="499" translate="yes" reformat="yes" xml:space="default">
                 <source>Agent name</source>
                 <target>Verkäufer</target>
+            </trans-unit>          
+            <trans-unit id="500" translate="yes" reformat="yes" xml:space="default">
+                <source>Fill in the contact details of your friend in the fields below</source>
+                <target>Füllen Sie die Kontaktdaten Ihres Freundes in die untenstehenden Felder</target>
+            </trans-unit>
+            <trans-unit id="501" translate="yes" reformat="yes" xml:space="default">
+                <source>Compose your message</source>
+                <target>Verfassen Sie Ihre Nachricht</target>
+            </trans-unit>
+            <trans-unit id="502" translate="yes" reformat="yes" xml:space="default">
+                <source>Send your invitation.</source>
+                <target>Senden Sie Ihre Einladung.</target>
+            </trans-unit>
+              <trans-unit id="503" translate="yes" reformat="yes" xml:space="default">
+                <source>It is easy:</source>
+                <target>Es ist einfach:</target>
             </trans-unit>
         </body>
     </file>

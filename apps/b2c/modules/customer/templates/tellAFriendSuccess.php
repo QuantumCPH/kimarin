@@ -86,7 +86,12 @@ function countChar(str)
 <h3><?php echo __('How?'); ?></h3>
 <p style="align:justified;"><?php echo __('You can tell your friends about %1% in two simple ways:',array('%1%'=>sfConfig::get('app_site_title'))); ?><br />
     
-<?php echo __('Fill out the fields below and click the Send Email button - your friend will receive an Email') ?></p>
+<?php //echo __('Fill out the fields below and click the Send Email button - your friend will receive an Email') ?>
+  <?php echo __('It is easy:');?><br />
+- <?php echo __('Fill in the contact details of your friend in the fields below');?><br />
+- <?php echo __('Compose your message');?><br />
+- <?php echo __('Send your invitation.')?><br />
+</p>
 <br/>
 <h3><?php echo __("Your benefits.") ?></h3>
 <p style="align:justified;"><?php echo __("%1% will automatically add 10.00%2% of free airtime to your account balance, when your friend has registered as a %1% customer and paid for the Starter Package.",array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code'))); ?> </p>
