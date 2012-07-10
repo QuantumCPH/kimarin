@@ -32,7 +32,7 @@ class Telienta {
 
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Customer');
 
-        $uniqueid="KB2C".$customer->getId().$customer->getUniqueid();
+        $uniqueid = "KB2C" . $customer->getId() . $customer->getUniqueid();
         if ($USReseller) {
             $Parent = self::$iParentUS;
         } else {
@@ -68,15 +68,15 @@ class Telienta {
 
         $customer->setICustomer($tCustomer->i_customer);
         $customer->save();
-        
+
         return true;
     }
 
     public static function createAAccount($mobileNumber, Customer $customer) {
         $c = new Criteria();
         $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
-        $c->addJoin(CustomerProductPeer::PRODUCT_ID,ProductPeer::ID, Criteria::LEFT_JOIN);
-        $c->addJoin(ProductPeer::BILLING_PRODUCT_ID,  BillingProductsPeer::ID, Criteria::LEFT_JOIN);
+        $c->addJoin(CustomerProductPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
+        $c->addJoin(ProductPeer::BILLING_PRODUCT_ID, BillingProductsPeer::ID, Criteria::LEFT_JOIN);
         $c->addAnd(CustomerProductPeer::STATUS_ID, 3);
         $c->addAnd(CustomerPeer::ID, $customer->getId());
         $product = BillingProductsPeer::doSelectOne($c);
@@ -84,7 +84,7 @@ class Telienta {
         return self::createAccount($customer, $mobileNumber, 'a', $product->getAIproduct());
     }
 
-    public static function createCBAccount($mobileNumber, Customer $customer,$iProduct=11804) {
+    public static function createCBAccount($mobileNumber, Customer $customer, $iProduct=11804) {
         return true; //self::createAccount($customer, $mobileNumber, 'cb',  $iProduct);
     }
 
@@ -224,43 +224,39 @@ class Telienta {
             return -1 * $Balance;
     }
 
-
     public static function charge(Customer $customer, $amount, $description="Charge") {
         return self::makeTransaction($customer, "Manual charge", $amount, $description);
-
     }
 
     public static function recharge(Customer $customer, $amount, $description) {
         $c = new Criteria;
         $c->add(EmailAlertSentPeer::USAGE_ALERT_STATUS_ID, null, Criteria::ISNOTNULL);
-        $c->addAnd(EmailAlertSentPeer::CUSTOMER_ID,$customer->getId());
+        $c->addAnd(EmailAlertSentPeer::CUSTOMER_ID, $customer->getId());
         $emailAlertCount = EmailAlertSentPeer::doCount($c);
-        if($emailAlertCount>0){
-           $emailAlerts =  EmailAlertSentPeer::doSelect($c);
-           foreach($emailAlerts as $emailAlert){
-               $emailAlert->setUsageAlertStatusId(null);
-               $emailAlert->save();
-           }
+        if ($emailAlertCount > 0) {
+            $emailAlerts = EmailAlertSentPeer::doSelect($c);
+            foreach ($emailAlerts as $emailAlert) {
+                $emailAlert->setUsageAlertStatusId(null);
+                $emailAlert->save();
+            }
         }
 
         $c = new Criteria;
         $c->add(SmsAlertSentPeer::USAGE_ALERT_STATUS_ID, null, Criteria::ISNOTNULL);
-        $c->addAnd(SmsAlertSentPeer::CUSTOMER_ID,$customer->getId());
+        $c->addAnd(SmsAlertSentPeer::CUSTOMER_ID, $customer->getId());
         $smsAlertCount = SmsAlertSentPeer::doCount($c);
-        if($smsAlertCount>0){
-           $smsAlerts =  SmsAlertSentPeer::doSelect($c);
-           foreach($smsAlerts as $smsAlert){
-               $smsAlert->setUsageAlertStatusId(null);
-               $smsAlert->save();
-           }
+        if ($smsAlertCount > 0) {
+            $smsAlerts = SmsAlertSentPeer::doSelect($c);
+            foreach ($smsAlerts as $smsAlert) {
+                $smsAlert->setUsageAlertStatusId(null);
+                $smsAlert->save();
+            }
         }
 
         return self::makeTransaction($customer, "Manual payment", $amount, $description);
-
     }
 
-
-    public static function callHistory($customer, $fromDate, $toDate, $reseller=false,$iService=3) {
+    public static function callHistory($customer, $fromDate, $toDate, $reseller=false, $iService=3) {
         $xdrList = false;
         $max_retries = 10;
         $retry_count = 0;
@@ -276,24 +272,20 @@ class Telienta {
             } catch (SoapFault $e) {
                 if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
 
-                    emailLib::sendErrorInTelinta("Customer Call History: " . $icustomer . " Error!", "We have faced an issue with Customer while Fetching Call History  this is the error for cusotmer with  ICustomer: " . $icustomer . " and the i_service is: ".$iService."error is " . $e->faultstring . "  <br/> Please Investigate.");
+                    emailLib::sendErrorInTelinta("Customer Call History: " . $icustomer . " Error!", "We have faced an issue with Customer while Fetching Call History  this is the error for cusotmer with  ICustomer: " . $icustomer . " and the i_service is: " . $iService . "error is " . $e->faultstring . "  <br/> Please Investigate.");
                     return false;
-
                 }
             }
             sleep(0.5);
             $retry_count++;
-
         }
         if ($retry_count == $max_retries) {
-            emailLib::sendErrorInTelinta("Customer Call History: " . $icustomer . " Error!", "We have faced an issue with Customer while Fetching Call History on telinta.  and the i_service is:".$iService." .Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+            emailLib::sendErrorInTelinta("Customer Call History: " . $icustomer . " Error!", "We have faced an issue with Customer while Fetching Call History on telinta.  and the i_service is:" . $iService . " .Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
             return false;
         }
 
         return $xdrList;
     }
-
-
 
     public static function getCustomerInfo($uniqueId) {
         $cInfo = false;
@@ -342,7 +334,7 @@ class Telienta {
         $retry_count = 0;
 
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Account');
-        $uniqueid="KB2C".$customer->getId().$customer->getUniqueid();
+        $uniqueid = "KB2C" . $customer->getId() . $customer->getUniqueid();
         $accountName = $accountType . $mobileNumber;
         while (!$account && $retry_count < $max_retries) {
             try {
@@ -388,7 +380,7 @@ class Telienta {
         return true;
     }
 
-    private static function makeTransaction(Customer $customer, $action, $amount,$description) {
+    private static function makeTransaction(Customer $customer, $action, $amount, $description) {
         $accounts = false;
         $max_retries = 10;
         $retry_count = 0;
@@ -418,6 +410,35 @@ class Telienta {
             return false;
         }
 
+        return true;
+    }
+
+    public static function updateAccount($accountInfo) {
+        $account = false;
+        $max_retries = 5;
+        $retry_count = 0;
+        $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Account');
+
+        $pass = self::randomAlphabets(4) . self::randomNumbers(1) . self::randomAlphabets(3);
+        $accountName = $accountType . $mobileNumber;
+        while (!$account && $retry_count < $max_retries) {
+            try {
+                //Example:
+                //$accountInf("i_account"=>"xxxxxx","blocked"=>"Y");
+                $account = $pb->update_account(array('account_info' => $accountInfo));
+            } catch (SoapFault $e) {
+                if ($e->faultstring != 'Could not connect to host') {
+                    emailLib::sendErrorInTelinta("Account Update: " . $accountInfo['i_account'] . " Error!", "We have faced an issue in Customer Account updation on telinta. this is the error fo Account" . $accountTitle . " error is " . $e->faultstring . " <br/> Please Investigate.");
+                    return false;
+                }
+            }
+            sleep(0.5);
+            $retry_count++;
+        }
+        if ($retry_count == $max_retries) {
+            emailLib::sendErrorInTelinta("Account Update: " . $accountInfo['i_account'] . " Error!", "We have faced an issue in Customer Account updation on telinta. Error is Even After Max Retries" . $max_retries . " <br/> Please Investigate.");
+            return false;
+        }
         return true;
     }
 

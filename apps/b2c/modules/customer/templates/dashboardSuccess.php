@@ -230,11 +230,11 @@ echo " ";   echo substr($Telintambs, 15,2);
 			</td>
 		<td></td></tr>
 	</table>
-<!--        <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
+  <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
 		<tr>
-                    <td ><a  style="text-decoration: none;" href="#" onClick="alert('<?php  echo __('Deactivate');  ?>'); return true"><span class="butonsigninsmall" style="padding: 5px 5px 5px 5px;">safsdafds</span></a></td>
+                    <td ><a  style="text-decoration: none;" href="<?php echo url_for('customer/blockCustomer', true) ?>" onClick="alert('<?php  echo __('Deaktiver');  ?>'); return true"><span class="butonsigninsmall" style="padding: 5px 5px 5px 5px;">safsdafds</span></a></td>
 
-                </tr></table>-->
+                </tr></table>
     </div>
   </div>
 

@@ -1900,4 +1900,43 @@ public function executeSmsHistory(sfWebrequest $request){
     private function updatePreferredCulture(){
        $this->getUser()->setCulture($this->currentCulture);
     }
+
+      public function executeBlockCustomer(sfWebRequest $request)
+    {
+
+
+
+
+            $this->redirectUnless($this->getUser()->isAuthenticated(), "@homepage");
+        //$this->customer = CustomerPeer::retrieveByPK(58);
+        $customer = CustomerPeer::retrieveByPK(
+                        $this->getUser()->getAttribute('customer_id', null, 'usersession')
+        );
+        //$this->forward404Unless($this->customer);
+        $this->redirectUnless($customer, "@homepage");
+
+                    $c = new Criteria;
+                    $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
+                    $c->add(TelintaAccountsPeer::STATUS,3);
+                    $tilentAccounts = TransactionPeer::doSelect($c);
+
+                    foreach($tilentAccounts as $tilentAccount){
+                    $accountInfo['i_account']=$tilentAccount->getIAccount();
+                    $accountInfo['blocked']="Y";
+                    Telienta::updateAccount($accountInfo);
+                    }
+                    $customer->setCustomerStatusId(7);
+                    $customer->save();
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Konto er deaktivert.'));
+                    $this->getUser()->getAttributeHolder()->removeNameSpace('usersession');
+                    $this->getUser()->setAuthenticated(false);
+                    $this->redirect('@b2c_homepage');
+                  
+                    return sfView::NONE;
+
+
+    }
+
+
+
 }
