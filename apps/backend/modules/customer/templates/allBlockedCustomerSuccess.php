@@ -6,8 +6,7 @@
 
 ?>
 
-<div id="sf_admin_container"><h1><?php echo  __('All Registered Customer') ?></h1></div><br />
-<p><?php echo @$message;?></p>
+<div id="sf_admin_container"><h1><?php echo  __('All Blocked Customer') ?></h1></div><br />
 <table width="75%" cellspacing="0" cellpadding="2" class="tblAlign">
     <thead>
         <tr class="headings">
@@ -44,7 +43,7 @@
             <td><?php echo  $customer->getFirstName() ?></td>
             <td><?php echo  $customer->getLastName() ?></td>
             <td><?php echo  $customer->getUniqueid() ?></td>
-            <td><a href="<?php echo url_for('customer/editcustomer?id='.$customer->getId()) ?>"><img src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/edit_icon.png" title="edit" alt="edit" /></a>&nbsp;<a href="customerDetail?id=<?php  echo $customer->getId() ?>"><img alt="view Detail" title="view Detail" src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/default_icon.png" /></a>
+            <td><a href="<?php echo url_for('customer/editcustomer?id='.$customer->getId()) ?>"><img src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/edit_icon.png" title="edit" alt="edit" /></a>&nbsp;<a href="customerDetail?id=<?php  echo $customer->getId() ?>"><img alt="view Detail" title="view Detail" src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/default_icon.png" /></a><a href="<?php echo url_for('customer/unBlockCustomer?id='.$customer->getId()) ?>">Unblock</a>
             </td>
         </tr>
         <?php   $incrment++;    ?>

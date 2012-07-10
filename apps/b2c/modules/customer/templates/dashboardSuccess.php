@@ -201,7 +201,7 @@ echo " ";   echo substr($Telintambs, 15,2);
         </span></div>-->
 <?php   } ?>
         <p>&nbsp;</p>
-        <br/><br/>
+      
 	<table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px;display:none; ">	
 		<tr>
 			<td colspan="1" width="45%" style=" padding-left: 8px;
@@ -230,11 +230,15 @@ echo " ";   echo substr($Telintambs, 15,2);
 			</td>
 		<td></td></tr>
 	</table>
-<!--        <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
+  <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
 		<tr>
-                    <td ><a  style="text-decoration: none;" href="#" onClick="alert('<?php  echo __('Deactivate');  ?>'); return true"><span class="butonsigninsmall" style="padding: 5px 5px 5px 5px;">safsdafds</span></a></td>
-
-                </tr></table>-->
+                    <td ><form name=myform action="<?php echo url_for('customer/blockCustomer', true) ?>">
+                            <input  class="butonsigninsmall" style="padding: 5px 5px 5px 5px;" type=submit value="Block Account"
+onClick="if(confirm('Are you sure you want to block your account'))
+alert('your account will be blocked');
+">
+</form> </td>
+                </tr></table>
     </div>
   </div>
 

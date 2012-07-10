@@ -1031,17 +1031,18 @@ class customerActions extends sfActions {
 
             $c = new Criteria();
             $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);            
-            $c->add(CustomerPeer::PASSWORD, $password);
-            $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $c->addAnd(CustomerPeer::PASSWORD, $password);
+            $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+            $c->addAnd(CustomerPeer::BLOCK,0);
             $cnt = CustomerPeer::doCount($c);
             if($cnt > 0){
                 $customer = CustomerPeer::doSelectOne($c);
             }else{
                 $c = new Criteria();
                 $c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $mobile_number);          
-                $c->add(CustomerPeer::PASSWORD, $password);
-                $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-                
+                $c->addAnd(CustomerPeer::PASSWORD, $password);
+                $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+                $c->addAnd(CustomerPeer::BLOCK,0);
                 $customer = CustomerPeer::doSelectOne($c);
             }
             
@@ -1850,8 +1851,8 @@ public function executeSmsHistory(sfWebrequest $request){
         if($item_amount=="") $item_amount = $request->getParameter('extra_refill');
         
         $lang=$this->getUser()->getCulture();
-        $return_url = $this->getTargetUrl().'customer/refillAccept';
-        $cancel_url = $this->getTargetUrl().'customer/refillReject?orderid='.$order_id;
+        $return_url = "http://www.kimarineurope.com/refill-thanks.html";
+        $cancel_url = "http://www.kimarineurope.com/refill-reject.html";
      //   $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
         
         $callbackparameters = $lang.'-'.$order_id.'-'.$item_amount;
@@ -1900,4 +1901,43 @@ public function executeSmsHistory(sfWebrequest $request){
     private function updatePreferredCulture(){
        $this->getUser()->setCulture($this->currentCulture);
     }
+
+      public function executeBlockCustomer(sfWebRequest $request)
+    {
+
+
+
+
+            $this->redirectUnless($this->getUser()->isAuthenticated(), "@homepage");
+        //$this->customer = CustomerPeer::retrieveByPK(58);
+        $customer = CustomerPeer::retrieveByPK(
+                        $this->getUser()->getAttribute('customer_id', null, 'usersession')
+        );
+        //$this->forward404Unless($this->customer);
+        $this->redirectUnless($customer, "@homepage");
+
+                    $c = new Criteria;
+                    $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
+                    $c->add(TelintaAccountsPeer::STATUS,3);
+                    $tilentAccounts = TelintaAccountsPeer::doSelect($c);
+
+                    foreach($tilentAccounts as $tilentAccount){
+                    $accountInfo['i_account']=$tilentAccount->getIAccount();
+                    $accountInfo['blocked']="Y";
+                    Telienta::updateAccount($accountInfo);
+                    }
+                    $customer->setBlock(1);
+                    $customer->save();
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Konto er deaktivert.'));
+                    $this->getUser()->getAttributeHolder()->removeNameSpace('usersession');
+                    $this->getUser()->setAuthenticated(false);
+                    $this->redirect('@b2c_homepage');
+                  
+                    return sfView::NONE;
+
+
+    }
+
+
+
 }
