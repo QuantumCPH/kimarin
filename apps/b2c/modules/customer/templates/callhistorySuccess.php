@@ -221,7 +221,7 @@
                                 <td width="8%" class="title"><?php echo __('Date and time') ?></td>
                                 <td class="title" width="31%"><?php echo __('Destination number') ?></td>
                                 <td width="15%" class="title"><?php echo __('Duration') ?></td>
-                                <td width="5%" class="title"><?php echo __('IVA'); echo sfConfig::get('app_vat'); ?></td>
+                                <td width="5%" class="title"><?php echo __('IVA'); echo '('.sfConfig::get('app_vat').')'; ?></td>
                                 <td width="17%" align="right" class="title"><?php echo __('Cost') ?></td>
                               <td width="24%" class="title"><?php echo __('Description') ?></td>
                           </tr>
