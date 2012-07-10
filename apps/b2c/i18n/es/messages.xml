@@ -1160,19 +1160,6 @@
                 <target>Cargue el cliente por Admin</target>
             </trans-unit>
             <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
-                <source>Sms Charges</source>
-                <target>Sms Cargos</target>
-            </trans-unit>
-            <trans-unit id="288" translate="yes" reformat="yes" xml:space="default">
-                <source>Web SMS</source>
-                <target>Web SMS</target>
-            </trans-unit>
-<<<<<<< HEAD
-            <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
-                <source>You must fill in this field.</source>
-                <target>Este campo es obligatorio</target>
-            </trans-unit>
-            <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
                 <source>Afghanistan</source>
                 <target>Afghanistán</target>
             </trans-unit>
@@ -1240,15 +1227,15 @@
                 <source>Belgium</source>
                 <target>Bélgica</target>
             </trans-unit>
-			<trans-unit id="304" translate="yes" reformat="yes" xml:space="default">
+	  <trans-unit id="304" translate="yes" reformat="yes" xml:space="default">
                 <source>Belize</source>
                 <target>Belice</target>
             </trans-unit>
-			<trans-unit id="305" translate="yes" reformat="yes" xml:space="default">
+	  <trans-unit id="305" translate="yes" reformat="yes" xml:space="default">
                 <source>Benin</source>
                 <target>Benin</target>
             </trans-unit>
-			<trans-unit id="306" translate="yes" reformat="yes" xml:space="default">
+	   <trans-unit id="306" translate="yes" reformat="yes" xml:space="default">
                 <source>Bhutan</source>
                 <target>Bután</target>
             </trans-unit>
@@ -1348,7 +1335,6 @@
                 <source>Czech Republic</source>
                 <target>República Checa, la</target>
 			</trans-unit>
-			</trans-unit>
 			<trans-unit id="331" translate="yes" reformat="yes" xml:space="default">
                 <source>Democratic Republic of the Congo</source>
                 <target>República Democrática del Congo</target>
@@ -1380,7 +1366,6 @@
 			<trans-unit id="338" translate="yes" reformat="yes" xml:space="default">
                 <source>Egypt</source>
                 <target>Egipto</target>
-			</trans-unit>
 			</trans-unit>
 			<trans-unit id="339" translate="yes" reformat="yes" xml:space="default">
                 <source>El Salvador</source>
@@ -1586,7 +1571,7 @@
                 <source>Malawi</source>
                 <target>Malawi</target>
             </trans-unit>
-			<trans-unit id="391" translate="yes" reformat="yes" xml:space="default">
+			<trans-unit id="390" translate="yes" reformat="yes" xml:space="default">
                 <source>Malaysia</source>
                 <target>Malasia</target>
 			</trans-unit>
@@ -1621,7 +1606,6 @@
 			<trans-unit id="398" translate="yes" reformat="yes" xml:space="default">
                 <source>Micronesia</source>
                 <target>Micronesia</target>
-			</trans-unit>
 			</trans-unit>
 			<trans-unit id="399" translate="yes" reformat="yes" xml:space="default">
                 <source>Moldova</source>
@@ -1686,7 +1670,6 @@
 			<trans-unit id="414" translate="yes" reformat="yes" xml:space="default">
                 <source>North Korea</source>
                 <target>Corea del Norte</target>
-			</trans-unit>
 			</trans-unit>
 			<trans-unit id="415" translate="yes" reformat="yes" xml:space="default">
                 <source>Norway</source>
@@ -2014,6 +1997,14 @@
             <trans-unit id="496" translate="yes" reformat="yes" xml:space="default">
                 <source>Agent name</source>
                 <target>nombre del agente</target>
+            </trans-unit>            
+            <trans-unit id="497" translate="yes" reformat="yes" xml:space="default">
+                <source>Web SMS</source>
+                <target>Web SMS</target>
+            </trans-unit>
+            <trans-unit id="498" translate="yes" reformat="yes" xml:space="default">
+                <source>You must fill in this field.</source>
+                <target>Este campo es obligatorio</target>
             </trans-unit>
         </body>
     </file>
