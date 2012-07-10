@@ -20,7 +20,7 @@
 	<div class="right-col">
 		<div class="box box-a">
                     <h4 class="web_sms"><?php echo __('Web SMS') ?></h4><p>
-<?php echo __('Send SMS worldwide at the best prices of market') ?></p>
+<?php echo __('Send SMS worldwide at affordable prices.') ?></p>
                     <a title="<?php echo __('Web SMS') ?>" class="sidebar_button" href="<?php echo url_for('customer/websms', true) ?>"><?php echo __('Send SMS') ?></a>
 		</div>
 
@@ -28,8 +28,8 @@
 
 	<div class="right-col">
 		<div class="box box-b">
-                    <h4 class="tellAfrnd"><?php echo __('Tell a friend') ?></h4><p>
-<?php echo __('International calls from 0 cents * With %1%, you can call the whole world.',array('%1%'=>sfConfig::get('app_site_title'))); ?></p>
+                    <h4 class="tellAfrnd"><?php echo __('Invite a friend') ?></h4><p>
+<?php echo __('Save up to 80 % on international calls from Spanish mobile telephone.'); ?></p>
                     <a title="<?php echo __('Tell a friend') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/tellAFriend', true) ?>"><?php echo __('Send Invitation') ?></a>
 		</div>
 	<br />

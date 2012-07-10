@@ -1008,7 +1008,7 @@ class customerActions extends sfActions {
                 //	echo 'validated';
                 $customer = $this->form->save();
 
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your settings have been saved.'));
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your settings changes have been saved.'));
             }
             // echo 'after';
         }
@@ -1166,10 +1166,10 @@ class customerActions extends sfActions {
             emailLib::sendForgetPasswordEmail($customer, $message, $subject);
             $this->updatePreferredCulture();
 
-            $this->getUser()->setFlash('send_password_message', $this->getContext()->getI18N()->__('Your account details have been sent to your email address.'));
+            $this->getUser()->setFlash('send_password_message', $this->getContext()->getI18N()->__('Your account details have been sent to your e-mail address.'));
         }
         else {
-            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this email.'));
+            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this e-mail address.'));
         }
 //  		require_once(sfConfig::get('sf_lib_dir').'/swift/lib/swift_init.php');
 //

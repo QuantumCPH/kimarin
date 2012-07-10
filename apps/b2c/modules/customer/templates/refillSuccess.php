@@ -155,7 +155,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
      <div  style="width:340px;float:left;">    <ul>
          	<!-- customer product -->
  			  <li>
-              <label for="customer_product" style="text-decoration:underline;"><?php echo __('Manual filling:') ?></label>
+              <label for="customer_product" style="text-decoration:underline;"><?php echo __('Manual refill:') ?></label>
              
             </li>
           	<!-- extra_refill -->
@@ -201,7 +201,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
                     </div>
           <div style="float:left;margin-top:30px;">   
        
-                <input type="submit" class="butonsigninsmall" name="button" style="width:101px;cursor: pointer;float: left; margin-left: -5px !important; margin-top: -5px;"  value="<?php echo __('Load') ?>" />
+                <input type="submit" class="butonsigninsmall" name="button" style="width:101px;cursor: pointer;float: left; margin-left: -5px !important; margin-top: -5px;"  value="<?php echo __('Refill') ?>" />
         </div>
         </div></form> 
        </div>

@@ -638,3 +638,18 @@ input[type=submit],input[type=button],textarea,option{
 img{
     border:none !important;
 }
+.maintext{
+  text-align: left;
+}
+.maintext .youcan{
+  margin-bottom: 2px;
+  text-decoration: underline;
+}
+ul.welcome{
+  margin:0 0 0 14px;
+  padding:0px;
+}
+ul.welcome li{
+  text-align: left;
+  list-style: circle !important;
+}

@@ -31,7 +31,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
                 <?php endif; ?>
-             <div class='inline-error'><?php if ($oldpasswordError){echo __('Old Password Is not Correct.');} ?>&nbsp;</div>
+             <div class='inline-error'><?php if ($oldpasswordError){echo __('Your old password is not correct.');} ?>&nbsp;</div>
             </li>
             <?php
             $error_password = false;;
