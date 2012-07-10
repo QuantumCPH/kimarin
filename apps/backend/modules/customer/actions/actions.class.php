@@ -179,7 +179,15 @@ class customerActions extends autocustomerActions {
     public function executeAllRegisteredCustomer(sfWebRequest $request) {
         $c = new Criteria();
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+         $c->addAnd(CustomerPeer::BLOCK,0);
         $this->customers = CustomerPeer::doSelect($c);
+    }
+ public function executeAllBlockedCustomer(sfWebRequest $request) {
+        $c = new Criteria();
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+         $c->addAnd(CustomerPeer::BLOCK,1);
+        $this->customers = CustomerPeer::doSelect($c);
+        
     }
 
     public function executeCustomerDetail(sfWebRequest $request) {
@@ -188,6 +196,7 @@ class customerActions extends autocustomerActions {
         $c = new Criteria();
         $c->add(CustomerPeer::ID, $id);
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+     
         $this->customer = CustomerPeer::doSelectOne($c);
 
 //$this->customer_balance =Telienta::getBalance($this->customer->getUniqueid());
@@ -580,5 +589,35 @@ class customerActions extends autocustomerActions {
     private function updatePreferredCulture() {
         $this->getUser()->setCulture($this->currentCulture);
     }
+
+      public function executeUnBlockCustomer(sfWebRequest $request)
+    {
+
+        $customer = CustomerPeer::retrieveByPK($request->getParameter('id'));
+
+
+
+                    $c = new Criteria;
+                    $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
+                    $c->add(TelintaAccountsPeer::STATUS,3);
+                    $tilentAccounts = TelintaAccountsPeer::doSelect($c);
+
+                    foreach($tilentAccounts as $tilentAccount){
+                    $accountInfo['i_account']=$tilentAccount->getIAccount();
+                    $accountInfo['blocked']="N";
+                    Telienta::updateAccount($accountInfo);
+                    }
+                    $customer->setBlock(0);
+                    $customer->save();
+                 $this->message = "Customer has been UnBlock successfully.";
+                    $this->redirect($this->getTargetURL() . 'customer/allRegisteredCustomer');
+                    return sfView::NONE;
+
+
+    }
+
+
+
+
 
 }

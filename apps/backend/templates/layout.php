@@ -129,7 +129,12 @@
                      }else{
                          echo link_to(__('All Registered Customer'), 'customer/allRegisteredCustomer');
                      }?>
-                    
+                      <?php
+                     if($actionName=="allBlockedCustomer"){
+                         echo link_to(__('All Blocked Customer'), 'customer/allBlockedCustomer', array('class'=>'subSelect'));
+                     }else{
+                         echo link_to(__('All Blocked Customer'), 'customer/allBlockedCustomer');
+                     }?>
                        <?php
                     if($actionName=='selectChargeCustomer' && $modulName=="customer"){
                        echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer', array('class'=>'subSelect'));

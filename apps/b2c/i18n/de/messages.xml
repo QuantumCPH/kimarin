@@ -85,7 +85,7 @@
                 <target>Gesamt</target>
             </trans-unit>
             <trans-unit id="21" translate="yes" reformat="yes" xml:space="default">
-                <source>If you have any questions please feel free to contact our customer support center at</source>
+                <source>If you have any inquiries please contact %1% Customer Support.</source>
                 <target>Wenn Sie Fragen haben, wenden Sie sich bitte an unser Kundendienst-Center in Verbindung setzen</target>
             </trans-unit>
             <trans-unit id="22" translate="yes" reformat="yes" xml:space="default">
@@ -115,7 +115,7 @@
                 <target>Zahlung</target>
             </trans-unit>
             <trans-unit id="28" translate="yes" reformat="yes" xml:space="default">
-                <source>mobile number</source>
+                <source>Mobile number</source>
                 <target>Handy-Nummer</target>
             </trans-unit>
             <trans-unit id="29" translate="yes" reformat="yes" xml:space="default">
@@ -159,7 +159,7 @@
                 <target>Passwort bestätigen</target>
             </trans-unit>
             <trans-unit id="39" translate="yes" reformat="yes" xml:space="default">
-                <source>email</source>
+                <source>e-mail</source>
                 <target>E-Mail</target>
             </trans-unit>
             <trans-unit id="40" translate="yes" reformat="yes" xml:space="default">
@@ -175,11 +175,11 @@
                 <target>ist Abonnent des Newsletters</target>
             </trans-unit>
             <trans-unit id="43" translate="yes" reformat="yes" xml:space="default">
-                <source>Call history is updated after every 5-10 minutes.</source>
+                <source>Your call history will be updated 5 - 10 minutes after you have finalised your call.</source>
                 <target>Rufen Sie die Geschichte nach alle 5-10 Minuten aktualisiert.</target>
             </trans-unit>
             <trans-unit id="44" translate="yes" reformat="yes" xml:space="default">
-                <source>Phone Number</source>
+                <source>Destination number</source>
                 <target>Telefonnummer</target>
             </trans-unit>
             <trans-unit id="45" translate="yes" reformat="yes" xml:space="default">
@@ -295,11 +295,11 @@
                 <target>Andere Geschichte</target>
             </trans-unit>
             <trans-unit id="73" translate="yes" reformat="yes" xml:space="default">
-                <source>Call History</source>
+                <source>Call history</source>
                 <target>Rufen Geschichte</target>
             </trans-unit>
             <trans-unit id="74" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Number</source>
+                <source>Order number</source>
                 <target>Bestell-Nummer</target>
             </trans-unit>
             <trans-unit id="75" translate="yes" reformat="yes" xml:space="default">
@@ -315,13 +315,13 @@
                 <target>Es liegen noch keine Transaktionen zu zeigen.</target>
             </trans-unit>
             <trans-unit id="78" translate="yes" reformat="yes" xml:space="default">
-                <source>Payment History</source>
+                <source>Payment history</source>
                 <target>Zahlung Geschichte</target>
             </trans-unit>
 
             <trans-unit id="79" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Numer</source>
-                <target>Bestellnummer</target>
+                <source>Order Number</source>
+                <target>Bestell-Nummer</target>
             </trans-unit>
 
             <trans-unit id="80" translate="yes" reformat="yes" xml:space="default">
@@ -665,7 +665,7 @@
                 <target>Kosten &lt;small&gt;(Ohne. Mehrwertsteuer)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
-                <source>Call Type</source>
+                <source>Description</source>
                 <target>Anruftyp</target>
             </trans-unit>
             <trans-unit id="164" translate="yes" reformat="yes" xml:space="default">
@@ -713,7 +713,7 @@
                 <target>Vielen Dank für Ihre Bestellung von &lt;b&gt;%1%&lt;/b&gt;.</target>
             </trans-unit>
             <trans-unit id="175" translate="yes" reformat="yes" xml:space="default">
-                <source>Your goods will be shipped today. You should have delivery within two days. Your customer number is </source>
+                <source>The products you have ordered will be sent by mail shortly. Your customer number is </source>
                 <target>Ihre Ware wird ausgeliefert heute. Sie sollten über die Lieferung innerhalb von zwei Tagen. Ihre Kunden-Nummer ist </target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
@@ -730,10 +730,10 @@
             </trans-unit>
             <trans-unit id="179" translate="yes" reformat="yes" xml:space="default">
                 <source>Yours sincerely,</source>
-                <target>Mit freundlichen Grüßen,</target>
+                <target>Best regards,</target>
             </trans-unit>
             <trans-unit id="180" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Receipt</source>
+                <source>Order receipt</source>
                 <target>Auftragseingang</target>
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
@@ -792,11 +792,11 @@
                 <target>Hallo </target>
             </trans-unit>
             <trans-unit id="194" translate="yes" reformat="yes" xml:space="default">
-                <source>This invitation is sent to you with the reference of</source>
+                <source>This invitation has been sent to you by</source>
                 <target>Diese Einladung wird Ihnen mit der Referenz der gesendeten</target>
             </trans-unit>
             <trans-unit id="195" translate="yes" reformat="yes" xml:space="default">
-                <source>a user of Smartsim from the %1%.</source>
+                <source>who is a registered %1% customer.</source>
                 <target>Ein Benutzer des SmartSim aus dem %1%.</target>
             </trans-unit>
             <trans-unit id="196" translate="yes" reformat="yes" xml:space="default">
@@ -808,7 +808,7 @@
                 <target>dash-navg</target>
             </trans-unit>
             <trans-unit id="198" translate="yes" reformat="yes" xml:space="default">
-                <source>Accept</source>
+                <source>Go to %1%'s web site for registration.</source>
                 <target>Akzeptieren</target>
             </trans-unit>
             <trans-unit id="199" translate="yes" reformat="yes" xml:space="default">
@@ -816,7 +816,7 @@
                 <target>Lesen Sie mehr</target>
             </trans-unit>
             <trans-unit id="200" translate="yes" reformat="yes" xml:space="default">
-                <source>Your password has been changed. Please use the following information to login to your %1% account.</source>
+                <source>Your password has been changed. Please use the following information to enter MY ACCOUNT.</source>
                 <target>Ihr Passwort wurde geändert. Bitte verwenden Sie die folgenden Informationen zu Ihrem %1% Account einloggen.</target>
             </trans-unit>
             <trans-unit id="201" translate="yes" reformat="yes" xml:space="default">
@@ -938,16 +938,16 @@
             </trans-unit>
 
             <trans-unit id="230" translate="yes" reformat="yes" xml:space="default">
-                <source>We hereby confirm that you have received commissions deposited into your account that you have referred a friend about Smartsim from %1%.Go in to "Payment History" to see what you have earned.</source>
+                <source>%1% has added 10.00 %2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.</source>
                 <target>Wir bestätigen hiermit, dass Sie erhielt Aufträge hinterlegt auf Ihr Konto, dass Sie einen Freund über SmartSim aus %1%.Go in die auf "Zahlungsprotokoll" bezeichnet zu sehen, was Sie verdient haben.</target>
             </trans-unit>
 
             <trans-unit id="231" translate="yes" reformat="yes" xml:space="default">
-                <source>Bonus Receiver</source>
+                <source>Receiver of bonus for inviting a friend</source>
                 <target>Bonus-Empfänger</target>
             </trans-unit>
             <trans-unit id="232" translate="yes" reformat="yes" xml:space="default">
-                <source>Registered Friend</source>
+                <source>Registered friend</source>
                 <target>Registrierte Freund</target>
             </trans-unit>
 
@@ -1030,7 +1030,7 @@
                 <target>Der Kunde ist bereits registriert.</target>
             </trans-unit>
             <trans-unit id="252" translate="yes" reformat="yes" xml:space="default">
-                <source>Call</source>
+                <source>Calls</source>
                 <target>Rufen</target>
             </trans-unit>
             <trans-unit id="253" translate="yes" reformat="yes" xml:space="default">
@@ -1150,7 +1150,7 @@
                 <target>Aktive mobile Nein</target>
             </trans-unit>
             <trans-unit id="282" translate="yes" reformat="yes" xml:space="default">
-                <source>Sms Charges</source>
+                <source>Sms charges</source>
                 <target>SMS-Gebühren</target>
             </trans-unit>
             <trans-unit id="283" translate="yes" reformat="yes" xml:space="default">
@@ -1162,13 +1162,22 @@
                 <target>navigationen</target>
             </trans-unit>
             <trans-unit id="285" translate="yes" reformat="yes" xml:space="default">
+                <source>IVA</source>
+                <target>Mehrwertsteuer</target>
+            </trans-unit>
+            <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
+                <source>Charge by Kimarin Customer Support</source>
+                <target>Laden Sie den Kunden durch Admin</target>
+			</trans-unit>
+            <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
                 <source>Invalid mobile number or password.</source>
                 <target>Ungültige Handynummer oder Passwort.</target>
             </trans-unit>
-            <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="288" translate="yes" reformat="yes" xml:space="default">
                 <source>Web SMS</source>
                 <target>Web SMS</target>
             </trans-unit>
+<<<<<<< HEAD
             <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
                 <source>You must fill in this field.</source>
                 <target>Dieses Feld ist obligatorisch</target>
@@ -1992,6 +2001,33 @@
             <trans-unit id="491" translate="yes" reformat="yes" xml:space="default">
                 <source>Order other products.</source>
                 <target>Bestellen Weitere Produkte.</target>
+           <trans-unit id="492" translate="yes" reformat="yes" xml:space="default">
+                <source>This field is required</source>
+                <target>Dieses Feld ist obligatorisch</target>
+            </trans-unit>
+            <trans-unit id="493" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill by Kimarin Customer Support</source>
+                <target>Nachfüllung der Kunde durch Admin</target>
+            </trans-unit>
+            <trans-unit id="494" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill via agent</source>
+                <target>Nachfüllung über Agenten</target>
+            </trans-unit>
+            <trans-unit id="495" translate="yes" reformat="yes" xml:space="default">
+                <source>Fee for change of number</source>
+                <target>Gebühr für Änderungsnummer</target>
+            </trans-unit>
+            <trans-unit id="496" translate="yes" reformat="yes" xml:space="default">
+                <source>E-mail</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="497" translate="yes" reformat="yes" xml:space="default">
+                <source>Telephone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="498" translate="yes" reformat="yes" xml:space="default">
+                <source>Agent name</source>
+                <target>Verkäufer</target>
             </trans-unit>
         </body>
     </file>
