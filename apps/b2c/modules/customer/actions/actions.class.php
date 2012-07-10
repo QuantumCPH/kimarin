@@ -1033,7 +1033,7 @@ class customerActions extends sfActions {
             $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);            
             $c->addAnd(CustomerPeer::PASSWORD, $password);
             $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-//            $c->addAnd(CustomerPeer::BLOCK,0);
+            $c->addAnd(CustomerPeer::BLOCK,0);
             $cnt = CustomerPeer::doCount($c);
             if($cnt > 0){
                 $customer = CustomerPeer::doSelectOne($c);
