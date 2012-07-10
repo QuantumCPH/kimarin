@@ -2007,6 +2007,22 @@
                 <source>You must fill in this field.</source>
                 <target>Este campo es obligatorio</target>
             </trans-unit>
+            <trans-unit id="499" translate="yes" reformat="yes" xml:space="default">
+                <source>It is easy:</source>
+                <target>Es fácil:</target>
+            </trans-unit>
+            <trans-unit id="500" translate="yes" reformat="yes" xml:space="default">
+                <source>Fill in the contact details of your friend in the fields below</source>
+                <target>Rellene los datos de contacto de su amigo en los campos de abajo</target>
+            </trans-unit>
+            <trans-unit id="501" translate="yes" reformat="yes" xml:space="default">
+                <source>Compose your message</source>
+                <target>Redacte su mensaje</target>
+            </trans-unit>
+            <trans-unit id="502" translate="yes" reformat="yes" xml:space="default">
+                <source>Send your invitation.</source>
+                <target>Envía tu invitación.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
