@@ -88,7 +88,7 @@ class emailLib {
     }
 
     public static function sendRefillEmail(Customer $customer, $order) {
-        $vat = 0;
+       
 
         //create transaction
 //        $transaction = new Transaction();
@@ -101,7 +101,7 @@ class emailLib {
         $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
         $tc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $transaction = TransactionPeer::doSelectOne($tc);
-
+        $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
         //This Section For Get The Agent Information
         $agent_company_id = $customer->getReferrerId();
         if ($agent_company_id != '') {
@@ -321,7 +321,9 @@ class emailLib {
     public static function sendCustomerRefillEmail(Customer $customer, $order, $transaction) {
 
         //set vat
-        $vat = $transaction->getAmount()*sfConfig::get('app_vat_percentage');
+        
+
+        $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
@@ -1421,7 +1423,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
         $tc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $transaction = TransactionPeer::doSelectOne($tc);
-
+        if(strstr($transaction->getDescription(),"Refill")){
+         $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
+        }
         //This Section For Get The Agent Information
         $agent_company_id = $customer->getReferrerId();
         if ($agent_company_id != '') {

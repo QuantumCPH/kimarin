@@ -264,7 +264,7 @@
             </trans-unit>
             <trans-unit id="65" translate="yes" reformat="yes" xml:space="default">
                 <source>Write e-mail address you used for registration.&lt;br /&gt;&lt;br /&gt;Your password will be sent to you via this email.</source>
-                <target>Escribir dirección de correo electrónico que usó para registrarse.&lt;br /&gt;&lt;br /&gt;Su contraseña le será enviada a usted a través de este e-mail.</target>
+                <target>Escribir dirección de correo electrónico que usó para registrarse. Su contraseña le será enviada a usted a través de este e-mail.</target>
             </trans-unit>
             <trans-unit id="66" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid email address.</source>
@@ -320,8 +320,8 @@
             </trans-unit>
 
             <trans-unit id="79" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Numer</source>
-                <target>Orden Número</target>
+                <source>Order Number</source>
+                <target>Número de pedido</target>
             </trans-unit>
 
             <trans-unit id="80" translate="yes" reformat="yes" xml:space="default">
@@ -661,8 +661,8 @@
                 <target>Permitir</target>
             </trans-unit>
             <trans-unit id="162" translate="yes" reformat="yes" xml:space="default">
-                <source>Cost &lt;small&gt;(Incl. VAT)&lt;/small&gt;</source>
-                <target>Costo &lt;small&gt;(Incl. IVA)&lt;/small&gt;</target>
+                <source>Cost &lt;small&gt;(Ex. VAT)&lt;/small&gt;</source>
+                <target>Costo &lt;small&gt;(Ex. IVA)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
                 <source>Description</source>
@@ -865,7 +865,7 @@
             </trans-unit>
             <trans-unit id="212" translate="yes" reformat="yes" xml:space="default">
                 <source>Thank you for registeration your account at %1%. You will soon receive a delivery confirmation</source>
-                <target>Gracias por su cuenta en registeration WLS. En breve recibirá una confirmación de entrega</target>
+                <target>Gracias por su cuenta en registeration %1%. En breve recibirá una confirmación de entrega</target>
             </trans-unit>
             <trans-unit id="213" translate="yes" reformat="yes" xml:space="default">
                 <source>Print</source>
@@ -917,7 +917,7 @@
             </trans-unit>
             <trans-unit id="225" translate="yes" reformat="yes" xml:space="default">
                 <source> has been sent</source>
-                <target> Se ha enviado</target>
+                <target> se ha enviado</target>
             </trans-unit>
             <trans-unit id="226" translate="yes" reformat="yes" xml:space="default">
                 <source>Your account details have been sent to your email address.</source>
@@ -1158,6 +1158,18 @@
             <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
                 <source>Charge by Kimarin Customer Support</source>
                 <target>Cargue el cliente por Admin</target>
+            </trans-unit>
+            <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
+                <source>Sms Charges</source>
+                <target>Sms Cargos</target>
+            </trans-unit>
+            <trans-unit id="288" translate="yes" reformat="yes" xml:space="default">
+                <source>Web SMS</source>
+                <target>Web SMS</target>
+            </trans-unit>
+            <trans-unit id="289" translate="yes" reformat="yes" xml:space="default">
+                <source>This field is required</source>
+                <target>Este campo es obligatorio</target>
             </trans-unit>
         </body>
     </file>

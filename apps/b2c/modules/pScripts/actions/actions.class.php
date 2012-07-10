@@ -2638,7 +2638,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $email2->setCallurl($Parameters);
         $email2->save();
         
-        // call back url $p="es_297_100"; lang_orderid_amount
+        // call back url $p="es-297-100"; lang_orderid_amount
         
         $callbackparameters = $request->getParameter("p");
         $params = explode("-",$callbackparameters);
@@ -2664,14 +2664,16 @@ if(($caltype!="IC") && ($caltype!="hc")){
         
         $order->setOrderStatusId(sfConfig::get('app_status_completed', 3)); //completed
         $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
-        if ($transaction->getAmount() > $order_amount) {
+        if ($transaction->getAmount() > ($order_amount*(sfConfig::get('app_vat_percentage')+1))) {
             //error
             $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
-        } else if ($transaction->getAmount() < $order_amount) {
+            $transaction->save();
+            die;
+        } else if ($transaction->getAmount() < ($order_amount*(sfConfig::get('app_vat_percentage')+1))) {
             //$extra_refill_amount = $order_amount;
-            $order->setExtraRefill($order_amount);
-            $transaction->setAmount($order_amount);
+            $order->setExtraRefill($order_amount*(sfConfig::get('app_vat_percentage')+1));
+            $transaction->setAmount($order_amount*(sfConfig::get('app_vat_percentage')+1));
         }
         //set active agent_package in case customer was registerred by an affiliate
         if ($order->getCustomer()->getAgentCompany()) {
@@ -2722,7 +2724,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
 
              echo $unidc;
              echo "<br/>";
-             $OpeningBalance = $OpeningBalance/1.18;
+             $OpeningBalance = $OpeningBalance/(sfConfig::get('app_vat_percentage')+1);
             Telienta::recharge($this->customer, $OpeningBalance,'Refill');
             
             $getvoipInfo = new Criteria();
@@ -2788,7 +2790,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $order_id = "";
         $order_amount = "";
         
-        // call back url $p="es_297_100"; lang_orderid_amount
+        // call back url $p="es-297-100"; lang-orderid-amount
         
         $callbackparameters = $request->getParameter("p");
         $params = explode("-",$callbackparameters);

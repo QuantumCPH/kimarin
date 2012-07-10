@@ -424,6 +424,7 @@ class affiliateActions extends sfActions {
         if ($request->isMethod('post')) {
             $mobile_number = $request->getParameter('mobile_number');
             $extra_refill = $request->getParameter('extra_refill');
+            $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
 
             $transaction = new Transaction();
@@ -524,7 +525,8 @@ class affiliateActions extends sfActions {
 
                     $uniqueId = $customer->getUniqueid();
                     $OpeningBalance = $transaction->getAmount();
-                    Telienta::recharge($customer, $transaction->getAmount());
+                    $OpeningBalance = $OpeningBalance/(sfConfig::get('app_vat_percentage')+1);
+                    Telienta::recharge($customer, $OpeningBalance);
                     //set status
                     $order->setOrderStatusId(sfConfig::get('app_status_completed'));
                     $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
