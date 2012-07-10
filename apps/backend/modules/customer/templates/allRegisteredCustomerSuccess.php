@@ -7,6 +7,7 @@
 ?>
 
 <div id="sf_admin_container"><h1><?php echo  __('All Registered Customer') ?></h1></div><br />
+<p><?php echo @$message;?></p>
 <table width="75%" cellspacing="0" cellpadding="2" class="tblAlign">
     <thead>
         <tr class="headings">
