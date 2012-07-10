@@ -218,7 +218,7 @@
                     <div class="callhistoryheadings"><h2><?php echo __("Calls"); ?> </h2></div><br />
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                             <tr>
-                                <td width="8%" class="title"><?php echo __('Date and time') ?></td>
+                                <td width="16%" class="title"><?php echo __('Date and time') ?></td>
                                 <td class="title" width="31%"><?php echo __('Destination number') ?></td>
                                 <td width="15%" class="title"><?php echo __('Duration') ?></td>
                                 <td width="5%" class="title"><?php echo __('IVA'); echo '('.sfConfig::get('app_vat').')'; ?></td>
