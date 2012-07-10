@@ -43,7 +43,7 @@
             <td><?php echo  $customer->getFirstName() ?></td>
             <td><?php echo  $customer->getLastName() ?></td>
             <td><?php echo  $customer->getUniqueid() ?></td>
-            <td><a href="<?php echo url_for('customer/editcustomer?id='.$customer->getId()) ?>"><img src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/edit_icon.png" title="edit" alt="edit" /></a>&nbsp;<a href="customerDetail?id=<?php  echo $customer->getId() ?>"><img alt="view Detail" title="view Detail" src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/default_icon.png" /></a>
+            <td><a href="<?php echo url_for('customer/editcustomer?id='.$customer->getId()) ?>"><img src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/edit_icon.png" title="edit" alt="edit" /></a>&nbsp;<a href="customerDetail?id=<?php  echo $customer->getId() ?>"><img alt="view Detail" title="view Detail" src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/default_icon.png" /></a><a href="<?php echo url_for('customer/unBlockCustomer?id='.$customer->getId()) ?>"></a>
             </td>
         </tr>
         <?php   $incrment++;    ?>
