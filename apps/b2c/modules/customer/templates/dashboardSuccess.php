@@ -200,7 +200,7 @@ echo " ";   echo substr($Telintambs, 15,2);
 
         </span></div>-->
 <?php   } ?>
-       
+       <br/>
 	<table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px;display:none; ">	
 		<tr>
 			<td colspan="1" width="45%" style=" padding-left: 8px;
