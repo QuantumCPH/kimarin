@@ -55,13 +55,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	
 	
 	<p>
-	<?php echo __('We hereby confirm that you have received commissions deposited into your account that you have referred a friend about Smartsim from %1%.Go in to "Payment History" to see what you have earned.',array('%1%'=>sfConfig::get('app_site_title'))); ?>
+	<?php echo __('%1% has added 10.00 %2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.',array('%1%'=>sfConfig::get('app_site_title'), '%2%'=>sfConfig::get('app_currency_code'))); ?>
 	</p>
         <p>
             <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 	</p>
         <p>
-	<?php echo __('Yours sincerely,') ?>
+	<?php echo __('Best regards,') ?>
 	</p>
         <p>
 	<?php echo __(sfConfig::get('app_site_title')) ?>
@@ -76,14 +76,14 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 <table class="receipt" cellspacing="0" width="600px">
   <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th ><?php echo __('Order Receipt') ?></th>
+    <th ><?php echo __('Order receipt') ?></th>
   
   </tr>
  <tr>
-  <td><b><?php echo __('Bonus Receiver') ?>:</b> <?php echo $recepient_name; ?></td>
+  <td><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
     </tr>
    <tr>
-  <td><b><?php echo __('Registered Friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?></td>
+  <td><b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?></td>
    </tr>
 </table>
     
