@@ -1168,6 +1168,7 @@
             <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
                 <source>Charge by Kimarin Customer Support</source>
                 <target>Laden Sie den Kunden durch Admin</target>
+			</trans-unit>
             <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
                 <source>Invalid mobile number or password.</source>
                 <target>Ungültige Handynummer oder Passwort.</target>
