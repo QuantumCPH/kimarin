@@ -1974,6 +1974,7 @@
             <trans-unit id="490" translate="yes" reformat="yes" xml:space="default">
                 <source>Order other products.</source>
                 <target>Pide otros productos.</target>
+            </trans-unit>    
             <trans-unit id="491" translate="yes" reformat="yes" xml:space="default">
                 <source>Refill by Kimarin Customer Support</source>
                 <target>Vuelva a llenar el cliente por Admin</target>
