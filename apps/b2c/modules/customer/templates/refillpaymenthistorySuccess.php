@@ -9,7 +9,7 @@
 </style>
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Payment History')) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Payment history')) ) ?>
   <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'paymenthistory', 'customer_id'=>$customer->getId())) ?>
       
@@ -22,8 +22,8 @@
               <!--Always use tables for tabular data-->
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                 <tr>
-                  <td class="title"><?php echo __('Order Number') ?></td>
-                  <td class="title" nowrap><?php echo __('Date & time') ?></td>
+                  <td class="title"><?php echo __('Order number') ?></td>
+                  <td class="title" nowrap><?php echo __('Date and time') ?></td>
                   <td class="title"><?php echo __('Description') ?></td>
                   <td class="title" align="right"><?php echo __('Amount') ?></td>
                   <td class="title"><?php echo __('Type') ?></td>
