@@ -541,11 +541,13 @@ class customerActions extends autocustomerActions {
 
             $this->startdate = $request->getParameter('startdate');
             $startdate = $request->getParameter('startdate') . " 00:00:00";
+            $startdate = date('Y-m-d h:i:s',  strtotime($startdate));
             $c->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_THAN);
         }
         if (isset($_POST['enddate']) && $_POST['enddate'] != "") {
             $this->enddate = $request->getParameter('enddate');
             $enddate = $request->getParameter('enddate') . " 23:59:59";
+            $enddate = date('Y-m-d h:i:s',  strtotime($enddate));
             $c->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_THAN);
         }
         if (isset($_POST['description']) && $_POST['description'] != "") {
