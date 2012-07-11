@@ -70,7 +70,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
             <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 	</p>
         <p>
-	<?php echo __('Yours sincerely,') ?>
+	<?php echo __('Best regards,') ?>
 	</p>
         <p>
 	<?php echo __(sfConfig::get('app_site_title')) ?>
