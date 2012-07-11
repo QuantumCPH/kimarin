@@ -601,7 +601,6 @@ class customerActions extends autocustomerActions {
                     $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
                     $c->add(TelintaAccountsPeer::STATUS,3);
                     $tilentAccounts = TelintaAccountsPeer::doSelect($c);
-
                     foreach($tilentAccounts as $tilentAccount){
                     $accountInfo['i_account']=$tilentAccount->getIAccount();
                     $accountInfo['blocked']="N";
