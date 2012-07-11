@@ -126,7 +126,7 @@ if(isset($val) && $val!=""){  ?>
                       </tr>
                          <tr>
                       <td id="sf_admin_list_th_created_at"  class="leftHeadign" >Created At</td>
-                            <td><?php echo  $customer->getCreatedAt() ?></td>
+                            <td><?php echo  $customer->getCreatedAt('d-m-Y') ?></td>
 
   </tr>
                          <tr>
