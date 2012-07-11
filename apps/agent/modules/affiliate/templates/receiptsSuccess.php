@@ -66,7 +66,7 @@ jQuery(function() {
 	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 		<td><?php echo ++$i ?>.</td>
              
-		<td><?php echo $registration->getCreatedAt(); ?>
+		<td><?php echo $registration->getCreatedAt('d-m-Y'); ?>
 		<td><?php 
 			$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -113,7 +113,7 @@ jQuery(function() {
 	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 		<td><?php echo ++$i ?>.</td>
 
-		<td><?php echo $refill->getCreatedAt(); ?>
+		<td><?php echo $refill->getCreatedAt('d-m-Y'); ?>
 		<td><?php
 			$customer = CustomerPeer::retrieveByPK($refill->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -159,7 +159,7 @@ jQuery(function() {
 	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 		<td><?php echo ++$i ?>.</td>
 
-		<td><?php echo $numberchange->getCreatedAt(); ?>
+		<td><?php echo $numberchange->getCreatedAt('d-m-Y'); ?>
 		<td><?php
 			$customer = CustomerPeer::retrieveByPK($numberchange->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
