@@ -2023,6 +2023,22 @@
                 <source>Send your invitation.</source>
                 <target>Envía tu invitación.</target>
             </trans-unit>
+            <trans-unit id="503" translate="yes" reformat="yes" xml:space="default">
+                <source>Block Account</source>
+                <target>Bloquear la cuenta</target>
+            </trans-unit>
+            <trans-unit id="504" translate="yes" reformat="yes" xml:space="default">
+                <source>Are you sure you want to block your account</source>
+                <target>¿Está seguro que desea bloquear su cuenta</target>
+            </trans-unit>
+            <trans-unit id="505" translate="yes" reformat="yes" xml:space="default">
+                <source>Your account will be blocked</source>
+                <target>Su cuenta será bloqueada</target>
+            </trans-unit>
+            <trans-unit id="506" translate="yes" reformat="yes" xml:space="default">
+                <source>Account is blocked.</source>
+                <target>La cuenta está bloqueada.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

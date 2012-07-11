@@ -1904,11 +1904,7 @@ public function executeSmsHistory(sfWebrequest $request){
 
       public function executeBlockCustomer(sfWebRequest $request)
     {
-
-
-
-
-            $this->redirectUnless($this->getUser()->isAuthenticated(), "@homepage");
+        $this->redirectUnless($this->getUser()->isAuthenticated(), "@homepage");
         //$this->customer = CustomerPeer::retrieveByPK(58);
         $customer = CustomerPeer::retrieveByPK(
                         $this->getUser()->getAttribute('customer_id', null, 'usersession')
