@@ -234,7 +234,7 @@
 		?>
 		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 			<td><?php echo ++$i ?>.</td>
-                        <td><?php echo $number_change->getCreatedAt() ?></td>
+                        <td><?php echo $number_change->getCreatedAt('d-m-Y') ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($number_change->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
