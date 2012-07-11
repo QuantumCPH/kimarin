@@ -176,7 +176,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <?php } else{  //////// for Othere orders
   ?>
   <tr> 
-    <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
     <?php 
          if($transaction->getDescription()=="Refill"){
