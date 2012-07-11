@@ -522,7 +522,7 @@ class CustomerForm extends BaseCustomerForm
                                         'min_length' => null ,
 
 				),
-				array('invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid Email address.'))
+				array('invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid e-mail address.'))
 			)
   			
   		)
@@ -537,7 +537,7 @@ class CustomerForm extends BaseCustomerForm
   					'min_length'=>6,
 
                                     ),
-                                array('min_length' => 'Password "%value%" at least six characters.')
+                                array('min_length' => 'Your password "%value%" must be 6 digits or characters.')
 
   			),
   			
@@ -607,7 +607,7 @@ class CustomerForm extends BaseCustomerForm
 	$this->widgetSchema['customer_status_id'] = new sfWidgetFormInputHidden();
 
 	//set help
-	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('I accept all terms and conditions'));
+	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the 1 terms and conditions.',array('1',sfConfig::get("app_site_title"))));
 	$this->widgetSchema->setHelp('is_newsletter_subscriber', sfContext::getInstance()->getI18n()->__('Yes, subscribe me to newsletter'));
 	$this->widgetSchema->setHelp('auto_refill', sfContext::getInstance()->getI18N()->__('Auto refill?'));
 	$this->validatorSchema->addOption('allow_extra_fields', true);
@@ -618,21 +618,24 @@ class CustomerForm extends BaseCustomerForm
 	//labels
 	$this->widgetSchema->setLabels(
 		array(
-			'po_box_number'=>'Post code',
-			'telecom_operator_id'=>'Telecom operator',
+			'po_box_number'=>'Postcode',
+			'telecom_operator_id'=>'Mobile service provider',
 			'manufacturer'=>'Mobile brand',
                         'to_date'=>'to date',
                         'from_date'=>'from date',
 			'country_id'=>'Country',
 			'device_id'=>'Mobile Model',
-			'password_confirm'=>'Retype password',
-			'date_of_birth'=>'Birth date <br />(dd-mm-yyyy)',
-                        'second_last_name'=>'Middle Name',
-                        'nie_passport_number'=>'N.I.E/Passport Number',  
-                        'preferred_language_id'=>'Preferred Language', 
+			'password_confirm'=>'Confirm password',
+			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)',
+                        'second_last_name'=>'Middle name',
+                        'nie_passport_number'=>'N.I.E. or passport<br />number',  
+                        'preferred_language_id'=>'Preferred language', 
                         'province_id'=>'Province',
-                        'sim_type_id'=>'Sim Type',
-                        'nationality_id'=>'Nationality'
+                        'sim_type_id'=>'SIM type',
+                        'nationality_id'=>'Country of citizenship',
+                        'mobile_number'=>'Mobile number 0034',
+                        'city'=>'Town/city',
+                        'email'=>'E-mail'
 		)
 	);
 	
@@ -667,7 +670,7 @@ class CustomerForm extends BaseCustomerForm
   	if (CustomerPeer::doCount($c)>=1)
   	{
   	      throw new sfValidatorErrorSchema($validator, array(
-	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('Mobile Number already registered.')),
+	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This mobile number is already registered to a 1 customer.',array('1',sfConfig::get('app_site_title')))),
 	      ));	
   	}
   	
@@ -685,7 +688,7 @@ class CustomerForm extends BaseCustomerForm
             if (CustomerPeer::doCount($c)>=1)
             {
                   throw new sfValidatorErrorSchema($validator, array(
-                    'nie_passport_number' => new sfValidatorError($validator, 'N.I.E/Passport Number already registered.'),
+                    'nie_passport_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This N.I.E. or passport number is already registered to a 1 customer.',array('1',sfConfig::get('app_site_title')))),
                   ));	
             }
         }

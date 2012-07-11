@@ -11,7 +11,7 @@
     });
 </script>
 <div class="alert_bar">
-        <?php echo __('Call history is updated after every 5-10 minutes.') ?>
+        <?php echo __('Your call history will be updated 5 - 10 minutes after you have finalised your call.') ?>
     </div>
 <div class="left-col">
     <?php include_partial('navigation', array('selected' => 'callhistory', 'customer_id' => $customer->getId())) ?>
@@ -78,11 +78,11 @@
                     </tr>
 
                     <tr>
-                        <th align="left" colspan="5"  style="background-color: #CCCCFF;color: #000000;text-align: left;"><?php echo __('Call History');?></th>
+                        <th align="left" colspan="5"  style="background-color: #CCCCFF;color: #000000;text-align: left;"><?php echo __('Call history');?></th>
 
                     </tr>
                     <tr  style="background-color: #CCCCFF;color: #000000;">
-                        <th width="20%"   align="left"><?php echo __('Date & time') ?></th>
+                        <th width="20%"   align="left"><?php echo __('Date and time') ?></th>
                         <th  width="20%"  align="left"><?php echo __('To Number') ?></th>
                         <th  width="20%"  align="left"><?php echo __('From Number') ?></th>
                         <th width="10%"   align="left"><?php echo __('Duration') ?></th>
@@ -167,7 +167,7 @@
                     <div class="callhistoryheadings"><h2><?php echo __("Other events"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
-                            <td class="title"><?php echo __('Date & time') ?></td>
+                            <td class="title"><?php echo __('Date and time') ?></td>
                             <td class="title" width="40%"><?php echo __('Description') ?></td>
                                 <td class="title"><?php echo __('Amount') ?></td>
                             </tr>
@@ -193,7 +193,7 @@
 <!--                                           <div class="callhistoryheadings"><h2><?php echo __("Payment History"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
-                            <td class="title"><?php echo __('Date & time') ?></td>
+                            <td class="title"><?php echo __('Date and time') ?></td>
                             <td class="title" width="40%"><?php echo __('Description') ?></td>
                                 <td class="title"><?php echo __('Amount') ?></td>
                             </tr>
@@ -215,15 +215,15 @@
 
                             } ?>
                         </table><br/><br/>-->
-                    <div class="callhistoryheadings"><h2><?php echo __("Call"); ?> </h2></div><br />
+                    <div class="callhistoryheadings"><h2><?php echo __("Calls"); ?> </h2></div><br />
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                             <tr>
-                                <td width="8%" class="title"><?php echo __('Date & time') ?></td>
-                                <td class="title" width="31%"><?php echo __('Phone Number') ?></td>
+                                <td width="16%" class="title"><?php echo __('Date and time') ?></td>
+                                <td class="title" width="31%"><?php echo __('Destination number') ?></td>
                                 <td width="15%" class="title"><?php echo __('Duration') ?></td>
-                                <td width="5%" class="title"><?php echo __('VAT') ?></td>
+                                <td width="5%" class="title"><?php echo __('IVA'); echo '('.sfConfig::get('app_vat').')'; ?></td>
                                 <td width="17%" align="right" class="title"><?php echo __('Cost') ?></td>
-                              <td width="24%" class="title"><?php echo __('Call Type') ?></td>
+                              <td width="24%" class="title"><?php echo __('Description') ?></td>
                           </tr>
 
 <?php
@@ -296,7 +296,7 @@
                                 </tr>
 <?php else: ?>
                                     <tr>
-                                        <td colspan="4" align="right"><strong><?php echo __('Subtotal') ?></strong></td><td align="right"><?php echo number_format($amount_total, 2, ',', '') ?><?php echo sfConfig::get('app_currency_code')?></td><td>&nbsp;</td>
+                                        <td colspan="4" align="right"><strong><?php echo __('Total') ?></strong></td><td align="right"><?php echo number_format($amount_total, 2, ',', '') ?><?php echo sfConfig::get('app_currency_code')?></td><td>&nbsp;</td>
                                     </tr>
 <?php
                                     endif;
