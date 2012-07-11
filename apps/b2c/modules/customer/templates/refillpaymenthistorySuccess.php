@@ -34,7 +34,7 @@
                 foreach($transactions as $transaction): ?>
                 <tr>
                   <td><?php  echo $transaction->getOrderId() ?></td>
-                  <td ><?php echo  $transaction->getCreatedAt("d-m-Y H:i:s") ?></td>
+                  <td ><?php echo  $transaction->getCreatedAt('d-m-Y') ?></td>
                   <td nowrap><?php 
                   if($transaction->getDescription()=="Registrering inkl. taletid"){
                       echo "SmartSim inkludert Pott";                      

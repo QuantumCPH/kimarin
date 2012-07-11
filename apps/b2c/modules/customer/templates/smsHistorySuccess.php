@@ -53,7 +53,7 @@
             <li>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                   <tr>
-                    <td class="title"><?php echo __('Date and time') ?></td>
+                    <td class="title"><?php echo __('Date') ?></td>
                     <td class="title" width="40%"><?php echo __('Destination number') ?></td>                    
                     <td class="title" align="right" style="padding-right: 20px;"><?php echo __('Cost <small style="display:none">(Ex. VAT)</small>') ?></td>
                   </tr>
@@ -62,7 +62,7 @@
                 $amount_total = 0;
                 foreach($smsRecords as $smsRecord): ?>
                 <tr>
-                  <td><?php  echo $smsRecord->getCreatedAt('d-m-Y H:i:s') ?></td>
+                  <td><?php  echo $smsRecord->getCreatedAt('d-m-Y') ?></td>
                   <td><?php echo  $smsRecord->getDa() ?></td>
                   
 

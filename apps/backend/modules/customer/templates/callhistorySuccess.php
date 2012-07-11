@@ -176,7 +176,7 @@ if($pus==1){
 
 
                             <tr>
-                                <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
+                                <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo $xdr->CLD; ?></td>
                                 <td align="right"><?php echo  number_format($xdr->charged_amount,2); ?></td>
                             </tr>
@@ -256,7 +256,7 @@ $numbername=$customer->getUniqueid();
 
 
                                 <tr>
-                                    <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->connect_time)); ?></td>
+                                    <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->connect_time)); ?></td>
                                     <td><?php echo $xdr->CLD; ?></td>
                                     <td><?php  $callval=$xdr->charged_quantity;
 if($callval>3600){

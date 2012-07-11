@@ -70,7 +70,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
             <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 	</p>
         <p>
-	<?php echo __('Yours sincerely,') ?>
+	<?php echo __('Best regards,') ?>
 	</p>
         <p>
 	<?php echo __(sfConfig::get('app_site_title')) ?>
@@ -89,7 +89,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
     <tr> 
     <td colspan="4" class="payer_summary">
-      <?php echo __('Customer Number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
+      <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s, %s', $customer->getCity(), $customer->getPoBoxNumber()) ?><br/>
@@ -112,7 +112,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
   </tr>
   <tr> 
-    <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
     <?php 
          echo __("Registration fee");
