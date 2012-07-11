@@ -115,7 +115,7 @@
                 <target>Zahlung</target>
             </trans-unit>
             <trans-unit id="28" translate="yes" reformat="yes" xml:space="default">
-                <source>mobile number</source>
+                <source>Mobile number</source>
                 <target>Handy-Nummer</target>
             </trans-unit>
             <trans-unit id="29" translate="yes" reformat="yes" xml:space="default">
@@ -729,7 +729,7 @@
                 <target>Zögern Sie nicht uns zu kontaktieren, wenn Sie irgendwelche Fragen haben.</target>
             </trans-unit>
             <trans-unit id="179" translate="yes" reformat="yes" xml:space="default">
-                <source>Yours sincerely,</source>
+                <source>Best regards,</source>
                 <target>Mit freundlichen Grüßen,</target>
             </trans-unit>
             <trans-unit id="180" translate="yes" reformat="yes" xml:space="default">
