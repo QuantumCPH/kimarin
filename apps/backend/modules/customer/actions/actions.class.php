@@ -275,9 +275,9 @@ class customerActions extends autocustomerActions {
         $this->redirectUnless($this->customer, "@homepage");
 
         $fromdate = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
-        $this->fromdate = date("Y-m-d", $fromdate);
+        $this->fromdate = date("d-m-Y", $fromdate);
         $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-        $this->todate = date("Y-m-d", $todate);
+        $this->todate = date("d-m-Y", $todate);
 
         if ($request->isMethod('post')) {
             $this->fromdate = $request->getParameter('startdate');
