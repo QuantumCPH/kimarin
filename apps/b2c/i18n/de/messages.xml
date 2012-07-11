@@ -2037,6 +2037,22 @@
                 <source>It is easy:</source>
                 <target>Es ist einfach:</target>
             </trans-unit>
+            <trans-unit id="504" translate="yes" reformat="yes" xml:space="default">
+                <source>Block Account</source>
+                <target>Block-Konto</target>
+            </trans-unit>
+            <trans-unit id="505" translate="yes" reformat="yes" xml:space="default">
+                <source>Are you sure you want to block your account</source>
+                <target>Sind Sie sicher, dass Sie Ihr Konto sperren</target>
+            </trans-unit>
+            <trans-unit id="506" translate="yes" reformat="yes" xml:space="default">
+                <source>Your account will be blocked</source>
+                <target>Ihr Konto wird gesperrt</target>
+            </trans-unit>
+            <trans-unit id="507" translate="yes" reformat="yes" xml:space="default">
+                <source>Account is blocked.</source>
+                <target>Konto ist gesperrt.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
