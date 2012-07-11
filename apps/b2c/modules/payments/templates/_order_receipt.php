@@ -95,7 +95,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr> 
     <td colspan="4" class="payer_summary">
-      <?php echo __('Customer Number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
+      <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s, %s', $customer->getCity(), $customer->getPoBoxNumber()) ?><br/>
@@ -129,7 +129,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
 <?php if($customerorder){?>  
   <tr> 
-    <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
     <?php 
          echo __("Registration Fee");
