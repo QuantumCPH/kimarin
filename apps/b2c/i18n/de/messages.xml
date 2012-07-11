@@ -725,7 +725,7 @@
                 <target> Dort können Sie in Ihrem Umgang mit Kunden-Service nutzen</target>
             </trans-unit>
             <trans-unit id="178" translate="yes" reformat="yes" xml:space="default">
-                <source>Do not hesitate to contact us if you have any questions.</source>
+                <source>If you have any inquiries please contact %1% Customer Support.</source>
                 <target>Zögern Sie nicht uns zu kontaktieren, wenn Sie irgendwelche Fragen haben.</target>
             </trans-unit>
             <trans-unit id="179" translate="yes" reformat="yes" xml:space="default">
