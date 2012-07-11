@@ -62,7 +62,7 @@
                 $amount_total = 0;
                 foreach($smsRecords as $smsRecord): ?>
                 <tr>
-                  <td><?php  echo $smsRecord->getCreatedAt('Y-m-d H:i:s') ?></td>
+                  <td><?php  echo $smsRecord->getCreatedAt('d-m-Y H:i:s') ?></td>
                   <td><?php echo  $smsRecord->getDa() ?></td>
                   
 
