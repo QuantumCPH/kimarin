@@ -146,11 +146,11 @@
                         $sDate = $updateNew->getStartingDate();
                         $eDate = $updateNew->getExpireDate();
 
-                        if ($currentDate >= $sDate) {
+                        if ($currentDate >= $sDate) {$sDate1 = $updateNew->getStartingDate('d-m-Y');
 ?>
 
 
-                            <b><?php echo $sDate ?></b><br/>
+                            <b><?php echo $sDate1 ?></b><br/>
             <?php echo $updateNew->getHeading(); ?> :
             <?php
                             if (strlen($updateNew->getMessage()) > 100) {
