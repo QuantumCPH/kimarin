@@ -179,7 +179,7 @@
 
 
                             <tr>
-                                <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
+                                <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo __($xdr->CLD); ?></td>
                                 <td><?php echo $xdr->charged_amount; ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                             </tr>
@@ -236,7 +236,7 @@
 
 
                                 <tr>
-                                    <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->connect_time)); ?></td>
+                                    <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->connect_time)); ?></td>
                                     <td><?php echo $xdr->CLD; ?></td>
                                     <td><?php
                                 $callval = $xdr->charged_quantity;
