@@ -299,7 +299,7 @@
                 <target>Rufen Geschichte</target>
             </trans-unit>
             <trans-unit id="74" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Number</source>
+                <source>Order number</source>
                 <target>Bestell-Nummer</target>
             </trans-unit>
             <trans-unit id="75" translate="yes" reformat="yes" xml:space="default">
@@ -320,7 +320,7 @@
             </trans-unit>
 
             <trans-unit id="79" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Numer</source>
+                <source>Order Number</source>
                 <target>Bestellnummer</target>
             </trans-unit>
 
@@ -733,7 +733,7 @@
                 <target>Mit freundlichen Grüßen,</target>
             </trans-unit>
             <trans-unit id="180" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Receipt</source>
+                <source>Order receipt</source>
                 <target>Auftragseingang</target>
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
