@@ -110,7 +110,7 @@
       
       <label class="grid_2 required"><?php echo __('Registered at:') ?></label>
       <div class="grid_2 content">
-            <?php echo $agent_company->getCreatedAt() ?>
+            <?php echo $agent_company->getCreatedAt('d-m-Y') ?>
       </div>
       <div class="clear"></div>
 
