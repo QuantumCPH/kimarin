@@ -140,7 +140,7 @@
                             <div class="form-row">
 				  <label class="required">Created at:</label>
 				  <div class="content">
-				  	<?php echo $employee->getCreatedAt() ?>
+				  	<?php echo $employee->getCreatedAt('d-m-Y') ?>
 				  </div>
 				</div>
                 	<!--<div class="form-row">

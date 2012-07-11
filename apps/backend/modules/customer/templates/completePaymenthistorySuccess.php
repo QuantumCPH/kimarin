@@ -41,7 +41,7 @@
     
     <tr class="headings">
       <th  width="15%"  class="title"><?php echo __('Order Numer') ?></th>
-      <th  width="20%" class="title"><?php echo __('Date &amp; Time') ?></th>
+      <th  width="20%" class="title"><?php echo __('Date') ?></th>
       <th  width="55%" class="title"><?php echo __('Description') ?></th>
       <th width="10%" class="title"  align="right"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</th>
     </tr>
@@ -60,7 +60,7 @@
                   ?>
                 <tr <?php echo $class;?>>
                   <td><?php  echo $transaction->getOrderId() ?></td>
-                  <td><?php echo  $transaction->getCreatedAt() ?></td>
+                  <td><?php echo  $transaction->getCreatedAt('d-m-Y') ?></td>
                   <td><?php echo $transaction->getDescription() ?></td>
                   <td align="right"><?php echo  number_format($transaction->getAmount(),2);  $amount_total += $transaction->getAmount() ?>
                             <?php 
