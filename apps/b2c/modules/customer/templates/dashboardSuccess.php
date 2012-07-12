@@ -9,7 +9,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
   <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'dashboard', 'customer_id'=>$customer->getId())) ?>
     <div class="dashboard-info">
-        <div class="fl cb dashboard-info-text"><span><?php echo __('Customer Number') ?>:</span><span><?php echo $customer->getUniqueid(); ?></span></div>
+        <div class="fl cb dashboard-info-text"><span><?php echo __('Customer number') ?>:</span><span><?php echo $customer->getUniqueid(); ?></span></div>
 	<div class="fl cb dashboard-info-text"><span><?php echo __('Your account balance is') ?>:</span><span>
 	<?php
             $pus=0;
@@ -55,7 +55,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
       
 echo '&nbsp;';
 $lang=sfConfig::get('app_language_symbol');
-               }?> <input type="button" class="butonsigninsmall" style="<?php if($voip_customer!=''){?> margin-left:63px;<?php }else{ ?>margin-left:43px;<?php }?>" name="button" onclick="window.location.href='<?php echo sfConfig::get('app_epay_relay_script_url').url_for('customer/refill?customer_id='.$customer->getId(), true) ?>'" style="cursor: pointer"  value="<?php echo __('Buy credit') ?>" ></span></div>
+               }?> <input type="button" class="butonsigninsmall" style="<?php if($voip_customer!=''){?> margin-left:63px;<?php }else{ ?>margin-left:43px;<?php }?>" name="button" onclick="window.location.href='<?php echo sfConfig::get('app_epay_relay_script_url').url_for('customer/refill?customer_id='.$customer->getId(), true) ?>'" style="cursor: pointer"  value="<?php echo __('Refill your account') ?>" ></span></div>
 
 
 
@@ -201,7 +201,7 @@ echo " ";   echo substr($Telintambs, 15,2);
         </span></div>-->
 <?php   } ?>
         <p>&nbsp;</p>
-        <br/><br/>
+      
 	<table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px;display:none; ">	
 		<tr>
 			<td colspan="1" width="45%" style=" padding-left: 8px;
@@ -232,7 +232,9 @@ echo " ";   echo substr($Telintambs, 15,2);
 	</table>
   <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
 		<tr>
-                    <td ><a  style="text-decoration: none;" href="<?php echo url_for('customer/blockCustomer', true) ?>" onClick="alert('<?php  echo __('Du ønsker å deaktivere din konto');  ?>'); return true"><span class="butonsigninsmall" style="padding: 5px 5px 5px 5px;">Deaktiver</span></a></td>
+                    <td ><form name=myform action="<?php echo url_for('customer/blockCustomer', true) ?>">
+                            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type=submit value="<?php echo __('Block Account')?>" onClick="if(confirm('<?php echo __("Are you sure you want to block your account");?>')) alert('<?php echo __("Your account will be blocked");?>');" />
+</form> </td>
                 </tr></table>
     </div>
   </div>

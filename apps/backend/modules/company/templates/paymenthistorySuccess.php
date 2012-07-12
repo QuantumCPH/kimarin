@@ -19,7 +19,7 @@
 </div>
 <table width="75%" cellspacing="0" cellpadding="2" class="tblAlign">
 <tr class="headings">
-    <th><?php echo __('Date & Time') ?></th>
+    <th><?php echo __('Date') ?></th>
     <th><?php echo __('Company & Name') ?></th>
     <th><?php echo __('Description') ?></th>
     <th align="right"><?php echo __('Amount') ?> (<?php echo sfConfig::get('app_currency_code');?>)</th>
@@ -40,7 +40,7 @@ if($incrment%2==0){
 $incrment++;
 ?>
 <tr  <?php echo $class;?>>
-    <td><?php echo  $transaction->getCreatedAt() ?></td>
+    <td><?php echo  $transaction->getCreatedAt('d-m-Y') ?></td>
     <td><?php echo ($transaction->getCompany()?$transaction->getCompany():'N/A')?></td>
     <td><?php echo __($transaction->getDescription()) ?></td>
     <td align="right"><?php echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount(); ?><?php echo sfConfig::get('app_currency_code');?></td>

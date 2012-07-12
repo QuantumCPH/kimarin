@@ -19,6 +19,7 @@ class BaseTelintaAccountsForm extends BaseFormPropel
       'account_title' => new sfWidgetFormInput(),
       'i_customer'    => new sfWidgetFormInput(),
       'status'        => new sfWidgetFormInput(),
+      'account_type'  => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -29,6 +30,7 @@ class BaseTelintaAccountsForm extends BaseFormPropel
       'account_title' => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'i_customer'    => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'status'        => new sfValidatorInteger(array('required' => false)),
+      'account_type'  => new sfValidatorString(array('max_length' => 50, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('telinta_accounts[%s]');

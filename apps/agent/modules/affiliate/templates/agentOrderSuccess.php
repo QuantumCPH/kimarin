@@ -26,7 +26,7 @@
         <?php foreach($agentOrders as $agentOrder){ ?>
         <tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
             <td><?php echo ++$i ?>.</td>
-            <td><?php echo $agentOrder->getCreatedAt() ?></td>
+            <td><?php echo $agentOrder->getCreatedAt('d-m-Y') ?></td>
             <td><?php echo $agentOrder->getAmount() ?></td>
             <td><a href="<?php echo url_for('affiliate/printAgentReceipt?aoid='.$agentOrder->getId(), true) ?>" ><?php echo __('Receipt');?> </a>
             </td>

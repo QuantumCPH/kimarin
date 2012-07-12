@@ -2,7 +2,7 @@
 	use_helper('Number');
 	$sf_user->setCulture('da_DK');
 ?>
-<div id="sf_admin_container"><h3>Report on Dates  From :  <?php echo $startdate; ?>  To : <?php echo $enddate; ?></h3></div>
+<div id="sf_admin_container"><h3>Report on Dates  From :  <?php echo date('d-m-Y', strtotime($startdate)); ?>  To : <?php echo date('d-m-Y', strtotime($enddate)); ?></h3></div>
 <div id="sf_admin_container"><h1><?php echo  __('SMS Detail Report') ?></h1></div>
 <table width="75%" cellspacing="0" cellpadding="2" class="tblAlign">
     <thead>

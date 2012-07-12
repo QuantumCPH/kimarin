@@ -46,7 +46,7 @@
      ?></td>
   <td><?php  echo $agent->getAmount();   ?> </td>
     <td><?php  echo $agent->getRemainingBalance();  ?></td>
-      <td><?php  echo $agent->getCreatedAt();  ?></td>
+      <td><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
       
   </tr>
   <?php  } ?>

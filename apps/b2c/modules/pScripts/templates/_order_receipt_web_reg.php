@@ -50,23 +50,27 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
-	<p><?php echo __('Hi') ?>&nbsp;<?php echo $customer->getFirstName();?></p>
+	<p><?php //echo __('Hi') ?><?php echo $customer->getFirstName();?></p>
 	
 	<p>
 	<?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?>
 	</p>
 	
 	<p>
-	<?php echo __('Your goods will be shipped today. You should have delivery within two days. Your customer number is '); echo $customer->getUniqueid();?>. <?php echo __(' There, you can use in your dealings with customer service'); ?></p>
+	<?php echo __('The products you have ordered will be sent by mail shortly. Your customer number is '); echo $customer->getUniqueid();?>. <?php //echo __(' There, you can use in your dealings with customer service'); ?></p>
 	
 	<p>
-	<?php echo __('Do not hesitate to contact us if you have any questions.') ?>
+            <?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
+            <br><?php echo __('E-mail') ?>:&nbsp;
+            <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
+            <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
+	<?php //echo __('Do not hesitate to contact us if you have any questions.') ?>
 	</p>
         <p>
             <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 	</p>
         <p>
-	<?php echo __('Yours sincerely,') ?>
+	<?php echo __('Best regards,') ?>
 	</p>
         <p>
 	<?php echo __(sfConfig::get('app_site_title')) ?>
@@ -80,12 +84,12 @@ $wrap_content  = isset($wrap)?$wrap:false;
 </table>
 <table class="receipt" cellspacing="0" width="600px">
   <tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <th colspan="3"><?php echo __('Order Receipt')." (".$order->getProduct()->getName()." )" ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
+    <th colspan="3"><?php echo __('Order receipt')." (".$order->getProduct()->getName()." )" ?></th>
+    <th><?php echo __('Order number') ?> <?php echo $order->getId() ?></th>
   </tr>
     <tr> 
     <td colspan="4" class="payer_summary">
-      <?php echo __('Customer Number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
+      <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s, %s', $customer->getCity(), $customer->getPoBoxNumber()) ?><br/>
@@ -95,10 +99,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	  $eC = EnableCountryPeer::doSelectOne($eC);
 	  echo $eC->getName();
       ?>    <br /><br />
-      <?php echo __('Mobile Number') ?>: <br />
+      <?php echo __('Mobile number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?><br />
 
-      <?php if($agent_name!=''){ echo __('Agent Name') ?>:  <?php echo $agent_name; } ?>
+      <?php if($agent_name!=''){ echo __('Agent name') ?>:  <?php echo $agent_name; } ?>
     </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC"> 
@@ -108,10 +112,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
   </tr>
   <tr> 
-    <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
     <?php 
-         echo __("Registration Fee");
+         echo __("Registration fee");
     
     ?>
 	</td>
@@ -122,7 +126,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td></td>
     <td>
     <?php
-         echo __("Product Price");
+         echo __("Product price");
 
     ?>
 	</td>
@@ -142,13 +146,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
   
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('Delivery and Returns') ?>  </td>
+    <td><?php echo __('Delivery charges') ?>  </td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($postalcharge,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
+    <td><?php echo __('IVA') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>

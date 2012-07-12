@@ -176,7 +176,7 @@ if($pus==1){
 
 
                             <tr>
-                                <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
+                                <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo $xdr->CLD; ?></td>
                                 <td align="right"><?php echo  number_format($xdr->charged_amount,2); ?></td>
                             </tr>
@@ -222,7 +222,7 @@ if($pus==1){
                     <th width="20%"   align="left"><?php echo __('Date &amp; time') ?></th>
                     <th  width="20%"  align="left"><?php echo __('Phone Number') ?></th>
                     <th width="10%"   align="left"><?php echo __('Duration') ?></th>
-                    <th  width="10%"  align="left"><?php echo __('VAT') ?></th>
+<!--                    <th  width="10%"  align="left"><?php echo __('VAT') ?></th>-->
                     <th width="20%"   align="right"><?php echo __('Cost') ?> <?php echo sfConfig::get('app_currency_code');?></th>
                    
                     <th  width="20%"   align="left">Call Type</th>
@@ -256,7 +256,7 @@ $numbername=$customer->getUniqueid();
 
 
                                 <tr>
-                                    <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->connect_time)); ?></td>
+                                    <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->connect_time)); ?></td>
                                     <td><?php echo $xdr->CLD; ?></td>
                                     <td><?php  $callval=$xdr->charged_quantity;
 if($callval>3600){
@@ -277,7 +277,7 @@ $minute=date('i',$rval);
 echo  date('i:s',$callval);
 
 }       ?></td>
-                                    <td><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>
+<!--                                    <td><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>-->
                                     <td align="right"><?php echo number_format($xdr->charged_amount, 2);
                                 $amount_total+= number_format($xdr->charged_amount, 2); ?> <?php echo sfConfig::get('app_currency_code');?></td>
                                    
@@ -318,7 +318,7 @@ echo  date('i:s',$callval);
                 </tr>
         <?php else: ?>
                     <tr>
-                        <td colspan="4" align="right"><strong><?php echo __('Subtotal') ?></strong></td>
+                        <td colspan="3" align="right"><strong><?php echo __('Subtotal') ?></strong></td>
                         <!--
                         <td><?php echo format_number($amount_total - $amount_total * sfConfig::get('app_vat_percentage')) ?> <?php echo sfConfig::get('app_currency_code')?></td>
                                         	 -->

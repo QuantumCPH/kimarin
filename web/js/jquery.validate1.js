@@ -235,7 +235,7 @@ $.extend($.validator, {
 	},
 
 	messages: {
-		required: "<br/>This field is required",
+		required: "You must fill in this field.",
 		remote: "Please enter the Valid Unique ID with 6 digits.",
 		email: "<br/>Please enter a valid email address.",
 		url: "Please enter a valid URL.",

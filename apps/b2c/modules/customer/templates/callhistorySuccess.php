@@ -11,7 +11,7 @@
     });
 </script>
 <div class="alert_bar">
-        <?php echo __('Call history is updated after every 5-10 minutes.') ?>
+        <?php echo __('Your call history will be updated 5 - 10 minutes after you have finalised your call.') ?>
     </div>
 <div class="left-col">
     <?php include_partial('navigation', array('selected' => 'callhistory', 'customer_id' => $customer->getId())) ?>
@@ -78,11 +78,11 @@
                     </tr>
 
                     <tr>
-                        <th align="left" colspan="5"  style="background-color: #CCCCFF;color: #000000;text-align: left;"><?php echo __('Call History');?></th>
+                        <th align="left" colspan="5"  style="background-color: #CCCCFF;color: #000000;text-align: left;"><?php echo __('Call history');?></th>
 
                     </tr>
                     <tr  style="background-color: #CCCCFF;color: #000000;">
-                        <th width="20%"   align="left"><?php echo __('Date & time') ?></th>
+                        <th width="20%"   align="left"><?php echo __('Date and time') ?></th>
                         <th  width="20%"  align="left"><?php echo __('To Number') ?></th>
                         <th  width="20%"  align="left"><?php echo __('From Number') ?></th>
                         <th width="10%"   align="left"><?php echo __('Duration') ?></th>
@@ -167,7 +167,7 @@
                     <div class="callhistoryheadings"><h2><?php echo __("Other events"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
-                            <td class="title"><?php echo __('Date & time') ?></td>
+                            <td class="title"><?php echo __('Date') ?></td>
                             <td class="title" width="40%"><?php echo __('Description') ?></td>
                                 <td class="title"><?php echo __('Amount') ?></td>
                             </tr>
@@ -179,7 +179,7 @@
 
 
                             <tr>
-                                <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
+                                <td><?php echo date("d-m-Y", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo __($xdr->CLD); ?></td>
                                 <td><?php echo $xdr->charged_amount; ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                             </tr>
@@ -193,7 +193,7 @@
 <!--                                           <div class="callhistoryheadings"><h2><?php echo __("Payment History"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
-                            <td class="title"><?php echo __('Date & time') ?></td>
+                            <td class="title"><?php echo __('Date and time') ?></td>
                             <td class="title" width="40%"><?php echo __('Description') ?></td>
                                 <td class="title"><?php echo __('Amount') ?></td>
                             </tr>
@@ -215,15 +215,15 @@
 
                             } ?>
                         </table><br/><br/>-->
-                    <div class="callhistoryheadings"><h2><?php echo __("Call"); ?> </h2></div><br />
+                    <div class="callhistoryheadings"><h2><?php echo __("Calls"); ?> </h2></div><br />
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                             <tr>
-                                <td width="8%" class="title"><?php echo __('Date & time') ?></td>
-                                <td class="title" width="31%"><?php echo __('Phone Number') ?></td>
+                                <td width="16%" class="title"><?php echo __('Date') ?></td>
+                                <td class="title" width="31%"><?php echo __('Destination number') ?></td>
                                 <td width="15%" class="title"><?php echo __('Duration') ?></td>
-                                <td width="5%" class="title"><?php echo __('VAT') ?></td>
+<!--                                <td width="5%" class="title"><?php echo __('IVA'); echo '('.sfConfig::get('app_vat').')'; ?></td>-->
                                 <td width="17%" align="right" class="title"><?php echo __('Cost') ?></td>
-                              <td width="24%" class="title"><?php echo __('Call Type') ?></td>
+                              <td width="24%" class="title"><?php echo __('Description') ?></td>
                           </tr>
 
 <?php
@@ -236,7 +236,7 @@
 
 
                                 <tr>
-                                    <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->connect_time)); ?></td>
+                                    <td><?php echo date("d-m-Y", strtotime($xdr->connect_time)); ?></td>
                                     <td><?php echo $xdr->CLD; ?></td>
                                     <td><?php
                                 $callval = $xdr->charged_quantity;
@@ -257,7 +257,7 @@
 
                                     echo date('i:s', $callval);
                                 } ?></td>
-                            <td align="right"><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>
+<!--                            <td align="right"><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>-->
                             <td align="right"><?php echo number_format($xdr->charged_amount, 2);
                                 $amount_total+= number_format($xdr->charged_amount, 2); ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                             <td><?php
@@ -292,11 +292,11 @@
 
 <?php if (count($tilentaCallHistryResult) == 0): ?>
                         <tr>
-                            <td colspan="6"><p><?php echo __('There are currently no call records to show.') ?></p></td>
+                            <td colspan="5"><p><?php echo __('There are currently no call records to show.') ?></p></td>
                                 </tr>
 <?php else: ?>
                                     <tr>
-                                        <td colspan="4" align="right"><strong><?php echo __('Subtotal') ?></strong></td><td align="right"><?php echo number_format($amount_total, 2, ',', '') ?><?php echo sfConfig::get('app_currency_code')?></td><td>&nbsp;</td>
+                                        <td colspan="3" align="right"><strong><?php echo __('Total') ?></strong></td><td align="right"><?php echo number_format($amount_total, 2, ',', '') ?><?php echo sfConfig::get('app_currency_code')?></td><td>&nbsp;</td>
                                     </tr>
 <?php
                                     endif;
@@ -305,7 +305,7 @@
 ?>
 
 
-                                    <tr><td colspan="6" align="left">
+                                    <tr><td colspan="5" align="left">
                                         </td></tr> <?php } ?>
                                 </table>
 

@@ -73,7 +73,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="receipt" cellspacing="0" width="600px">
 	
   <tr bgcolor="#CCCCCC" class="receipt_header">   	
-    <th colspan="3"><?php echo __('Order Receipt') ?>(  <?php if ($order->getIsFirstOrder())
+    <th colspan="3"><?php echo __('Order receipt') ?>(  <?php if ($order->getIsFirstOrder())
     {
         echo $order->getProduct()->getName();
         if($transaction->getDescription()=="Anmeldung inc. sprechen"){
@@ -91,11 +91,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
         }
     }
     ?>)</th>
-    <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
+    <th><?php echo __('Order number') ?> <?php echo $order->getId() ?></th>
   </tr>
   <tr> 
     <td colspan="4" class="payer_summary">
-      <?php echo __('Customer Number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
+      <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s, %s', $customer->getCity(), $customer->getPoBoxNumber()) ?><br/>
@@ -112,7 +112,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       
 
      <?php     $customer->getMobileNumber()    ?>
-      <?php echo __('Mobile Number') ?>: <br />
+      <?php echo __('Mobile number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>
  
 
@@ -129,7 +129,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
 <?php if($customerorder){?>  
   <tr> 
-    <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
     <?php 
          echo __("Registration Fee");
@@ -163,20 +163,20 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
    <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('Delivery and Returns') ?>  </td>
+    <td><?php echo __('Delivery charges') ?>  </td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($postalcharge,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
+    <td><?php echo __('IVA') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <?php } else{  //////// for Othere orders
   ?>
   <tr> 
-    <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
     <?php 
          if($transaction->getDescription()=="Refill"){
@@ -201,7 +201,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>  
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
+    <td><?php echo __('IVA') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
@@ -241,15 +241,17 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <?php endif; ?>
 
 <p style="font-weight: bold;">
-	<?php echo __('If you have any questions please feel free to contact our customer support center at'); ?>
+	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
+        <br><?php echo __('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
+        <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
 
-<p style="font-weight: bold;"><?php echo __('Cheers') ?></p>
+<!--<p style="font-weight: bold;"><?php echo __('Cheers') ?></p>
 
 <p style="font-weight: bold;">
 
 <?php echo __('%1% Support',array('%1%'=>sfConfig::get('app_site_title'))) ?>&nbsp;
 
-</p>
+</p>-->
 

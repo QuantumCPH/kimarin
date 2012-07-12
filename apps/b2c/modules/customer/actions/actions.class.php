@@ -997,7 +997,7 @@ class customerActions extends sfActions {
                 //	echo 'validated';
                 $customer = $this->form->save();
 
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your settings have been saved.'));
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your settings changes have been saved.'));
             }
             // echo 'after';
         }
@@ -1107,13 +1107,15 @@ class customerActions extends sfActions {
             //echo $new_password.''.$customer->getPassword();
             $customer->setPlainText($new_password);
             $customer->setPassword($new_password);
-            $message_body = $this->getContext()->getI18N()->__('Hi') . ' ' . $customer->getFirstName() . '!';
+            $message_body = /*$this->getContext()->getI18N()->__('Hi') . ' ' .*/ $customer->getFirstName() . '!';
             $message_body .= '<br /><br />';
-            $message_body .= $this->getContext()->getI18N()->__('Your password has been changed. Please use the following information to login to your %1% account.', array('%1%' => sfConfig::get('app_site_title')));
+
+            $message_body .= $this->getContext()->getI18N()->__('Your password has been changed. Please use the following information to enter MY ACCOUNT.',array('%1%'=>sfConfig::get('app_site_title')));
+
             $message_body .= '<br /><br />';
-            $message_body .= sprintf($this->getContext()->getI18N()->__('Mobile Number: %s'), $customer->getMobileNumber());
+            $message_body .= sprintf($this->getContext()->getI18N()->__('Mobile number: %s'), $customer->getMobileNumber());
             $message_body .= '<br />';
-            $message_body .= $this->getContext()->getI18N()->__('password') . ': ' . $new_password;
+            $message_body .= $this->getContext()->getI18N()->__('Password') . ': ' . $new_password;
 
             $customer->save();
 
@@ -1146,10 +1148,10 @@ class customerActions extends sfActions {
             emailLib::sendForgetPasswordEmail($customer, $message, $subject);
             $this->updatePreferredCulture();
 
-            $this->getUser()->setFlash('send_password_message', $this->getContext()->getI18N()->__('Your account details have been sent to your email address.'));
+            $this->getUser()->setFlash('send_password_message', $this->getContext()->getI18N()->__('Your account details have been sent to your e-mail address.'));
         }
         else {
-            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this email.'));
+            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this e-mail address.'));
         }
 //  		require_once(sfConfig::get('sf_lib_dir').'/swift/lib/swift_init.php');
 //
@@ -1311,8 +1313,8 @@ class customerActions extends sfActions {
 
 
                 if (CARBORDFISH_SMS::Send($destination, $sms_text, $this->customer->getMobileNumber())) {
-                    $description = "Sms Charges";
 
+                    $description="Sms charges";
                     Telienta::charge($this->customer, $amt, $description);
                     $this->msgSent = "Yes";
                     $this->balance = (double) Telienta::getBalance($this->customer);
@@ -1379,9 +1381,11 @@ class customerActions extends sfActions {
             $subject = $this->getContext()->getI18N()->__("%1% invitation", array('%1%' => sfConfig::get('app_site_title')));
 
             $name = $this->customer->getFirstName() . ' ' . $this->customer->getLastName();
-            $message_body = $this->getContext()->getI18N()->__('Hi ') . $recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation is sent to you with the reference of") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("a user of Smartsim from the %1%.", array('%1%' => sfConfig::get('app_site_title')));
 
-            $message_body_end = $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . ' <a  href="' . sfConfig::get('app_customer_url') . 'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Accept") . '</a><br/>' . $this->getContext()->getI18N()->__('Read more') . ' <a href="' . sfConfig::get('app_site_url') . '">' . sfConfig::get('app_site_url') . '</a>';
+            $message_body = /*$this->getContext()->getI18N()->__('Hi ') . */$recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation has been sent to you by") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("who is a registered %1% customer.",array('%1%' => sfConfig::get('app_site_title')));
+
+            $message_body_end = /*$this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="'.sfConfig::get('app_customer_url').'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.",array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>'. $this->getContext()->getI18N()->__('Read more').' <a href="'.sfConfig::get('app_site_url').'">'.sfConfig::get('app_site_url').'</a>';
+
 
             //send email
             if ($recepient_name != ''):
@@ -1874,10 +1878,9 @@ class customerActions extends sfActions {
         $this->getUser()->setCulture($this->currentCulture);
     }
 
-    public function executeBlockCustomer(sfWebRequest $request) {
 
-
-
+      public function executeBlockCustomer(sfWebRequest $request)
+    {
 
         $this->redirectUnless($this->getUser()->isAuthenticated(), "@homepage");
         //$this->customer = CustomerPeer::retrieveByPK(58);

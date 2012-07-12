@@ -7,6 +7,8 @@ generator:
     list:
       title: New update List
       display: [id,  heading , message ,   starting_date ,  expire_date,created_at]
+      fields : 
+        created_at: { params: date_format='dd-MM-yyyy' }
       object_actions:
         _edit: ~
         _delete: ~

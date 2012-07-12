@@ -141,7 +141,7 @@ class CustomerForm extends BaseCustomerForm
 					'pattern'=>'/^([\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+\.)*[\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+@((((([a-z0-9]{1}[a-z0-9\-]{0,62}[a-z0-9]{1})|[a-z])\.)+[a-z]{2,6})|(\d{1,3}\.){3}\d{1,3}(\:\d{1,5})?)$/i',
                                         'min_length'=>3,
 				),
-				array('invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid Email address.ff'))
+				array('invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid e-mail address.'))
 			)
   			
   		)
@@ -214,7 +214,7 @@ class CustomerForm extends BaseCustomerForm
 	$this->widgetSchema['customer_status_id'] = new sfWidgetFormInputHidden();
 
 	//set help
-	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('I accept all terms and conditions'));
+	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the 1 terms and conditions.',array('1',sfConfig::get("app_site_title"))));
 	$this->widgetSchema->setHelp('is_newsletter_subscriber', sfContext::getInstance()->getI18n()->__('Yes, subscribe me to newsletter'));
 	$this->widgetSchema->setHelp('auto_refill', sfContext::getInstance()->getI18N()->__('Auto refill?'));
 	$this->validatorSchema->addOption('allow_extra_fields', true);
@@ -225,20 +225,24 @@ class CustomerForm extends BaseCustomerForm
 	//labels
 	$this->widgetSchema->setLabels(
 		array(
-			'po_box_number'=>'Post code',
-			'telecom_operator_id'=>'Telecom operator',
+			'po_box_number'=>'Postcode',
+			'telecom_operator_id'=>'Mobile service provider',
 			'manufacturer'=>'Mobile brand',
                         'to_date'=>'To date',
                         'from_date'=>'From date',
 			'country_id'=>'Country',
 			'device_id'=>'Mobile Model',
-			'password_confirm'=>'Retype password',
-			'date_of_birth'=>'Birth date <br />(dd-mm-yyyy)',
+			'password_confirm'=>'Confirm password',
+			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)',
                         'second_last_name'=> 'Middle Name',
-                        'nie_passport_number'=>'N.I.E/Passport<br />Number', 
-                        'preferred_language_id'=>'Preferred Language', 
+                        'nie_passport_number'=>'N.I.E. or passport<br />number', 
+                        'preferred_language_id'=>'Preferred language', 
                         'province_id'=>'Province',
-                        'nationality_id'=>'Nationality',
+                        'sim_type_id'=>'SIM type',
+                        'nationality_id'=>'Country of citizenship',
+                        'mobile_number'=>'Mobile number 0034',
+                        'city'=>'Town/city',
+                        'email'=>'E-mail'
 		)
 	);
 	

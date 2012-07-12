@@ -56,6 +56,7 @@ class BaseCustomerForm extends BaseFormPropel
       'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
       'block'                    => new sfWidgetFormInput(),
       'comments'                 => new sfWidgetFormTextarea(),
+      'block'                    => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -101,8 +102,13 @@ class BaseCustomerForm extends BaseFormPropel
       'sim_type_id'              => new sfValidatorPropelChoice(array('model' => 'SimTypes', 'column' => 'id', 'required' => false)),
       'preferred_language_id'    => new sfValidatorPropelChoice(array('model' => 'PreferredLanguages', 'column' => 'id', 'required' => false)),
       'province_id'              => new sfValidatorPropelChoice(array('model' => 'Province', 'column' => 'id', 'required' => false)),
+<<<<<<< HEAD
       'block'                    => new sfValidatorInteger(array('required' => false)),
       'comments'                 => new sfValidatorString(),
+=======
+      'comments'                 => new sfValidatorString(array('required' => false)),
+      'block'                    => new sfValidatorInteger(array('required' => false)),
+>>>>>>> 019f1695ddfdccd5fa96bbbe32bbcaebc105d218
     ));
 
     $this->widgetSchema->setNameFormat('customer[%s]');

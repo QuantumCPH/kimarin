@@ -1,8 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
 * {margin:0px;padding:0px;}
-body {font-family:Helvetica, sans-serif; font-size:14px; color:#0c74a5;background-color:#FFFFFF;font-style: normal;}
-#wrap {width:780px;margin:0px auto;background-color:#FFFFFF;}
+body {font-family:Helvetica, sans-serif; font-size:14px; color:#0c74a5;font-style: normal;}
+#wrap {width:780px;margin:0px auto;}
 #header {width:780px;height:119px;}
 #logo {width:168px; height:79px; float:left;}
 #logo h1 {width:168px; height:79px;float:left;padding-top:25px;}
@@ -61,11 +61,12 @@ body {font-family:Helvetica, sans-serif; font-size:14px; color:#0c74a5;backgroun
 .jcarousel-control a {font-family:Georgia, "Times New Roman", Times, serif;color:#fff;font-size:18px;padding:5px;border-top:1px solid #999999;border-right:0px;border-bottom:1px solid #999999;	border-left:1px solid #999999;margin:0px;text-decoration:none;outline:none}
 
 #login-modal{ background-image:url(../images/bg-login.jpg); background-repeat:no-repeat; width:381px; height:200px; padding:20px;}
-#login-modal h4{ margin-bottom:20px; font-size:14px;}
+#login-modal h4{ margin-bottom:10px; font-size:14px;}
 .input{ width:140px; font-size:12px; padding:3px; border:1px solid #999999; margin-bottom:9px;}
 #login-modal label{ font-size:12px;}
 #login-modal button{ background-image:url(../images/bg-login-btn.jpg); width:77px;  height:28px;  font-size:13px; border:0px; color:#fff; padding-bottom:0px; padding-top:0px;}
 #login-modal p{ margin-bottom:18px;}
+.loginblock{ margin-bottom: 13px;}
 .login-left{ float:left; width:152px;}
 .login-right{ float:left; width:200px; padding-left:20px;}
 .luk{ font-size:12px; color:#999999; cursor:pointer;}
@@ -201,7 +202,7 @@ width:232px;
 
 a.receipt{ background-image:url(../images/next.png); background-repeat:no-repeat; padding-left:15px; float:left; display:block; text-decoration:none;}
 
-.split-form-sign-up{padding-top:20px; float:left; clear:both; width:750px; padding-bottom:30px; min-height:412px; background-color:#FFFFFF; padding-top:20px; padding-left:30px; margin-bottom:10px;}
+.split-form-sign-up{padding-top:20px; float:left; clear:both; width:750px; padding-bottom:30px; min-height:412px; padding-top:20px; padding-left:30px; margin-bottom:10px;}
 .split-form-sign-up .col{width:314px; float: left; position: relative;height: 250px;}
 .split-form-sign-up ul{list-style:none;}
 .split-form-sign-up ul li{list-style:none; margin-bottom:10px; float:left; clear:both;width:350px; white-space:nowrap; z-index:100; position:relative;}
@@ -725,4 +726,7 @@ img{
 }
 #lang_spa {
     background-image: url("../images/lang_spa.png");
+}
+input.blockbutton{
+   margin-left: 0 !important; 
 }

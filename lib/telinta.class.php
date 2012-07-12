@@ -376,6 +376,10 @@ class Telienta {
         $telintaAccount->setParentTable("customer");
         $telintaAccount->setICustomer($customer->getICustomer());
         $telintaAccount->setIAccount($account->i_account);
+        if($accountType==""){
+         $accountType='r';   
+        }
+           $telintaAccount->setAccountType($accountType);
         $telintaAccount->save();
         return true;
     }
