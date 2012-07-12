@@ -150,7 +150,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
     
 <br/>
 <br/>
-  <form action="<?php echo $target;?>customer/refilTransaction"  method="post" id="refill" >
+  <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill" targe="_parent">
      <div style="width:500px;">
      <div  style="width:340px;float:left;">    <ul>
          	<!-- customer product -->
