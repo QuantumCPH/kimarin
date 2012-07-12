@@ -661,7 +661,7 @@
                 <target>Ermöglichen</target>
             </trans-unit>
             <trans-unit id="162" translate="yes" reformat="yes" xml:space="default">
-                <source>Cost &lt;small style="display:none"&gt;(Ex. VAT)&lt;/small&gt;</source>
+                <source>Cost &lt;small&gt;(Ex. VAT)&lt;/small&gt;</source>
                 <target>Kosten &lt;small&gt;(Ohne. Mehrwertsteuer)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
