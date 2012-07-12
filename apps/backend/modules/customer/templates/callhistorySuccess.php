@@ -222,7 +222,7 @@ if($pus==1){
                     <th width="20%"   align="left"><?php echo __('Date &amp; time') ?></th>
                     <th  width="20%"  align="left"><?php echo __('Phone Number') ?></th>
                     <th width="10%"   align="left"><?php echo __('Duration') ?></th>
-                    <th  width="10%"  align="left"><?php echo __('VAT') ?></th>
+<!--                    <th  width="10%"  align="left"><?php echo __('VAT') ?></th>-->
                     <th width="20%"   align="right"><?php echo __('Cost') ?> <?php echo sfConfig::get('app_currency_code');?></th>
                    
                     <th  width="20%"   align="left">Call Type</th>
@@ -277,7 +277,7 @@ $minute=date('i',$rval);
 echo  date('i:s',$callval);
 
 }       ?></td>
-                                    <td><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>
+<!--                                    <td><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>-->
                                     <td align="right"><?php echo number_format($xdr->charged_amount, 2);
                                 $amount_total+= number_format($xdr->charged_amount, 2); ?> <?php echo sfConfig::get('app_currency_code');?></td>
                                    
