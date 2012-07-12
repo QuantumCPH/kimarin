@@ -727,3 +727,6 @@ img{
 #lang_spa {
     background-image: url("../images/lang_spa.png");
 }
+input.blockbutton{
+   margin-left: 0 !important; 
+}
