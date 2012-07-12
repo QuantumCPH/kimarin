@@ -150,7 +150,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
             </li>
             <li>
               <label> <?php echo __('Registration fee') ?> <br />
-				<?php //echo __('Product price') ?> </label><label class="fr ac"><span class="product_price_span"><?php //echo  number_format($order->getProduct()->getRegistrationFee(),2);?></span><?php echo sfConfig::get('app_currency_code')?><br /><span id="extra_refill_span"><?php //echo  number_format($order->getProduct()->getPrice(),2); ?></span><?php //echo sfConfig::get('app_currency_code')?></label><!--<input type="hidden" id="product_price" value="<?php  $product_price_vat = ($order->getProduct()->getRegistrationFee()+$postalcharge)*sfConfig::get('app_vat_percentage');$product_price = ($order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee());echo $product_price;	?>" />-->
+				<?php //echo __('Product price') ?> </label><label class="fr ac"><span class="product_price_span"><?php echo  number_format($order->getProduct()->getRegistrationFee(),2);?></span><?php echo sfConfig::get('app_currency_code')?><br /><span id="extra_refill_span"><?php //echo  number_format($order->getProduct()->getPrice(),2); ?></span><?php //echo sfConfig::get('app_currency_code')?></label><!--<input type="hidden" id="product_price" value="<?php  $product_price_vat = ($order->getProduct()->getRegistrationFee()+$postalcharge)*sfConfig::get('app_vat_percentage');$product_price = ($order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee());echo $product_price;	?>" />-->
               <input type="hidden" id="extra_refill" value="<?php $extra_refill = $order->getExtraRefill(); echo $extra_refill; ?>" />
             </li>
             <?php
