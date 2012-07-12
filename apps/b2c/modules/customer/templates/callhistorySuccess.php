@@ -221,7 +221,7 @@
                                 <td width="16%" class="title"><?php echo __('Date') ?></td>
                                 <td class="title" width="31%"><?php echo __('Destination number') ?></td>
                                 <td width="15%" class="title"><?php echo __('Duration') ?></td>
-                                <td width="5%" class="title"><?php echo __('IVA'); echo '('.sfConfig::get('app_vat').')'; ?></td>
+<!--                                <td width="5%" class="title"><?php echo __('IVA'); echo '('.sfConfig::get('app_vat').')'; ?></td>-->
                                 <td width="17%" align="right" class="title"><?php echo __('Cost') ?></td>
                               <td width="24%" class="title"><?php echo __('Description') ?></td>
                           </tr>
@@ -257,7 +257,7 @@
 
                                     echo date('i:s', $callval);
                                 } ?></td>
-                            <td align="right"><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>
+<!--                            <td align="right"><?php echo number_format($xdr->charged_amount / 4, 2); ?></td>-->
                             <td align="right"><?php echo number_format($xdr->charged_amount, 2);
                                 $amount_total+= number_format($xdr->charged_amount, 2); ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                             <td><?php
