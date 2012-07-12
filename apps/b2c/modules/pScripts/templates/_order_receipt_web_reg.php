@@ -50,7 +50,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
-	<p><?php //echo __('Hi') ?><?php echo $customer->getFirstName();?></p>
+	<p><?php echo __('To ') ?><?php echo $customer->getFirstName()." ".$customer->getLastName();?></p>
 	
 	<p>
 	<?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?>
@@ -92,7 +92,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $customer->getCity(), $customer->getPoBoxNumber()) ?><br/>
+      <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>
       <?php 
 	  $eC = new Criteria();
 	  $eC->add(EnableCountryPeer::ID, $customer->getCountryId());
@@ -109,18 +109,18 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
+    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?><!--(<?php echo sfConfig::get('app_currency_code')?>)--></td>
   </tr>
   <tr> 
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
     <?php 
-         echo __("Registration fee");
+         echo __("Kimarin Starter Package");
     
     ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo format_number($order->getProduct()->getRegistrationFee()); ?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <?php if($order->getProduct()->getPrice() > 0){?><tr>
     <td></td>
@@ -152,7 +152,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('IVA') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
+    <td><?php echo __('IVA') ?> <!--(<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
