@@ -51,10 +51,9 @@ class BaseCustomerForm extends BaseFormPropel
       'i_customer'               => new sfWidgetFormInput(),
       'usage_alert_sms'          => new sfWidgetFormInput(),
       'usage_alert_email'        => new sfWidgetFormInput(),
-      'sim_type_id'              => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
-      'preferred_language_id'    => new sfWidgetFormPropelChoice(array('model' => 'PreferredLanguages', 'add_empty' => true)),
+      'sim_type_id'              => new sfWidgetFormInput(),
+      'preferred_language_id'    => new sfWidgetFormInput(),
       'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
-      'block'                    => new sfWidgetFormInput(),
       'comments'                 => new sfWidgetFormTextarea(),
       'block'                    => new sfWidgetFormInput(),
     ));
@@ -71,7 +70,7 @@ class BaseCustomerForm extends BaseFormPropel
       'mobile_number'            => new sfValidatorString(array('max_length' => 255)),
       'device_id'                => new sfValidatorPropelChoice(array('model' => 'Device', 'column' => 'id', 'required' => false)),
       'email'                    => new sfValidatorString(array('max_length' => 255)),
-      'nie_passport_number'      => new sfValidatorString(array('max_length' => 50)),
+      'nie_passport_number'      => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'password'                 => new sfValidatorString(array('max_length' => 255)),
       'is_newsletter_subscriber' => new sfValidatorBoolean(array('required' => false)),
       'created_at'               => new sfValidatorDateTime(array('required' => false)),
@@ -99,16 +98,11 @@ class BaseCustomerForm extends BaseFormPropel
       'i_customer'               => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'usage_alert_sms'          => new sfValidatorInteger(array('required' => false)),
       'usage_alert_email'        => new sfValidatorInteger(array('required' => false)),
-      'sim_type_id'              => new sfValidatorPropelChoice(array('model' => 'SimTypes', 'column' => 'id', 'required' => false)),
-      'preferred_language_id'    => new sfValidatorPropelChoice(array('model' => 'PreferredLanguages', 'column' => 'id', 'required' => false)),
+      'sim_type_id'              => new sfValidatorInteger(),
+      'preferred_language_id'    => new sfValidatorInteger(),
       'province_id'              => new sfValidatorPropelChoice(array('model' => 'Province', 'column' => 'id', 'required' => false)),
-<<<<<<< HEAD
-      'block'                    => new sfValidatorInteger(array('required' => false)),
-      'comments'                 => new sfValidatorString(),
-=======
       'comments'                 => new sfValidatorString(array('required' => false)),
       'block'                    => new sfValidatorInteger(array('required' => false)),
->>>>>>> 019f1695ddfdccd5fa96bbbe32bbcaebc105d218
     ));
 
     $this->widgetSchema->setNameFormat('customer[%s]');

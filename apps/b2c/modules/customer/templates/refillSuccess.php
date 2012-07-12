@@ -147,25 +147,20 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
           <div style="float:left;"><input type="submit" class="butonsigninsmall" style="width:101px;margin-left:-13px !important;" name="button" value="<?php echo __('Enable') ?>" /></div>
   </form>
   </div>
-    
-<br/>
-<br/>
   <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill" target="_parent">
      <div style="width:500px;">
-     <div  style="width:340px;float:left;">    <ul>
+     <div  style="width:340px;float:left;"> 
+          <div class="refillhead"><?php echo __('Manual filling:') ?></div>
+         <ul class="welcome">
          	<!-- customer product -->
-
- 		<?php
-                foreach($refillProducts as $refill){
-                    echo $refill->getDescription()." Amount:".$refill->getRegistrationFee()." Bonus:".$refill->getBonus()." Total Including Vat:".(sfConfig::get('app_vat_percentage')+1)*$refill->getRegistrationFee()."<br/>";
-                }
-                
-                ?>
-
-                <li>
-              <label for="customer_product" style="text-decoration:underline;"><?php echo __('Manual filling:') ?></label>
-      
-            </li>
+	<?php
+                foreach($refillProducts as $refill){ ?>
+            <li><?php   echo $refill->getDescription()."&nbsp; Amount:".$refill->getRegistrationFee()."&nbsp;Bonus:".$refill->getBonus()."&nbsp;Total Including Vat:".(sfConfig::get('app_vat_percentage')+1)*$refill->getRegistrationFee();?></li>
+        <?php
+        }       
+        ?>
+         </ul><br clear="both" /><p>&nbsp;</p>
+         <ul>
           	<!-- extra_refill -->
             <?php
             $error_extra_refill = false;;
@@ -187,10 +182,12 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
             	<?php echo $sf_user->getFlash('error_message'); ?>
             </li>
             <?php endif; ?>
-
-
-          </ul>
-  
+           
+         
+          </ul><br clear="both" />
+          <div style="margin-top:40px;"> 
+                <input type="submit" class="butonsigninsmall" name="button" style="width:101px;cursor: pointer;float: left; margin-left: -5px !important; margin-top: -5px;"  value="<?php echo __('Refill') ?>" />
+          </div>
         <!-- hidden fields -->
       
         
@@ -207,10 +204,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
         <input type="hidden" name="item_number" value="<?php echo $order->getId();?>" />
         <input type="hidden" name="rm" value="2" />        
                     </div>
-          <div style="float:left;margin-top:30px;">   
-       
-                <input type="submit" class="butonsigninsmall" name="button" style="width:101px;cursor: pointer;float: left; margin-left: -5px !important; margin-top: -5px;"  value="<?php echo __('Refill') ?>" />
-        </div>
+          
         </div></form> 
        </div>
       
