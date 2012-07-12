@@ -50,7 +50,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
-	<p><?php echo __('To') ?><?php echo $customer->getFirstName()."".$customer->getLastName();?></p>
+	<p><?php echo __('To ') ?><?php echo $customer->getFirstName()." ".$customer->getLastName();?></p>
 	
 	<p>
 	<?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?>
