@@ -202,7 +202,7 @@ width:232px;
 
 a.receipt{ background-image:url(../images/next.png); background-repeat:no-repeat; padding-left:15px; float:left; display:block; text-decoration:none;}
 
-.split-form-sign-up{padding-top:20px; float:left; clear:both; width:750px; padding-bottom:30px; min-height:412px; background-color:#FFFFFF; padding-top:20px; padding-left:30px; margin-bottom:10px;}
+.split-form-sign-up{padding-top:20px; float:left; clear:both; width:750px; padding-bottom:30px; min-height:412px; padding-top:20px; padding-left:30px; margin-bottom:10px;}
 .split-form-sign-up .col{width:314px; float: left; position: relative;height: 250px;}
 .split-form-sign-up ul{list-style:none;}
 .split-form-sign-up ul li{list-style:none; margin-bottom:10px; float:left; clear:both;width:350px; white-space:nowrap; z-index:100; position:relative;}
