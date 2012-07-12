@@ -55,6 +55,7 @@ class BaseCustomerForm extends BaseFormPropel
       'preferred_language_id'    => new sfWidgetFormInput(),
       'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
       'comments'                 => new sfWidgetFormTextarea(),
+      'block'                    => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -101,6 +102,7 @@ class BaseCustomerForm extends BaseFormPropel
       'preferred_language_id'    => new sfValidatorInteger(),
       'province_id'              => new sfValidatorPropelChoice(array('model' => 'Province', 'column' => 'id', 'required' => false)),
       'comments'                 => new sfValidatorString(array('required' => false)),
+      'block'                    => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('customer[%s]');

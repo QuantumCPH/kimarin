@@ -3167,5 +3167,50 @@ if(($caltype!="IC") && ($caltype!="hc")){
     private function updatePreferredCulture(){
        $this->getUser()->setCulture($this->currentCulture);
     }
+  public function executeUpdateCallHistory(sfWebRequest $request)
+    {
+//
+
+        $c = new Criteria;
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
+        $customers =CustomerPeer::doSelect($c);
+
+        foreach($customers as $customer){
+        $fromdate = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
+        $this->fromdate = date("Y-m-d", $fromdate);
+        $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+        $this->todate = date("Y-m-d", $todate);
+       $tilentaCallHistryResult = Telienta::callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
+   //   var_dump($tilentaCallHistryResult);
+  foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
+
+      
+        $cuCalls = new CustomerCalls();
+        $cuCalls->setAccountId($xdr->account_id);
+        $cuCalls->setBillStatus($xdr->bill_status);
+        $cuCalls->setBillTime($xdr->bill_time);
+        $cuCalls->setChargedAmount($xdr->charged_amount);
+        $cuCalls->setChargedQuantity($xdr->charged_quantity);
+        $cuCalls->setCld($xdr->CLD);
+        $cuCalls->setCli($xdr->CLI);
+        $cuCalls->setConnectTime($xdr->connect_time);
+        $cuCalls->setCountry($xdr->country);
+        $cuCalls->setCustomerId($customer->getId());
+        $cuCalls->setDescription($xdr->description);
+        $cuCalls->setDisconnectCause($xdr->disconnect_cause);
+        $cuCalls->setDisconnectTime($xdr->disconnect_time);
+        $cuCalls->setICustomer($customer->getICustomer());
+        $cuCalls->setIXdr($xdr->i_xdr);
+        $cuCalls->setStatus(1);
+        $cuCalls->setSubdivision($xdr->subdivision);
+        $cuCalls->setUnixConnectTime($xdr->unix_connect_time);
+        $cuCalls->save();
+
+  }
+        }
+                    return sfView::NONE;
+
+
+    }
 
 }

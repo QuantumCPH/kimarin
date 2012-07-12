@@ -1939,5 +1939,33 @@ public function executeSmsHistory(sfWebrequest $request){
     }
 
 
+        public function executeUpdateCallHistory(sfWebRequest $request)
+        {
+              changeLanguageCulture::languageCulture($request, $this);
+
+        $this->customer = CustomerPeer::retrieveByPK(
+                        $this->getUser()->getAttribute('customer_id', null, 'usersession')
+        );
+        $this->redirectUnless($this->customer, "@homepage");
+        $fromdate = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
+        $this->fromdate = date("Y-m-d", $fromdate);
+        $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+        $this->todate = date("Y-m-d", $todate);
+        if ($request->isMethod('post')) {
+            $this->fromdate = $request->getParameter('startdate');
+            $this->todate = $request->getParameter('enddate');
+        }
+       $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);
+        if ($getFirstnumberofMobile == 0) {
+            $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
+            $this->TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
+        } else {
+            $this->TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
+        }
+        $this->numbername = $this->customer->getUniqueid();
+           $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 1);
+            return sfView::NONE;
+        }
+
 
 }
