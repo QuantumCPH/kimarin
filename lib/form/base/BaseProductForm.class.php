@@ -62,7 +62,7 @@ class BaseProductForm extends BaseFormPropel
       'billing_product_id'    => new sfValidatorPropelChoice(array('model' => 'BillingProducts', 'column' => 'id')),
       'is_in_b2b'             => new sfValidatorBoolean(),
       'product_type_id'       => new sfValidatorPropelChoice(array('model' => 'ProductType', 'column' => 'id')),
-      'bonus'                 => new sfValidatorNumber(),
+      'bonus'                 => new sfValidatorNumber(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('product[%s]');
