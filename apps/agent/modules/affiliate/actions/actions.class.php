@@ -710,7 +710,7 @@ class affiliateActions extends sfActions {
             $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
             $customer->setRegistrationTypeId('2');
             $customer->setPlainText($plainPws);
-
+            $customer->setBlock('0');
             $customer->save();
             if ($customer) {
 
