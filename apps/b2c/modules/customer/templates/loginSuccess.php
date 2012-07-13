@@ -1,6 +1,6 @@
 <?php use_helper('I18N') ?>
 <table><tr><td align="center">
-<?php include_partial('customer/dashboard_header', array('customer'=> null, 'section'=>__('MY ACCOUNT')) ) ?>
+<div class="loginheading"><?php include_partial('customer/dashboard_header', array('customer'=> null, 'section'=>__('MY ACCOUNT')) ) ?></div>
 	<?php if ($sf_user->hasFlash('send_password_message')): ?>
 	<div class="alert_bar">
 		<?php echo $sf_user->getFlash('send_password_message') ?>
@@ -20,15 +20,15 @@
   <?php //echo $sf_user->getCulture();
           if($sf_user->getCulture()=='en'){
               $class = 'class="texten"';
-              $style = 'style ="display:block;height:69px;width: 148px;"';
+              $style = 'style ="display:block;height:18px;width: 148px;"';
               $clsLogin = "class='loginblock'";
           }elseif($sf_user->getCulture()=='de'){
               $class = 'class="textde"';
-              $style = 'style ="display:block;height:85px;width: 148px;"';
+              $style = 'style ="display:block;height:18px;width: 148px;"';
               $clsLogin = "";
           }else{
               $class = 'class="textes"';
-              $style = 'style ="display:block;height:88px;width: 148px;"';
+              $style = 'style ="display:block;height:18px;width: 148px;"';
               $clsLogin = "class='loginblock'";
           }
         ?>              
@@ -39,7 +39,7 @@
 	<h4  style="text-align:left;"><?php echo __('Enter MY ACCOUNT') ?></h4>
 	<form method="post" id="login_form" action="<?php echo $target; ?>customer/login">
             <div <?php echo $clsLogin;?>> 
-                <label  style="text-align:left;"><?php echo __('Enter your mobile number') ?></label><br />
+                <label  style="display:block;text-align:left;height:18px;"><?php echo __('Enter your mobile number') ?></label>
                 <input type="text"  class="input"  name="mobile_number" id="mobile_number" />
                 <p class="error_msg" style="color: red; margin-bottom:1px; position: relative; top: -2px;">
                 <?php
@@ -90,7 +90,7 @@
 	<?php if ($sf_user->hasFlash('send_password_error_message')): ?>
 	<p class="error_msg" style="color: red; margin:6px auto;"><?php echo $sf_user->getFlash('send_password_error_message') ?></p>
 	<?php endif;?>
-        <?php echo __('Your password will be sent to the above e-mail address shortly.') ?><br><br>
+        <p class="yourpassword"><?php echo __('Your password will be sent to the above e-mail address shortly.') ?></p>
         <input  style="cursor: pointer;"  class="loginbuttun"  type="submit" name="submit" value="<?php echo __('Send');?>" />
         
         
