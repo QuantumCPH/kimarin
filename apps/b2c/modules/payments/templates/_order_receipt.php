@@ -49,15 +49,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
  
 <?php if($wrap_content): ?>
 	<p><?php echo __('Dear Customer') ?></p>
-	
 	<p>
 	<?php echo __('Thank you for ordering <b>%1%</b> and becoming %2% Customer. We welcome you to a new and huge mobile world. ',array('%1%'=>$order->getProduct()->getName(),'%2%'=>sfConfig::get('app_site_title'))); echo __('Your customer number is '); ?>  <?php echo $customer->getUniqueid();?>. <?php echo __(' There, you can use in your dealings with customer service')?>
-
 	</p>
-	
 	<p>
 	<?php echo __('With <b>%1%</b>, you can easily call your friends and family for free.', array('%1%'=>$order->getProduct()->getName())) ?></p>
-	
 	<p>
 	<?php echo __('Below is the receipt of the product indicated.') ?>
 	</p>
@@ -98,7 +94,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $customer->getCity(), $customer->getPoBoxNumber()) ?><br/>
+      <?php echo sprintf('%s, %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>
       <?php 
 	  $eC = new Criteria();
 	  $eC->add(EnableCountryPeer::ID, $customer->getCountryId());
@@ -106,20 +102,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	  echo $eC->getName();
 	  //echo $customer->getCountry()->getName() ?> 
       <br /><br />
-      
-      
       <?php    $unid=$customer->getUniqueid(); ?>
-      
-
      <?php     $customer->getMobileNumber()    ?>
       <?php echo __('Mobile number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>
- 
-
-
-
-
-    </td>
+  </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC"> 
     <td><?php echo __('Date') ?></td>
@@ -184,8 +171,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         }else{
            echo $transaction->getDescription();  
         }  
-    
-    ?>
+        ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>

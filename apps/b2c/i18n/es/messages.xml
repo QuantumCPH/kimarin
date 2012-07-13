@@ -25,7 +25,7 @@
                 <target>Acceder</target>
             </trans-unit>
             <trans-unit id="6" translate="yes" reformat="yes" xml:space="default">
-                <source>Forgot password?</source>
+                <source>Did you forget your password?</source>
                 <target>Olvidó su contraseña?</target>
             </trans-unit>
             <trans-unit id="7" translate="yes" reformat="yes" xml:space="default">
@@ -101,7 +101,7 @@
                 <target>Enviar SMS en todo el mundo a los mejores precios del mercado</target>
             </trans-unit>
             <trans-unit id="25" translate="yes" reformat="yes" xml:space="default">
-                <source>Save up to 80 % on international calls from Spanish mobile telephone.</source>
+                <source>Save up to 80 % on international calls from your Spanish mobile telephone.</source>
                 <target>Llamadas internacionales desde 0 céntimos * Con Kimarin, usted puede llamar a todo el mundo.</target>
             </trans-unit>
             
@@ -315,7 +315,7 @@
                 <target>Actualmente no hay transacciones para mostrar.</target>
             </trans-unit>
             <trans-unit id="78" translate="yes" reformat="yes" xml:space="default">
-                <source>Payment history</source>
+                <source>Payment History</source>
                 <target>Pago Historia</target>
             </trans-unit>
 
@@ -363,7 +363,7 @@
                 <target>Dile a tus amigos acerca de %1% &amp; y ganar saldo adicional!</target>
             </trans-unit>
             <trans-unit id="89" translate="yes" reformat="yes" xml:space="default">
-                <source>%1% will add 10%2% of airtime to your account balance for each new customer you invite and who registers as a %1% customer.</source>
+                <source>%1% will add 10.00%2% of airtime to your account balance for each new customer you invite and who registers as a %1% customer.</source>
                 <target>Fortell vennene dine om %1% og tjene 10%2% så snart dine venner har gjort sin første innbetaling med %1%! Spre ordet om %1% og la vennene dine om %1% tjenester.</target>
             </trans-unit>
             <trans-unit id="90" translate="yes" reformat="yes" xml:space="default">
@@ -625,7 +625,7 @@
                 <target>Manual de relleno:</target>
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
-                <source>Select amount to be loaded:</source>
+                <source>Select amount to be refilled:</source>
                 <target>Seleccione la cantidad que se cargue:</target>
             </trans-unit>
               <trans-unit id="147" translate="yes" reformat="yes" xml:space="default">
@@ -701,7 +701,7 @@
                 <target>Se ha enviado</target>
             </trans-unit>
             <trans-unit id="172" translate="yes" reformat="yes" xml:space="default">
-                <source>Invite a friend to register as a %1% customer.</source>
+                <source>Invite a friend to register as a %1% customer</source>
                 <target>Recomendar a un amigo %1%!</target>
             </trans-unit>
             <trans-unit id="173" translate="yes" reformat="yes" xml:space="default">
@@ -980,7 +980,7 @@
                 <target>"%value%" es demasiado tiempo máximo de 5 caracteres.</target>
             </trans-unit>
             <trans-unit id="241" translate="yes" reformat="yes" xml:space="default">
-                <source>Active Mobile No</source>
+                <source>Active mobile number</source>
                 <target>Activa Móvil No</target>
             </trans-unit>
             <trans-unit id="242" translate="yes" reformat="yes" xml:space="default">
@@ -2038,6 +2038,10 @@
             <trans-unit id="506" translate="yes" reformat="yes" xml:space="default">
                 <source>Account is blocked.</source>
                 <target>La cuenta está bloqueada.</target>
+            </trans-unit>
+            <trans-unit id="507" translate="yes" reformat="yes" xml:space="default">
+                <source>All amounts are excl. IVA (%1%).</source>
+                <target>Todas las cantidades son excl. IVA (%1%).</target>
             </trans-unit>
         </body>
     </file>

@@ -57,7 +57,7 @@ return true;}
           
 <?php if (!($balance <= 0.00 )){ ?>
           <form action=<?php echo url_for('customer/websms', true) ?>  method="post" id="websms" onsubmit="isHex(this.value)">
-              <h3 style="width: 400px;"><?php echo __("Your Current Balance is:") ?><?php echo $balance ?><?php echo sfConfig::get('app_currency_code')?></h3>
+              <h3 style="width: 400px;"><?php echo __("Your account balance is") ?>:<?php echo $balance ?><?php echo sfConfig::get('app_currency_code')?></h3>
    <?php }else{ ?>
                 
                 <h3 style="width: 400px;"><?php echo __("Your Current Balance is:") ?> <?php echo $balance ?> <?php echo sfConfig::get('app_currency_code')?></h3>
@@ -72,7 +72,7 @@ return true;}
 		  - <?php echo __("Messages from 143 to 302 characters will be considered as 2 SMS ") ?> <br />
 		  - <?php echo __("Messages from 303 to 432 characters will be considered as 3 SMS") ?> <br />
 		  - <?php echo __("Messages with more than 432 characters will be truncated automatically.") ?> <br />
-          - <?php echo __("SMS charges may apply") ?> <br />
+<!--          - <?php //echo __("SMS charges may apply") ?> <br />-->
 		  
        </li>
        

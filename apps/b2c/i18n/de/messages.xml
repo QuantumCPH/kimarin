@@ -25,7 +25,7 @@
                 <target>Einloggen</target>
             </trans-unit>
             <trans-unit id="6" translate="yes" reformat="yes" xml:space="default">
-                <source>Forgot password?</source>
+                <source>Did you forget your password?</source>
                 <target>Passwort vergessen?</target>
             </trans-unit>
             <trans-unit id="7" translate="yes" reformat="yes" xml:space="default">
@@ -101,7 +101,7 @@
                 <target>Senden Sie eine SMS weltweit zu den besten Preisen des Marktes</target>
             </trans-unit>
             <trans-unit id="25" translate="yes" reformat="yes" xml:space="default">
-                <source>Save up to 80 % on international calls from Spanish mobile telephone.</source>
+                <source>Save up to 80 % on international calls from your Spanish mobile telephone.</source>
                 <target>Internationale Anrufe von 0 Cent * Mit Kimarin, können Sie die ganze Welt.</target>
             </trans-unit>
             
@@ -363,7 +363,7 @@
                 <target>Erzähle deinen Freunden von %1% &amp; verdienen Extra-Balance!</target>
             </trans-unit>
             <trans-unit id="89" translate="yes" reformat="yes" xml:space="default">
-                <source>%1% will add 10%2% of airtime to your account balance for each new customer you invite and who registers as a %1% customer.</source>
+                <source>%1% will add 10.00%2% of airtime to your account balance for each new customer you invite and who registers as a %1% customer.</source>
                 <target>Erzähle deinen Freunden von %1% und verdienen 10%2% sobald Ihre Freunde ihre erste Zahlung mit %1% gemacht! Spread the word über %1% und lassen Sie Ihre Freunde über %1% Dienstleistungen.</target>
             </trans-unit>
             <trans-unit id="90" translate="yes" reformat="yes" xml:space="default">
@@ -625,7 +625,7 @@
                 <target>Manuelle Befüllung:</target>
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
-                <source>Select amount to be loaded:</source>
+                <source>Select amount to be refilled:</source>
                 <target>Wählen Sie den Betrag geladen werden:</target>
             </trans-unit>
               <trans-unit id="147" translate="yes" reformat="yes" xml:space="default">
@@ -701,7 +701,7 @@
                 <target>Gesendet wurde</target>
             </trans-unit>
             <trans-unit id="172" translate="yes" reformat="yes" xml:space="default">
-                <source>Invite a friend to register as a %1% customer.</source>
+                <source>Invite a friend to register as a %1% customer</source>
                 <target>Sagen ein Freund über %1%!</target>
             </trans-unit>
             <trans-unit id="173" translate="yes" reformat="yes" xml:space="default">
@@ -986,7 +986,7 @@
                 <target>"%value%" ist zu lang 5 Zeichen max.</target>
             </trans-unit>
             <trans-unit id="241" translate="yes" reformat="yes" xml:space="default">
-                <source>Active Mobile No</source>
+                <source>Active mobile number</source>
                 <target>Aktiv Handy No</target>
             </trans-unit>
             <trans-unit id="242" translate="yes" reformat="yes" xml:space="default">
@@ -2052,6 +2052,10 @@
             <trans-unit id="507" translate="yes" reformat="yes" xml:space="default">
                 <source>Account is blocked.</source>
                 <target>Konto ist gesperrt.</target>
+            </trans-unit>
+            <trans-unit id="508" translate="yes" reformat="yes" xml:space="default">
+                <source>All amounts are excl. IVA (%1%).</source>
+                <target>Alle Beträge sind excl. IVA (%1%).</target>
             </trans-unit>
         </body>
     </file>

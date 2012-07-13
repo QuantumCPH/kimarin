@@ -4,8 +4,8 @@
 <script type="text/javascript">
     jQuery(function() {
 
-        jQuery( "#startdate" ).datepicker({ maxDate: '0m +0w', dateFormat: 'yy-mm-dd' });
-        jQuery( "#enddate" ).datepicker({ maxDate: '0m +0w', dateFormat: 'yy-mm-dd'});
+        jQuery( "#startdate" ).datepicker({ maxDate: '0m +0w', dateFormat: 'dd-mm-yy' });
+        jQuery( "#enddate" ).datepicker({ maxDate: '0m +0w', dateFormat: 'dd-mm-yy'});
 
 
     });
@@ -33,11 +33,11 @@
                     <div class="dateBox-pt">
                         <div class="formRow-pt" style="float:left;">
                             <label class="datelable"><?php echo __('From');?>:</label>
-                            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo @$fromdate ? $fromdate : date('Y-m-d', strtotime('-15 days')); ?>" />
+                            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo @$fromdate1 ? $fromdate1 : date('d-m-Y', strtotime('-15 days')); ?>" />
                         </div>
                         <div class="formRow-pt1" style="float:left;margin-left:7px;">
                             &nbsp;<label class="datelable"><?php echo __('To');?>:</label>
-                            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$todate ? $todate : date('Y-m-d'); ?>" />
+                            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$todate1 ? $todate1 : date('d-m-Y'); ?>" />
                         </div>
                         <div class="formRow-pt1" style="float:left;margin-left:7px;">
 
@@ -167,7 +167,7 @@
                     <div class="callhistoryheadings"><h2><?php echo __("Other events"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
-                            <td class="title"><?php echo __('Date') ?></td>
+                            <td class="title"><?php echo __('Date and time') ?></td>
                             <td class="title" width="40%"><?php echo __('Description') ?></td>
                                 <td class="title"><?php echo __('Amount') ?></td>
                             </tr>
@@ -179,7 +179,7 @@
 
 
                             <tr>
-                                <td><?php echo date("d-m-Y", strtotime($xdr->bill_time)); ?></td>
+                                <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo __($xdr->CLD); ?></td>
                                 <td><?php echo $xdr->charged_amount; ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                             </tr>
@@ -218,7 +218,7 @@
                     <div class="callhistoryheadings"><h2><?php echo __("Calls"); ?> </h2></div><br />
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                             <tr>
-                                <td width="16%" class="title"><?php echo __('Date') ?></td>
+                                <td width="16%" class="title"><?php echo __('Date and time') ?></td>
                                 <td class="title" width="31%"><?php echo __('Destination number') ?></td>
                                 <td width="15%" class="title"><?php echo __('Duration') ?></td>
 <!--                                <td width="5%" class="title"><?php echo __('IVA'); echo '('.sfConfig::get('app_vat').')'; ?></td>-->
@@ -229,14 +229,10 @@
 <?php
                             $amount_total = 0;
                             $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59');
-
-
-                            foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
+                          foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
 ?>
-
-
-                                <tr>
-                                    <td><?php echo date("d-m-Y", strtotime($xdr->connect_time)); ?></td>
+                               <tr>
+                                    <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->connect_time)); ?></td>
                                     <td><?php echo $xdr->CLD; ?></td>
                                     <td><?php
                                 $callval = $xdr->charged_quantity;
@@ -305,8 +301,7 @@
 ?>
 
 
-                                    <tr><td colspan="5" align="left">
-                                        </td></tr> <?php } ?>
+                                    <tr><td colspan="5" style="text-align: right">All amounts excl. IVA.</td></tr> <?php } ?>
                                 </table>
 
                         <?php } ?>
