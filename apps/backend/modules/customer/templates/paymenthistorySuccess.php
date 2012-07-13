@@ -32,7 +32,7 @@
                   ?>
                 <tr <?php echo $class;   ?>>
                   <td><?php  echo $transaction->getOrderId() ?></td>
-                  <td><?php echo  $transaction->getCreatedAt('d-m-Y') ?></td>
+                  <td><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
                   <td><?php echo $transaction->getDescription() ?></td>
                   <td  align="right"><?php echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount() ?>
                             <?php
