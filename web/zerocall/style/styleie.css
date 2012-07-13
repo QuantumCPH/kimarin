@@ -743,3 +743,6 @@ table.termsnconditions ol li{
 table.termsnconditions ol li a{
     color:#ECB32E;
 }
+p{
+   line-height: 16px !important;
+}
