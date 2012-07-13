@@ -3227,7 +3227,9 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $customers = CustomerPeer::doSelect($c);
 
         foreach($customers as $customer){
-
+           $balance =  Telienta::getBalance($customer);
+           $transaction = new Transaction();
+           $transaction->setAgentCompanyId(-$balance);
         }
 
 
