@@ -70,7 +70,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <td colspan="4" class="payer_summary">
 	<?php echo sprintf("%s", $agent->getName())?><br/>
       <?php echo $agent->getAddress() ?><br/>
-      <?php echo sprintf('%s', $agent->getPostCode()) ?><br/>
+      <?php echo sprintf('%s', $agent->getPostCode(),$agent->getCity()) ?><br/>
 	
 	<br />
 	<?php echo __("CVR Number") ?>: <?php echo sprintf('%s', $agent->getCvrNumber()) ?>
@@ -87,7 +87,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right:65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
+    <td align="right" style="padding-right:65px;"><?php echo __('Amount') ?><!-- (<?php //echo sfConfig::get('app_currency_code')?>)--></td>
   </tr>
   <tr> 
     <td><?php echo $createddate ?></td>
@@ -108,7 +108,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
+  <td><?php echo __('VAT') ?><!--   (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right:65px;"><?php echo number_format($vat,2); ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>

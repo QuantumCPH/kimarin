@@ -828,7 +828,6 @@ class affiliateActions extends sfActions {
         $cc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
         $commission_package = AgentCommissionPackagePeer::doSelectOne($cc);
 
-
         //get transaction
         $c = new Criteria;
         $c->add(TransactionPeer::ORDER_ID, $order_id);
