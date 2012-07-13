@@ -730,3 +730,16 @@ img{
 input.blockbutton{
    margin-left: 0 !important; 
 }
+table.termsnconditions p{
+    margin-bottom: 5px !important;
+}
+table.termsnconditions ol{
+    padding:9px 28px !important;
+}
+table.termsnconditions ol li{
+    padding: 3px 0 !important;
+    line-height: 19px;
+}
+table.termsnconditions ol li a{
+    color:#ECB32E;
+}
