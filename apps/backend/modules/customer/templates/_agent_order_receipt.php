@@ -109,7 +109,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
+    <td><?php echo __('IVA') ?></td>
     <td>&nbsp;</td>
     <td><?php echo format_number($vat) ?></td>
   </tr>
