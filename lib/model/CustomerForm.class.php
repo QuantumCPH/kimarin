@@ -199,7 +199,7 @@ class CustomerForm extends BaseCustomerForm
 	$this->validatorSchema['po_box_number'] = new sfValidatorAnd(
 		array(
 			 $this->validatorSchema['po_box_number'],
-                            new sfValidatorString(array('requried' => true))
+                            new sfValidatorNumber(array('requried' => true))
                     
                     
                         /*new sfValidatorRegex(
