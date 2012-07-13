@@ -663,11 +663,16 @@ class customerActions extends sfActions {
         $this->redirectUnless($this->customer, "@homepage");
 
         $fromdate = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
+        $this->fromdate1 = date("d-m-Y", $fromdate);
         $this->fromdate = date("Y-m-d", $fromdate);
         $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+        $this->todate1 = date("d-m-Y", $todate);
         $this->todate = date("Y-m-d", $todate);
-
+        
         if ($request->isMethod('post')) {
+            $this->fromdate1 = $request->getParameter('startdate');
+            $this->todate1 = $request->getParameter('enddate');
+            
             $this->fromdate = date("Y-m-d", strtotime($request->getParameter('startdate')));
             $this->todate = date("Y-m-d", strtotime($request->getParameter('enddate')));
         }
