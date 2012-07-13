@@ -1808,7 +1808,16 @@ class customerActions extends sfActions {
 
     }
 
+    public function executeSendRefilToPaypal(sfWebRequest $request) {
+        $querystring = $request->getParameter('qstr');
+        Payment::SendPayment($querystring);
+        return sfView::NONE;
+    }
+
+
+
     public function executeRefilTransaction(sfWebRequest $request) {
+        $this->target = $this->getTargetUrl();
         $order_id = $request->getParameter('item_number');
         $product = ProductPeer::retrieveByPK($request->getParameter('extra_refill'));
         $item_amount = $product->getRegistrationFee() * (sfConfig::get('app_vat_percentage') + 1);
@@ -1855,15 +1864,20 @@ class customerActions extends sfActions {
             $querystring .= "return=" . urldecode($return_url) . "&";
             $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
             $querystring .= "notify_url=" . urldecode($notify_url);
+            $this->queryString=$querystring;
+            $this->customer = $order->getCustomer();
+            $this->order = $order;
+            $this->customerBalance = Telienta::getBalance($this->customer);
+            $this->product = $product;
 
             //   $environment = "sandbox";
 
-            if ($order_id && $item_amount) {
+            /*if ($order_id && $item_amount) {
                 Payment::SendPayment($querystring);
             } else {
                 echo 'error';
             }
-            return sfView::NONE;
+            return sfView::NONE;*/
             //exit();
         }
     }
