@@ -733,14 +733,15 @@ input.blockbutton{
 table.termsnconditions p{
     margin-bottom: 5px !important;
 }
-table.termsnconditions ol{
+table.termsnconditions ul{
     padding:9px 28px !important;
+    list-style: none;
 }
-table.termsnconditions ol li{
+table.termsnconditions ul li{
     padding: 3px 0 !important;
     line-height: 19px;
 }
-table.termsnconditions ol li a{
+table.termsnconditions ul li a{
     color:#ECB32E;
 }
 p{
