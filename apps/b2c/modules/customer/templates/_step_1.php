@@ -361,28 +361,19 @@
           <li>
               <input type="submit" class="butonsigninsmall" name="submit" style="cursor: pointer; margin-left: 0px !important;"  value="<?php echo __('Next') ?>" />
           </li>
-          </ul>
-          <!-- end terms and conditions -->
-                 
-     
+          </ul><!-- end terms and conditions -->
       </div>
-    </div>
-	 
+    </div> 
   </div>
 </form>
 <script type="text/javascript">
-     
 	$('form li em').prev('label').append(' *');
 	$('form li em').remove();
-
         $("#customer_manufacturer").change(function() {
 		var url = "<?php echo url_for('customer/getmobilemodel') ?>";
 		var value = $(this).val();
 			$.get(url, {device_id: value}, function(output) {
 				$("#customer_device_id").html(output);
 			});
-	});
-
-        $('#customer_manufacturer').trigger('change');
-
+	});$('#customer_manufacturer').trigger('change');
 </script>
