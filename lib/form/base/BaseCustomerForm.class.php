@@ -70,7 +70,7 @@ class BaseCustomerForm extends BaseFormPropel
       'mobile_number'            => new sfValidatorString(array('max_length' => 255)),
       'device_id'                => new sfValidatorPropelChoice(array('model' => 'Device', 'column' => 'id', 'required' => false)),
       'email'                    => new sfValidatorString(array('max_length' => 255)),
-      'nie_passport_number'      => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'nie_passport_number'      => new sfValidatorString(array('max_length' => 50, 'required' => true)),
       'password'                 => new sfValidatorString(array('max_length' => 255)),
       'is_newsletter_subscriber' => new sfValidatorBoolean(array('required' => false)),
       'created_at'               => new sfValidatorDateTime(array('required' => false)),
@@ -105,7 +105,7 @@ class BaseCustomerForm extends BaseFormPropel
       'block'                    => new sfValidatorInteger(array('required' => false)),
  
     ));
-
+    
     $this->widgetSchema->setNameFormat('customer[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

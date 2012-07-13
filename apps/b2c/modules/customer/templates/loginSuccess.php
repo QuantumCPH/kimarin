@@ -6,7 +6,7 @@
 		<?php echo $sf_user->getFlash('send_password_message') ?>
 	</div>
 	<?php endif;?>
-         <div class="maintext" style="width:500px; margin-top: 15px;">
+         <div class="maintext">
             <?php echo __('Welcome to MY ACCOUNT');?><br />
             <?php echo __('Here you can:');?><br />
             <ul class="welcome">
@@ -32,7 +32,7 @@
               $clsLogin = "class='loginblock'";
           }
         ?>              
-  <div class="left-col" style="padding-left:210px;text-align:left;">
+  <div class="loginpagediv">
     <?php //include_partial('customer/navigation', array('selected'=>'', 'customer_id'=>$customer->getId())) ?>
 	<div id="login-modal" style="background-repeat: repeat-x; width: 470px; margin-top: 16px; background: none;">
 	<div class="login-left">

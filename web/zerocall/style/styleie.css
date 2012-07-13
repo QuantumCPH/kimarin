@@ -750,7 +750,18 @@ p{
 .loginheading{
     text-align: left;
     width: 500px;
+    margin-left: 57px;
 }
 .yourpassword{
     margin-top: 13px;
+}
+.loginpagediv{ 
+    width:520px;
+    padding-left:120px;
+    text-align:left;
+}
+.maintext{
+    width:500px;
+    margin-top: 15px;
+    margin-left: 57px;
 }

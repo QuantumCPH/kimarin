@@ -419,9 +419,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
         'invalid'	=> 'Invalid Nationality',
     ));
 
-$this->validatorSchema['nie_passport_number'] = new sfValidatorNumber(
-    array('required'=>true)
-);
+
 
 /*$this->validatorSchema['date_of_birth'] = new sfValidatorNumber(
     array('required'=>sfContext::getInstance()->getI18N()->__('Please choose a nationality'))
