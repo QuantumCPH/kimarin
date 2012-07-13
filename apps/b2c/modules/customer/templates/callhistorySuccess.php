@@ -167,7 +167,7 @@
                     <div class="callhistoryheadings"><h2><?php echo __("Other events"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
-                            <td class="title"><?php echo __('Date') ?></td>
+                            <td class="title"><?php echo __('Date and time') ?></td>
                             <td class="title" width="40%"><?php echo __('Description') ?></td>
                                 <td class="title"><?php echo __('Amount') ?></td>
                             </tr>
@@ -179,7 +179,7 @@
 
 
                             <tr>
-                                <td><?php echo date("d-m-Y", strtotime($xdr->bill_time)); ?></td>
+                                <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo __($xdr->CLD); ?></td>
                                 <td><?php echo $xdr->charged_amount; ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                             </tr>
@@ -218,7 +218,7 @@
                     <div class="callhistoryheadings"><h2><?php echo __("Calls"); ?> </h2></div><br />
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                             <tr>
-                                <td width="16%" class="title"><?php echo __('Date') ?></td>
+                                <td width="16%" class="title"><?php echo __('Date and time') ?></td>
                                 <td class="title" width="31%"><?php echo __('Destination number') ?></td>
                                 <td width="15%" class="title"><?php echo __('Duration') ?></td>
 <!--                                <td width="5%" class="title"><?php echo __('IVA'); echo '('.sfConfig::get('app_vat').')'; ?></td>-->
@@ -229,14 +229,10 @@
 <?php
                             $amount_total = 0;
                             $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59');
-
-
-                            foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
+                          foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
 ?>
-
-
-                                <tr>
-                                    <td><?php echo date("d-m-Y", strtotime($xdr->connect_time)); ?></td>
+                               <tr>
+                                    <td><?php echo date("Y-m-d H:i:s", strtotime($xdr->connect_time)); ?></td>
                                     <td><?php echo $xdr->CLD; ?></td>
                                     <td><?php
                                 $callval = $xdr->charged_quantity;
