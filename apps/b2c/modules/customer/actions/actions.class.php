@@ -1112,7 +1112,7 @@ class customerActions extends sfActions {
             //echo $new_password.''.$customer->getPassword();
             $customer->setPlainText($new_password);
             $customer->setPassword($new_password);
-            $message_body = /*$this->getContext()->getI18N()->__('Hi') . ' ' .*/ $customer->getFirstName() . '!';
+            $message_body =$this->getContext()->getI18N()->__('To') . ' ' . $customer->getFirstName() . '&nbsp;'. $customer->getLastName().'!';
             $message_body .= '<br /><br />';
 
             $message_body .= $this->getContext()->getI18N()->__('Your password has been changed. Please use the following information to enter MY ACCOUNT.',array('%1%'=>sfConfig::get('app_site_title')));
