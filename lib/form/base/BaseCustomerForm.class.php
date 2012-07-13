@@ -105,7 +105,7 @@ class BaseCustomerForm extends BaseFormPropel
       'block'                    => new sfValidatorInteger(array('required' => false)),
  
     ));
-
+    
     $this->widgetSchema->setNameFormat('customer[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
