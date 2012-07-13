@@ -6,6 +6,9 @@
     <?php include_partial('navigation', array('selected' => 'refill', 'customer_id' => $customer->getId())) ?>
     <div class="split-form">
         <div style="width:500px;">
+            <h2><?php echo __("Payment");?></h2>
+            <br/>
+            <br/>
             <?php
             echo $product->getName();
             echo "<br/>";
@@ -15,9 +18,12 @@
             echo "<br/>";
             echo "IVA: " . $product->getRegistrationFee() * sfConfig::get('app_vat_percentage');
             echo "<br/>";
+             echo "Airtime: " . $product->getInitialBalance(); if($product->getBonus()>0){ echo " PLUS ".$product->getBonus()." ".sfConfig::get('app_currency_code'); echo " = ".($product->getBonus()+$product->getInitialBalance())." ".sfConfig::get('app_currency_code'); }
+            echo "<br/>";
             echo "to be paid on Paypal:" . $product->getRegistrationFee() * (sfConfig::get('app_vat_percentage') + 1);
             ?>
-
+            <br/>
+            <br/>
             <form method="post" action="<?php echo $target; ?>customer/sendRefilToPaypal">
                 <input type="hidden" value="<?php echo $queryString; ?>" name="qstr" />
                 <?php if($customerBalance+$order->getExtraRefill()<=250){ ?>
