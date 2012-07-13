@@ -77,7 +77,7 @@ function countChar(str)
 <br/><br/>&nbsp;<br/>&nbsp;
 <div class="tipafriend">
 <center>
-    <h1 style="font-family: Verdana; font-size: 18px; line-height: 20px; text-align: :left; padding-top: 10px;"> <?php echo __('Invite a friend to register as a %1% customer',array('%1%'=>sfConfig::get('app_site_title'))); ?></h1>
+    <h1 style="font-family: Verdana; font-size: 18px; line-height: 20px; text-align: left; padding-top: 10px;"> <?php echo __('Invite a friend to register as a %1% customer',array('%1%'=>sfConfig::get('app_site_title'))); ?></h1>
 </center>
 <br/>
 <h3><?php echo __('Recommend %1% to your friends and earn extra airtime.',array('%1%'=>sfConfig::get('app_site_title')));?></h3>
