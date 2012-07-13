@@ -35,7 +35,7 @@
             $refillbonus = $product->getBonus();
           ?>
             <?php 
-               $refilltext = __('Airtime value refilled on your account %1%%2% PLUS %3%%2% = %4%%2%',array("%1%"=>number_format($refillamount,2),"%2%"=>sfConfig::get('app_currency_code'),"%3%"=>number_format($refillbonus,2),"%4%"=>number_format($refillamount+$refillbonus)));
+               $refilltext = __('Airtime value refilled on your account %1%%2% PLUS %3%%2% = %4%%2%',array("%1%"=>number_format($refillamount,2),"%2%"=>sfConfig::get('app_currency_code'),"%3%"=>number_format($refillbonus,2),"%4%"=>number_format($refillamount+$refillbonus,2)));
             else:
                $refilltext = __('Airtime value refilled on your account %1%%2%',array("%1%"=>number_format($refillamount,2),"%2%"=>sfConfig::get('app_currency_code'))); 
             ?>
