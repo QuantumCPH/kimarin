@@ -301,8 +301,7 @@
 ?>
 
 
-                                    <tr><td colspan="5" align="left">
-                                        </td></tr> <?php } ?>
+                                    <tr><td colspan="5" align="left">All amounts excl. IVA.</td></tr> <?php } ?>
                                 </table>
 
                         <?php } ?>
