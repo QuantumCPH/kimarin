@@ -44,6 +44,7 @@ Cufon.set('fontSize', '13px').replace('.maintext .youcan', { fontFamily: 'Calibr
 Cufon.set('fontSize', '13px').replace('.maintext .welcome', { fontFamily: 'Calibri'});
 Cufon.set('fontSize', '16px').replace('.termsnconditions  h1', { fontFamily: 'Calibri Bold'});
 Cufon.set('fontSize', '14px').replace('.termsnconditions  ul li', { fontFamily: 'Calibri'});
+Cufon.set('fontSize', '16px').replace('.termsnconditions  ul li span.termhead', { fontFamily: 'Calibri'});
 Cufon.set('fontSize', '15px').replace('.split-form h2', { fontFamily: 'Calibri Bold' });
 Cufon.set('fontSize', '14px').replace('.refillproducts', { fontFamily: 'Calibri'});
 Cufon.set('fontSize', '14px').replace('.refillproducts .refilltotal', { fontFamily: 'Calibri Bold'});
