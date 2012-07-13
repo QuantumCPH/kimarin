@@ -668,8 +668,8 @@ class customerActions extends sfActions {
         $this->todate = date("Y-m-d", $todate);
 
         if ($request->isMethod('post')) {
-            $this->fromdate = $request->getParameter('startdate');
-            $this->todate = $request->getParameter('enddate');
+            $this->fromdate = date("Y-m-d", strtotim($request->getParameter('startdate')));
+            $this->todate = date("Y-m-d", strtotim($request->getParameter('enddate')));
         }
 
 
