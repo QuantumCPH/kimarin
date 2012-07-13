@@ -80,7 +80,7 @@ class BaseCustomerForm extends BaseFormPropel
       'fonet_customer_id'        => new sfValidatorPropelChoice(array('model' => 'FonetCustomer', 'column' => 'fonet_customer_id', 'required' => false)),
       'referrer_id'              => new sfValidatorPropelChoice(array('model' => 'AgentCompany', 'column' => 'id', 'required' => false)),
       'telecom_operator_id'      => new sfValidatorPropelChoice(array('model' => 'TelecomOperator', 'column' => 'id')),
-      'date_of_birth'            => new sfValidatorDate(array('required' => false)),
+      'date_of_birth'            => new sfValidatorDate(array('required' => true)),
       'other'                    => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'subscription_type'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'auto_refill_amount'       => new sfValidatorNumber(array('required' => false)),
