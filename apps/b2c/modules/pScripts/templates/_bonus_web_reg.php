@@ -49,7 +49,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
-	<p><?php echo __('Hi') ?>&nbsp;<?php echo $recepient_name;//$customer->getFirstName();?></p>
+	<p><?php echo __('To') ?>&nbsp;<?php echo $recepient_name;//$customer->getFirstName();?></p>
 	
 
 	
