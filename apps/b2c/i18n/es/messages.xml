@@ -2040,8 +2040,8 @@
                 <target>La cuenta está bloqueada.</target>
             </trans-unit>
             <trans-unit id="507" translate="yes" reformat="yes" xml:space="default">
-                <source>All amounts are excl. IVA (%1% %).</source>
-                <target>Todas las cantidades son excl. IVA (%% 1%).</target>
+                <source>All amounts are excl. IVA (%1%).</source>
+                <target>Todas las cantidades son excl. IVA (%1%).</target>
             </trans-unit>
         </body>
     </file>
