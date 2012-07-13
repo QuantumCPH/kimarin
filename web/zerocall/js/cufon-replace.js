@@ -25,6 +25,7 @@ Cufon.replace('.login-right label', { fontFamily: 'Calibri' });
 Cufon.replace('.loginbuttun', { fontFamily: 'Calibri'});
 Cufon.replace('input[type=submit]', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '17px').replace('.dashboard h2', { fontFamily: 'Calibri Bold' });
+Cufon.replace('.dashboard h2', { fontFamily: 'Calibri Bold' });
 Cufon.set('fontSize', '18px').replace('.callhistoryheadings h2', { fontFamily: 'Calibri Bold'});
 Cufon.set('fontSize', '12px').replace('.alert_bar', { fontFamily: 'Calibri'});
 Cufon.set('fontSize', '13px').replace('table.callhistory', { fontFamily: 'Calibri'});

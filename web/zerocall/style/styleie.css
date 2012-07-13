@@ -747,3 +747,6 @@ table.termsnconditions ul li a{
 p{
    line-height: 16px !important;
 }
+div.dashboard h2{
+    text-align: left;
+}
