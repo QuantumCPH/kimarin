@@ -6,7 +6,7 @@
 		<?php echo $sf_user->getFlash('send_password_message') ?>
 	</div>
 	<?php endif;?>
-         <div class="maintext" style="width:500px; margin-top: 15px;">
+         <div class="maintext" style="width:500px; margin-top: 15px;margin-left: 229px;">
             <?php echo __('Welcome to MY ACCOUNT');?><br />
             <?php echo __('Here you can:');?><br />
             <ul class="welcome">
