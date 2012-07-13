@@ -33,7 +33,7 @@ class CustomerForm extends BaseCustomerForm
        // $emailWidget = new sfWidgetFormInput(array(), array('class' => 'required email'));
 
 	//pobox
-	
+	//sfValidatorString
 	$this->validatorSchema['po_box_number'] = new sfValidatorNumber(
 		array('required'=>true),
 		array('invalid'=>'Please enter a valid postal code. E.g. 3344 ')
@@ -97,6 +97,11 @@ class CustomerForm extends BaseCustomerForm
                     'order_by' => array('Title','asc')
             ));
             //----------------------------------------------------------
+            //
+            //
+            //
+
+
     //date of birth
 	$years = range(1950, 2020);
 	$this->widgetSchema['date_of_birth']->setOption('years' , array_combine($years, $years));
