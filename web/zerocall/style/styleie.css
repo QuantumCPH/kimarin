@@ -60,7 +60,7 @@ body {font-family:Helvetica, sans-serif; font-size:14px; color:#0c74a5;font-styl
 .jcarousel-control {position: absolute;z-index:100;bottom:2px;left:0px;border-right:1px solid #999999;padding-top:5px;padding-bottom:5px;}
 .jcarousel-control a {font-family:Georgia, "Times New Roman", Times, serif;color:#fff;font-size:18px;padding:5px;border-top:1px solid #999999;border-right:0px;border-bottom:1px solid #999999;	border-left:1px solid #999999;margin:0px;text-decoration:none;outline:none}
 
-#login-modal{ background-image:url(../images/bg-login.jpg); background-repeat:no-repeat; width:381px; height:200px; padding:20px;}
+#login-modal{ background-image:url(../images/bg-login.jpg); background-repeat:no-repeat; width:381px; height:200px; padding:25px;}
 #login-modal h4{ margin-bottom:10px; font-size:14px;}
 .input{ width:140px; font-size:12px; padding:3px; border:1px solid #999999; margin-bottom:9px;}
 #login-modal label{ font-size:12px;}
@@ -750,18 +750,18 @@ p{
 .loginheading{
     text-align: left;
     width: 500px;
-    margin-left: 122px;
+    margin-left: 140px;
 }
 .yourpassword{
     margin-top: 13px;
 }
 .loginpagediv{ 
     width:520px;
-    margin-left:120px;
+    margin-left:122px;
     text-align:left;
 }
 .maintext{
     width:500px;
     margin-top: 15px;
-    margin-left: 122px;
+    margin-left: 144px;
 }
