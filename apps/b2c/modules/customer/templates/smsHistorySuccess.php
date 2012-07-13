@@ -53,7 +53,7 @@
             <li>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                   <tr>
-                    <td class="title"><?php echo __('Date & time') ?></td>
+                    <td class="title"><?php echo __('Date and time') ?></td>
                     <td class="title" width="40%"><?php echo __('Destination number') ?></td>                    
                     <td class="title" align="right" style="padding-right: 20px;"><?php echo __('Cost <small>(Ex. VAT)</small>') ?></td>
                   </tr>
