@@ -57,11 +57,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr>
   <td colspan="4" class="payer_summary">
-            Kimarin Europe SL.<br />
-            Urb Golf Rio Real<br />
-            Greenlife Village sd 11,<br />
-            29603 Marbella<br />
-            Spain
+  <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_top')));?>
 	<br />	
 	<br />
   </td>
@@ -75,7 +71,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td colspan="4" class="payer_summary">
       <?php echo sprintf("%s ", $agent->getName())?><br/>
       <?php echo $agent->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $agent->getCity(), $agent->getPostCode()) ?><br/>
+      <?php echo sprintf('%s, %s', $agent->getPostCode(),$agent->getCity() ) ?><br/>
       <?php $eC = new Criteria();
 	  $eC->add(EnableCountryPeer::ID, $agent->getCountryId());
 	  $eC = EnableCountryPeer::doSelectOne($eC);
@@ -92,7 +88,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</td>
+   <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?><!-- (<?php //echo sfConfig::get('app_currency_code');?>)--></td>
   </tr>
   <tr>
     <td><?php echo $agent_order->getCreatedAt('m-d-Y') ?></td>
@@ -113,7 +109,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo '0%' ?>)</td>
+    <td><?php echo __('VAT') ?></td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo format_number(0.00) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
