@@ -1,4 +1,3 @@
-
 <?php use_helper('I18N') ?>
 <table><tr><td align="center">
 <?php include_partial('customer/dashboard_header', array('customer'=> null, 'section'=>__('MY ACCOUNT')) ) ?>
@@ -8,7 +7,8 @@
 	</div>
 	<?php endif;?>
          <div class="maintext" style="width:500px; margin-top: 15px;">
-            <?php echo __('Welcome to MY ACCOUNT. Here you can:');?><br />
+            <?php echo __('Welcome to MY ACCOUNT');?><br />
+            <?php echo __('Here you can:');?><br />
             <ul class="welcome">
                 <li><?php echo __('Refill your account.');?></li>
                 <li><?php echo __('Change your settings.');?></li>
@@ -82,15 +82,18 @@
 	</script>
 	</form>
 	</div>
-	<div class="login-right"><h4><?php echo __('Forgot password?') ?></h4>
+	<div class="login-right"><h4><?php echo __('Did you forget your password?') ?></h4>
 	<form id="forgot_password_form" method="post" action="<?php echo url_for('customer/sendPassword') ?>">
         
-            <label <?php echo $class;?> <?php echo $style;?>><?php echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
+        <label <?php echo $class;?> <?php echo $style;?>><?php echo __('Your e-mail address.');//echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
 	<input   class="input"  type="text" name="email" id="forgot_password_email" /><br />
 	<?php if ($sf_user->hasFlash('send_password_error_message')): ?>
 	<p class="error_msg" style="color: red; margin:6px auto;"><?php echo $sf_user->getFlash('send_password_error_message') ?></p>
 	<?php endif;?>
+        <?php echo __('Your password will be sent to the above e-mail address shortly.') ?><br><br>
         <input  style="cursor: pointer;"  class="loginbuttun"  type="submit" name="submit" value="<?php echo __('Send');?>" />
+        
+        
 <!--	<button style="cursor: pointer;">Send</button>-->
 	<script language="javascript" type="text/javascript">
 		jq = jQuery.noConflict();
