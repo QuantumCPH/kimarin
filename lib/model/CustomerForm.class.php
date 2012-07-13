@@ -398,15 +398,31 @@ class CustomerForm extends BaseCustomerForm
 	        
 
 	        
-	$this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
-    								'model'		=> 'Product',
-    								'column'	=> 'id',
-									'criteria'	=>	$product_criteria,
-    							),array(
-    								'required'	=> sfContext::getInstance()->getI18N()->__('Please choose a product'),
-    								'invalid'	=> 'Invalid product',
-    							));
+$this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
+        'model'		=> 'Product',
+        'column'	=> 'id',
+        'criteria'	=> $product_criteria,
+    ),array(
+        'required'	=> sfContext::getInstance()->getI18N()->__('Please choose a product'),
+        'invalid'	=> 'Invalid product',
+    ));
 
+
+$this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
+        'model'		=> 'Nationality',
+        'column'	=> 'id',
+    ),array(
+        'required'	=> sfContext::getInstance()->getI18N()->__('Please choose a nationality'),
+        'invalid'	=> 'Invalid Nationality',
+    ));
+
+$this->validatorSchema['nie_passport_number'] = new sfValidatorNumber(
+    array('required'=>true)
+);
+
+//$this->validatorSchema['date_of_birth'] = new sfValidatorNumber(
+    //array('required'=>sfContext::getInstance()->getI18N()->__('Please choose a nationality'))
+//);
     //date of birth
 
 
