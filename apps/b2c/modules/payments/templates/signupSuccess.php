@@ -179,7 +179,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 
               
               <?php echo __('Delivery charges') ?> <br />
-              <?php echo __('IVA') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
+              <?php echo __('IVA') ?> <!--(<?php echo sfConfig::get('app_vat')?>)--><br />
               <?php echo __('Total amount') ?>
 
 
