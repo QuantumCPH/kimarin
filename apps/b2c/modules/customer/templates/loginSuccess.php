@@ -1,6 +1,7 @@
 <?php use_helper('I18N') ?>
 <table><tr><td align="center">
 <div class="loginheading"><?php include_partial('customer/dashboard_header', array('customer'=> null, 'section'=>__('MY ACCOUNT')) ) ?></div>
+<div style="clear:both;height:1px;"></div>
 	<?php if ($sf_user->hasFlash('send_password_message')): ?>
 	<div class="alert_bar">
 		<?php echo $sf_user->getFlash('send_password_message') ?>
@@ -17,6 +18,7 @@
             </ul>
             <?php //echo __('Hello and welcome to Smartsim - my pages. To log in, use your customer number which is your mobile number and password. On my pages you can see what calls you made, fill the pot, and more.'); //echo $target; ?>
          </div>
+<div style="clear:both;height:1px;"></div>
   <?php //echo $sf_user->getCulture();
           if($sf_user->getCulture()=='en'){
               $class = 'class="texten"';
@@ -112,6 +114,6 @@
 	</script>
 	</form></div>
 	</div>
-  </div> <!-- end left-col -->
+  </div> <!-- end left-col --><div style="clear:both;height:1px;"></div>
   <?php //include_partial('customer/sidebar') ?></td></tr></table>
  
