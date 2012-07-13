@@ -557,7 +557,7 @@
                 <target>Próximo</target>
             </trans-unit>
                <trans-unit id="137" translate="yes" reformat="yes" xml:space="default">
-                <source>We are sorry we have difficulties in our database, please try again in 2 hours</source>
+                <source>Due to a technical problem, you cannot access the %1% data base currently. We do apologise. Please try later.</source>
                 <target>Lo sentimos, tenemos dificultades en nuestra base de datos, por favor, inténtelo de nuevo en 2 horas</target>
             </trans-unit>
                <trans-unit id="138" translate="yes" reformat="yes" xml:space="default">
