@@ -77,14 +77,14 @@ function countChar(str)
 <br/><br/>&nbsp;<br/>&nbsp;
 <div class="tipafriend">
 <center>
-    <h1 style="font-family: Verdana; font-size: 18px; line-height: 20px; align:center; padding-top: 10px;"> <?php echo __('Invite a friend to register as a %1% customer.',array('%1%'=>sfConfig::get('app_site_title'))); ?></h1>
+    <h1 style="font-family: Verdana; font-size: 18px; line-height: 20px; text-align: :left; padding-top: 10px;"> <?php echo __('Invite a friend to register as a %1% customer',array('%1%'=>sfConfig::get('app_site_title'))); ?></h1>
 </center>
 <br/>
 <h3><?php echo __('Recommend %1% to your friends and earn extra airtime.',array('%1%'=>sfConfig::get('app_site_title')));?></h3>
-<p style="align:justified;"><?php echo __('%1% will add 10%2% of airtime to your account balance for each new customer you invite and who registers as a %1% customer.',array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code')));?></p>
+<p style="align:justified;"><?php echo __('%1% will add 10.00%2% of airtime to your account balance for each new customer you invite and who registers as a %1% customer.',array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code')));?></p>
 <br/>
 <h3><?php echo __('How?'); ?></h3>
-<p style="align:justified;"><?php echo __('You can tell your friends about %1% in two simple ways:',array('%1%'=>sfConfig::get('app_site_title'))); ?><br />
+<p style="align:justified;"><?php //echo __('You can tell your friends about %1% in two simple ways:',array('%1%'=>sfConfig::get('app_site_title'))); ?><!--<br />-->
     
 <?php //echo __('Fill out the fields below and click the Send Email button - your friend will receive an Email') ?>
   <?php echo __('It is easy:');?><br />
