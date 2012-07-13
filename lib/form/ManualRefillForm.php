@@ -26,10 +26,15 @@
                     $countryRefill  = $countryRefill;
                     $countryRefill = explode(",", $countryRefill);
 
+
+                        $c = new Criteria();
+                        $c->add(ProductPeer::PRODUCT_TYPE_ID, 2);
+
+                        $refillProducts = ProductPeer::doSelect($c);
                     //----------------------------       End Code -----------------------------------
                         //$countryRefills[] = array();
-                        foreach ($countryRefill as &$value) {
-                           $countryRefills[$value] =  $value;
+                        foreach ($refillProducts as &$refill) {
+                           $countryRefills[$refill->getId()] =  $refill->getDescription();
                         }
 
 			$this->widgetSchema['extra_refill'] =

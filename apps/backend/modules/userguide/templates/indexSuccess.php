@@ -31,7 +31,7 @@
       <td><?php echo $userguide->getCountryId() ?></td>
       <td><?php echo $userguide->getStatusId() ?></td>
       <td><?php echo $userguide->getImage() ?></td>
-      <td><?php echo $userguide->getCreateAt() ?></td>
+      <td><?php echo $userguide->getCreateAt('d-m-Y') ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>

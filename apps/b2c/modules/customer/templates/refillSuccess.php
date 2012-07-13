@@ -150,13 +150,21 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
     
 <br/>
 <br/>
-  <form action="<?php echo $target;?>customer/refilTransaction"  method="post" id="refill" >
+  <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill" target="_parent">
      <div style="width:500px;">
      <div  style="width:340px;float:left;">    <ul>
          	<!-- customer product -->
- 			  <li>
-              <label for="customer_product" style="text-decoration:underline;"><?php echo __('Manual refill:') ?></label>
-             
+
+ 		<?php
+                foreach($refillProducts as $refill){
+                    echo $refill->getDescription()." Amount:".$refill->getRegistrationFee()." Bonus:".$refill->getBonus()." Total Including Vat:".(sfConfig::get('app_vat_percentage')+1)*$refill->getRegistrationFee()."<br/>";
+                }
+                
+                ?>
+
+                <li>
+              <label for="customer_product" style="text-decoration:underline;"><?php echo __('Manual filling:') ?></label>
+      
             </li>
           	<!-- extra_refill -->
             <?php

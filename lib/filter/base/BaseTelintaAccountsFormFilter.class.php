@@ -20,6 +20,7 @@ class BaseTelintaAccountsFormFilter extends BaseFormFilterPropel
       'account_title' => new sfWidgetFormFilterInput(),
       'i_customer'    => new sfWidgetFormFilterInput(),
       'status'        => new sfWidgetFormFilterInput(),
+      'account_type'  => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -29,6 +30,7 @@ class BaseTelintaAccountsFormFilter extends BaseFormFilterPropel
       'account_title' => new sfValidatorPass(array('required' => false)),
       'i_customer'    => new sfValidatorPass(array('required' => false)),
       'status'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'account_type'  => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('telinta_accounts_filters[%s]');
@@ -53,6 +55,7 @@ class BaseTelintaAccountsFormFilter extends BaseFormFilterPropel
       'account_title' => 'Text',
       'i_customer'    => 'Text',
       'status'        => 'Number',
+      'account_type'  => 'Text',
     );
   }
 }

@@ -2664,16 +2664,16 @@ if(($caltype!="IC") && ($caltype!="hc")){
         
         $order->setOrderStatusId(sfConfig::get('app_status_completed', 3)); //completed
         $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
-        if ($transaction->getAmount() > ($order_amount*(sfConfig::get('app_vat_percentage')+1))) {
+        if ($transaction->getAmount() > $order_amount) {
             //error
             $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < ($order_amount*(sfConfig::get('app_vat_percentage')+1))) {
+        } else if ($transaction->getAmount() < $order_amount) {
             //$extra_refill_amount = $order_amount;
-            $order->setExtraRefill($order_amount*(sfConfig::get('app_vat_percentage')+1));
-            $transaction->setAmount($order_amount*(sfConfig::get('app_vat_percentage')+1));
+            $order->setExtraRefill($order_amount);
+            $transaction->setAmount($order_amount);
         }
         //set active agent_package in case customer was registerred by an affiliate
         if ($order->getCustomer()->getAgentCompany()) {
@@ -2724,7 +2724,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
 
              echo $unidc;
              echo "<br/>";
-             $OpeningBalance = $OpeningBalance/(sfConfig::get('app_vat_percentage')+1);
+             $OpeningBalance = $order->getExtraRefill();
             Telienta::recharge($this->customer, $OpeningBalance,'Refill');
             
             $getvoipInfo = new Criteria();
@@ -3184,7 +3184,6 @@ if(($caltype!="IC") && ($caltype!="hc")){
    //   var_dump($tilentaCallHistryResult);
   foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
 
-      
         $cuCalls = new CustomerCalls();
         $cuCalls->setAccountId($xdr->account_id);
         $cuCalls->setBillStatus($xdr->bill_status);
@@ -3205,12 +3204,9 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $cuCalls->setSubdivision($xdr->subdivision);
         $cuCalls->setUnixConnectTime($xdr->unix_connect_time);
         $cuCalls->save();
-
   }
         }
                     return sfView::NONE;
-
-
     }
 
 }

@@ -23,7 +23,7 @@
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                 <tr>
                   <td class="title"><?php echo __('Order number') ?></td>
-                  <td class="title" nowrap><?php echo __('Date and time') ?></td>
+                  <td class="title" nowrap><?php echo __('Date') ?></td>
                   <td class="title"><?php echo __('Description') ?></td>
                   <td class="title" align="right"><?php echo __('Amount') ?></td>
                   <td class="title"><?php echo __('Type') ?></td>
@@ -34,7 +34,7 @@
                 foreach($transactions as $transaction): ?>
                 <tr>
                   <td><?php  echo $transaction->getOrderId() ?></td>
-                  <td ><?php echo  $transaction->getCreatedAt() ?></td>
+                  <td ><?php echo  $transaction->getCreatedAt('d-m-Y') ?></td>
                   <td nowrap><?php 
                   if($transaction->getDescription()=="Registrering inkl. taletid"){
                       echo "SmartSim inkludert Pott";                      

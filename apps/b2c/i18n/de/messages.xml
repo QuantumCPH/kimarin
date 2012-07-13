@@ -115,7 +115,7 @@
                 <target>Zahlung</target>
             </trans-unit>
             <trans-unit id="28" translate="yes" reformat="yes" xml:space="default">
-                <source>mobile number</source>
+                <source>Mobile number</source>
                 <target>Handy-Nummer</target>
             </trans-unit>
             <trans-unit id="29" translate="yes" reformat="yes" xml:space="default">
@@ -299,7 +299,7 @@
                 <target>Rufen Geschichte</target>
             </trans-unit>
             <trans-unit id="74" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Number</source>
+                <source>Order number</source>
                 <target>Bestell-Nummer</target>
             </trans-unit>
             <trans-unit id="75" translate="yes" reformat="yes" xml:space="default">
@@ -320,7 +320,7 @@
             </trans-unit>
 
             <trans-unit id="79" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Numer</source>
+                <source>Order Number</source>
                 <target>Bestellnummer</target>
             </trans-unit>
 
@@ -661,7 +661,7 @@
                 <target>Ermöglichen</target>
             </trans-unit>
             <trans-unit id="162" translate="yes" reformat="yes" xml:space="default">
-                <source>Cost &lt;small style="display:none"&gt;(Ex. VAT)&lt;/small&gt;</source>
+                <source>Cost &lt;small&gt;(Ex. VAT)&lt;/small&gt;</source>
                 <target>Kosten &lt;small&gt;(Ohne. Mehrwertsteuer)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
@@ -725,15 +725,15 @@
                 <target> Dort können Sie in Ihrem Umgang mit Kunden-Service nutzen</target>
             </trans-unit>
             <trans-unit id="178" translate="yes" reformat="yes" xml:space="default">
-                <source>Do not hesitate to contact us if you have any questions.</source>
+                <source>If you have any inquiries please contact %1% Customer Support.</source>
                 <target>Zögern Sie nicht uns zu kontaktieren, wenn Sie irgendwelche Fragen haben.</target>
             </trans-unit>
             <trans-unit id="179" translate="yes" reformat="yes" xml:space="default">
-                <source>Yours sincerely,</source>
+                <source>Best regards,</source>
                 <target>Mit freundlichen Grüßen,</target>
             </trans-unit>
             <trans-unit id="180" translate="yes" reformat="yes" xml:space="default">
-                <source>Order Receipt</source>
+                <source>Order receipt</source>
                 <target>Auftragseingang</target>
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
@@ -2036,6 +2036,22 @@
               <trans-unit id="503" translate="yes" reformat="yes" xml:space="default">
                 <source>It is easy:</source>
                 <target>Es ist einfach:</target>
+            </trans-unit>
+            <trans-unit id="504" translate="yes" reformat="yes" xml:space="default">
+                <source>Block Account</source>
+                <target>Block-Konto</target>
+            </trans-unit>
+            <trans-unit id="505" translate="yes" reformat="yes" xml:space="default">
+                <source>Are you sure you want to block your account</source>
+                <target>Sind Sie sicher, dass Sie Ihr Konto sperren</target>
+            </trans-unit>
+            <trans-unit id="506" translate="yes" reformat="yes" xml:space="default">
+                <source>Your account will be blocked</source>
+                <target>Ihr Konto wird gesperrt</target>
+            </trans-unit>
+            <trans-unit id="507" translate="yes" reformat="yes" xml:space="default">
+                <source>Account is blocked.</source>
+                <target>Konto ist gesperrt.</target>
             </trans-unit>
         </body>
     </file>

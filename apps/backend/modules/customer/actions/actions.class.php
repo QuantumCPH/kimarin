@@ -275,9 +275,9 @@ class customerActions extends autocustomerActions {
         $this->redirectUnless($this->customer, "@homepage");
 
         $fromdate = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
-        $this->fromdate = date("Y-m-d", $fromdate);
+        $this->fromdate = date("d-m-Y", $fromdate);
         $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-        $this->todate = date("Y-m-d", $todate);
+        $this->todate = date("d-m-Y", $todate);
 
         if ($request->isMethod('post')) {
             $this->fromdate = $request->getParameter('startdate');
@@ -541,11 +541,13 @@ class customerActions extends autocustomerActions {
 
             $this->startdate = $request->getParameter('startdate');
             $startdate = $request->getParameter('startdate') . " 00:00:00";
+            $startdate = date('Y-m-d h:i:s',  strtotime($startdate));
             $c->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_THAN);
         }
         if (isset($_POST['enddate']) && $_POST['enddate'] != "") {
             $this->enddate = $request->getParameter('enddate');
             $enddate = $request->getParameter('enddate') . " 23:59:59";
+            $enddate = date('Y-m-d h:i:s',  strtotime($enddate));
             $c->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_THAN);
         }
         if (isset($_POST['description']) && $_POST['description'] != "") {

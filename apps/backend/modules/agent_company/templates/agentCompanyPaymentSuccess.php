@@ -77,7 +77,7 @@
         ?>
         <tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
             <td><?PHP echo $i;?></td>
-            <td><?php  echo $agent->getCreatedAt();  ?></td>
+            <td><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
              <?php if($agentidd==0){?>
             <td>
                  <?php
