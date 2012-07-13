@@ -98,7 +98,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $customer->getCity(), $customer->getPoBoxNumber()) ?><br/>
+      <?php echo sprintf('%s, %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>
       <?php 
 	  $eC = new Criteria();
 	  $eC->add(EnableCountryPeer::ID, $customer->getCountryId());
@@ -106,20 +106,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	  echo $eC->getName();
 	  //echo $customer->getCountry()->getName() ?> 
       <br /><br />
-      
-      
       <?php    $unid=$customer->getUniqueid(); ?>
-      
-
      <?php     $customer->getMobileNumber()    ?>
       <?php echo __('Mobile number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>
- 
-
-
-
-
-    </td>
+  </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC"> 
     <td><?php echo __('Date') ?></td>
@@ -184,8 +175,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         }else{
            echo $transaction->getDescription();  
         }  
-    
-    ?>
+        ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
