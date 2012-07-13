@@ -56,7 +56,7 @@ use_helper('Number');
       <?php echo __('Customer Number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $customer->getCity(), $customer->getPoBoxNumber()) ?><br/>
+      <?php echo sprintf('%s, %s', $customer->getPoBoxNumber(),$customer->getCity() ) ?><br/>
       <?php
 	  $eC = new Criteria();
 	  $eC->add(EnableCountryPeer::ID, $customer->getCountryId());
@@ -76,7 +76,7 @@ use_helper('Number');
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</td>
+  <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?><!--    (<?php //echo sfConfig::get('app_currency_code');?>)--></td>
   </tr>
   <tr>
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
@@ -101,7 +101,7 @@ use_helper('Number');
 
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
+   <td><?php echo __('VAT') ?> <!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>

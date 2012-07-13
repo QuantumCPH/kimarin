@@ -97,13 +97,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
+   <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?><!-- (<?php //echo sfConfig::get('app_currency_code')?>)--></td>
   </tr>
   <tr>
     <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
     <td>
     <?php
-         echo __("Registration Fee");
+         echo __("Kimarin Starter Package");
 
     ?>
 	</td>
@@ -133,7 +133,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('VAT') ?> (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)</td>
+    <td><?php echo __('VAT') ?> <!--(<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
