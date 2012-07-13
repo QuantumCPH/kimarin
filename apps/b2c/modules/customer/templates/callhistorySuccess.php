@@ -167,7 +167,7 @@
                     <div class="callhistoryheadings"><h2><?php echo __("Other events"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
-                            <td class="title"><?php echo __('Date') ?></td>
+                            <td class="title"><?php echo __('Date and time') ?></td>
                             <td class="title" width="40%"><?php echo __('Description') ?></td>
                                 <td class="title"><?php echo __('Amount') ?></td>
                             </tr>
@@ -179,7 +179,7 @@
 
 
                             <tr>
-                                <td><?php echo date("d-m-Y", strtotime($xdr->bill_time)); ?></td>
+                                <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo __($xdr->CLD); ?></td>
                                 <td><?php echo $xdr->charged_amount; ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                             </tr>
