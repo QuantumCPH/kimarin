@@ -148,18 +148,25 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
   </form>
   </div>
   <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill" target="_parent">
-     <div style="width:500px;">
-     <div  style="width:340px;float:left;"> 
+     <div style="width:510px;">
+     <div  style="width:510px;float:left;"> 
           <div class="refillhead"><?php echo __('Manual filling:') ?></div>
+          <p> <?php echo __('You can refill your Kimarin Account with the following amounts:')?></p>
          <ul class="welcome">
          	<!-- customer product -->
-	<?php
-                foreach($refillProducts as $refill){ ?>
-            <li><?php   echo $refill->getDescription()."&nbsp; Amount:".$refill->getRegistrationFee()."&nbsp;Bonus:".$refill->getBonus()."&nbsp;Total Including Vat:".(sfConfig::get('app_vat_percentage')+1)*$refill->getRegistrationFee();?></li>
+	<?php   
+                $bonus ="";
+                foreach($refillProducts as $refill){ 
+                    if($refill->getBonus()) $bonus = __('PLUS %1%%2%',array("%1%"=>number_format($refill->getBonus(),2),"%2%"=>sfConfig::get('app_currency_code')));
+        ?>
+            <li><?php   echo number_format($refill->getRegistrationFee(),2).sfConfig::get('app_currency_code'); echo __(" (airtime value: %1%%2% %3%)",array("%1%"=>number_format($refill->getRegistrationFee(),2),"%2%"=>sfConfig::get('app_currency_code'),"%3%"=>$bonus));
+                    //"&nbsp;Bonus:".$refill->getBonus()."&nbsp;Total Including Vat:".(sfConfig::get('app_vat_percentage')+1)*$refill->getRegistrationFee();?></li>
         <?php
         }       
         ?>
-         </ul><br clear="both" /><p>&nbsp;</p>
+         </ul><br clear="both" />
+         <p><?php echo __("The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. The refill amount is valid for 180 days.",array("%1%"=>sfConfig::get('app_currency_code')));?></p>
+         <p>&nbsp;</p>
          <ul>
           	<!-- extra_refill -->
             <?php
@@ -174,7 +181,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
             <?php } ?>
             <li id="selectAmt" class="refilselect">
               <label for="extra_refill" ><?php echo __('Select amount to be loaded:') ?></label>
-              <span style="margin-left:99px;"><?php echo $form['extra_refill']?></span>  <?php echo sfConfig::get('app_currency_code')?>
+              <span style="margin-left:99px;"><?php echo $form['extra_refill']?></span>
             </li>
 
             <?php if($sf_user->hasFlash('error_message')): ?>
@@ -182,10 +189,8 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
             	<?php echo $sf_user->getFlash('error_message'); ?>
             </li>
             <?php endif; ?>
-           
-         
           </ul><br clear="both" />
-          <div style="margin-top:40px;"> 
+          <div style="margin-top:30px;"> 
                 <input type="submit" class="butonsigninsmall" name="button" style="width:101px;cursor: pointer;float: left; margin-left: -5px !important; margin-top: -5px;"  value="<?php echo __('Refill') ?>" />
           </div>
         <!-- hidden fields -->
