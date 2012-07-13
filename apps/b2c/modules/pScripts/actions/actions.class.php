@@ -3227,9 +3227,17 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $customers = CustomerPeer::doSelect($c);
 
         foreach($customers as $customer){
+           // echo $customer->getId();
            $balance =  Telienta::getBalance($customer);
-           $transaction = new Transaction();
-           $transaction->setAgentCompanyId(-$balance);
+           if($balance>0){
+               $transaction = new Transaction();
+               $transaction->setAmount(-$balance);
+               $transaction->setDescription("Balance Expired");
+               $transaction->setTransactionStatusId(3);
+               $transaction->setCustomerId($customer->getId());
+               $transaction->save();
+               Telienta::charge($customer, $balance, "Balance Expired");
+           }
         }
 
 
