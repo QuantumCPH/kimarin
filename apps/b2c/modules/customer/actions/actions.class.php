@@ -898,6 +898,7 @@ class customerActions extends sfActions {
         unset($this->form['province_id']);
         unset($this->form['sim_type_id']);
         unset($this->form['nationality_id']);
+        unset($this->form['date_of_birth']);
         //  unset($this->form['password']);
         // unset($this->form['password_confirm']);
         /////////////////////////////////////
