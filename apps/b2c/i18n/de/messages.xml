@@ -625,7 +625,7 @@
                 <target>Manuelle Befüllung:</target>
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
-                <source>Select amount to be loaded:</source>
+                <source>Select amount to be refilled:</source>
                 <target>Wählen Sie den Betrag geladen werden:</target>
             </trans-unit>
               <trans-unit id="147" translate="yes" reformat="yes" xml:space="default">
@@ -2052,6 +2052,10 @@
             <trans-unit id="507" translate="yes" reformat="yes" xml:space="default">
                 <source>Account is blocked.</source>
                 <target>Konto ist gesperrt.</target>
+            </trans-unit>
+            <trans-unit id="508" translate="yes" reformat="yes" xml:space="default">
+                <source>All amounts are excl. IVA (%1% %).</source>
+                <target>Alle Beträge sind excl. IVA (% 1%%).</target>
             </trans-unit>
         </body>
     </file>
