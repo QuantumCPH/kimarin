@@ -315,7 +315,7 @@
                 <target>Actualmente no hay transacciones para mostrar.</target>
             </trans-unit>
             <trans-unit id="78" translate="yes" reformat="yes" xml:space="default">
-                <source>Payment history</source>
+                <source>Payment History</source>
                 <target>Pago Historia</target>
             </trans-unit>
 
