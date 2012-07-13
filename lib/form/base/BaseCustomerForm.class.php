@@ -104,7 +104,7 @@ class BaseCustomerForm extends BaseFormPropel
       'comments'                 => new sfValidatorString(array('required' => false)),
       'block'                    => new sfValidatorInteger(array('required' => false)),
     ));
-
+    
     $this->widgetSchema->setNameFormat('customer[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
