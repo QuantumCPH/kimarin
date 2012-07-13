@@ -3208,5 +3208,32 @@ if(($caltype!="IC") && ($caltype!="hc")){
         }
                     return sfView::NONE;
     }
+    /*
+     * To remove Last Refill after 180 days. if not refilled again
+     *
+     */
+    public function executeRemoveRefilBalance(sfWebRequest $request){
+
+        $date = date('Y-m-d 00:00:00',strtotime('-180 Days'));
+        $c = new Criteria;
+        $c->addJoin(CustomerPeer::ID, CustomerOrderPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
+        $c->addJoin(CustomerOrderPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
+        $c->addJoin(ProductPeer::PRODUCT_TYPE_ID,  ProductTypePeer::ID, Criteria::LEFT_JOIN);
+        $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
+        $c->addAnd(ProductTypePeer::ID,2);
+        $c->addAnd(CustomerOrderPeer::CREATED_AT,$date, Criteria::LESS_THAN);
+        $c->addGroupByColumn(CustomerPeer::ID);
+        $c->addDescendingOrderByColumn (CustomerOrderPeer::CREATED_AT);
+        $customers = CustomerPeer::doSelect($c);
+
+        foreach($customers as $customer){
+           $balance =  Telienta::getBalance($customer);
+           $transaction = new Transaction();
+           $transaction->setAgentCompanyId(-$balance);
+        }
+
+
+        return sfView::NONE;
+    }
 
 }

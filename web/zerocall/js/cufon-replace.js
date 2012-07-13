@@ -22,6 +22,7 @@ Cufon.replace('.login-left label', { fontFamily: 'Calibri' });
 Cufon.replace('.login-left .error_msg', { fontFamily: 'Calibri' });
 Cufon.replace('.login-right .error_msg', { fontFamily: 'Calibri' });
 Cufon.replace('.login-right label', { fontFamily: 'Calibri' });
+Cufon.replace('.login-right .yourpassword', { fontFamily: 'Calibri' });
 Cufon.replace('.loginbuttun', { fontFamily: 'Calibri'});
 Cufon.replace('input[type=submit]', { fontFamily: 'Calibri' });
 Cufon.set('fontSize', '17px').replace('.dashboard h2', { fontFamily: 'Calibri Bold' });

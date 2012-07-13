@@ -65,7 +65,7 @@ body {font-family:Helvetica, sans-serif; font-size:14px; color:#0c74a5;font-styl
 .input{ width:140px; font-size:12px; padding:3px; border:1px solid #999999; margin-bottom:9px;}
 #login-modal label{ font-size:12px;}
 #login-modal button{ background-image:url(../images/bg-login-btn.jpg); width:77px;  height:28px;  font-size:13px; border:0px; color:#fff; padding-bottom:0px; padding-top:0px;}
-#login-modal p{ margin-bottom:18px;}
+#login-modal p{ margin-bottom:21px;}
 .loginblock{ margin-bottom: 13px;}
 .login-left{ float:left; width:152px;}
 .login-right{ float:left; width:200px; padding-left:20px;}
@@ -746,4 +746,11 @@ table.termsnconditions ul li a{
 }
 p{
    line-height: 16px !important;
+}
+.loginheading{
+    text-align: left;
+    width: 500px;
+}
+.yourpassword{
+    margin-top: 13px;
 }
