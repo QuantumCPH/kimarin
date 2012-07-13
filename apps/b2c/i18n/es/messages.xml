@@ -315,7 +315,7 @@
                 <target>Actualmente no hay transacciones para mostrar.</target>
             </trans-unit>
             <trans-unit id="78" translate="yes" reformat="yes" xml:space="default">
-                <source>Payment history</source>
+                <source>Payment History</source>
                 <target>Pago Historia</target>
             </trans-unit>
 
@@ -625,7 +625,7 @@
                 <target>Manual de relleno:</target>
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
-                <source>Select amount to be loaded:</source>
+                <source>Select amount to be refilled:</source>
                 <target>Seleccione la cantidad que se cargue:</target>
             </trans-unit>
               <trans-unit id="147" translate="yes" reformat="yes" xml:space="default">
@@ -2038,6 +2038,10 @@
             <trans-unit id="506" translate="yes" reformat="yes" xml:space="default">
                 <source>Account is blocked.</source>
                 <target>La cuenta está bloqueada.</target>
+            </trans-unit>
+            <trans-unit id="507" translate="yes" reformat="yes" xml:space="default">
+                <source>All amounts are excl. IVA (%1%).</source>
+                <target>Todas las cantidades son excl. IVA (%1%).</target>
             </trans-unit>
         </body>
     </file>

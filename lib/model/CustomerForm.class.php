@@ -202,13 +202,13 @@ class CustomerForm extends BaseCustomerForm
 			new sfValidatorRegex(
 				array(
 					'pattern'=>$poboxPattern,
-                                        'max_length'=>5,
-                                        'min_length' =>4 ,
+                                        //'max_length'=>5,
+                                        //'min_length' =>4 ,
 
 				),
                                 array(
-                                        'max_length' => '"%value%" is too long 5 characters max.',
-                                        'min_length' => '"%value%" is too short 4 characters min.',
+                                        //'max_length' => '"%value%" is too long 5 characters max.',
+                                        //'min_length' => '"%value%" is too short 4 characters min.',
                                         'invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid postal code with 4 or 5 digits.'))
 			)
 		)
@@ -420,9 +420,9 @@ $this->validatorSchema['nie_passport_number'] = new sfValidatorNumber(
     array('required'=>true)
 );
 
-//$this->validatorSchema['date_of_birth'] = new sfValidatorNumber(
-    //array('required'=>sfContext::getInstance()->getI18N()->__('Please choose a nationality'))
-//);
+/*$this->validatorSchema['date_of_birth'] = new sfValidatorNumber(
+    array('required'=>sfContext::getInstance()->getI18N()->__('Please choose a nationality'))
+);*/
     //date of birth
 
 
@@ -578,7 +578,7 @@ $this->validatorSchema['nie_passport_number'] = new sfValidatorNumber(
         $this->mergePostValidator(new sfValidatorSchemaCompare('password',
                                           sfValidatorSchemaCompare::EQUAL, 'password_confirm',
                                           array(),
-                                          array('invalid' => sfContext::getInstance()->getI18n()->__('The two passwords must be the same.'))
+                                          array('invalid' => sfContext::getInstance()->getI18n()->__(' '))
                                                   ));
 
 
