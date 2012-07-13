@@ -557,7 +557,7 @@
                 <target>Nächste</target>
             </trans-unit>
             <trans-unit id="137" translate="yes" reformat="yes" xml:space="default">
-                <source>We are sorry we have difficulties in our database, please try again in 2 hours</source>
+                <source>Due to a technical problem, you cannot access the %1% data base currently. We do apologise. Please try later.</source>
                 <target>Es tut uns leid wir Schwierigkeiten in unserer Datenbank haben, bitte versuchen Sie es erneut in 2 Stunden</target>
             </trans-unit>
             <trans-unit id="138" translate="yes" reformat="yes" xml:space="default">
