@@ -280,7 +280,7 @@
 			 </span>
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_password?$form['password']->renderError():'&nbsp;'?></div>
-             <label style="float:right;width:95px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:85px;<?php else:?>margin-right: 73px; <?php endif; ?>"><?php echo __('Minimum 6 digits') ?></label>
+             <label style="float:right;width:95px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:85px;<?php else:?>margin-right: 73px; <?php endif; ?>"><?php echo __('Min. 6 digits or characters') ?></label>
             </li>
             <!-- end password -->
             <?php

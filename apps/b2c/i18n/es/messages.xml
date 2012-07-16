@@ -561,8 +561,8 @@
                 <target>Lo sentimos, tenemos dificultades en nuestra base de datos, por favor, inténtelo de nuevo en 2 horas</target>
             </trans-unit>
                <trans-unit id="138" translate="yes" reformat="yes" xml:space="default">
-                <source>Minimum 6 digits</source>
-                <target>Mínimo 6 dígitos</target>
+                <source>Min. 6 digits or characters</source>
+                <target>Min. 6 dígitos o caracteres</target>
             </trans-unit>
                <trans-unit id="139" translate="yes" reformat="yes" xml:space="default">
                 <source>Pay</source>
