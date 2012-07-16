@@ -166,7 +166,7 @@ if($pus==1){
                         <tr class="headings">
                             <th class="title"><?php echo __('Date &amp; time') ?></th>
                             <th class="title" width="40%"><?php echo __('Description') ?></th>
-                            <th class="title" align="right"><?php echo __('Amount') ?> <?php echo sfConfig::get('app_currency_code');?></th>
+                            <th class="title" align="right" ><?php echo __('Amount') ?> <?php echo sfConfig::get('app_currency_code');?></th>
                             </tr>
                         <?php
                         $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 1);
