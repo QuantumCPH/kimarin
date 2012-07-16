@@ -44,8 +44,8 @@
         echo $tdd->getTitle();        
     }
      ?></td>
-  <td style="text-align:right;padding-right: 25px;"><?php  echo BaseUtil::format_number($agent->getAmount());?><?php echo sfConfig::get('app_currency_code')?></td>
-    <td style="text-align:right;padding-right: 25px;"><?php  echo BaseUtil::format_number($agent->getRemainingBalance());?><?php echo sfConfig::get('app_currency_code')?></td>
+  <td style="text-align:right;padding-right: 25px;"><?php  echo number_format($agent->getAmount(),2);?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td style="text-align:right;padding-right: 25px;"><?php  echo number_format($agent->getRemainingBalance(),2);?><?php echo sfConfig::get('app_currency_code')?></td>
       <td><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
       
   </tr>
