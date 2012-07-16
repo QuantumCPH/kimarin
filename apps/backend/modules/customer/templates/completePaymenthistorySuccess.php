@@ -43,7 +43,7 @@
       <th  width="15%"  class="title"><?php echo __('Order Numer') ?></th>
       <th  width="20%" class="title"><?php echo __('Date') ?></th>
       <th  width="55%" class="title"><?php echo __('Description') ?></th>
-      <th width="10%" class="title"  align="right"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</th>
+      <th width="10%" class="title"  align="right" style="text-align: right;"><?php echo __('Amount') ?></th>
     </tr>
                 <?php 
                 $amount_total = 0;
