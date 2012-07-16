@@ -1836,7 +1836,7 @@ class customerActions extends sfActions {
         $c->add(TransactionPeer::ORDER_ID, $order_id);
         $transaction = TransactionPeer::doSelectOne($c);
         $transaction->setAmount($item_amount);
-        $transaction->setDescription("Refill:" . $product->getRegistrationFee() . " Bouns:" . $product->getBonus());
+        $transaction->setDescription( $product->getDescription());
         $transaction->save();
 
 
