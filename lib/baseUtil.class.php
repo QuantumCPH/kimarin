@@ -54,7 +54,7 @@
 		 
 		 static function format_number($number, $decimal_points = 2)
 		 { //get the number in the form xxxx.x0
-		 	return number_format($number, $decimal_points, '.', ' ');
+		 	return number_format($number, $decimal_points, '.', ',');
 		 }
 		 
 		 /** 
