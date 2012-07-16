@@ -87,6 +87,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr>
     <td colspan="4" class="payer_summary">
+      <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>
@@ -99,7 +100,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <br /><br />
       <?php echo __('Mobile Number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>   <br/>
-      <?php //echo __('Paid Through'); ?>: <?php //echo __('Agent'); ?>
+      <?php //echo __('Paid Through'); ?> <?php //echo __('Agent'); ?>
     </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC">
@@ -123,7 +124,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo format_number($subtotal = $transaction->getAmount()-$vat, 2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 
 
@@ -134,13 +135,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo format_number($subtotal, 2) ?><?php echo sfConfig::get('app_currency_code');?> </td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal,2) ?><?php echo sfConfig::get('app_currency_code');?> </td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
    <td><?php echo __('IVA') ?> <!-- (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo format_number($vat, 2) ?><?php echo sfConfig::get('app_currency_code');?> </td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?> </td>
   </tr>
   <?php
   //echo $postalcharge.'ss';
@@ -160,8 +161,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php if($postalcharge && $order->getIsFirstOrder()){ echo format_number($transaction->getAmount()+$postalcharge); }else{ echo format_number($transaction->getAmount(),2); } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
+    <td align="right" style="padding-right: 65px;"><?php if($postalcharge && $order->getIsFirstOrder()){ echo number_format($transaction->getAmount()+$postalcharge,2); }else{ echo number_format($transaction->getAmount(),2); } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
 
+  </tr>
+  <tr>
+  	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
   <tr class="footer">
     <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;">
