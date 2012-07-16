@@ -1196,7 +1196,7 @@ class affiliateActions extends sfActions {
 
     public function executePaymentHistory(sfWebrequest $request) {
 
-        $ca = new Criteria();
+        $ca = new Criteria();echo "id--".$this->getUser()->getAttribute('agent_company_id', '', 'agentsession') ;die;
         $ca->add(AgentPaymentHistoryPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentPaymentHistoryPeer::doSelect($ca);
         $this->forward404Unless($agent);
