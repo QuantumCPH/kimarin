@@ -322,7 +322,7 @@ echo  date('i:s',$callval);
                         <!--
                         <td><?php echo format_number($amount_total - $amount_total * sfConfig::get('app_vat_percentage')) ?> <?php echo sfConfig::get('app_currency_code')?></td>
                                         	 -->
-                        <td><?php echo number_format($amount_total, 2, ',', '') ?> <?php echo sfConfig::get('app_currency_code');?></td>
+                        <td><?php echo number_format($amount_total, 2) ?> <?php echo sfConfig::get('app_currency_code');?></td>
                     <td>&nbsp;</td>
                 </tr>
         <?php endif;
