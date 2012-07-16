@@ -163,6 +163,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td align="right" style="padding-right: 65px;"><?php if($postalcharge && $order->getIsFirstOrder()){ echo format_number($transaction->getAmount()+$postalcharge); }else{ echo format_number($transaction->getAmount()); } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
 
   </tr>
+  <tr class="footer">
+    <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;">
+    <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
+  </tr>
 </table>
 <?php if($wrap_content): ?>
 <br />
