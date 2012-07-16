@@ -169,7 +169,7 @@
                         <tr>
                             <td class="title"><?php echo __('Date and time') ?></td>
                             <td class="title" width="40%"><?php echo __('Description') ?></td>
-                                <td class="title"><?php echo __('Amount') ?></td>
+                            <td class="title" align="right"><?php echo __('Amount') ?></td>
                             </tr>
                         <?php
                         $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 1);
