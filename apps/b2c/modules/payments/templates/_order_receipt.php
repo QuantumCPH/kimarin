@@ -94,12 +94,12 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>
+      <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>
       <?php 
 	  $eC = new Criteria();
 	  $eC->add(EnableCountryPeer::ID, $customer->getCountryId());
 	  $eC = EnableCountryPeer::doSelectOne($eC);
-	  echo $eC->getName();
+	 // echo $eC->getName();
 	  //echo $customer->getCountry()->getName() ?> 
       <br /><br />
       <?php    $unid=$customer->getUniqueid(); ?>
