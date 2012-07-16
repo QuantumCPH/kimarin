@@ -65,7 +65,7 @@
             <th><?php echo __('Agent Number') ?></th>
             <?}?>
             <th><?php echo __('Description') ?> </th>
-            <th align="right"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</th>
+            <th align="right" style="text-align: right;padding-right: 15px;"><?php echo __('Amount') ?></th>
             <th><?php echo __('Show Receipt') ?></th>
         </tr>
         <?php
@@ -92,7 +92,7 @@
                 $transaction_desc = TransactionDescriptionPeer::doSelectOne($c);
                 echo $transaction_desc->getTitle();
             }?></td>
-            <td align="right"><?php  echo number_format($agent->getAmount(),2);   ?></td>
+            <td align="right" style="padding-right: 15px;"><?php  echo number_format($agent->getAmount(),2);?><?php echo sfConfig::get('app_currency_code');?></td>
             <td><a href="<?php echo url_for(sfConfig::get('app_admin_url').'agent_company/printAgentReceipt?aoid='.$agent->getId(), true) ?>"><img alt="view Detail" title="view Detail" src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/default_icon.png" /></a>
          </tr>
     <?php  } ?>
