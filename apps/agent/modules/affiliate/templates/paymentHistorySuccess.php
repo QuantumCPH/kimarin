@@ -17,10 +17,10 @@
     <table cellspacing="0" width="100%" class="summary">
    
   <tr>
-    <th width="25%"><?php echo __('Transaction Type') ?></th>
-    <th width="25%"><?php echo __('Amount') ?> (<?php echo sfConfig::get('app_currency_code')?>) </th>
-    <th width="25%"><?php echo __('Remaining Balance') ?> (<?php echo sfConfig::get('app_currency_code')?>)</th>
-    <th width="25%"><?php echo __('Date') ?> </th>
+    <th width="21%"><?php echo __('Transaction Type') ?></th>
+    <th width="14%" style="text-align:right;padding-right: 25px;"><?php echo __('Amount') ?> </th>
+    <th width="15%" style="text-align:right;padding-right: 25px;"><?php echo __('Remaining Balance') ?></th>
+    <th width="50%"><?php echo __('Date') ?> </th>
       
   </tr>
  <?php
@@ -44,8 +44,8 @@
         echo $tdd->getTitle();        
     }
      ?></td>
-  <td><?php  echo $agent->getAmount();   ?> </td>
-    <td><?php  echo $agent->getRemainingBalance();  ?></td>
+  <td style="text-align:right;padding-right: 25px;"><?php  echo BaseUtil::format_number($agent->getAmount());?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td style="text-align:right;padding-right: 25px;"><?php  echo BaseUtil::format_number($agent->getRemainingBalance());?><?php echo sfConfig::get('app_currency_code')?></td>
       <td><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
       
   </tr>

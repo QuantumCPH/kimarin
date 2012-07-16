@@ -63,8 +63,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td colspan="4" class="payer_summary">
       <?php echo sprintf("%s ", $agent->getName())?><br/>
       <?php echo $agent->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $agent->getCity(), $agent->getPostCode()) ?><br/>
-      <?php  echo $agent->getCountryName(); ?>
+      <?php echo sprintf('%s %s', $agent->getCity(), $agent->getPostCode()) ?><br/>
+      <?php // echo $agent->getCountryName(); ?>
 
 
       <br /><br />
