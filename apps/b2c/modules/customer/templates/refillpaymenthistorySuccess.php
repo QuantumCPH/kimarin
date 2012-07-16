@@ -22,12 +22,12 @@
               <!--Always use tables for tabular data-->
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                 <tr>
-                  <td class="title"><?php echo __('Order number') ?></td>
-                  <td class="title" nowrap><?php echo __('Date and time') ?></td>
-                  <td class="title"><?php echo __('Description') ?></td>
-                  <td class="title" align="right"><?php echo __('Amount') ?></td>
-                  <td class="title"><?php echo __('Type') ?></td>
-                  <td class="title"></td>
+                  <td width="91" class="title"><?php echo __('Order number') ?></td>
+                  <td width="104" class="title" nowrap><?php echo __('Date and time') ?></td>
+                  <td width="117" class="title"><?php echo __('Description') ?></td>
+                  <td width="103" class="title" align="right"><?php echo __('Amount') ?></td>
+                  <td width="82" class="title"><?php echo __('Type') ?></td>
+                  <td width="18" class="title"></td>
                 </tr>
                 <?php 
                 $amount_total = 0;
@@ -42,12 +42,13 @@
                         if($transaction->getDescription()=="Zapna Refill"){
                           echo __("Refill ".$transaction->getAmount());
                         }else{
-                          echo __($transaction->getDescription());  
+                          echo __($tdescription = $transaction->getDescription());  
                         } 
                   }?></td>
                   <td align="right"><?php
                     echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount();
 ?>
+
                             <?php 
 //                            if($lang=="pl"){
 //                               // echo ('plz');
@@ -56,7 +57,15 @@
 //                            }else{
                                 echo sfConfig::get('app_currency_code');
 //                            } ?></td>
-                  <td><a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')"><?php echo $transaction->getAmount()>=0?__('Paid'):__('Refund') ?></a></td>
+                  <td><a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')">
+                            <?php //echo $tdescription;
+                              if(strstr($tdescription, "bonus")){
+                                echo __('Bonus');
+                              }else{
+                                echo $transaction->getAmount()>=0?__('Paid'):__('Charged');  
+                              }  
+                            ?>
+                      </a></td>
 <!--                  <td nowrap="nowrap"><a href="#" style=" white-space: nowrap" class="receipt" onclick="iprint(preview_<?php echo $transaction->getId();?>);return false;"><?php echo __('Print'); ?>
                   </a>
                       <iframe id="preview_<?php echo $transaction->getId();?>" name="preview_<?php echo $transaction->getId();?>" src="<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>"  style="display:none">
@@ -83,7 +92,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong><?php echo __('Total') ?></strong></td>
-                        <td colspan="3"  align="right"><?php echo number_format($amount_total,2) ?>
+                        <td colspan="3"  align="left"><?php echo number_format($amount_total,2) ?>
                             <?php 
 //                            if($lang=="pl"){
 //                                echo ('plz');
