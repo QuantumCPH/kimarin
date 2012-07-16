@@ -83,7 +83,7 @@
 				?>
 			</td>
 			<td >
-			<?php echo BaseUtil::format_number($registration->getAmount()) ?>
+			<?php echo BaseUtil::format_number($registration->getAmount());?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
 			<td ><?php echo BaseUtil::format_number($registration->getCommissionAmount())?>
 			</td>
@@ -135,14 +135,14 @@
 
                         
 			<td >
-			<?php echo BaseUtil::format_number($sms_registration->getAmount()) ?>
+			<?php echo BaseUtil::format_number($sms_registration->getAmount()) ?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php if ( $sms_registration->getAmount() == 0) {?>
                             <td ><?php echo '10.00' ?>
 			</td>
                         <?php }else{ ?>
                         
-			<td ><?php echo BaseUtil::format_number($sms_registration->getCommissionAmount()) ?>
+			<td ><?php echo BaseUtil::format_number($sms_registration->getCommissionAmount()) ?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php } ?>
                         
@@ -195,9 +195,9 @@
 		
 
 			<td >
-			<?php echo BaseUtil::format_number($refill->getAmount()) ?>
+			<?php echo BaseUtil::format_number($refill->getAmount()) ?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
-			<td ><?php echo BaseUtil::format_number($refill->getCommissionAmount())?>
+			<td ><?php echo BaseUtil::format_number($refill->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
 		</tr>
 		<?php endforeach; ?>
@@ -207,10 +207,10 @@
                     <td align="right"><strong><?php echo __('Total Refills:') ?></strong></td><td align="right"> <?php echo $i ?></td>
 		</tr>
 		<tr>
-		 <td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo  number_format($refill_revenue,2) ?></td>
+		 <td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo  number_format($refill_revenue,2)?><?php echo sfConfig::get('app_currency_code');?></td>
 		</tr>
 		<tr>
-		 <td align="right"><strong><?php echo __('Total Commission Earned:') ?></strong></td><td align="right"> <?php echo  number_format($refill_com,2) ?></td>
+		 <td align="right"><strong><?php echo __('Total Commission Earned:') ?></strong></td><td align="right"> <?php echo  number_format($refill_com,2);?><?php echo sfConfig::get('app_currency_code');?></td>
 		</tr>
         </table>
         </div>
@@ -246,13 +246,13 @@
 
 
 			<td >
-			<?php echo BaseUtil::format_number($number_change->getAmount()) ?>
+			<?php echo BaseUtil::format_number($number_change->getAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php //if ( $number_change->getAmount() == 0) {?>
 <!--                            <td ><?php //echo '10.00' ?></td>-->
                         <?php //}else{ ?>
 
-			<td ><?php echo BaseUtil::format_number($number_change->getCommissionAmount()) ?>
+			<td ><?php echo BaseUtil::format_number($number_change->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php //} ?>
 
@@ -264,10 +264,10 @@
 		<td align="right"><strong><?php echo __('Total Number Change Sales:') ?></strong></td><td align="right"> <?php echo $i ?></td>
 		</tr>
 		<tr>
-		<td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo $numberChange_earnings; ?></td>
+		<td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo BaseUtil::format_number($numberChange_earnings); ?><?php echo sfConfig::get('app_currency_code');?></td>
 		</tr>
 		<tr>
-		<td align="right"><strong><?php echo __('Total Commission Earned:') ?> </strong></td><td align="right"> <?php echo $numberChange_commission; ?></td>
+		<td align="right"><strong><?php echo __('Total Commission Earned:') ?> </strong></td><td align="right"> <?php echo BaseUtil::format_number($numberChange_commission); ?><?php echo sfConfig::get('app_currency_code');?></td>
 		</tr>
 	</table></div>
 	<?php endif; ?>
