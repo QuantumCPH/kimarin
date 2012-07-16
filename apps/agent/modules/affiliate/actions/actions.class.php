@@ -1199,9 +1199,7 @@ class affiliateActions extends sfActions {
         $ca = new Criteria();
         $ca->add(AgentPaymentHistoryPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentPaymentHistoryPeer::doSelect($ca);
-        var_dump($agent);
-        die;
-        $this->forward404Unless($agent);
+        //$this->forward404Unless($agent);
 
         $this->agents = $agent;
     }
