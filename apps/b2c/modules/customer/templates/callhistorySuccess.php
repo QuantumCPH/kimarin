@@ -292,7 +292,7 @@
                                 </tr>
 <?php else: ?>
                                     <tr>
-                                        <td colspan="3" align="right"><strong><?php echo __('Total') ?></strong></td><td align="right"><?php echo number_format($amount_total, 2, ',', '') ?><?php echo sfConfig::get('app_currency_code')?></td><td>&nbsp;</td>
+                                        <td colspan="3" align="right"><strong><?php echo __('Total') ?></strong></td><td align="right"><?php echo number_format($amount_total, 2) ?><?php echo sfConfig::get('app_currency_code')?></td><td>&nbsp;</td>
                                     </tr>
 <?php
                                     endif;
