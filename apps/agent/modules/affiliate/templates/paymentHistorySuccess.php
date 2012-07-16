@@ -15,7 +15,9 @@
         
  <div class="borderDiv">     
     <table cellspacing="0" width="100%" class="summary">
-   
+  <?php
+  if($agents){
+  ?> 
   <tr>
     <th width="21%"><?php echo __('Transaction Type') ?></th>
     <th width="14%" style="text-align:right;padding-right: 25px;"><?php echo __('Amount') ?> </th>
@@ -25,6 +27,7 @@
   </tr>
  <?php
     $i = 0;
+    
     foreach($agents as $agent) {
         $i++;
         ?>
@@ -49,10 +52,16 @@
       <td><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
       
   </tr>
-  <?php  } ?>
+  <?php  }
+  }
+  else{ ?>
+      <tr>
+          <td> <?php echo __("Payment history not found.");?></td>
+      </tr>
+ <?php } ?>
   </table>
 
-
+  
 
   </div>
 </div>
