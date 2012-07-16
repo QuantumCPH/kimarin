@@ -169,7 +169,7 @@
                         <tr>
                             <td class="title"><?php echo __('Date and time') ?></td>
                             <td class="title" width="40%"><?php echo __('Description') ?></td>
-                                <td class="title"><?php echo __('Amount') ?></td>
+                                <td class="title" aligin="right"><?php echo __('Amount') ?></td>
                             </tr>
                         <?php
                         $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 1);
@@ -181,7 +181,7 @@
                             <tr>
                                 <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo __($xdr->CLD); ?></td>
-                                <td><?php echo number_format($xdr->charged_amount,2); ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
+                                <td aligin="right"><?php echo number_format($xdr->charged_amount,2); ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
                             </tr>
                             <?php } }else {
 
