@@ -77,7 +77,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php //echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code')?>)</td>
+    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?></td>
   </tr>
   <tr>
     <td><?php echo $agent_order->getCreatedAt('d-m-Y') ?></td>
