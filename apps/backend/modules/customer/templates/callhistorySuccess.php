@@ -166,7 +166,9 @@ if($pus==1){
                         <tr class="headings">
                             <th class="title"><?php echo __('Date &amp; time') ?></th>
                             <th class="title" width="40%"><?php echo __('Description') ?></th>
-                            <th class="title" align="right" ><?php echo __('Amount') ?> <?php echo sfConfig::get('app_currency_code');?></th>
+
+                            <th class="title" align="right" style="text-align:right !important;"><?php echo __('Amount') ?></th>
+
                             </tr>
                         <?php
                         $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 1);
@@ -178,7 +180,7 @@ if($pus==1){
                             <tr>
                                 <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
                                 <td><?php echo $xdr->CLD; ?></td>
-                                <td align="right"><?php echo  number_format($xdr->charged_amount,2); ?></td>
+                                <td align="right"><?php echo  number_format($xdr->charged_amount,2); ?> <?php echo sfConfig::get('app_currency_code');?></td>
                             </tr>
                             <?php } }else {
 
