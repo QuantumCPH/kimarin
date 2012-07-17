@@ -55,7 +55,7 @@
             ?>
                 <tr>
                     <td><strong><?php echo __('Your Balance is:') ?></strong></td>
-                    <td align="right"><?php echo number_format($agent->getBalance(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+                    <td align="right"><?php echo BaseUtil::format_number($agent->getBalance()); ?><?php echo sfConfig::get('app_currency_code');?></td>
                 </tr>
             <?php } ?>
             <tr>

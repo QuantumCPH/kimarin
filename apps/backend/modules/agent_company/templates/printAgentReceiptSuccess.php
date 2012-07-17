@@ -68,11 +68,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td colspan="4" class="payer_summary">
       <?php echo sprintf("%s ", $agent->getName())?><br/>
       <?php echo $agent->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $agent->getCity(), $agent->getPostCode()) ?><br/>
-      <?php $eC = new Criteria();
+      <?php echo sprintf('%s %s', $agent->getCity(), $agent->getPostCode()) ?>
+      <?php /*$eC = new Criteria();
 	  $eC->add(EnableCountryPeer::ID, $agent->getCountryId());
 	  $eC = EnableCountryPeer::doSelectOne($eC);
-	  echo $eC->getName(); ?>
+	  echo $eC->getName(); */?>
 
 
       <br /><br />
@@ -91,7 +91,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Date') ?></td>
     <td><?php //echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right:28px;"><?php echo __('Amount') ?>(<?php echo sfConfig::get('app_currency_code');?>)</td>
+    <td align="right" style="padding-right:28px;"><?php echo __('Amount') ?></td>
   </tr>
   <tr>
     <td><?php echo $agent_order->getCreatedAt('d-m-Y') ?></td>
@@ -99,7 +99,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         
     </td>
     <td>1<?php //echo $agent_order->getQuantity() ?></td>
-    <td align="right" style="padding-right:28px;"><?php echo format_number($subtotal = $agent_order->getAmount()) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right:28px;"><?php echo number_format($subtotal = $agent_order->getAmount(),2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
@@ -108,19 +108,19 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right:28px;"><?php echo format_number($subtotal) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right:28px;"><?php echo number_format($subtotal,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
     <td><?php echo __('IVA') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right:28px;"><?php echo format_number(0.00) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right:28px;"><?php echo number_format(0,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right:28px;"><?php echo format_number($agent_order->getAmount()) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right:28px;"><?php echo number_format($agent_order->getAmount(),2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 </table>
 <?php if($wrap_content): ?>
@@ -141,8 +141,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?>
 </p>
 <?php endif; ?>
-
-<p>
+<p style="font-weight: bold;">
+	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
+        <br><?php echo __('E-mail') ?>:&nbsp;
+	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
+        <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
+</p>
+<!--<p>
 	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 </p>
@@ -152,4 +157,4 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <p>
 <?php echo __('Support') ?><br />
 <?php echo sfConfig::get('app_site_title')?> 
-</p>
+</p>-->
