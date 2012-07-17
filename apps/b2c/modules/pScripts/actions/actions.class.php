@@ -3181,7 +3181,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
         $this->todate = date("Y-m-d", $todate);
        $tilentaCallHistryResult = Telienta::callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
-   //   var_dump($tilentaCallHistryResult);
+  if($tilentaCallHistryResult){
   foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
 
         $cuCalls = new CustomerCalls();
@@ -3204,6 +3204,10 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $cuCalls->setSubdivision($xdr->subdivision);
         $cuCalls->setUnixConnectTime($xdr->unix_connect_time);
         $cuCalls->save();
+  }
+  }else{
+      
+
   }
         }
                     return sfView::NONE;
