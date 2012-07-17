@@ -73,7 +73,7 @@
                   $amt = $country->getCbfRate();
                   
                   ?>
-                  <td align="right"><?php $amount_total += $amt; echo number_format($amt, 2, ',', '') ?> <?php echo sfConfig::get('app_currency_code')?></td>
+                  <td align="right"><?php $amount_total += $amt; echo number_format($amt, 2) ?> <?php echo sfConfig::get('app_currency_code')?></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php if(count($smsRecords)==0): ?>
@@ -86,7 +86,7 @@
                 	<!--
                 	<td><?php echo format_number($amount_total-$amount_total*sfConfig::get('app_vat_percentage')) ?> <?php echo sfConfig::get('app_currency_code')?></td>
                 	 -->
-                         <td align="right"><?php echo number_format($amount_total, 2, ',', '') ?> <?php echo sfConfig::get('app_currency_code')?></td>
+                         <td align="right"><?php echo number_format($amount_total, 2) ?> <?php echo sfConfig::get('app_currency_code')?></td>
                 </tr>
                 <?php endif; ?>
                 <tr><td colspan="3" style="text-align: right">All amounts excl. IVA.</td></tr>

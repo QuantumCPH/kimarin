@@ -357,6 +357,7 @@ class customerActions extends autocustomerActions {
             $validated = false;
             $mobile_number = $request->getParameter('mobile_number');
             $extra_refill = $request->getParameter('charge_amount');
+            $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
             $transaction = new Transaction();
             $order = new CustomerOrder();

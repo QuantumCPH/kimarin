@@ -56,12 +56,12 @@ use_helper('Number');
       <?php echo __('Customer Number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>
+      <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>
       <?php
 	  $eC = new Criteria();
 	  $eC->add(EnableCountryPeer::ID, $customer->getCountryId());
 	  $eC = EnableCountryPeer::doSelectOne($eC);
-	  echo $eC->getName();
+	//  echo $eC->getName();
 	  ?>
 
 
@@ -119,4 +119,14 @@ use_helper('Number');
     <?php echo __('%1%',array('%1%' => sfConfig::get('app_postal_address_bottom')));?> </td>
   </tr>
 </table>
-        
+  <p>
+	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
+	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
+</p>
+
+<p><?php echo __('Cheers') ?></p>
+
+<p>
+<?php echo __('Support') ?><br />
+<?php echo sfConfig::get('app_site_title');?>
+</p>      
