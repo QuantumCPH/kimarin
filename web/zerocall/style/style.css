@@ -94,7 +94,7 @@ width:232px;
 .right-col .box a span{ background-image:url(../images/bg-greenbutton-.png); background-position:right top; background-repeat:no-repeat; display:block; padding:3px 5px 3px; }
 .right-col .box-last{ margin:0px;}
 .navigations{ width:575px; float:left;}
-.navigations a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-sprite.gif); background-repeat:no-repeat; margin-right:0px;}
+.navigations a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-sprite.jpg); background-repeat:no-repeat; margin-right:0px;}
 .navigations a.dashboard{ background-position:0px 0px}
 .navigations a.dashboard:hover{ background-position:-90px 0px}
 .navigations a.dashboard-s{ background-position:-90px 0px}
@@ -104,8 +104,8 @@ width:232px;
 .navigations a.refil-s{ background-position:-90px -64px}
 
 .navigations a.callhistory{ background-position:0px -127px}
-.navigations a.callhistory:hover{ background-position:-90px -127px}
-.navigations a.callhistory-s{ background-position:-90px -127px}
+.navigations a.callhistory:hover{ background-position:-96px -127px}
+.navigations a.callhistory-s{ background-position:-96px -127px}
 
 .navigations a.paymenthistory{ background-position:0px -188px}
 .navigations a.paymenthistory:hover{ background-position:-90px -188px}
