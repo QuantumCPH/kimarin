@@ -66,7 +66,7 @@ jQuery(function() {
 	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 		<td><?php echo ++$i ?>.</td>
              
-		<td><?php echo $registration->getCreatedAt('d-m-Y'); ?>
+		<td><?php echo $registration->getCreatedAt('d-m-Y'); ?></td>
 		<td><?php 
 			$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -76,8 +76,10 @@ jQuery(function() {
             
 		</td>
 		<td><?php echo $customer->getMobileNumber()?></td>
-		<td >
-			<?php echo BaseUtil::format_number($registration->getAmount()) ?>
+		<td align="right" style="text-align:right;">
+			<?php // echo BaseUtil::format_number($registration->getAmount()) 
+                          echo number_format($registration->getAmount(),2);
+                        ?>
 		</td>
 		<td>
 		<?php echo __($registration->getDescription()) ?>
@@ -101,7 +103,7 @@ jQuery(function() {
 		<th><?php echo __('Date') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
-		<th><?php echo __('Amount Refilled') ?></th>
+		<th style="text-align:right;padding-right: 25px;"><?php echo __('Amount Refilled') ?></th>
 		<th><?php echo __('Description') ?></th>
 		<th><?php echo __('Show Receipt') ?></th>
 
@@ -123,8 +125,8 @@ jQuery(function() {
 
 		</td>
 		<td><?php echo $customer->getMobileNumber()?></td>
-		<td >
-			<?php echo BaseUtil::format_number($refill->getAmount()) ?>
+		<td style="text-align:right;padding-right: 25px;">
+			<?php echo number_format($refill->getAmount(),2);?><?php echo sfConfig::get('app_currency_code');?>
 		</td>
 		<td>
 		<?php echo __($refill->getDescription()) ?>
@@ -147,7 +149,7 @@ jQuery(function() {
 		<th><?php echo __('Date') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
-		<th><?php echo __('Change Number Amount') ?></th>
+		<th style="text-align:right;padding-right: 25px;"><?php echo __('Change Number Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
 		<th><?php echo __('Show Receipt') ?></th>
 
@@ -169,8 +171,8 @@ jQuery(function() {
 
 		</td>
 		<td><?php echo $customer->getMobileNumber()?></td>
-		<td >
-			<?php echo BaseUtil::format_number($numberchange->getAmount()) ?>
+		<td style="text-align:right;padding-right: 25px;">
+			<?php echo number_format($numberchange->getAmount(),2);?><?php echo sfConfig::get('app_currency_code');?>
 		</td>
 		<td>
 		<?php echo $numberchange->getDescription() ?>

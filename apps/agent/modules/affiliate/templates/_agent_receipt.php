@@ -71,11 +71,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td colspan="4" class="payer_summary">
       <?php echo sprintf("%s ", $agent->getName())?><br/>
       <?php echo $agent->getAddress() ?><br/>
-      <?php echo sprintf('%s, %s', $agent->getPostCode(),$agent->getCity() ) ?><br/>
+      <?php echo sprintf('%s %s', $agent->getPostCode(),$agent->getCity() ) ?><br/>
       <?php $eC = new Criteria();
 	  $eC->add(EnableCountryPeer::ID, $agent->getCountryId());
 	  $eC = EnableCountryPeer::doSelectOne($eC);
-	  echo $eC->getName(); ?>
+	//  echo $eC->getName(); ?>
 
 
       <br /><br />
