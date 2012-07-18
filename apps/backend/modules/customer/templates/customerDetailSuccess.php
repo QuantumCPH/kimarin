@@ -157,8 +157,8 @@ if(isset($val) && $val!=""){  ?>
                         </tr  >
                           <tr><td  id="sf_admin_list_th_auto_refill" class="leftHeadign" >Comments</td>
                   <td><?php echo $customer->getComments(); ?></td>
-                </tr>
-                     
+                </tr> <?php  $unid   =  $customer->getUniqueid();  ?>
+                        
                          <?php  $uid=0;
                       $uid=$customer->getUniqueid();
                       if(isset($uid) && $uid>0){
