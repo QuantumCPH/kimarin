@@ -32,7 +32,7 @@ class Telienta {
 
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Customer');
 
-        $uniqueid = "KB2C" . $customer->getId() . $customer->getUniqueid();
+        $uniqueid = "KB2Cc" . $customer->getId() . $customer->getUniqueid();
         if ($USReseller) {
             $Parent = self::$iParentUS;
         } else {
@@ -334,7 +334,7 @@ class Telienta {
         $retry_count = 0;
 
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Account');
-        $uniqueid = "KB2C" . $customer->getId() . $customer->getUniqueid();
+        $uniqueid = "KB2Cc" . $customer->getId() . $customer->getUniqueid();
         $accountName = $accountType . $mobileNumber;
         while (!$account && $retry_count < $max_retries) {
             try {
