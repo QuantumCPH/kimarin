@@ -653,7 +653,7 @@ class customerActions extends autocustomerActions {
 
 
 
-            if (Telienta::createAAccount("34" . substr($this->customer->getMobileNumber(), 1), $this->customer)) {
+            if (Telienta::createAAccount("34" .$this->customer->getMobileNumber(), $this->customer)) {
                 echo "<br/> A Account Created Successfully<br/>";
             }
 
