@@ -158,27 +158,7 @@ if(isset($val) && $val!=""){  ?>
                           <tr><td  id="sf_admin_list_th_auto_refill" class="leftHeadign" >Comments</td>
                   <td><?php echo $customer->getComments(); ?></td>
                 </tr>
-<!--                         <tr style="background-color:#EEEEFF">-->
-                       <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Active No</td>
-                        <td>  <?php  $unid   =  $customer->getUniqueid();
-        if(isset($unid) && $unid!=""){
-            $un = new Criteria();
-            $un->add(CallbackLogPeer::UNIQUEID, $unid);
-
-            $un -> addDescendingOrderByColumn(CallbackLogPeer::CREATED);
-            $unumber = CallbackLogPeer::doSelectOne($un);
-
-               if($pus==1){
-   $us = new Criteria();
-            $us->add(UsNumberPeer::CUSTOMER_ID, $cuid);
-             $usnumber = UsNumberPeer::doSelectOne($us);
-             echo   $usnumber->getUsMobileNumber();
-               }else{
-                   echo $unumber->getMobileNumber();    
-               }
-
-         }else{  }  ?> </td>
-                         </tr>
+                     
                          <?php  $uid=0;
                       $uid=$customer->getUniqueid();
                       if(isset($uid) && $uid>0){
