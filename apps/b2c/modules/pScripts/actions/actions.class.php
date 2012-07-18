@@ -3312,5 +3312,22 @@ $callsHistory->save();
 
         return sfView::NONE;
     }
+  public function executeKs(sfWebRequest $request){
 
+      $customer=CustomerPeer::retrieveByPK(4);
+
+         $c = new Criteria();
+        $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
+        $c->addJoin(CustomerProductPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
+        $c->addJoin(ProductPeer::BILLING_PRODUCT_ID, BillingProductsPeer::ID, Criteria::LEFT_JOIN);
+        $c->addAnd(CustomerProductPeer::STATUS_ID, 3);
+        $c->addAnd(CustomerPeer::ID, $customer->getId());
+        $product = BillingProductsPeer::doSelectOne($c);
+
+       echo $product->getAIproduct();
+
+       die;
+           return sfView::NONE;
+
+  }
 }
