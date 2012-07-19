@@ -92,7 +92,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong><?php echo __('Total') ?></strong></td>
-                        <td colspan="3"  align="left"><?php echo number_format($amount_total,2) ?>
+                        <td  align="left" style="text-align:right;"><?php echo number_format($amount_total,2) ?>
                             <?php 
 //                            if($lang=="pl"){
 //                                echo ('plz');
@@ -100,7 +100,7 @@
 //                                echo ('eur');
 //                            }else{
                                 echo sfConfig::get('app_currency_code');
-//                            } ?></td>
+//                            } ?></td><td>&nbsp;</td>
                 </tr>	
                 <?php endif; ?>
               </table>

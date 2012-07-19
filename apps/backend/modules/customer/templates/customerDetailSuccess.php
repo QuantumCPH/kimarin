@@ -160,7 +160,7 @@ if(isset($val) && $val!=""){  ?>
                 </tr>
                          <tr style="background-color:#EEEEFF">
                        <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Active No</td>
-                        <td>  <?php  $unid   =  $customer->getUniqueid();
+                        <td>  <?php  $unid   =  $customer->getUniqueid(); 
         if(isset($unid) && $unid!=""){
             $un = new Criteria();
             $un->add(CallbackLogPeer::UNIQUEID, $unid);
@@ -172,9 +172,11 @@ if(isset($val) && $val!=""){  ?>
    $us = new Criteria();
             $us->add(UsNumberPeer::CUSTOMER_ID, $cuid);
              $usnumber = UsNumberPeer::doSelectOne($us);
-             echo   $usnumber->getUsMobileNumber();
+           //  echo   $usnumber->getUsMobileNumber();
+
                }else{
-                   echo $unumber->getMobileNumber();    
+                 //  echo $unumber->getMobileNumber();
+                   echo  "0034".$customer->getMobileNumber();
                }
 
          }else{  }  ?> </td>

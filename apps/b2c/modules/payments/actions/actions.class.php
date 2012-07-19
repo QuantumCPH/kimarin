@@ -268,7 +268,7 @@ class paymentsActions extends sfActions {
         else
             die('Error retreiving');
 
-        if(strstr($transaction->getDescription(),"Refill")){
+        if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
             $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
         }
 
@@ -309,7 +309,8 @@ class paymentsActions extends sfActions {
         
         $lang=$this->getUser()->getCulture();
       
-        $return_url = "http://www.kimarineurope.com/registration-thanks.html";
+      //  $return_url = "http://www.kimarineurope.com/registration-thanks.html";
+        $return_url = "http://www.kimarineurope.com/test";
         $cancel_url = "http://www.kimarineurope.com/registration-reject.html";
         
         $callbackparameters = $lang.'-'.$order_id.'-'.$item_amount;

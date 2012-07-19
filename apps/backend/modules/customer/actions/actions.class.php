@@ -357,6 +357,7 @@ class customerActions extends autocustomerActions {
             $validated = false;
             $mobile_number = $request->getParameter('mobile_number');
             $extra_refill = $request->getParameter('charge_amount');
+            $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
             $transaction = new Transaction();
             $order = new CustomerOrder();
@@ -618,6 +619,68 @@ class customerActions extends autocustomerActions {
     }
 
 
+    public function executeUpdateUniqueId(sfWebRequest $request) {
+
+        $this->customer = CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
+        $this->redirectUnless($this->customer, "@homepage");
+        $c = new Criteria();
+        $c->add(UniqueIdsPeer::UNIQUE_NUMBER, $request->getParameter('unique_id'));
+        $c->addAnd(UniqueIdsPeer::STATUS, 0);
+        $this->uniqueId = UniqueIdsPeer::doSelectOne($c);
+        $this->redirectUnless($this->uniqueId, "@homepage");
+
+
+        $cp = new Criteria;
+        $cp->add(TelintaAccountsPeer::I_CUSTOMER, $this->customer->getICustomer());
+        $cp->addAnd(TelintaAccountsPeer::STATUS, 3);
+
+        if (TelintaAccountsPeer::doCount($cp) > 0) {
+            $telintaAccounts = TelintaAccountsPeer::doSelect($cp);
+            foreach ($telintaAccounts as $account) {
+                echo "Deleting Account: " . $account->getAccountTitle();
+                Telienta::terminateAccount($account);
+            }
+        }
+
+        $balance = Telienta::getBalance($this->customer);
+        $this->customer->setUniqueid($this->uniqueId->getUniqueNumber());
+        $this->customer->save();
+        if (Telienta::ResgiterCustomer($this->customer, $balance)) {
+            echo "<br/>Customer Account Created Successfully<br/>";
+            $this->uniqueId->setStatus(1);
+            $this->uniqueId->setAssignedAt(date("Y-m-d H:i:s"));
+            $this->uniqueId->save();
+
+
+
+            if (Telienta::createAAccount("34" .$this->customer->getMobileNumber(), $this->customer)) {
+                echo "<br/> A Account Created Successfully<br/>";
+            }
+
+//            if (Telienta::createCBAccount("46" . substr($this->customer->getMobileNumber(), 1), $this->customer)) {
+//                echo "<br/> CB Account Created Successfully<br/>";
+//                ;
+//            }
+//
+//            $getvoipInfo = new Criteria();
+//            $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $this->customer->getId());
+//            $getvoipInfo->addAnd(SeVoipNumberPeer::IS_ASSIGNED, 1);
+//            $getvoipInfos = SeVoipNumberPeer::doSelectOne($getvoipInfo); //->getId();
+//            if (isset($getvoipInfos)) {
+//                $voipnumbers = $getvoipInfos->getNumber();
+//                $voipnumbers = substr($voipnumbers, 2);
+//                Telienta::createReseNumberAccount($voipnumbers, $this->customer, $this->customer->getMobileNumber());
+//            }
+
+
+            $callbacklog = new CallbackLog();
+            $callbacklog->setMobileNumber("34" . substr($this->customer->getMobileNumber(), 1));
+            $callbacklog->setuniqueId($this->customer->getUniqueid());
+            $callbacklog->setcallingCode("34");
+            $callbacklog->save();
+        }
+        return sfView::none;
+    }
 
  
 
