@@ -3176,12 +3176,12 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $customers =CustomerPeer::doSelect($c);
 
         foreach($customers as $customer){
-        $fromdate = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
+        $fromdate = mktime(0, 0, 0, date("m"), date("d")-1, date("Y"));
         $this->fromdate = date("Y-m-d", $fromdate);
-        $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+        $todate = mktime(0, 0, 0, date("m"), date("d")-1, date("Y"));
         $this->todate = date("Y-m-d", $todate);
        $tilentaCallHistryResult = Telienta::callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
-   //   var_dump($tilentaCallHistryResult);
+  if($tilentaCallHistryResult){
   foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
 
         $cuCalls = new CustomerCalls();
@@ -3205,9 +3205,78 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $cuCalls->setUnixConnectTime($xdr->unix_connect_time);
         $cuCalls->save();
   }
+  }else{
+    
+$callsHistory = new CallHistoryCallsLog();
+$callsHistory->setCustomerId($customer->getId());
+$callsHistory->setTodate($this->todate);
+$callsHistory->setFromdate($this->fromdate);
+$callsHistory->save();
+ 
+  }
         }
                     return sfView::NONE;
     }
+
+
+      public function executeCallHistoryNotFetch(sfWebRequest $request)
+    {
+
+  $c = new Criteria;
+        $c->add(CallHistoryCallsLogPeer::STATUS,1);
+        $callLogs =CallHistoryCallsLogPeer::doSelect($c);
+
+        foreach($callLogs as $callLog){
+
+        $this->fromdate =$callLog->getFromdate();
+
+        $this->todate =$callLog->getTodate();
+        $customer=  CustomerPeer::retrieveByPK($callLog->getCustomerId());
+
+       $tilentaCallHistryResult = Telienta::callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
+  if($tilentaCallHistryResult){
+  foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
+
+        $cuCalls = new CustomerCalls();
+        $cuCalls->setAccountId($xdr->account_id);
+        $cuCalls->setBillStatus($xdr->bill_status);
+        $cuCalls->setBillTime($xdr->bill_time);
+        $cuCalls->setChargedAmount($xdr->charged_amount);
+        $cuCalls->setChargedQuantity($xdr->charged_quantity);
+        $cuCalls->setCld($xdr->CLD);
+        $cuCalls->setCli($xdr->CLI);
+        $cuCalls->setConnectTime($xdr->connect_time);
+        $cuCalls->setCountry($xdr->country);
+        $cuCalls->setCustomerId($customer->getId());
+        $cuCalls->setDescription($xdr->description);
+        $cuCalls->setDisconnectCause($xdr->disconnect_cause);
+        $cuCalls->setDisconnectTime($xdr->disconnect_time);
+        $cuCalls->setICustomer($customer->getICustomer());
+        $cuCalls->setIXdr($xdr->i_xdr);
+        $cuCalls->setStatus(1);
+        $cuCalls->setSubdivision($xdr->subdivision);
+        $cuCalls->setUnixConnectTime($xdr->unix_connect_time);
+        $cuCalls->save();
+  }
+
+
+  $callLogs->setStatus(3);
+   $callLogs->save();
+  } 
+        }
+
+
+
+
+         return sfView::NONE;
+      }
+
+
+
+
+
+
+
     /*
      * To remove Last Refill after 180 days. if not refilled again
      *
@@ -3254,13 +3323,10 @@ if(($caltype!="IC") && ($caltype!="hc")){
         $c->addAnd(CustomerProductPeer::STATUS_ID, 3);
         $c->addAnd(CustomerPeer::ID, $customer->getId());
         $product = BillingProductsPeer::doSelectOne($c);
-
-       echo $product->getAIproduct();
+        echo $product->getAIproduct();
 
        die;
            return sfView::NONE;
 
   }
-
-
 }

@@ -46,9 +46,7 @@
                         } 
                   }?></td>
                   <td align="right"><?php
-                    echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount();
-?>
-
+                    echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount();?>
                             <?php 
 //                            if($lang=="pl"){
 //                               // echo ('plz');

@@ -30,10 +30,6 @@ $unid = $customer->getUniqueid();
 if($pus==1){
 
 ?>
-
-
-
-
     <?php } else {
         
     if(isset($_POST['startdate']) && isset($_POST['enddate'])){
@@ -78,7 +74,7 @@ if($pus==1){
                 </ul>
             </form>
         </div>
-                <h1><?php echo 'Subscription Charges'; ?> </h1>
+              <h1><?php echo 'Subscription Charges'; ?> </h1>
                     <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign" border='0'>
                         <tr class="headings">
                             <th class="title"><?php echo __('Date &amp; time') ?></th>
