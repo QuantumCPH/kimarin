@@ -3323,8 +3323,7 @@ $callsHistory->save();
         $c->addAnd(CustomerProductPeer::STATUS_ID, 3);
         $c->addAnd(CustomerPeer::ID, $customer->getId());
         $product = BillingProductsPeer::doSelectOne($c);
-
-       echo $product->getAIproduct();
+        echo $product->getAIproduct();
 
        die;
            return sfView::NONE;
