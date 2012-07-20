@@ -237,6 +237,7 @@ class CustomerForm extends BaseCustomerForm
                         'from_date'=>'From date',
 			'country_id'=>'Country',
 			'device_id'=>'Mobile Model',
+                        'password'=>'Create password',
 			'password_confirm'=>'Confirm password',
 			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)',
                         'second_last_name'=> 'Middle Name',
