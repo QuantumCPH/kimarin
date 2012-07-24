@@ -60,14 +60,16 @@ if($pus==1){
                         <label><?php echo __('From');?>:</label>
                         <div class="content">
 <!--                            <input type="text" value="2012-05-31"  id="startdates" autocomplete="off" name="startdate" class="hasDatepicker" />-->
-                            <?php echo input_date_tag('startdate', $fromdate1, 'rich=true') ?>
+                            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo @$fromdate1; ?>" />
+                            <?php //echo input_date_tag('startdate', $fromdate1, 'rich=true') ?>
                         </div>
                     </div>
                     <div class="form-row">
                         <label><?php echo __('To');?>:</label>
                         <div class="content">
 <!--                                <input id="enddates" class="hasDatepicker" type="text" size="12" value="2012-05-31" name="enddate" autocomplete="off" />-->
-                            <?php echo input_date_tag('enddate', $todate1, 'rich=true') ?>
+                            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$todate1; ?>" />
+                            <?php //echo input_date_tag('enddate', $todate1, 'rich=true') ?>
                         </div>
                     </div>
 
