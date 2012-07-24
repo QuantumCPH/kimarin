@@ -78,9 +78,9 @@
                       <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription Charges"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
-                            <th class="title"><?php echo __('Date and time') ?></th>
-                            <th class="title" width="40%"><?php echo __('Description') ?></th>
-                            <th class="title" align="right" style="text-align:right !important;"><?php echo __('Amount') ?></th>
+                            <td class="title"><?php echo __('Date and time') ?></td>
+                            <td class="title" width="40%"><?php echo __('Description') ?></td>
+                            <td class="title" align="right" style="text-align:right !important;"><?php echo __('Amount') ?></td>
 
                         </tr>
                         <?php
