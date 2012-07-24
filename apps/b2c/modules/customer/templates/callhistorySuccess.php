@@ -76,14 +76,13 @@
                         <?php } else {
  ?>                 
                       <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription Charges"); ?> </h2></div><br />
-                    <table width="100%" cellspacing="0" cellpadding="2"  class="callhistory" border='0'>
-                        <tr class="headings">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
+                        <tr>
                             <th class="title"><?php echo __('Date and time') ?></th>
                             <th class="title" width="40%"><?php echo __('Description') ?></th>
-
                             <th class="title" align="right" style="text-align:right !important;"><?php echo __('Amount') ?></th>
 
-                            </tr>
+                        </tr>
                         <?php
                         $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 4);
                         if(count($tilentaCallHistryResult)>0){
