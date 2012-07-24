@@ -69,9 +69,6 @@
 
             if ($pus == 1) {
             ?>
-
-
-
                         <?php } else {
  ?>        
                     <div class="callhistoryheadings">
@@ -101,6 +98,7 @@
                                 echo __('There are currently no  records to show.');
 
                             } ?>
+
                         </table><br/><br/><h2><?php echo __("Other events"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>

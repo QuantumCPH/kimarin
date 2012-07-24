@@ -30,7 +30,6 @@ $unid = $customer->getUniqueid();
 if($pus==1){
 
 ?>
-
     <?php } else {
         
     if(isset($_POST['startdate']) && isset($_POST['enddate'])){
