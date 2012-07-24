@@ -74,11 +74,8 @@
 
 
                         <?php } else {
- ?>        
-                    <div class="callhistoryheadings">
-
-
-                          <h1><?php echo __("Subscription Charges"); ?> </h1>
+ ?>                 
+                      <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription Charges"); ?> </h2></div><br />
                     <table width="100%" cellspacing="0" cellpadding="2"  class="callhistory" border='0'>
                         <tr class="headings">
                             <th class="title"><?php echo __('Date and time') ?></th>
@@ -105,9 +102,8 @@
 
                             } ?>
                         </table><br/><br/>
-
-
-                        <h2><?php echo __("Other events"); ?> </h2></div><br />
+                        
+                    <div class="callhistoryheadings"><h2><?php echo __("Other events"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
                             <td class="title"><?php echo __('Date and time') ?></td>
