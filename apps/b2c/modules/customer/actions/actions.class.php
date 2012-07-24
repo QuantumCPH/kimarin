@@ -603,10 +603,13 @@ class customerActions extends sfActions {
         //new transaction
         $transaction = new Transaction();
 
-        $transaction->setAmount($this->order->getExtraRefill() * (sfConfig::get('app_vat_percentage') + 1));
-        $transaction->setDescription('Refill');
-        $transaction->setOrderId($this->order->getId());
-        $transaction->setCustomerId($this->order->getCustomerId());
+$transaction->setAmount($this->order->getExtraRefill() * (sfConfig::get('app_vat_percentage') + 1));
+$transactiondescription=  TransactionDescriptionPeer::retrieveByPK(9);
+$transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+$transaction->setTransactionDescriptionId($transactiondescription->getId());
+$transaction->setDescription($transactiondescription->getTitle());
+$transaction->setOrderId($this->order->getId());
+$transaction->setCustomerId($this->order->getCustomerId());
 
         //save
         $transaction->save();

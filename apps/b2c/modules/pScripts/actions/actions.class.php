@@ -2896,6 +2896,10 @@ if(($caltype!="IC") && ($caltype!="hc")){
                 $order->setOrderStatusId(sfConfig::get('app_status_completed')); //completed
                 $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed')); //completed
                 $transaction->setTransactionStatusId(3); //completed
+                $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(8);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
                 // echo 'transaction=ok <br /> ';
                 $is_transaction_ok = true;
             }
@@ -3028,7 +3032,11 @@ if(($caltype!="IC") && ($caltype!="hc")){
                     // make a new transaction to show in payment history
                     $transaction_i = new Transaction();
                     $transaction_i->setAmount($comsion);
-                    $transaction_i->setDescription('Invitation Bonus');
+                   $transactiondescriptionB=  TransactionDescriptionPeer::retrieveByPK(10);
+                $transaction_i->setTransactionTypeId($transactiondescriptionB->getTransactionType());
+                $transaction_i->setTransactionDescriptionId($transactiondescriptionB->getId());
+                $transaction_i->setDescription($transactiondescriptionB->getTitle());
+                 
                     $transaction_i->setCustomerId($invite->getCustomerId());
                     $transaction_i->setOrderId($OrderId);
                     $transaction_i->setTransactionStatusId(3);
@@ -3227,16 +3235,12 @@ $callsHistory->save();
         $callLogs =CallHistoryCallsLogPeer::doSelect($c);
 
         foreach($callLogs as $callLog){
-
         $this->fromdate =$callLog->getFromdate();
-
         $this->todate =$callLog->getTodate();
         $customer=  CustomerPeer::retrieveByPK($callLog->getCustomerId());
-
        $tilentaCallHistryResult = Telienta::callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
   if($tilentaCallHistryResult){
   foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
-
         $cuCalls = new CustomerCalls();
         $cuCalls->setAccountId($xdr->account_id);
         $cuCalls->setBillStatus($xdr->bill_status);
@@ -3264,16 +3268,9 @@ $callsHistory->save();
    $callLogs->save();
   } 
         }
-
-
-
-
+ 
          return sfView::NONE;
       }
-
-
-
-
 
 
 
