@@ -196,7 +196,7 @@ if($getFirstnumberofMobile==0){
 $numbername=$customer->getUniqueid();
 
 
-                          $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate, $todate);
+                          $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59');
 
 
                             foreach ($tilentaCallHistryResult->xdr_list as $xdr) { //echo "<pre>";echo var_dump($tilentaCallHistryResult);echo "</pre>";
