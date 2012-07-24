@@ -78,10 +78,10 @@
                     <div class="callhistoryheadings">
 
 
-                          <h1><?php echo 'Subscription Charges'; ?> </h1>
-                    <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign" border='0'>
+                          <h1><?php echo __("Subscription Charges"); ?> </h1>
+                    <table width="100%" cellspacing="0" cellpadding="2"  class="callhistory" border='0'>
                         <tr class="headings">
-                            <th class="title"><?php echo __('Date &amp; time') ?></th>
+                            <th class="title"><?php echo __('Date and time') ?></th>
                             <th class="title" width="40%"><?php echo __('Description') ?></th>
 
                             <th class="title" align="right" style="text-align:right !important;"><?php echo __('Amount') ?></th>
