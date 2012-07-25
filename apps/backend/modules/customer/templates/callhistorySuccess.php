@@ -36,7 +36,7 @@ if($pus==1){
 
     <?php } else {
         
-    if(isset($_POST['startdate']) && isset($_POST['enddate'])){
+    /*if(isset($_POST['startdate']) && isset($_POST['enddate'])){
         $fromdate=$_POST['startdate']. ' 00:00:00';
         $todate=$_POST['enddate']. ' 23:59:59';
     }else{
@@ -44,7 +44,7 @@ if($pus==1){
         $fromdate=date("Y-m-d", $tomorrow1). ' 00:00:00';
         //$tomorrow = mktime(0,0,0,date("m"),date("d")+1,date("Y"));
         $todate=date("Y-m-d"). ' 23:59:59';
-    }
+    }*/
         
         ?>
     <div id="sf_admin_content">
@@ -60,14 +60,16 @@ if($pus==1){
                         <label><?php echo __('From');?>:</label>
                         <div class="content">
 <!--                            <input type="text" value="2012-05-31"  id="startdates" autocomplete="off" name="startdate" class="hasDatepicker" />-->
-                            <?php echo input_date_tag('startdate', $fromdate, 'rich=true') ?>
+                            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo @$fromdate1; ?>" />
+                            <?php //echo input_date_tag('startdate', $fromdate1, 'rich=true') ?>
                         </div>
                     </div>
                     <div class="form-row">
                         <label><?php echo __('To');?>:</label>
                         <div class="content">
 <!--                                <input id="enddates" class="hasDatepicker" type="text" size="12" value="2012-05-31" name="enddate" autocomplete="off" />-->
-                            <?php echo input_date_tag('enddate', $todate, 'rich=true') ?>
+                            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$todate1; ?>" />
+                            <?php //echo input_date_tag('enddate', $todate1, 'rich=true') ?>
                         </div>
                     </div>
 
@@ -194,7 +196,7 @@ if($getFirstnumberofMobile==0){
 $numbername=$customer->getUniqueid();
 
 
-                          $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate, $todate);
+                          $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59');
 
 
                             foreach ($tilentaCallHistryResult->xdr_list as $xdr) { //echo "<pre>";echo var_dump($tilentaCallHistryResult);echo "</pre>";
