@@ -361,8 +361,8 @@ class customerActions extends autocustomerActions {
         if (($request->getParameter('mobile_number')) && $request->getParameter('charge_amount') != '') {
             $validated = false;
             $mobile_number = $request->getParameter('mobile_number');
-            $extra_refill = $request->getParameter('charge_amount');
-            $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
+            $extra_refill_wovat = $request->getParameter('charge_amount');
+            $extra_refill = $extra_refill_wovat; //$extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
             $transaction = new Transaction();
             $order = new CustomerOrder();
@@ -389,7 +389,7 @@ class customerActions extends autocustomerActions {
                 $order->setCustomerId($customer->getId());
                 $order->setProductId($customer_product->getId());
                 $order->setQuantity(1);
-                $order->setExtraRefill(-$extra_refill);
+                $order->setExtraRefill(-$extra_refill_wovat);
                 $order->setIsFirstOrder(false);
                 $order->setOrderStatusId(1);
                 //$order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
@@ -402,7 +402,7 @@ class customerActions extends autocustomerActions {
                 $transaction->setTransactionFrom(2);
 
                 $transaction->save();
-                Telienta::charge($customer, $extra_refill, $request->getParameter('transaction_description'));
+                Telienta::charge($customer, $order->getExtraRefill(), $request->getParameter('transaction_description'));
                 //set status
                 $order->setOrderStatusId(3);
                 $transaction->setTransactionStatusId(3);
