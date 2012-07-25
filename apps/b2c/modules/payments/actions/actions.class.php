@@ -180,8 +180,10 @@ class paymentsActions extends sfActions {
         $order->setIsFirstOrder(1);
         $order->save();
         $transaction->setAmount($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage')));
-        //TODO: $transaction->setAmount($order->getProduct()->getPrice());
-        $transaction->setDescription('Registration');
+          $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(8);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
         //$transaction->setTransactionStatusId() // default value 1

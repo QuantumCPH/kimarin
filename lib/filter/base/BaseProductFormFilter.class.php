@@ -33,9 +33,9 @@ class BaseProductFormFilter extends BaseFormFilterPropel
       'product_order'         => new sfWidgetFormFilterInput(),
       'product_type_package'  => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'product_country_us'    => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
-      'billing_product_id'    => new sfWidgetFormPropelChoice(array('model' => 'BillingProducts', 'add_empty' => true)),
+      'billing_product_id'    => new sfWidgetFormFilterInput(),
       'is_in_b2b'             => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
-      'product_type_id'       => new sfWidgetFormPropelChoice(array('model' => 'ProductType', 'add_empty' => true)),
+      'product_type_id'       => new sfWidgetFormFilterInput(),
       'bonus'                 => new sfWidgetFormFilterInput(),
     ));
 
@@ -59,9 +59,9 @@ class BaseProductFormFilter extends BaseFormFilterPropel
       'product_order'         => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'product_type_package'  => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'product_country_us'    => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
-      'billing_product_id'    => new sfValidatorPropelChoice(array('required' => false, 'model' => 'BillingProducts', 'column' => 'id')),
+      'billing_product_id'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'is_in_b2b'             => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
-      'product_type_id'       => new sfValidatorPropelChoice(array('required' => false, 'model' => 'ProductType', 'column' => 'id')),
+      'product_type_id'       => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'bonus'                 => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
     ));
 
@@ -100,9 +100,9 @@ class BaseProductFormFilter extends BaseFormFilterPropel
       'product_order'         => 'Number',
       'product_type_package'  => 'Boolean',
       'product_country_us'    => 'Boolean',
-      'billing_product_id'    => 'ForeignKey',
+      'billing_product_id'    => 'Number',
       'is_in_b2b'             => 'Boolean',
-      'product_type_id'       => 'ForeignKey',
+      'product_type_id'       => 'Number',
       'bonus'                 => 'Number',
     );
   }
