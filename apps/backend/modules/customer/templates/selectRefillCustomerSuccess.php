@@ -26,7 +26,7 @@
              <div class="content">
                  <select id="transaction_description" name="transaction_description" class="required">                    
                     <?php    foreach($transactionDescriptions as $transactionDescription){?>
-                    <option value="<?php echo $transactionDescription->getTitle();   ?>"><?php echo $transactionDescription->getTitle();   ?></option>
+                    <option value="<?php echo $transactionDescription->getId();   ?>"><?php echo $transactionDescription->getTitle();   ?></option>
                     <?php } ?>
                 </select>
             </div>
