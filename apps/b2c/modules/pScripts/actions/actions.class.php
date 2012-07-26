@@ -853,8 +853,8 @@ class pScriptsActions extends sfActions
 
 
 
-	$sender_email = sfConfig::get('app_email_sender_email', 'support@kimarin.es');
-	$sender_name = sfConfig::get('app_email_sender_name', 'Kimarin support');
+	$sender_email = sfConfig::get('app_email_support_name');
+	$sender_name = sfConfig::get('app_email_support_email');
 
         echo '<br/>';
         echo $sender_email ;
