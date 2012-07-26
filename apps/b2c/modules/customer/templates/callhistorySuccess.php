@@ -70,17 +70,14 @@
             if ($pus == 1) {
             ?>
                         <?php } else {
- ?>        
-                    <div class="callhistoryheadings">
-                          <h1><?php echo 'Subscription Charges'; ?> </h1>
-                    <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign" border='0'>
-                        <tr class="headings">
-                            <th class="title"><?php echo __('Date &amp; time') ?></th>
-                            <th class="title" width="40%"><?php echo __('Description') ?></th>
-
-                            <th class="title" align="right" style="text-align:right !important;"><?php echo __('Amount') ?></th>
-
-                            </tr>
+ ?>                 
+                      <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription Charges"); ?> </h2></div><br />
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
+                        <tr>
+                            <td class="title"><?php echo __('Date and time') ?></td>
+                            <td class="title" width="40%"><?php echo __('Description') ?></td>
+                            <td class="title" align="right" style="text-align:right !important;"><?php echo __('Amount') ?></td>
+                        </tr>
                         <?php
                         $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 4);
                         if(count($tilentaCallHistryResult)>0){
@@ -99,7 +96,9 @@
 
                             } ?>
 
-                        </table><br/><br/><h2><?php echo __("Other events"); ?> </h2></div><br />
+                        </table><br/><br/>
+                        
+                    <div class="callhistoryheadings"><h2><?php echo __("Other events"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
                             <td class="title"><?php echo __('Date and time') ?></td>
