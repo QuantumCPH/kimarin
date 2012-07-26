@@ -643,6 +643,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
                         'from_date'=>'from date',
 			'country_id'=>'Country',
 			'device_id'=>'Mobile Model',
+                        'password'=>'Create password',
 			'password_confirm'=>'Confirm password',
 			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)',
                         'second_last_name'=>'Middle name',

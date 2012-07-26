@@ -234,12 +234,22 @@ class customerActions extends autocustomerActions {
         $this->customer = CustomerPeer::retrieveByPK($request->getParameter('id'));
         $this->redirectUnless($this->customer, "@homepage");
         $fromdate = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
-        $this->fromdate = date("d-m-Y", $fromdate);
+        $this->fromdate1 = date("d-m-Y", $fromdate);
+        $this->fromdate = date("Y-m-d", $fromdate);
         $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+<<<<<<< HEAD
         $this->todate = date("d-m-Y", $todate);
+=======
+        $this->todate1 = date("d-m-Y", $todate);
+        $this->todate = date("Y-m-d", $todate);
+
+>>>>>>> master
         if ($request->isMethod('post')) {
-            $this->fromdate = $request->getParameter('startdate');
-            $this->todate = $request->getParameter('enddate');
+            $this->fromdate1 = $request->getParameter('startdate');
+            $this->todate1 = $request->getParameter('enddate');
+
+            $this->fromdate = date("Y-m-d", strtotime($request->getParameter('startdate')));
+            $this->todate = date("Y-m-d", strtotime($request->getParameter('enddate')));
         }
         $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);
         if ($getFirstnumberofMobile == 0) {
@@ -300,8 +310,8 @@ class customerActions extends autocustomerActions {
         if (($request->getParameter('mobile_number')) && $request->getParameter('charge_amount') != '') {
             $validated = false;
             $mobile_number = $request->getParameter('mobile_number');
-            $extra_refill = $request->getParameter('charge_amount');
-            $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
+            $extra_refill_wovat = $request->getParameter('charge_amount');
+            $extra_refill = $extra_refill_wovat; //$extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
             $transaction = new Transaction();
             $order = new CustomerOrder();
@@ -328,7 +338,7 @@ class customerActions extends autocustomerActions {
                 $order->setCustomerId($customer->getId());
                 $order->setProductId($customer_product->getId());
                 $order->setQuantity(1);
-                $order->setExtraRefill(-$extra_refill);
+                $order->setExtraRefill(-$extra_refill_wovat);
                 $order->setIsFirstOrder(false);
                 $order->setOrderStatusId(1);
                 //$order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
@@ -344,7 +354,11 @@ class customerActions extends autocustomerActions {
                 $transaction->setTransactionFrom(2);
 
                 $transaction->save();
+<<<<<<< HEAD
                 Telienta::charge($customer, $extra_refill, $transactiondescription->getTitle());
+=======
+                Telienta::charge($customer, $order->getExtraRefill(), $request->getParameter('transaction_description'));
+>>>>>>> master
                 //set status
                 $order->setOrderStatusId(3);
                 $transaction->setTransactionStatusId(3);
