@@ -237,13 +237,11 @@ class customerActions extends autocustomerActions {
         $this->fromdate1 = date("d-m-Y", $fromdate);
         $this->fromdate = date("Y-m-d", $fromdate);
         $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-<<<<<<< HEAD
-        $this->todate = date("d-m-Y", $todate);
-=======
+
         $this->todate1 = date("d-m-Y", $todate);
         $this->todate = date("Y-m-d", $todate);
 
->>>>>>> master
+
         if ($request->isMethod('post')) {
             $this->fromdate1 = $request->getParameter('startdate');
             $this->todate1 = $request->getParameter('enddate');
@@ -354,11 +352,9 @@ class customerActions extends autocustomerActions {
                 $transaction->setTransactionFrom(2);
 
                 $transaction->save();
-<<<<<<< HEAD
-                Telienta::charge($customer, $extra_refill, $transactiondescription->getTitle());
-=======
-                Telienta::charge($customer, $order->getExtraRefill(), $request->getParameter('transaction_description'));
->>>>>>> master
+
+                Telienta::charge($customer, $order->getExtraRefill(), $transactiondescription->getTitle());
+
                 //set status
                 $order->setOrderStatusId(3);
                 $transaction->setTransactionStatusId(3);
