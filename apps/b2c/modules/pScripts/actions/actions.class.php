@@ -2627,7 +2627,10 @@ if(($caltype!="IC") && ($caltype!="hc")){
             $aph->save();
             
             emailLib::sendAgentRefilEmail($this->agent, $agent_order);
+
         }
+
+        return sfView::NONE;
     }
     
     public function executeCalbackrefill(sfWebRequest $request) {
