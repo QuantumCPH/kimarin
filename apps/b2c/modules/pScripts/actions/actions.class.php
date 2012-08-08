@@ -2866,7 +2866,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
             if (CustomerProductPeer::doCount($c) != 0) {
 
                 //Customer is already registered.
-                echo __('The customer is already registered.');
+                //echo __('The customer is already registered.');
                 //exit the script successfully
                 return sfView::NONE;
             }
@@ -3147,6 +3147,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
                 $this->logMessage('Error in transaction.');
             } 
         }
+	//header('HTTP/1.1 200 OK');
         return sfView::NONE;
     }
    public function executeEmailTest(sfWebRequest $request) {

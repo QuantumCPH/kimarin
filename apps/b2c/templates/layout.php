@@ -35,13 +35,14 @@
   
 </head>
 <body>
-<!--    <div style="vertical-align: top;float: right;">
+    <div style="vertical-align: top;float: right;">
 
-                        <?php echo link_to(image_tag('/images/lang_de1.png'), 'customer/changeCulture?new=de'); ?>
-                        <?php echo link_to(image_tag('/images/lang_spa1.png'), 'customer/changeCulture?new=es', array('id'=>'lang_spa')); ?>
-                         <?php echo link_to(image_tag('/images/lang_eng1.png'), 'customer/changeCulture?new=en'); ?>
+    <?php echo link_to(image_tag('/images/lang_de1.png'), 'customer/changeCulture?new=de',array('title'=>'de')); ?>
+    <?php echo link_to(image_tag('/images/lang_spa1.png'), 'customer/changeCulture?new=es', array('id'=>'lang_spa','title'=>'es')); ?>
+    <?php //echo link_to(image_tag('/images/lang_spa1.png'), 'customer/changeCulture?new=ca', array('id'=>'lang_spa','title'=>'ca')); ?>
+    <?php echo link_to(image_tag('/images/lang_eng1.png'), 'customer/changeCulture?new=en',array('title'=>'en')); ?>
 
-             </div>-->
+             </div>
 <div id="wrap"><?php //echo $sf_user->getCulture();
 // set alert if customer is not yet registered with fonet
 
@@ -54,13 +55,13 @@
 
 <script type="text/javascript"> 	
     Cufon.now(); 
-     $(document).ready(function()
+     jQuery(document).ready(function()
      {
-        $('.submitBtn').corner('round 5px');
-        $('.sidebar_button').corner('round 5px');
-        $('.butonsigninsmall').corner('round 5px');
-        $('.buton').corner('round 5px');
-        $('.loginbuttun').corner('round 5px');
+        jQuery('.submitBtn').corner('round 5px');
+        jQuery('.sidebar_button').corner('round 5px');
+        jQuery('.butonsigninsmall').corner('round 5px');
+        jQuery('.buton').corner('round 5px');
+        jQuery('.loginbuttun').corner('round 5px');
         
      }); 
 </script>
