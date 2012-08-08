@@ -150,7 +150,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
   <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill" target="_parent">
      <div style="width:510px;">
      <div  style="width:510px;float:left;"> 
-          <div class="refillhead"><?php echo __('Manual filling:') ?></div>
+          <div class="refillhead"><?php echo __('Manual refill.') ?></div>
           <p> <?php echo __('You can refill your Kimarin Account with the following amounts:')?></p>
          <ul class="welcome">
          	<!-- customer product -->
