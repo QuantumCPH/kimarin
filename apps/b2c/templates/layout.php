@@ -68,9 +68,10 @@
 
 <?php if($sf_user->getCulture()=='en'){    ?>
    <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validate1.js"></script>
-
-   <?php }else{  ?>
-      <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatede.js"></script>
+<?php }elseif($sf_user->getCulture()=='es'){    ?>
+   <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatees.js"></script>
+<?php }else{  ?>
+  <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatede.js"></script>
  <?php  } ?>
 </body>
 </html>
