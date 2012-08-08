@@ -353,6 +353,7 @@ class customerActions extends autocustomerActions {
 
                 $transaction->save();
 
+
                 Telienta::charge($customer, $extra_refill_wovat, $transactiondescription->getTitle());
 
                 //set status
