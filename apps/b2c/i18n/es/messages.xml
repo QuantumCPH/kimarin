@@ -1984,7 +1984,7 @@
                 <target>Recarga a través de agente</target>
             </trans-unit>
             <trans-unit id="493" translate="yes" reformat="yes" xml:space="default">
-                <source>Fee for change of number</source>
+                <source>Fee for change number</source>
                 <target>Tarifa por cambio de número</target>
             </trans-unit>
             <trans-unit id="494" translate="yes" reformat="yes" xml:space="default">
@@ -2077,12 +2077,12 @@
                 <target>MÁS %1%%2%</target>
             </trans-unit>
             <trans-unit id="516" translate="yes" reformat="yes" xml:space="default">
-                <source> (airtime value: %1%%2% %3%)</source>
-                <target> (valor del tiempo de uso: %1%%2% %3%)</target>
+                <source> (airtime value:</source>
+                <target> (valor del tiempo de uso:</target>
             </trans-unit>
             <trans-unit id="517" translate="yes" reformat="yes" xml:space="default">
-                <source>The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. The refill amount is valid for 180 days.</source>
-                <target>El valor del tiempo de uso sobre en el saldo de su cuenta no puede sobrepasar los 250,00%1% en ningún momento. </target>
+                <source>The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time.</source>
+                <target>El valor del tiempo de uso sobre en el saldo de su cuenta no puede sobrepasar los 250,00%1% en ningún momento.</target>
             </trans-unit>
             <trans-unit id="518" translate="yes" reformat="yes" xml:space="default">
                 <source>Select amount to be refilled:</source>
