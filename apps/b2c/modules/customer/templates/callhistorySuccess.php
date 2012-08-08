@@ -233,9 +233,7 @@
 
                                     if ($pus == 0) {
 ?>
-
-
-                                    <tr><td colspan="5" style="text-align: right"><?php echo __('All amounts excl. IVA.');?></td></tr> <?php } ?>
+                                    <tr><td colspan="5" style="text-align: right"><?php echo __('All amounts excl. IVA.') ?></td></tr> <?php } ?>
                                 </table>
 
                         <?php } ?>
