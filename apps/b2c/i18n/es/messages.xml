@@ -1156,8 +1156,8 @@
                 <target>IVA</target>
             </trans-unit>
             <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
-                <source>Charge by Kimarin Customer Support</source>
-                <target>Cargo por el servicio de atención al cliente de Kimarin</target>
+                <source>Charge by Customer Support</source>
+                <target>Cargo por el servicio de atención al cliente de</target>
             </trans-unit>
             <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
                 <source>Afghanistan</source>
@@ -1976,8 +1976,8 @@
                 <target>Solicitar otros productos.</target>
             </trans-unit>    
             <trans-unit id="491" translate="yes" reformat="yes" xml:space="default">
-                <source>Refill by Kimarin Customer Support</source>
-                <target>Recarga por el servicio de atención al cliente de Kimarin</target>
+                <source>Refill by Customer Support</source>
+                <target>Recarga por el servicio de atención al cliente de</target>
             </trans-unit>
             <trans-unit id="492" translate="yes" reformat="yes" xml:space="default">
                 <source>Refill via agent</source>
