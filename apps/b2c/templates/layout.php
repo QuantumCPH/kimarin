@@ -35,13 +35,13 @@
   
 </head>
 <body>
-<!--    <div style="vertical-align: top;float: right;">
+    <div style="vertical-align: top;float: right;">
 
                         <?php echo link_to(image_tag('/images/lang_de1.png'), 'customer/changeCulture?new=de'); ?>
                         <?php echo link_to(image_tag('/images/lang_spa1.png'), 'customer/changeCulture?new=es', array('id'=>'lang_spa')); ?>
                          <?php echo link_to(image_tag('/images/lang_eng1.png'), 'customer/changeCulture?new=en'); ?>
 
-             </div>-->
+             </div>
 <div id="wrap"><?php //echo $sf_user->getCulture();
 // set alert if customer is not yet registered with fonet
 
@@ -67,9 +67,10 @@
 
 <?php if($sf_user->getCulture()=='en'){    ?>
    <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validate1.js"></script>
-
-   <?php }else{  ?>
-      <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatede.js"></script>
+<?php }elseif($sf_user->getCulture()=='es'){    ?>
+   <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatees.js"></script>
+<?php }else{  ?>
+  <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatede.js"></script>
  <?php  } ?>
 </body>
 </html>

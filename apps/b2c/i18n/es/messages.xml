@@ -1984,7 +1984,7 @@
                 <target>Recarga a través de agente</target>
             </trans-unit>
             <trans-unit id="493" translate="yes" reformat="yes" xml:space="default">
-                <source>Fee for change of number</source>
+                <source>Fee for change number</source>
                 <target>Tarifa por cambio de número</target>
             </trans-unit>
             <trans-unit id="494" translate="yes" reformat="yes" xml:space="default">
