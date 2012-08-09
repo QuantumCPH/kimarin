@@ -546,7 +546,7 @@
             </trans-unit>
                <trans-unit id="134" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile service provider</source>
-                <target>Compañía de telefonía móvil</target>
+                <target>Compañía de telefonía&lt;br /&gt;móvil</target>
             </trans-unit>
                <trans-unit id="135" translate="yes" reformat="yes" xml:space="default">
                 <source>Please check this box to confirm that you have&lt;br /&gt;read and accept the %1% terms and conditions.</source>
