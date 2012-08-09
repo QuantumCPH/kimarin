@@ -67,6 +67,7 @@ body {font-family:Calibri; font-size:14px; color:#0c74a5;font-style: normal;}
 #login-modal button{ background-image:url(../images/bg-login-btn.jpg); width:77px;  height:28px;  font-size:13px; border:0px; color:#fff; padding-bottom:0px; padding-top:0px;}
 #login-modal p{ margin-bottom:10px;}
 .loginblock{ margin-bottom: 11px;}
+.loginblock-en{ margin-bottom: 16px;}
 .loginfield-de{display:block !important;height:38px !important;width: 148px !important;}
 .forgotField-de{display:block;height:19px;width: 148px;}
 .loginfield-ca{display:block !important;height:35px !important;width: 148px !important;}
