@@ -2,9 +2,13 @@
 <?php use_helper('Number') ?>
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Refill') ) ) ?>
 <?php 
-		 //echo $res_cbf;
+ if($sf_user->getCulture()=='de'){
+     $class = 'refill_de';
+ }  else {
+     $class = '';
+ }
  if($customerBalance+$order->getExtraRefill() >= 250){   ?>
-    <?php echo "<div class='alert_bar'>".__("Sorry! You Cant do payment as your balance will excede from 250%1%",array("%1%"=>sfConfig::get("app_currency_code"))).'</div>'; ?>
+    <?php echo "<div class='alert_bar ".$class."'>".__("Sorry! You Cant do payment as your balance will excede from 250%1%",array("%1%"=>sfConfig::get("app_currency_code"))).'</div>'; ?>
  <?php } ?>
 <br />
 <div class="left-col">
