@@ -733,7 +733,7 @@
                 <target>Un cordial saludo,</target>
             </trans-unit>
             <trans-unit id="180" translate="yes" reformat="yes" xml:space="default">
-                <source>Order receipt</source>
+                <source>Order Receipt</source>
                 <target>Recibo del pedido</target>
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
