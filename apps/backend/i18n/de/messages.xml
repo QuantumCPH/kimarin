@@ -195,7 +195,7 @@
                 <target>Zwischensumme</target>
             </trans-unit>
             <trans-unit id="48" translate="yes" reformat="yes" xml:space="default">
-                <source>Customer number</source>
+                <source>Customer Number</source>
                 <target>Kundennummer</target>
             </trans-unit>
             <trans-unit id="49" translate="yes" reformat="yes" xml:space="default">
@@ -731,7 +731,7 @@
                 <target>Mit freundlichen Grüßen,</target>
             </trans-unit>
             <trans-unit id="180" translate="yes" reformat="yes" xml:space="default">
-                <source>Order receipt</source>
+                <source>Order Receipt</source>
                 <target>Beleg der Bestellung</target>
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
@@ -2011,7 +2011,7 @@
                 <target>Telefon</target>
             </trans-unit>
             <trans-unit id="499" translate="yes" reformat="yes" xml:space="default">
-                <source>Agent name</source>
+                <source>Agent Name</source>
                 <target>Name Mitarbeiter</target>
             </trans-unit>          
             <trans-unit id="500" translate="yes" reformat="yes" xml:space="default">
