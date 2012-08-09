@@ -2147,6 +2147,10 @@
                 <source>Bonus</source>
                 <target>Bonificació</target>
             </trans-unit>
+	    <trans-unit id="534" translate="yes" reformat="yes" xml:space="default">
+                <source>Order Receipt</source>
+                <target>Rebut de la comanda</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
