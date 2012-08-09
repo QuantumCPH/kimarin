@@ -20,11 +20,11 @@
          </div>
 <div style="clear:both;height:1px;"></div>
   <?php //echo $sf_user->getCulture();
-          if($sf_user->getCulture()=='en'){
+          if($sf_user->getCulture()=='es'){
               $clsLoginField = "class='loginfield-es'";
               $clsForgotField = "class='forgotField-es'";
               $clsLogin = "class='loginblock'";
-              $pclass = "yourpassword";
+              $pclass = "yourpassword-es";
           }elseif($sf_user->getCulture()=='de'){
               $clsLogin = "class='loginblock'";
               $clsLoginField = "class='loginfield-de'";
@@ -52,12 +52,13 @@
             <div <?php echo $clsLogin;?>> 
                 <label <?php echo $clsLoginField;?>><?php echo __('Enter your mobile number') ?></label>
                 <input type="text"  class="input"  name="mobile_number" id="mobile_number" />
-                <p class="error_msg" style="color: red; margin-bottom:1px; position: relative; top: -2px;">
                 <?php
                 if ($sf_user->hasFlash('error_message')): ?>
+                <p class="error_msg" style="color: red; margin-bottom:1px; position: relative; top: -2px;">
                 <?php echo $sf_user->getFlash('error_message'); ?>
+                </p>
                 <?php
-                endif;?>&nbsp;</p>
+                endif;?>
                 <label style="text-align:left;"><?php echo __('Password') ?></label><br />
                 <input  class="input" type="password" name="password" id="password" /><br />
                 </div>
@@ -101,7 +102,7 @@
 	<?php if ($sf_user->hasFlash('send_password_error_message')): ?>
 	<p class="error_msg" style="color: red; margin:6px auto;"><?php echo $sf_user->getFlash('send_password_error_message') ?></p>
 	<?php endif;?>
-        <p class="yourpassword <?php echo $pclass;?>"><?php echo __('Your password will be sent to the above e-mail address shortly.') ?></p>
+        <p class="<?php echo $pclass;?>"><?php echo __('Your password will be sent to the above e-mail address shortly.') ?></p>
         <input  style="cursor: pointer;"  class="loginbuttun"  type="submit" name="submit" value="<?php echo __('Send');?>" />
         
         

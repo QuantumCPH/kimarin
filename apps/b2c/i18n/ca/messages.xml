@@ -295,7 +295,7 @@
                 <target>otra historia</target>
             </trans-unit>
             <trans-unit id="73" translate="yes" reformat="yes" xml:space="default">
-                <source>Call history</source>
+                <source>Call History</source>
                 <target>Registre de trucades</target>
             </trans-unit>
             <trans-unit id="74" translate="yes" reformat="yes" xml:space="default">
@@ -1956,8 +1956,8 @@
                 <target>Número del destinatari (sense 0 inicial)</target>
             </trans-unit>
             <trans-unit id="486" translate="yes" reformat="yes" xml:space="default">
-                <source>Welcome to MY ACCOUNT.</source>
-                <target>Benvingut al MEU COMPTE.</target>
+                <source>Welcome to MY ACCOUNT</source>
+                <target>Benvingut al MEU COMPTE</target>
             </trans-unit>
             <trans-unit id="487" translate="yes" reformat="yes" xml:space="default">
                 <source>Refill your account.</source>

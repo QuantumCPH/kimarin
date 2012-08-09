@@ -10,9 +10,9 @@
 <?php use_javascript('../zerocall/js/jquery-1.4.2.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('../zerocall/js/jquery.jcarousel.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('../zerocall/js/carousel.js', '', array('absolute'=>true)) ?>
-<?php use_javascript('../zerocall/js/cufon-yui.js', '', array('absolute'=>true)) ?>
-<?php use_javascript('../zerocall/js/calibri.cufonfonts.js', '', array('absolute'=>true)) ?>
-<?php use_javascript('../zerocall/js/cufon-replace.js', '', array('absolute'=>true)) ?>
+<?php //use_javascript('../zerocall/js/cufon-yui.js', '', array('absolute'=>true)) ?>
+<?php //use_javascript('../zerocall/js/calibri.cufonfonts.js', '', array('absolute'=>true)) ?>
+<?php //use_javascript('../zerocall/js/cufon-replace.js', '', array('absolute'=>true)) ?>
 
 <?php use_javascript('jquery.formatCurrency-1.3.0.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('i18n/jquery.formatCurrency.all.js', '', array('absolute'=>true)) ?>
@@ -54,7 +54,7 @@
 <!-- end wrap -->
 
 <script type="text/javascript"> 	
-    Cufon.now(); 
+    //Cufon.now(); 
      jQuery(document).ready(function()
      {
         jQuery('.submitBtn').corner('round 5px');

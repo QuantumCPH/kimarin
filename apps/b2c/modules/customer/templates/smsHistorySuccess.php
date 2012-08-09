@@ -1,14 +1,8 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('SMS History')) ) ?>
-<?php
-if($sf_user->getCulture()=='ca'){
-     $class = 'refill_de';
- }  else {
-     $class = '';
- }
-?>
-<div class="alert_bar <?php echo $class?>">
+
+<div class="alert_bar">
 	<?php echo __('Your SMS history will be updated 5 - 10 minutes after you have sent your SMS.') ?>
 </div>
   <div class="left-col">
