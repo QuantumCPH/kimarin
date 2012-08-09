@@ -2,6 +2,9 @@
 /* CSS Document */
 * {margin:0px;padding:0px;}
 body {font-family:Calibri; font-size:14px; color:#0c74a5;font-style: normal;}
+h1{ font-size:20px;}
+h2{ font-size:18px;}
+h3{ font-size:16px;}
 #wrap {width:780px;margin:0px auto;}
 #header {width:780px;height:119px;}
 #logo {width:168px; height:79px; float:left;}
