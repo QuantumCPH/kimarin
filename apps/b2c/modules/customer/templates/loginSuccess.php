@@ -37,7 +37,7 @@
               $pclass = "yourpassword-ca";
           }else{
               $class = 'class="textes"';
-              $clsLogin = "class='loginblock'";
+              $clsLogin = "class='loginblock-en'";
               $clsLoginField = "class='loginfield'";
               $clsForgotField = "class='forgotField'";
               $pclass = "yourpassword";
