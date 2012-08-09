@@ -10,6 +10,7 @@
 
     });
 </script>
+
 <div class="alert_bar">
         <?php echo __('Your call history will be updated 5 - 10 minutes after you have finalised your call.') ?>
     </div>
@@ -74,10 +75,10 @@
                       <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription Charges"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
-                            <td class="title"><?php echo __('Date and time') ?></td>
-                            <td class="title" width="40%"><?php echo __('Description') ?></td>
-                            <td class="title" align="right" style="text-align:right !important;"><?php echo __('Amount') ?></td>
-                        </tr>
+                            <td width="26%" class="title"><?php echo __('Date and time') ?></td>
+                            <td class="title" width="32%"><?php echo __('Description') ?></td>
+                          <td width="42%" align="right" class="title" style="text-align:right !important;"><?php echo __('Amount') ?></td>
+                      </tr>
                         <?php
                         $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 4);
                         if(count($tilentaCallHistryResult)>0){
