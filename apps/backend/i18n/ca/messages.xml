@@ -2151,6 +2151,10 @@
                 <source>Order Receipt</source>
                 <target>Rebut de la comanda</target>
             </trans-unit>
+            <trans-unit id="535" translate="yes" reformat="yes" xml:space="default">
+                <source>If you have any questions please feel free to contact our customer support center at</source>
+                <target>Si vostè té alguna pregunta no dubti en posar-se en contacte amb el nostre centre de suport al client en</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
