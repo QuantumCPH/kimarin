@@ -21,21 +21,26 @@
 <div style="clear:both;height:1px;"></div>
   <?php //echo $sf_user->getCulture();
           if($sf_user->getCulture()=='en'){
-              $class = 'class="texten"';
-              $style = 'style ="display:block;height:18px;width: 148px;"';
               $clsLoginField = "class='loginfield-es'";
               $clsForgotField = "class='forgotField-es'";
               $clsLogin = "class='loginblock'";
+              $pclass = "yourpassword";
           }elseif($sf_user->getCulture()=='de'){
               $clsLogin = "class='loginblock'";
               $clsLoginField = "class='loginfield-de'";
               $clsForgotField = "class='forgotField-de'";
+              $pclass = "yourpassword";
+          }elseif($sf_user->getCulture()=='ca'){
+              $clsLogin = "class='loginblock'";
+              $clsLoginField = "class='loginfield-ca'";
+              $clsForgotField = "class='forgotField-ca'";
+              $pclass = "yourpassword-ca";
           }else{
               $class = 'class="textes"';
-              $style = 'style ="display:block;height:18px;width: 148px;"';
               $clsLogin = "class='loginblock'";
               $clsLoginField = "class='loginfield'";
               $clsForgotField = "class='forgotField'";
+              $pclass = "yourpassword";
           }
         ?>              
   <div class="loginpagediv">
@@ -96,7 +101,7 @@
 	<?php if ($sf_user->hasFlash('send_password_error_message')): ?>
 	<p class="error_msg" style="color: red; margin:6px auto;"><?php echo $sf_user->getFlash('send_password_error_message') ?></p>
 	<?php endif;?>
-        <p class="yourpassword"><?php echo __('Your password will be sent to the above e-mail address shortly.') ?></p>
+        <p class="yourpassword <?php echo $pclass;?>"><?php echo __('Your password will be sent to the above e-mail address shortly.') ?></p>
         <input  style="cursor: pointer;"  class="loginbuttun"  type="submit" name="submit" value="<?php echo __('Send');?>" />
         
         
