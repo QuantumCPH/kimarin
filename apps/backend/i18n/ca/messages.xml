@@ -195,7 +195,7 @@
                 <target>Import total</target>
             </trans-unit>
             <trans-unit id="48" translate="yes" reformat="yes" xml:space="default">
-                <source>Customer number</source>
+                <source>Customer Number</source>
                 <target>Número de client</target>
             </trans-unit>
             <trans-unit id="49" translate="yes" reformat="yes" xml:space="default">
@@ -733,7 +733,7 @@
                 <target>Cordialment,</target>
             </trans-unit>
             <trans-unit id="180" translate="yes" reformat="yes" xml:space="default">
-                <source>Order receipt</source>
+                <source>Order Receipt</source>
                 <target>Rebut de la comanda,</target>
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
@@ -1996,7 +1996,7 @@
                 <target>Telèfon</target>
             </trans-unit>
             <trans-unit id="496" translate="yes" reformat="yes" xml:space="default">
-                <source>Agent name</source>
+                <source>Agent Name</source>
                 <target>Nom de l'agent</target>
             </trans-unit>            
             <trans-unit id="497" translate="yes" reformat="yes" xml:space="default">
