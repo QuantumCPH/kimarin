@@ -805,7 +805,7 @@
             </trans-unit>
             <trans-unit id="197" translate="yes" reformat="yes" xml:space="default">
                 <source>navigations</source>
-                <target>navegaciones</target>
+                <target>navegacions</target>
             </trans-unit>
             <trans-unit id="198" translate="yes" reformat="yes" xml:space="default">
                 <source>Go to %1%'s web site for registration.</source>
