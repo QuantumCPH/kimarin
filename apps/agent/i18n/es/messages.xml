@@ -195,7 +195,7 @@
                 <target>Total parcial</target>
             </trans-unit>
             <trans-unit id="48" translate="yes" reformat="yes" xml:space="default">
-                <source>Customer number</source>
+                <source>Customer Number</source>
                 <target>Número de cliente</target>
             </trans-unit>
             <trans-unit id="49" translate="yes" reformat="yes" xml:space="default">
