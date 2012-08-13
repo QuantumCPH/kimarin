@@ -1133,7 +1133,7 @@
             </trans-unit>
             <trans-unit id="280" translate="yes" reformat="yes" xml:space="default">
                 <source>Country of citizenship</source>
-                <target>País de su nacionalidad</target>
+                <target>País de su&lt;br /&gt;nacionalidad</target>
             </trans-unit>
             <trans-unit id="281" translate="yes" reformat="yes" xml:space="default">
                 <source>Province</source>
