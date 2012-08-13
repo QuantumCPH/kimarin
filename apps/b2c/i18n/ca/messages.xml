@@ -510,7 +510,7 @@
             </trans-unit>
             <trans-unit id="125" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number 0034</source>
-                <target>Número de mòbil 0034</target>
+                <target>Número de mòbil&lt;br /&gt;0034</target>
             </trans-unit>
             <trans-unit id="126" translate="yes" reformat="yes" xml:space="default">
                 <source>Product</source>
