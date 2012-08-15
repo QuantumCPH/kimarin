@@ -563,8 +563,6 @@ class customerActions extends autocustomerActions {
         $c->addAnd(UniqueIdsPeer::STATUS, 0);
         $this->uniqueId = UniqueIdsPeer::doSelectOne($c);
         $this->redirectUnless($this->uniqueId, "@homepage");
-
-
         $cp = new Criteria;
         $cp->add(TelintaAccountsPeer::I_CUSTOMER, $this->customer->getICustomer());
         $cp->addAnd(TelintaAccountsPeer::STATUS, 3);
@@ -617,5 +615,4 @@ class customerActions extends autocustomerActions {
         return sfView::none;
     }
 
- 
 }
