@@ -460,14 +460,11 @@ return number_format($bill_charge/100.00, 2);
     			throw $e;
     		}
 		}
-		
-		//create invoice
+				//create invoice
 		$new_invoice = new Invoice();
 		$new_invoice->setCompany($company);
 		$new_invoice->setBillingStartingDate($billing_start_date);
 		$new_invoice->setBillingEndingDate($billing_end_date);
-		
-		
 		
 		//get the billing_due_days for the company
 		$billing_due_days = $company->getPackage()->getBillingDueDays();
@@ -713,13 +710,53 @@ return number_format($bill_charge/100.00, 2);
 	}
 
         function executeSelectIntervalAlert(sfRequest $request)
-	{
+	{	}
 
-
-	}
-
+ 
+        function executeRegistrationType(sfRequest $request)
+	{       }   
+        
+          function executeTotalSaleStat(sfRequest $request)
+	{       }   
+          function executeTotalRefilSale(sfRequest $request)
+	{       }   
+          function executeTotalProductSale(sfRequest $request)
+	{       }   
+         function executeCustomerRegistrationReport(sfRequest $request)
+	{   
+              if($request->getParameter('startdate')){
+         $billing_start_date = $request->getParameter('startdate');
+		 $billing_end_date  = $request->getParameter('enddate');
+                 $billing_start_date = date("Y-m-d 00:00:00", strtotime($billing_start_date));
+		 $billing_end_date  = date("Y-m-d 23:59:59", strtotime($billing_end_date));
+                
+                 
+        $this->startdate=$billing_start_date;
+      $this->enddate=$billing_end_date;
+        }else{
+              $date = mktime(0, 0, 0, date("m"), date("d") - 1, date("Y")); 
+         $startdate=date("Y-m-d 00:00:00", $date);
+           $enddate=date("Y-m-d 23:59:59", $date);
+             
+         $this->startdate=$startdate;
+       $this->enddate=$enddate;  
+            
+        }
+             
+             
+             }   
+        
+         function executeAgentProductSale(sfRequest $request)
+	{    
+             
+             
+             
+             
+             }
+ 
         function executeCountryStat(sfWebRequest $request){
             
         }
 
+ 
 }
