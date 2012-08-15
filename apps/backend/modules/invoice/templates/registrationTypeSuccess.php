@@ -128,37 +128,37 @@ $daytotal1=0;
     
       $conn = Propel::getConnection();
     $query = 'SELECT registration_type.id, registration_type.description
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND DATE( created_at ) ="'.$year.'-'.$month.'-01") AS day1_calls
- ,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND  customer_status_id=3 AND DATE( created_at ) ="'.$year.'-'.$month.'-02") AS day2_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND  customer_status_id=3 AND DATE( created_at ) ="'.$year.'-'.$month.'-03" ) AS day3_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND  customer_status_id=3 AND DATE( created_at ) ="'.$year.'-'.$month.'-04" ) AS day4_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-05") AS day5_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-06") AS day6_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-07") AS day7_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-08") AS day8_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-09") AS day9_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-10") AS day10_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-11") AS day11_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-12") AS day12_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-13") AS day13_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-14") AS day14_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-15") AS day15_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-16") AS day16_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-17") AS day17_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-18") AS day18_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-19") AS day19_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-20") AS day20_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-21") AS day21_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-22") AS day22_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-23") AS day23_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-24") AS day24_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-25") AS day25_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-26") AS day26_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-27") AS day27_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-28") AS day28_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-29") AS day29_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-30") AS day30_calls
-,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  DATE( created_at ) ="'.$year.'-'.$month.'-31") AS day31_calls 
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND DATE( created_at ) ="'.$year.'-'.$month.'-01") AS day1_calls
+ ,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND  customer_status_id=3 AND  i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-02") AS day2_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND  customer_status_id=3 AND   i_customer>0 AND DATE( created_at ) ="'.$year.'-'.$month.'-03" ) AS day3_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND  customer_status_id=3 AND  i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-04" ) AS day4_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-05") AS day5_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-06") AS day6_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-07") AS day7_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-08") AS day8_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-09") AS day9_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  i_customer>0 AND   DATE( created_at ) ="'.$year.'-'.$month.'-10") AS day10_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  i_customer>0 AND   DATE( created_at ) ="'.$year.'-'.$month.'-11") AS day11_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  i_customer>0 AND   DATE( created_at ) ="'.$year.'-'.$month.'-12") AS day12_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  i_customer>0 AND   DATE( created_at ) ="'.$year.'-'.$month.'-13") AS day13_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-14") AS day14_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-15") AS day15_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-16") AS day16_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-17") AS day17_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-18") AS day18_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-19") AS day19_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-20") AS day20_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-21") AS day21_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-22") AS day22_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-23") AS day23_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-24") AS day24_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-25") AS day25_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND  i_customer>0 AND   DATE( created_at ) ="'.$year.'-'.$month.'-26") AS day26_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-27") AS day27_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-28") AS day28_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-29") AS day29_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-30") AS day30_calls
+,(SELECT count( id ) FROM customer WHERE registration_type_id = registration_type.id AND customer_status_id=3 AND   i_customer>0 AND  DATE( created_at ) ="'.$year.'-'.$month.'-31") AS day31_calls 
 FROM registration_type';
     $statement = $conn->prepare($query);
     $statement->execute();

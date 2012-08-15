@@ -590,12 +590,8 @@ return number_format($bill_charge/100.00, 2);
 	
 	function executeGetPdf(sfWebRequest $request)
 	{
-	
-
-            $invoice_id = $request->getParameter('id');
-		
+	  $invoice_id = $request->getParameter('id');
 		$this->forward404Unless($invoice_id);
-				  
 		if(!($invoice = InvoicePeer::retrieveByPK($invoice_id)))
 		{
 			$this->forward404();
@@ -620,17 +616,13 @@ return number_format($bill_charge/100.00, 2);
 		
 		exit(1);
 	}
-	
 	function executeSendEmail(sfRequest $request)
 	{
-
 		//var_dump(sfConfig::get('app_email_invoice_smtp_host'));
 		//exit;
-		
-		$invoice_id = $this->request->getParameter('id');
-		
+				$invoice_id = $this->request->getParameter('id');
 		$this->forward404Unless($invoice_id);
-				  
+			  
 		if(!($invoice = InvoicePeer::retrieveByPK($invoice_id)))
 		{
 			$this->forward404();
@@ -639,8 +631,7 @@ return number_format($bill_charge/100.00, 2);
 		{
 			$htmlcontent  = $invoice->getInvoiceHtml();
 		}
-		
-		$pdf_path = util::html2pdf($htmlcontent);
+				$pdf_path = util::html2pdf($htmlcontent);
                 //create pdf from html
 					// and return the the file path
             //	require_once(sfConfig::get('sf_lib_dir').'/swift/lib/swift_init.php');
@@ -669,8 +660,7 @@ return number_format($bill_charge/100.00, 2);
 			
 		$connection = Swift_SmtpTransport::newInstance()
 					->setHost(sfConfig::get('app_email_smtp_host'));				
-		
-		$mailer = new Swift_Mailer($connection);
+				$mailer = new Swift_Mailer($connection);
 		
 		$message = Swift_Message::newInstance($subject)
 		         ->setFrom(array($sender_email => $sender_name))
@@ -694,10 +684,8 @@ return number_format($bill_charge/100.00, 2);
 		//echo "<div class='notice'>Invoice has been sucessfully sent to $recepient_email.</div>";
 		exit(1);
 	}
-
          function executeUsageAlertReport(sfRequest $request)
 	{
-
                  $billing_start_date = $request->getParameter('startdate');
 		 $billing_end_date  = $request->getParameter('enddate');
                  $billing_start_date = date("Y-m-d", strtotime($billing_start_date));
@@ -706,13 +694,9 @@ return number_format($bill_charge/100.00, 2);
 		 //$billing_end_date = $this->formatDate($billing_end_date);
                  $this->startdate=$billing_start_date;
                  $this->enddate=$billing_end_date;
-
 	}
-
         function executeSelectIntervalAlert(sfRequest $request)
 	{	}
-
- 
         function executeRegistrationType(sfRequest $request)
 	{       }   
         
@@ -741,22 +725,10 @@ return number_format($bill_charge/100.00, 2);
          $this->startdate=$startdate;
        $this->enddate=$enddate;  
             
-        }
-             
-             
-             }   
-        
-         function executeAgentProductSale(sfRequest $request)
-	{    
-             
-             
-             
-             
-             }
- 
-        function executeCountryStat(sfWebRequest $request){
-            
-        }
+        }  }   
+                 function executeAgentProductSale(sfRequest $request)
+	{   }
+         function executeCountryStat(sfWebRequest $request){
+                 }
 
- 
 }
