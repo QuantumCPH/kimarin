@@ -133,6 +133,10 @@ $daytotal1A=0;
     $statementC->execute();
   while ($rowObjCus = $statementC->fetch(PDO::FETCH_OBJ))
     {  ?> 
+         <tr>
+       <td colspan="33"  > &nbsp;</td>
+             
+  </tr>   
    <tr>
        <td colspan="33"  ><b><?php echo $rowObjCus->agentname; ?></b></td>
              
