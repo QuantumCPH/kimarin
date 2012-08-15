@@ -1892,10 +1892,9 @@ $transaction->setCustomerId($this->order->getCustomerId());
     }
 
     private function setPreferredCulture(Customer $customer) {
-     echo   $this->currentCulture = $this->getUser()->getCulture();
-     echo '<br />';
+        $this->currentCulture = $this->getUser()->getCulture();
         $preferredLang = PreferredLanguagesPeer::retrieveByPK($customer->getPreferredLanguageId());
-     echo   $this->getUser()->setCulture($preferredLang->getLanguageCode());
+        $this->getUser()->setCulture($preferredLang->getLanguageCode());
     }
 
     private function updatePreferredCulture() {
