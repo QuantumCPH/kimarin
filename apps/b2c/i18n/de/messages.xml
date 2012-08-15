@@ -2190,6 +2190,10 @@
                 <source>Customer number</source>
                 <target>Kundennummer</target>
             </trans-unit>
+            <trans-unit id="543" translate="yes" reformat="yes" xml:space="default">
+                <source>Your mobile number.</source>
+                <target>Ihre número de mòbil.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
