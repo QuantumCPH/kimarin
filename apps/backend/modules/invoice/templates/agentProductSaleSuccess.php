@@ -98,7 +98,7 @@
   while ($rowObjCus = $statementC->fetch(PDO::FETCH_OBJ))
     {  ?> 
    <tr>
-       <th colspan="33" ><?php echo $rowObjCus->agentname; ?></th>
+       <td colspan="33"  ><b><?php echo $rowObjCus->agentname; ?></b></td>
              
   </tr>      
         
