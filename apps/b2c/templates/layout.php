@@ -54,13 +54,13 @@
 
 <script type="text/javascript"> 	
     Cufon.now(); 
-     $(document).ready(function()
+     jq(document).ready(function()
      {
-        $('.submitBtn').corner('round 5px');
-        $('.sidebar_button').corner('round 5px');
-        $('.butonsigninsmall').corner('round 5px');
-        $('.buton').corner('round 5px');
-        $('.loginbuttun').corner('round 5px');
+        jq('.submitBtn').corner('round 5px');
+        jq('.sidebar_button').corner('round 5px');
+        jq('.butonsigninsmall').corner('round 5px');
+        jq('.buton').corner('round 5px');
+        jq('.loginbuttun').corner('round 5px');
         
      }); 
 </script>

@@ -87,7 +87,7 @@
 	<form id="forgot_password_form" method="post" action="<?php echo url_for('customer/sendPassword') ?>">
         
         <label <?php echo $class;?> <?php echo $style;?>><?php echo __('Your mobile number.');//echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
-	<input   class="input"  type="text" name="email" id="forgot_password_email" /><br />
+	<input   class="input"  type="text" name="mobile" id="forgot_password_email" /><br />
 	<?php if ($sf_user->hasFlash('send_password_error_message')): ?>
 	<p class="error_msg" style="color: red; margin:6px auto;"><?php echo $sf_user->getFlash('send_password_error_message') ?></p>
 	<?php endif;?>
@@ -108,9 +108,8 @@
 //				alert('<?php echo __('Please enter a valid email address.') ?>');
 //				return false;
 //			}
-                        var valid = true
-
-                        valid = jq('#forgot_password_mobile').val().length==0?false:true;
+                        var valid = true;
+                        valid = jq('#forgot_password_email').val().length==0?false:true;
 
                         //alert(valid);
                         if (!valid) { // if email is not valid
