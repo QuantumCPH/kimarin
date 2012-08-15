@@ -2159,6 +2159,10 @@
                 <source>Customer number</source>
                 <target>Número de client</target>
             </trans-unit>
+            <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
+                <source>Your mobile number.</source>
+                <target>El seu número de telèfon mòbil.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
