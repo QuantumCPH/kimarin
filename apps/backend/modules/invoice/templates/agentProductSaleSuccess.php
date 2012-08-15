@@ -92,10 +92,10 @@
     <tbody>
  <?php
             $conn = Propel::getConnection();
-   $query = 'select ac.id,ac.name as agentname from customer as c left join agent_company  as ac on c.referrer_id=ac.id where c.referrer_id>0';
-    $statement = $conn->prepare($query);
-    $statement->execute();
-  while ($rowObjCus = $statement->fetch(PDO::FETCH_OBJ))
+   $queryC = 'select ac.id,ac.name as agentname from customer as c left join agent_company  as ac on c.referrer_id=ac.id where c.referrer_id>0 group by ac.id';
+    $statementC = $conn->prepare($queryC);
+    $statementC->execute();
+  while ($rowObjCus = $statementC->fetch(PDO::FETCH_OBJ))
     {  ?> 
    <tr>
               <td><?php echo $rowObjCus->agentname; ?></td>
