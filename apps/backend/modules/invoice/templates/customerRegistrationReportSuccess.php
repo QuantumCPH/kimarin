@@ -92,7 +92,7 @@
             <td><?php  echo $rowObjs->email; ?></td>
             <td><?php  echo $rowObjs->created_at; ?></td>
             <td><?php  echo $rowObjs->uniqueid; ?></td>
-            <td><?php  echo $rowObjs->id; ?></td>
+            <td><?php  echo $rowObjs->id;  ?></td>
            
         </tr> 
         
