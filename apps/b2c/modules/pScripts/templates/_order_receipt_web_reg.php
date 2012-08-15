@@ -84,7 +84,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 </table>
 <table class="receipt" cellspacing="0" width="600px">
   <tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <th colspan="3"><?php echo __('Order receipt')." (".$order->getProduct()->getName()." )" ?></th>
+    <th colspan="3"><?php echo __('Order Receipt')." (".$order->getProduct()->getName()." )" ?></th>
     <th><?php echo __('Order number') ?> <?php echo $order->getId() ?></th>
   </tr>
     <tr> 

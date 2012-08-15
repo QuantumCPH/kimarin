@@ -625,7 +625,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 	$this->widgetSchema['customer_status_id'] = new sfWidgetFormInputHidden();
 
 	//set help
-	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the 1 terms and conditions.',array('1',sfConfig::get("app_site_title"))));
+	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the %1% terms and conditions.',array('%1%'=>sfConfig::get("app_site_title"))));
 	$this->widgetSchema->setHelp('is_newsletter_subscriber', sfContext::getInstance()->getI18n()->__('Yes, subscribe me to newsletter'));
 	$this->widgetSchema->setHelp('auto_refill', sfContext::getInstance()->getI18N()->__('Auto refill?'));
 	$this->validatorSchema->addOption('allow_extra_fields', true);
@@ -643,6 +643,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
                         'from_date'=>'from date',
 			'country_id'=>'Country',
 			'device_id'=>'Mobile Model',
+                        'password'=>'Create password',
 			'password_confirm'=>'Confirm password',
 			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)',
                         'second_last_name'=>'Middle name',
@@ -688,7 +689,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
   	if (CustomerPeer::doCount($c)>=1)
   	{
   	      throw new sfValidatorErrorSchema($validator, array(
-	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This mobile number is already registered to a 1 customer.',array('1',sfConfig::get('app_site_title')))),
+	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This mobile number is already registered to a %1% customer.',array('%1%'=>sfConfig::get('app_site_title')))),
 	      ));	
   	}
   	
@@ -706,7 +707,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
             if (CustomerPeer::doCount($c)>=1)
             {
                   throw new sfValidatorErrorSchema($validator, array(
-                    'nie_passport_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This N.I.E. or passport number is already registered to a 1 customer.',array('1',sfConfig::get('app_site_title')))),
+                    'nie_passport_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This N.I.E. or passport number is already registered to a %1% customer.',array('%1%'=>sfConfig::get('app_site_title')))),
                   ));	
             }
         }

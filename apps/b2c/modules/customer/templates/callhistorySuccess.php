@@ -10,6 +10,7 @@
 
     });
 </script>
+
 <div class="alert_bar">
         <?php echo __('Your call history will be updated 5 - 10 minutes after you have finalised your call.') ?>
     </div>
@@ -70,17 +71,16 @@
             if ($pus == 1) {
             ?>
                         <?php } else {
- ?>        
-                    <div class="callhistoryheadings">
-                          <h1><?php echo 'Subscription Charges'; ?> </h1>
-                    <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign" border='0'>
-                        <tr class="headings">
-                            <th class="title"><?php echo __('Date &amp; time') ?></th>
-                            <th class="title" width="40%"><?php echo __('Description') ?></th>
 
-                            <th class="title" align="right" style="text-align:right !important;"><?php echo __('Amount') ?></th>
+ ?>                 
+                      <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription Charges"); ?> </h2></div><br />
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
+                        <tr>
+                            <td width="26%" class="title"><?php echo __('Date and time') ?></td>
+                            <td class="title" width="32%"><?php echo __('Description') ?></td>
+                          <td width="42%" align="right" class="title" style="text-align:right !important;"><?php echo __('Amount') ?></td>
+                      </tr>
 
-                            </tr>
                         <?php
                         $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 4);
                         if(count($tilentaCallHistryResult)>0){
@@ -99,7 +99,9 @@
 
                             } ?>
 
-                        </table><br/><br/><h2><?php echo __("Other events"); ?> </h2></div><br />
+                        </table><br/><br/>
+                        
+                    <div class="callhistoryheadings"><h2><?php echo __("Other events"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
                             <td class="title"><?php echo __('Date and time') ?></td>
@@ -234,9 +236,7 @@
 
                                     if ($pus == 0) {
 ?>
-
-
-                                    <tr><td colspan="5" style="text-align: right">All amounts excl. IVA.</td></tr> <?php } ?>
+                                    <tr><td colspan="5" style="text-align: right"><?php echo __('All amounts excl. IVA.') ?></td></tr> <?php } ?>
                                 </table>
 
                         <?php } ?>

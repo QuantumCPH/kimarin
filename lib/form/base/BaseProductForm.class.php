@@ -32,9 +32,9 @@ class BaseProductForm extends BaseFormPropel
       'product_order'         => new sfWidgetFormInput(),
       'product_type_package'  => new sfWidgetFormInputCheckbox(),
       'product_country_us'    => new sfWidgetFormInputCheckbox(),
-      'billing_product_id'    => new sfWidgetFormInput(),
+      'billing_product_id'    => new sfWidgetFormPropelChoice(array('model' => 'BillingProducts', 'add_empty' => false)),
       'is_in_b2b'             => new sfWidgetFormInputCheckbox(),
-      'product_type_id'       => new sfWidgetFormInput(),
+      'product_type_id'       => new sfWidgetFormPropelChoice(array('model' => 'ProductType', 'add_empty' => false)),
       'bonus'                 => new sfWidgetFormInput(),
     ));
 
@@ -59,9 +59,9 @@ class BaseProductForm extends BaseFormPropel
       'product_order'         => new sfValidatorInteger(array('required' => false)),
       'product_type_package'  => new sfValidatorBoolean(),
       'product_country_us'    => new sfValidatorBoolean(),
-      'billing_product_id'    => new sfValidatorInteger(),
+      'billing_product_id'    => new sfValidatorPropelChoice(array('model' => 'BillingProducts', 'column' => 'id')),
       'is_in_b2b'             => new sfValidatorBoolean(),
-      'product_type_id'       => new sfValidatorInteger(),
+      'product_type_id'       => new sfValidatorPropelChoice(array('model' => 'ProductType', 'column' => 'id')),
       'bonus'                 => new sfValidatorNumber(array('required' => false)),
     ));
 

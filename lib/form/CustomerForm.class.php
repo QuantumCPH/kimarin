@@ -219,7 +219,7 @@ class CustomerForm extends BaseCustomerForm
 	$this->widgetSchema['customer_status_id'] = new sfWidgetFormInputHidden();
 
 	//set help
-	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the 1 terms and conditions.',array('1',sfConfig::get("app_site_title"))));
+	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the %1% terms and conditions.',array('%1%'=>sfConfig::get("app_site_title"))));
 	$this->widgetSchema->setHelp('is_newsletter_subscriber', sfContext::getInstance()->getI18n()->__('Yes, subscribe me to newsletter'));
 	$this->widgetSchema->setHelp('auto_refill', sfContext::getInstance()->getI18N()->__('Auto refill?'));
 	$this->validatorSchema->addOption('allow_extra_fields', true);
@@ -237,6 +237,7 @@ class CustomerForm extends BaseCustomerForm
                         'from_date'=>'From date',
 			'country_id'=>'Country',
 			'device_id'=>'Mobile Model',
+                        'password'=>'Create password',
 			'password_confirm'=>'Confirm password',
 			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)',
                         'second_last_name'=> 'Middle Name',

@@ -55,7 +55,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	
 	
 	<p>
-	<?php echo __('%1% has added 10.00 %2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.',array('%1%'=>sfConfig::get('app_site_title'), '%2%'=>sfConfig::get('app_currency_code'))); ?>
+	<?php echo __('%1% has added 10.00%2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.',array('%1%'=>sfConfig::get('app_site_title'), '%2%'=>sfConfig::get('app_currency_code'))); ?>
 	</p>
         <p>
             <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
@@ -76,7 +76,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 <table class="receipt" cellspacing="0" width="600px">
   <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th ><?php echo __('Order receipt') ?></th>
+    <th ><?php echo __('Order Receipt') ?></th>
   
   </tr>
  <tr>

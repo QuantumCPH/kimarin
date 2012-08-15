@@ -304,4 +304,9 @@ Recepient Email: rs@zapna.com \r\n Agent Email:  \r\n Sender Email: support@land
 Recepient Email: rs@zapna.com \r\n Agent Email:  \r\n Sender Email: support@landncall.com \r\nCustomer Refill Account 
 Recepient Email: rs@zapna.com \r\n Agent Email:  \r\n Sender Email: support@landncall.com \r\nCustomer Refill Account 
 Recepient Email: rs@zapna.com \r\n Agent Email:  \r\n Sender Email: support@landncall.com \r\nRecepient Email: leif.fiesta@bahnhof.seRecepient Email: bk@zapna.comRecepient Email: fu@zerocall.comRecepient Email: fu@zerocall.comRecepient Email: fu@zerocall.comRecepient Email: fu@zerocall.comRecepient Email: fu@zerocall.comCustomer Refill Account 
-Recepient Email: rr@zerocall.com \r\n Agent Email:  \r\n Sender Email: support@kimarin.es \r\nRecepient Email: rr@zerocall.comRecepient Email: rr@zerocall.com
+<<<<<<< HEAD
+Recepient Email: rr@zerocall.com \r\n Agent Email:  \r\n Sender Email: support@kimarin.es \r\nRecepient Email: rr@zerocall.comRecepient Email: rr@zerocall.comRecepient Email: rr@zerocall.com
+=======
+Recepient Email: rr@zerocall.com \r\n Agent Email:  \r\n Sender Email: support@kimarin.es \r\nRecepient Email: rr@zerocall.comRecepient Email: rr@zerocall.comRecepient Email: fu@zerocall.comRecepient Email: rubab.11@gmail.com
+>>>>>>> forgotpassword
+Recepient Email: fu@zerocall.comRecepient Email: fu@zerocall.com
