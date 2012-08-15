@@ -1104,7 +1104,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
         $c = new Criteria();
 
-        $c->add(CustomerPeer::EMAIL, $request->getParameter('email'));
+        $c->add(CustomerPeer::MOBILE_NUMBER, $request->getParameter('mobile'));
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, sfConfig::get('app_status_completed', 3));
 
         //echo $c->toString(); exit;
