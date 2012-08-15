@@ -90,6 +90,42 @@
     </thead>
    
     <tbody>
+   <?php
+$day1A=0;
+$day2A=0;
+$day3A=0;
+$day4A=0;
+$day5A=0;
+$day6A=0;
+$day7A=0;
+$day8A=0;
+$day9A=0;
+$day10A=0;
+$day11A=0;
+$day12A=0;
+$day13A=0;
+$day14A=0;
+$day15A=0;
+$day16A=0;
+$day17A=0;
+$day18A=0;
+$day19A=0;
+$day20A=0;
+$day21A=0;
+$day22A=0;
+$day23A=0;
+$day24A=0;
+$day25A=0;
+$day26A=0;
+$day27A=0;
+$day28A=0;
+$day29A=0;
+$day30A=0;
+$day31A=0;
+$daytotal1A=0;     
+
+?>
+        
  <?php
             $conn = Propel::getConnection();
    $queryC = 'select ac.id,ac.name as agentname from customer as c left join agent_company  as ac on c.referrer_id=ac.id where c.referrer_id>0 group by ac.id';
@@ -231,41 +267,76 @@ $i++;
 }  ?>
         
           <tr>
-              <td>Total</td>
-    <td><?php echo  $day1;    ?></td>
-   <td><?php echo  $day2;    ?></td>
-     <td><?php echo  $day3;    ?></td>
-      <td><?php echo  $day4;    ?></td>
-   <td><?php echo  $day5;    ?></td>
-     <td><?php echo  $day6;    ?></td>
-    <td><?php echo  $day7;    ?></td>
-     <td><?php echo  $day8;    ?></td>
-     <td><?php echo  $day9;    ?></td>
-     <td><?php echo  $day10;    ?></td>
-      <td><?php echo  $day11;    ?></td>
-      <td><?php echo  $day12;    ?></td>
-     <td><?php echo  $day13;    ?></td>
-     <td><?php echo  $day14;    ?></td>
-     <td><?php echo  $day15;    ?></td>
-    <td><?php echo  $day16;    ?></td>
-    <td><?php echo  $day17;    ?></td>
-    <td><?php echo  $day18;    ?></td>
-     <td><?php echo  $day19;    ?></td>
-     <td><?php echo  $day20;    ?></td>
-     <td><?php echo  $day21;    ?></td>
-   <td><?php echo  $day22;    ?></td>
-     <td><?php echo  $day23;    ?></td>
-     <td><?php echo  $day24;    ?></td>
-        <td><?php echo  $day25;    ?></td>
-        <td><?php echo  $day26;    ?></td>
-       <td><?php echo  $day27;    ?></td>
-      <td><?php echo  $day28;    ?></td>
-       <td><?php echo  $day29;    ?></td>
-         <td><?php echo  $day30;    ?></td>
-       <td><?php echo  $day31;    ?></td>
-         <td><?php  echo  $daytotal1    ?></td>
+              <td><b>Total</b></td>
+    <td><?php echo $day1;  $day1A+=$day1;    ?></td>
+   <td><?php echo $day2; $day2A+=$day2;    ?></td>
+     <td><?php echo $day3;  $day3A+=$day3;    ?></td>
+      <td><?php echo $day4; $day4A+=$day4;    ?></td>
+   <td><?php echo  $day5; $day5A+=$day5;    ?></td>
+     <td><?php echo $day6;  $day6A+=$day6;    ?></td>
+    <td><?php echo $day7; $day7A+=$day7;    ?></td>
+     <td><?php echo $day8; $day8A+=$day8;    ?></td>
+     <td><?php echo $day9;  $day9A+=$day9;    ?></td>
+     <td><?php echo $day10; $day10A+=$day10;    ?></td>
+      <td><?php echo $day11; $day11A+=$day11;    ?></td>
+      <td><?php echo $day12;  $day12A+=$day12;    ?></td>
+     <td><?php echo $day13; $day13A+=$day13;    ?></td>
+     <td><?php echo $day14; $day14A+=$day14;    ?></td>
+     <td><?php echo $day15;  $day15A+=$day15;    ?></td>
+    <td><?php echo $day16;   $day16A+=$day16;    ?></td>
+    <td><?php echo $day17;  $day17A+=$day17;    ?></td>
+    <td><?php echo $day18; $day18A+=$day18;    ?></td>
+     <td><?php echo $day19; $day19A+=$day19;    ?></td>
+     <td><?php echo $day20; $day20A+=$day20;    ?></td>
+     <td><?php echo $day21; $day21A+=$day21;    ?></td>
+   <td><?php echo $day22; $day22A+=$day22;    ?></td>
+     <td><?php echo $day23; $day23A+=$day23;    ?></td>
+     <td><?php echo $day24; $day24A+=$day24;    ?></td>
+        <td><?php echo $day25; $day25A+=$day25;    ?></td>
+        <td><?php echo $day26;  $day26A+=$day26;    ?></td>
+       <td><?php echo $day27; $day27A+=$day27;    ?></td>
+      <td><?php echo $day28; $day28A+=$day28;    ?></td>
+       <td><?php echo $day29; $day29A+=$day29;    ?></td>
+         <td><?php echo $day30; $day30A+=$day30;    ?></td>
+       <td><?php echo $day31;  $day31A+=$day31;    ?></td>
+         <td><?php  echo $daytotal1; $daytotal1A+=$daytotal1;    ?></td>
   </tr>
   <?php  } ?>
+    <tr>
+              <td><b>Total</b></td>
+    <td><?php echo  $day1A;    ?></td>
+   <td><?php echo  $day2A;    ?></td>
+     <td><?php echo  $day3A;    ?></td>
+      <td><?php echo  $day4A;    ?></td>
+   <td><?php echo  $day5A;    ?></td>
+     <td><?php echo  $day6A;    ?></td>
+    <td><?php echo  $day7A;    ?></td>
+     <td><?php echo  $day8A;    ?></td>
+     <td><?php echo  $day9A;    ?></td>
+     <td><?php echo  $day10A;    ?></td>
+      <td><?php echo  $day11A;    ?></td>
+      <td><?php echo  $day12A;    ?></td>
+     <td><?php echo  $day13A;    ?></td>
+     <td><?php echo  $day14A;    ?></td>
+     <td><?php echo  $day15A;    ?></td>
+    <td><?php echo  $day16A;    ?></td>
+    <td><?php echo  $day17A;    ?></td>
+    <td><?php echo  $day18A;    ?></td>
+     <td><?php echo  $day19A;    ?></td>
+     <td><?php echo  $day20A;    ?></td>
+     <td><?php echo  $day21A;    ?></td>
+   <td><?php echo  $day22A;    ?></td>
+     <td><?php echo  $day23A;    ?></td>
+     <td><?php echo  $day24A;    ?></td>
+        <td><?php echo  $day25A;    ?></td>
+        <td><?php echo  $day26A;    ?></td>
+       <td><?php echo  $day27A;    ?></td>
+      <td><?php echo  $day28A;    ?></td>
+       <td><?php echo  $day29A;    ?></td>
+         <td><?php echo  $day30A;    ?></td>
+       <td><?php echo  $day31A;    ?></td>
+         <td><?php  echo  $daytotal1A    ?></td>
+  </tr>
   </tbody>
 </table>
  
