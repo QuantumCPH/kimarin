@@ -1116,6 +1116,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             //echo $new_password.''.$customer->getPassword();
             $customer->setPlainText($new_password);
             $customer->setPassword($new_password);
+            $this->setPreferredCulture($customer);
             $message_body =$this->getContext()->getI18N()->__('To') . ' ' . $customer->getFirstName() . '&nbsp;'. $customer->getLastName().'!';
             $message_body .= '<br /><br />';
 
@@ -1153,7 +1154,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             file_put_contents($invite_data_file, $invite2, FILE_APPEND);
 
             //Send Email to User --- when Forget Password Request Come --- 01/15/11
-            $this->setPreferredCulture($customer);
+            
             emailLib::sendForgetPasswordEmail($customer, $message, $subject);
             $this->updatePreferredCulture();
 
@@ -1162,59 +1163,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
         else {
             $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this e-mail address.'));
         }
-//  		require_once(sfConfig::get('sf_lib_dir').'/swift/lib/swift_init.php');
-//
-//		$connection = Swift_SmtpTransport::newInstance()
-//					->setHost(sfConfig::get('app_email_smtp_host', 'localhost'))
-//					->setPort(sfConfig::get('app_email_smtp_port', '25'))
-//					->setUsername(sfConfig::get('app_email_smtp_username'))
-//					->setPassword(sfConfig::get('app_email_smtp_password'));
-//
-//		$mailer = new Swift_Mailer($connection);
-//
-//		$message = Swift_Message::newInstance($subject)
-//		         ->setFrom(array($sender_email => $sender_name))
-//		         ->setTo(array($recepient_email => $recepient_name))
-//		         ->setBody($message_body, 'text/html')
-//		         ;
-//
-//
-//		if (@$mailer->send($message))
-//			if ($request->isXmlHttpRequest())
-//			{
-//			 	$this->renderText('ok');
-//			 	return sfView::NONE;
-//			}
-//			else
-//			{
-//	  			$this->getUser()->setFlash('send_password_message', 'Your account details have been sent to your email address.');
-//			}
-//		else
-//			if ($request->isXmlHttpRequest())
-//			{
-//				$this->renderText('invalid');
-//				return sfView::NONE;
-//			}
-//			else
-//			{
-//	  			//$this->getUser()->setFlash('send_password_error_message', 'Unable to send details at your email. Please try again later.');
-//	  			$email = new EmailQueue($subject, $message_body, $recepient_name, $recepient_email);
-//	  			$email->save();
-//			}
-//  	}
-//  	else
-//  	{
-//		if ($request->isXmlHttpRequest())
-//		{
-//  			$this->renderText('invalid');
-//  			return sfView::NONE;
-//		}
-//		else
-//		{
-//	  		$this->getUser()->setFlash('send_password_error_message', 'No customer is registered with this email.');
-//		}
-        //} //end if
-        //return $this->forward('customer', 'login');
+
         return $this->redirect('customer/login');
     }
 
