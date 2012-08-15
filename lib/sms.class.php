@@ -1,4 +1,5 @@
 <?php
+
 require_once(sfConfig::get('sf_lib_dir') . '/smsCharacterReplacement.php');
 
 /**
@@ -10,24 +11,25 @@ class CARBORDFISH_SMS {
 
     //put your code here
 
-    private static $S   = 'H';
-    private static $UN  = 'zapna1';
-    private static $P   = 'Zapna2010';
-    private static $SA  = 'Zeorcall';
-    private static $ST   = 5;
-    
-   /*
-    * Description of Send
-    *
-    * @param $mobilenumber is the mobile number leading with country code;
-    * @smsText is for the text that will be sent.
-    * @param $Sender will be the sender name of the SMS;
-    */
+    private static $S = 'H';
+    private static $UN = 'zapna1';
+    private static $P = 'Zapna2010';
+    private static $SA = 'Zeorcall';
+    private static $ST = 5;
 
-    public static function Send($mobileNumber,$smsText,$senderName=null) {
-        if($senderName == null)
+    /*
+     * Description of Send
+     *
+     * @param $mobilenumber is the mobile number leading with country code;
+     * @smsText is for the text that will be sent.
+     * @param $Sender will be the sender name of the SMS;
+     */
+
+    public static function Send($mobileNumber, $smsText, $senderName=null, $smsType=null) {
+        if ($senderName == null)
             $senderName = self::$SA;
-
+            if ($smsType == null)
+            $smsType = 1;
         $data = array(
             'S' => self::$S,
             'UN' => self::$UN,
@@ -45,6 +47,7 @@ class CARBORDFISH_SMS {
         $smsLog = new SmsLog();
         $smsLog->setMessage($smsText);
         $smsLog->setStatus($res);
+         $smsLog->setSmsType($smsType);
         $smsLog->setSenderName($senderName);
         $smsLog->setMobileNumber($mobileNumber);
         $smsLog->save();
@@ -53,14 +56,15 @@ class CARBORDFISH_SMS {
         else
             return false;
     }
-  
+
 }
+
 class SMSNU {
 
     //put your code here
 
     private static $main = '13rkha84';
-    private static $id = 'LandNCall';
+    private static $id = 'Kimarin';
     /*
      * Description of Send
      *
@@ -69,9 +73,11 @@ class SMSNU {
      * @param $Sender will be the sender name of the SMS;
      */
 
-    public static function Send($mobileNumber, $smsText, $senderName=null) {
+    public static function Send($mobileNumber, $smsText, $senderName=null, $smsType=null) {
         if ($senderName == null)
             $senderName = self::$id;
+        if ($smsType == null)
+            $smsType = 1;
         $data = array(
             'main' => self::$main,
             'til' => $mobileNumber,
@@ -89,6 +95,8 @@ class SMSNU {
         $smsLog = new SmsLog();
         $smsLog->setMessage($smsText);
         $smsLog->setStatus($res);
+
+        $smsLog->setSmsType($smsType);
         $smsLog->setSenderName($senderName);
         $smsLog->setMobileNumber($mobileNumber);
         $smsLog->save();
@@ -105,13 +113,16 @@ class SMSNU {
 
 class ROUTED_SMS {
 
-    public static function Send($mobileNumber, $smsText, $senderName=null) {
+    public static function Send($mobileNumber, $smsText, $senderName=null, $smsType=null) {
         if (!CARBORDFISH_SMS::Send($mobileNumber, $smsText, $senderName)) {
             if (!SMSNU::Send($mobileNumber, $smsText, $senderName)) {
                 if ($senderName == null)
-                    $senderName = "WLS2";
+                    $senderName = "Kimarin";
+                 if ($smsType == null)
+                    $smsType =1;
                 $smsLog = new SmsLog();
                 $smsLog->setMessage($smsText);
+                $smsLog->setSmsType($smsType);
                 $smsLog->setStatus("Unable to send from both");
                 $smsLog->setSenderName($senderName);
                 $smsLog->setMobileNumber($mobileNumber);
@@ -119,5 +130,7 @@ class ROUTED_SMS {
             }
         }
     }
+
 }
+
 ?>

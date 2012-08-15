@@ -718,4 +718,8 @@ return number_format($bill_charge/100.00, 2);
 
 	}
 
+        function executeCountryStat(sfWebRequest $request){
+            
+        }
+
 }
