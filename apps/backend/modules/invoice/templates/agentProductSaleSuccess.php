@@ -267,7 +267,7 @@ $i++;
 }  ?>
         
           <tr>
-              <td><b>Total</b></td>
+              <td><b> Agent Total</b></td>
     <td><?php echo $day1;  $day1A+=$day1;    ?></td>
    <td><?php echo $day2; $day2A+=$day2;    ?></td>
      <td><?php echo $day3;  $day3A+=$day3;    ?></td>
@@ -303,7 +303,7 @@ $i++;
   </tr>
   <?php  } ?>
     <tr>
-              <td><b>Total</b></td>
+              <td><b>ALL Agent Total</b></td>
     <td><?php echo  $day1A;    ?></td>
    <td><?php echo  $day2A;    ?></td>
      <td><?php echo  $day3A;    ?></td>
