@@ -296,7 +296,48 @@
                         echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert');
                      }
                      ?>
-
+  <?php
+                     if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
+                        echo link_to(__('Registered Customers Report'), 'invoice/registrationType', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__(' Registered Customers Report'), 'invoice/registrationType');
+                     }
+                     ?>
+ <?php
+                     if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
+                        echo link_to(__('Total Sale Stat Report'), 'invoice/totalSaleStat', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Total Sale Stat Report'), 'invoice/totalSaleStat');
+                     }
+                     ?>
+                    <?php
+                     if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
+                        echo link_to(__('Total Refill Sale Report'), 'invoice/totalRefilSale', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Total Refill Sale Report'), 'invoice/totalRefilSale');
+                     }
+                     ?>
+                     <?php
+                     if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
+                        echo link_to(__('Total Product Sale Report'), 'invoice/totalProductSale', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Total Product Sale Report'), 'invoice/totalProductSale');
+                     }
+                     ?>
+                      <?php
+                     if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
+                        echo link_to(__('Customer Registration Report'), 'invoice/customerRegistrationReport', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Customer Registration Report'), 'invoice/customerRegistrationReport');
+                     }
+                     ?>
+                     <?php
+                     if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
+                        echo link_to(__('Agent Product Sale Report'), 'invoice/agentProductSale', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Agent Product Sale Report'), 'invoice/agentProductSale');
+                     }
+                     ?>
                 </div>
             </li>
 

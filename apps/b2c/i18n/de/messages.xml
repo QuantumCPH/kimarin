@@ -2186,6 +2186,14 @@
                 <source>Sorry! You Cant do payment as your balance will excede from 250%1%</source>
                 <target>Es tut uns leid, aber die Zahlung kann nicht akzeptiert werden, da Ihr Guthaben 250.00%1% übersteigen würde</target>
             </trans-unit>
+            <trans-unit id="542" translate="yes" reformat="yes" xml:space="default">
+                <source>Customer number</source>
+                <target>Kundennummer</target>
+            </trans-unit>
+            <trans-unit id="543" translate="yes" reformat="yes" xml:space="default">
+                <source>Your mobile number.</source>
+                <target>Ihre número de mòbil.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

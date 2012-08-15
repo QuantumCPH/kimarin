@@ -2148,6 +2148,14 @@
                 <source>If you have any questions please feel free to contact our customer support center at</source>
                 <target>Si usted tiene alguna pregunta no dude en ponerse en contacto con nuestro centro de soporte al cliente en</target>
             </trans-unit>
+            <trans-unit id="534" translate="yes" reformat="yes" xml:space="default">
+                <source>Customer number</source>
+                <target>Número de cliente</target>
+            </trans-unit>
+            <trans-unit id="535" translate="yes" reformat="yes" xml:space="default">
+                <source>Your mobile number.</source>
+                <target>Su número de teléfono móvil.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -510,7 +510,7 @@
             </trans-unit>
             <trans-unit id="125" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number 0034</source>
-                <target>Número de mòbil 0034</target>
+                <target>Número de mòbil&lt;br /&gt;0034</target>
             </trans-unit>
             <trans-unit id="126" translate="yes" reformat="yes" xml:space="default">
                 <source>Product</source>
@@ -2147,13 +2147,21 @@
                 <source>Bonus</source>
                 <target>Bonificació</target>
             </trans-unit>
-	    <trans-unit id="534" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="534" translate="yes" reformat="yes" xml:space="default">
                 <source>Order Receipt</source>
                 <target>Rebut de la comanda</target>
             </trans-unit>
             <trans-unit id="535" translate="yes" reformat="yes" xml:space="default">
                 <source>If you have any questions please feel free to contact our customer support center at</source>
                 <target>Si vostè té alguna pregunta no dubti en posar-se en contacte amb el nostre centre de suport al client en</target>
+            </trans-unit>
+            <trans-unit id="536" translate="yes" reformat="yes" xml:space="default">
+                <source>Customer number</source>
+                <target>Número de client</target>
+            </trans-unit>
+            <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
+                <source>Your mobile number.</source>
+                <target>El seu número de telèfon mòbil.</target>
             </trans-unit>
         </body>
     </file>
