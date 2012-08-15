@@ -96,7 +96,7 @@
 	<div class="login-right"><h4><?php echo __('Did you forget your password?') ?></h4>
 	<form id="forgot_password_form" method="post" action="<?php echo url_for('customer/sendPassword') ?>">
 
-        <label <?php echo $class;?> <?php echo $style;?>><?php echo __('Your mobile number.');//echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
+        <label <?php echo $clsForgotField;?>><?php echo __('Your mobile number.');//echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
 	<input   class="input"  type="text" name="mobile" id="forgot_password_email" /><br />
 
 	<?php if ($sf_user->hasFlash('send_password_error_message')): ?>
