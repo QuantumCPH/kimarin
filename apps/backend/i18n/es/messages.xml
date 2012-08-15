@@ -510,7 +510,7 @@
             </trans-unit>
             <trans-unit id="125" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number 0034</source>
-                <target>Número de móvil 0034</target>
+                <target>Número de móvil&lt;br /&gt;0034</target>
             </trans-unit>
             <trans-unit id="126" translate="yes" reformat="yes" xml:space="default">
                 <source>Product</source>
@@ -546,7 +546,7 @@
             </trans-unit>
                <trans-unit id="134" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile service provider</source>
-                <target>Compañía de telefonía&lt;br /&gt;móvil</target>
+                <target>Compañía de&lt;br /&gt;telefonía móvil</target>
             </trans-unit>
                <trans-unit id="135" translate="yes" reformat="yes" xml:space="default">
                 <source>Please check this box to confirm that you have&lt;br /&gt;read and accept the %1% terms and conditions.</source>
@@ -621,8 +621,8 @@
                 <target>La manera más conveniente de llenar el bote es llamada Para activar automáticamente &lt;br /&gt; llenado (abajo). entonces no es necesario que te preocupes por el bote se queda sin. &lt;br /&gt; BEspecialmente importante en esos viajes en el extranjero cuando puede ser difícil de llenar en cualquier otra forma.</target>
             </trans-unit>
               <trans-unit id="153" translate="yes" reformat="yes" xml:space="default">
-                <source>Manual refill.</source>
-                <target>Recarga manual.</target>
+                <source>Manual refill:</source>
+                <target>Recarga manual:</target>
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
                 <source>Select amount to be refilled:</source>
@@ -1133,7 +1133,7 @@
             </trans-unit>
             <trans-unit id="280" translate="yes" reformat="yes" xml:space="default">
                 <source>Country of citizenship</source>
-                <target>País de su nacionalidad</target>
+                <target>País de su&lt;br /&gt;nacionalidad</target>
             </trans-unit>
             <trans-unit id="281" translate="yes" reformat="yes" xml:space="default">
                 <source>Province</source>
@@ -2069,8 +2069,8 @@
             </trans-unit>
 
             <trans-unit id="514" translate="yes" reformat="yes" xml:space="default">
-                <source>You can refill your Kimarin Account with the following amounts:</source>
-                <target>Puede recargar su cuenta de Kimarin con los importes siguientes: </target>
+                <source>You can refill your %1% Account with the following amounts:</source>
+                <target>Puede recargar su cuenta de %1% con los importes siguientes: </target>
             </trans-unit>
             <trans-unit id="515" translate="yes" reformat="yes" xml:space="default">
                 <source>PLUS %1%%2%</source>
@@ -2147,6 +2147,10 @@
             <trans-unit id="533" translate="yes" reformat="yes" xml:space="default">
                 <source>If you have any questions please feel free to contact our customer support center at</source>
                 <target>Si usted tiene alguna pregunta no dude en ponerse en contacto con nuestro centro de soporte al cliente en</target>
+            </trans-unit>
+            <trans-unit id="534" translate="yes" reformat="yes" xml:space="default">
+                <source>Customer number</source>
+                <target>Número de cliente</target>
             </trans-unit>
         </body>
     </file>
