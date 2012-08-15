@@ -25,7 +25,7 @@ class emailLib {
         $createddate = $agent_order->getCreatedAt('d-m-Y');
         $agentid = $agent_order->getAgentOrderId();
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
-        $message_body = get_partial('affiliate/agent_order_receipt', array(
+        $message_body = get_partial('pScripts/agent_order_receipt', array(
                     'order' => $agentid,
                     'transaction' => $agentamount,
                     'createddate' => $createddate,
@@ -40,13 +40,12 @@ class emailLib {
 
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna');
-
-        //------------------Sent The Email To Customer
-        //----------------------------------------
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+        
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
         //------------------Sent the Email To Agent
         if (trim($recepient_agent_email) != ''):
 
@@ -62,7 +61,7 @@ class emailLib {
         endif;
         //---------------------------------------
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -71,7 +70,7 @@ class emailLib {
             $email3->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To cdu
         if (trim($sender_emailcdu) != ''):
@@ -130,10 +129,13 @@ class emailLib {
         $customer_id = trim($customer->getId());
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+       
+        
 
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
@@ -164,7 +166,7 @@ class emailLib {
         endif;
         //---------------------------------------
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -174,7 +176,7 @@ class emailLib {
             $email3->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To cdu
         if (trim($sender_emailcdu) != ''):
@@ -229,11 +231,12 @@ class emailLib {
         $customer_id = trim($customer->getId());
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
 
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
             $email = new EmailQueue();
@@ -263,7 +266,7 @@ class emailLib {
         endif;
         //---------------------------------------
         //--------------Sent The Email To Okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -273,7 +276,7 @@ class emailLib {
             $email3->setEmailType(sfConfig::get('app_site_title') . ' Customer registration via agent');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
         if (trim($sender_emailcdu) != ''):
@@ -300,8 +303,8 @@ class emailLib {
         $referrer_id = trim($customer->getReferrerId());
 
         //Support Information
-        $sender_email = sfConfig::get('app_email_sender_email', 'support@Zapna.com');
-        $sender_name = sfConfig::get('app_email_sender_name', 'Zapna support');
+        //$sender_email = sfConfig::get('app_email_sender_email', 'support@Zapna.com');
+        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna support');
 
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
@@ -353,10 +356,12 @@ class emailLib {
 
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email', 'rs@zapna.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('email_sender_email_cdu');
+        
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
             $email = new EmailQueue();
@@ -384,7 +389,7 @@ class emailLib {
         endif;
         //---------------------------------------
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -394,7 +399,7 @@ class emailLib {
             $email3->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
         if (trim($sender_emailcdu) != ''):
@@ -414,10 +419,13 @@ class emailLib {
     public static function sendCustomerAutoRefillEmail(Customer $customer, $message_body) {
 
         $subject = __('Payment Confirmation');
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna ');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna ');
+
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
 
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
@@ -439,7 +447,7 @@ class emailLib {
         endif;
 
         //send to OKHAN
-       /* if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email2 = new EmailQueue();
             $email2->setSubject($subject);
             $email2->setMessage($message_body);
@@ -449,7 +457,7 @@ class emailLib {
             $email2->setAgentId($referrer_id);
             $email2->setEmailType(sfConfig::get('app_site_title') . ' Customer Auto Refill');
             $email2->save();
-        endif;*/
+        endif;
 ////////////////////////////////////////////////////////
         //send to CDU
         if (trim($sender_emailcdu) != ''):
@@ -469,10 +477,13 @@ class emailLib {
 
 
         $subject = __('Payment Confirmation');
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna ');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna ');
+
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
 
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
@@ -495,7 +506,7 @@ class emailLib {
         endif;
 
         //send to okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email2 = new EmailQueue();
             $email2->setSubject($subject);
             $email2->setMessage($message_body);
@@ -505,7 +516,7 @@ class emailLib {
             $email2->setAgentId($referrer_id);
             $email2->setEmailType(sfConfig::get('app_site_title') . ' Customer Confirm Payment');
             $email2->save();
-        endif;*/
+        endif;
         //send to cdu
         if (trim($sender_emailcdu) != ''):
             $email3 = new EmailQueue();
@@ -532,11 +543,13 @@ class emailLib {
 
         $subject = $subject;
         $subject = $subject;
-        //$sender_email = sfConfig::get('app_email_sender_email', 'support@zapna.no');
-       // $sender_name = sfConfig::get('app_email_sender_name', 'Zapna support');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna support');
+        
+        $sender_name = sfConfig::get('app_email_sender_name_sup');
+        $sender_email = sfConfig::get('app_email_sender_email_sup');
 
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+ 
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('pScripts/bonus_web_reg', array(
                     'customer' => $customerr,
@@ -565,7 +578,7 @@ class emailLib {
         endif;
 
         //send to okhan
-        /*if ($sender_email != ''):
+        if ($sender_email != ''):
             $email2 = new EmailQueue();
             $email2->setSubject($subject);
             $email2->setMessage($message_body);
@@ -575,7 +588,7 @@ class emailLib {
             //$email2->setAgentId($referrer_id);
             $email2->setEmailType(sfConfig::get('app_site_title') . ' Customer Confirm Bonus');
             $email2->save();
-        endif;*/
+        endif;
         //////////////////////////////////////////////////////////////////
         if ($sender_emailcdu != ''):
             $email3 = new EmailQueue();
@@ -656,12 +669,13 @@ class emailLib {
         $customer_id = trim($customer->getId());
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna ');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna ');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
 
-        //------------------Sent The Email To Customer
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
+       //------------------Sent The Email To Customer
         if ($recepient_email != '') {
             $email = new EmailQueue();
             $email->setSubject($subject);
@@ -675,7 +689,7 @@ class emailLib {
         //----------------------------------------
         //------------------Sent the Email To Agent
         //--------------Sent The Email To Support
-        /*if ($sender_email != ''):
+        if ($sender_email != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -684,7 +698,7 @@ class emailLib {
             $email3->setEmailType(sfConfig::get('app_site_title') . ' Customer registration via link');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To Support
         if ($sender_emailcdu != ''):
@@ -737,12 +751,12 @@ class emailLib {
         $customer_id = trim($customer->getId());
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
 
-        //------------------Sent The Email To Customer
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
         //------------------Sent the Email To Agent
 
         if (trim($recepient_agent_email) != ''):
@@ -760,7 +774,7 @@ class emailLib {
         endif;
         //---------------------------------------
         //--------------Sent The Email To Okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -770,7 +784,7 @@ class emailLib {
             $email3->setEmailType('Customer registration via agent SMS ');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
         if (trim($sender_emailcdu) != ''):
@@ -839,10 +853,11 @@ class emailLib {
         $customer_id = trim($customer->getId());
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
 
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
@@ -873,7 +888,7 @@ class emailLib {
         endif;
         //---------------------------------------
         //--------------Sent The Email To Okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -883,7 +898,7 @@ class emailLib {
             $email3->setEmailType(sfConfig::get('app_site_title') . ' Customer registration via APP');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
         if (trim($sender_emailcdu) != ''):
@@ -950,10 +965,12 @@ Med vänlig hälsning<br/><br/>
 " . sfConfig::get('app_site_title') . "<br/><a href='" . sfConfig::get('app_site_url') . "'>" . sfConfig::get('app_site_url') . "</a></td></tr></table>";
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email', 'rs@zapna.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
             $email = new EmailQueue();
@@ -981,7 +998,7 @@ Med vänlig hälsning<br/><br/>
         endif;
         //---------------------------------------
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -991,7 +1008,7 @@ Med vänlig hälsning<br/><br/>
             $email3->setEmailType('Transation for VoIP Purchase');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
         if (trim($sender_emailcdu) != ''):
@@ -1043,14 +1060,14 @@ Med vänlig hälsning<br/><br/>
 " . sfConfig::get('app_site_title') . "<br/><a href='" . sfConfig::get('app_site_url') . "'>" . sfConfig::get('app_site_url') . "</a></td></tr></table>";
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email', 'rs@zapna.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
 
-
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -1060,7 +1077,7 @@ Med vänlig hälsning<br/><br/>
             $email3->setEmailType('Error In Telinta');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
         if (trim($sender_emailcdu) != ''):
@@ -1086,14 +1103,16 @@ Uniuqe Ids finsihed.<br/><br/>
 " . sfConfig::get('app_site_title') . "<br/><a href='" . sfConfig::get('app_site_url') . "'>" . sfConfig::get('app_site_url') . "</a></td></tr></table>";
 
         //Support Informationt
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email', 'rs@zapna.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
 
 
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -1103,7 +1122,7 @@ Uniuqe Ids finsihed.<br/><br/>
             $email3->setEmailType('Unique Ids Finished');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
         if (trim($sender_emailcdu) != ''):
@@ -1129,14 +1148,15 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 " . sfConfig::get('app_site_title') . "<br/><a href='" . sfConfig::get('app_site_url') . "'>" . sfConfig::get('app_site_url') . "</a></td></tr></table>";
 
         //Support Informationt
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        //$sender_emailcdu = sfConfig::get('app_email_sender_email', 'zerocallengineering@googlegroups.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email', 'rs@zapna.com');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
 
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        //$sender_emailcdu = sfConfig::get('app_email_sender_email', 'zerocallengineering@googlegroups.com');
+        
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -1146,7 +1166,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email3->setEmailType('Unique Ids Finished');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
         if (trim($sender_emailcdu) != ''):
@@ -1172,14 +1192,17 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 " . sfConfig::get('app_site_title') . "<br/><a href='" . sfConfig::get('app_site_url') . "'>" . sfConfig::get('app_site_url') . "</a></td></tr></table>";
 
         //Support Informationt
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
         //$sender_emailcdu = sfConfig::get('app_email_sender_email', 'zerocallengineering@googlegroups.com');
-        $sender_namecdu = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email', 'rs@zapna.com');
+        
+
 
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -1189,7 +1212,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email3->setEmailType('Unique Ids Finished');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
         if (trim($sender_emailcdu) != ''):
@@ -1208,23 +1231,29 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
     public static function sendErrorInTelinta($subject, $message) {
 
+        $sender_name = sfConfig::get('app_email_sender_name_sup');
+        $sender_email = sfConfig::get('app_email_sender_email_sup');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+
         //To RS.
         $email = new EmailQueue();
         $email->setSubject($subject);
-        $email->setReceipientName("Raheel Safdar");
-        $email->setReceipientEmail("rs@zapna.com");
+        $email->setReceipientName($sender_namecdu);
+        $email->setReceipientEmail($sender_emailcdu);
         $email->setEmailType('Telinta Error');
         $email->setMessage($message);
         $email->save();
 
         //To Support @ Zerocall
-        /*$email = new EmailQueue();
+        $email = new EmailQueue();
         $email->setSubject($subject);
-        $email->setReceipientName("Support");
-        $email->setReceipientEmail("support@zerocall.com");
+        $email->setReceipientName($sender_name);
+        $email->setReceipientEmail($sender_email);
         $email->setEmailType('Telinta Error');
         $email->setMessage($message);
-        $email->save();*/
+        $email->save();
     }
 
     public static function sendAdminRefilEmail(AgentCompany $agent, $agent_order) {
@@ -1265,12 +1294,13 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', sfConfig::get('app_site_title'));
+        $sender_name = sfConfig::get('app_email_sender_name', sfConfig::get('app_site_title'));
+        $sender_email = sfConfig::get('app_email_sender_email');
+        
+
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', sfConfig::get('app_site_title'));
-        $sender_emailcdu = sfConfig::get('app_email_sender_email', 'rs@zapna.com');
-        //------------------Sent The Email To Customer
-        //----------------------------------------
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+
         //------------------Sent the Email To Agent
         if (trim($recepient_agent_email) != ''):
 
@@ -1347,11 +1377,11 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $customer_id = trim($customer->getId());
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
-        //$sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna');
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
 
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
             $email = new EmailQueue();
@@ -1381,7 +1411,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         endif;
         //---------------------------------------
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -1391,7 +1421,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email3->setEmailType('Change Number ');
             $email3->setMessage($message_body);
             $email3->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To cdu
         if (trim($sender_emailcdu) != ''):
@@ -1455,12 +1485,15 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $customer_id = trim($customer->getId());
 
         //Support Information
-        //$sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        //$sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'support@zapna.no');
-       // $sender_name = sfConfig::get('app_email_sender_name', 'Zapna');
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Zapna');
-        $rs_email = sfConfig::get('app_email_sender_email', 'rs@zapna.com');
-
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+        
+        $sender_name_sup = sfConfig::get('app_email_sender_name_sup');
+        $sender_email_sup = sfConfig::get('app_email_sender_email_sup');
+        
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
             $email = new EmailQueue();
@@ -1490,7 +1523,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         endif;
         //---------------------------------------
         //--------------Sent The Email To okhan
-        /*if (trim($sender_email) != ''):
+        if (trim($sender_email) != ''):
             $email3 = new EmailQueue();
             $email3->setSubject($subject);
             $email3->setReceipientName($sender_name);
@@ -1506,21 +1539,21 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         if (trim($sender_emailcdu) != ''):
             $email4 = new EmailQueue();
             $email4->setSubject($subject);
-            $email4->setReceipientName($sender_namecdu);
-            $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setReceipientName($sender_name_sup);
+            $email4->setReceipientEmail($sender_email_sup);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
             $email4->setEmailType(sfConfig::get('app_site_title') . ' Refill/charge via admin');
             $email4->setMessage($message_body);
             $email4->save();
-        endif;*/
+        endif;
         //-----------------------------------------
         //--------------Sent The Email To RS
         if (trim($rs_email) != ''):
             $email4 = new EmailQueue();
             $email4->setSubject($subject);
             $email4->setReceipientName($sender_namecdu);
-            $email4->setReceipientEmail($rs_email);
+            $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
             $email4->setEmailType(sfConfig::get('app_site_title') . ' refill/charge via admin');

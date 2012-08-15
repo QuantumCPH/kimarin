@@ -30,7 +30,7 @@
         // Now scan for illegal characters
         for(idx=0;idx<strlen;idx++){
             if(validChar.indexOf(entry.charAt(idx))<0){
-                alert("Entry must be in numeric format!");return false;
+                alert("<?php echo __('Entry must be in numeric format!');?>");return false;
             }
         } // end scan
         return true;
@@ -63,8 +63,7 @@ if ($msgSent != '') {
             <form action=<?php echo url_for('customer/websms', true) ?>  method="post" id="websms" onsubmit="isHex(this.value)">
                 <h3 style="width: 400px;"><?php echo __("Your account balance is") ?>:<?php echo number_format($balance, 2); ?><?php echo sfConfig::get('app_currency_code') ?></h3>
 <?php } else { ?>
-
-                <h3 style="width: 400px;"><?php echo __("Your Current Balance is:") ?> <?php echo number_format($balance, 2); ?> <?php echo sfConfig::get('app_currency_code') ?></h3>
+                <h3 style="width: 400px;"><?php echo __("Your account balance is") ?> <?php echo number_format($balance, 2); ?> <?php echo sfConfig::get('app_currency_code') ?></h3>
                 <?php echo __("Your %1% account balance is low. Please refill your %1% account. Thank you.", array("%1%" => sfConfig::get("app_site_title"))); ?> <b><a href="<?php echo url_for('customer/refill', true) ?><?php echo "/customer_id/" . $customer->getId() ?>">her</a></b>
 <?php } ?>
                 <ul>

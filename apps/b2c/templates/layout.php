@@ -10,9 +10,9 @@
 <?php use_javascript('../zerocall/js/jquery-1.4.2.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('../zerocall/js/jquery.jcarousel.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('../zerocall/js/carousel.js', '', array('absolute'=>true)) ?>
-<?php use_javascript('../zerocall/js/cufon-yui.js', '', array('absolute'=>true)) ?>
-<?php use_javascript('../zerocall/js/calibri.cufonfonts.js', '', array('absolute'=>true)) ?>
-<?php use_javascript('../zerocall/js/cufon-replace.js', '', array('absolute'=>true)) ?>
+<?php //use_javascript('../zerocall/js/cufon-yui.js', '', array('absolute'=>true)) ?>
+<?php //use_javascript('../zerocall/js/calibri.cufonfonts.js', '', array('absolute'=>true)) ?>
+<?php //use_javascript('../zerocall/js/cufon-replace.js', '', array('absolute'=>true)) ?>
 
 <?php use_javascript('jquery.formatCurrency-1.3.0.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('i18n/jquery.formatCurrency.all.js', '', array('absolute'=>true)) ?>
@@ -35,13 +35,14 @@
   
 </head>
 <body>
-<!--    <div style="vertical-align: top;float: right;">
+    <div style="vertical-align: top;float: right;">
 
-                        <?php echo link_to(image_tag('/images/lang_de1.png'), 'customer/changeCulture?new=de'); ?>
-                        <?php echo link_to(image_tag('/images/lang_spa1.png'), 'customer/changeCulture?new=es', array('id'=>'lang_spa')); ?>
-                         <?php echo link_to(image_tag('/images/lang_eng1.png'), 'customer/changeCulture?new=en'); ?>
+    <?php echo link_to(image_tag('/images/lang_de1.png'), 'customer/changeCulture?new=de',array('title'=>'de')); ?>
+    <?php echo link_to(image_tag('/images/lang_spa1.png'), 'customer/changeCulture?new=es', array('id'=>'lang_spa','title'=>'es')); ?>
+    <?php echo link_to(image_tag('/images/lang_cat1.png'), 'customer/changeCulture?new=ca', array('id'=>'lang_spa','title'=>'ca')); ?>
+    <?php echo link_to(image_tag('/images/lang_eng1.png'), 'customer/changeCulture?new=en',array('title'=>'en')); ?>
 
-             </div>-->
+             </div>
 <div id="wrap"><?php //echo $sf_user->getCulture();
 // set alert if customer is not yet registered with fonet
 
@@ -53,23 +54,24 @@
 <!-- end wrap -->
 
 <script type="text/javascript"> 	
-    Cufon.now(); 
-     $(document).ready(function()
+    //Cufon.now(); 
+     jQuery(document).ready(function()
      {
-        $('.submitBtn').corner('round 5px');
-        $('.sidebar_button').corner('round 5px');
-        $('.butonsigninsmall').corner('round 5px');
-        $('.buton').corner('round 5px');
-        $('.loginbuttun').corner('round 5px');
+        jQuery('.submitBtn').corner('round 5px');
+        jQuery('.sidebar_button').corner('round 5px');
+        jQuery('.butonsigninsmall').corner('round 5px');
+        jQuery('.buton').corner('round 5px');
+        jQuery('.loginbuttun').corner('round 5px');
         
      }); 
 </script>
 
 <?php if($sf_user->getCulture()=='en'){    ?>
    <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validate1.js"></script>
-
-   <?php }else{  ?>
-      <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatede.js"></script>
+<?php }elseif($sf_user->getCulture()=='es'){    ?>
+   <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatees.js"></script>
+<?php }else{  ?>
+  <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatede.js"></script>
  <?php  } ?>
 </body>
 </html>
