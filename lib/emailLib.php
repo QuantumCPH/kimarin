@@ -1563,6 +1563,117 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         //-----------------------------------------
     }
 
+    public static function sendCustomerRegistrationViaRetail(Customer $customer, $order) {
+        $product_price = $order->getProduct()->getPrice() - $order->getExtraRefill();
+        $vat = .20 * $product_price;
+
+
+
+        $tc = new Criteria();
+        $tc->add(TransactionPeer::ORDER_ID, $order->getId());
+        $transaction = TransactionPeer::doSelectOne($tc);
+
+
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('pScripts/order_receipt_sms', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,
+                    'agent_name' => $recepient_agent_name,
+                    'wrap' => false,
+                ));
+
+        $subject = __('Payment Confirmation');
+
+
+
+        $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
+        $sender_name = sfConfig::get('app_email_sender_name', 'Kimarin');
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Kimarin');
+        //---------------------------------------
+        //--------------Sent The Email To Support
+
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_name);
+        $email3->setReceipientEmail($sender_email);
+        $email3->setEmailType('Retail Activation');
+        $email3->setMessage($message_body);
+        $email3->save();
+
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_namecdu);
+        $email3->setReceipientEmail($sender_emailcdu);
+        $email3->setEmailType('Retail Activation');
+        $email3->setMessage($message_body);
+        $email3->save();
+        //-----------------------------------------
+    }
+
+        public static function sendErrorInAutoReg($subject, $message) {
+
+        //To RS.
+        $email = new EmailQueue();
+        $email->setSubject($subject);
+        $email->setReceipientName("Raheel Safdar");
+        $email->setReceipientEmail("rs@zapna.com");
+        $email->setEmailType('Auto Registration Error');
+        $email->setMessage($message);
+        $email->save();
+
+    }
+
+    public static function sendRetailRefillEmail(Customer $customer, $order) {
+        $vat = 0;
+
+        $tc = new Criteria();
+        $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
+        $tc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+        $transaction = TransactionPeer::doSelectOne($tc);
+
+        //$this->renderPartial('affiliate/order_receipt', array(
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('pScripts/order_receipt_sms', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,
+                    'agent_name' => $recepient_agent_name,
+                    'wrap' => false,
+                ));
+
+        $subject = __('Payment Confirmation');
+        $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
+        $sender_name = sfConfig::get('app_email_sender_name', 'Kimarin');
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Kimarin');
+        //---------------------------------------
+        //--------------Sent The Email To Support
+
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_name);
+        $email3->setReceipientEmail($sender_email);
+        $email3->setEmailType('Retail Refil');
+        $email3->setMessage($message_body);
+        $email3->save();
+
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_namecdu);
+        $email3->setReceipientEmail($sender_emailcdu);
+        $email3->setEmailType('Retail Refil');
+        $email3->setMessage($message_body);
+        $email3->save();
+
+
+        //-----------------------------------------
+
+    }
+
 }
 
 ?>
