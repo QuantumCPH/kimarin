@@ -195,7 +195,7 @@
                 <target>Total parcial</target>
             </trans-unit>
             <trans-unit id="48" translate="yes" reformat="yes" xml:space="default">
-                <source>Customer number</source>
+                <source>Customer Number</source>
                 <target>Número de cliente</target>
             </trans-unit>
             <trans-unit id="49" translate="yes" reformat="yes" xml:space="default">
@@ -510,7 +510,7 @@
             </trans-unit>
             <trans-unit id="125" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number 0034</source>
-                <target>Número de móvil 0034</target>
+                <target>Número de móvil&lt;br /&gt;0034</target>
             </trans-unit>
             <trans-unit id="126" translate="yes" reformat="yes" xml:space="default">
                 <source>Product</source>
@@ -546,7 +546,7 @@
             </trans-unit>
                <trans-unit id="134" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile service provider</source>
-                <target>Compañía de telefonía&lt;br /&gt;móvil</target>
+                <target>Compañía de&lt;br /&gt;telefonía móvil</target>
             </trans-unit>
                <trans-unit id="135" translate="yes" reformat="yes" xml:space="default">
                 <source>Please check this box to confirm that you have&lt;br /&gt;read and accept the %1% terms and conditions.</source>
@@ -1133,7 +1133,7 @@
             </trans-unit>
             <trans-unit id="280" translate="yes" reformat="yes" xml:space="default">
                 <source>Country of citizenship</source>
-                <target>País de su nacionalidad</target>
+                <target>País de su&lt;br /&gt;nacionalidad</target>
             </trans-unit>
             <trans-unit id="281" translate="yes" reformat="yes" xml:space="default">
                 <source>Province</source>
@@ -2147,6 +2147,10 @@
             <trans-unit id="533" translate="yes" reformat="yes" xml:space="default">
                 <source>If you have any questions please feel free to contact our customer support center at</source>
                 <target>Si usted tiene alguna pregunta no dude en ponerse en contacto con nuestro centro de soporte al cliente en</target>
+            </trans-unit>
+            <trans-unit id="534" translate="yes" reformat="yes" xml:space="default">
+                <source>Customer number</source>
+                <target>Número de cliente</target>
             </trans-unit>
         </body>
     </file>

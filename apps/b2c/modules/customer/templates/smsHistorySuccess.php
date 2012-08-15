@@ -54,9 +54,9 @@
             <li>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                   <tr>
-                    <td class="title"><?php echo __('Date and time') ?></td>
-                    <td class="title" width="40%"><?php echo __('Destination number') ?></td>                    
-                    <td class="title" align="right" style="padding-right: 20px;"><?php echo __('Cost') ?></td>
+                    <td class="title"><strong><?php echo __('Date and time') ?></strong></td>
+                    <td class="title" width="40%"><strong><?php echo __('Destination number') ?></strong></td>                    
+                    <td class="title" align="right" style="padding-right: 20px;"><strong><?php echo __('Cost') ?></strong></td>
                   </tr>
 
                 <?php

@@ -19,6 +19,7 @@ class BaseSmsLogForm extends BaseFormPropel
       'status'        => new sfWidgetFormInput(),
       'created_at'    => new sfWidgetFormDateTime(),
       'customer_id'   => new sfWidgetFormInput(),
+      'sms_type'      => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -29,6 +30,7 @@ class BaseSmsLogForm extends BaseFormPropel
       'status'        => new sfValidatorString(array('max_length' => 20)),
       'created_at'    => new sfValidatorDateTime(),
       'customer_id'   => new sfValidatorInteger(array('required' => false)),
+      'sms_type'      => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('sms_log[%s]');
