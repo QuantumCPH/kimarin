@@ -2194,6 +2194,10 @@
                 <source>Your mobile number.</source>
                 <target>Ihre número de mòbil.</target>
             </trans-unit>
+            <trans-unit id="544" translate="yes" reformat="yes" xml:space="default">
+                <source>Your password will be sent to your e-mail address shortly.</source>
+                <target>Ihr Passwort wird an Ihre E-Mail-Adresse in Kürze zugesandt.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

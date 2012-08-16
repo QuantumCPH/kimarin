@@ -2156,6 +2156,10 @@
                 <source>Your mobile number.</source>
                 <target>Su número de teléfono móvil.</target>
             </trans-unit>
+             <trans-unit id="536" translate="yes" reformat="yes" xml:space="default">
+                <source>Your password will be sent to your e-mail address shortly.</source>
+                <target>Su contraseña le será enviada a su dirección de correo electrónico en breve.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
