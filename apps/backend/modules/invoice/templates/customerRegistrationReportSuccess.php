@@ -5,7 +5,7 @@
       
         
 ?>
-<div id="sf_admin_container"><h3>Report on Dates  From :  <?php  echo date('d-m-Y', strtotime($startdate)); ?>  To : <?php  echo date('d-m-Y', strtotime($enddate)); ?></h3></div>
+<div id="sf_admin_container"><h3>Report on Dates  From :  <?php  echo date('d-m-Y H:i:s', strtotime($startdate)); ?>     To : <?php  echo date('d-m-Y H:i:s', strtotime($enddate)); ?></h3></div>
 <div id="sf_admin_container"><h1><?php echo  __('Customer Registration Report') ?></h1></div>
 <div id="sf_admin_container">
    <div class="sf_admin_filters">  
