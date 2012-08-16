@@ -901,6 +901,8 @@ class customerActions extends sfActions {
         unset($this->form['date_of_birth']);
         unset($this->form['comments']);
         unset($this->form['block']);
+        unset($this->form['usage_alert_sms']);
+        unset($this->form['usage_alert_email']);
         //  unset($this->form['password']);
         // unset($this->form['password_confirm']);
         /////////////////////////////////////
@@ -982,7 +984,8 @@ class customerActions extends sfActions {
         unset($this->form['sim_type_id']);
         unset($this->form['comments']);
         unset($this->form['block']);
-        
+        unset($this->form['usage_alert_sms']);
+        unset($this->form['usage_alert_email']);
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
         $getvoipInfo = new Criteria();
