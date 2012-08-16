@@ -53,7 +53,7 @@
    ?>
         <tr class="headings"><th colspan="12"> Customer Registered Through <?php  echo $rowObj->description; ?></th></tr><br/>
         <tr class="headings">
-            <th>Id</th>
+             <th>Customer Id</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Mobile No</th>
@@ -127,7 +127,7 @@
    ?>
         <tr class="headings"><th colspan="12"> Not Completed Customer Registered Through <?php  echo $rowObj->description; ?></th></tr><br/>
         <tr class="headings">
-            <th>Id</th>
+            <th>Customer Id</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Mobile No</th>
