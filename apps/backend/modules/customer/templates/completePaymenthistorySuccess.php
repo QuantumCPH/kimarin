@@ -1,6 +1,5 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-
  
               <!--Always use tables for tabular data-->
 <div id="sf_admin_container"><h1><?php echo  __('Payment History') ?></h1><br />
@@ -21,7 +20,7 @@
                         <option value="">All</option>
                     <?php  foreach($alltransactions as $alltransaction){  ?>
 
-                    <option value="<?php  echo $alltransaction->getDescription();  ?>"><?php  echo $alltransaction->getDescription();  ?></option>
+                    <option value="<?php  echo $alltransaction->getDescription();  ?>" <?php echo ($alltransaction->getDescription()==$description)?'selected="selected"':''?>><?php  echo $alltransaction->getDescription();  ?></option>
                   <?php  }
                     ?>
 
