@@ -242,10 +242,10 @@ echo " ";   echo substr($Telintambs, 15,2);
   <?php include_partial('sidebar') ?>
 <script type="text/javascript">
  function confirmBlock(){   
-   var c = confirm('"Are you sure you want to block your account"');
+   var c = confirm('<?php echo __("Are you sure you want to block your account")?>');
    
     if(c){
-      alert('"Your account will be blocked"'); 
+      alert('<?php echo __("Your account will be blocked");?>'); 
       window.location="<?php echo url_for('customer/blockCustomer', true) ?>";
     } else { 
       return false; 
