@@ -84,7 +84,7 @@
                     <option value="">--Select--</option>
                 <?php
                   foreach($planguages as $language){
-               ?>
+                ?>
                     <option value="<?php echo $language->getId();?>" <?php echo ($language->getId()==$editCust->getPreferredLanguageId())?'selected="selected"':'';?>><?php echo $language->getLanguage();?></option>
                <?php       
                   }
