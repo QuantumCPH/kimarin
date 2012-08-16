@@ -1165,7 +1165,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             $this->getUser()->setFlash('send_password_message', $this->getContext()->getI18N()->__('Your account details have been sent to your e-mail address.'));
         }
         else {
-            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this e-mail address.'));
+            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this mobile number.'));
         }
 
         return $this->redirect('customer/login');
