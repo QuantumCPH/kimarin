@@ -219,7 +219,7 @@ $i++;
 }  ?>
         
           <tr>
-              <td>Total</td>
+              <td><b>Total</b></td>
     <td><?php echo  $day1;    ?></td>
    <td><?php echo  $day2;    ?></td>
      <td><?php echo  $day3;    ?></td>
