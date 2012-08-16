@@ -3009,10 +3009,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
                 $invite = InvitePeer::doSelectOne($invite_c);
                 if ($invite) {
                     $invite->setInviteStatus(3);
-                    $sc = new Criteria();
-                    $sc->add(ProductPeer::ID, 2);
-                    $commisionary = ProductPeer::doSelectOne($sc);
-                    $comsion = $commisionary->getCommision();
+                   
                     $products = new Criteria();
                     $products->add(ProductPeer::ID, 2);
                     $products = ProductPeer::doSelectOne($products);
