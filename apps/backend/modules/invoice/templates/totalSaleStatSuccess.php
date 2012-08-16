@@ -124,42 +124,41 @@ $day30=0;
 $day31=0;
 $daytotal1=0;
   $i=0;
-
-    
+   
       $conn = Propel::getConnection();
-   $query = 'Select cod.is_first_order
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at) ="'.$year.'-'.$month.'-01") AS day1_calls
- ,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-02") AS day2_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-03" ) AS day3_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-04" ) AS day4_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-05") AS day5_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-06") AS day6_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-07") AS day7_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-08") AS day8_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-09") AS day9_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-10") AS day10_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-11") AS day11_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-12") AS day12_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-13") AS day13_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-14") AS day14_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-15") AS day15_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-16") AS day16_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-17") AS day17_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-18") AS day18_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-19") AS day19_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-20") AS day20_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-21") AS day21_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-22") AS day22_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-23") AS day23_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-24") AS day24_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-25") AS day25_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-26") AS day26_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-27") AS day27_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-28") AS day28_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-29") AS day29_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-30") AS day30_calls
-,(SELECT count( co.id ) FROM customer_order  as co WHERE    co.is_first_order=cod.is_first_order AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-31") AS day31_calls 
-FROM customer_order as cod group by cod.is_first_order order by cod.is_first_order Desc ';
+  echo  $query = 'pt.title
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at) ="'.$year.'-'.$month.'-01") AS day1_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-02") AS day2_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-03" ) AS day3_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-04" ) AS day4_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-05") AS day5_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-06") AS day6_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-07") AS day7_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-08") AS day8_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-09") AS day9_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-10") AS day10_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-11") AS day11_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-12") AS day12_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-13") AS day13_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-14") AS day14_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-15") AS day15_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-16") AS day16_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-17") AS day17_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-18") AS day18_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-19") AS day19_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-20") AS day20_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-21") AS day21_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-22") AS day22_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-23") AS day23_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-24") AS day24_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-25") AS day25_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-26") AS day26_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-27") AS day27_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-28") AS day28_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-29") AS day29_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-30") AS day30_calls
+,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3 AND DATE( co.created_at ) ="'.$year.'-'.$month.'-31") AS day31_calls 
+ from product_type pt order by pt.id  Desc ';
     $statement = $conn->prepare($query);
     $statement->execute();
   while ($rowObj = $statement->fetch(PDO::FETCH_OBJ))
@@ -175,7 +174,7 @@ FROM customer_order as cod group by cod.is_first_order order by cod.is_first_ord
         <tr <?php echo $class;?>>
          
 <!--   <td><?php  //echo $rowObj->is_first_order;   ?></td>-->
-    <td><?php   if($rowObj->is_first_order==1){ echo "Registration"; }else{  echo "Refill";  }   ?></td>
+    <td><?php  echo  $rowObj->title;   ?></td>
    <td><?php   $day1+=$rowObj->day1_calls;   echo $rowObj->day1_calls;?></td>
    <td><?php  $day2+=$rowObj->day2_calls; echo $rowObj->day2_calls;   ?></td>
   <td><?php  $day3+=$rowObj->day3_calls; echo $rowObj->day3_calls;   ?></td>
