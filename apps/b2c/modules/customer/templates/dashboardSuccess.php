@@ -232,11 +232,23 @@ echo " ";   echo substr($Telintambs, 15,2);
 	</table>
   <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
 		<tr>
-                    <td ><form name=myform action="<?php echo url_for('customer/blockCustomer', true) ?>">
-                            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type=submit value="<?php echo __('Block Account')?>" onClick="if(confirm('<?php echo __("Are you sure you want to block your account");?>')) alert('<?php echo __("Your account will be blocked");?>');" />
+                    <td ><form name="myform" action="">
+                            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="button" value="<?php echo __('Block Account')?>" onclick="confirmBlock()" />
 </form> </td>
                 </tr></table>
     </div>
   </div>
 
   <?php include_partial('sidebar') ?>
+<script type="text/javascript">
+ function confirmBlock(){   
+   var c = confirm('"Are you sure you want to block your account"');
+   
+    if(c){
+      alert('"Your account will be blocked"'); 
+      window.location="<?php echo url_for('customer/blockCustomer', true) ?>";
+    } else { 
+      return false; 
+    }
+  }  
+</script>

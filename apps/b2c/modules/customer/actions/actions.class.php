@@ -253,7 +253,7 @@ class customerActions extends sfActions {
         $this->customer_balance = -1;
 
         $country_id = $this->customer->getCountryId();
-
+        $this->targe = $this->getTargetUrl();
         //This Section For Get the Language Symbol For Set Currency -
         $enableCountry = new Criteria();
         $enableCountry->add(EnableCountryPeer::ID, $country_id);
