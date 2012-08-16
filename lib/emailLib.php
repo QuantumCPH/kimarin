@@ -360,7 +360,7 @@ class emailLib {
         $sender_email = sfConfig::get('app_email_sender_email');
 
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
-        $sender_emailcdu = sfConfig::get('email_sender_email_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
         
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
