@@ -2160,6 +2160,10 @@
                 <source>Your password will be sent to your e-mail address shortly.</source>
                 <target>Su contraseña le será enviada a su dirección de correo electrónico en breve.</target>
             </trans-unit>
+            <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
+                <source>No customer is registered with this mobile number.</source>
+                <target>Ningún cliente está registrado con este número de teléfono móvil.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

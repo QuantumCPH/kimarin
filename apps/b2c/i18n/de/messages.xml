@@ -2198,6 +2198,10 @@
                 <source>Your password will be sent to your e-mail address shortly.</source>
                 <target>Ihr Passwort wird an Ihre E-Mail-Adresse in Kürze zugesandt.</target>
             </trans-unit>
+             <trans-unit id="545" translate="yes" reformat="yes" xml:space="default">
+                <source>No customer is registered with this mobile number.</source>
+                <target>Kein Kunde ist mit diesem número de mòbil registriert.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
