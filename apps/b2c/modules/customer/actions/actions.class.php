@@ -902,6 +902,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
         unset($this->form['sim_type_id']);
         unset($this->form['nationality_id']);
         unset($this->form['date_of_birth']);
+        unset($this->form['comments']);
         unset($this->form['block']);
         //  unset($this->form['password']);
         // unset($this->form['password_confirm']);
@@ -982,6 +983,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
         unset($this->form['usage_alert_sms']);
         unset($this->form['usage_alert_email']);
         unset($this->form['sim_type_id']);
+        unset($this->form['comments']);
         unset($this->form['block']);
  
         
@@ -1165,7 +1167,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             $this->getUser()->setFlash('send_password_message', $this->getContext()->getI18N()->__('Your account details have been sent to your e-mail address.'));
         }
         else {
-            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this e-mail address.'));
+            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this mobile number.'));
         }
 
         return $this->redirect('customer/login');
