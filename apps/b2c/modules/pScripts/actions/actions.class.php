@@ -3009,9 +3009,9 @@ if(($caltype!="IC") && ($caltype!="hc")){
                 $invite = InvitePeer::doSelectOne($invite_c);
                 if ($invite) {
                     $invite->setInviteStatus(3);
-                    $sc = new Criteria();
-                    $sc->add(CustomerCommisionPeer::ID, 1);
-                    $commisionary = CustomerCommisionPeer::doSelectOne($sc);
+                    $ipc = new Criteria();
+                    $ipc->add(ProductPeer::ID, 2);
+                    $commisionary = ProductPeer::doSelectOne($sc);
                     $comsion = $commisionary->getCommision();
                     $products = new Criteria();
                     $products->add(ProductPeer::ID, 2);
@@ -3028,7 +3028,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
                     $OrderId = $inviteOrder->getId();
                     // make a new transaction to show in payment history
                     $transaction_i = new Transaction();
-                    $transaction_i->setAmount($comsion);
+                    $transaction_i->setAmount($extrarefill);
                     $transaction_i->setDescription('Invitation Bonus');
                     $transaction_i->setCustomerId($invite->getCustomerId());
                     $transaction_i->setOrderId($OrderId);
@@ -3045,7 +3045,7 @@ if(($caltype!="IC") && ($caltype!="hc")){
                         $TelintaMobile = sfConfig::get('app_country_code') . $this->customers->getMobileNumber();
                     }
                     $uniqueId = $this->customers->getUniqueid();
-                    $OpeningBalance = $comsion;
+                    $OpeningBalance = $extrarefill;
                     //This is for Recharge the Customer
                 
                          Telienta::recharge($this->customers, $OpeningBalance,"Tipsa en van " . $invite->getInviteNumber());
