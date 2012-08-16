@@ -983,6 +983,9 @@ $transaction->setCustomerId($this->order->getCustomerId());
         unset($this->form['usage_alert_email']);
         unset($this->form['sim_type_id']);
         unset($this->form['block']);
+ 
+        
+ 
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
         $getvoipInfo = new Criteria();

@@ -92,7 +92,11 @@
             <td><?php  echo $rowObjs->email; ?></td>
             <td><?php  echo $rowObjs->created_at; ?></td>
             <td><?php  echo $rowObjs->uniqueid; ?></td>
-            <td><?php  echo $rowObjs->id;  ?></td>
+            <td><?php    $conn = Propel::getConnection();
+     $querycp = 'select p.name from product as p left join  customer_product  as cp on p.id=cp.product_id where cp.customer_id="'.$rowObjs->id.'"  and p.product_type_id=1';
+    $statementcp = $conn->prepare($querycp);
+    $statementcp->execute();
+  $rowObjcp = $statementcp->fetch(PDO::FETCH_OBJ);     echo $rowObjcp->name;          ?></td>
            
         </tr> 
         
@@ -162,7 +166,11 @@
             <td><?php  echo $rowObjs->email; ?></td>
             <td><?php  echo $rowObjs->created_at; ?></td>
             <td><?php  echo $rowObjs->uniqueid; ?></td>
-            <td><?php  echo $rowObjs->id; ?></td>
+            <td><?php    $conn = Propel::getConnection();
+     $querycp = 'select p.name from product as p left join  customer_product  as cp on p.id=cp.product_id where cp.customer_id="'.$rowObjs->id.'"  and p.product_type_id=1';
+    $statementcp = $conn->prepare($querycp);
+    $statementcp->execute();
+  $rowObjcp = $statementcp->fetch(PDO::FETCH_OBJ);     echo $rowObjcp->name;          ?></td>
            
         </tr> 
         
