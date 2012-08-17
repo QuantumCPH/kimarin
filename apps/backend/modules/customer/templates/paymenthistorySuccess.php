@@ -34,7 +34,21 @@
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
                   <td><?php echo $transaction->getDescription() ?></td>
-                  <td  align="right"><?php echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount() ?>
+                  <td  align="right">
+                      
+                      <?php
+                     $TDI=$transaction->getTransactionDescriptionId();
+                  
+                     if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{
+                    echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount(); 
+                    
+                     }
+                    ?>
                             <?php
                                 echo (sfConfig::get('app_currency_code'));
                           ?></td>
