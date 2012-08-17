@@ -818,3 +818,10 @@ p{
     margin-top: 15px;
     margin-left: 144px;
 }
+label.error{
+   color:#f00 !important;
+   font-weight: normal !important;
+}
+input.changeNum{
+   margin-left:128px!important;
+}
