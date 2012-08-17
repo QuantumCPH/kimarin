@@ -30,14 +30,24 @@
                       }
  $incrment++;
                   ?>
+                              
+                              <?php    $TDI=$transaction->getTransactionDescriptionId();  ?>
                 <tr <?php echo $class;   ?>>
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
-                  <td><?php echo $transaction->getDescription() ?></td>
+                  <td><?php echo $transaction->getDescription() ?> ( <?php
+                   
+                  
+                     if($TDI==6){
+                              echo number_format($transaction->getAmount(),2);
+                         
+                     }elseif($TDI==10){
+                            echo number_format($transaction->getAmount(),2);
+                     }  ?>)</td>
                   <td  align="right">
                       
                       <?php
-                     $TDI=$transaction->getTransactionDescriptionId();
+                   
                   
                      if($TDI==6){
                              echo  "0.00" ;
