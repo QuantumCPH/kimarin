@@ -35,15 +35,15 @@
                 <tr <?php echo $class;   ?>>
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
-                  <td><?php echo $transaction->getDescription() ?> ( <?php
+                  <td><?php echo $transaction->getDescription() ?> <?php
                    
                   
                      if($TDI==6){
-                              echo number_format($transaction->getAmount(),2);
+                              echo "(".number_format($transaction->getAmount(),2).")";
                          
                      }elseif($TDI==10){
-                            echo number_format($transaction->getAmount(),2);
-                     }  ?>)</td>
+                            echo "(".number_format($transaction->getAmount(),2).")";
+                     }  ?> </td>
                   <td  align="right">
                       
                       <?php
