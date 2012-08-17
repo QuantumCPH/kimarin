@@ -120,7 +120,7 @@ function countChar(str)
 
                     </tr>
                     <tr>
-                        <td  colspan="2" align="center"><textarea name="message" ><?php echo __("You can save up to 80% on international calls from your Spanish mobile telephone if you are registered as a %1% customer. It is easy to register and use, and you do not need to change your mobile number or mobile service provider. Please go to %1%'s web site: www.kimarineurope.com and read more.",array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code')));?> </textarea></td>
+                        <td  colspan="2" align="center"><textarea name="message" ><?php echo __("You can save up to 80% on international calls from your Spanish mobile telephone if you are registered as a %1% customer. It is easy to register and use, and you do not need to change your mobile number or mobile service provider. Please go to %1%'s web site: %3% and read more.",array('%1%'=>sfConfig::get('app_site_title'),'%2%'=>sfConfig::get('app_currency_code'),'%3%'=>sfConfig::get('app_live_site_url')));?> </textarea></td>
                     </tr>
                 </table><br />
                 <input type="submit" class="butonsigninsmall" style="margin-left: 0px !important;" name="submit" value="<?php echo __('Send invitation') ?>" />
