@@ -2010,7 +2010,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             echo "<br />";
             echo $notify_url;
             if ($order_id && $item_amount) {
-               // Payment::SendPayment($querystring);
+                Payment::SendPayment($querystring);
             } else {
                 echo 'error';
             }
