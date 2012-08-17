@@ -295,15 +295,20 @@ class customerActions extends sfActions {
         //This is for Retrieve balance From Telinta
         // $telintaGetBalance = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?action=getbalance&name=' . $uniqueId . '&type=customer');
         $telintaGetBalance = Telienta::getBalance($this->customer);
-
-
-
         $this->customer_balance = $telintaGetBalance;
 
-
-
-        if ($this->customer_balance != null)
-            $this->customer_balance = $this->customer_balance;
+        if ($this->customer_balance != null) $this->customer_balance = $this->customer_balance;
+        
+        $change_no_startdate = date('Y-m-1 h:i:s');
+        $change_no_enddate = date('Y-m-t h:i:s');
+        
+        $cn = new Criteria();
+        $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID,$this->customer->getId());
+        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT,$change_no_startdate,Criteria::GREATER_EQUAL);
+        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT,$change_no_enddate,Criteria::LESS_EQUAL);
+        $cn->addAnd(ChangeNumberDetailPeer::STATUS,1);
+        $change_number_count = ChangeNumberDetailPeer::doCount($cn);
+        $this->change_number_count = $change_number_count;
     }
 
     //This Function add Again new Feature Wls2 --
@@ -1887,9 +1892,130 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
         return sfView::NONE;
     }
+    public function executeChangenumberservice(sfWebRequest $request) {
+        $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', '', 'usersession'));
 
-  
+        $this->redirectUnless($this->customer, "@homepage");
+        $this->targetUrl = $this->getTargetUrl();
+    }
+    public function executeChangeNumber(sfWebRequest $request)
+    {
+
+        $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', '', 'usersession'));
+        
+        $this->redirectUnless($this->customer, "@homepage");
+        $this->targetUrl = $this->getTargetUrl();
+        
+        $existingNumber = $this->customer->getMobileNumber();
+        $this->newNumber = $request->getParameter('newNumber');
+        $newNumber = $this->newNumber;
+        $product_id = $request->getParameter('product');
+        $this->product = ProductPeer::retrieveByPK($product_id);
+        $extra_refill = $this->product->getPrice();
+        
+        $this->countrycode = sfConfig::get('app_country_code');
+        $customer = $this->customer;
+        
+        if($newNumber !=""){
+            $ccu = new Criteria();
+            $ccu->add(CustomerPeer::MOBILE_NUMBER,$newNumber);
+            $ccu->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
+            $ccheck = CustomerPeer::doCount($ccu); 
+            if($ccheck > 0){
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('New mobile number already exists.'));
+                return $this->redirect('customer/changenumberservice');
+            }else{
+                $order = new CustomerOrder(); 
+                $order->setCustomerId($customer->getId());
+                $order->setProductId($product_id);
+                $order->setQuantity(1);
+                $order->setExtraRefill($extra_refill);
+                $order->setOrderStatusId(sfConfig::get('app_status_new'));
+
+                $order->save();
+                $this->order = $order;
+                //create transaction
+                $transaction = new Transaction();
+                $transaction->setOrderId($order->getId());
+                $transaction->setCustomerId($customer->getId());
+                $transaction->setAmount($extra_refill);
+                $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(13);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->save();  
+            }            
+        }
+    }
+
+    public function executeNumberProcess(sfWebRequest $request) {
+        
+        $lang = $this->getUser()->getCulture();
+        $return_url = "http://www.kimarineurope.com/refill-thanks.html";
+        $cancel_url = "http://www.kimarineurope.com/refill-reject.html";
+        
+        $order_id = $request->getParameter('item_number'); 
+        $order = CustomerOrderPeer::retrieveByPK($order_id);
+        
+        $item_amount = $request->getParameter('amount'); 
+        if($item_amount==""){
+           $item_amount = number_format($order->getExtraRefill(),2); 
+        }
+        $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
+        
+        $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
+
+        $email2 = new DibsCall();
+        $email2->setCallurl($notify_url);
+
+        $email2->save();
+        
+        $mobile_number = $request->getParameter('mobile_number'); 
+        $newnumber = $request->getParameter('newnumber'); 
+        $customerid = $order->getCustomerId(); 
+        
+        $changenumberdetail = new ChangeNumberDetail();
+        $changenumberdetail->setOldNumber($mobile_number);
+        $changenumberdetail->setNewNumber($newnumber);
+        $changenumberdetail->setCustomerId($customerid);
+        $changenumberdetail->setStatus(0); 
+        $changenumberdetail->save();
+        
+        $querystring = '';
+        
+        $ct =  new Criteria();
+        $ct->add(TransactionPeer::ORDER_ID,$order_id);
+        $tCount = TransactionPeer::doCount($ct);
+        if($tCount > 0){
+            $transaction = TransactionPeer::doSelectOne($ct);
+            $item_name = $transaction->getDescription();
+        }else{
+            $item_name = "Fee for change number";
+        }
+        
+
+            //loop for posted values and append to querystring
+            foreach ($_POST as $key => $value) {
+                $value = urlencode(stripslashes($value));
+                $querystring .= "$key=$value&";
+            }
+
+            $querystring .= "item_name=" . urlencode($item_name) . "&";
+            $querystring .= "return=" . urldecode($return_url) . "&";
+            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+            $querystring .= "notify_url=" . urldecode($notify_url);
 
 
+            echo $querystring;
+            echo "<br />";
+            echo $notify_url;
+            if ($order_id && $item_amount) {
+               // Payment::SendPayment($querystring);
+            } else {
+                echo 'error';
+            }
+            return sfView::NONE;
+            exit();
+    }
 
 }
