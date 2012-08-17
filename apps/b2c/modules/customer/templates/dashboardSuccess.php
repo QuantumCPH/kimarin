@@ -241,7 +241,7 @@ echo " ";   echo substr($Telintambs, 15,2);
 		<tr>
                     <td ><form name="changeNumber" action="<?php echo url_for('customer/changenumberservice', true) ?>">
                           <?php 
-                            if($change_number_count > 0){
+                            if($change_number_count > 2){
                           ?>  
                              <p></p><br />
                           <?php
