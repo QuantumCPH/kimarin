@@ -46,7 +46,18 @@
                         } 
                   }?></td>
                   <td align="right"><?php
-                    echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount();?>
+                     $TDI=$transaction->getTransactionDescriptionId();
+                  
+                     if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{
+                    echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount(); 
+                    
+                     }
+                    ?>
                             <?php 
 //                            if($lang=="pl"){
 //                               // echo ('plz');

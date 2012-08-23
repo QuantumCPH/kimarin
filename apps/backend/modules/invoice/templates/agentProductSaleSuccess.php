@@ -125,7 +125,7 @@ $day31A=0;
 $daytotal1A=0;     
 
 ?>
-        
+ 
  <?php
             $conn = Propel::getConnection();
    $queryC = 'select ac.id,ac.name as agentname from customer as c left join agent_company  as ac on c.referrer_id=ac.id where c.referrer_id>0 group by ac.id';
@@ -134,13 +134,9 @@ $daytotal1A=0;
   while ($rowObjCus = $statementC->fetch(PDO::FETCH_OBJ))
     {  ?> 
          <tr>
-       <td colspan="33"  > &nbsp;</td>
-             
-  </tr>   
+       <td colspan="33"  > &nbsp;</td> </tr>   
    <tr>
-       <td colspan="33"  ><b><?php echo $rowObjCus->agentname; ?></b></td>
-             
-  </tr>      
+       <td colspan="33"  ><b><?php echo $rowObjCus->agentname; ?></b></td> </tr>      
         
 <?php
 $day1=0;

@@ -295,15 +295,20 @@ class customerActions extends sfActions {
         //This is for Retrieve balance From Telinta
         // $telintaGetBalance = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?action=getbalance&name=' . $uniqueId . '&type=customer');
         $telintaGetBalance = Telienta::getBalance($this->customer);
-
-
-
         $this->customer_balance = $telintaGetBalance;
 
-
-
-        if ($this->customer_balance != null)
-            $this->customer_balance = $this->customer_balance;
+        if ($this->customer_balance != null) $this->customer_balance = $this->customer_balance;
+        
+        $change_no_startdate = date('Y-m-1 h:i:s');
+        $change_no_enddate = date('Y-m-t h:i:s');
+        
+        $cn = new Criteria();
+        $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID,$this->customer->getId());
+        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT,$change_no_startdate,Criteria::GREATER_EQUAL);
+        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT,$change_no_enddate,Criteria::LESS_EQUAL);
+        $cn->addAnd(ChangeNumberDetailPeer::STATUS,1);
+        $change_number_count = ChangeNumberDetailPeer::doCount($cn);
+        $this->change_number_count = $change_number_count;
     }
 
     //This Function add Again new Feature Wls2 --
@@ -1802,8 +1807,8 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
 
         $lang = $this->getUser()->getCulture();
-        $return_url = "http://www.kimarineurope.com/refill-thanks.html";
-        $cancel_url = "http://www.kimarineurope.com/refill-reject.html";
+        $return_url = "http://www.kimarin.es/refill-thanks.html";
+        $cancel_url = "http://www.kimarin.es/refill-reject.html";
         //   $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
 
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
@@ -1890,86 +1895,6 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
         return sfView::NONE;
     }
-
-    public function executeNewcardPur(sfWebRequest $request) {
-        $this->price='';
-        $this->sim='';
-        $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', null, 'usersession'));
-        $this->redirectUnless($this->customer, "@homepage");
-
-        $cst = new Criteria();
-        //$cst->add(ProductPeer::PRODUCT_TYPE_ID, 3);
-        $this->simtypes = SimTypesPeer::doSelect($cst);
-
-
-       if ($request->isMethod('post')) {
-            $st = new Criteria();
-            $st->add(ProductPeer::NAME, '%'.$request->getParameter('sim_type').'%', Criteria::LIKE);
-            $simtype = ProductPeer::doSelectOne($st);//var_dump($simtype);
-            $this->sim=$request->getParameter('sim_type');
-            $this->price=$simtype->getPrice();
-            $this->vat=$this->price*sfConfig::get('app_vat_percentage');
-            $this->total=$this->price+$this->vat;
-            $product_id=$simtype->getId();
-
-            $this->order = new CustomerOrder();
-
-            $this->order->setProductId($product_id);
-            $this->order->setCustomer($this->customer);
-            $this->order->setQuantity(1);
-            $this->order->setExtraRefill(0);
-            $this->order->save();
-
-            //new transaction
-            $transaction = new Transaction();
-
-            $transaction->setAmount($this->total);
-            $transaction->setDescription('Purchase '.$request->getParameter('sim_type'));
-            $transaction->setOrderId($this->order->getId());
-            $transaction->setCustomerId($this->order->getCustomerId());
-            $transaction->save();
-
-            
-        }
-        if($request->getParameter('buy')!=''){
-            $this->target = $this->getTargetUrl();
-
-            $order_id = $request->getParameter('item_number');
-            $item_amount = $request->getParameter('amount');
-            $lang = $this->getUser()->getCulture();
-            $return_url = $this->target."customer/dashboard";
-            $cancel_url = $this->target."customer/dashboard";
-
-
-            $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
-            $notify_url = $this->getTargetUrl() . 'pScripts/calbacknewcard?p=' . $callbackparameters;
-
-            $email2 = new DibsCall();
-            $email2->setCallurl($notify_url);
-
-            $email2->save();
-
-            $querystring = '';
-
-            $item_name = 'Purchase '.$request->getParameter('sim_type');
-
-            //loop for posted values and append to querystring
-            foreach ($_POST as $key => $value) {
-                $value = urlencode(stripslashes($value));
-                $querystring .= "$key=$value&";
-            }
-
-            $querystring .= "item_name=" . urlencode($item_name) . "&";
-            $querystring .= "return=" . urldecode($return_url) . "&";
-            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
-            $querystring .= "notify_url=" . urldecode($notify_url);
-            if ($order_id && $item_amount) {
-                Payment::SendPayment($querystring);
-            } else {
-                echo 'error';
-            }
-        }
-    }
-
+    
 
 }

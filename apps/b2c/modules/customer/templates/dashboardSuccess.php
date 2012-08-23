@@ -236,6 +236,23 @@ echo " ";   echo substr($Telintambs, 15,2);
                             <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="button" value="<?php echo __('Block Account')?>" onclick="confirmBlock()" />
 </form> </td>
                 </tr></table>
+        
+        <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
+		<tr>
+                    <td ><form name="changeNumber" action="<?php echo url_for('customer/changenumberservice', true) ?>">
+                          <?php 
+                            if($change_number_count >= 2){
+                          ?>  
+                             <p></p><br />
+                          <?php
+                            }else{ ?>
+                              <p>You can change your number maximum 2 times in a month.</p><br />
+                              <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="submit" value="<?php echo __('Change Number')?>" />  
+                         <?php
+                            }
+                         ?>   
+</form> </td>
+                </tr></table>
     </div>
   </div>
 
