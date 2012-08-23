@@ -2156,6 +2156,14 @@
                 <source>Your mobile number.</source>
                 <target>Su número de teléfono móvil.</target>
             </trans-unit>
+            <trans-unit id="536" translate="yes" reformat="yes" xml:space="default">
+                <source>Change Number</source>
+                <target>Nummer ändern</target>
+            </trans-unit>
+            <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
+                <source>Enter your mobile number to receive your password.</source>
+                <target>Introduce tu número de móvil para recibir su contraseña.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -2194,6 +2194,14 @@
                 <source>Your mobile number.</source>
                 <target>Ihre número de mòbil.</target>
             </trans-unit>
+            <trans-unit id="544" translate="yes" reformat="yes" xml:space="default">
+                <source>Change Number</source>
+                <target>Nummer ändern</target>
+            </trans-unit>
+            <trans-unit id="545" translate="yes" reformat="yes" xml:space="default">
+                <source>Enter your mobile number to receive your password.</source>
+                <target>Geben Sie Ihre Handynummer ein, um Ihr Passwort zu erhalten.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

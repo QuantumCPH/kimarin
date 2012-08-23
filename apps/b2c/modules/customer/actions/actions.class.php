@@ -253,7 +253,7 @@ class customerActions extends sfActions {
         $this->customer_balance = -1;
 
         $country_id = $this->customer->getCountryId();
-
+        $this->targe = $this->getTargetUrl();
         //This Section For Get the Language Symbol For Set Currency -
         $enableCountry = new Criteria();
         $enableCountry->add(EnableCountryPeer::ID, $country_id);
@@ -909,6 +909,9 @@ $transaction->setCustomerId($this->order->getCustomerId());
         unset($this->form['date_of_birth']);
         unset($this->form['comments']);
         unset($this->form['block']);
+        unset($this->form['usage_alert_sms']);
+        unset($this->form['usage_alert_email']);
+
         //  unset($this->form['password']);
         // unset($this->form['password_confirm']);
         /////////////////////////////////////
@@ -990,9 +993,9 @@ $transaction->setCustomerId($this->order->getCustomerId());
         unset($this->form['sim_type_id']);
         unset($this->form['comments']);
         unset($this->form['block']);
- 
-        
- 
+        unset($this->form['usage_alert_sms']);
+        unset($this->form['usage_alert_email']);
+
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
         $getvoipInfo = new Criteria();
@@ -1804,8 +1807,8 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
 
         $lang = $this->getUser()->getCulture();
-        $return_url = "http://www.kimarineurope.com/refill-thanks.html";
-        $cancel_url = "http://www.kimarineurope.com/refill-reject.html";
+        $return_url = "http://www.kimarin.es/refill-thanks.html";
+        $cancel_url = "http://www.kimarin.es/refill-reject.html";
         //   $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
 
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
@@ -1892,6 +1895,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
         return sfView::NONE;
     }
+
     public function executeChangenumberservice(sfWebRequest $request) {
         $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', '', 'usersession'));
 
@@ -1951,8 +1955,8 @@ $transaction->setCustomerId($this->order->getCustomerId());
     public function executeNumberProcess(sfWebRequest $request) {
         
         $lang = $this->getUser()->getCulture();
-        $return_url = "http://www.kimarineurope.com/refill-thanks.html";
-        $cancel_url = "http://www.kimarineurope.com/refill-reject.html";
+        $return_url = "http://www.kimarin.es/refill-thanks.html";
+        $cancel_url = "http://www.kimarin.es/refill-reject.html";
         
         $order_id = $request->getParameter('item_number'); 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
@@ -2017,6 +2021,87 @@ $transaction->setCustomerId($this->order->getCustomerId());
             return sfView::NONE;
             exit();
     }
+    public function executeNewcardPur(sfWebRequest $request) {
+        $this->price='';
+        $this->sim='';
+        $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', null, 'usersession'));
+        $this->redirectUnless($this->customer, "@homepage");
+
+        $cst = new Criteria();
+        //$cst->add(ProductPeer::PRODUCT_TYPE_ID, 3);
+        $this->simtypes = SimTypesPeer::doSelect($cst);
+
+
+       if ($request->isMethod('post')) {
+            $st = new Criteria();
+            $st->add(ProductPeer::NAME, '%'.$request->getParameter('sim_type').'%', Criteria::LIKE);
+            $simtype = ProductPeer::doSelectOne($st);//var_dump($simtype);
+            $this->sim=$request->getParameter('sim_type');
+            $this->price=$simtype->getPrice();
+            $this->vat=$this->price*sfConfig::get('app_vat_percentage');
+            $this->total=$this->price+$this->vat;
+            $product_id=$simtype->getId();
+
+            $this->order = new CustomerOrder();
+
+            $this->order->setProductId($product_id);
+            $this->order->setCustomer($this->customer);
+            $this->order->setQuantity(1);
+            $this->order->setExtraRefill(0);
+            $this->order->save();
+
+            //new transaction
+            $transaction = new Transaction();
+
+            $transaction->setAmount($this->total);
+            $transaction->setDescription('Purchase '.$request->getParameter('sim_type'));
+            $transaction->setOrderId($this->order->getId());
+            $transaction->setCustomerId($this->order->getCustomerId());
+            $transaction->save();
+
+
+        }
+        if($request->getParameter('buy')!=''){
+            $this->target = $this->getTargetUrl();
+
+            $order_id = $request->getParameter('item_number');
+            $item_amount = $request->getParameter('amount');
+            $lang = $this->getUser()->getCulture();
+            $return_url = $this->target."customer/dashboard";
+            $cancel_url = $this->target."customer/dashboard";
+
+
+            $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
+            $notify_url = $this->getTargetUrl() . 'pScripts/calbacknewcard?p=' . $callbackparameters;
+
+            $email2 = new DibsCall();
+            $email2->setCallurl($notify_url);
+
+            $email2->save();
+
+            $querystring = '';
+
+            $item_name = 'Purchase '.$request->getParameter('sim_type');
+
+            //loop for posted values and append to querystring
+            foreach ($_POST as $key => $value) {
+                $value = urlencode(stripslashes($value));
+                $querystring .= "$key=$value&";
+            }
+
+            $querystring .= "item_name=" . urlencode($item_name) . "&";
+            $querystring .= "return=" . urldecode($return_url) . "&";
+            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+            $querystring .= "notify_url=" . urldecode($notify_url);
+            if ($order_id && $item_amount) {
+                Payment::SendPayment($querystring);
+            } else {
+                echo 'error';
+            }
+        }
+    }
+
+
 
      public function executeChangeProductSubscription(sfWebRequest $request)
     {
