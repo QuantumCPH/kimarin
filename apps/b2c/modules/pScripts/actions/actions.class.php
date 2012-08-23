@@ -3466,4 +3466,236 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
   }
 
+  public function executeCalbackChangeNumber(sfWebRequest $request){
+
+        $Parameters = $request->getURI();
+
+        $email2 = new DibsCall();
+        $email2->setCallurl($Parameters);
+        $email2->save();
+
+        // call back url $p="es-297-100"; lang_orderid_amount
+
+        $callbackparameters = $request->getParameter("p");
+        $params = explode("-",$callbackparameters);
+
+        $lang = $params[0];
+        $order_id = $params[1];
+        $order_amount   = $params[2];
+
+        $this->getUser()->setCulture($lang);
+
+        $this->forward404Unless($order_id);
+
+        $order = CustomerOrderPeer::retrieveByPK($order_id);
+        $this->forward404Unless($order);
+
+
+        $c = new Criteria;
+        $c->add(TransactionPeer::ORDER_ID, $order_id);
+        $transaction = TransactionPeer::doSelectOne($c);
+        if($order_amount=="")$order_amount = $transaction->getAmount();
+
+        $order->setOrderStatusId(sfConfig::get('app_status_completed', 3)); //completed
+        $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
+        if ($transaction->getAmount() > $order_amount) {
+            //error
+            $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
+            $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
+            $transaction->save();
+            die;
+        } else if ($transaction->getAmount() < $order_amount) {
+            //$extra_refill_amount = $order_amount;
+            $order->setExtraRefill($order_amount);
+            $transaction->setAmount($order_amount);
+        }
+
+        $customer = $order->getCustomer();
+        $old_mobile_number = $customer->getMobileNumber();
+
+        $cn = new Criteria();
+        $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID,$customer->getId());
+        $cn->addAnd(ChangeNumberDetailPeer::OLD_NUMBER,$old_mobile_number);
+        $cn->addAnd(ChangeNumberDetailPeer::STATUS,0);
+        $change_number = ChangeNumberDetailPeer::doSelectOne($cn);
+       // var_dump($change_number);
+        $new_mobile = $change_number->getNewNumber();
+        $countrycode = sfConfig::get("app_country_code");
+        $new_mobile_number = $countrycode.$new_mobile;
+        $uniqueId = $customer->getUniqueid();
+
+        $un = new Criteria();
+        $un->add(CallbackLogPeer::UNIQUEID, $uniqueId);
+        $un->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
+        $activeNumber = CallbackLogPeer::doSelectOne($un);
+
+        // As each customer have a single account search the previous account and terminate it.
+        $cp = new Criteria;
+        $cp->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'a' . $activeNumber->getMobileNumber());
+        $cp->addAnd(TelintaAccountsPeer::STATUS, 3);
+
+        if (TelintaAccountsPeer::doCount($cp) > 0) {
+            $telintaAccount = TelintaAccountsPeer::doSelectOne($cp);
+            Telienta::terminateAccount($telintaAccount);
+        }
+
+        Telienta::createAAccount($new_mobile_number, $customer);
+
+        $cb = new Criteria;
+        $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb' . $activeNumber->getMobileNumber());
+        $cb->addAnd(TelintaAccountsPeer::STATUS, 3);
+
+        if (TelintaAccountsPeer::doCount($cb) > 0) {
+            $telintaAccountsCB = TelintaAccountsPeer::doSelectOne($cb);
+           // Telienta::terminateAccount($telintaAccountsCB);
+           // Telienta::createCBAccount($new_mobile_number, $customer);
+        }
+
+        $getvoipInfo = new Criteria();
+        $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $customer->getId());
+        $getvoipInfo->addAnd(SeVoipNumberPeer::IS_ASSIGNED, 1);
+        $getvoipInfos = SeVoipNumberPeer::doSelectOne($getvoipInfo); //->getId();
+        if (isset($getvoipInfos)) {
+            $voipnumbers = $getvoipInfos->getNumber();
+            $voipnumbers = substr($voipnumbers, 2);
+
+            $tc = new Criteria();
+            $tc->add(TelintaAccountsPeer::ACCOUNT_TITLE, $voipnumbers);
+            $tc->add(TelintaAccountsPeer::STATUS, 3);
+            if (TelintaAccountsPeer::doCount($tc) > 0) {
+                $telintaAccountR = TelintaAccountsPeer::doSelectOne($tc);
+                Telienta::terminateAccount($telintaAccountR);
+            }
+            Telienta::createReseNumberAccount($voipnumbers, $customer, $new_mobile_number);
+        }
+
+        $change_number->setStatus(1);
+        $change_number->save();
+
+        $customer->setMobileNumber($new_mobile);
+        $customer->save();
+
+
+        $order->save();
+        $transaction->save();
+
+        $callbacklog = new CallbackLog();
+        $callbacklog->setMobileNumber($new_mobile_number);
+        $callbacklog->setuniqueId($uniqueId);
+        $callbacklog->setcallingCode($countrycode);
+        $callbacklog->save();
+
+        emailLib::sendChangeNumberEmail($customer, $order);
+        return sfView::NONE;
+  }
+
+  public function executeCalbacknewcard(sfWebRequest $request) {
+
+        $Parameters=$request->getURI();
+
+        $email2 = new DibsCall();
+        $email2->setCallurl($Parameters);
+        $email2->save();
+
+        // call back url $p="es-297-100"; lang_orderid_amount
+
+        $callbackparameters = $request->getParameter("p");
+        $params = explode("-",$callbackparameters);
+
+        $lang = $params[0];
+        $order_id = $params[1];
+        $order_amount   = $params[2];
+
+        $this->getUser()->setCulture($lang);
+
+        $this->forward404Unless($order_id);
+
+        $order = CustomerOrderPeer::retrieveByPK($order_id);
+        $this->forward404Unless($order);
+
+        $c = new Criteria;
+        $c->add(TransactionPeer::ORDER_ID, $order_id);
+        $transaction = TransactionPeer::doSelectOne($c);
+        if($order_amount=="")$order_amount = $transaction->getAmount();
+
+        $order->setOrderStatusId(sfConfig::get('app_status_completed', 3)); //completed
+        $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
+        if ($transaction->getAmount() > $order_amount) {
+            //error
+            $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
+            $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
+            $transaction->save();
+            die;
+        } else if ($transaction->getAmount() < $order_amount) {
+            $transaction->setAmount($order_amount);
+        }
+        //set active agent_package in case customer was registerred by an affiliate
+        /*if ($order->getCustomer()->getAgentCompany()) {
+            $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
+        }*/
+        $order->save();
+        $transaction->save();
+
+        $this->customer = $order->getCustomer();
+        echo "ag" . $agentid = $this->customer->getReferrerId();
+        echo "prid" . $productid = $order->getProductId();
+        //echo "trid" . $transactionid = $transaction->getId();
+        /*if (isset($agentid) && $agentid != "") {
+            echo "getagentid";
+            commissionLib::refilCustomer($agentid, $productid, $transactionid);
+            $transaction->setAgentCompanyId($agentid);
+            $transaction->save();
+        }*/
+        $cst = new Criteria();
+        $cst->add(SimTypesPeer::TITLE, '%'.$order->getProduct()->getName().'%', Criteria::LIKE);
+        $simtype = SimTypesPeer::doSelectOne($cst);
+        echo "sim type id ".$sim_type_id=$simtype->getId();
+        $exest = $order->getExeStatus();
+        if ($exest!=1) {
+
+            $uniqueId=$this->customer->getUniqueid();
+            $cb = new Criteria();
+            $cb->add(CallbackLogPeer::UNIQUEID, $uniqueId);
+            $cb->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
+            $activeNumber = CallbackLogPeer::doSelectOne($cb);
+
+            $uc = new Criteria();
+            $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+            $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
+            $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+            $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
+
+            if($availableUniqueCount  == 0){
+                // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
+                emailLib::sendUniqueIdsShortage();
+                $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+            }
+
+            $callbacklog = new CallbackLog();
+            $callbacklog->setMobileNumber($activeNumber->getMobileNumber());
+            $callbacklog->setuniqueId($availableUniqueId->getUniqueNumber());
+            $callbacklog->setcallingCode(sfConfig::get('app_country_code'));
+            $callbacklog->save();
+
+            $uniqueidlog = new UniqueidLog();
+            $uniqueidlog->setCustomerId($this->customer->getId());
+            $uniqueidlog->setUniqueNumber($availableUniqueId->getUniqueNumber());
+            $uniqueidlog->save();
+
+            $this->customer->setUniqueid($availableUniqueId->getUniqueNumber());
+            $this->customer->setSimTypeId($sim_type_id);
+            $this->customer->save();
+
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerNewcardEmail($this->customer, $order, $transaction);
+            $this->updatePreferredCulture();
+        }
+
+        $order->setExeStatus(1);
+        $order->save();
+        echo 'Yes';
+        return sfView::NONE;
+    }
+
 }
