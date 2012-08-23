@@ -2163,6 +2163,14 @@
                 <source>Your mobile number.</source>
                 <target>El seu número de telèfon mòbil.</target>
             </trans-unit>
+            <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
+                <source>Change Number</source>
+                <target>Canviar el nombre de</target>
+            </trans-unit>
+            <trans-unit id="539" translate="yes" reformat="yes" xml:space="default">
+                <source>Enter your mobile number to receive your password.</source>
+                <target>Introdueix el teu número de mòbil per rebre la contrasenya.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
