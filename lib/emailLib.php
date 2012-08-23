@@ -1702,7 +1702,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,*/
                 ));
 
-        $subject = __('Registration Confirmation');
+        $subject = __('Purchase New Sim Card Confirmation');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');

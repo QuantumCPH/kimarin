@@ -102,11 +102,7 @@
 	<?php if ($sf_user->hasFlash('send_password_error_message')): ?>
 	<p class="error_msg" style="color: red; margin:6px auto;"><?php echo $sf_user->getFlash('send_password_error_message') ?></p>
 	<?php endif;?>
-<<<<<<< HEAD
-        <p class="yourpassword"><?php echo __('Your password will be sent to your e-mail address shortly.') ?></p>
-=======
         <p class="<?php echo $pclass;?>"><?php echo __('Your password will be sent to your e-mail address shortly.') ?></p>
->>>>>>> fd1aa84722501b876d33eb1dfbd6042d3578ea5d
         <input  style="cursor: pointer;"  class="loginbuttun"  type="submit" name="submit" value="<?php echo __('Send');?>" />
         
         
