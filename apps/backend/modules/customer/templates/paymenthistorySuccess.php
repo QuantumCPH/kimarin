@@ -62,8 +62,7 @@
                             <?php
                                 echo (sfConfig::get('app_currency_code'));
                           ?></td>
-                
-                </tr>
+                                </tr>
                 <?php endforeach; ?>
                 <?php if(count($transactions)==0): ?>
                 <tr>
@@ -76,8 +75,9 @@
                             <?php 
                                 echo (sfConfig::get('app_currency_code'));
                        ?></td>
-                	
-                </tr>	
+                              </tr>	
                 <?php endif; ?>
               </table>
   </div> 
+
+

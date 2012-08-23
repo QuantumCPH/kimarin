@@ -734,7 +734,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
           }
          */
-        //This Section For Get the Language Symbol For Set Currency - Ahtsham - LandNCall AB
+        //This Section For Get the Language Symbol For Set Currency - kmmalik.com
         $country_id = $this->customer->getCountryId();
         $enableCountry = new Criteria();
         $enableCountry->add(EnableCountryPeer::ID, $country_id);
@@ -2103,4 +2103,41 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
 
 
+     public function executeChangeProductSubscription(sfWebRequest $request)
+    {
+         
+       $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', '', 'usersession'));
+
+        $this->redirectUnless($this->customer, "@homepage");
+        $this->targetUrl = $this->getTargetUrl();   
+       
+          $cp =  new Criteria();
+        $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->customer->getId());
+        $this->customerProduct = CustomerProductPeer::doSelectOne($cp);
+        
+         
+     }
+     public function executeChangeProductProcess(sfWebRequest $request)
+    {
+        
+         
+         $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', '', 'usersession'));
+
+        $this->redirectUnless($this->customer, "@homepage");
+        $this->targetUrl = $this->getTargetUrl();    
+         
+            $product_id = $request->getParameter('product'); 
+       $ccp = new CustomerChangeProduct();
+                $ccp->setCustomerId($this->customer->getId());
+                $ccp->setProductId($product_id);
+                $ccp->setCreatedAt(Date());
+                $ccp->setStatus(1);
+                $ccp->save();  
+        
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Product Change Request is Submited.'));
+            return $this->redirect('customer/dashboard');
+         
+     }
+    
+    
 }
