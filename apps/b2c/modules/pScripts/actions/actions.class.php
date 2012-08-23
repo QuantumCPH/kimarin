@@ -3261,5 +3261,114 @@ if(($caltype!="IC") && ($caltype!="hc")){
 
   }
 
+   public function executeCalbacknewcard(sfWebRequest $request) {
+
+        $Parameters=$request->getURI();
+
+        $email2 = new DibsCall();
+        $email2->setCallurl($Parameters);
+        $email2->save();
+
+        // call back url $p="es-297-100"; lang_orderid_amount
+
+        $callbackparameters = $request->getParameter("p");
+        $params = explode("-",$callbackparameters);
+
+        $lang = $params[0];
+        $order_id = $params[1];
+        $order_amount   = $params[2];
+
+        $this->getUser()->setCulture($lang);
+
+        $this->forward404Unless($order_id);
+
+        $order = CustomerOrderPeer::retrieveByPK($order_id);
+        $this->forward404Unless($order);
+
+        $c = new Criteria;
+        $c->add(TransactionPeer::ORDER_ID, $order_id);
+        $transaction = TransactionPeer::doSelectOne($c);
+        if($order_amount=="")$order_amount = $transaction->getAmount();
+
+        $order->setOrderStatusId(sfConfig::get('app_status_completed', 3)); //completed
+        $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
+        if ($transaction->getAmount() > $order_amount) {
+            //error
+            $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
+            $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
+            $transaction->save();
+            die;
+        } else if ($transaction->getAmount() < $order_amount) {
+            $transaction->setAmount($order_amount);
+        }
+        //set active agent_package in case customer was registerred by an affiliate
+        /*if ($order->getCustomer()->getAgentCompany()) {
+            $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
+        }*/
+        $order->save();
+        $transaction->save();
+
+        $this->customer = $order->getCustomer();
+        echo "ag" . $agentid = $this->customer->getReferrerId();
+        echo "prid" . $productid = $order->getProductId();
+        //echo "trid" . $transactionid = $transaction->getId();
+        /*if (isset($agentid) && $agentid != "") {
+            echo "getagentid";
+            commissionLib::refilCustomer($agentid, $productid, $transactionid);
+            $transaction->setAgentCompanyId($agentid);
+            $transaction->save();
+        }*/
+        $cst = new Criteria();
+        $cst->add(SimTypesPeer::TITLE, '%'.$order->getProduct()->getName().'%', Criteria::LIKE);
+        $simtype = SimTypesPeer::doSelectOne($cst);
+        echo "sim type id ".$sim_type_id=$simtype->getId();
+        $exest = $order->getExeStatus();
+        if ($exest!=1) {
+            
+            $uniqueId=$this->customer->getUniqueid();
+            $cb = new Criteria();
+            $cb->add(CallbackLogPeer::UNIQUEID, $uniqueId);
+            $cb->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
+            $activeNumber = CallbackLogPeer::doSelectOne($cb);
+
+            $uc = new Criteria();
+            $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+            $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
+            $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+            $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
+
+            if($availableUniqueCount  == 0){
+                // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
+                emailLib::sendUniqueIdsShortage();
+                $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+            }
+
+            $callbacklog = new CallbackLog();
+            $callbacklog->setMobileNumber($activeNumber->getMobileNumber());
+            $callbacklog->setuniqueId($availableUniqueId->getUniqueNumber());
+            $callbacklog->setcallingCode(sfConfig::get('app_country_code'));
+            $callbacklog->save();
+
+            $uniqueidlog = new UniqueidLog();
+            $uniqueidlog->setCustomerId($this->customer->getId());
+            $uniqueidlog->setUniqueNumber($availableUniqueId->getUniqueNumber());
+            $uniqueidlog->save();
+
+            $this->customer->setUniqueid($availableUniqueId->getUniqueNumber());
+            $this->customer->setSimTypeId($sim_type_id);
+            $this->customer->save();
+
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerNewcardEmail($this->customer, $order, $transaction);
+            $this->updatePreferredCulture();
+        }
+
+        $order->setExeStatus(1);
+        $order->save();
+        echo 'Yes';
+        return sfView::NONE;
+    }
+
 
 }
