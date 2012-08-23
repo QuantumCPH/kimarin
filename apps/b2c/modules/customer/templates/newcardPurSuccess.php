@@ -59,10 +59,11 @@
                 <input type="hidden" name="rm" value="2" />
                 
              <?php }?>
+                <tr><td colspan="2" align="center"><input type="submit" class="butonsigninsmall" style="margin-left: 0px !important;" name="buy" value="<?php echo __('Buy') ?>" /></td></tr>
             </table><br />
 
             
-            <input type="submit" class="butonsigninsmall" style="margin-left: 0px !important;" name="buy" value="<?php echo __('Buy') ?>" />
+            
         </form>
     </div>
   </div>

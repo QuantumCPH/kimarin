@@ -252,7 +252,9 @@ echo " ";   echo substr($Telintambs, 15,2);
                             }
                          ?>   
 </form> </td>
-                </tr></table>
+                </tr>
+                <tr><td><br /><input type="button" class="butonsigninsmall blockbutton"  onclick="window.location.href='<?php echo url_for('customer/newcardPur', true) ?>'"value="<?php echo __('Purchase New Sim Card') ?>"></td></tr>
+        </table>
     </div>
   </div>
 
