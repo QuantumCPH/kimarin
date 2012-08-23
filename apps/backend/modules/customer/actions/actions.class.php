@@ -496,14 +496,14 @@ class customerActions extends autocustomerActions {
         $c->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
         if (isset($_POST['startdate']) && $_POST['startdate'] != "") {
             $this->startdate = $request->getParameter('startdate');
-            $startdate = $request->getParameter('startdate') . " 00:00:00";
-            $startdate = date('Y-m-d h:i:s',  strtotime($startdate));
+            $startdate = $request->getParameter('startdate');
+            $startdate = date('Y-m-d',  strtotime($startdate)) . " 00:00:00";
             $c->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_THAN);
         }
         if (isset($_POST['enddate']) && $_POST['enddate'] != "") {
             $this->enddate = $request->getParameter('enddate');
-            $enddate = $request->getParameter('enddate') . " 23:59:59";
-            $enddate = date('Y-m-d h:i:s',  strtotime($enddate));
+            $enddate = $request->getParameter('enddate');
+            $enddate = date('Y-m-d',  strtotime($enddate)) . " 23:59:59";
             $c->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_THAN);
         }
         if (isset($_POST['description']) && $_POST['description'] != "") {
