@@ -1,4 +1,4 @@
-<div id="sf_admin_container"><form method="post" action="" name="edit" enctype="multipart/form-data" >
+<div id="sf_admin_container"><form method="post" action="" name="edit" enctype="multipart/form-data" id="sf_admin_form" >
     <input type="hidden" name="customerID" value="<?php echo $editCust->getId();?>" />
 <p><?php echo @$message;?></p>
 <div id="sf_admin_content">
@@ -14,12 +14,12 @@
         
         <tr>
             <td style="padding: 5px;">First Name</td>
-            <td style="padding: 5px;"><input type="text" name="firstName" value="<?php echo $editCust->getFirstName();?>" />
+            <td style="padding: 5px;"><input type="text" name="firstName" value="<?php echo $editCust->getFirstName();?>" class="required" />
             </td>
         </tr>
         <tr>
             <td style="padding: 5px;">Last Name</td>
-            <td style="padding: 5px;"><input type="text" name="lastName" value="<?php echo $editCust->getLastName();?>" />
+            <td style="padding: 5px;"><input type="text" name="lastName" value="<?php echo $editCust->getLastName();?>" class="required" />
             </td>
         </tr>
         <tr>
@@ -29,18 +29,18 @@
         </tr>
         <tr>
             <td style="padding: 5px;">Address</td>
-            <td style="padding: 5px;"><input type="text" name="address" value="<?php echo $editCust->getAddress();?>" />
+            <td style="padding: 5px;"><input type="text" name="address" value="<?php echo $editCust->getAddress();?>" class="required" />
             </td>
         </tr>
         <tr>
             <td style="padding: 5px;">City</td>
-            <td style="padding: 5px;"><input type="text" name="city" value="<?php echo $editCust->getCity();?>" />
+            <td style="padding: 5px;"><input type="text" name="city" value="<?php echo $editCust->getCity();?>" class="required" />
             </td>
         </tr>
         <tr>
             <td style="padding: 5px;">Province</td>
             <td style="padding: 5px;">
-                <select name="provinceid">
+                <select name="provinceid" class="required">
                     <option value="">--Select--</option>
                 <?php
                   foreach($province_list as $province){
@@ -54,18 +54,18 @@
         </tr>
         <tr>
             <td style="padding: 5px;">PO-BOX Number</td>
-            <td style="padding: 5px;"><input type="text" name="pob" value="<?php echo $editCust->getPoBoxNumber();?>" />
+            <td style="padding: 5px;"><input type="text" name="pob" value="<?php echo $editCust->getPoBoxNumber();?>" class="required" />
             </td>
         </tr>
         <tr>
             <td style="padding: 5px;">Email</td>
-            <td style="padding: 5px;"><input type="text" name="email" value="<?php echo $editCust->getEmail();?>" />
+            <td style="padding: 5px;"><input type="text" name="email" value="<?php echo $editCust->getEmail();?>"  class="required email"/>
             </td>
         </tr>
          <tr>
             <td style="padding: 5px;">Nationality</td>
             <td style="padding: 5px;">
-                <select name="nationalityid">
+                <select name="nationalityid" class="required">
                     <option value="">--Select--</option>
                 <?php
                   foreach($nationality_list as $nationality){
@@ -80,7 +80,7 @@
         <tr>
             <td style="padding: 5px;">Preferred Language</td>
             <td style="padding: 5px;">
-                <select name="pLanguageId">
+                <select name="pLanguageId" class="required">
                     <option value="">--Select--</option>
                 <?php
                   foreach($planguages as $language){
@@ -107,7 +107,7 @@
                           $dy = date('Y',strtotime($dt));
                          } 
                 ?>
-                <select name="dd">
+                <select name="dd" class="required">
                     <option value="">Day</option>
                     <?php
                     for($d = 1;$d<=31; $d++){
@@ -117,7 +117,7 @@
                     }
                     ?>
                 </select>&nbsp;
-                <select name="dm">
+                <select name="dm" class="required">
                     <option value="">Month</option>
                     <?php
                     for($m = 1;$m<=12; $m++){
@@ -127,7 +127,7 @@
                     }
                     ?>
                 </select>&nbsp;
-                <select name="dy">
+                <select name="dy" class="required">
                     <option value="">Year</option>
                     <?php
                     for($y =1901;$y<=1998; $y++){
