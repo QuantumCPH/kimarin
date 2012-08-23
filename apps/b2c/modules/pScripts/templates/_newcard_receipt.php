@@ -3,20 +3,23 @@ use_helper('I18N');
 use_helper('Number');
 $vat=$order->getProduct()->getPrice()*sfConfig::get('app_vat_percentage')
 ?>
-<p><?php echo __('To') ?>&nbsp;<?php echo $customer->getFirstName();?></p>
+<p><?php echo __('To') ?>&nbsp;<?php echo $customer->getFirstName()." ".$customer->getLastName();?></p>
 
 <p><?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?></p>
 
-<p><?php echo __('Your goods will be shipped today. You should have delivery within two days. Your customer number is '); echo $customer->getUniqueid();?>. <?php echo __(' There, you can use in your dealings with customer service'); ?></p>
+<p><?php echo __('The products you have ordered will be sent by mail shortly. Your customer number is '); echo $customer->getUniqueid();?>.</p>
 
-<p><?php echo __('Do not hesitate to contact us if you have any questions.') ?></p>
+<p>
+    <?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
+    <br><?php echo __('E-mail') ?>:&nbsp;
+    <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
+    <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
+</p>
 
-<p><a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a></p>
-
-<p><?php echo __('Yours sincerely,') ?></p>
+<p><?php echo __('Best regards,') ?></p>
 
 <p><?php echo __(sfConfig::get('app_site_title')) ?></p>
-<br>
+<br />
 
 <table width="665px">
     <tr style="border:0px solid #fff">

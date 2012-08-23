@@ -3683,6 +3683,10 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $uniqueidlog->setUniqueNumber($availableUniqueId->getUniqueNumber());
             $uniqueidlog->save();
 
+            $availableUniqueId->setStatus(1);
+            $availableUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
+            $availableUniqueId->save();
+
             $this->customer->setUniqueid($availableUniqueId->getUniqueNumber());
             $this->customer->setSimTypeId($sim_type_id);
             $this->customer->save();
