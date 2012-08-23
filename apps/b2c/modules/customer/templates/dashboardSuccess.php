@@ -6,6 +6,11 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
 ?>
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Dashboard')) ) ?>
+<?php if ($sf_user->hasFlash('message')): ?>
+<div class="alert_bar">
+	<?php echo $sf_user->getFlash('message') ?>
+</div>
+<?php endif;?>
   <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'dashboard', 'customer_id'=>$customer->getId())) ?>
     <div class="dashboard-info">
@@ -232,8 +237,8 @@ echo " ";   echo substr($Telintambs, 15,2);
 	</table>
   <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
 		<tr>
-                    <td ><form name=myform action="<?php echo url_for('customer/blockCustomer', true) ?>">
-                            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type=submit value="<?php echo __('Block Account')?>" onClick="if(confirm('<?php echo __("Are you sure you want to block your account");?>')) alert('<?php echo __("Your account will be blocked");?>');" />
+                    <td ><form name="myform" action="">
+                            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="button" value="<?php echo __('Block Account')?>" onclick="confirmBlock()" />
 </form> </td>
                 </tr></table>
         
@@ -244,6 +249,7 @@ echo " ";   echo substr($Telintambs, 15,2);
                             if($change_number_count >= 2){
                           ?>  
                              <p><?php echo __("You can't change your number more than 2 times.");?></p><br />
+
                           <?php
                             }else{ ?>
                               <p>You can change your number maximum 2 times in a month.</p><br />
@@ -252,8 +258,58 @@ echo " ";   echo substr($Telintambs, 15,2);
                             }
                          ?>   
 </form> </td>
+ 
                 </tr></table>
+        
+        <?php   $c = new Criteria();
+                $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$customer->getId()); 
+                $c->addAnd(CustomerChangeProductPeer::STATUS, 1);
+             $ccpCount=CustomerChangeProductPeer::doCount($c);
+             if($ccpCount==0){
+                ?>
+         <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
+		<tr>
+                    <td ><form name="changeNumber" action="<?php echo url_for('customer/changeProductSubscription', true) ?>">
+                          
+                             <p></p>
+                          
+                              <p>Product change will be implemented in 1 day of comming month.</p><br />
+                              <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="submit" value="<?php echo __('Change Product/Subscription')?>" />  
+                       
+</form> </td>
+                </tr></table>
+        <?php }else{
+             $CCP=CustomerChangeProductPeer::doSelectOne($c);
+            
+            ?>
+        <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
+		<tr>
+                    <td >       
+                         
+                              <p>You have already subscribed for change of Product/subscription</p><br />
+                                 <p>Product change will be implemented in 1 day of comming month.</p>
+                              </td>
+                </tr></table>
+        <?php } ?>
+               
+ 
+                </tr>
+                <tr><td><br /><input type="button" class="butonsigninsmall blockbutton"  onclick="window.location.href='<?php echo url_for('customer/newcardPur', true) ?>'"value="<?php echo __('Purchase New Sim Card') ?>"></td></tr>
+        </table>
+ 
     </div>
   </div>
 
   <?php include_partial('sidebar') ?>
+<script type="text/javascript">
+ function confirmBlock(){   
+   var c = confirm('<?php echo __("Are you sure you want to block your account")?>');
+   
+    if(c){
+      alert('<?php echo __("Your account will be blocked");?>'); 
+      window.location="<?php echo url_for('customer/blockCustomer', true) ?>";
+    } else { 
+      return false; 
+    }
+  }  
+</script>
