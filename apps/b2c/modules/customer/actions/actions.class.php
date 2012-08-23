@@ -1951,8 +1951,8 @@ $transaction->setCustomerId($this->order->getCustomerId());
     public function executeNumberProcess(sfWebRequest $request) {
         
         $lang = $this->getUser()->getCulture();
-        $return_url = "http://www.kimarineurope.com/refill-thanks.html";
-        $cancel_url = "http://www.kimarineurope.com/refill-reject.html";
+        $return_url = "http://www.kimarin.es/refill-thanks.html";
+        $cancel_url = "http://www.kimarin.es/refill-reject.html";
         
         $order_id = $request->getParameter('item_number'); 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
