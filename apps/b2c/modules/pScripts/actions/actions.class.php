@@ -3590,4 +3590,49 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         emailLib::sendChangeNumberEmail($customer, $order);
         return sfView::NONE;
   }
+   public function executeChangeCustomerProduct(sfWebRequest $request){
+   
+            $ccp = new Criteria();
+            $ccp->add(CustomerChangeProductPeer::STATUS, 1);
+            $ChangeCustomers=CustomerChangeProductPeer::doSelect($ccp);
+            
+            foreach ($ChangeCustomers as $ChangeCustomer){
+            
+                
+                $customer=CustomerPeer::retrieveByPK($ChangeCustomer->getCustomerId());
+                $product=ProductPeer::retrieveByPK($ChangeCustomer->getProductId());
+                
+                 $Bproducts= BillingProductsPeer::retrieveByPK($product->getBillingProductId());
+                
+            $c = new Criteria;
+                    $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
+                    $c->add(TelintaAccountsPeer::STATUS,3);
+                    $tilentAccount = TelintaAccountsPeer::doSelectOne($c);
+                  //  foreach($tilentAccounts as $tilentAccount){
+                    $accountInfo['i_account']=$tilentAccount->getIAccount();
+                    $accountInfo['i_product']=$Bproducts->getAIproduct();
+                    if(Telienta::updateAccount($accountInfo)){
+                      $ChangeCustomer->setStatus(3); 
+                      $ChangeCustomer->Save();
+                      }
+                     //   }  
+                      
+                       $cp =  new Criteria();
+        $cp->add(CustomerProductPeer::CUSTOMER_ID,$customer->getId());
+        $customerProduct = CustomerProductPeer::doSelectOne($cp);
+        $customerProduct->setStatusId(7);
+        $customerProduct->Save();
+
+        $cProduct = new CustomerProductPeer();
+        $cProduct->setProductId($ChangeCustomer->getProductId());
+        $cProduct->setCustomerId($ChangeCustomer->getCustomerId());
+        $cProduct->setStatusId(3);
+        $cProduct->save();
+        
+                    }
+          return sfView::NONE;   
+            
+            
+   }
+  
 }

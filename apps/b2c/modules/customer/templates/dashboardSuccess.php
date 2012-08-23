@@ -6,6 +6,11 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
 ?>
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Dashboard')) ) ?>
+<?php if ($sf_user->hasFlash('message')): ?>
+<div class="alert_bar">
+	<?php echo $sf_user->getFlash('message') ?>
+</div>
+<?php endif;?>
   <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'dashboard', 'customer_id'=>$customer->getId())) ?>
     <div class="dashboard-info">
@@ -243,7 +248,7 @@ echo " ";   echo substr($Telintambs, 15,2);
                           <?php 
                             if($change_number_count >= 2){
                           ?>  
-                             <p></p><br />
+                             <p></p>
                           <?php
                             }else{ ?>
                               <p>You can change your number maximum 2 times in a month.</p><br />
@@ -253,6 +258,38 @@ echo " ";   echo substr($Telintambs, 15,2);
                          ?>   
 </form> </td>
                 </tr></table>
+        
+        <?php   $c = new Criteria();
+                $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$customer->getId()); 
+                $c->addAnd(CustomerChangeProductPeer::STATUS, 1);
+             $ccpCount=CustomerChangeProductPeer::doCount($c);
+             if($ccpCount==0){
+                ?>
+         <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
+		<tr>
+                    <td ><form name="changeNumber" action="<?php echo url_for('customer/changeProductSubscription', true) ?>">
+                          
+                             <p></p>
+                          
+                              <p>Product change will be implemented in 1 day of comming month.</p><br />
+                              <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="submit" value="<?php echo __('Change Product/Subscription')?>" />  
+                       
+</form> </td>
+                </tr></table>
+        <?php }else{
+             $CCP=CustomerChangeProductPeer::doSelectOne($c);
+            
+            ?>
+        <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
+		<tr>
+                    <td >       
+                         
+                              <p>You have already subscribed for change of Product/subscription</p><br />
+                                 <p>Product change will be implemented in 1 day of comming month.</p>
+                              </td>
+                </tr></table>
+        <?php } ?>
+               
     </div>
   </div>
 
