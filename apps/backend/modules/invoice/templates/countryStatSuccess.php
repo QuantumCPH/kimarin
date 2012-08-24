@@ -111,7 +111,7 @@ if ($month == '01') {
 
 <!--            <td>&nbsp;</td>-->
             <td>&nbsp;</td>
-             <td colspan="4" align="center">Total</td>
+             <td colspan="4" align="center"><b>Total</b></td>
             <?php
                     $date = "$year-$month-05";
                     $totalDays = date('t', strtotime($date));
