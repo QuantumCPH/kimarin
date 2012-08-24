@@ -3732,7 +3732,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
             $uniqueidlog = new UniqueidLog();
             $uniqueidlog->setCustomerId($this->customer->getId());
-            $uniqueidlog->setUniqueNumber($availableUniqueId->getUniqueNumber());
+            $uniqueidlog->setUniqueNumber($uniqueId);
             $uniqueidlog->save();
 
             $availableUniqueId->setStatus(1);
