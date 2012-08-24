@@ -156,10 +156,10 @@ if ($month == '01') {
               ,(SELECT CONCAT(COALESCE(ROUND(sum(charged_quantity)/60,2),0),"-",COALESCE(sum(charged_amount),0)) FROM employee_customer_callhistory WHERE country_id = country.id AND DATE( connect_time ) = "' . $year . '-' . $month . '-' . $i . '" AND (description not like "%Cellular%" AND description not like "%mobile%") ) AS day' . $i . '_fixed ';
                     }
 
-                    $query .= 'FROM country left join employee_customer_callhistory on country.id=employee_customer_callhistory.country_id ';
+                    $query .= 'FROM country right join employee_customer_callhistory on  employee_customer_callhistory.country_id=country.id group by country.id';
 
 
-//                    echo $query;
+ //                  echo $query;
 //                    die;
 
                     $statement = $conn->prepare($query);
