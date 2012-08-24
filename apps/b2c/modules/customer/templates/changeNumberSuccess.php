@@ -1,6 +1,6 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Dashboard') ) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change Number') ) ) ?>
 <br />
 <div class="left-col">
 
@@ -35,7 +35,7 @@
         </li>
         <li>
             <label><?php echo __("VAT");?>:</label>
-            <label><?php echo  number_format($refillvat=$product->getRegistrationFee() * sfConfig::get('app_vat_percentage'),2) ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
+            <label><?php echo  number_format($refillvat=$product->getPrice() * sfConfig::get('app_vat_percentage'),2) ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
         </li>
         <li>
             <label><?php echo __("Total");?>:</label>
