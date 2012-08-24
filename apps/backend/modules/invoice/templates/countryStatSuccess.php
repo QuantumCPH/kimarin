@@ -185,7 +185,7 @@ if ($month == '01') {
                         <tr <?php echo $class; ?>>
 
 <!--                            <td><?php //echo $rowObj['id'] ?></td>-->
-                            <td><?php echo $rowObj['name']; ?></td>
+                            <td><b><?php echo $rowObj['name']; ?></b></td>
 
  <?php 
   /////////////////////////////////////////////////
