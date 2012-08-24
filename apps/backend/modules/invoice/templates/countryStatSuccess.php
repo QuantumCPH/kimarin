@@ -260,7 +260,31 @@ if ($month == '01') {
                         <td><?php echo $total[$i]['fixed_0']; ?></td>
 
 <? } ?>
+                        
+           <?php            $T_mobile_t=0;
+  $T_mobile_r=0;
+  $T_fixed_t=0;
+  $T_fixed_r=0;   ?>
+  <?php for ($i = 1; $i <= $totalDays; $i++) {
+ 
+                     $T_mobile_t+=$total[$i]['mobile_1'];  
+                        $T_mobile_r+=$total[$i]['mobile_0'];
+                      $T_fixed_t+=$total[$i]['fixed_1']; 
+                     $T_fixed_r+=$total[$i]['fixed_0']; 
 
+  } ?>
+                        
+       
+                        
+                        
+                        
+                        
+                      <td align="center"><?php echo $T_mobile_t;  ?></td>
+                <td  align="center"><?php echo $T_mobile_r;  ?></td>
+                <td  align="center"><?php echo $T_fixed_t;  ?></td>
+                <td  align="center"><?php echo $T_fixed_r;  ?></td>             
+                        
+                        
         </tr>
     </tbody>
 </table>
