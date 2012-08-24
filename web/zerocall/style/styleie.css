@@ -102,21 +102,21 @@ width:232px;
 .right-col .box h3 span{ color:#000;}*/
 .right-col .box small{ font-size:11px;}
 .right-col .box p{ margin-top:5px; margin-bottom:20px; font-size:12px;padding:0px;}
-.right-col .box a{
+a.sidebar_button{
     background-image: url("../images/bg-greenbutton-.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     color: #ffffff;
-    display: block;
     font-size: 11px;
     height: 16px;
-    width:auto !important;
     padding-bottom: 0px;
-    padding-left: 10px;
+    padding-left: 5px;
     padding-right: 10px;
-    padding-top: 4px;
+    padding-top: 3px;
     text-decoration: none;
     white-space: nowrap;
+    display: block;
+    float: left;
 }
 .right-col .box a span{
     background-image: url("../images/bg-greenbutton-.png");
@@ -833,10 +833,15 @@ div.dashboardproduct{
     background: url('../images/dashboardproducts.png') no-repeat;
     width:160px;
     height:78px;
-    margin-right:10px;
-    padding:48px 10px 10px;
-    cursor: pointer;
+    margin:0 10px 10px 0;
+    padding:38px 10px 10px;
     float:left;
+    position: relative;
+    font-size: 12px;
+}
+div.dashboardproduct a.sidebar_button{
+    position: absolute;
+    bottom:8px;
 }
 span.alertmsg{
     color:#CD481D;

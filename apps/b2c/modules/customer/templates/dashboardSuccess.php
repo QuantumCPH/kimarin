@@ -60,7 +60,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
       
 echo '&nbsp;';
 $lang=sfConfig::get('app_language_symbol');
-               }?> </span></div>
+               }?> <input type="button" class="butonsigninsmall" style="<?php if($voip_customer!=''){?> margin-left:63px;<?php }else{ ?>margin-left:43px;<?php }?>" name="button" onclick="window.location.href='<?php echo sfConfig::get('app_epay_relay_script_url').url_for('customer/refill?customer_id='.$customer->getId(), true) ?>'" style="cursor: pointer"  value="<?php echo __('Refill your account') ?>" ></span></div>
 
 
 
@@ -234,21 +234,21 @@ echo " ";   echo substr($Telintambs, 15,2);
                         } ?></a></b>
 			</td>
 		<td></td></tr>
-	</table>
-        <div class="dashboardproduct" onclick="window.location.href='<?php echo sfConfig::get('app_epay_relay_script_url').url_for('customer/refill?customer_id='.$customer->getId(), true) ?>'">
-           <?php echo __("Refill Account");?> 
+	</table> 
+        <h2><?php echo __("Services");?></h2><br />
+        <div class="dashboardproduct">         
+            <a title="<?php echo __('Block Account')?>" class="sidebar_button" rel="bookmark" href="#" onclick="confirmBlock();"><?php echo __('Block Account')?></a>
         </div>
-        <div class="dashboardproduct" onclick="confirmBlock()">
-          <?php echo __('Block Account')?>
+        <div class="dashboardproduct">
+           
+            <a title="<?php echo __('Change Number')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changenumberservice', true) ?>"><?php echo __('Change Number')?></a>
         </div>
-        <div class="dashboardproduct" onclick="window.location.href='<?php echo url_for('customer/changenumberservice', true) ?>'">
-           <?php echo __('Change Number')?>
+        <div class="dashboardproduct">
+            <a title="<?php echo __('Change Product')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changeProductSubscription', true) ?>"><?php echo __('Change Product')?></a>
         </div>
-        <div class="dashboardproduct" onclick="window.location.href='<?php echo url_for('customer/changeProductSubscription', true) ?>'">
-           <?php echo __('Change Product')?>
-        </div>
-        <div class="dashboardproduct" onclick="window.location.href='<?php echo url_for('customer/newcardPur', true) ?>'">
-           <?php echo __('New Sim Card') ?>
+        <div class="dashboardproduct">
+           
+            <a title="<?php echo __('New Sim Card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim Card') ?></a>
         </div>
         
                
