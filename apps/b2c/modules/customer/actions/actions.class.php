@@ -1955,7 +1955,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
     public function executeNumberProcess(sfWebRequest $request) {
         
         $lang = $this->getUser()->getCulture();
-        $return_url = "http://www.kimarin.es/refill-thanks.html";
+        $return_url = "http://stagek.zerocall.com/b2c.php/customer/dashboard";
         $cancel_url = "http://www.kimarin.es/refill-reject.html";
         
         $order_id = $request->getParameter('item_number'); 

@@ -1786,7 +1786,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         }
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
-        $message_body = get_partial('pScript/change_number_order_receipt', array(
+        $message_body = get_partial('pScripts/change_number_order_receipt', array(
                     'customer' => $customer,
                     'order' => $order,
                     'transaction' => $transaction,
