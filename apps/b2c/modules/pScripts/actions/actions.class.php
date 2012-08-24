@@ -3302,7 +3302,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $this->todate = $todate;
 
        $tilentaCallHistryResult = Telienta::callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
-   //   var_dump($tilentaCallHistryResult);
+    var_dump($tilentaCallHistryResult);
 
 
          if($tilentaCallHistryResult){
