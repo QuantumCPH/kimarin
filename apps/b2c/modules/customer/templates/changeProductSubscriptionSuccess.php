@@ -12,7 +12,10 @@
     
     <div class="split-form">
         <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeProductProcess') ?>">
-            <?php if($disable)?> <span class="alertmsg"><?php echo __("You have already subscribed for change of Product/subscription");?></span>
+            <?php if($disable){?> 
+            <span class="alertmsg"><?php echo __("You have already subscribed for change of Product/subscription");?></span>
+            <?php } 
+            ?>
             <p><?php echo __('Product change will be implemented in 1 day of comming month.');?></p><br />
     	<ul class="fl col">
             <li>
