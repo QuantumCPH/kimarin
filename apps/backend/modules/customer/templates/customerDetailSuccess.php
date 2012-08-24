@@ -147,6 +147,18 @@ if(isset($val) && $val!=""){  ?>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Unique ID</td>
                          <td>  <?php  echo $customer->getUniqueid();     ?>   </td>
                         </tr  >
+                        <?php
+                            $oun = new Criteria();
+                            $oun->add(UniqueidLogPeer::CUSTOMER_ID, $cuid);
+                            $oun -> addAscendingOrderByColumn(UniqueidLogPeer::CREATED_AT);
+                            $old_number = UniqueidLogPeer::doSelectOne($oun);
+                            if($old_number!=''){
+                        ?>
+                        <tr>
+                            <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Old Unique ID</td>
+                            <td><?php  echo $old_number->getUniqueNumber();?></td>
+                        </tr>
+                        <?php }?>
                         <tr>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Usage Email Alerts</td>
                          <td>  <?php  echo ($customer->getUsageAlertEmail()==1)?"Yes":"No";     ?>   </td>

@@ -5,6 +5,7 @@ body {font-family:Calibri; font-size:14px; color:#0c74a5;font-style: normal;}
 h1{ font-size:20px;}
 h2{ font-size:18px;}
 h3{ font-size:16px;}
+h4{font-size:14px;}
 #wrap {width:780px;margin:0px auto;}
 #header {width:780px;height:119px;}
 #logo {width:168px; height:79px; float:left;}
@@ -651,34 +652,34 @@ margin-top:12px;
 
 /****** German ********/
 .navigationen{ width:575px; float:left;}
-.navigationen a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-de.gif); background-repeat:no-repeat; margin-right:0px;}
+.navigationen a{ width:82px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/german.jpg); background-repeat:no-repeat; margin-right:0px;}
 .navigationen a.dashboard{ background-position:-5px 0px}
 .navigationen a.dashboard:hover{ background-position:-90px 0px}
 .navigationen a.dashboard-s{ background-position:-90px 0px}
 
-.navigationen a.refil{ background-position:-5px -56px;}
-.navigationen a.refil:hover{ background-position:-90px -56px}
-.navigationen a.refil-s{ background-position:-90px -56px}
+.navigationen a.refil{ background-position:0px -64px;}
+.navigationen a.refil:hover{ background-position:-90px -64px}
+.navigationen a.refil-s{ background-position:-90px -64px}
 
-.navigationen a.callhistory{ background-position:-5px -113px;}
-.navigationen a.callhistory:hover{ background-position:-90px -113px;}
-.navigationen a.callhistory-s{ background-position:-90px -113px;}
+.navigationen a.callhistory{ background-position:0px -124px;}
+.navigationen a.callhistory:hover{ background-position:-90px -124px;}
+.navigationen a.callhistory-s{ background-position:-90px -124px;}
 
-.navigationen a.paymenthistory{ background-position:-5px -169px}
-.navigationen a.paymenthistory:hover{ background-position:-90px -169px}
-.navigationen a.paymenthistory-s{ background-position:-90px -169px}
+.navigationen a.paymenthistory{ background-position:-4px -185px}
+.navigationen a.paymenthistory:hover{ background-position:-94px -185px}
+.navigationen a.paymenthistory-s{ background-position:-90px -185px}
 
-.navigationen a.settings{ background-position:-5px -227px}
-.navigationen a.settings:hover{ background-position:-90px -227px}
-.navigationen a.settings-s{ background-position:-90px -227px}
+.navigationen a.settings{ background-position:0px -250px}
+.navigationen a.settings:hover{ background-position:-90px -250px}
+.navigationen a.settings-s{ background-position:-90px -250px}
 
-.navigationen a.websms{ background-position:-2px -283px}
-.navigationen a.websms:hover{ background-position:-87px -283px}
-.navigationen a.websms-s{ background-position:-87px -283px}
+.navigationen a.websms{ background-position:3px -313px}
+.navigationen a.websms:hover{ background-position:-87px -313px}
+.navigationen a.websms-s{ background-position:-87px -313px}
 
-.navigationen a.logout{ background-position:-3px -340px;}
-.navigationen a.logout:hover{ background-position:-87px -340px}
-.navigationen a.logout-s{ background-position:-87px -340px}
+.navigationen a.logout{ background-position:2px -380px;}
+.navigationen a.logout:hover{ background-position:-87px -380px}
+.navigationen a.logout-s{ background-position:-87px -380px}
 
 /****** Catalan ********/
 .navegacions{ width:575px; float:left;}
@@ -821,10 +822,12 @@ p{
 label.error{
    color:#f00 !important;
    font-weight: normal !important;
+   margin-left: 5px;
 }
 input.changeNum{
    margin-left:128px!important;
 }
+.newcard {width:137px; border:1px solid #999999;font-size:11px; padding:3px; }
 .dashboardbutton{
     width:105px !important;
     margin-left: 0 !important;
@@ -832,9 +835,9 @@ input.changeNum{
 div.dashboardproduct{
     background: url('../images/dashboardproducts.png') no-repeat;
     width:160px;
-    height:78px;
+    height:74px;
     margin:0 10px 10px 0;
-    padding:38px 10px 10px;
+    padding:44px 10px 10px;
     float:left;
     position: relative;
     font-size: 12px;
@@ -847,3 +850,4 @@ span.alertmsg{
     color:#CD481D;
     font-style: italic;
 }
+

@@ -1922,7 +1922,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
         $newNumber = $this->newNumber;
         $product_id = $request->getParameter('product');
         $this->product = ProductPeer::retrieveByPK($product_id);
-        $extra_refill = $this->product->getPrice();
+        $extra_refill = $this->product->getRegistrationFee();
         
         $this->countrycode = sfConfig::get('app_country_code');
         $customer = $this->customer;
