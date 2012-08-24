@@ -248,7 +248,8 @@ echo " ";   echo substr($Telintambs, 15,2);
                           <?php 
                             if($change_number_count >= 2){
                           ?>  
-                             <p></p>
+                             <p><?php echo __("You can't change your number more than 2 times.");?></p><br />
+
                           <?php
                             }else{ ?>
                               <p>You can change your number maximum 2 times in a month.</p><br />
