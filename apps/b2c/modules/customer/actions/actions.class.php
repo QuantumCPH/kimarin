@@ -1933,7 +1933,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             $ccu->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
             $ccheck = CustomerPeer::doCount($ccu); 
             if($ccheck > 0){
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('New mobile number already exists.'));
+                $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__('New mobile number already exists.'));
                 return $this->redirect('customer/changenumberservice');
             }else{
                 $order = new CustomerOrder(); 
