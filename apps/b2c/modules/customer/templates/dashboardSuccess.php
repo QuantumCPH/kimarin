@@ -60,7 +60,7 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
       
 echo '&nbsp;';
 $lang=sfConfig::get('app_language_symbol');
-               }?> <input type="button" class="butonsigninsmall" style="<?php if($voip_customer!=''){?> margin-left:63px;<?php }else{ ?>margin-left:43px;<?php }?>" name="button" onclick="window.location.href='<?php echo sfConfig::get('app_epay_relay_script_url').url_for('customer/refill?customer_id='.$customer->getId(), true) ?>'" style="cursor: pointer"  value="<?php echo __('Refill your account') ?>" ></span></div>
+               }?> </span></div>
 
 
 
@@ -235,67 +235,23 @@ echo " ";   echo substr($Telintambs, 15,2);
 			</td>
 		<td></td></tr>
 	</table>
-  <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
-		<tr>
-                    <td ><form name="myform" action="">
-                            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="button" value="<?php echo __('Block Account')?>" onclick="confirmBlock()" />
-</form> </td>
-                </tr></table>
+        <div class="dashboardproduct" onclick="window.location.href='<?php echo sfConfig::get('app_epay_relay_script_url').url_for('customer/refill?customer_id='.$customer->getId(), true) ?>'">
+           <?php echo __("Refill Account");?> 
+        </div>
+        <div class="dashboardproduct" onclick="confirmBlock()">
+          <?php echo __('Block Account')?>
+        </div>
+        <div class="dashboardproduct" onclick="window.location.href='<?php echo url_for('customer/changenumberservice', true) ?>'">
+           <?php echo __('Change Number')?>
+        </div>
+        <div class="dashboardproduct" onclick="window.location.href='<?php echo url_for('customer/changeProductSubscription', true) ?>'">
+           <?php echo __('Change Product')?>
+        </div>
+        <div class="dashboardproduct" onclick="window.location.href='<?php echo url_for('customer/newcardPur', true) ?>'">
+           <?php echo __('New Sim Card') ?>
+        </div>
         
-        <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
-		<tr>
-                    <td ><form name="changeNumber" action="<?php echo url_for('customer/changenumberservice', true) ?>">
-                          <?php 
-                            if($change_number_count >= 2){
-                          ?>  
-                             <p><?php echo __("You can't change your number more than 2 times.");?></p><br />
-
-                          <?php
-                            }else{ ?>
-                              <p>You can change your number maximum 2 times in a month.</p><br />
-                              <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="submit" value="<?php echo __('Change Number')?>" />  
-                         <?php
-                            }
-                         ?>   
-</form> </td>
- 
-                </tr></table>
-        
-        <?php   $c = new Criteria();
-                $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$customer->getId()); 
-                $c->addAnd(CustomerChangeProductPeer::STATUS, 1);
-             $ccpCount=CustomerChangeProductPeer::doCount($c);
-             if($ccpCount==0){
-                ?>
-         <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
-		<tr>
-                    <td ><form name="changeNumber" action="<?php echo url_for('customer/changeProductSubscription', true) ?>">
-                          
-                             <p></p>
-                          
-                              <p>Product change will be implemented in 1 day of comming month.</p><br />
-                              <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="submit" value="<?php echo __('Change Product/Subscription')?>" />  
-                       
-</form> </td>
-                </tr></table>
-        <?php }else{
-             $CCP=CustomerChangeProductPeer::doSelectOne($c);
-            
-            ?>
-        <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
-		<tr>
-                    <td >       
-                         
-                              <p>You have already subscribed for change of Product/subscription</p><br />
-                                 <p>Product change will be implemented in 1 day of comming month.</p>
-                              </td>
-                </tr></table>
-        <?php } ?>
                
- 
-                </tr>
-                <tr><td><br /><input type="button" class="butonsigninsmall blockbutton"  onclick="window.location.href='<?php echo url_for('customer/newcardPur', true) ?>'"value="<?php echo __('Purchase New Sim Card') ?>"></td></tr>
-        </table>
  
     </div>
   </div>

@@ -825,3 +825,20 @@ label.error{
 input.changeNum{
    margin-left:128px!important;
 }
+.dashboardbutton{
+    width:105px !important;
+    margin-left: 0 !important;
+}
+div.dashboardproduct{
+    background: url('../images/dashboardproducts.png') no-repeat;
+    width:160px;
+    height:78px;
+    margin-right:10px;
+    padding:48px 10px 10px;
+    cursor: pointer;
+    float:left;
+}
+span.alertmsg{
+    color:#CD481D;
+    font-style: italic;
+}

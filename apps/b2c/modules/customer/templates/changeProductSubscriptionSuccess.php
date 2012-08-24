@@ -12,9 +12,9 @@
     
     <div class="split-form">
         <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeProductProcess') ?>">
-<h1><?php //echo __('Change Number');?></h1>
+            <?php if($disable)?> <span class="alertmsg"><?php echo __("You have already subscribed for change of Product/subscription");?></span>
+            <p><?php echo __('Product change will be implemented in 1 day of comming month.');?></p><br />
     	<ul class="fl col">
-           
             <li>
                 <label><?php echo __('Product Name') ?></label>
                 <?php  $c = new Criteria();
@@ -31,7 +31,12 @@
             </li>
              
 	          <li class="fr buttonplacement">
-	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 12px !important;" type="submit" value="<?php echo __('Submit')?>" />
+                    <?php $button_disable='';
+                    if($disable){ 
+                           $button_disable = 'disabled="disabled"';
+                    }
+                    ?>  
+	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 12px !important;" type="submit" <?php echo $button_disable;?> value="<?php echo __('Submit')?>" />
 	          </li>
 
 	</ul>
