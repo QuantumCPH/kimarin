@@ -622,7 +622,7 @@ margin-top:12px;
 /****** Spanish ********/
 .navegaciones{ width:645px; float:left;}
 .navegaciones a{ width:92px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/spanish.jpg); background-repeat:no-repeat; margin-right:0px;}
-.navegaciones a.dashboard{ background-position:-5px 0px}
+.navegaciones a.dashboard{ background-position:0px 0px}
 .navegaciones a.dashboard:hover{ background-position:-90px 0px}
 .navegaciones a.dashboard-s{ background-position:-90px 0px}
 
@@ -653,7 +653,7 @@ margin-top:12px;
 /****** German ********/
 .navigationen{ width:575px; float:left;}
 .navigationen a{ width:82px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/german.jpg); background-repeat:no-repeat; margin-right:0px;}
-.navigationen a.dashboard{ background-position:-5px 0px}
+.navigationen a.dashboard{ background-position:0px 0px}
 .navigationen a.dashboard:hover{ background-position:-90px 0px}
 .navigationen a.dashboard-s{ background-position:-90px 0px}
 
@@ -684,7 +684,7 @@ margin-top:12px;
 /****** Catalan ********/
 .navegacions{ width:645px; float:left;}
 .navegacions a{ width:92px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/catalan.jpg); background-repeat:no-repeat; margin-right:0px;}
-.navegacions a.dashboard{ background-position:-5px 0px}
+.navegacions a.dashboard{ background-position:0px 0px}
 .navegacions a.dashboard:hover{ background-position:-90px 0px}
 .navegacions a.dashboard-s{ background-position:-90px 0px}
 
