@@ -299,16 +299,7 @@ class customerActions extends sfActions {
 
         if ($this->customer_balance != null) $this->customer_balance = $this->customer_balance;
         
-        $change_no_startdate = date('Y-m-1 h:i:s');
-        $change_no_enddate = date('Y-m-t h:i:s');
         
-        $cn = new Criteria();
-        $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID,$this->customer->getId());
-        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT,$change_no_startdate,Criteria::GREATER_EQUAL);
-        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT,$change_no_enddate,Criteria::LESS_EQUAL);
-        $cn->addAnd(ChangeNumberDetailPeer::STATUS,1);
-        $change_number_count = ChangeNumberDetailPeer::doCount($cn);
-        $this->change_number_count = $change_number_count;
     }
 
     //This Function add Again new Feature Wls2 --
@@ -1901,6 +1892,22 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
         $this->redirectUnless($this->customer, "@homepage");
         $this->targetUrl = $this->getTargetUrl();
+        
+        $change_no_startdate = date('Y-m-1 h:i:s');
+        $change_no_enddate = date('Y-m-t h:i:s');
+        
+        $cn = new Criteria();
+        $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID,$this->customer->getId());
+        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT,$change_no_startdate,Criteria::GREATER_EQUAL);
+        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT,$change_no_enddate,Criteria::LESS_EQUAL);
+        $cn->addAnd(ChangeNumberDetailPeer::STATUS,1);
+        $change_number_count = ChangeNumberDetailPeer::doCount($cn);
+        $this->change_number_count = $change_number_count;
+        $this->disable = false;
+        if($change_number_count >=2){
+            $this->disable = true;
+            $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__("You can't change your number more than 2 times."));
+        }
     }
     public function executeChangeNumber(sfWebRequest $request)
     {
@@ -2116,10 +2123,21 @@ $transaction->setCustomerId($this->order->getCustomerId());
         $this->redirectUnless($this->customer, "@homepage");
         $this->targetUrl = $this->getTargetUrl();   
        
-          $cp =  new Criteria();
+        $cp =  new Criteria();
         $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->customer->getId());
         $this->customerProduct = CustomerProductPeer::doSelectOne($cp);
+
+        $c = new Criteria();
+        $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$this->customer->getId()); 
+        $c->addAnd(CustomerChangeProductPeer::STATUS, 1);
+        $ccpCount=CustomerChangeProductPeer::doCount($c);
+        $this->disable = false;
+        if($ccpCount > 0){
+            $this->disable = true;            
         }
+         
+     }
+
      public function executeChangeProductProcess(sfWebRequest $request)
     {
          
