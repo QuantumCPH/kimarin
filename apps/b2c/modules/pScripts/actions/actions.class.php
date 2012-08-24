@@ -3689,10 +3689,10 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $transaction->save();
 
         $this->customer = $order->getCustomer();
-        echo "ag" . $agentid = $this->customer->getReferrerId();
+        /*echo "ag" . $agentid = $this->customer->getReferrerId();
         echo "prid" . $productid = $order->getProductId();
-        //echo "trid" . $transactionid = $transaction->getId();
-        /*if (isset($agentid) && $agentid != "") {
+        echo "trid" . $transactionid = $transaction->getId();
+        if (isset($agentid) && $agentid != "") {
             echo "getagentid";
             commissionLib::refilCustomer($agentid, $productid, $transactionid);
             $transaction->setAgentCompanyId($agentid);
@@ -3701,7 +3701,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $cst = new Criteria();
         $cst->add(SimTypesPeer::TITLE, '%'.$order->getProduct()->getName().'%', Criteria::LIKE);
         $simtype = SimTypesPeer::doSelectOne($cst);
-        echo "sim type id ".$sim_type_id=$simtype->getId();
+        $sim_type_id=$simtype->getId();
         $exest = $order->getExeStatus();
         if ($exest!=1) {
 
