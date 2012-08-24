@@ -263,7 +263,7 @@ echo " ";   echo substr($Telintambs, 15,2);
         
         <?php   $c = new Criteria();
                 $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$customer->getId()); 
-                $c->addAnd(CustomerChangeProductPeer::STATUS, 1);
+                $c->addAnd(CustomerChangeProductPeer::STATUS, 2);
              $ccpCount=CustomerChangeProductPeer::doCount($c);
              if($ccpCount==0){
                 ?>
