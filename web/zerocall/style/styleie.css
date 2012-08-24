@@ -620,40 +620,40 @@ margin-top:12px;
     width: 132px;
 }
 /****** Spanish ********/
-.navegaciones{ width:575px; float:left;}
-.navegaciones a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-es.gif); background-repeat:no-repeat; margin-right:0px;}
-.navegaciones a.dashboard{ background-position:-5px 0px}
+.navegaciones{ width:645px; float:left;}
+.navegaciones a{ width:92px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/spanish.jpg); background-repeat:no-repeat; margin-right:0px;}
+.navegaciones a.dashboard{ background-position:0px 0px}
 .navegaciones a.dashboard:hover{ background-position:-90px 0px}
 .navegaciones a.dashboard-s{ background-position:-90px 0px}
 
-.navegaciones a.refil{ background-position:-5px -56px;}
-.navegaciones a.refil:hover{ background-position:-90px -56px}
-.navegaciones a.refil-s{ background-position:-90px -56px}
+.navegaciones a.refil{ background-position:0px -64px;}
+.navegaciones a.refil:hover{ background-position:-90px -64px}
+.navegaciones a.refil-s{ background-position:-90px -64px}
 
-.navegaciones a.callhistory{ background-position:-5px -112px;}
-.navegaciones a.callhistory:hover{ background-position:-90px -112px;}
-.navegaciones a.callhistory-s{ background-position:-90px -112px;}
+.navegaciones a.callhistory{ background-position:0px -126px;}
+.navegaciones a.callhistory:hover{ background-position:-90px -126px;}
+.navegaciones a.callhistory-s{ background-position:-90px -126px;}
 
-.navegaciones a.paymenthistory{ background-position:-5px -169px}
-.navegaciones a.paymenthistory:hover{ background-position:-90px -169px}
-.navegaciones a.paymenthistory-s{ background-position:-90px -169px}
+.navegaciones a.paymenthistory{ background-position:5px -187px}
+.navegaciones a.paymenthistory:hover{ background-position:-85px -187px}
+.navegaciones a.paymenthistory-s{ background-position:-85px -187px}
 
-.navegaciones a.settings{ background-position:-5px -227px}
-.navegaciones a.settings:hover{ background-position:-90px -227px}
-.navegaciones a.settings-s{ background-position:-90px -227px}
+.navegaciones a.settings{ background-position:0px -250px}
+.navegaciones a.settings:hover{ background-position:-90px -250px}
+.navegaciones a.settings-s{ background-position:-90px -250px}
 
-.navegaciones a.websms{ background-position:-5px -284px}
-.navegaciones a.websms:hover{ background-position:-90px -284px}
-.navegaciones a.websms-s{ background-position:-90px -284px}
+.navegaciones a.websms{ background-position:3px -313px}
+.navegaciones a.websms:hover{ background-position:-87px -313px}
+.navegaciones a.websms-s{ background-position:-87px -313px}
 
-.navegaciones a.logout{ background-position:-3px -340px;}
-.navegaciones a.logout:hover{ background-position:-87px -340px}
-.navegaciones a.logout-s{ background-position:-87px -340px}
+.navegaciones a.logout{ background-position:3px -380px;}
+.navegaciones a.logout:hover{ background-position:-87px -380px}
+.navegaciones a.logout-s{ background-position:-87px -380px}
 
 /****** German ********/
 .navigationen{ width:575px; float:left;}
 .navigationen a{ width:82px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/german.jpg); background-repeat:no-repeat; margin-right:0px;}
-.navigationen a.dashboard{ background-position:-5px 0px}
+.navigationen a.dashboard{ background-position:0px 0px}
 .navigationen a.dashboard:hover{ background-position:-90px 0px}
 .navigationen a.dashboard-s{ background-position:-90px 0px}
 
@@ -665,9 +665,9 @@ margin-top:12px;
 .navigationen a.callhistory:hover{ background-position:-90px -124px;}
 .navigationen a.callhistory-s{ background-position:-90px -124px;}
 
-.navigationen a.paymenthistory{ background-position:-4px -185px}
-.navigationen a.paymenthistory:hover{ background-position:-94px -185px}
-.navigationen a.paymenthistory-s{ background-position:-90px -185px}
+.navigationen a.paymenthistory{ background-position:-4px -186px}
+.navigationen a.paymenthistory:hover{ background-position:-94px -186px}
+.navigationen a.paymenthistory-s{ background-position:-90px -186px}
 
 .navigationen a.settings{ background-position:0px -250px}
 .navigationen a.settings:hover{ background-position:-90px -250px}
@@ -677,40 +677,40 @@ margin-top:12px;
 .navigationen a.websms:hover{ background-position:-87px -313px}
 .navigationen a.websms-s{ background-position:-87px -313px}
 
-.navigationen a.logout{ background-position:2px -380px;}
+.navigationen a.logout{ background-position:3px -380px;}
 .navigationen a.logout:hover{ background-position:-87px -380px}
 .navigationen a.logout-s{ background-position:-87px -380px}
 
 /****** Catalan ********/
-.navegacions{ width:575px; float:left;}
-.navegacions a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-es.gif); background-repeat:no-repeat; margin-right:0px;}
-.navegacions a.dashboard{ background-position:-5px 0px}
+.navegacions{ width:645px; float:left;}
+.navegacions a{ width:92px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/catalan.jpg); background-repeat:no-repeat; margin-right:0px;}
+.navegacions a.dashboard{ background-position:0px 0px}
 .navegacions a.dashboard:hover{ background-position:-90px 0px}
 .navegacions a.dashboard-s{ background-position:-90px 0px}
 
-.navegacions a.refil{ background-position:-5px -56px;}
-.navegacions a.refil:hover{ background-position:-90px -56px}
-.navegacions a.refil-s{ background-position:-90px -56px}
+.navegacions a.refil{ background-position:0px -64px;}
+.navegacions a.refil:hover{ background-position:-90px -64px}
+.navegacions a.refil-s{ background-position:-90px -64px}
 
-.navegacions a.callhistory{ background-position:-5px -112px;}
-.navegacions a.callhistory:hover{ background-position:-90px -112px;}
-.navegacions a.callhistory-s{ background-position:-90px -112px;}
+.navegacions a.callhistory{ background-position:0px -126px;}
+.navegacions a.callhistory:hover{ background-position:-90px -126px;}
+.navegacions a.callhistory-s{ background-position:-90px -126px;}
 
-.navegacions a.paymenthistory{ background-position:-5px -169px}
-.navegacions a.paymenthistory:hover{ background-position:-90px -169px}
-.navegacions a.paymenthistory-s{ background-position:-90px -169px}
+.navegacions a.paymenthistory{ background-position:4px -187px}
+.navegacions a.paymenthistory:hover{ background-position:-86px -187px}
+.navegacions a.paymenthistory-s{ background-position:-86px -187px}
 
-.navegacions a.settings{ background-position:-5px -227px}
-.navegacions a.settings:hover{ background-position:-90px -227px}
-.navegacions a.settings-s{ background-position:-90px -227px}
+.navegacions a.settings{ background-position:0px -250px}
+.navegacions a.settings:hover{ background-position:-90px -250px}
+.navegacions a.settings-s{ background-position:-90px -250px}
 
-.navegacions a.websms{ background-position:-5px -284px}
-.navegacions a.websms:hover{ background-position:-90px -284px}
-.navegacions a.websms-s{ background-position:-90px -284px}
+.navegacions a.websms{ background-position:3px -313px}
+.navegacions a.websms:hover{ background-position:-87px -313px}
+.navegacions a.websms-s{ background-position:-87px -313px}
 
-.navegacions a.logout{ background-position:-3px -340px;}
-.navegacions a.logout:hover{ background-position:-87px -340px}
-.navegacions a.logout-s{ background-position:-87px -340px}
+.navegacions a.logout{ background-position:3px -380px;}
+.navegacions a.logout:hover{ background-position:-87px -380px}
+.navegacions a.logout-s{ background-position:-87px -380px}
 
 
 label.extra_refill{

@@ -400,8 +400,8 @@
             </trans-unit>
             <trans-unit id="98" translate="yes" reformat="yes" xml:space="default">
  
-                <source>You can save up to 80% on international calls from your Spanish mobile telephone if you are registered as a %1% customer. It is easy to register and use, and you do not need to change your mobile number or mobile service provider. Please go to %1%'s web site: www.kimarineurope.com and read more.</source>
-                <target>Wenn Sie sich als %1%-Kunde registrieren, können Sie bis zu 80% bei internationalen Anrufen von Ihrem spanischen Mobilfunktelefon aus sparen. Benutzung und Anmeldung sind einfach und sie müssen weder Ihren Mobilfunkanbieter noch ihre Telefonnummer wechseln. Bitte informieren Sie sich auf der %1%-Internetseite www.kimarineurope.com.</target>
+                <source>You can save up to 80% on international calls from your Spanish mobile telephone if you are registered as a %1% customer. It is easy to register and use, and you do not need to change your mobile number or mobile service provider. Please go to %1%'s web site: %3% and read more.</source>
+                <target>Wenn Sie sich als %1%-Kunde registrieren, können Sie bis zu 80% bei internationalen Anrufen von Ihrem spanischen Mobilfunktelefon aus sparen. Benutzung und Anmeldung sind einfach und sie müssen weder Ihren Mobilfunkanbieter noch ihre Telefonnummer wechseln. Bitte informieren Sie sich auf der %1%-Internetseite %3%.</target>
  
              
             </trans-unit>
