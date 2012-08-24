@@ -298,30 +298,30 @@
                      ?>
   <?php
                      if($actionName=='registrationType' && $modulName=="invoice"){
-                        echo link_to(__('Registered Customers Report'), 'invoice/registrationType', array('class'=>'subSelect'));
+                        echo link_to(__('Registered Customers Method Report'), 'invoice/registrationType', array('class'=>'subSelect'));
                      }else{
-                        echo link_to(__(' Registered Customers Report'), 'invoice/registrationType');
+                        echo link_to(__('Registered Customers Method Report'), 'invoice/registrationType');
                      }
                      ?>
  <?php
                      if($actionName=='totalSaleStat' && $modulName=="invoice"){
-                        echo link_to(__('Total Sale Stat Report'), 'invoice/totalSaleStat', array('class'=>'subSelect'));
+                        echo link_to(__('Sales Statistic -Total overview daily basis'), 'invoice/totalSaleStat', array('class'=>'subSelect'));
                      }else{
-                        echo link_to(__('Total Sale Stat Report'), 'invoice/totalSaleStat');
+                        echo link_to(__('Sales Statistic -Total overview daily basis'), 'invoice/totalSaleStat');
                      }
                      ?>
                     <?php
                      if($actionName=='totalRefilSale' && $modulName=="invoice"){
-                        echo link_to(__('Total Refill Sale Report'), 'invoice/totalRefilSale', array('class'=>'subSelect'));
+                        echo link_to(__('Customer Refill Packages Report'), 'invoice/totalRefilSale', array('class'=>'subSelect'));
                      }else{
-                        echo link_to(__('Total Refill Sale Report'), 'invoice/totalRefilSale');
+                        echo link_to(__('Customer Refill Packages Report'), 'invoice/totalRefilSale');
                      }
                      ?>
                      <?php
                      if($actionName=='totalProductSale' && $modulName=="invoice"){
-                        echo link_to(__('Total Product Sale Report'), 'invoice/totalProductSale', array('class'=>'subSelect'));
+                        echo link_to(__('Registered Customers with Products Report'), 'invoice/totalProductSale', array('class'=>'subSelect'));
                      }else{
-                        echo link_to(__('Total Product Sale Report'), 'invoice/totalProductSale');
+                        echo link_to(__('Registered Customers with Products Report'), 'invoice/totalProductSale');
                      }
                      ?>
                       <?php
@@ -333,9 +333,9 @@
                      ?>
                      <?php
                      if($actionName=='agentProductSale' && $modulName=="invoice"){
-                        echo link_to(__('Agent Product Sale Report'), 'invoice/agentProductSale', array('class'=>'subSelect'));
+                        echo link_to(__('Agent sales overview Report'), 'invoice/agentProductSale', array('class'=>'subSelect'));
                      }else{
-                        echo link_to(__('Agent Product Sale Report'), 'invoice/agentProductSale');
+                        echo link_to(__('Agent sales overview Report'), 'invoice/agentProductSale');
                      }
                      ?>
                       <?php

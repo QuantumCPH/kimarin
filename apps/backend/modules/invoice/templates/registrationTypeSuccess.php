@@ -47,13 +47,13 @@
         <input type="submit"  name="submit" value="search">
     
     </form><br/><h3>Report on Month :  <?php  echo $month."-".$year; ?> </h3></div>
-<div id="sf_admin_container"><h1><?php echo  __('Kimarin Registered Customers method') ?></h1></div>
+<div id="sf_admin_container"><h1><?php echo  __('Kimarin New Registered Customers Method') ?></h1></div>
 <table width="75%" cellspacing="0" cellpadding="2" class="tblAlign">
     <thead>
         <tr class="headings">
         
     <th>ID</th>
-    <th>Description</th>
+    <th>Modules</th>
     <th>Day 1</th>
     <th>Day 2</th>
     <th>Day 3</th>
