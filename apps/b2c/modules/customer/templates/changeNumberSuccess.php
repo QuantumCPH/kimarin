@@ -26,15 +26,11 @@
             <label><?php echo  $customer->getMobileNumber(); ?></label><br />
         </li>
         <li>
-            <label><?php echo __("Product Detail");?>:</label>
-            <label><?php echo $product->getDescription(); ?></label><br />
-        </li>
-        <li>
             <label><?php echo __("Amount");?>:</label>
             <label><?php echo  number_format($prodPrice = $product->getRegistrationFee(),2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
         </li>
         <li>
-            <label><?php echo __("VAT");?>:</label>
+            <label><?php echo __("IVA");?>:</label>
             <label><?php echo  number_format($refillvat=$product->getRegistrationFee() * sfConfig::get('app_vat_percentage'),2) ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
         </li>
         <li>
