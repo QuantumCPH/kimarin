@@ -53,16 +53,11 @@ jQuery(function(){
                 <label><?php echo __('New Mobile Number') ?><br />0034*</label>
                 <input type="text" name="newNumber" style="margin-bottom:0px"/>
             </li>
-           
-            <li>
-                <label><?php echo __('Product Name') ?></label>
+
                 <?php  $c = new Criteria();
                 $c->add(ProductPeer::ID, 3);
                 $product = ProductPeer::doSelectOne($c);  ?>
-                <select name="product">
-                    <option value="<?php echo $product->getID(); ?>" ><?php echo $product->getName(); ?></option>
-                </select>
-            </li>
+                   <input type="hidden" name="product" value="<?php echo $product->getID(); ?>" />
              
 	          <li class="fr buttonplacement">
                     <?php $button_disable='';
