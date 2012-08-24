@@ -1,6 +1,13 @@
+<?php
+    $sim="Please Select the Sim Type";
+?>
 <script type="text/javascript">
     jQuery(function(){
-        jQuery('#form').validate({});
+        jQuery('#form').validate({
+            //rules: {
+                //simtype: "required"
+            //}
+        });
     });
 </script>
 <?php use_helper('I18N') ?>
@@ -12,12 +19,12 @@
 <br/><br/>&nbsp;<br/>&nbsp;<br/>
 <div class="split-form">
   <div class="fl">
-        <form id="form" method="POST">
+        <form id="form" method="POST" action="">
             <table width="100%" cellspacing="20">
                 <tr>
                     <td><?php echo __("SIM type") ?>:</td>
                     <td>
-                        <select name="sim_type" id="sim_type_id" class="required" style="width:190px;" onchange="this.form.submit()" message="fkfkf">
+                        <select name="simtype" onchange="this.form.submit()" class="required newcard">
                             <option value=""><?php echo __("Select SIM type") ?></option>
                             <?php foreach($simtypes as $simtype){  ?>
                             <option value="<?php echo $simtype->getId(); ?>" <?php echo ($simtype->getId()==$product_id)?'selected="selected"':''?>><?php echo $simtype->getName(); ?></option>
