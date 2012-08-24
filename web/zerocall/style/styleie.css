@@ -822,10 +822,12 @@ p{
 label.error{
    color:#f00 !important;
    font-weight: normal !important;
+   margin-left: 5px;
 }
 input.changeNum{
    margin-left:128px!important;
 }
+.newcard {width:137px; border:1px solid #999999;font-size:11px; padding:3px; }
 .dashboardbutton{
     width:105px !important;
     margin-left: 0 !important;
@@ -848,3 +850,4 @@ span.alertmsg{
     color:#CD481D;
     font-style: italic;
 }
+
