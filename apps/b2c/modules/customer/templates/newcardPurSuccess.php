@@ -5,7 +5,7 @@
     });
 </script>
 <style>
-    .padding{ padding: 10px; padding-left: 30px}
+    .padding{ padding: 10px; padding-left: 30px; text-align: right; padding-right: 20px}
 </style>
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
@@ -20,7 +20,7 @@
             <table width="100%" cellspacing="0" border="0">
                 <tr>
                     <td><?php echo __("SIM type") ?>:</td>
-                    <td class="padding">
+                    <td class="padding" style="padding-right:10px">
                         <select name="sim_type" onchange="this.form.submit()" class="required newcard">
                             <option value=""><?php echo __("Select SIM type") ?></option>
                             <?php foreach($simtypes as $simtype){  ?>
@@ -55,7 +55,7 @@
                 <input type="hidden" name="rm" value="2" />
                 
              <?php }?>
-                <tr><td>&nbsp;</td><td class="padding"><input type="submit" class="butonsigninsmall" style="margin-left: 0px !important;" name="buy" value="<?php echo __('Pay') ?>" /></td></tr>
+                <tr><td>&nbsp;</td><td class="padding"><input type="submit" class="butonsigninsmall" style="margin-left: 0px; padding-left: 25px; padding-right: 25px" name="buy" value="<?php echo __('Pay') ?>" /></td></tr>
             </table><br />
 
             
