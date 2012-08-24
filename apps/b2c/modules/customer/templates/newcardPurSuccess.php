@@ -24,7 +24,7 @@
                 <tr>
                     <td><?php echo __("SIM type") ?>:</td>
                     <td>
-                        <select name="simtype" onchange="this.form.submit()" class="required newcard">
+                        <select name="sim_type" onchange="this.form.submit()" class="required newcard">
                             <option value=""><?php echo __("Select SIM type") ?></option>
                             <?php foreach($simtypes as $simtype){  ?>
                             <option value="<?php echo $simtype->getId(); ?>" <?php echo ($simtype->getId()==$product_id)?'selected="selected"':''?>><?php echo $simtype->getName(); ?></option>
