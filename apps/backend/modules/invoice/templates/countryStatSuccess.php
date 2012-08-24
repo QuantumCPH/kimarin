@@ -215,10 +215,11 @@ if ($month == '01') {
             ///////////////////////
             
             ?>
-                <td align="center"><b><?php echo $mobile_t;  ?></b></td>
-                <td  align="center"><b><?php echo $mobile_r;  ?></b></td>
                 <td  align="center"><b><?php echo $fixed_t;  ?></b></td>
                 <td  align="center"><b><?php echo $fixed_r;  ?></b></td>
+                <td align="center"><b><?php echo $mobile_t;  ?></b></td>
+                <td  align="center"><b><?php echo $mobile_r;  ?></b></td>
+              
 
 
                             
@@ -274,18 +275,19 @@ if ($month == '01') {
                         
                         
                         
-                        
+                        <td  align="center"><b><?php echo $T_fixed_t;  ?></b></td>
+                <td  align="center"><b><?php echo $T_fixed_r;  ?></b></td>      
                       <td align="center"><b><?php echo $T_mobile_t;  ?></b></td>
                 <td  align="center"><b><?php echo $T_mobile_r;  ?></b></td>
-                <td  align="center"><b><?php echo $T_fixed_t;  ?></b></td>
-                <td  align="center"><b><?php echo $T_fixed_r;  ?></b></td>            
+                      
                         
             <?php for ($i = 1; $i <= $totalDays; $i++) {
  ?>
-                        <td><b><?php echo $total[$i]['mobile_1']; ?></b></td>
+                 <td><b><?php echo $total[$i]['fixed_1']; ?></b></td>
+                        <td><b><?php echo $total[$i]['fixed_0']; ?></b></td>       
+                <td><b><?php echo $total[$i]['mobile_1']; ?></b></td>
                         <td><b><?php echo $total[$i]['mobile_0']; ?></b></td>
-                        <td><b><?php echo $total[$i]['fixed_1']; ?></b></td>
-                        <td><b><?php echo $total[$i]['fixed_0']; ?></b></td>
+                       
 
 <? } ?>
                    
