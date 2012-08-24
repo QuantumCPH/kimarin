@@ -3292,12 +3292,17 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
         foreach($customers as $customer){
 
-        $fromdate = mktime(0, 0, 0, date("m"), date("d") - 1, date("Y"));
-        $this->fromdate = date("Y-m-d", $fromdate);
-        $this->todate = $fromdate;
+//        $fromdate = mktime(0, 0, 0, date("m"), date("d") - 1, date("Y"));
+//        $this->fromdate = date("Y-m-d", $fromdate);
+//        $this->todate = $fromdate;
+            
+              $fromdate = mktime(0, 0, 0, date("m")-1, date("d") - 1, date("Y"));
+    $this->fromdate = date("Y-m-d", $fromdate);
+          $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+       $this->todate =date("Y-m-d", $todate);
 
        $tilentaCallHistryResult = Telienta::callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
-   //   var_dump($tilentaCallHistryResult);
+  //  var_dump($tilentaCallHistryResult);
 
 
          if($tilentaCallHistryResult){
@@ -3592,7 +3597,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
    public function executeChangeCustomerProduct(sfWebRequest $request){
    
             $ccp = new Criteria();
-            $ccp->add(CustomerChangeProductPeer::STATUS, 1);
+            $ccp->add(CustomerChangeProductPeer::STATUS, 2);
             $ChangeCustomers=CustomerChangeProductPeer::doSelect($ccp);
             
             foreach ($ChangeCustomers as $ChangeCustomer){
@@ -3684,10 +3689,10 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $transaction->save();
 
         $this->customer = $order->getCustomer();
-        echo "ag" . $agentid = $this->customer->getReferrerId();
+        /*echo "ag" . $agentid = $this->customer->getReferrerId();
         echo "prid" . $productid = $order->getProductId();
-        //echo "trid" . $transactionid = $transaction->getId();
-        /*if (isset($agentid) && $agentid != "") {
+        echo "trid" . $transactionid = $transaction->getId();
+        if (isset($agentid) && $agentid != "") {
             echo "getagentid";
             commissionLib::refilCustomer($agentid, $productid, $transactionid);
             $transaction->setAgentCompanyId($agentid);
@@ -3696,7 +3701,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $cst = new Criteria();
         $cst->add(SimTypesPeer::TITLE, '%'.$order->getProduct()->getName().'%', Criteria::LIKE);
         $simtype = SimTypesPeer::doSelectOne($cst);
-        echo "sim type id ".$sim_type_id=$simtype->getId();
+        $sim_type_id=$simtype->getId();
         $exest = $order->getExeStatus();
         if ($exest!=1) {
 

@@ -118,7 +118,7 @@ if ($month == '01') {
             ?>
                         <td colspan="4" align="center">Day <?php echo $i; ?></td>
             <?php } ?>
-
+  <td colspan="4" align="center">Total</td>
 
                 </tr>
                 <tr>
@@ -129,6 +129,8 @@ if ($month == '01') {
                         <td colspan="2" align="center">Fixed</td>
                         <td colspan="2" align="center">Mobile</td>
             <?php } ?>
+                          <td colspan="2" align="center">Fixed</td>
+                        <td colspan="2" align="center">Mobile</td>
                 </tr>
                 <tr>
                     <td>ID</td>
@@ -140,6 +142,10 @@ if ($month == '01') {
                         <td  align="center">Traffic</td>
                         <td  align="center">Revenue</td>
             <?php } ?>
+                  <td align="center">Traffic</td>
+                        <td  align="center">Revenue</td>
+                        <td  align="center">Traffic</td>
+                        <td  align="center">Revenue</td>        
                 </tr>
             </thead>
 
@@ -156,10 +162,10 @@ if ($month == '01') {
               ,(SELECT CONCAT(COALESCE(ROUND(sum(charged_quantity)/60,2),0),"-",COALESCE(sum(charged_amount),0)) FROM employee_customer_callhistory WHERE country_id = country.id AND DATE( connect_time ) = "' . $year . '-' . $month . '-' . $i . '" AND (description not like "%Cellular%" AND description not like "%mobile%") ) AS day' . $i . '_fixed ';
                     }
 
-                    $query .= 'FROM country';
+                    $query .= 'FROM country right join employee_customer_callhistory on  employee_customer_callhistory.country_id=country.id group by country.id';
 
 
-//                    echo $query;
+ //                  echo $query;
 //                    die;
 
                     $statement = $conn->prepare($query);
@@ -202,8 +208,38 @@ if ($month == '01') {
 
             <?php } ?>
 
+  <?php 
+  /////////////////////////////////////////////////
+  $mobile_t=0;
+  $mobile_r=0;
+  $fixed_t=0;
+  $fixed_r=0;
+  for ($i = 1; $i <= $totalDays; $i++) {
+            ?>
 
 
+            <?php $mobile = explode('-', $rowObj['day' . $i . '_mobile']); ?>
+            <?php $fixed = explode('-', $rowObj['day' . $i . '_fixed']); ?>
+                           
+                <?php        
+                             $mobile_t+=$mobile[1];  
+                        
+                            $mobile_r+=$mobile[0];  
+                         
+                           $fixed_t+=$fixed[1];  
+                      
+                            $fixed_r+=$fixed[0];  
+                       
+
+           } 
+            
+            ///////////////////////
+            
+            ?>
+                <td align="center"><?php echo $mobile_t;  ?></td>
+                <td  align="center"><?php echo $mobile_r;  ?></td>
+                <td  align="center"><?php echo $fixed_t;  ?></td>
+                <td  align="center"><?php echo $fixed_r;  ?></td>
 
 
 
@@ -224,7 +260,31 @@ if ($month == '01') {
                         <td><?php echo $total[$i]['fixed_0']; ?></td>
 
 <? } ?>
+                        
+           <?php            $T_mobile_t=0;
+  $T_mobile_r=0;
+  $T_fixed_t=0;
+  $T_fixed_r=0;   ?>
+  <?php for ($i = 1; $i <= $totalDays; $i++) {
+ 
+                     $T_mobile_t+=$total[$i]['mobile_1'];  
+                        $T_mobile_r+=$total[$i]['mobile_0'];
+                      $T_fixed_t+=$total[$i]['fixed_1']; 
+                     $T_fixed_r+=$total[$i]['fixed_0']; 
 
+  } ?>
+                        
+       
+                        
+                        
+                        
+                        
+                      <td align="center"><?php echo $T_mobile_t;  ?></td>
+                <td  align="center"><?php echo $T_mobile_r;  ?></td>
+                <td  align="center"><?php echo $T_fixed_t;  ?></td>
+                <td  align="center"><?php echo $T_fixed_r;  ?></td>             
+                        
+                        
         </tr>
     </tbody>
 </table>

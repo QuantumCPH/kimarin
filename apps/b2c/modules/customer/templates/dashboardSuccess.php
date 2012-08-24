@@ -250,9 +250,7 @@ echo " ";   echo substr($Telintambs, 15,2);
            
             <a title="<?php echo __('New Sim Card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim Card') ?></a>
         </div>
-        
-               
- 
+        <br />
     </div>
   </div>
 

@@ -1,3 +1,8 @@
+<script type="text/javascript">
+    jQuery(function(){
+        jQuery('#form').validate({});
+    });
+</script>
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Purchase New Sim Card') ) ) ?>
@@ -7,15 +12,15 @@
 <br/><br/>&nbsp;<br/>&nbsp;<br/>
 <div class="split-form">
   <div class="fl">
-        <form  id="form1" method="POST">
+        <form id="form" method="POST">
             <table width="100%" cellspacing="20">
                 <tr>
                     <td><?php echo __("SIM type") ?>:</td>
                     <td>
-                        <select name="sim_type" id="employee_sim_type_id" class="required" style="width:190px;" onchange="this.form.submit()">
+                        <select name="sim_type" id="sim_type_id" class="required" style="width:190px;" onchange="this.form.submit()" message="fkfkf">
                             <option value=""><?php echo __("Select SIM type") ?></option>
                             <?php foreach($simtypes as $simtype){  ?>
-                            <option value="<?php echo $simtype->getTitle(); ?>" <?php echo ($simtype->getTitle()==$sim)?'selected="selected"':''?>><?php echo $simtype->getTitle(); ?></option>
+                            <option value="<?php echo $simtype->getId(); ?>" <?php echo ($simtype->getId()==$product_id)?'selected="selected"':''?>><?php echo $simtype->getName(); ?></option>
                             <?php   }  ?>
                         </select>
                     </td>
@@ -46,7 +51,7 @@
                 <input type="hidden" name="rm" value="2" />
                 
              <?php }?>
-                <tr><td colspan="2" align="center"><input type="submit" class="butonsigninsmall" style="margin-left: 0px !important;" name="buy" value="<?php echo __('Pay') ?>" /></td></tr>
+                <tr><td><input type="submit" class="butonsigninsmall" style="margin-left: 0px !important;" name="buy" value="<?php echo __('Pay') ?>" /></td></tr>
             </table><br />
 
             
