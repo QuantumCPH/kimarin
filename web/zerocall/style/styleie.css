@@ -652,34 +652,34 @@ margin-top:12px;
 
 /****** German ********/
 .navigationen{ width:575px; float:left;}
-.navigationen a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-de.gif); background-repeat:no-repeat; margin-right:0px;}
+.navigationen a{ width:82px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/german.jpg); background-repeat:no-repeat; margin-right:0px;}
 .navigationen a.dashboard{ background-position:-5px 0px}
 .navigationen a.dashboard:hover{ background-position:-90px 0px}
 .navigationen a.dashboard-s{ background-position:-90px 0px}
 
-.navigationen a.refil{ background-position:-5px -56px;}
-.navigationen a.refil:hover{ background-position:-90px -56px}
-.navigationen a.refil-s{ background-position:-90px -56px}
+.navigationen a.refil{ background-position:0px -64px;}
+.navigationen a.refil:hover{ background-position:-90px -64px}
+.navigationen a.refil-s{ background-position:-90px -64px}
 
-.navigationen a.callhistory{ background-position:-5px -113px;}
-.navigationen a.callhistory:hover{ background-position:-90px -113px;}
-.navigationen a.callhistory-s{ background-position:-90px -113px;}
+.navigationen a.callhistory{ background-position:0px -124px;}
+.navigationen a.callhistory:hover{ background-position:-90px -124px;}
+.navigationen a.callhistory-s{ background-position:-90px -124px;}
 
-.navigationen a.paymenthistory{ background-position:-5px -169px}
-.navigationen a.paymenthistory:hover{ background-position:-90px -169px}
-.navigationen a.paymenthistory-s{ background-position:-90px -169px}
+.navigationen a.paymenthistory{ background-position:-4px -185px}
+.navigationen a.paymenthistory:hover{ background-position:-94px -185px}
+.navigationen a.paymenthistory-s{ background-position:-90px -185px}
 
-.navigationen a.settings{ background-position:-5px -227px}
-.navigationen a.settings:hover{ background-position:-90px -227px}
-.navigationen a.settings-s{ background-position:-90px -227px}
+.navigationen a.settings{ background-position:0px -250px}
+.navigationen a.settings:hover{ background-position:-90px -250px}
+.navigationen a.settings-s{ background-position:-90px -250px}
 
-.navigationen a.websms{ background-position:-2px -283px}
-.navigationen a.websms:hover{ background-position:-87px -283px}
-.navigationen a.websms-s{ background-position:-87px -283px}
+.navigationen a.websms{ background-position:3px -313px}
+.navigationen a.websms:hover{ background-position:-87px -313px}
+.navigationen a.websms-s{ background-position:-87px -313px}
 
-.navigationen a.logout{ background-position:-3px -340px;}
-.navigationen a.logout:hover{ background-position:-87px -340px}
-.navigationen a.logout-s{ background-position:-87px -340px}
+.navigationen a.logout{ background-position:2px -380px;}
+.navigationen a.logout:hover{ background-position:-87px -380px}
+.navigationen a.logout-s{ background-position:-87px -380px}
 
 /****** Catalan ********/
 .navegacions{ width:575px; float:left;}
