@@ -31,7 +31,7 @@
         </li>
         <li>
             <label><?php echo __("Amount");?>:</label>
-            <label><?php echo  number_format($prodPrice = $product->getPrice(),2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
+            <label><?php echo  number_format($prodPrice = $product->getRegistrationFee(),2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
         </li>
         <li>
             <label><?php echo __("VAT");?>:</label>
