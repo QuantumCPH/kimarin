@@ -32,15 +32,15 @@
              <?php if($price!=''){ ?>
                 <tr>
                     <td><?php echo __("Product price") ?>:</td>
-                    <td class="padding"><?php echo $price; ?></td>
+                    <td class="padding"><?php echo number_format($price, 2);echo sfConfig::get('app_currency_code'); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo __("IVA") ?>:</td>
-                    <td class="padding"><?php echo $vat ?></td>
+                    <td class="padding"><?php echo number_format($vat, 2);echo sfConfig::get('app_currency_code'); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo __("Total amount") ?>:</td>
-                    <td class="padding"><?php echo $total; ?></td>
+                    <td class="padding"><?php echo number_format($total, 2);echo sfConfig::get('app_currency_code'); ?></td>
                 </tr>
                 <input type="hidden" name="amount" id="total" value="<?php echo $total; ?>" />
                 <input type="hidden" name="cmd" value="_xclick" />
