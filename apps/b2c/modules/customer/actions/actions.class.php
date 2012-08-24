@@ -2058,7 +2058,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             $transaction->setCustomerId($this->order->getCustomerId());
 
             $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(14);
-            $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+            $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
             $transaction->setTransactionDescriptionId($transactiondescription->getId());
             $transaction->setDescription($transactiondescription->getTitle());
                 
