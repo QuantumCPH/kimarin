@@ -2153,8 +2153,8 @@ $transaction->setCustomerId($this->order->getCustomerId());
                 $ccp->setStatus(1);
                 $ccp->save();  
         
-//                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Product Change Request is Submited.'));
-//            return $this->redirect('customer/dashboard');
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Product Change Request is Submited.'));
+            return $this->redirect('customer/dashboard');
          
      }
     
