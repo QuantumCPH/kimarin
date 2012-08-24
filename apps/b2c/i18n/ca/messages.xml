@@ -693,12 +693,12 @@
                 <target>Com?</target>
             </trans-unit>
             <trans-unit id="170" translate="yes" reformat="yes" xml:space="default">
-                <source>Your invitation to</source>
-                <target>La invitació a</target>
+                <source>Your invitation to </source>
+                <target>La invitació a </target>
             </trans-unit>
             <trans-unit id="171" translate="yes" reformat="yes" xml:space="default">
-                <source>has been sent.</source>
-                <target>ha estat enviada.</target>
+                <source> has been sent.</source>
+                <target> ha estat enviada.</target>
             </trans-unit>
             <trans-unit id="172" translate="yes" reformat="yes" xml:space="default">
                 <source>Invite a friend to register as a %1% customer</source>
