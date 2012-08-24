@@ -2039,7 +2039,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
         $this->simtypes = ProductPeer::doSelect($cst);
 
 
-       if ($request->isMethod('post')) {
+       if ($request->getParameter('sim_type')!='') {
             $st = new Criteria();
             $st->add(ProductPeer::ID, $request->getParameter('sim_type'));
             $simtype = ProductPeer::doSelectOne($st);
@@ -2072,7 +2072,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             $transaction->save();
 
 
-        }
+        
         if($request->getParameter('buy')!=''){
             $this->target = $this->getTargetUrl();
 
@@ -2110,7 +2110,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             } else {
                 echo 'error';
             }
-        }
+       } }
     }
 
 
