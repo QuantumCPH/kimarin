@@ -365,7 +365,7 @@ class customerActions extends autocustomerActions {
                 $this->setPreferredCulture($this->customer);
                 emailLib::sendAdminRefillEmail($this->customer, $order);
                 $this->updatePreferredCulture();
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully charged with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully charged with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" =>$request->getParameter('charge_amount'), "%3%" => sfConfig::get('app_currency_code'))));
 //                                        echo 'rehcarged, redirecting';
                 $this->redirect($this->getTargetURL() . 'customer/selectChargeCustomer');
             } else {
@@ -448,7 +448,7 @@ class customerActions extends autocustomerActions {
                 $this->setPreferredCulture($this->customer);
                 emailLib::sendAdminRefillEmail($this->customer, $order);
                 $this->updatePreferredCulture();
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $request->getParameter('refill_amount'), "%3%" => sfConfig::get('app_currency_code'))));
                 //                                        echo 'rehcarged, redirecting';
                 $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');
             } else {

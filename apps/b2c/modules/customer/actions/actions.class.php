@@ -2114,15 +2114,11 @@ $transaction->setCustomerId($this->order->getCustomerId());
           $cp =  new Criteria();
         $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->customer->getId());
         $this->customerProduct = CustomerProductPeer::doSelectOne($cp);
-        
-         
-     }
+        }
      public function executeChangeProductProcess(sfWebRequest $request)
     {
-        
          
          $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', '', 'usersession'));
-
         $this->redirectUnless($this->customer, "@homepage");
         $this->targetUrl = $this->getTargetUrl();    
          
