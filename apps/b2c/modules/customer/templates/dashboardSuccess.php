@@ -236,18 +236,20 @@ echo " ";   echo substr($Telintambs, 15,2);
 		<td></td></tr>
 	</table> 
         <h2><?php echo __("Services");?></h2><br />
-        <div class="dashboardproduct">         
+        <div class="dashboardproduct"> 
+            <h4 class="web_sms"><?php echo __('Block Account') ?></h4>
             <a title="<?php echo __('Block Account')?>" class="sidebar_button" rel="bookmark" href="#" onclick="confirmBlock();"><?php echo __('Block Account')?></a>
         </div>
         <div class="dashboardproduct">
-           
+           <h4 class="web_sms"><?php echo __('Change Number') ?></h4>
             <a title="<?php echo __('Change Number')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changenumberservice', true) ?>"><?php echo __('Change Number')?></a>
         </div>
         <div class="dashboardproduct">
+            <h4 class="web_sms"><?php echo __('Change Product') ?></h4>
             <a title="<?php echo __('Change Product')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changeProductSubscription', true) ?>"><?php echo __('Change Product')?></a>
         </div>
         <div class="dashboardproduct">
-           
+           <h4 class="web_sms"><?php echo __('New Sim Card') ?></h4>
             <a title="<?php echo __('New Sim Card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim Card') ?></a>
         </div>
         <br />
