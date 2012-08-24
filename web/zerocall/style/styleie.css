@@ -5,6 +5,7 @@ body {font-family:Calibri; font-size:14px; color:#0c74a5;font-style: normal;}
 h1{ font-size:20px;}
 h2{ font-size:18px;}
 h3{ font-size:16px;}
+h4{font-size:14px;}
 #wrap {width:780px;margin:0px auto;}
 #header {width:780px;height:119px;}
 #logo {width:168px; height:79px; float:left;}
@@ -832,9 +833,9 @@ input.changeNum{
 div.dashboardproduct{
     background: url('../images/dashboardproducts.png') no-repeat;
     width:160px;
-    height:78px;
+    height:74px;
     margin:0 10px 10px 0;
-    padding:38px 10px 10px;
+    padding:44px 10px 10px;
     float:left;
     position: relative;
     font-size: 12px;
