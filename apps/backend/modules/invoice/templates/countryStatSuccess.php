@@ -111,6 +111,7 @@ if ($month == '01') {
 
             <td>&nbsp;</td>
             <td>&nbsp;</td>
+             <td colspan="4" align="center">Total</td>
             <?php
                     $date = "$year-$month-05";
                     $totalDays = date('t', strtotime($date));
@@ -118,7 +119,7 @@ if ($month == '01') {
             ?>
                         <td colspan="4" align="center">Day <?php echo $i; ?></td>
             <?php } ?>
-  <td colspan="4" align="center">Total</td>
+ 
 
                 </tr>
                 <tr>
@@ -135,6 +136,10 @@ if ($month == '01') {
                 <tr>
                     <td>ID</td>
                     <td>Name</td>
+                     <td align="center">Traffic</td>
+                        <td  align="center">Revenue</td>
+                        <td  align="center">Traffic</td>
+                        <td  align="center">Revenue</td>  
             <?php for ($i = 1; $i <= $totalDays; $i++) {
             ?>
                         <td align="center">Traffic</td>
@@ -142,10 +147,7 @@ if ($month == '01') {
                         <td  align="center">Traffic</td>
                         <td  align="center">Revenue</td>
             <?php } ?>
-                  <td align="center">Traffic</td>
-                        <td  align="center">Revenue</td>
-                        <td  align="center">Traffic</td>
-                        <td  align="center">Revenue</td>        
+                       
                 </tr>
             </thead>
 
@@ -165,7 +167,7 @@ if ($month == '01') {
                     $query .= 'FROM country right join employee_customer_callhistory on  employee_customer_callhistory.country_id=country.id group by country.id';
 
 
- //                  echo $query;
+//                  echo $query;
 //                    die;
 
                     $statement = $conn->prepare($query);
@@ -185,30 +187,7 @@ if ($month == '01') {
                             <td><?php echo $rowObj['id'] ?></td>
                             <td><?php echo $rowObj['name']; ?></td>
 
-
-            <?php for ($i = 1; $i <= $totalDays; $i++) {
-            ?>
-
-
-            <?php $mobile = explode('-', $rowObj['day' . $i . '_mobile']); ?>
-            <?php $fixed = explode('-', $rowObj['day' . $i . '_fixed']); ?>
-                            <td>
-                <?php echo $mobile[1];
-                            $total[$i]['mobile_1']+=$mobile[1]; ?>
-                        </td>
-                        <td><?php echo $mobile[0];
-                            $total[$i]['mobile_0']+=$mobile[0]; ?>
-                        </td>
-                        <td><?php echo $fixed[1];
-                            $total[$i]['fixed_1']+=$fixed[1]; ?>
-                        </td>
-                        <td><?php echo $fixed[0];
-                            $total[$i]['fixed_0']+=$fixed[0]; ?>
-                        </td>
-
-            <?php } ?>
-
-  <?php 
+ <?php 
   /////////////////////////////////////////////////
   $mobile_t=0;
   $mobile_r=0;
@@ -222,13 +201,13 @@ if ($month == '01') {
             <?php $fixed = explode('-', $rowObj['day' . $i . '_fixed']); ?>
                            
                 <?php        
-                             $mobile_t+=$mobile[1];  
+                             $mobile_r+=$mobile[1];  
                         
-                            $mobile_r+=$mobile[0];  
+                            $mobile_t+=$mobile[0];  
                          
-                           $fixed_t+=$fixed[1];  
+                           $fixed_r+=$fixed[1];  
                       
-                            $fixed_r+=$fixed[0];  
+                            $fixed_t+=$fixed[0];  
                        
 
            } 
@@ -236,12 +215,37 @@ if ($month == '01') {
             ///////////////////////
             
             ?>
-                <td align="center"><?php echo $mobile_t;  ?></td>
-                <td  align="center"><?php echo $mobile_r;  ?></td>
-                <td  align="center"><?php echo $fixed_t;  ?></td>
-                <td  align="center"><?php echo $fixed_r;  ?></td>
+                <td align="center"><b><?php echo $mobile_t;  ?></b></td>
+                <td  align="center"><b><?php echo $mobile_r;  ?></b></td>
+                <td  align="center"><b><?php echo $fixed_t;  ?></b></td>
+                <td  align="center"><b><?php echo $fixed_r;  ?></b></td>
 
 
+                            
+                            
+            <?php for ($i = 1; $i <= $totalDays; $i++) {
+            ?>
+
+
+            <?php $mobile = explode('-', $rowObj['day' . $i . '_mobile']); ?>
+            <?php $fixed = explode('-', $rowObj['day' . $i . '_fixed']); ?>
+                          
+                        <td><?php echo $mobile[0];
+                            $total[$i]['mobile_0']+=$mobile[0]; ?>
+                        </td>  <td>
+                <?php echo $mobile[1];
+                            $total[$i]['mobile_1']+=$mobile[1]; ?>
+                        </td> <td><?php echo $fixed[0];
+                            $total[$i]['fixed_0']+=$fixed[0]; ?>
+                        </td>
+                        <td><?php echo $fixed[1];
+                            $total[$i]['fixed_1']+=$fixed[1]; ?>
+                        </td>
+                       
+
+            <?php } ?>
+
+ 
 
 
                     </tr>
@@ -252,25 +256,17 @@ if ($month == '01') {
 
                     <tr>
                         <td  colspan="2">Total</td>
-            <?php for ($i = 1; $i <= $totalDays; $i++) {
- ?>
-                        <td><?php echo $total[$i]['mobile_1']; ?></td>
-                        <td><?php echo $total[$i]['mobile_0']; ?></td>
-                        <td><?php echo $total[$i]['fixed_1']; ?></td>
-                        <td><?php echo $total[$i]['fixed_0']; ?></td>
-
-<? } ?>
-                        
+                              
            <?php            $T_mobile_t=0;
   $T_mobile_r=0;
   $T_fixed_t=0;
   $T_fixed_r=0;   ?>
   <?php for ($i = 1; $i <= $totalDays; $i++) {
  
-                     $T_mobile_t+=$total[$i]['mobile_1'];  
-                        $T_mobile_r+=$total[$i]['mobile_0'];
-                      $T_fixed_t+=$total[$i]['fixed_1']; 
-                     $T_fixed_r+=$total[$i]['fixed_0']; 
+                     $T_mobile_r+=$total[$i]['mobile_1'];  
+                        $T_mobile_t+=$total[$i]['mobile_0'];
+                      $T_fixed_r+=$total[$i]['fixed_1']; 
+                     $T_fixed_t+=$total[$i]['fixed_0']; 
 
   } ?>
                         
@@ -279,10 +275,20 @@ if ($month == '01') {
                         
                         
                         
-                      <td align="center"><?php echo $T_mobile_t;  ?></td>
-                <td  align="center"><?php echo $T_mobile_r;  ?></td>
-                <td  align="center"><?php echo $T_fixed_t;  ?></td>
-                <td  align="center"><?php echo $T_fixed_r;  ?></td>             
+                      <td align="center"><b><?php echo $T_mobile_t;  ?></b></td>
+                <td  align="center"><b><?php echo $T_mobile_r;  ?></b></td>
+                <td  align="center"><b><?php echo $T_fixed_t;  ?></b></td>
+                <td  align="center"><b><?php echo $T_fixed_r;  ?></b></td>            
+                        
+            <?php for ($i = 1; $i <= $totalDays; $i++) {
+ ?>
+                        <td><b><?php echo $total[$i]['mobile_1']; ?></b></td>
+                        <td><b><?php echo $total[$i]['mobile_0']; ?></b></td>
+                        <td><b><?php echo $total[$i]['fixed_1']; ?></b></td>
+                        <td><b><?php echo $total[$i]['fixed_0']; ?></b></td>
+
+<? } ?>
+                   
                         
                         
         </tr>
