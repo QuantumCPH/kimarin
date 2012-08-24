@@ -256,7 +256,7 @@ if ($month == '01') {
         ?>
 
                     <tr>
-                        <td >Total</td>
+                        <td><b>Total</b></td>
                               
            <?php            $T_mobile_t=0;
   $T_mobile_r=0;
