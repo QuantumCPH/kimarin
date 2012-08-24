@@ -3585,7 +3585,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $callbacklog->setcallingCode($countrycode);
         $callbacklog->save();
 
-        emailLib::sendChangeNumberEmail($customer, $order);
+        emailLib::sendCustomerChangeNumberEmail($customer, $order);
         return sfView::NONE;
   }
  
