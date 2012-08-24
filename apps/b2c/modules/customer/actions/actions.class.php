@@ -2023,28 +2023,28 @@ $transaction->setCustomerId($this->order->getCustomerId());
     }
     public function executeNewcardPur(sfWebRequest $request) {
         $this->price='';
-        $this->sim='';
+        $this->product_id='';
         $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', null, 'usersession'));
         $this->redirectUnless($this->customer, "@homepage");
 
         $cst = new Criteria();
-        //$cst->add(ProductPeer::PRODUCT_TYPE_ID, 3);
-        $this->simtypes = SimTypesPeer::doSelect($cst);
+        $cst->add(ProductPeer::PRODUCT_TYPE_ID, 6);
+        $this->simtypes = ProductPeer::doSelect($cst);
 
 
        if ($request->isMethod('post')) {
             $st = new Criteria();
-            $st->add(ProductPeer::NAME, '%'.$request->getParameter('sim_type').'%', Criteria::LIKE);
-            $simtype = ProductPeer::doSelectOne($st);//var_dump($simtype);
-            $this->sim=$request->getParameter('sim_type');
+            $st->add(ProductPeer::ID, $request->getParameter('sim_type'));
+            $simtype = ProductPeer::doSelectOne($st);
+            $this->product_id=$simtype->getId();
             $this->price=$simtype->getPrice();
             $this->vat=$this->price*sfConfig::get('app_vat_percentage');
             $this->total=$this->price+$this->vat;
-            $product_id=$simtype->getId();
+            //$product_name=$simtype->getName();
 
             $this->order = new CustomerOrder();
 
-            $this->order->setProductId($product_id);
+            $this->order->setProductId($this->product_id);
             $this->order->setCustomer($this->customer);
             $this->order->setQuantity(1);
             $this->order->setExtraRefill(0);
@@ -2054,9 +2054,14 @@ $transaction->setCustomerId($this->order->getCustomerId());
             $transaction = new Transaction();
 
             $transaction->setAmount($this->total);
-            $transaction->setDescription('Purchase '.$request->getParameter('sim_type'));
             $transaction->setOrderId($this->order->getId());
             $transaction->setCustomerId($this->order->getCustomerId());
+
+            $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(14);
+            $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+            $transaction->setTransactionDescriptionId($transactiondescription->getId());
+            $transaction->setDescription($transactiondescription->getTitle());
+                
             $transaction->save();
 
 
@@ -2081,7 +2086,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
             $querystring = '';
 
-            $item_name = 'Purchase '.$request->getParameter('sim_type');
+            $item_name = $transactiondescription->getTitle();
 
             //loop for posted values and append to querystring
             foreach ($_POST as $key => $value) {
