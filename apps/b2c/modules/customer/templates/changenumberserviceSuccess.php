@@ -41,7 +41,7 @@ jQuery(function(){
     
     <div class="split-form">
         <p><?php echo __('You can change your number maximum 2 times in a month.');?></p>
-        <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeNumber') ?>">
+        <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeNumber') ?>" style="padding-left: 0px">
      <h1><?php //echo __('Change Number');?></h1>
     	<ul class="fl col">
             <li>
@@ -65,7 +65,7 @@ jQuery(function(){
                            $button_disable = 'disabled="disabled"';
                     }
                     ?>  
-	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 12px !important;" type="submit" <?php echo $button_disable;?> value="<?php echo __('Next')?>" />
+	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 22px !important;" type="submit" <?php echo $button_disable;?> value="<?php echo __('Next')?>" />
 	          </li>
 
 	</ul>
