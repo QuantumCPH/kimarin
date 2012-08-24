@@ -155,7 +155,7 @@ if(isset($val) && $val!=""){  ?>
                             if($old_number!=''){
                         ?>
                         <tr>
-                            <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Unique ID</td>
+                            <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Old Unique ID</td>
                             <td><?php  echo $old_number->getUniqueNumber();?></td>
                         </tr>
                         <?php }?>
