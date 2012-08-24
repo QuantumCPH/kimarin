@@ -39,7 +39,7 @@
                            $button_disable = 'disabled="disabled"';
                     }
                     ?>  
-	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 12px !important;" type="submit" <?php echo $button_disable;?> value="<?php echo __('Submit')?>" />
+	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 12px !important;" type="submit" <?php echo $button_disable;?> value="<?php echo __('Next')?>" />
 	          </li>
 
 	</ul>
