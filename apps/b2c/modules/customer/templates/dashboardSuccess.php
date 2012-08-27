@@ -184,7 +184,7 @@ echo " ";   echo substr($Telintambs, 15,2);
 <?php } ?>
   <?php   if($ccpCount>0){ ?>       
          
-     <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px">You already Subscribed for Change Product it affect from 1st of next month  </span></div>
+     <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('You already Subscribed for Change Product it affect from 1st of next month'); ?>  </span></div>
          <?php } ?>
          
 <?php   if($pus==5){?>
