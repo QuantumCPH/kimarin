@@ -2151,7 +2151,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             
             $product=ProductPeer::retrieveByPK($product_id);
              $this->product_id=$product->getId();
-            $this->price=$Product->getRegistrationFee();
+            $this->price=$product->getRegistrationFee();
             $this->vat=$this->price*sfConfig::get('app_vat_percentage');
             $this->total=$this->price+$this->vat;
       
@@ -2159,7 +2159,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
                 $order->setCustomerId($customer->getId());
                 $order->setProductId($product_id);
                 $order->setQuantity(1);
-                $order->setExtraRefill($Product->getInitialBalance());
+                $order->setExtraRefill($product->getInitialBalance());
                 $order->setOrderStatusId(1);
 
                 $order->save();
