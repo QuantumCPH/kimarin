@@ -169,7 +169,15 @@ echo " ";   echo substr($Telintambs, 15,2);
            
           
          }  ?></span></div>
-
+         
+         
+            <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Customer Product') ?>:</span><span>
+ <?php  
+ 
+ 
+  echo $product->getName();
+ 
+ ?></span></div>
 <?php } ?>
 <?php   if($pus==5){?>
 
@@ -244,10 +252,17 @@ echo " ";   echo substr($Telintambs, 15,2);
            <h4 class="web_sms"><?php echo __('Change Number') ?></h4>
             <a title="<?php echo __('Change Number')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changenumberservice', true) ?>"><?php echo __('Change Number')?></a>
         </div>
+            <?php     $c = new Criteria();
+        $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$customer->getId()); 
+        $c->addAnd(CustomerChangeProductPeer::STATUS, 2);
+        $ccpCount=CustomerChangeProductPeer::doCount($c);      ?> 
         <div class="dashboardproduct">
             <h4 class="web_sms"><?php echo __('Change Product') ?></h4>
-            <a title="<?php echo __('Change Product')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changeProductSubscription', true) ?>"><?php echo __('Change Product')?></a>
+            <a title="<?php echo __('Change Product')?>" class="sidebar_button" rel="bookmark" href="<?php  if($ccpCount>0){  echo "#"; }else{ echo url_for('customer/changeProductSubscription', true);  } ?>"><?php echo __('Change Product')?></a>
         </div>
+     
+        
+        
         <div class="dashboardproduct">
            <h4 class="web_sms"><?php echo __('New Sim Card') ?></h4>
             <a title="<?php echo __('New Sim Card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim Card') ?></a>

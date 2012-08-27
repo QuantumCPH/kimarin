@@ -274,7 +274,12 @@ class customerActions extends sfActions {
         for ($i = 0; ($i < 3) && $this->customer_balance == -1; $i++) {
             $this->customer_balance = (double) Fonet::getBalance($this->customer);
         }
-
+         $cp =  new Criteria();
+        $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->customer->getId());
+        $this->customerProduct = CustomerProductPeer::doSelectOne($cp); 
+        $this->product = ProductPeer::retrieveByPK($this->customerProduct->getProductId());
+        
+        
         //echo  $TelintaMobile = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
         $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
         if ($getFirstnumberofMobile == 0) {
@@ -2132,12 +2137,9 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
         $c = new Criteria();
         $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$this->customer->getId()); 
-        $c->addAnd(CustomerChangeProductPeer::STATUS, 1);
+        $c->addAnd(CustomerChangeProductPeer::STATUS, 2);
         $ccpCount=CustomerChangeProductPeer::doCount($c);
-        $this->disable = false;
-        if($ccpCount > 0){
-            $this->disable = true;            
-        }
+       
          
      }
 
@@ -2148,18 +2150,92 @@ $transaction->setCustomerId($this->order->getCustomerId());
         $this->redirectUnless($this->customer, "@homepage");
         $this->targetUrl = $this->getTargetUrl();    
          
-            $product_id = $request->getParameter('product'); 
-       $ccp = new CustomerChangeProduct();
+             $product_id = $request->getParameter('product'); 
+            
+            $product=ProductPeer::retrieveByPK($product_id);
+            $this->product=$product;
+             $this->product_id=$product->getId();
+            $this->price=$product->getRegistrationFee();
+            $this->vat=$this->price*sfConfig::get('app_vat_percentage');
+            $this->total=$this->price+$this->vat;
+      
+                  $order = new CustomerOrder(); 
+                $order->setCustomerId($this->customer->getId());
+                $order->setProductId($product_id);
+                $order->setQuantity(1);
+                $order->setExtraRefill($product->getInitialBalance());
+                $order->setOrderStatusId(1);
+
+                $order->save();
+                $this->order = $order;
+                //create transaction
+                $transaction = new Transaction();
+                $transaction->setOrderId($order->getId());
+                $transaction->setCustomerId($this->customer->getId());
+                $transaction->setAmount($this->total);
+                $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(15);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->setTransactionStatusId(1);
+                
+                $transaction->save();  
+                $ccp = new CustomerChangeProduct();
                 $ccp->setCustomerId($this->customer->getId());
                 $ccp->setProductId($product_id);
                 $ccp->setCreatedAt(Date());
                 $ccp->setStatus(1);
+                $ccp->setOrderId($order->getId());
+                $ccp->setTransactionId($transaction->getId());
                 $ccp->save();  
-        
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Product Change Request is Submited.'));
-            return $this->redirect('customer/dashboard');
+                $this->ccp = $ccp;  
+              
          
      }
-    
+     public function executeChangeNumberProcessPay(sfWebRequest $request)
+    {
+         
+     
+            $this->target = $this->getTargetUrl();
+
+            $order_id = $request->getParameter('item_number');
+            $item_amount = $request->getParameter('amount');
+            $ccpid = $request->getParameter('ccpid');
+            $lang = $this->getUser()->getCulture();
+            $return_url = $this->target."customer/dashboard";
+            $cancel_url = $this->target."customer/dashboard";
+
+
+            $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount . '-' . $ccpid;
+            $notify_url = $this->getTargetUrl() . 'pScripts/calbackChangeProduct?p=' . $callbackparameters;
+
+            $email2 = new DibsCall();
+            $email2->setCallurl($notify_url);
+
+            $email2->save();
+
+            $querystring = '';
+
+            $item_name ="Chnage Product";
+
+            
+            
+            //loop for posted values and append to querystring
+            foreach ($_POST as $key => $value) {
+                $value = urlencode(stripslashes($value));
+                $querystring .= "$key=$value&";
+            }
+
+            $querystring .= "item_name=" . urlencode($item_name) . "&";
+            $querystring .= "return=" . urldecode($return_url) . "&";
+            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+            $querystring .= "notify_url=" . urldecode($notify_url);
+            if ($order_id && $item_amount) {
+                Payment::SendPayment($querystring);
+            } else {
+                echo 'error';
+            }
+        return sfView::NONE;
+     }
     
 }

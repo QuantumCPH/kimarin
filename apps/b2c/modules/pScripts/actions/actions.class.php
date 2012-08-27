@@ -3604,21 +3604,22 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             
                 
                 $customer=CustomerPeer::retrieveByPK($ChangeCustomer->getCustomerId());
+                $this->customer=$customer;
                 $product=ProductPeer::retrieveByPK($ChangeCustomer->getProductId());
-                
-                 $Bproducts= BillingProductsPeer::retrieveByPK($product->getBillingProductId());
-                
-            $c = new Criteria;
-                    $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
-                    $c->add(TelintaAccountsPeer::STATUS,3);
-                    $tilentAccount = TelintaAccountsPeer::doSelectOne($c);
-                  //  foreach($tilentAccounts as $tilentAccount){
-                    $accountInfo['i_account']=$tilentAccount->getIAccount();
-                    $accountInfo['i_product']=$Bproducts->getAIproduct();
-                    if(Telienta::updateAccount($accountInfo)){
-                      $ChangeCustomer->setStatus(3); 
-                      $ChangeCustomer->Save();
-                      }
+                $order=  CustomerOrderPeer::retrieveByPK($ChangeCustomer->getOrderId());
+                $transaction=  TransactionPeer::retrieveByPK($ChangeCustomer->getTransactionId());
+                $Bproducts= BillingProductsPeer::retrieveByPK($product->getBillingProductId());
+                $c = new Criteria;
+                $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
+                $c->add(TelintaAccountsPeer::STATUS,3);
+                $tilentAccount = TelintaAccountsPeer::doSelectOne($c);
+                //  foreach($tilentAccounts as $tilentAccount){
+                  $accountInfo['i_account']=$tilentAccount->getIAccount();
+                  $accountInfo['i_product']=$Bproducts->getAIproduct();
+                  if(Telienta::updateAccount($accountInfo)){
+                    $ChangeCustomer->setStatus(3); 
+                    $ChangeCustomer->Save();
+                    }
                      //   }  
                       
                        $cp =  new Criteria();
@@ -3632,6 +3633,12 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $cProduct->setCustomerId($ChangeCustomer->getCustomerId());
         $cProduct->setStatusId(3);
         $cProduct->save();
+        
+          $OpeningBalance = $order->getExtraRefill();
+            Telienta::recharge($this->customer, $OpeningBalance,'Refill');
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerChangeProduct($this->customer, $order, $transaction);
+            $this->updatePreferredCulture();
         
                     }
           return sfView::NONE;   
@@ -3747,6 +3754,75 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             emailLib::sendCustomerNewcardEmail($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
         }
+
+        $order->setExeStatus(1);
+        $order->save();
+        echo 'Yes';
+        return sfView::NONE;
+    }
+
+ 
+
+  public function executeCalbackChangeProduct(sfWebRequest $request) {
+
+        $Parameters=$request->getURI();
+
+        $email2 = new DibsCall();
+        $email2->setCallurl($Parameters);
+        $email2->save();
+
+        // call back url $p="es-297-100"; lang_orderid_amount
+
+        $callbackparameters = $request->getParameter("p");
+        $params = explode("-",$callbackparameters);
+
+        $lang = $params[0];
+        $order_id = $params[1];
+        $order_amount   = $params[2];
+         $ccpid   = $params[3];
+
+        $this->getUser()->setCulture($lang);
+
+        $this->forward404Unless($order_id);
+        $CCP = CustomerChangeProductPeer::retrieveByPK($ccpid);
+        $CCP->setStatus(2);
+        $CCP->save();
+ 
+        $order = CustomerOrderPeer::retrieveByPK($order_id);
+        $this->forward404Unless($order);
+
+        $c = new Criteria;
+        $c->add(TransactionPeer::ORDER_ID, $order_id);
+        $transaction = TransactionPeer::doSelectOne($c);
+        if($order_amount=="")$order_amount = $transaction->getAmount();
+
+        $order->setOrderStatusId(sfConfig::get('app_status_completed', 3)); //completed
+        $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
+        if ($transaction->getAmount() > $order_amount) {
+            //error
+            $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
+            $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
+            $transaction->save();
+            die;
+        } else if ($transaction->getAmount() < $order_amount) {
+            $transaction->setAmount($order_amount);
+        }
+       
+        $order->save();
+        $transaction->save();
+
+        $this->customer = $order->getCustomer();
+       
+       
+        $exest = $order->getExeStatus();
+        
+
+            $uniqueId=$this->customer->getUniqueid();
+           
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerChangeProduct($this->customer, $order, $transaction);
+            $this->updatePreferredCulture();
+       
 
         $order->setExeStatus(1);
         $order->save();
