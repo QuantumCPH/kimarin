@@ -40,7 +40,6 @@
 
 
 <?php include_partial('dashboard_header', array('customer' => $customer, 'section' => __('Web SMS'))) ?>
-<br />
 <?php
 //echo $res_cbf;
 if ($msgSent != '') {
