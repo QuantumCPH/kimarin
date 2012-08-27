@@ -3628,7 +3628,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $customerProduct->setStatusId(7);
         $customerProduct->Save();
 
-        $cProduct = new CustomerProductPeer();
+        $cProduct = new CustomerProduct();
         $cProduct->setProductId($changeCustomer->getProductId());
         $cProduct->setCustomerId($changeCustomer->getCustomerId());
         $cProduct->setStatusId(3);
