@@ -1269,6 +1269,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
                 $cbf->setMessage($sms_text);
                 $cbf->setCountryId($country->getId());
                 $cbf->setMobileNumber($this->customer->getMobileNumber());
+                $cbf->setCustomerId($this->customer->getId());
                 $cbf->save();
 
                 $amt = $country->getCbfRate();
@@ -1296,7 +1297,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
         );
         $this->redirectUnless($this->customer, "@homepage");
         $c = new Criteria();
-        $c->add(CbfPeer::MOBILE_NUMBER, $this->customer->getMobileNumber());
+        $c->add(CbfPeer::CUSTOMER_ID, $this->customer->getId());
         $c->addDescendingOrderByColumn(CbfPeer::CREATED_AT);
         $items_per_page = 25; //shouldn't be 0
         $this->page = $request->getParameter('page');
