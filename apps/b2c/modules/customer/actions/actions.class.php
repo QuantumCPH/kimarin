@@ -1922,8 +1922,10 @@ $transaction->setCustomerId($this->order->getCustomerId());
         $newNumber = $this->newNumber;
         $product_id = $request->getParameter('product');
         $this->product = ProductPeer::retrieveByPK($product_id);
-        $extra_refill = $this->product->getRegistrationFee();
         
+        $this->vat = $this->product->getRegistrationFee()* sfConfig::get('app_vat_percentage');
+        $this->amount = $this->product->getRegistrationFee() + $this->vat;
+        $amount = $this->amount;
         $this->countrycode = sfConfig::get('app_country_code');
         $customer = $this->customer;
         
@@ -1940,7 +1942,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
                 $order->setCustomerId($customer->getId());
                 $order->setProductId($product_id);
                 $order->setQuantity(1);
-                $order->setExtraRefill($extra_refill);
+               // $order->setExtraRefill($extra_refill);
                 $order->setOrderStatusId(sfConfig::get('app_status_new'));
 
                 $order->save();
@@ -1949,7 +1951,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
                 $transaction = new Transaction();
                 $transaction->setOrderId($order->getId());
                 $transaction->setCustomerId($customer->getId());
-                $transaction->setAmount($extra_refill);
+                $transaction->setAmount($amount);
                 $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(13);
                 $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());

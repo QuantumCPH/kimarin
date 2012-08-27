@@ -27,15 +27,15 @@
         </li>
         <li>
             <label><?php echo __("Amount");?>:</label>
-            <label><?php echo  number_format($prodPrice = $product->getRegistrationFee(),2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
+            <label><?php echo  number_format($product->getRegistrationFee(),2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
         </li>
         <li>
             <label><?php echo __("IVA");?>:</label>
-            <label><?php echo  number_format($refillvat=$product->getRegistrationFee() * sfConfig::get('app_vat_percentage'),2) ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
+            <label><?php echo  number_format($vat,2) ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
         </li>
         <li>
             <label><?php echo __("Total");?>:</label>
-            <label><?php echo  $amount = number_format($prodPrice + $refillvat,2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
+            <label><?php echo  number_format($amount,2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
         </li>
         <li><input type="submit" class="butonsigninsmall changeNum" name="Pay" value="<?php echo __("Pay");?>" /><br /></li>
     </ul>
