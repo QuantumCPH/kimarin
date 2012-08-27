@@ -425,12 +425,12 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 //    array('required'=>sfContext::getInstance()->getI18N()->__('Please choose a date of birth'))
 //);
     //date of birth
-       $this->validatorSchema->setPostValidator(
-  new sfValidatorSchemaCompare('date_of_birth', sfValidatorSchemaCompare::NOT_EQUAL, null,
-    array(),
-    array('invalid' => 'You must fill this field')
-  )
-);
+//       $this->validatorSchema->setPostValidator(
+//  new sfValidatorSchemaCompare('date_of_birth', sfValidatorSchemaCompare::NOT_EQUAL, null,
+//    array(),
+//    array('invalid' => 'You must fill this field')
+//  )
+//);
        
        $setdate=date('Y');
        $setstartdate=$setdate-13;

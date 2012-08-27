@@ -1297,6 +1297,8 @@ $transaction->setCustomerId($this->order->getCustomerId());
                     Telienta::charge($this->customer, $amt, $description);
                     $this->msgSent = "Yes";
                     $this->balance = (double) Telienta::getBalance($this->customer);
+                }else{
+                    $this->res_cbf = "Response from CBF is:";
                 }
             }
         }
