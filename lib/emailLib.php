@@ -1766,7 +1766,8 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
     }
     
     public static function sendCustomerChangeNumberEmail(Customer $customer, $order) {
-        $vat = 0;
+        
+        $vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
 
         $tc = new Criteria();
         $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
