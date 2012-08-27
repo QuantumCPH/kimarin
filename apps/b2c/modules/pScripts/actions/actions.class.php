@@ -3604,6 +3604,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             
                 
                 $customer=CustomerPeer::retrieveByPK($ChangeCustomer->getCustomerId());
+                $this->customer=$customer;
                 $product=ProductPeer::retrieveByPK($ChangeCustomer->getProductId());
                 $order=  CustomerOrderPeer::retrieveByPK($ChangeCustomer->getOrderId());
                 $transaction=  TransactionPeer::retrieveByPK($ChangeCustomer->getTransactionId());
