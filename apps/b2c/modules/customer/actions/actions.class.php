@@ -274,7 +274,12 @@ class customerActions extends sfActions {
         for ($i = 0; ($i < 3) && $this->customer_balance == -1; $i++) {
             $this->customer_balance = (double) Fonet::getBalance($this->customer);
         }
-
+         $cp =  new Criteria();
+        $cp->add(CustomerProductPeer::CUSTOMER_ID,$customer->getId());
+        $this->customerProduct = CustomerProductPeer::doSelectOne($cp); 
+        $this->product = ProductPeer::retrieveByPK($this->customerProduct->getProductId());
+        
+        
         //echo  $TelintaMobile = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
         $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
         if ($getFirstnumberofMobile == 0) {
