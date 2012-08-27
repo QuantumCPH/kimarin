@@ -2147,10 +2147,10 @@ $transaction->setCustomerId($this->order->getCustomerId());
         $this->redirectUnless($this->customer, "@homepage");
         $this->targetUrl = $this->getTargetUrl();    
          
-            $product_id = $request->getParameter('product'); 
+         echo   $product_id = $request->getParameter('product'); 
             
-            $Product=ProductPeer::retrieveByPK($product_id);
-               $this->product_id=$Product->getId();
+            $product=ProductPeer::retrieveByPK($product_id);
+            echo $this->product_id=$product->getId();
             $this->price=$Product->getRegistrationFee();
             $this->vat=$this->price*sfConfig::get('app_vat_percentage');
             $this->total=$this->price+$this->vat;
