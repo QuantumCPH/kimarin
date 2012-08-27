@@ -1292,7 +1292,8 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
 
                 if (CARBORDFISH_SMS::Send($destination, $sms_text, $this->customer->getMobileNumber())) {
-
+                    $cbf->setStatus(3);
+                    $cbf->save();
                     $description="SMS charges";
                     Telienta::charge($this->customer, $amt, $description);
                     $this->msgSent = "Yes";
@@ -1315,6 +1316,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
         $this->redirectUnless($this->customer, "@homepage");
         $c = new Criteria();
         $c->add(CbfPeer::CUSTOMER_ID, $this->customer->getId());
+        $c->add(CbfPeer::STATUS, 3);
         $c->addDescendingOrderByColumn(CbfPeer::CREATED_AT);
         $items_per_page = 25; //shouldn't be 0
         $this->page = $request->getParameter('page');
