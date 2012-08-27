@@ -2148,17 +2148,88 @@ $transaction->setCustomerId($this->order->getCustomerId());
         $this->targetUrl = $this->getTargetUrl();    
          
             $product_id = $request->getParameter('product'); 
-       $ccp = new CustomerChangeProduct();
+            
+            $Product=ProductPeer::retrieveByPK($product_id);
+               $this->product_id=$Product->getId();
+            $this->price=$Product->getRegistrationFee();
+            $this->vat=$this->price*sfConfig::get('app_vat_percentage');
+            $this->total=$this->price+$this->vat;
+      
+                  $order = new CustomerOrder(); 
+                $order->setCustomerId($customer->getId());
+                $order->setProductId($product_id);
+                $order->setQuantity(1);
+                $order->setExtraRefill($Product->getInitialBalance());
+                $order->setOrderStatusId(1);
+
+                $order->save();
+                $this->order = $order;
+                //create transaction
+                $transaction = new Transaction();
+                $transaction->setOrderId($order->getId());
+                $transaction->setCustomerId($customer->getId());
+                $transaction->setAmount($this->total);
+                $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(15);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->setTransactionStatusId(1);
+                
+                $transaction->save();  
+                $ccp = new CustomerChangeProduct();
                 $ccp->setCustomerId($this->customer->getId());
                 $ccp->setProductId($product_id);
                 $ccp->setCreatedAt(Date());
                 $ccp->setStatus(1);
+                $ccp->setOrderId($order->getId());
+                $ccp->setTransactionId($transaction->getId());
                 $ccp->save();  
-        
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Product Change Request is Submited.'));
-            return $this->redirect('customer/dashboard');
+                $this->ccp = $ccp;  
+              
          
      }
-    
+     public function executeChangeNumberProcessPay(sfWebRequest $request)
+    {
+         
+     
+            $this->target = $this->getTargetUrl();
+
+            $order_id = $request->getParameter('item_number');
+            $item_amount = $request->getParameter('amount');
+            $ccpid = $request->getParameter('ccpid');
+            $lang = $this->getUser()->getCulture();
+            $return_url = $this->target."customer/dashboard";
+            $cancel_url = $this->target."customer/dashboard";
+
+
+            $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount . '-' . $ccpid;
+            $notify_url = $this->getTargetUrl() . 'pScripts/calbackChangeProduct?p=' . $callbackparameters;
+
+            $email2 = new DibsCall();
+            $email2->setCallurl($notify_url);
+
+            $email2->save();
+
+            $querystring = '';
+
+            $item_name = $transactiondescription->getTitle();
+
+            //loop for posted values and append to querystring
+            foreach ($_POST as $key => $value) {
+                $value = urlencode(stripslashes($value));
+                $querystring .= "$key=$value&";
+            }
+
+            $querystring .= "item_name=" . urlencode($item_name) . "&";
+            $querystring .= "return=" . urldecode($return_url) . "&";
+            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+            $querystring .= "notify_url=" . urldecode($notify_url);
+            if ($order_id && $item_amount) {
+                Payment::SendPayment($querystring);
+            } else {
+                echo 'error';
+            }
+        return sfView::NONE;
+     }
     
 }
