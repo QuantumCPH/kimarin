@@ -276,6 +276,7 @@ class customerActions extends sfActions {
         }
          $cp =  new Criteria();
         $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->customer->getId());
+        $cp->addAnd(CustomerProductPeer::STATUS_ID,3);
         $this->customerProduct = CustomerProductPeer::doSelectOne($cp); 
         $this->product = ProductPeer::retrieveByPK($this->customerProduct->getProductId());
         
@@ -2142,6 +2143,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
        
         $cp =  new Criteria();
         $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->customer->getId());
+         $cp->addAnd(CustomerProductPeer::STATUS_ID,3);
         $this->customerProduct = CustomerProductPeer::doSelectOne($cp);
 
         $c = new Criteria();
