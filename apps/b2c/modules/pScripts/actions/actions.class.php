@@ -3511,7 +3511,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             die;
         } else if ($transaction->getAmount() < $order_amount) {
             //$extra_refill_amount = $order_amount;
-            $order->setExtraRefill($order_amount);
+           // $order->setExtraRefill($order_amount);
             $transaction->setAmount($order_amount);
         }
 
