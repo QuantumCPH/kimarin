@@ -169,7 +169,15 @@ echo " ";   echo substr($Telintambs, 15,2);
            
           
          }  ?></span></div>
-
+         
+         
+            <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Customer Product') ?>:</span><span>
+ <?php  
+ 
+ 
+  echo $product->getName();
+ 
+ ?></span></div>
 <?php } ?>
 <?php   if($pus==5){?>
 
