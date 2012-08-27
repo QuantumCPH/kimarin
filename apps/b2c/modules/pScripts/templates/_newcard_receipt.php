@@ -1,7 +1,7 @@
 <?php
 use_helper('I18N');
 use_helper('Number');
-$vat=$order->getProduct()->getPrice()*sfConfig::get('app_vat_percentage')
+$vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentage')
 ?>
 <p><?php echo __('To') ?>&nbsp;<?php echo $customer->getFirstName()." ".$customer->getLastName();?></p>
 
@@ -53,7 +53,7 @@ $vat=$order->getProduct()->getPrice()*sfConfig::get('app_vat_percentage')
     <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
     <td><?php echo __($transaction->getDescription());?></td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $order->getProduct()->getPrice(),2) ?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $order->getProduct()->getRegistrationFee(),2) ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr><td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td></tr>
   <tr class="footer"> 
