@@ -2062,7 +2062,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             $st->add(ProductPeer::ID, $request->getParameter('sim_type'));
             $simtype = ProductPeer::doSelectOne($st);
             $this->product_id=$simtype->getId();
-            $this->price=$simtype->getPrice();
+            $this->price=$simtype->getRegistrationFee();
             $this->vat=$this->price*sfConfig::get('app_vat_percentage');
             $this->total=$this->price+$this->vat;
             //$product_name=$simtype->getName();
