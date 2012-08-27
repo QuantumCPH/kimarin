@@ -245,7 +245,7 @@ echo " ";   echo substr($Telintambs, 15,2);
             <a title="<?php echo __('Change Number')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changenumberservice', true) ?>"><?php echo __('Change Number')?></a>
         </div>
             <?php     $c = new Criteria();
-        $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$this->customer->getId()); 
+        $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$customer->getId()); 
         $c->addAnd(CustomerChangeProductPeer::STATUS, 2);
         $ccpCount=CustomerChangeProductPeer::doCount($c);      ?> 
         <div class="dashboardproduct">
