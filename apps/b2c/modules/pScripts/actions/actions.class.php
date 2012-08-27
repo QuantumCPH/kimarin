@@ -3624,6 +3624,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                       
                        $cp =  new Criteria();
         $cp->add(CustomerProductPeer::CUSTOMER_ID,$customer->getId());
+         $cp->addAnd(CustomerProductPeer::STATUS_ID,3);
         $customerProduct = CustomerProductPeer::doSelectOne($cp);
         $customerProduct->setStatusId(7);
         $customerProduct->Save();
