@@ -2150,13 +2150,14 @@ $transaction->setCustomerId($this->order->getCustomerId());
              $product_id = $request->getParameter('product'); 
             
             $product=ProductPeer::retrieveByPK($product_id);
+            $this->product=$product;
              $this->product_id=$product->getId();
             $this->price=$product->getRegistrationFee();
             $this->vat=$this->price*sfConfig::get('app_vat_percentage');
             $this->total=$this->price+$this->vat;
       
                   $order = new CustomerOrder(); 
-                $order->setCustomerId($customer->getId());
+                $order->setCustomerId($this->customer->getId());
                 $order->setProductId($product_id);
                 $order->setQuantity(1);
                 $order->setExtraRefill($product->getInitialBalance());
@@ -2167,7 +2168,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
                 //create transaction
                 $transaction = new Transaction();
                 $transaction->setOrderId($order->getId());
-                $transaction->setCustomerId($customer->getId());
+                $transaction->setCustomerId($this->customer->getId());
                 $transaction->setAmount($this->total);
                 $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(15);
                 $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
@@ -2212,7 +2213,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
             $querystring = '';
 
-            $item_name = $transactiondescription->getTitle();
+            $item_name ="Chnage Product";
 
             //loop for posted values and append to querystring
             foreach ($_POST as $key => $value) {
