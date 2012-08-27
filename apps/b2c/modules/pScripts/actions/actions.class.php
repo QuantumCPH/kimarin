@@ -3606,6 +3606,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $customer=CustomerPeer::retrieveByPK($ChangeCustomer->getCustomerId());
                 $product=ProductPeer::retrieveByPK($ChangeCustomer->getProductId());
                 $order=  CustomerOrderPeer::retrieveByPK($ChangeCustomer->getOrderId());
+                $transaction=  TransactionPeer::retrieveByPK($ChangeCustomer->getTransactionId());
                 $Bproducts= BillingProductsPeer::retrieveByPK($product->getBillingProductId());
                 $c = new Criteria;
                 $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
@@ -3634,7 +3635,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         
           $OpeningBalance = $order->getExtraRefill();
             Telienta::recharge($this->customer, $OpeningBalance,'Refill');
-        
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerChangeProduct($this->customer, $order, $transaction);
+            $this->updatePreferredCulture();
         
                     }
           return sfView::NONE;   

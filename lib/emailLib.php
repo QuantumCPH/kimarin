@@ -1900,6 +1900,8 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+           $sender_namers = sfConfig::get('app_email_sender_name_sup');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_sup');
         
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
@@ -1951,6 +1953,17 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->setEmailType(sfConfig::get('app_site_title') . 'Customer  Change Product');
             $email4->setMessage($message_body);
             $email4->save();
+        endif;
+          if (trim($sender_emailrs) != ''):
+            $email5 = new EmailQueue();
+            $email5->setSubject($subject);
+            $email5->setReceipientName($sender_namers);
+            $email5->setReceipientEmail($sender_emailrs);
+            $email5->setAgentId($referrer_id);
+            $email5->setCutomerId($customer_id);
+            $email5->setEmailType(sfConfig::get('app_site_title') . 'Customer  Change Product');
+            $email5->setMessage($message_body);
+            $email5->save();
         endif;
     }
   
