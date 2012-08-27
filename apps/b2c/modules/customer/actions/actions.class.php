@@ -247,7 +247,7 @@ class customerActions extends sfActions {
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
         //echo "--- ".sfPropel::getDefaultCulture();
         $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', '', 'usersession'));
-
+        $customer=$this->customer;
         $this->redirectUnless($this->customer, "@homepage");
 
         $this->customer_balance = -1;
@@ -303,6 +303,15 @@ class customerActions extends sfActions {
         $this->customer_balance = $telintaGetBalance;
 
         if ($this->customer_balance != null) $this->customer_balance = $this->customer_balance;
+        
+         $c = new Criteria();
+        $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$customer->getId()); 
+        $c->addAnd(CustomerChangeProductPeer::STATUS, 2);
+        $ccpCount=CustomerChangeProductPeer::doCount($c);
+        $this->ccpCount=$ccpCount;
+        
+        
+        
         
         
     }

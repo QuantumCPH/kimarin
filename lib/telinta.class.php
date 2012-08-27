@@ -424,7 +424,7 @@ class Telienta {
         $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Account');
 
       
-        $accountName = $accountType . $mobileNumber;
+      //  $accountName = $accountType . $mobileNumber;
         while (!$account && $retry_count < $max_retries) {
             try {
                 //Example:

@@ -1866,7 +1866,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
     public static function sendCustomerChangeProduct(Customer $customer, $order,$transaction) {
      
         $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
-        $subject = __('Change Product Payment Confirmation');
+    
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
         $customer_id = trim($customer->getId());
@@ -1884,7 +1884,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
-        $message_body = get_partial('payments/order_receipt', array(
+        $message_body = get_partial('payments/order_receipt_payment', array(
                     'customer' => $customer,
                     'order' => $order,
                     'transaction' => $transaction,
@@ -1893,7 +1893,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,
                 ));
 
-
+    $subject = __('Change Product Payment Confirmation');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');
