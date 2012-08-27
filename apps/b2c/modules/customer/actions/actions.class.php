@@ -2131,12 +2131,9 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
         $c = new Criteria();
         $c->add(CustomerChangeProductPeer::CUSTOMER_ID,$this->customer->getId()); 
-        $c->addAnd(CustomerChangeProductPeer::STATUS, 1);
+        $c->addAnd(CustomerChangeProductPeer::STATUS, 2);
         $ccpCount=CustomerChangeProductPeer::doCount($c);
-        $this->disable = false;
-        if($ccpCount > 0){
-            $this->disable = true;            
-        }
+       
          
      }
 
@@ -2215,6 +2212,8 @@ $transaction->setCustomerId($this->order->getCustomerId());
 
             $item_name ="Chnage Product";
 
+            
+            
             //loop for posted values and append to querystring
             foreach ($_POST as $key => $value) {
                 $value = urlencode(stripslashes($value));
