@@ -275,7 +275,7 @@ class customerActions extends sfActions {
             $this->customer_balance = (double) Fonet::getBalance($this->customer);
         }
          $cp =  new Criteria();
-        $cp->add(CustomerProductPeer::CUSTOMER_ID,$customer->getId());
+        $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->customer->getId());
         $this->customerProduct = CustomerProductPeer::doSelectOne($cp); 
         $this->product = ProductPeer::retrieveByPK($this->customerProduct->getProductId());
         
