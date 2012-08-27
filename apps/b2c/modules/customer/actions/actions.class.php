@@ -276,6 +276,7 @@ class customerActions extends sfActions {
         }
          $cp =  new Criteria();
         $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->customer->getId());
+        $cp->addAnd(CustomerProductPeer::STATUS_ID,3);
         $this->customerProduct = CustomerProductPeer::doSelectOne($cp); 
         $this->product = ProductPeer::retrieveByPK($this->customerProduct->getProductId());
         
@@ -2061,7 +2062,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
             $st->add(ProductPeer::ID, $request->getParameter('sim_type'));
             $simtype = ProductPeer::doSelectOne($st);
             $this->product_id=$simtype->getId();
-            $this->price=$simtype->getPrice();
+            $this->price=$simtype->getRegistrationFee();
             $this->vat=$this->price*sfConfig::get('app_vat_percentage');
             $this->total=$this->price+$this->vat;
             //$product_name=$simtype->getName();
@@ -2142,6 +2143,7 @@ $transaction->setCustomerId($this->order->getCustomerId());
        
         $cp =  new Criteria();
         $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->customer->getId());
+         $cp->addAnd(CustomerProductPeer::STATUS_ID,3);
         $this->customerProduct = CustomerProductPeer::doSelectOne($cp);
 
         $c = new Criteria();
