@@ -26,6 +26,25 @@ jQuery(function(){
             }
         }
     });
+    jQuery('#changenumber').submit(function(){
+        var newnum = jQuery('#newNumber').val();
+        var startnum = newnum.substring(0,4);
+        if(startnum == "0034"){
+            document.getElementById("error").innerHTML="Enter mobile number without 0034";
+            return false;
+        }
+        var startnum = newnum.substring(0,2);
+        if(startnum == "00"){
+            document.getElementById("error").innerHTML="Enter mobile number without 00";
+            return false;
+        }
+        var startnum = newnum.substring(0,1);
+        if(startnum == "0"){
+            document.getElementById("error").innerHTML="Enter mobile number without 0";
+            return false;
+        }
+    })
+      
 });
 </script>
 <?php use_helper('I18N') ?>
@@ -51,7 +70,8 @@ jQuery(function(){
             </li>
             <li>
                 <label><?php echo __('New Mobile Number') ?><br />0034*</label>
-                <input type="text" name="newNumber" style="margin-bottom:0px"/>
+                <input type="text" name="newNumber" id="newNumber" style="margin-bottom:0px" />
+                <span class="alertmsg" id="error"></span>
             </li>
 
                 <?php  $c = new Criteria();
