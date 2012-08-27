@@ -5,7 +5,7 @@
     });
 </script>
 <style>
-    .padding{ padding: 10px; padding-left: 30px}
+    .padding{ padding: 10px; padding-left: 30px; text-align: right; padding-right: 20px}
 </style>
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
@@ -20,7 +20,7 @@
             <table width="100%" cellspacing="0" border="0">
                 <tr>
                     <td><?php echo __("SIM type") ?>:</td>
-                    <td class="padding">
+                    <td class="padding" style="padding-right:10px">
                         <select name="sim_type" onchange="this.form.submit()" class="required newcard">
                             <option value=""><?php echo __("Select SIM type") ?></option>
                             <?php foreach($simtypes as $simtype){  ?>
@@ -32,15 +32,15 @@
              <?php if($price!=''){ ?>
                 <tr>
                     <td><?php echo __("Product price") ?>:</td>
-                    <td class="padding"><?php echo $price; ?></td>
+                    <td class="padding"><?php echo number_format($price, 2);echo sfConfig::get('app_currency_code'); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo __("IVA") ?>:</td>
-                    <td class="padding"><?php echo $vat ?></td>
+                    <td class="padding"><?php echo number_format($vat, 2);echo sfConfig::get('app_currency_code'); ?></td>
                 </tr>
                 <tr>
                     <td><?php echo __("Total amount") ?>:</td>
-                    <td class="padding"><?php echo $total; ?></td>
+                    <td class="padding"><?php echo number_format($total, 2);echo sfConfig::get('app_currency_code'); ?></td>
                 </tr>
                 <input type="hidden" name="amount" id="total" value="<?php echo $total; ?>" />
                 <input type="hidden" name="cmd" value="_xclick" />
@@ -55,7 +55,7 @@
                 <input type="hidden" name="rm" value="2" />
                 
              <?php }?>
-                <tr><td>&nbsp;</td><td class="padding"><input type="submit" class="butonsigninsmall" style="margin-left: 0px !important;" name="buy" value="<?php echo __('Pay') ?>" /></td></tr>
+                <tr><td>&nbsp;</td><td class="padding"><input type="submit" class="butonsigninsmall" style="margin-left: 0px; padding-left: 25px; padding-right: 25px" name="buy" value="<?php echo __('Pay') ?>" /></td></tr>
             </table><br />
 
             
