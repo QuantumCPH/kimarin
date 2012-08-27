@@ -3600,14 +3600,14 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $ccp->add(CustomerChangeProductPeer::STATUS, 2);
             $ChangeCustomers=CustomerChangeProductPeer::doSelect($ccp);
             
-            foreach ($ChangeCustomers as $ChangeCustomer){
+            foreach ($ChangeCustomers as $changeCustomer){
             
                 
-                $customer=CustomerPeer::retrieveByPK($ChangeCustomer->getCustomerId());
+                $customer=CustomerPeer::retrieveByPK($changeCustomer->getCustomerId());
                 $this->customer=$customer;
-                $product=ProductPeer::retrieveByPK($ChangeCustomer->getProductId());
-                $order=  CustomerOrderPeer::retrieveByPK($ChangeCustomer->getOrderId());
-                $transaction=  TransactionPeer::retrieveByPK($ChangeCustomer->getTransactionId());
+                $product=ProductPeer::retrieveByPK($changeCustomer->getProductId());
+                $order=  CustomerOrderPeer::retrieveByPK($CchangeCustomer->getOrderId());
+                $transaction=  TransactionPeer::retrieveByPK($changeCustomer->getTransactionId());
                 $Bproducts= BillingProductsPeer::retrieveByPK($product->getBillingProductId());
                 $c = new Criteria;
                 $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
@@ -3617,8 +3617,8 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                   $accountInfo['i_account']=$tilentAccount->getIAccount();
                   $accountInfo['i_product']=$Bproducts->getAIproduct();
                   if(Telienta::updateAccount($accountInfo)){
-                    $ChangeCustomer->setStatus(3); 
-                    $ChangeCustomer->Save();
+                    $changeCustomer->setStatus(3); 
+                    $changeCustomer->Save();
                     }
                      //   }  
                       
@@ -3629,8 +3629,8 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $customerProduct->Save();
 
         $cProduct = new CustomerProductPeer();
-        $cProduct->setProductId($ChangeCustomer->getProductId());
-        $cProduct->setCustomerId($ChangeCustomer->getCustomerId());
+        $cProduct->setProductId($changeCustomer->getProductId());
+        $cProduct->setCustomerId($changeCustomer->getCustomerId());
         $cProduct->setStatusId(3);
         $cProduct->save();
         
