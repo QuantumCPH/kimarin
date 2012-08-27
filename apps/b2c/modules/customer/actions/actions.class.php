@@ -2153,8 +2153,27 @@ $transaction->setCustomerId($this->order->getCustomerId());
                 $ccp->setStatus(1);
                 $ccp->save();  
         
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Product Change Request is Submited.'));
-            return $this->redirect('customer/dashboard');
+                  $order = new CustomerOrder(); 
+                $order->setCustomerId($customer->getId());
+                $order->setProductId($product_id);
+                $order->setQuantity(1);
+                $order->setExtraRefill($extra_refill);
+                $order->setOrderStatusId(sfConfig::get('app_status_new'));
+
+                $order->save();
+                $this->order = $order;
+                //create transaction
+                $transaction = new Transaction();
+                $transaction->setOrderId($order->getId());
+                $transaction->setCustomerId($customer->getId());
+                $transaction->setAmount($extra_refill);
+                $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(13);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->save();  
+                
+              
          
      }
     
