@@ -346,7 +346,7 @@ class customerActions extends autocustomerActions {
                 $transaction->setAmount(-$extra_refill);
                 //get agent name
                 $transactiondescription=  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setTransactionFrom(2);
