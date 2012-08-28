@@ -1990,10 +1990,12 @@ class customerActions extends sfActions {
     public function executeNumberProcess(sfWebRequest $request) {
 
         $lang = $this->getUser()->getCulture();
-        $return_url = "http://stagek.zerocall.com/b2c.php/customer/dashboard";
-        $cancel_url = "http://www.kimarin.es/refill-reject.html";
 
-        $order_id = $request->getParameter('item_number');
+        $return_url = $this->getTargetUrl()."customer/dashboard";
+        $cancel_url = $this->getTargetUrl()."customer/dashboard";
+        
+        $order_id = $request->getParameter('item_number'); 
+
         $order = CustomerOrderPeer::retrieveByPK($order_id);
 
         $item_amount = $request->getParameter('amount');

@@ -30,7 +30,7 @@ if ($month == '01') {
             <option value="02" <?php
                     if ($month == '02') {
                         echo 'selected="selected"';
-                    } ?>>Febuary</option>
+                    } ?>>February</option>
             <option value="03" <?php
                     if ($month == '03') {
                         echo 'selected="selected"';
@@ -39,7 +39,7 @@ if ($month == '01') {
             <option value="04" <?php
                     if ($month == '04') {
                         echo 'selected="selected"';
-                    } ?>>Aprail</option>
+                    } ?>>April</option>
             <option value="05" <?php
                     if ($month == '05') {
                         echo 'selected="selected"';
@@ -57,7 +57,7 @@ if ($month == '01') {
             <option value="08" <?php
                     if ($month == '08') {
                         echo 'selected="selected"';
-                    } ?>>Auguest</option>
+                    } ?>>August</option>
             <option value="09" <?php
                     if ($month == '09') {
                         echo 'selected="selected"';

@@ -14,7 +14,7 @@
         <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeProductProcess') ?>">
           
              
-            <p><?php echo __('Product change will be implemented in 1 day of comming month.');?></p><br />
+            <p><?php echo __('Product change will be implemented on the 1st day of next month.');?></p><br />
     	<ul class="fl col">
             <li>
                 <label><?php echo __('Product Name') ?></label>

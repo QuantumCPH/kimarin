@@ -35,12 +35,15 @@
   
 </head>
 <body>
-   <!-- <div style="vertical-align: top;float: right;">
 
-    <?php echo link_to(image_tag('/images/lang_de1.png'), 'customer/changeCulture?new=de',array('title'=>'de')); ?>
+<!--
+    <div style="vertical-align: top;float: right;">
+
     <?php echo link_to(image_tag('/images/lang_spa1.png'), 'customer/changeCulture?new=es', array('id'=>'lang_spa','title'=>'es')); ?>
-    <?php echo link_to(image_tag('/images/lang_cat1.png'), 'customer/changeCulture?new=ca', array('id'=>'lang_spa','title'=>'ca')); ?>
     <?php echo link_to(image_tag('/images/lang_eng1.png'), 'customer/changeCulture?new=en',array('title'=>'en')); ?>
+    <?php echo link_to(image_tag('/images/lang_de1.png'), 'customer/changeCulture?new=de',array('title'=>'de')); ?>    
+    <?php echo link_to(image_tag('/images/lang_cat1.png'), 'customer/changeCulture?new=ca', array('id'=>'lang_spa','title'=>'ca')); ?>
+    
 
              </div> -->
 <div id="wrap"><?php //echo $sf_user->getCulture();
