@@ -720,7 +720,7 @@
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>SMS History</source>
-                <target>SMS Historia</target>
+                <target>Registro de SMS</target>
             </trans-unit>
             <trans-unit id="177" translate="yes" reformat="yes" xml:space="default">
                 <source> There, you can use in your dealings with customer service</source>
