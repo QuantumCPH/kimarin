@@ -1745,6 +1745,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $customer->setCountryId(2);
                     $customer->setCity("");
                     $customer->setAddress("");
+                    $customer->setSimTypeId($availableUniqueId->getSimTypeId());
                     $customer->setTelecomOperatorId(1);
                     $customer->setDeviceId(1474);
                     $customer->setUniqueId($uniqueId);
@@ -1764,7 +1765,10 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $transaction = new Transaction();
                     $transaction->setAgentCompanyId($customer->getReferrerId());
                     $transaction->setAmount($order->getProduct()->getPrice());
-                    $transaction->setDescription('Registration of Retail');
+                    $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(8);
+                    $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                    $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                    $transaction->setDescription($transactiondescription->getTitle());
                     $transaction->setOrderId($order->getId());
                     $transaction->setCustomerId($customer->getId());
                     $transaction->setTransactionStatusId(3);
@@ -2012,6 +2016,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $customer->setLastName($mobileNumber);
                     $customer->setMobileNumber($mobileNumber);
                     $customer->setPassword($password);
+                    $customer->setSimTypeId($availableUniqueId->getSimTypeId());
                     $customer->setEmail("retail@example.com");
                     $customer->setCountryId(2);
                     $customer->setCity("");
@@ -2035,7 +2040,10 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $transaction = new Transaction();
                     $transaction->setAgentCompanyId($customer->getReferrerId());
                     $transaction->setAmount($order->getProduct()->getPrice());
-                    $transaction->setDescription('Registration of Retail');
+                    $transactiondescription =  TransactionDescriptionPeer::retrieveByPK(8);
+                    $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                    $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                    $transaction->setDescription($transactiondescription->getTitle());
                     $transaction->setOrderId($order->getId());
                     $transaction->setCustomerId($customer->getId());
                     $transaction->setTransactionStatusId(3);
@@ -2163,7 +2171,10 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             //new transaction
                             $transaction = new Transaction();
                             $transaction->setAmount($scratchCard->getCardPrice());
-                            $transaction->setDescription('Refill Via Pin Sr #' . $scratchCard->getCardSerial());
+                            $transactiondescription =  TransactionDescriptionPeer::retrieveByPK(8);
+                            $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                            $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                            $transaction->setDescription($transactiondescription->getTitle());
                             $transaction->setOrderId($order->getId());
                             $transaction->setCustomerId($order->getCustomerId());
                             $transaction->save();
