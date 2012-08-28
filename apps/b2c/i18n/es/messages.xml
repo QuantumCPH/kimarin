@@ -511,7 +511,7 @@
                 <target>Cantidad de recarga extra</target>
             </trans-unit>
             <trans-unit id="125" translate="yes" reformat="yes" xml:space="default">
-                <source>Mobile number 0034</source>
+                <source>Mobile number&lt;br /&gt;0034</source>
                 <target>Número de móvil&lt;br /&gt;0034</target>
             </trans-unit>
             <trans-unit id="126" translate="yes" reformat="yes" xml:space="default">
@@ -547,7 +547,7 @@
                 <target>Confirmar contraseña</target>
             </trans-unit>
                <trans-unit id="134" translate="yes" reformat="yes" xml:space="default">
-                <source>Mobile service provider</source>
+                <source>Mobile service&lt;br /&gt;provider</source>
                 <target>Compañía de&lt;br /&gt;telefonía móvil</target>
             </trans-unit>
                <trans-unit id="135" translate="yes" reformat="yes" xml:space="default">
@@ -2165,6 +2165,22 @@
             <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
                 <target>Ningún cliente está registrado con este número de teléfono móvil.</target>
+            </trans-unit>
+            <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
+                <source>English</source>
+                <target>Inglés</target>
+            </trans-unit>            
+            <trans-unit id="539" translate="yes" reformat="yes" xml:space="default">
+                <source>German</source>
+                <target>Alemán</target>
+            </trans-unit>
+            <trans-unit id="540" translate="yes" reformat="yes" xml:space="default">
+                <source>Spanish</source>
+                <target>Español</target>
+            </trans-unit>
+            <trans-unit id="541" translate="yes" reformat="yes" xml:space="default">
+                <source>Catalan</source>
+                <target>Catalán</target>
             </trans-unit>
         </body>
     </file>

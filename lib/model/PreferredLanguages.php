@@ -4,6 +4,6 @@ class PreferredLanguages extends BasePreferredLanguages
 {
    public function __toString()
     {
-      return $this->getLanguage();
+      return __($this->getLanguage());
     }
 }

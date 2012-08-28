@@ -510,7 +510,7 @@
                 <target>Zugabe Nachfüllung Menge</target>
             </trans-unit>
             <trans-unit id="125" translate="yes" reformat="yes" xml:space="default">
-                <source>Mobile number 0034</source>
+                <source>Mobile number&lt;br /&gt;0034</source>
                 <target>Mobilfunknummer&lt;br /&gt;0034</target>
             </trans-unit>
             <trans-unit id="126" translate="yes" reformat="yes" xml:space="default">
@@ -546,7 +546,7 @@
                 <target>Passwort bestätigen</target>
             </trans-unit>
             <trans-unit id="134" translate="yes" reformat="yes" xml:space="default">
-                <source>Mobile service provider</source>
+                <source>Mobile service&lt;br /&gt;provider</source>
                 <target>Mobilfunkanbieter</target>
             </trans-unit>
             <trans-unit id="135" translate="yes" reformat="yes" xml:space="default">
@@ -2204,6 +2204,22 @@
              <trans-unit id="545" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
                 <target>Kein Kunde ist mit diesem número de mòbil registriert.</target>
+            </trans-unit>
+            <trans-unit id="546" translate="yes" reformat="yes" xml:space="default">
+                <source>English</source>
+                <target>Englisch</target>
+            </trans-unit>            
+            <trans-unit id="547" translate="yes" reformat="yes" xml:space="default">
+                <source>German</source>
+                <target>Deutsch</target>
+            </trans-unit>
+            <trans-unit id="547" translate="yes" reformat="yes" xml:space="default">
+                <source>Spanish</source>
+                <target>Spanisch</target>
+            </trans-unit>
+            <trans-unit id="548" translate="yes" reformat="yes" xml:space="default">
+                <source>Catalan</source>
+                <target>Katalanisch</target>
             </trans-unit>
         </body>
     </file>

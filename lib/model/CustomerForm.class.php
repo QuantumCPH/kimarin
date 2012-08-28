@@ -642,7 +642,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 	$this->widgetSchema->setLabels(
 		array(
 			'po_box_number'=>'Postcode',
-			'telecom_operator_id'=>'Mobile service provider',
+			'telecom_operator_id'=>'Mobile service<br />provider',
 			'manufacturer'=>'Mobile brand',
                         'to_date'=>'to date',
                         'from_date'=>'from date',
@@ -657,7 +657,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
                         'province_id'=>'Province',
                         'sim_type_id'=>'SIM type',
                         'nationality_id'=>'Country of citizenship',
-                        'mobile_number'=>'Mobile number 0034',
+                        'mobile_number'=>'Mobile number<br />0034',
                         'city'=>'Town/city',
                         'email'=>'E-mail'
 		)
