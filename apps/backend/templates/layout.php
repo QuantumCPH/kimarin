@@ -149,7 +149,7 @@
                        echo link_to(__('Refill Customers'), 'customer/selectRefillCustomer');
                     }
                     ?>
-                                           <?php
+                   <?php
                     if($actionName=='completePaymenthistory' && $modulName=="customer"){
                        echo link_to(__('Payment History'), 'customer/completePaymenthistory', array('class'=>'subSelect'));
                     }else{
