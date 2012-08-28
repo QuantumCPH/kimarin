@@ -2119,7 +2119,7 @@
             </trans-unit>
             <trans-unit id="525" translate="yes" reformat="yes" xml:space="default">
                 <source>Update</source>
-                <target>Aktualisierung</target>
+                <target>Aktualisieren</target>
             </trans-unit>
             <trans-unit id="526" translate="yes" reformat="yes" xml:space="default">
                 <source>Messages from 143 to 302 characters will be considered as 2 SMS</source>
@@ -2182,8 +2182,8 @@
                 <target>Empfänger des Bonus nach Einladung eines Freundes</target>
             </trans-unit>
             <trans-unit id="541" translate="yes" reformat="yes" xml:space="default">
-                <source>Sorry! You Cant do payment as your balance will excede from 250%1%</source>
-                <target>Es tut uns leid, aber die Zahlung kann nicht akzeptiert werden, da Ihr Guthaben 250.00%1% übersteigen würde</target>
+                <source>Your payment has not been accepted as your account balance will exceed 250%1%.</source>
+                <target>Es tut uns leid, aber die Zahlung kann nicht akzeptiert werden, da Ihr Guthaben 250.00%1% übersteigen würde.</target>
             </trans-unit>
             <trans-unit id="541" translate="yes" reformat="yes" xml:space="default">
                 <source>Sorry! You Cant do payment as your balance will excede from 250%1%</source>

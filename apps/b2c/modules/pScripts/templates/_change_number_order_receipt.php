@@ -119,9 +119,11 @@ use_helper('Number');
     <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')));?> </td>
   </tr>
 </table>
-<p>
-	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
+<p style="font-weight: bold;">
+	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
+        <br><?php echo __('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
+        <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
 
 <p><?php echo __('Cheers') ?></p>

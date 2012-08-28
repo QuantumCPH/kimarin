@@ -2116,8 +2116,8 @@
                 <target>MÉS %1%%2%</target>
             </trans-unit>
             <trans-unit id="526" translate="yes" reformat="yes" xml:space="default">
-                <source>Sorry! You Cant do payment as your balance will excede from 250%1%</source>
-                <target>Disculpeu.  No podeu efectuar el pagament ja que el vostre saldo superarà els 250%1%</target>
+                <source>Your payment has not been accepted as your account balance will exceed 250%1%.</source>
+                <target>Disculpeu.  No podeu efectuar el pagament ja que el vostre saldo superarà els 250%1%.</target>
             </trans-unit>
             <trans-unit id="527" translate="yes" reformat="yes" xml:space="default">
                 <source>Update</source>
