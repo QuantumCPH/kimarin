@@ -33,7 +33,7 @@
              
 	          <li class="fr buttonplacement">
                    
-	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 12px !important;" type="submit"  value="<?php echo __('Next')?>" />
+	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 23px !important;" type="submit"  value="<?php echo __('Next')?>" />
 	          </li>
 
 	</ul>

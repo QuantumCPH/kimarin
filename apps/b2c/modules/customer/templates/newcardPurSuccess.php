@@ -55,7 +55,7 @@
                 <input type="hidden" name="rm" value="2" />
                 
              <?php }?>
-                <tr><td>&nbsp;</td><td class="padding"><input type="submit" class="butonsigninsmall" style="margin-left: 0px; padding-left: 25px; padding-right: 25px" name="buy" value="<?php echo __('Pay') ?>" /></td></tr>
+                <tr><td>&nbsp;</td><td><input type="submit" class="butonsigninsmall" style="margin-left:28px !important;padding-left: 25px; padding-right: 25px" name="buy" value="<?php echo __('Pay') ?>" /></td></tr>
             </table><br />
 
             
