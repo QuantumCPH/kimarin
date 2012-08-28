@@ -621,8 +621,8 @@
                 <target>La manera más conveniente de llenar el bote es llamada Para activar automáticamente &lt;br /&gt; llenado (abajo). entonces no es necesario que te preocupes por el bote se queda sin. &lt;br /&gt; BEspecialmente importante en esos viajes en el extranjero cuando puede ser difícil de llenar en cualquier otra forma.</target>
             </trans-unit>
               <trans-unit id="153" translate="yes" reformat="yes" xml:space="default">
-                <source>Manual refill:</source>
-                <target>Recarrega manual:</target>
+                <source>Manual refill.</source>
+                <target>Recarrega manual.</target>
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
                 <source>Select amount to be refilled:</source>
@@ -2160,8 +2160,8 @@
                 <target>Número de client</target>
             </trans-unit>
             <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
-                <source>Your mobile number.</source>
-                <target>El seu número de telèfon mòbil.</target>
+                <source>Your mobile number:</source>
+                <target>El seu número de telèfon mòbil:</target>
             </trans-unit>
             <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to your e-mail address shortly.</source>
@@ -2186,6 +2186,10 @@
             <trans-unit id="543" translate="yes" reformat="yes" xml:space="default">
                 <source>Catalan</source>
                 <target>Català</target>
+            </trans-unit>
+            <trans-unit id="544" translate="yes" reformat="yes" xml:space="default">
+                <source>Nationality</source>
+                <target>Nacionalitat</target>
             </trans-unit>
         </body>
     </file>
