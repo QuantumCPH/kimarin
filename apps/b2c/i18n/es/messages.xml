@@ -2091,7 +2091,7 @@
                 <target>Seleccione el importe que desea recargar:</target>
             </trans-unit>
             <trans-unit id="519" translate="yes" reformat="yes" xml:space="default">
-                <source>Sorry! You Cant do payment as your balance will excede from 250%1%</source>
+                <source>Your payment has not been accepted as your account balance will exceed 250%1%.</source>
                 <target>Disculpe. No puede efectuar el pago debido a que su saldo superará los 250%1%</target>
             </trans-unit>
             <trans-unit id="520" translate="yes" reformat="yes" xml:space="default">

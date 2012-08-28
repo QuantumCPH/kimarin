@@ -157,9 +157,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
 	<?php   
                 $bonus ="";
                 foreach($refillProducts as $refill){ 
-                    if($refill->getBonus()){
-                        $bonus = __('PLUS %1%%2%',array("%1%"=>number_format($refill->getBonus(),2),"%2%"=>sfConfig::get('app_currency_code')));                        
-                    }
+                    if($refill->getBonus()) $bonus = __('PLUS %1%%2%',array("%1%"=>number_format($refill->getBonus(),2),"%2%"=>sfConfig::get('app_currency_code')));
         ?>
             <li><?php   echo number_format($refill->getRegistrationFee(),2).sfConfig::get('app_currency_code'); echo __(" (airtime value:");echo __(" %1%%2% %3%)",array("%1%"=>number_format($refill->getRegistrationFee(),2),"%2%"=>sfConfig::get('app_currency_code'),"%3%"=>$bonus));
                     //"&nbsp;Bonus:".$refill->getBonus()."&nbsp;Total Including Vat:".(sfConfig::get('app_vat_percentage')+1)*$refill->getRegistrationFee();?></li>
