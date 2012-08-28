@@ -81,9 +81,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
     else
     {
 	if($transaction->getDescription()=="Refill"){
-          echo "Refill";
+          echo __("Refill");
         }else{
-          echo $transaction->getDescription();
+          echo __($transaction->getDescription());
         }
     }
     ?>)</th>
