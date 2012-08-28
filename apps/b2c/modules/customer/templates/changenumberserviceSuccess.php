@@ -60,17 +60,17 @@ jQuery(function(){
     <?php include_partial('navigation', array('selected' => 'dashboard', 'customer_id' => $customer->getId())) ?><br />
     
     <div class="split-form">
-        <p><?php echo __('You can change your number maximum 2 times in a month.');?></p>
+        <p><?php echo __('You can change your number maximum two times in a month.');?></p>
         <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeNumber') ?>" style="padding-left: 0px">
      <h1><?php //echo __('Change Number');?></h1>
     	<ul class="fl col">
             <li>
-                <label><?php echo __('Old Mobile Number') ?></label>
+                <label><?php echo __('Old mobile number') ?></label>
                 <input type="text" name="existingNumber" style="margin-bottom:0px" value="<?php echo $customer->getMobileNumber();?>" readonly="readonly" />
 
             </li>
             <li>
-                <label><?php echo __('New Mobile Number') ?><br />0034*</label>
+                <label><?php echo __('New mobile number') ?><br />0034*</label>
                 <input type="text" name="newNumber" id="newNumber" style="margin-bottom:0px" />
                 <span class="alertmsg" id="error"></span>
             </li>

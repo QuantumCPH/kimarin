@@ -184,7 +184,7 @@ echo " ";   echo substr($Telintambs, 15,2);
 <?php } ?>
   <?php   if($ccpCount>0){ ?>       
          
-     <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('You already Subscribed for Change Product it affect from 1st of next month'); ?>  </span></div>
+     <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('You have already ordered a change of product.'); ?>  </span></div>
          <?php } ?>
          
 <?php   if($pus==5){?>
@@ -269,7 +269,7 @@ echo " ";   echo substr($Telintambs, 15,2);
         
         
         <div class="dashboardproduct">
-           <h4 class="web_sms"><?php echo __('New Sim Card') ?></h4>
+           <h4 class="web_sms"><?php echo __('New SIM-card') ?></h4>
             <a title="<?php echo __('New Sim Card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim Card') ?></a>
         </div>
         <br />

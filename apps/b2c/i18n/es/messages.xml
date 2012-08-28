@@ -623,8 +623,8 @@
                 <target>La manera más conveniente de llenar el bote es llamada Para activar automáticamente &lt;br /&gt; llenado (abajo). entonces no es necesario que te preocupes por el bote se queda sin. &lt;br /&gt; BEspecialmente importante en esos viajes en el extranjero cuando puede ser difícil de llenar en cualquier otra forma.</target>
             </trans-unit>
               <trans-unit id="153" translate="yes" reformat="yes" xml:space="default">
-                <source>Manual refill:</source>
-                <target>Recarga manual:</target>
+                <source>Manual refill.</source>
+                <target>Recarga manual.</target>
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
                 <source>Select amount to be refilled:</source>
@@ -2091,7 +2091,7 @@
                 <target>Seleccione el importe que desea recargar:</target>
             </trans-unit>
             <trans-unit id="519" translate="yes" reformat="yes" xml:space="default">
-                <source>Sorry! You Cant do payment as your balance will excede from 250%1%</source>
+                <source>Your payment has not been accepted as your account balance will exceed 250%1%.</source>
                 <target>Disculpe. No puede efectuar el pago debido a que su saldo superará los 250%1%</target>
             </trans-unit>
             <trans-unit id="520" translate="yes" reformat="yes" xml:space="default">
@@ -2155,8 +2155,8 @@
                 <target>Número de cliente</target>
             </trans-unit>
             <trans-unit id="535" translate="yes" reformat="yes" xml:space="default">
-                <source>Your mobile number.</source>
-                <target>Su número de teléfono móvil.</target>
+                <source>Your mobile number:</source>
+                <target>Su número de teléfono móvil:</target>
             </trans-unit>
              <trans-unit id="536" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to your e-mail address shortly.</source>
@@ -2181,6 +2181,10 @@
             <trans-unit id="541" translate="yes" reformat="yes" xml:space="default">
                 <source>Catalan</source>
                 <target>Catalán</target>
+            </trans-unit>
+            <trans-unit id="542" translate="yes" reformat="yes" xml:space="default">
+                <source>Nationality</source>
+                <target>Nacionalidad</target>
             </trans-unit>
         </body>
     </file>

@@ -1932,7 +1932,7 @@ class customerActions extends sfActions {
         $this->disable = false;
         if ($change_number_count >= 2) {
             $this->disable = true;
-            $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__("You can't change your number more than 2 times."));
+            $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__("You can't change your number more than two times in a month."));
         }
     }
 
@@ -2233,7 +2233,7 @@ class customerActions extends sfActions {
 
         $querystring = '';
 
-        $item_name = "Chnage Product";
+        $item_name = "Change Product";
 
 
 

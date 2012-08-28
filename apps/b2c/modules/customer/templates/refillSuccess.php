@@ -150,7 +150,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
   <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill" target="_parent">
      <div style="width:510px;">
      <div  style="width:510px;float:left;"> 
-          <div class="refillhead"><?php echo __('Manual refill:') ?></div>
+          <div class="refillhead"><?php echo __('Manual refill.') ?></div>
           <p> <?php echo __('You can refill your %1% Account with the following amounts:',array("%1%"=>sfConfig::get('app_site_title')))?></p>
          <ul class="welcome">
          	<!-- customer product -->
