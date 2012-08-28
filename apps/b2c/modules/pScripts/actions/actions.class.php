@@ -2015,12 +2015,14 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $customer->setFirstName($mobileNumber);
                     $customer->setLastName($mobileNumber);
                     $customer->setMobileNumber($mobileNumber);
+                    $customer->setNiePassportNumber($mobileNumber);
+
                     $customer->setPassword($password);
                     $customer->setSimTypeId($availableUniqueId->getSimTypeId());
                     $customer->setEmail("retail@example.com");
-                    $customer->setCountryId(2);
+                    $customer->setCountryId(1);
                     $customer->setCity("");
-                    $customer->setAddress("");
+                    $customer->setAddress($mobileNumber);
                     $customer->setTelecomOperatorId(1);
                     $customer->setDeviceId(1474);
                     $customer->setUniqueId($uniqueId);
