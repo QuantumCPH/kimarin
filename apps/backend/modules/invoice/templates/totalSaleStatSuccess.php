@@ -24,14 +24,15 @@
 <div id="sf_admin_container"> <form method="get" action="">   Filter 
         <select id="customer_date_of_birth_month" name="month" class="shrinked_select_box">
  
+
 <option value="01" <?php if($month=='01'){ echo 'selected="selected"';  }   ?>>January</option>
-<option value="02" <?php if($month=='02'){ echo 'selected="selected"';  }   ?>>Febuary</option>
+<option value="02" <?php if($month=='02'){ echo 'selected="selected"';  }   ?>>February</option>
 <option value="03" <?php if($month=='03'){ echo 'selected="selected"';  }   ?>>March</option>
-<option value="04" <?php if($month=='04'){ echo 'selected="selected"';  }   ?>>Aprail</option>
+<option value="04" <?php if($month=='04'){ echo 'selected="selected"';  }   ?>>April</option>
 <option value="05" <?php if($month=='05'){ echo 'selected="selected"';  }   ?>>May</option>
 <option value="06" <?php if($month=='06'){ echo 'selected="selected"';  }   ?>>June</option>
 <option value="07" <?php if($month=='07'){ echo 'selected="selected"';  }   ?>>July</option>
-<option value="08" <?php if($month=='08'){ echo 'selected="selected"';  }   ?>>Auguest</option>
+<option value="08" <?php if($month=='08'){ echo 'selected="selected"';  }   ?>>August</option>
 <option value="09" <?php if($month=='09'){ echo 'selected="selected"';  }   ?>>September</option>
 <option value="10" <?php if($month=='10'){ echo 'selected="selected"';  }   ?>>October</option>
 <option value="11" <?php if($month=='11'){ echo 'selected="selected"';  }   ?>>November</option>
