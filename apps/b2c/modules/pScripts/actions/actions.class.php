@@ -3841,6 +3841,25 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         echo 'Yes';
         return sfView::NONE;
     }
+    private function hextostr($hex) {
+        $str = '';
+        for ($i = 0; $i < strlen($hex) - 1; $i+=2) {
+            $str .= chr(hexdec($hex[$i] . $hex[$i + 1]));
+        }
+        return $str;
+    }
+
+    public function executeGenrateTestString(sfWebRequest $request){
+
+        if($request->isMethod('post')){
+            if($request->getParameter("hex")=="on"){
+                echo $this->hexToStr($request->getParameter("inputstr"));
+            }else{
+                echo $this->strToHex($request->getParameter("inputstr"));
+            }
+        }
+
+    }
 
  
 }
