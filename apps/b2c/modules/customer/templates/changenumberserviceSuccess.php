@@ -1,3 +1,6 @@
+<?php use_helper('I18N') ?>
+<?php use_helper('Number') ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change Number')) ) ?>
 <script type="text/javascript">
 jQuery(function(){
     jQuery('#changenumber').validate({
@@ -15,14 +18,14 @@ jQuery(function(){
         },
         messages: {
             existingNumber:{
-                required: "Please Enter Old Mobile Number",
-                minlength: "Atleast 8 digits are required",
-                digits: "Please Enter only digits"
+                required: "<?php echo __('Please Enter Old Mobile Number')?>",
+                minlength: "<?php echo __('Atleast 8 digits are required')?>",
+                digits: "<?php echo __('Please Enter only digits')?>"
             },
             newNumber:{
-                required: "Please Enter New Mobile Number",
-                minlength: "Atleast 8 digits are required",
-                digits: "Please Enter only digits"
+                required: "<?php echo __('Please Enter New Mobile Number')?>",
+                minlength: "<?php echo __('Atleast 8 digits are required')?>",
+                digits: "<?php echo __('Please Enter only digits')?>"
             }
         }
     });
@@ -30,26 +33,24 @@ jQuery(function(){
         var newnum = jQuery('#newNumber').val();
         var startnum = newnum.substring(0,4);
         if(startnum == "0034"){
-            document.getElementById("error").innerHTML="Enter mobile number without 0034";
+            document.getElementById("error").innerHTML="<?php echo __('Enter mobile number without 0034')?>";
             return false;
         }
         var startnum = newnum.substring(0,2);
         if(startnum == "00"){
-            document.getElementById("error").innerHTML="Enter mobile number without 00";
+            document.getElementById("error").innerHTML="<?php echo __('Enter mobile number without 00')?>";
             return false;
         }
         var startnum = newnum.substring(0,1);
         if(startnum == "0"){
-            document.getElementById("error").innerHTML="Enter mobile number without 0";
+            document.getElementById("error").innerHTML="<?php echo __('Enter mobile number without 0')?>";
             return false;
         }
     })
       
 });
 </script>
-<?php use_helper('I18N') ?>
-<?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change Number')) ) ?>
+
 <?php if ($sf_user->hasFlash('change_number_message')): ?>
         <div class="alert_bar">
          <?php echo __($sf_user->getFlash('change_number_message')) ?>

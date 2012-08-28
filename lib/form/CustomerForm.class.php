@@ -231,7 +231,7 @@ class CustomerForm extends BaseCustomerForm
 	$this->widgetSchema->setLabels(
 		array(
 			'po_box_number'=>'Postcode',
-			'telecom_operator_id'=>'Mobile service provider',
+			'telecom_operator_id'=>'Mobile service<br />provider',
 			'manufacturer'=>'Mobile brand',
                         'to_date'=>'To date',
                         'from_date'=>'From date',
@@ -246,7 +246,7 @@ class CustomerForm extends BaseCustomerForm
                         'province_id'=>'Province',
                         'sim_type_id'=>'SIM type',
                         'nationality_id'=>'Country of citizenship',
-                        'mobile_number'=>'Mobile number 0034',
+                        'mobile_number'=>'Mobile number<br />0034',
                         'city'=>'Town/city',
                         'email'=>'E-mail'
 		)

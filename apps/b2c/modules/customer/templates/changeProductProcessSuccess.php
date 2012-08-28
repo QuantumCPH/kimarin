@@ -1,6 +1,6 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change Number') ) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change Product') ) ) ?>
 <br />
 <div class="left-col">
 
@@ -16,8 +16,7 @@
         <li>
             <label><?php echo __("Product Name");?>:</label>
             <label><?php echo  $product->getName();  ?></label><br />
-        </li>
-        
+        </li>        
         <li>
             <label><?php echo __("Amount");?>:</label>
             <label><?php echo  number_format($prodPrice = $product->getRegistrationFee(),2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
