@@ -2156,7 +2156,7 @@
             </trans-unit>
             <trans-unit id="535" translate="yes" reformat="yes" xml:space="default">
                 <source>Your mobile number:</source>
-                <target>Su número de teléfono móvil:</target>
+                <target>Número de móvil:</target>
             </trans-unit>
              <trans-unit id="536" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to your e-mail address shortly.</source>
