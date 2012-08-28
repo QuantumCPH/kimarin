@@ -938,8 +938,8 @@
                 <target>Bonificación obtenida</target>
             </trans-unit>
             <trans-unit id="230" translate="yes" reformat="yes" xml:space="default">
-                <source>%1% has added 10.00 %2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.</source>
-                <target>%1% ha añadido a su saldo 10,00 %2% de tiempo de uso por invitar a un amigo a darse de alta como cliente de %1%. Gracias.</target>
+                <source>%1% has added 10.00%2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.</source>
+                <target>%1% ha añadido a su saldo 10,00%2% de tiempo de uso por invitar a un amigo a darse de alta como cliente de %1%. Gracias.</target>
             </trans-unit>
             <trans-unit id="231" translate="yes" reformat="yes" xml:space="default">
                 <source>Receiver of bonus for inviting a friend</source>
@@ -1130,8 +1130,8 @@
                 <target>N.I.E/Número de pasaporte ya existentes.</target>
             </trans-unit>
             <trans-unit id="279" translate="yes" reformat="yes" xml:space="default">
-                <source>This N.I.E. or passport number is already registered to a 1 customer.</source>
-                <target>Este N.I.E. o número de pasaporte ya está registrado a un cliente de 1.</target>
+                <source>This N.I.E. or passport number is already registered to a %1% customer.</source>
+                <target>Este N.I.E. o número de pasaporte ya está registrado a un cliente de %1%.</target>
             </trans-unit>
             <trans-unit id="280" translate="yes" reformat="yes" xml:space="default">
                 <source>Country of citizenship</source>
