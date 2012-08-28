@@ -48,7 +48,7 @@
             </li>
             
             <li>
-              <label for="customer_sim_type"><?php echo __('Sim type');  ?></label><input type="text" value="<?php echo $customer->getSimType();?>" readonly="readonly" />
+              <label for="customer_sim_type"><?php echo __('SIM type');  ?></label><input type="text" value="<?php echo $customer->getSimType();?>" readonly="readonly" />
             </li>
             <?php
             $error_preferred_language_id = false;
