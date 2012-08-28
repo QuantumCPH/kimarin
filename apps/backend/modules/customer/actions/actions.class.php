@@ -346,14 +346,14 @@ class customerActions extends autocustomerActions {
                 $transaction->setAmount(-$extra_refill);
                 //get agent name
                 $transactiondescription=  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setTransactionFrom(2);
 
                 $transaction->save();
 
-                Telienta::charge($customer, $order->getExtraRefill(), $transactiondescription->getTitle());
+                Telienta::charge($customer, $extra_refill_wovat, $transactiondescription->getTitle());
 
 
                 //set status
