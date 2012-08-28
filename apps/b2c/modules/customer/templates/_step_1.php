@@ -25,8 +25,7 @@
 			 <?php endif; ?>
                 
              <div class='inline-error'><?php echo $error_mobile_number?$form['mobile_number']->renderError():'&nbsp;'?>
-                 </div>
-                <label style="float:right;width:85px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:85px; <?php else: ?>margin-right: 1px;<?php endif; ?>">ex. 0701234567</label>
+                 </div>                
             </li>
             <!-- end mobile_number -->  
             <?php 
@@ -199,7 +198,7 @@
           </ul>
 
       </div>
-        <div class="fr col"><span>&nbsp;</span>
+        <div class="fr col">
         <ul>
            <?php
             $error_province_id = false;;
