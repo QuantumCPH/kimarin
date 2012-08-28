@@ -2233,7 +2233,7 @@ class customerActions extends sfActions {
 
         $querystring = '';
 
-        $item_name = "Chnage Product";
+        $item_name = "Change Product";
 
 
 
