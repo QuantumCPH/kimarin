@@ -137,9 +137,9 @@
                      }?>
                        <?php
                     if($actionName=='selectChargeCustomer' && $modulName=="customer"){
-                       echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer', array('class'=>'subSelect'));
+                     //  echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer', array('class'=>'subSelect'));
                     }else{
-                       echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer');
+                     //  echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer');
                     }
                     ?>
                        <?php
