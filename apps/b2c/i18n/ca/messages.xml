@@ -820,7 +820,7 @@
                 <target>S'ha canviat la vostra contrasenya.  Utilitzeu la informació següent per accedir al MEU COMPTE.</target>
             </trans-unit>
             <trans-unit id="201" translate="yes" reformat="yes" xml:space="default">
-                <source>Mobile Number: %s</source>
+                <source>Mobile number: %s</source>
                 <target>Número de mòbil: %s</target>
             </trans-unit>
             <trans-unit id="202" translate="yes" reformat="yes" xml:space="default">
@@ -2024,7 +2024,7 @@
                 <target>Envieu la invitació.</target>
             </trans-unit>
             <trans-unit id="503" translate="yes" reformat="yes" xml:space="default">
-                <source>Block Account</source>
+                <source>Block account</source>
                 <target>Bloquejar el compte</target>
             </trans-unit>
             <trans-unit id="504" translate="yes" reformat="yes" xml:space="default">
@@ -2190,6 +2190,78 @@
             <trans-unit id="544" translate="yes" reformat="yes" xml:space="default">
                 <source>Nationality</source>
                 <target>Nacionalitat</target>
+            </trans-unit>
+            <trans-unit id="545" translate="yes" reformat="yes" xml:space="default">
+                <source>Change number</source>
+                <target>Modificar el número</target>
+            </trans-unit>
+            <trans-unit id="545" translate="yes" reformat="yes" xml:space="default">
+                <source>Change product</source>
+                <target>Modificar el producte</target>
+            </trans-unit>
+            <trans-unit id="546" translate="yes" reformat="yes" xml:space="default">
+                <source>Services</source>
+                <target>Serveis</target>
+            </trans-unit>
+            <trans-unit id="547" translate="yes" reformat="yes" xml:space="default">
+                <source>New Sim-card</source>
+                <target>Targeta SIM nova</target>
+            </trans-unit>
+            <trans-unit id="548" translate="yes" reformat="yes" xml:space="default">
+                <source>Purchase new SIM-card</source>
+                <target>Comprar targeta SIM nova</target>
+            </trans-unit>
+            <trans-unit id="549" translate="yes" reformat="yes" xml:space="default">
+                <source>Select SIM type</source>
+                <target>Selecciona el tipus de SIM</target>
+            </trans-unit>
+            <trans-unit id="550" translate="yes" reformat="yes" xml:space="default">
+                <source>New SIM-card confirmation</source>
+                <target>Confirmació de la nova targeta SIM</target>
+            </trans-unit>
+            <trans-unit id="551" translate="yes" reformat="yes" xml:space="default">
+                <source>Old mobile number</source>
+                <target>Número de mòbil antic</target>
+            </trans-unit>
+            <trans-unit id="552" translate="yes" reformat="yes" xml:space="default">
+                <source>New mobile number</source>
+                <target>Número de mòbil nou</target>
+            </trans-unit>
+            <trans-unit id="553" translate="yes" reformat="yes" xml:space="default">
+                <source>Customer name</source>
+                <target>Nom del client</target>
+            </trans-unit>
+            <trans-unit id="554" translate="yes" reformat="yes" xml:space="default">
+                <source>Product Detail</source>
+                <target>Detalls del producte</target>
+            </trans-unit>
+            <trans-unit id="555" translate="yes" reformat="yes" xml:space="default">
+                <source>You can change your number maximum two times in a month.</source>
+                <target>Pots modificar el teu número un màxim de dues vegades al mes.</target>
+            </trans-unit>
+            <trans-unit id="556" translate="yes" reformat="yes" xml:space="default">
+                <source>You can't change your number more than two times in a month.</source>
+                <target>No pots modificar el teu número més de dues vegades al mes.</target>
+            </trans-unit>
+            <trans-unit id="557" translate="yes" reformat="yes" xml:space="default">
+                <source>Product Name</source>
+                <target>Nom del producte</target>
+            </trans-unit>
+            <trans-unit id="558" translate="yes" reformat="yes" xml:space="default">
+                <source>Submit</source>
+                <target>Enviar</target>
+            </trans-unit>
+            <trans-unit id="559" translate="yes" reformat="yes" xml:space="default">
+                <source>Your product change will be valid from the first day of the comming month.</source>
+                <target>La modificació del producte serà vàlida a partir del primer dia del proper mes.</target>
+            </trans-unit>
+            <trans-unit id="560" translate="yes" reformat="yes" xml:space="default">
+                <source>Your product change request is submitted.</source>
+                <target>S'ha enviat la teva petició de modificació del producte.</target>
+            </trans-unit>
+            <trans-unit id="561" translate="yes" reformat="yes" xml:space="default">
+                <source>You have already ordered a change of product.</source>
+                <target>Ja hi ha una petició de modificació del producte en curs.</target>
             </trans-unit>
         </body>
     </file>
