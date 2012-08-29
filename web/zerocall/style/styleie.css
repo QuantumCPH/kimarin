@@ -850,4 +850,8 @@ span.alertmsg{
     color:#CD481D;
     font-style: italic;
 }
-
+ul.changenumber{
+    width:436px !important;    
+}
+ul.changenumber li{width:383px !important;}
+ul.changenumber li label{width: 151px !important;}
