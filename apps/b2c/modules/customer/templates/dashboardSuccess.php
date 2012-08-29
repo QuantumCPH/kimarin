@@ -171,7 +171,7 @@ echo " ";   echo substr($Telintambs, 15,2);
          }  ?></span></div>
          
          
-            <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Customer Product') ?>:</span><span>
+            <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Customer product') ?>:</span><span>
  <?php  
  
  
@@ -253,24 +253,22 @@ echo " ";   echo substr($Telintambs, 15,2);
 	</table> 
         <h2><?php echo __("Services");?></h2><br />
         <div class="dashboardproduct"> 
-            <h4 class="web_sms"><?php echo __('Block Account') ?></h4>
-            <a title="<?php echo __('Block Account')?>" class="sidebar_button" rel="bookmark" href="#" onclick="confirmBlock();"><?php echo __('Block Account')?></a>
+            <h4 class="web_sms"><?php echo __('Block account') ?></h4>
+            <a title="<?php echo __('Block account')?>" class="sidebar_button" rel="bookmark" href="#" onclick="confirmBlock();"><?php echo __('Block account')?></a>
         </div>
         <div class="dashboardproduct">
-           <h4 class="web_sms"><?php echo __('Change Number') ?></h4>
-            <a title="<?php echo __('Change Number')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changenumberservice', true) ?>"><?php echo __('Change Number')?></a>
+           <h4 class="web_sms"><?php echo __('Change number') ?></h4>
+            <a title="<?php echo __('Change number')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changenumberservice', true) ?>"><?php echo __('Change number')?></a>
         </div>
           
         <div class="dashboardproduct">
-            <h4 class="web_sms"><?php echo __('Change Product') ?></h4>
-            <a title="<?php echo __('Change Product')?>" class="sidebar_button" rel="bookmark" href="<?php  if($ccpCount>0){  echo "#"; }else{ echo url_for('customer/changeProductSubscription', true);  } ?>"><?php echo __('Change Product')?></a>
+            <h4 class="web_sms"><?php echo __('Change product') ?></h4>
+            <a title="<?php echo __('Change product')?>" class="sidebar_button" rel="bookmark" href="<?php  if($ccpCount>0){  echo "#"; }else{ echo url_for('customer/changeProductSubscription', true);  } ?>"><?php echo __('Change product')?></a>
         </div>
-     
-        
         
         <div class="dashboardproduct">
            <h4 class="web_sms"><?php echo __('New SIM-card') ?></h4>
-            <a title="<?php echo __('New Sim Card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim Card') ?></a>
+            <a title="<?php echo __('New SIM-card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim-card') ?></a>
         </div>
         <br />
     </div>

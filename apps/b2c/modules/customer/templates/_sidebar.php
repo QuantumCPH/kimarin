@@ -30,7 +30,7 @@
 		<div class="box box-b">
                     <h4 class="tellAfrnd"><?php echo __('Invite a friend') ?></h4><p>
 <?php echo __('Save up to 80 % on international calls from your Spanish mobile telephone.'); ?></p>
-                    <a title="<?php echo __('Tell a friend') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/tellAFriend', true) ?>"><?php echo __('Send Invitation') ?></a>
+                    <a title="<?php echo __('Tell a friend') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/tellAFriend', true) ?>"><?php echo __('Send invitation') ?></a>
 		</div>
 	<br />
 	</div>

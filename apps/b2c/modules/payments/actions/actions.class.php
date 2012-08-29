@@ -269,7 +269,7 @@ class paymentsActions extends sfActions {
             $vat = 0;
         }
         else{
-           // $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+            $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
         }
         //if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
         if(strstr($transaction->getDescription(),"Refill")){

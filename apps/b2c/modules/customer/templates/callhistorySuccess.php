@@ -73,7 +73,7 @@
                         <?php } else {
 
  ?>                 
-                      <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription Charges"); ?> </h2></div><br />
+                      <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription charges"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
                             <td width="26%" class="title"><?php echo __('Date and time') ?></td>

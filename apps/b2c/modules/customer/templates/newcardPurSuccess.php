@@ -9,7 +9,7 @@
 </style>
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Purchase New Sim Card') ) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('New SIM-card') ) ) ?>
 
 <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'', 'customer_id'=>$customer->getId())) ?>
