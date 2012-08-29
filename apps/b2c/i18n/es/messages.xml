@@ -1158,7 +1158,7 @@
                 <target>IVA</target>
             </trans-unit>
             <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
-                <source>Charge by Customer Support</source>
+                <source>Charge by customer support</source>
                 <target>Cargo por el servicio de atención al cliente de</target>
             </trans-unit>
             <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
@@ -1978,7 +1978,7 @@
                 <target>Solicitar otros productos.</target>
             </trans-unit>    
             <trans-unit id="491" translate="yes" reformat="yes" xml:space="default">
-                <source>Refill by Customer Support</source>
+                <source>Refill by customer support</source>
                 <target>Recarga por el servicio de atención al cliente de</target>
             </trans-unit>
             <trans-unit id="492" translate="yes" reformat="yes" xml:space="default">
