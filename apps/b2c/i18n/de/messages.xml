@@ -2134,7 +2134,7 @@
                 <target>Ihre Anrufliste wird 5-10 Minuten nach Beendigung Ihres letzten Anrufs aktualisiert.</target>
             </trans-unit>
             <trans-unit id="529" translate="yes" reformat="yes" xml:space="default">
-                <source>Subscription Charges</source>
+                <source>Subscription charges</source>
                 <target>Gebühren des Abbonements</target>
             </trans-unit>
             <trans-unit id="530" translate="yes" reformat="yes" xml:space="default">

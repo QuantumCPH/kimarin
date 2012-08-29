@@ -2123,7 +2123,7 @@
                 <target>¡Los dígitos deben tener formato numérico!</target>
             </trans-unit>
             <trans-unit id="527" translate="yes" reformat="yes" xml:space="default">
-                <source>Subscription Charges</source>
+                <source>Subscription charges</source>
                 <target>Cuota de abono</target>
             </trans-unit>
             <trans-unit id="528" translate="yes" reformat="yes" xml:space="default">
