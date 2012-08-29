@@ -180,8 +180,10 @@ class paymentsActions extends sfActions {
         $order->setIsFirstOrder(1);
         $order->save();
         $transaction->setAmount($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage')));
-        //TODO: $transaction->setAmount($order->getProduct()->getPrice());
-        $transaction->setDescription('Registration');
+          $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(8);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
         //$transaction->setTransactionStatusId() // default value 1
@@ -261,12 +263,14 @@ class paymentsActions extends sfActions {
         $customer_order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
        // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
-        if ($customer_order) {
-            $vat = $customer_order->getIsFirstOrder() ?
-                    ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage') : 0;
+        if ($customerorder) {
+            $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage');
+        }elseif($transaction->getTransactionTypeId()==2){
+            $vat = 0;
         }
-        else
-            die('Error retreiving');
+        else{
+           // $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+        }
         //if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
         if(strstr($transaction->getDescription(),"Refill")){
             $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));

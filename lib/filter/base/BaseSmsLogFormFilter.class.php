@@ -20,6 +20,7 @@ class BaseSmsLogFormFilter extends BaseFormFilterPropel
       'status'        => new sfWidgetFormFilterInput(),
       'created_at'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'customer_id'   => new sfWidgetFormFilterInput(),
+      'sms_type'      => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -29,6 +30,7 @@ class BaseSmsLogFormFilter extends BaseFormFilterPropel
       'status'        => new sfValidatorPass(array('required' => false)),
       'created_at'    => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'customer_id'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'sms_type'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('sms_log_filters[%s]');
@@ -53,6 +55,7 @@ class BaseSmsLogFormFilter extends BaseFormFilterPropel
       'status'        => 'Text',
       'created_at'    => 'Date',
       'customer_id'   => 'Number',
+      'sms_type'      => 'Number',
     );
   }
 }

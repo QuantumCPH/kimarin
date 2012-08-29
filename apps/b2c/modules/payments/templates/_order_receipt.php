@@ -69,7 +69,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="receipt" cellspacing="0" width="600px">
 	
   <tr bgcolor="#CCCCCC" class="receipt_header">   	
-    <th colspan="3"><?php echo __('Order receipt') ?>(  <?php if ($order->getIsFirstOrder())
+    <th colspan="3"><?php echo __('Order Receipt') ?>(  <?php if ($order->getIsFirstOrder())
     {
         echo $order->getProduct()->getName();
         if($transaction->getDescription()=="Anmeldung inc. sprechen"){
@@ -156,7 +156,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('IVA') ?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
+    <td><?php echo __('IVA') ;?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
@@ -187,7 +187,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>  
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('IVA') ?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
+    <td><?php echo __('IVA');?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>

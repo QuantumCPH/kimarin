@@ -6,6 +6,11 @@ header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT
 
 ?>
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Dashboard')) ) ?>
+<?php if ($sf_user->hasFlash('message')): ?>
+<div class="alert_bar">
+	<?php echo $sf_user->getFlash('message') ?>
+</div>
+<?php endif;?>
   <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'dashboard', 'customer_id'=>$customer->getId())) ?>
     <div class="dashboard-info">
@@ -164,8 +169,24 @@ echo " ";   echo substr($Telintambs, 15,2);
            
           
          }  ?></span></div>
-
+         
+         
+            <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Customer Product') ?>:</span><span>
+ <?php  
+ 
+ 
+  echo $product->getName();
+ 
+ ?></span></div>
+         
+        
+         
 <?php } ?>
+  <?php   if($ccpCount>0){ ?>       
+         
+     <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('You have already ordered a change of product.'); ?>  </span></div>
+         <?php } ?>
+         
 <?php   if($pus==5){?>
 
   <?php if($voip_customer!=''){ ?>
@@ -229,13 +250,29 @@ echo " ";   echo substr($Telintambs, 15,2);
                         } ?></a></b>
 			</td>
 		<td></td></tr>
-	</table>
-  <table cellspacing="0" cellpadding="0" style="width: 100%; margin-top: 30px; margin-bottom: 10px; ">
-		<tr>
-                    <td ><form name="myform" action="">
-                            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px;" type="button" value="<?php echo __('Block Account')?>" onclick="confirmBlock()" />
-</form> </td>
-                </tr></table>
+	</table> 
+        <h2><?php echo __("Services");?></h2><br />
+        <div class="dashboardproduct"> 
+            <h4 class="web_sms"><?php echo __('Block Account') ?></h4>
+            <a title="<?php echo __('Block Account')?>" class="sidebar_button" rel="bookmark" href="#" onclick="confirmBlock();"><?php echo __('Block Account')?></a>
+        </div>
+        <div class="dashboardproduct">
+           <h4 class="web_sms"><?php echo __('Change Number') ?></h4>
+            <a title="<?php echo __('Change Number')?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/changenumberservice', true) ?>"><?php echo __('Change Number')?></a>
+        </div>
+          
+        <div class="dashboardproduct">
+            <h4 class="web_sms"><?php echo __('Change Product') ?></h4>
+            <a title="<?php echo __('Change Product')?>" class="sidebar_button" rel="bookmark" href="<?php  if($ccpCount>0){  echo "#"; }else{ echo url_for('customer/changeProductSubscription', true);  } ?>"><?php echo __('Change Product')?></a>
+        </div>
+     
+        
+        
+        <div class="dashboardproduct">
+           <h4 class="web_sms"><?php echo __('New SIM-card') ?></h4>
+            <a title="<?php echo __('New Sim Card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim Card') ?></a>
+        </div>
+        <br />
     </div>
   </div>
 
