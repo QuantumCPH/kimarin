@@ -212,7 +212,7 @@
             </trans-unit>
             <trans-unit id="52" translate="yes" reformat="yes" xml:space="default">
                 <source>Services</source>
-                <target>Dienstleistungen</target>
+                <target>Serviceleistungen</target>
             </trans-unit>
             <trans-unit id="53" translate="yes" reformat="yes" xml:space="default">
                 <source>Choose</source>
