@@ -958,7 +958,7 @@
                 <target>Auto Repuesto</target>
             </trans-unit>
             <trans-unit id="235" translate="yes" reformat="yes" xml:space="default">
-                <source>Invitation Bonus</source>
+                <source>Invitation bonus</source>
                 <target>Bonificación por invitaciones</target>
             </trans-unit>
             <trans-unit id="236" translate="yes" reformat="yes" xml:space="default">
