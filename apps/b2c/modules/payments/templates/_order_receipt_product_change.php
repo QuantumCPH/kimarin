@@ -71,7 +71,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
             <?php echo __('Dear'); ?>   <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?>  ,<br/>
  
    <?php echo __('your order for change of product has been successfully implemented.');  ?>
- <?php echo __('Now your current product is'); ?> ( <?php $product->getName();   ?>).
+ <?php echo __('Now your current product is'); ?> ( <?php echo $product->getName();   ?>).
   </td>
   </tr>
   
