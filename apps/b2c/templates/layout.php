@@ -36,7 +36,7 @@
 </head>
 <body>
 
-<!--
+
     <div style="vertical-align: top;float: right;">
 
     <?php echo link_to(image_tag('/images/lang_spa1.png'), 'customer/changeCulture?new=es', array('id'=>'lang_spa','title'=>'es')); ?>
@@ -45,7 +45,7 @@
     <?php echo link_to(image_tag('/images/lang_cat1.png'), 'customer/changeCulture?new=ca', array('id'=>'lang_spa','title'=>'ca')); ?>
     
 
-             </div> -->
+             </div> 
 <div id="wrap"><?php //echo $sf_user->getCulture();
 // set alert if customer is not yet registered with fonet
 
