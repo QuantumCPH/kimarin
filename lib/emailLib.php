@@ -1796,7 +1796,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,
                 ));
 
-        $subject = __('Change Number Confirmation');
+        $subject = __('Change number confirmation');
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
         $customer_id = trim($customer->getId());
@@ -1815,7 +1815,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email->setReceipientEmail($recepient_email);
             $email->setAgentId($agent_company_id);
             $email->setCutomerId($customer_id);
-            $email->setEmailType('Change Number ');
+            $email->setEmailType('Change number');
             $email->setMessage($message_body);
             $email->save();
         }
@@ -1829,7 +1829,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email2->setReceipientEmail($recepient_agent_email);
             $email2->setAgentId($agent_company_id);
             $email2->setCutomerId($customer_id);
-            $email2->setEmailType('Change Number ');
+            $email2->setEmailType('Change number');
             $email2->setMessage($message_body);
 
             $email2->save();
@@ -1843,7 +1843,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email3->setReceipientEmail($sender_email);
             $email3->setAgentId($agent_company_id);
             $email3->setCutomerId($customer_id);
-            $email3->setEmailType('Change Number ');
+            $email3->setEmailType('Change number');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -1856,7 +1856,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Change Number ');
+            $email4->setEmailType('Change number');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
