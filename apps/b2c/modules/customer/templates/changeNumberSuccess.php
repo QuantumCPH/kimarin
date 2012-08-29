@@ -14,15 +14,15 @@
     <input type="hidden" value="<?php echo  $countrycode;  ?>" name="countrycode" />
     <ul class="fl col changenumber">
         <li>
-            <label><?php echo __("New Mobile Number");?>:</label>
+            <label><?php echo __("New mobile number");?>:</label>
             <label><?php echo  $newNumber;  ?></label><br />
         </li>
         <li>
-            <label><?php echo __("Customer Name");?>:</label>
+            <label><?php echo __("Customer name");?>:</label>
             <label><?php echo  $customer->getFirstName(); ?>&nbsp;<?php echo  $customer->getLastName(); ?></label><br />
         </li>
         <li>
-            <label><?php echo __("Old Mobile Number");?>:</label>
+            <label><?php echo __("Old mobile number");?>:</label>
             <label><?php echo  $customer->getMobileNumber(); ?></label><br />
         </li>
         <li>
