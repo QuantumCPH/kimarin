@@ -584,7 +584,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
         $this->mergePostValidator(new sfValidatorSchemaCompare('password',
                                           sfValidatorSchemaCompare::EQUAL, 'password_confirm',
                                           array(),
-                                          array('invalid' => sfContext::getInstance()->getI18n()->__(' '))
+                                          array('invalid' => sfContext::getInstance()->getI18n()->__('The passwords don\'t match.'))
                                                   ));
 
 
