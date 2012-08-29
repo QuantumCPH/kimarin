@@ -267,8 +267,8 @@ echo " ";   echo substr($Telintambs, 15,2);
         </div>
         
         <div class="dashboardproduct">
-           <h4 class="web_sms"><?php echo __('New SIM-card') ?></h4>
-            <a title="<?php echo __('New SIM-card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim-card') ?></a>
+           <h4 class="web_sms"><?php echo __('Purchase new SIM-card') ?></h4>
+            <a title="<?php echo __('Purchase new SIM-card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('Purchase new SIM-card') ?></a>
         </div>
         <br />
     </div>

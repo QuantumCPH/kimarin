@@ -420,7 +420,7 @@ width:252px;
 .inline-error{
 	color:#FF0000;
 	float:right;
-	margin-right:83px;
+	margin-right:0 ;
 	text-align:right;
 	white-space:normal;
 }
@@ -850,4 +850,8 @@ span.alertmsg{
     color:#CD481D;
     font-style: italic;
 }
-
+ul.changenumber{
+    width:436px !important;    
+}
+ul.changenumber li{width:383px !important;}
+ul.changenumber li label{width: 151px !important;}

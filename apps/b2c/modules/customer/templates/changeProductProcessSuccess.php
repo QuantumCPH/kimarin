@@ -1,6 +1,6 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change Product') ) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change product') ) ) ?>
 <br />
 <div class="left-col">
 
@@ -14,11 +14,11 @@
    
     <ul class="fl col changenumber">
         <li>
-            <label><?php echo __("Change Product");?>:</label>
+            <label><?php echo __("Change product");?></label>
             <label><?php //echo  $product->getName();  ?></label><br />
         </li> 
          <li>
-            <label><?php echo __("New Product Name");?>:</label>
+            <label><?php echo __("New product name");?>:</label>
             <label><?php echo  $oldProduct->getName();  ?></label><br />
         </li> 
         <li>
