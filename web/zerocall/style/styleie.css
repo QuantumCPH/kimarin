@@ -298,7 +298,7 @@ ul.paging {
 ul.paging li {
 	float: left;
 	padding: 3px;
-	border:1px solid #CC441A;
+	border:1px solid #0C74A5;
 	margin:0 5px;
 	background:#E88937;
 	width: 15px;
@@ -307,7 +307,7 @@ ul.paging li {
 }
 
 ul.paging li a {
-	color:	#CD481D;
+	color:	#fff !important;
 	text-align: center;
 	display:block;
 	width: 100%;
@@ -320,7 +320,7 @@ ul.paging li.selected a {
 }
 
 ul.paging li.selected{
-	background: #CD481D;
+	background: #0C74A5;
 	color: white;	
 }
 	

@@ -137,9 +137,9 @@
                      }?>
                        <?php
                     if($actionName=='selectChargeCustomer' && $modulName=="customer"){
-                       echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer', array('class'=>'subSelect'));
+                     //  echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer', array('class'=>'subSelect'));
                     }else{
-                       echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer');
+                     //  echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer');
                     }
                     ?>
                        <?php
@@ -149,7 +149,7 @@
                        echo link_to(__('Refill Customers'), 'customer/selectRefillCustomer');
                     }
                     ?>
-                                           <?php
+                   <?php
                     if($actionName=='completePaymenthistory' && $modulName=="customer"){
                        echo link_to(__('Payment History'), 'customer/completePaymenthistory', array('class'=>'subSelect'));
                     }else{

@@ -346,7 +346,7 @@ class customerActions extends autocustomerActions {
                 $transaction->setAmount(-$extra_refill);
                 //get agent name
                 $transactiondescription=  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setTransactionFrom(2);
@@ -390,6 +390,17 @@ class customerActions extends autocustomerActions {
             $validated = false;
             $mobile_number = $request->getParameter('mobile_number');
             $extra_refill = $request->getParameter('refill_amount');
+            
+              
+                $cc = new Criteria();
+                $cc->add(CustomerPeer::MOBILE_NUMBER,$mobile_number);
+                $cc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);        
+                $cCount = CustomerPeer::doCount($cc);
+                if($cCount==0){
+                  $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Mobile number not exist.'));  
+                  $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');  
+                }
+            
             $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
             $transaction = new Transaction();
@@ -473,6 +484,7 @@ class customerActions extends autocustomerActions {
         $ct->add(TransactionDescriptionPeer::B2C, 1); // For refill
         $ct->addAnd(TransactionDescriptionPeer::TRANSACTION_SECTION_ID, 1); // 1, Description is for Admin and 2, for  Agent
         $this->transactionDescriptions = TransactionDescriptionPeer::doSelect($ct);
+        
     }
 
     public function executeSelectChargeCustomer($request) {

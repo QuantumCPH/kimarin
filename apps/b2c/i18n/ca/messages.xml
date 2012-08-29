@@ -718,7 +718,7 @@
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>SMS History</source>
-                <target>SMS Historia</target>
+                <target>Registre de SMS</target>
             </trans-unit>
             <trans-unit id="177" translate="yes" reformat="yes" xml:space="default">
                 <source> There, you can use in your dealings with customer service</source>
@@ -2161,7 +2161,7 @@
             </trans-unit>
             <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
                 <source>Your mobile number:</source>
-                <target>El seu número de telèfon mòbil:</target>
+                <target>Vostre número de mòbil:</target>
             </trans-unit>
             <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to your e-mail address shortly.</source>

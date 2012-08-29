@@ -719,7 +719,7 @@
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>SMS History</source>
-                <target>SMS Geschichte</target>
+                <target>SMS-Liste</target>
             </trans-unit>
             <trans-unit id="177" translate="yes" reformat="yes" xml:space="default">
                 <source> There, you can use in your dealings with customer service</source>
@@ -2154,7 +2154,7 @@
                 <target>Bonus</target>
             </trans-unit>
             <trans-unit id="534" translate="yes" reformat="yes" xml:space="default">
-                <source>The products you have ordered will be sent by mail shortly. Your customer number is</source>
+                <source>The products you have ordered will be sent by mail shortly. Your customer number is </source>
                 <target>Die von Ihnen bestellten Produkte werden in Kürze per E-Mail versandt. Ihre Kundennummer lautet</target>
             </trans-unit>
             <trans-unit id="535" translate="yes" reformat="yes" xml:space="default">
@@ -2195,7 +2195,7 @@
             </trans-unit>
             <trans-unit id="543" translate="yes" reformat="yes" xml:space="default">
                 <source>Your mobile number:</source>
-                <target>Ihre número de mòbil:</target>
+                <target>Ihre Mobilfunknummer:</target>
             </trans-unit>
             <trans-unit id="544" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to your e-mail address shortly.</source>
