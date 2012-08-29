@@ -435,8 +435,8 @@
                 <target>Los mensajes de 1 a 142 caracteres se considerarán como 1 mensaje de texto</target>
             </trans-unit>
             <trans-unit id="106" translate="yes" reformat="yes" xml:space="default">
-                <source>Messages from 143 to 302 characters will be considered as 2 SMS </source>
-                <target>Los mensajes de 143 a 302 caracteres se considerarán como 2 mensajes de texto </target>
+                <source>Messages from 143 to 302 characters will be considered as 2 SMS</source>
+                <target>Los mensajes de 143 a 302 caracteres se considerarán como 2 mensajes de texto</target>
             </trans-unit>
             <trans-unit id="107" translate="yes" reformat="yes" xml:space="default">
                 <source>Messages from 303 to 432 characters will be considered as 3 SMS</source>
