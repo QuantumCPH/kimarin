@@ -1,6 +1,6 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change Number') ) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change number') ) ) ?>
 <br />
 <div class="left-col">
 
