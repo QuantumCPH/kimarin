@@ -3651,9 +3651,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         //  $OpeningBalance = $order->getExtraRefill();
          //   Telienta::recharge($this->customer, $OpeningBalance,'Refill');
             $this->setPreferredCulture($this->customer);
-            emailLib::sendCustomerChangeProduct($this->customer, $order, $transaction);
+            emailLib::sendCustomerChangeProductConfirm($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
-        
+      //  order_receipt_product_change
                     }
           return sfView::NONE;   
             
