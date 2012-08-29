@@ -171,7 +171,7 @@ echo " ";   echo substr($Telintambs, 15,2);
          }  ?></span></div>
          
          
-            <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Customer Product') ?>:</span><span>
+            <div class="fl cb dashboard-info-text"  ><span   style="padding-right:-10px"><?php echo __('Customer product') ?>:</span><span>
  <?php  
  
  
@@ -265,12 +265,10 @@ echo " ";   echo substr($Telintambs, 15,2);
             <h4 class="web_sms"><?php echo __('Change Product') ?></h4>
             <a title="<?php echo __('Change Product')?>" class="sidebar_button" rel="bookmark" href="<?php  if($ccpCount>0){  echo "#"; }else{ echo url_for('customer/changeProductSubscription', true);  } ?>"><?php echo __('Change Product')?></a>
         </div>
-     
-        
         
         <div class="dashboardproduct">
            <h4 class="web_sms"><?php echo __('New SIM-card') ?></h4>
-            <a title="<?php echo __('New Sim Card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim Card') ?></a>
+            <a title="<?php echo __('New SIM-card') ?>" class="sidebar_button" rel="bookmark" href="<?php echo url_for('customer/newcardPur', true) ?>"><?php echo __('New Sim-card') ?></a>
         </div>
         <br />
     </div>
