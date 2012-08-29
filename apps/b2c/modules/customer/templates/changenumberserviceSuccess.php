@@ -63,7 +63,7 @@ jQuery(function(){
         <p><?php echo __('You can change your number maximum two times in a month.');?></p>
         <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeNumber') ?>" style="padding-left: 0px">
      <h1><?php //echo __('Change Number');?></h1>
-    	<ul class="fl col">
+    	<ul class="fl col changenumber">
             <li>
                 <label><?php echo __('Old mobile number') ?></label>
                 <input type="text" name="existingNumber" style="margin-bottom:0px" value="<?php echo $customer->getMobileNumber();?>" readonly="readonly" />
