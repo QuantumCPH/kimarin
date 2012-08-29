@@ -2171,6 +2171,7 @@ class customerActions extends sfActions {
         $this->targetUrl = $this->getTargetUrl();
 
         $product_id = $request->getParameter('product');
+          $this->oldProduct = ProductPeer::retrieveByPK($product_id);
 
         $product = ProductPeer::retrieveByPK(16);
         $this->product = $product;

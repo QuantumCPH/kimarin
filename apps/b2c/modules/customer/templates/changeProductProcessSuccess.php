@@ -16,7 +16,11 @@
         <li>
             <label><?php echo __("Product Name");?>:</label>
             <label><?php echo  $product->getName();  ?></label><br />
-        </li>        
+        </li> 
+         <li>
+            <label><?php echo __("New Product Name");?>:</label>
+            <label><?php echo  $oldProduct->getName();  ?></label><br />
+        </li> 
         <li>
             <label><?php echo __("Amount");?>:</label>
             <label><?php echo  number_format($prodPrice = $product->getRegistrationFee(),2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />
