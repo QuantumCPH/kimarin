@@ -91,6 +91,14 @@ $pus=0;
 		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Preferred Language</td>
                           <td><?php echo  $customer->getPreferredLanguage(); ?></td>
                          </tr>
+                         <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign">Current Product</td>
+                          <td><?php echo  $customer->getCurrentProduct(); ?></td>
+                         </tr>
+                         <tr>
+		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign">Subscribed Product</td>
+                          <td><?php echo  $customer->getSubscribedProduct(); ?></td>
+                         </tr>
                        
 <?php
 $val="";

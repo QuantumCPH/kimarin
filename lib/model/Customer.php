@@ -138,5 +138,31 @@ class Customer extends BaseCustomer
               if(ProvincePeer::doCount($cpr)>0) $provinceName = $province->getProvince();
             return $provinceName;
         }
+        
+        public function getCurrentProduct(){
+           $customerproduct = "";
+           $cp = new Criteria();
+           $cp->add(CustomerProductPeer::CUSTOMER_ID,$this->getId());
+           $cp->addAnd(CustomerProductPeer::STATUS_ID,3);
+           if(CustomerProductPeer::doCount($cp) > 0){
+               $product  = CustomerProductPeer::doSelectOne($cp);
+               $customerproduct = $product->getProduct()->getName();
+               
+           }
+           return $customerproduct;
+        }
+        
+        public function getSubscribedProduct(){
+           $subProd = "";
+           $cs = new Criteria();
+           $cs->add(CustomerChangeProductPeer::CUSTOMER_ID,$this->getId());
+           $cs->addAnd(CustomerChangeProductPeer::STATUS,2);
+           if(CustomerChangeProductPeer::doCount($cs)>0){
+               $changeproduct = CustomerChangeProductPeer::doSelectOne($cs);
+               $subProd = $changeproduct->getProduct()->getName();
+           }
+           
+           return $subProd;
+        }
 	    
 }
