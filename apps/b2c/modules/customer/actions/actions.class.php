@@ -253,7 +253,7 @@ class customerActions extends sfActions {
         $this->customer_balance = -1;
 
         $country_id = $this->customer->getCountryId();
-
+        $this->targe = $this->getTargetUrl();
         //This Section For Get the Language Symbol For Set Currency -
         $enableCountry = new Criteria();
         $enableCountry->add(EnableCountryPeer::ID, $country_id);
@@ -899,6 +899,10 @@ class customerActions extends sfActions {
         unset($this->form['sim_type_id']);
         unset($this->form['nationality_id']);
         unset($this->form['date_of_birth']);
+        unset($this->form['comments']);
+        unset($this->form['block']);
+        unset($this->form['usage_alert_sms']);
+        unset($this->form['usage_alert_email']);
         //  unset($this->form['password']);
         // unset($this->form['password_confirm']);
         /////////////////////////////////////
@@ -978,7 +982,10 @@ class customerActions extends sfActions {
         unset($this->form['usage_alert_sms']);
         unset($this->form['usage_alert_email']);
         unset($this->form['sim_type_id']);
-
+        unset($this->form['comments']);
+        unset($this->form['block']);
+        unset($this->form['usage_alert_sms']);
+        unset($this->form['usage_alert_email']);
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
         $getvoipInfo = new Criteria();
@@ -1101,7 +1108,7 @@ class customerActions extends sfActions {
 
         $c = new Criteria();
 
-        $c->add(CustomerPeer::EMAIL, $request->getParameter('email'));
+        $c->add(CustomerPeer::MOBILE_NUMBER, $request->getParameter('mobile'));
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, sfConfig::get('app_status_completed', 3));
 
         //echo $c->toString(); exit;
@@ -1157,7 +1164,7 @@ class customerActions extends sfActions {
             $this->getUser()->setFlash('send_password_message', $this->getContext()->getI18N()->__('Your account details have been sent to your e-mail address.'));
         }
         else {
-            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this e-mail address.'));
+            $this->getUser()->setFlash('send_password_error_message', $this->getContext()->getI18N()->__('No customer is registered with this mobile number.'));
         }
 //  		require_once(sfConfig::get('sf_lib_dir').'/swift/lib/swift_init.php');
 //
@@ -1841,8 +1848,8 @@ class customerActions extends sfActions {
 
 
         $lang = $this->getUser()->getCulture();
-        $return_url = "http://www.kimarineurope.com/refill-thanks.html";
-        $cancel_url = "http://www.kimarineurope.com/refill-reject.html";
+        $return_url = "http://www.kimarin.es/refill-thanks.html";
+        $cancel_url = "http://www.kimarin.es/refill-reject.html";
         //   $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
 
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;

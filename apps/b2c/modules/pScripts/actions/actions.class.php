@@ -853,8 +853,8 @@ class pScriptsActions extends sfActions
 
 
 
-	$sender_email = sfConfig::get('app_email_sender_email', 'support@kimarin.es');
-	$sender_name = sfConfig::get('app_email_sender_name', 'Kimarin support');
+	$sender_email = sfConfig::get('app_email_support_email');
+	$sender_name = sfConfig::get('app_email_support_name');
 
         echo '<br/>';
         echo $sender_email ;
@@ -2732,6 +2732,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             
             emailLib::sendAgentRefilEmail($this->agent, $agent_order);
         }
+        return sfView::NONE;
     }
     
     public function executeCalbackrefill(sfWebRequest $request) {
@@ -2967,7 +2968,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             if (CustomerProductPeer::doCount($c) != 0) {
 
                 //Customer is already registered.
-                echo __('The customer is already registered.');
+                //echo __('The customer is already registered.');
                 //exit the script successfully
                 return sfView::NONE;
             }
@@ -3112,10 +3113,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $invite = InvitePeer::doSelectOne($invite_c);
                 if ($invite) {
                     $invite->setInviteStatus(3);
-                    $sc = new Criteria();
-                    $sc->add(CustomerCommisionPeer::ID, 1);
-                    $commisionary = CustomerCommisionPeer::doSelectOne($sc);
-                    $comsion = $commisionary->getCommision();
+                   
                     $products = new Criteria();
                     $products->add(ProductPeer::ID, 2);
                     $products = ProductPeer::doSelectOne($products);
@@ -3131,7 +3129,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $OrderId = $inviteOrder->getId();
                     // make a new transaction to show in payment history
                     $transaction_i = new Transaction();
-                    $transaction_i->setAmount($comsion);
+                    $transaction_i->setAmount($extrarefill);
                     $transaction_i->setDescription('Invitation Bonus');
                     $transaction_i->setCustomerId($invite->getCustomerId());
                     $transaction_i->setOrderId($OrderId);
@@ -3148,7 +3146,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                         $TelintaMobile = sfConfig::get('app_country_code') . $this->customers->getMobileNumber();
                     }
                     $uniqueId = $this->customers->getUniqueid();
-                    $OpeningBalance = $comsion;
+                    $OpeningBalance = $extrarefill;
                     //This is for Recharge the Customer
                 
                          Telienta::recharge($this->customers, $OpeningBalance,"Tipsa en van " . $invite->getInviteNumber());
@@ -3240,6 +3238,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $this->logMessage('Error in transaction.');
             } 
         }
+	//header('HTTP/1.1 200 OK');
         return sfView::NONE;
     }
    public function executeEmailTest(sfWebRequest $request) {

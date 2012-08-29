@@ -16,7 +16,6 @@
                 <li><?php echo __('See your payment and call history.');?></li>
                 <li><?php echo __('Order other products.');?></li>
             </ul>
-            <?php //echo __('Hello and welcome to Smartsim - my pages. To log in, use your customer number which is your mobile number and password. On my pages you can see what calls you made, fill the pot, and more.'); //echo $target; ?>
          </div>
 <div style="clear:both;height:1px;"></div>
   <?php //echo $sf_user->getCulture();
@@ -53,7 +52,7 @@
                 <input  class="input" type="password" name="password" id="password" /><br />
                 </div>
                 <span>
-                <input type="submit" class="loginbuttun" name="submit" value="<?php echo __('Log in') ?>"></span>
+                <input type="submit" class="loginbuttun" name="submit" value="<?php echo __('Log in') ?>" /></span>
              
 		<!--	<button style="cursor: pointer;" ><?php //echo __('Log in') ?></button>-->
 	<script language="javascript" type="text/javascript">
@@ -87,12 +86,12 @@
 	<div class="login-right"><h4><?php echo __('Did you forget your password?') ?></h4>
 	<form id="forgot_password_form" method="post" action="<?php echo url_for('customer/sendPassword') ?>">
         
-        <label <?php echo $class;?> <?php echo $style;?>><?php echo __('Your e-mail address.');//echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
-	<input   class="input"  type="text" name="email" id="forgot_password_email" /><br />
+        <label <?php echo $class;?> <?php echo $style;?>><?php echo __('Your mobile number.');//echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
+	<input   class="input"  type="text" name="mobile" id="forgot_password_email" /><br />
 	<?php if ($sf_user->hasFlash('send_password_error_message')): ?>
 	<p class="error_msg" style="color: red; margin:6px auto;"><?php echo $sf_user->getFlash('send_password_error_message') ?></p>
 	<?php endif;?>
-        <p class="yourpassword"><?php echo __('Your password will be sent to the above e-mail address shortly.') ?></p>
+        <p class="yourpassword"><?php echo __('Your password will be sent to your e-mail address shortly.') ?></p>
         <input  style="cursor: pointer;"  class="loginbuttun"  type="submit" name="submit" value="<?php echo __('Send');?>" />
         
         
@@ -102,13 +101,23 @@
 	
 		jq('#forgot_password_form').submit(function(){
 			
-			var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-			if (reg.test(jq('#forgot_password_email').val())==false)
-			{
-				jq('#forgot_password_email').focus();
-				alert('<?php echo __('Please enter a valid email address.') ?>');
-				return false;
-			}
+//			var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+//			if (reg.test(jq('#forgot_password_email').val())==false)
+//			{
+//				jq('#forgot_password_email').focus();
+//				alert('<?php echo __('Please enter a valid email address.') ?>');
+//				return false;
+//			}
+                        var valid = true;
+                        valid = jq('#forgot_password_email').val().length==0?false:true;
+
+                        //alert(valid);
+                        if (!valid) { // if email is not valid
+                            jq('#forgot_password_mobile').focus();
+                            alert('<?php echo __('Enter your mobile number to receive your password.') ?>');
+                            return false;
+                        }
+
 
 		});
 	</script>

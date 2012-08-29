@@ -400,7 +400,7 @@
                 <target>Su mensaje</target>
             </trans-unit>
             <trans-unit id="98" translate="yes" reformat="yes" xml:space="default">
-                <source>You can save up to 80% on international calls from your Spanish mobile telephone if you are registered as a %1% customer. It is easy to register and use, and you do not need to change your mobile number or mobile service provider. Please go to %1%'s web site: www.kimarineurope.com and read more.</source>
+                <source>You can save up to 80% on international calls from your Spanish mobile telephone if you are registered as a %1% customer. It is easy to register and use, and you do not need to change your mobile number or mobile service provider. Please go to %1%'s web site: %3% and read more.</source>
                 <target>SmartSim utilizar para realizar llamadas internacionales muy baratas (Ahorra hasta 90%) y para reducir los precios cuando se encuentre en el extranjero (se ahorrará 30-80%). Ahora cuesta SmartSim 99%2% y usted puede llamar por el importe total. SmartSim no tiene cuota mensual ni cargos ocultos.</target>
             </trans-unit>
             <trans-unit id="99" translate="yes" reformat="yes" xml:space="default">

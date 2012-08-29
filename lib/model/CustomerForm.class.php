@@ -421,12 +421,17 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 
 
 
-/*$this->validatorSchema['date_of_birth'] = new sfValidatorNumber(
-    array('required'=>sfContext::getInstance()->getI18N()->__('Please choose a nationality'))
-);*/
+//$this->validatorSchema['date_of_birth'] = new sfValidatorNumber(
+//    array('required'=>sfContext::getInstance()->getI18N()->__('Please choose a date of birth'))
+//);
     //date of birth
-
-
+       $this->validatorSchema->setPostValidator(
+  new sfValidatorSchemaCompare('date_of_birth', sfValidatorSchemaCompare::NOT_EQUAL, null,
+    array(),
+    array('invalid' => 'You must fill this field')
+  )
+);
+       
        $setdate=date('Y');
        $setstartdate=$setdate-13;
        $setenddate=$setdate-110;
@@ -645,7 +650,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 			'device_id'=>'Mobile Model',
                         'password'=>'Create password',
 			'password_confirm'=>'Confirm password',
-			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)',
+			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)*',
                         'second_last_name'=>'Middle name',
                         'nie_passport_number'=>'N.I.E. or passport<br />number',  
                         'preferred_language_id'=>'Preferred language', 
