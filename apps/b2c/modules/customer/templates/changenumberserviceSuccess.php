@@ -19,7 +19,7 @@ jQuery(function(){
         messages: {
             existingNumber:{
                 required: "<?php echo __('Please Enter Old Mobile Number')?>",
-                minlength: "<?php echo __('At least 8 digits are required')?>",
+                minlength: "<?php echo __('At sleast 8 digits are required')?>",
                 digits: "<?php echo __('Please Enter only digits')?>"
             },
             newNumber:{
