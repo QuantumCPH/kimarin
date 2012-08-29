@@ -1146,7 +1146,7 @@
                 <target>Aktive mobile Nein</target>
             </trans-unit>
             <trans-unit id="282" translate="yes" reformat="yes" xml:space="default">
-                <source>SMS Charges</source>
+                <source>SMS charges</source>
                 <target>Gebühren SMS</target>
             </trans-unit>
             <trans-unit id="283" translate="yes" reformat="yes" xml:space="default">
@@ -2094,8 +2094,8 @@
                 <target> (Gesprächsguthaben:</target>
             </trans-unit>
             <trans-unit id="519" translate="yes" reformat="yes" xml:space="default">
-                <source>The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time .</source>
-                <target>Der Wert der auf Ihrem Konto verzeichneten Gesprächszeit kann zu keiner Zeit 250.00%1% übersteigen .</target>
+                <source>The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. </source>
+                <target>Der Wert der auf Ihrem Konto verzeichneten Gesprächszeit kann zu keiner Zeit 250.00%1% übersteigen. </target>
             </trans-unit>
             <trans-unit id="520" translate="yes" reformat="yes" xml:space="default">
                 <source>%1% Refill Payment details:</source>
