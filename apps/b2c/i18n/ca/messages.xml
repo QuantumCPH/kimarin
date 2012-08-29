@@ -295,7 +295,7 @@
                 <target>otra historia</target>
             </trans-unit>
             <trans-unit id="73" translate="yes" reformat="yes" xml:space="default">
-                <source>Call History</source>
+                <source>Call history</source>
                 <target>Registre de trucades</target>
             </trans-unit>
             <trans-unit id="74" translate="yes" reformat="yes" xml:space="default">
@@ -315,7 +315,7 @@
                 <target>No hi ha registrada cap transacció.</target>
             </trans-unit>
             <trans-unit id="78" translate="yes" reformat="yes" xml:space="default">
-                <source>Payment History</source>
+                <source>Payment history</source>
                 <target>Registre de pagaments</target>
             </trans-unit>
 
@@ -717,7 +717,7 @@
                 <target>En breu, rebreu per correu els productes que heu sol·licitat.  El vostre número de client és</target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
-                <source>SMS History</source>
+                <source>SMS history</source>
                 <target>Registre de SMS</target>
             </trans-unit>
             <trans-unit id="177" translate="yes" reformat="yes" xml:space="default">
