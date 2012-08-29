@@ -2172,7 +2172,7 @@ class customerActions extends sfActions {
 
         $product_id = $request->getParameter('product');
 
-        $product = ProductPeer::retrieveByPK($product_id);
+        $product = ProductPeer::retrieveByPK(16);
         $this->product = $product;
         $this->product_id = $product->getId();
         $this->price = $product->getRegistrationFee();
@@ -2181,7 +2181,7 @@ class customerActions extends sfActions {
 
         $order = new CustomerOrder();
         $order->setCustomerId($this->customer->getId());
-        $order->setProductId($product_id);
+        $order->setProductId($product->getId());
         $order->setQuantity(1);
         $order->setExtraRefill($product->getInitialBalance());
         $order->setOrderStatusId(1);
