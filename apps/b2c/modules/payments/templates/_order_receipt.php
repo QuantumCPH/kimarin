@@ -75,7 +75,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         if($transaction->getDescription()=="Anmeldung inc. sprechen"){
           echo "<br />["; echo __('Smartsim including pot'); echo "]";
         }else{
-            echo  '<br />['. $transaction->getDescription() .']';
+            echo  '<br />['. __($transaction->getDescription()) .']';
         }
     }
     else
