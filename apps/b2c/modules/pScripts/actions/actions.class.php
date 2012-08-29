@@ -3648,8 +3648,8 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $cProduct->setStatusId(3);
         $cProduct->save();
         
-          $OpeningBalance = $order->getExtraRefill();
-            Telienta::recharge($this->customer, $OpeningBalance,'Refill');
+        //  $OpeningBalance = $order->getExtraRefill();
+         //   Telienta::recharge($this->customer, $OpeningBalance,'Refill');
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerChangeProduct($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
