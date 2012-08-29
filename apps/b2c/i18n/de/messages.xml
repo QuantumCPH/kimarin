@@ -1146,7 +1146,7 @@
                 <target>Aktive mobile Nein</target>
             </trans-unit>
             <trans-unit id="282" translate="yes" reformat="yes" xml:space="default">
-                <source>SMS Charges</source>
+                <source>SMS charges</source>
                 <target>Gebühren SMS</target>
             </trans-unit>
             <trans-unit id="283" translate="yes" reformat="yes" xml:space="default">
