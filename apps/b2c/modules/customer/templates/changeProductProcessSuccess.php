@@ -14,11 +14,11 @@
    
     <ul class="fl col changenumber">
         <li>
-            <label><?php echo __("Change Product");?></label>
+            <label><?php echo __("Change product");?></label>
             <label><?php //echo  $product->getName();  ?></label><br />
         </li> 
          <li>
-            <label><?php echo __("New Product Name");?>:</label>
+            <label><?php echo __("New product name");?>:</label>
             <label><?php echo  $oldProduct->getName();  ?></label><br />
         </li> 
         <li>
