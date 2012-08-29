@@ -65,12 +65,12 @@ jQuery(function(){
      <h1><?php //echo __('Change Number');?></h1>
     	<ul class="fl col changenumber">
             <li>
-                <label><?php echo __('Old mobile number') ?></label>
+                <label style="width: 199px !important;"><?php echo __('Old mobile number') ?></label>
                 <input type="text" name="existingNumber" style="margin-bottom:0px" value="<?php echo $customer->getMobileNumber();?>" readonly="readonly" />
 
             </li>
             <li>
-                <label><?php echo __('New mobile number') ?><br />0034*</label>
+                <label style="width: 199px !important;"><?php echo __('New mobile number') ?><br />0034*</label>
                 <input type="text" name="newNumber" id="newNumber" style="margin-bottom:0px" />
                 <span class="alertmsg" id="error"></span>
             </li>
@@ -86,7 +86,7 @@ jQuery(function(){
                            $button_disable = 'disabled="disabled"';
                     }
                     ?>  
-	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 22px !important;" type="submit" <?php echo $button_disable;?> value="<?php echo __('Next')?>" />
+	            <input  class="butonsigninsmall blockbutton" style="padding: 5px 5px 5px 5px; margin-right: 92px !important;" type="submit" <?php echo $button_disable;?> value="<?php echo __('Next')?>" />
 	          </li>
 
 	</ul>
