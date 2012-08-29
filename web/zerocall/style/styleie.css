@@ -825,7 +825,7 @@ label.error{
    margin-left: 5px;
 }
 input.changeNum{
-   margin-left:128px!important;
+   margin-left:188px!important;
 }
 .newcard {width:137px; border:1px solid #999999;font-size:11px; padding:3px; }
 .dashboardbutton{
@@ -851,7 +851,7 @@ span.alertmsg{
     font-style: italic;
 }
 ul.changenumber{
-    width:436px !important;    
+    width:442px !important;    
 }
-ul.changenumber li{width:383px !important;}
-ul.changenumber li label{width: 151px !important;}
+ul.changenumber li{width:390px !important;}
+ul.changenumber li label{width: 195px !important;}
