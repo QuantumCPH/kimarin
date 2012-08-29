@@ -1894,7 +1894,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,
                 ));
 
-    $subject = __('Change Product Payment Confirmation');
+    $subject = __('Change product payment confirmation');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');
