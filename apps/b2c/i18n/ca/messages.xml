@@ -2136,7 +2136,7 @@
                 <target>Els dígits han de tenir format numèric!</target>
             </trans-unit>
             <trans-unit id="531" translate="yes" reformat="yes" xml:space="default">
-                <source>Subscription Charges</source>
+                <source>Subscription charges</source>
                 <target>Quota d'abonament</target>
             </trans-unit>
             <trans-unit id="532" translate="yes" reformat="yes" xml:space="default">
