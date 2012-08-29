@@ -167,7 +167,7 @@ a.sidebar_button{
 .split-form ul li label{width:129px; float:left; padding-top:3px; font-weight:bold; }
 .split-form ul li input{width:110px; border:1px solid #999999; font-size:12px; padding:3px;}
 .split-form ul li select{width:110px; border:1px solid #999999;font-size:11px; padding:3px; }
-.split-form ul li select.strselect{width:37px;font-size:9px; padding:0px; }
+.split-form ul li select.strselect{width:37px;font-size:11px; padding:0px; }
 .split-form ul li select.quater{width:55px; border:1px solid #999999;font-size:11px; padding:3px; margin-right:3px; }
 .split-form ul li input.chkbx{width:20px; padding:0px; border:0px}
 .split-form ul li.fr {float:right;width:250px; text-align:right;}
@@ -432,7 +432,7 @@ width:252px;
 
 #customer_date_of_birth_year
 {
-	width: 41px!important;
+	width: 51px!important;
 }
 
 .alert_bar {
