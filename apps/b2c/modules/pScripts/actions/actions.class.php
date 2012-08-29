@@ -3611,8 +3611,8 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
    
             $ccp = new Criteria();
             $ccp->add(CustomerChangeProductPeer::STATUS, 2);
-            $ccp->add(CustomerChangeProductPeer::CUSTOMER_ID, 35);
-            //$ChangeCustomers=CustomerChangeProductPeer::doSelect($ccp);
+            //$ccp->add(CustomerChangeProductPeer::CUSTOMER_ID, 35);
+            $ChangeCustomers=CustomerChangeProductPeer::doSelect($ccp);
             //var_dump($ChangeCustomers); exit;
             foreach ($ChangeCustomers as $changeCustomer){
             
