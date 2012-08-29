@@ -117,9 +117,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
  
   <tr> 
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
-    <td>
+     <td><?php echo $transaction->getDescription(); ?></td>
+    <td><?php echo $order->getQuantity() ?>
     	</td>
-    <td><?php echo $order->getQuantity() ?></td>
+   
     <td align="right" style="padding-right: 65px;"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 <?php if($order->getProduct()->getPrice()> 0){?> 
