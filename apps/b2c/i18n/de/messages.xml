@@ -295,7 +295,7 @@
                 <target>Andere Geschichte</target>
             </trans-unit>
             <trans-unit id="73" translate="yes" reformat="yes" xml:space="default">
-                <source>Call History</source>
+                <source>Call history</source>
                 <target>Anrufliste</target>
             </trans-unit>
             <trans-unit id="74" translate="yes" reformat="yes" xml:space="default">
@@ -315,7 +315,7 @@
                 <target>Aktuell sind keine Transaktionen verzeichnet.</target>
             </trans-unit>
             <trans-unit id="78" translate="yes" reformat="yes" xml:space="default">
-                <source>Payment History</source>
+                <source>Payment history</source>
                 <target>Verlauf Zahlungen</target>
             </trans-unit>
 
@@ -718,8 +718,8 @@
                 <target>Ihre Ware wird ausgeliefert heute. Sie sollten über die Lieferung innerhalb von zwei Tagen. Ihre Kunden-Nummer ist </target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
-                <source>SMS History</source>
-                <target>SMS Verzeichnis</target>
+                <source>SMS history</source>
+                <target>SMS verzeichnis</target>
             </trans-unit>
             <trans-unit id="177" translate="yes" reformat="yes" xml:space="default">
                 <source> There, you can use in your dealings with customer service</source>
