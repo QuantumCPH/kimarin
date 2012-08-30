@@ -72,7 +72,7 @@ jQuery(function(){
             <li>
                 <label style="width: 199px !important;"><?php echo __('New mobile number') ?><br />0034*</label>
                 <input type="text" name="newNumber" id="newNumber" style="margin-bottom:0px" />
-                <span class="alertmsg" id="error"></span>
+                <span class="alertmsg" id="error" style="float:right!important;margin-right: -5px;"></span>
             </li>
 
                 <?php  $c = new Criteria();
