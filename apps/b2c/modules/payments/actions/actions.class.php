@@ -187,6 +187,7 @@ class paymentsActions extends sfActions {
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
         //$transaction->setTransactionStatusId() // default value 1
+        $transaction->setVat((($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage')));
         $transaction->save();
         $this->order = $order;
         $this->forward404Unless($this->order);
