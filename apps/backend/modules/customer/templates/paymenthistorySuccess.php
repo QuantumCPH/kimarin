@@ -39,12 +39,13 @@
                    
                   
                      if($TDI==6){
-                         $tramount=$transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1);
+                         $tramount=$order->getExtraRefill()/(sfConfig::get('app_vat_percentage')+1);
                               echo "(".number_format($tramount,2).")";
                          
                      }elseif($TDI==10){
                          
-                            echo "(".number_format($transaction->getAmount(),2).")";
+                           $tramount=$order->getExtraRefill()/(sfConfig::get('app_vat_percentage')+1);
+                              echo "(".number_format($tramount,2).")";
                      }  ?> </td>
                   <td  align="right">
                       
