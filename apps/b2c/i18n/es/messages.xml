@@ -2262,6 +2262,14 @@
                 <source>Fee for change of number</source>
                 <target>Tarifa por cambio de número</target>
             </trans-unit>
+            <trans-unit id="562" translate="yes" reformat="yes" xml:space="default">
+                <source>Change product - payment confirmation</source>
+                <target>Cambiar de Producto - confirmación de pago</target>
+            </trans-unit>
+            <trans-unit id="563" translate="yes" reformat="yes" xml:space="default">
+                <source>Change number - payment confirmation</source>
+                <target>Cambiar de Número - confirmación de pago</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

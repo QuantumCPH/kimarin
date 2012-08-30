@@ -2263,6 +2263,14 @@
                 <source>You have already ordered a change of product.</source>
                 <target>Ja hi ha una petició de modificació del producte en curs.</target>
             </trans-unit>
+            <trans-unit id="563" translate="yes" reformat="yes" xml:space="default">
+                <source>Change product - payment confirmation</source>
+                <target>Modificar el producte - confirmació de pagament</target>
+            </trans-unit>
+            <trans-unit id="564" translate="yes" reformat="yes" xml:space="default">
+                <source>Change number - payment confirmation</source>
+                <target>Modificar el número - confirmació de pagament</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
