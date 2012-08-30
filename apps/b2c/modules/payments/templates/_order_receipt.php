@@ -102,7 +102,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	 // echo $eC->getName();
 	  //echo $customer->getCountry()->getName() ?> 
       
-      <?php    $TDI=$transaction->getTransactionDescriptionId();   ?>
+      <?php  
+      $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId()); 
+      $TDI=$transaction->getTransactionDescriptionId();   ?>
       <br /><br />
       <?php    $unid=$customer->getUniqueid(); ?>
      <?php     $customer->getMobileNumber()    ?>
