@@ -2305,6 +2305,10 @@
                 <source>Change number - payment confirmation</source>
                 <target>Nummer wechseln - zahlungsbestätigung</target>
             </trans-unit>
+            <trans-unit id="569" translate="yes" reformat="yes" xml:space="default">
+                <source>New product</source>
+                <target>Neue produkts</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
