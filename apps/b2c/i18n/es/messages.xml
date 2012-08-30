@@ -2258,6 +2258,10 @@
                 <source>You have already ordered a change of product.</source>
                 <target>Ya se ha pedido un cambio de producto.</target>
             </trans-unit>
+            <trans-unit id="561" translate="yes" reformat="yes" xml:space="default">
+                <source>Fee for change of number</source>
+                <target>Tarifa por cambio de número</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

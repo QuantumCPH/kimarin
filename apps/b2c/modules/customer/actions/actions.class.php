@@ -619,6 +619,7 @@ class customerActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($this->order->getId());
         $transaction->setCustomerId($this->order->getCustomerId());
+         $transaction->setVat($this->order->getExtraRefill()*sfConfig::get('app_vat_percentage'));
 
         //save
         $transaction->save();
@@ -1823,6 +1824,7 @@ class customerActions extends sfActions {
         $transaction = TransactionPeer::doSelectOne($c);
         $transaction->setAmount($item_amount);
         $transaction->setDescription($product->getDescription());
+         $transaction->setVat($product->getRegistrationFee()*sfConfig::get('app_vat_percentage'));
         $transaction->save();
 
 
@@ -1983,6 +1985,7 @@ class customerActions extends sfActions {
                 $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->setVat($this->vat);
                 $transaction->save();
             }
         }
@@ -2100,7 +2103,7 @@ class customerActions extends sfActions {
             $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
             $transaction->setTransactionDescriptionId($transactiondescription->getId());
             $transaction->setDescription($transactiondescription->getTitle());
-
+            $transaction->setVat($this->vat);
             $transaction->save();
 
 
@@ -2199,7 +2202,7 @@ class customerActions extends sfActions {
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
-
+        $transaction->setVat($this->vat);
         $transaction->save();
         $ccp = new CustomerChangeProduct();
         $ccp->setCustomerId($this->customer->getId());
