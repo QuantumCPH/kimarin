@@ -102,7 +102,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	 // echo $eC->getName();
 	  //echo $customer->getCountry()->getName() ?> 
       
-      <?php    $TDI=$transaction->getTransactionDescriptionId();   ?>
+      <?php  
+      $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId()); 
+      $TDI=$transaction->getTransactionDescriptionId();   ?>
       <br /><br />
       <?php    $unid=$customer->getUniqueid(); ?>
      <?php     $customer->getMobileNumber()    ?>
@@ -164,20 +166,61 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <?php } else{  //////// for Othere orders
   ?>
+  
+
   <tr> 
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
-    <?php 
-         if($transaction->getDescription()=="Refill"){
+   
+    
+     <?php   if($TDI==6){
+         echo __('Airtime refill');
+         }elseif($TDI==10){
+           echo __('Airtime refill');    
+    }else{
+    
+		 if($transaction->getDescription()=="Refill"){
            echo "Refill ".$transaction->getAmount();
         }else{
            echo __($transaction->getDescription());
         }  
-        ?>
+    }
+    ?>
+    
+        
+      
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php  if($TDI==6){
+       echo number_format($subtotal = $order->getExtraRefill()-$vat,2);
+         }elseif($TDI==10){
+          echo number_format($subtotal = $order->getExtraRefill()-$vat,2); 
+    }else{ echo number_format($subtotal = $transaction->getAmount()-$vat,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
+  
+ 
+    <?php   if($TDI==6){   ?>
+                           <tr> 
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td>
+      <?php  echo __('Discount Customer Support');   ?>
+	</td>
+    <td><?php echo $order->getQuantity() ?></td>
+    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $order->getExtraRefill()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+  </tr>
+                         
+              <?php       }elseif($TDI==10){  ?>
+                             
+                    <tr> 
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td>
+      <?php  echo __('Bonus “Invite a Friend”');   ?>
+	</td>
+    <td><?php echo $order->getQuantity() ?></td>
+    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $order->getExtraRefill()-$vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
+  </tr>            
+                          
+                 <?php    }   ?>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
@@ -204,7 +247,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
                      }else{   echo number_format($vat,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <?php    
-  }?>
+  }  ?>
   <tr class="footer">
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
