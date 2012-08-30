@@ -101,6 +101,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	  $eC = EnableCountryPeer::doSelectOne($eC);
 	 // echo $eC->getName();
 	  //echo $customer->getCountry()->getName() ?> 
+      
+      <?php    $TDI=$transaction->getTransactionDescriptionId();   ?>
       <br /><br />
       <?php    $unid=$customer->getUniqueid(); ?>
      <?php     $customer->getMobileNumber()    ?>
@@ -183,13 +185,23 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{ echo number_format($subtotal,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>  
   <tr class="footer"> 
     <td>&nbsp;</td>
     <td><?php echo __('IVA');?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php    if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{   echo number_format($vat,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <?php    
   }?>
@@ -197,7 +209,12 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($transaction->getAmount(),2); ?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{ echo number_format($transaction->getAmount(),2); } ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
