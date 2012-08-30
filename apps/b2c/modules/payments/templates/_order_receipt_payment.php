@@ -117,7 +117,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  
   <tr> 
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
-     <td><?php echo $transaction->getDescription(); ?></td>
+     <td><?php echo __($transaction->getDescription()); ?></td>
     <td><?php echo $order->getQuantity() ?>
     	</td>
    
