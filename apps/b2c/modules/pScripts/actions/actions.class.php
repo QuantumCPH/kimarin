@@ -3450,6 +3450,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             echo $customer->getId();
            $balance =  Telienta::getBalance($customer);
            if($balance>0){
+               $transaction = new Transaction();
                $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
                $transaction->setAmount(-$balance);
                $transaction->setTransactionStatusId(3);
