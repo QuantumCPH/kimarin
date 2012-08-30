@@ -3174,7 +3174,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $OpeningBalance = $extrarefill;
                     //This is for Recharge the Customer
                 
-                         Telienta::recharge($this->customers, $OpeningBalance,"Tipsa en van " . $invite->getInviteNumber());
+                         Telienta::recharge($this->customers, $OpeningBalance,$transactiondescriptionB->getTitle());
 
                     //This is for Recharge the Account
                   
