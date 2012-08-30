@@ -3187,15 +3187,11 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
                     $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
                     $this->setPreferredCulture($inviterCustomer);
-                           if($this->getUser()->getCulture()=='en'){
-
-                                  $subject ='Bonus awarded';
-                           }else{
-                                 $subject ='Bonus tildeles';
-                           }
+                    
+                          
 
                         
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$subject);
+                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer);
                         $this->updatePreferredCulture();
                     }
                 }
