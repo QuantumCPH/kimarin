@@ -6,9 +6,13 @@ generator:
     css:              /sf/sf_admin/css/admin_main.css
     list:
       title: 'Postal Charges'
-      display: [id, charges, enablecountry, status]
+      display: [charges, enablecountry, status]
       fields:
         enablecountry: {name: Country}
       object_actions:
-        _delete: ~
         _edit: ~
+    edit:
+      actions:
+        _list: ~
+        _save: ~
+        _save_and_add: ~
