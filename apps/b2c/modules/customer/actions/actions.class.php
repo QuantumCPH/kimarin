@@ -169,6 +169,9 @@ class customerActions extends sfActions {
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
         if($request->getParameter('lang') != ''){
             $this->getUser()->setCulture($request->getParameter('lang'));
+            $this->sLang = $request->getParameter('lang');
+        }else{
+            $this->sLang = 'en';
         }
 
 
