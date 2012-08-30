@@ -48,8 +48,8 @@
                          
                      }elseif($TDI==10){
                          
-                           $tramount=$order->getExtraRefill()/(sfConfig::get('app_vat_percentage')+1);
-                              echo "(".number_format($tramount,2).")";
+                           
+                              echo "(".number_format($order->getExtraRefill(),2).")";
                      }  ?> </td>
                   <td  align="right">
                       
