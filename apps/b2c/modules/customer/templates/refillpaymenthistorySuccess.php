@@ -32,6 +32,8 @@
                 <?php 
                 $amount_total = 0;
                 foreach($transactions as $transaction): ?>
+                
+                <?php      $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId());   ?>
                 <tr>
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td ><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
@@ -72,7 +74,7 @@
                   <td>
                       
                       
-                      <a href="#" class="receipt"  <?php   if($TDI==6){ }else{ ?> onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')"  <?php } ?>>
+                      <a href="#" class="receipt"  <?php   if($TDI==6){ }eselif($TDI==10){}else{ ?> onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')"  <?php } ?>>
                             <?php //echo $tdescription;
                               if(strstr($tdescription, "bonus")){
                                 echo __('Bonus');
