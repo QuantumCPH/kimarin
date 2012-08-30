@@ -22,6 +22,10 @@
                 foreach($transactions as $transaction): ?>
 
                  <?php
+                 
+                 
+                $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
+                 
                   if($incrment%2==0){
                  $class= 'class="even"';
                   }else{
