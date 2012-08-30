@@ -2181,7 +2181,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             $transaction->setCustomerId($order->getCustomerId());
                             $transaction->save();
 
-                            if (Telienta::recharge($customer, $scratchCard->getCardPrice(), "Refill")) {
+                            if (Telienta::recharge($customer, $scratchCard->getCardPrice(), $transactiondescription->getTitle())) {
                                 $scratchCard->setStatus(1);
                                 $scratchCard->setUsedAt(date("Y-m-d H:i:s"));
                                 $scratchCard->setCustomerId($customer->getId());
