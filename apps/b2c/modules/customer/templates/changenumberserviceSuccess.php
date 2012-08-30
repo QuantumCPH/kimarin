@@ -18,7 +18,7 @@ jQuery(function(){
         },
         messages: {
             existingNumber:{
-                required: "<?php echo __('Please Enter Old Mobile Number')?>",
+                required: "<?php echo __('You must fill in this field')?>",
                 minlength: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>",
                 digits: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>"
             },
@@ -72,7 +72,7 @@ jQuery(function(){
             <li>
                 <label style="width: 199px !important;"><?php echo __('New mobile number') ?><br />0034*</label>
                 <input type="text" name="newNumber" id="newNumber" style="margin-bottom:0px" />
-                <span class="alertmsg" id="error" style="float:right!important;margin-right: -5px;"></span>
+                <span class="alertmsg" id="error"></span>
             </li>
 
                 <?php  $c = new Criteria();
