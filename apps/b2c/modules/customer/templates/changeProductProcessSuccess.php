@@ -18,7 +18,7 @@
             <label><?php //echo  $product->getName();  ?></label><br />
         </li> 
          <li>
-            <label><?php echo __("New product name");?>:</label>
+            <label><?php echo __("New product");?>:</label>
             <label><?php echo  $oldProduct->getName();  ?></label><br />
         </li> 
         <li>

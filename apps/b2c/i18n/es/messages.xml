@@ -78,7 +78,7 @@
             </trans-unit>
             <trans-unit id="19" translate="yes" reformat="yes" xml:space="default">
                 <source>IVA</source>
-                <target>I.V.A.</target>
+                <target>IVA</target>
             </trans-unit>
             <trans-unit id="20" translate="yes" reformat="yes" xml:space="default">
                 <source>Total</source>
@@ -2261,6 +2261,22 @@
             <trans-unit id="561" translate="yes" reformat="yes" xml:space="default">
                 <source>Fee for change of number</source>
                 <target>Tarifa por cambio de número</target>
+            </trans-unit>
+            <trans-unit id="562" translate="yes" reformat="yes" xml:space="default">
+                <source>Change product - payment confirmation</source>
+                <target>Cambiar de Producto - confirmación de pago</target>
+            </trans-unit>
+            <trans-unit id="563" translate="yes" reformat="yes" xml:space="default">
+                <source>Change number - payment confirmation</source>
+                <target>Cambiar de Número - confirmación de pago</target>
+            </trans-unit>
+            <trans-unit id="564" translate="yes" reformat="yes" xml:space="default">
+                <source>New product</source>
+                <target>Nueva producto</target>
+            </trans-unit>
+            <trans-unit id="565" translate="yes" reformat="yes" xml:space="default">
+                <source>Charge by Kimarin Customer Support</source>
+                <target>Cargo por el servicio de atención al cliente de Kimarin</target>
             </trans-unit>
         </body>
     </file>

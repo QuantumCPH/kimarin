@@ -6,7 +6,7 @@ generator:
     css:             /sf/sf_admin/css/admin_main.css
     list:
       title:          Preferred Languages
-      display:        [id,language,language_code]
+      display:        [language,language_code]
       
     edit:
       title:          Preferred Language 
