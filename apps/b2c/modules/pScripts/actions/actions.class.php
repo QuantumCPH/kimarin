@@ -3721,9 +3721,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->save();
         }*/
         $cst = new Criteria();
-        $cst->add(SimTypesPeer::TITLE, '%'.$order->getProduct()->getName().'%', Criteria::LIKE);
+        $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
-        $sim_type_id=$simtype->getId();
+       echo $sim_type_id=$simtype->getId();
         $exest = $order->getExeStatus();
         if ($exest!=1) {
 
