@@ -1964,7 +1964,7 @@ class customerActions extends sfActions {
             $ccu->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
             $ccheck = CustomerPeer::doCount($ccu);
             if ($ccheck > 0) {
-                $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__('This mobile number is already registered to a Kimarin customer.'));
+                $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__('This mobile number is already registered to a %1% customer.',array("%1%"=>sfConfig::get("app_site_title"))));
                 return $this->redirect('customer/changenumberservice');
             } else {
                 $order = new CustomerOrder();
