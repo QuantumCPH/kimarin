@@ -350,7 +350,7 @@ class customerActions extends autocustomerActions {
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setTransactionFrom(2);
-
+                 $transaction->setVat($request->getParameter('charge_amount')*sfConfig::get('app_vat_percentage'));
                 $transaction->save();
 
                 Telienta::charge($customer, $extra_refill_wovat, $transactiondescription->getTitle());
@@ -448,6 +448,7 @@ class customerActions extends autocustomerActions {
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setTransactionFrom('2');
+                 $transaction->setVat($request->getParameter('refill_amount')*sfConfig::get('app_vat_percentage'));
                 $transaction->save();
                 Telienta::recharge($customer, $transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1),$transactiondescription->getTitle());
                 //set status

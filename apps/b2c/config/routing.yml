@@ -51,7 +51,7 @@ epay_callback_url:
   param: { module: pScripts, action: confirmPayment }
   
 b2c_homepage:
-  url: /zerocall
+  url: /
   param: { module: customer, action: login}
     
 default_index:
