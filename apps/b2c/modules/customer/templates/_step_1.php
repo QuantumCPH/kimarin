@@ -24,7 +24,7 @@
 			 </span>
 			 <?php endif; ?>
                 
-             <div class='inline-error'><?php echo $error_mobile_number?$form['mobile_number']->renderError():'&nbsp;'?>
+             <div class='inline-error-signup'><?php echo $error_mobile_number?$form['mobile_number']->renderError():'&nbsp;'?>
                  </div>                
             </li>
             <!-- end mobile_number -->  
@@ -43,7 +43,7 @@
 			 </span>
 			 <?php endif; ?>
                 
-             <div class='inline-error'><?php echo $error_nie_passport_number?$form['nie_passport_number']->renderError():'&nbsp;'?>
+             <div class='inline-error-signup'><?php echo $error_nie_passport_number?$form['nie_passport_number']->renderError():'&nbsp;'?>
                  </div>
                 <label style="float:right;width:85px;font-weight:normal;<?php if ($error_nie_passport_number): ?> margin-right:85px; <?php endif; ?>"></label>
             </li>
@@ -61,7 +61,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end nationality -->
             <?php
@@ -77,7 +77,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_product?$form['product']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_product?$form['product']->renderError():'&nbsp;'?></div>
             </li>
             <!--  end product -->
             <?php
@@ -93,7 +93,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_sim_type_id?$form['sim_type_id']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_sim_type_id?$form['sim_type_id']->renderError():'&nbsp;'?></div>
             </li>
             <!--  end sim type -->
             <?php
@@ -109,7 +109,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_preferred_language_id?$form['preferred_language_id']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_preferred_language_id?$form['preferred_language_id']->renderError():'&nbsp;'?></div>
             </li>
             <!--  end preferred language -->
             <?php
@@ -125,7 +125,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_first_name?$form['first_name']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_first_name?$form['first_name']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end first name -->
             <?php
@@ -141,7 +141,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end second last name -->
             <?php
@@ -157,7 +157,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end last name -->
             
@@ -175,7 +175,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_address?$form['address']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_address?$form['address']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end address -->
             <?php
@@ -191,7 +191,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_po_box_number?$form['po_box_number']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_po_box_number?$form['po_box_number']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end pobox number -->
            
@@ -213,7 +213,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_province_id?$form['province_id']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_province_id?$form['province_id']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end province -->
            <?php
@@ -229,7 +229,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_city?$form['city']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_city?$form['city']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end city -->
             
@@ -246,7 +246,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_country_id?$form['country_id']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_country_id?$form['country_id']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end country -->
             <?php
@@ -262,7 +262,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_date_of_birth?$form['date_of_birth']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_date_of_birth?$form['date_of_birth']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end date of birth -->
             <?php
@@ -278,8 +278,8 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_password?$form['password']->renderError():'&nbsp;'?></div>
-             <label style="float:right;width:95px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:103px;<?php else:?>margin-right: 31px; <?php endif; ?>"><?php echo __('Min. 6 digits or characters') ?></label>
+             <div class='inline-error-signup'><?php echo $error_password?$form['password']->renderError():'&nbsp;'?></div>
+             <label style="float:right;width:141px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:70px;<?php else:?>margin-right: 1px; <?php endif; ?>"><?php echo __('Min. 6 digits or characters') ?></label>
             </li>
             <!-- end password -->
             <?php
@@ -295,7 +295,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_password_confirm?$form['password_confirm']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_password_confirm?$form['password_confirm']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end confirm password -->
             <?php
@@ -311,7 +311,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_email?$form['email']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_email?$form['email']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end email -->
             <?php 
@@ -327,7 +327,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_telecom_operator_id?$form['telecom_operator_id']->renderError():'&nbsp;'?></div>
+             <div class='inline-error-signup'><?php echo $error_telecom_operator_id?$form['telecom_operator_id']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end telecom operator -->
                         <!-- 
@@ -337,7 +337,7 @@
           <li><?php  $error_terms_conditions = false;;
             if($form['terms_conditions']->hasError())
             	$error_terms_conditions = true;
-            ?><?php if($error_terms_conditions) { ?><span class="inline-error" style="float:none !important;">
+            ?><?php if($error_terms_conditions) { ?><span class="inline-error-signup" style="float:none !important;">
             	<?php echo $form['terms_conditions']->renderError() ?>
             </span><?php } ?><?php echo $form['terms_conditions'] ?><span>
             <?php

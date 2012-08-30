@@ -104,7 +104,7 @@ function countChar(str)
                         <td><?php echo __("Your friend's full name") ?></td>
                         <td><?php echo __("Your friend's Spanish mobile number") ?></td>
                     </tr>
-                    <tr><td><input type="text" name="name" /><span>&nbsp;</span></td><td><input type="text" name="phone" /><br />ex. 0701234567</td>
+                    <tr><td><input type="text" name="name" /><span>&nbsp;</span></td><td><input type="text" name="phone" /><br /></td>
                     </tr>
                     <tr> 
                         <td ><?php echo __("Your friend's e-mail address") ?></td>

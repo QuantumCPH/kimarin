@@ -3174,7 +3174,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $OpeningBalance = $extrarefill;
                     //This is for Recharge the Customer
                 
-                         Telienta::recharge($this->customers, $OpeningBalance,"Tipsa en van " . $invite->getInviteNumber());
+                         Telienta::recharge($this->customers, $OpeningBalance,$transactiondescriptionB->getTitle());
 
                     //This is for Recharge the Account
                   
@@ -3187,15 +3187,11 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
                     $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
                     $this->setPreferredCulture($inviterCustomer);
-                           if($this->getUser()->getCulture()=='en'){
-
-                                  $subject ='Bonus awarded';
-                           }else{
-                                 $subject ='Bonus tildeles';
-                           }
+                    
+                          
 
                         
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$subject);
+                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer);
                         $this->updatePreferredCulture();
                     }
                 }

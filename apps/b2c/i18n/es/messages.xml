@@ -295,7 +295,7 @@
                 <target>otra historia</target>
             </trans-unit>
             <trans-unit id="73" translate="yes" reformat="yes" xml:space="default">
-                <source>Call History</source>
+                <source>Call history</source>
                 <target>Registro de llamadas</target>
             </trans-unit>
             <trans-unit id="74" translate="yes" reformat="yes" xml:space="default">
@@ -315,7 +315,7 @@
                 <target>No hay registrada ninguna transacción.</target>
             </trans-unit>
             <trans-unit id="78" translate="yes" reformat="yes" xml:space="default">
-                <source>Payment History</source>
+                <source>Payment history</source>
                 <target>Registro de pagos</target>
             </trans-unit>
 
@@ -435,8 +435,8 @@
                 <target>Los mensajes de 1 a 142 caracteres se considerarán como 1 mensaje de texto</target>
             </trans-unit>
             <trans-unit id="106" translate="yes" reformat="yes" xml:space="default">
-                <source>Messages from 143 to 302 characters will be considered as 2 SMS </source>
-                <target>Los mensajes de 143 a 302 caracteres se considerarán como 2 mensajes de texto </target>
+                <source>Messages from 143 to 302 characters will be considered as 2 SMS</source>
+                <target>Los mensajes de 143 a 302 caracteres se considerarán como 2 mensajes de texto</target>
             </trans-unit>
             <trans-unit id="107" translate="yes" reformat="yes" xml:space="default">
                 <source>Messages from 303 to 432 characters will be considered as 3 SMS</source>
@@ -719,7 +719,7 @@
                 <target>En breve, recibirá por correo los productos que ha solicitado. Su número de cliente es </target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
-                <source>SMS History</source>
+                <source>SMS history</source>
                 <target>Registro de SMS</target>
             </trans-unit>
             <trans-unit id="177" translate="yes" reformat="yes" xml:space="default">
@@ -822,8 +822,8 @@
                 <target>Se ha cambiado su contraseña. Utilice la siguiente información para acceder a MI CUENTA.</target>
             </trans-unit>
             <trans-unit id="201" translate="yes" reformat="yes" xml:space="default">
-                <source>Mobile Number: %s</source>
-                <target>Móvil Número: %s</target>
+                <source>Mobile number: %s</source>
+                <target>Móvil número: %s</target>
             </trans-unit>
             <trans-unit id="202" translate="yes" reformat="yes" xml:space="default">
                 <source>Invalid mobile number or password.</source>
@@ -1158,7 +1158,7 @@
                 <target>IVA</target>
             </trans-unit>
             <trans-unit id="286" translate="yes" reformat="yes" xml:space="default">
-                <source>Charge by Customer Support</source>
+                <source>Charge by customer support</source>
                 <target>Cargo por el servicio de atención al cliente de</target>
             </trans-unit>
             <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
@@ -1978,7 +1978,7 @@
                 <target>Solicitar otros productos.</target>
             </trans-unit>    
             <trans-unit id="491" translate="yes" reformat="yes" xml:space="default">
-                <source>Refill by Customer Support</source>
+                <source>Refill by customer support</source>
                 <target>Recarga por el servicio de atención al cliente de</target>
             </trans-unit>
             <trans-unit id="492" translate="yes" reformat="yes" xml:space="default">
@@ -2026,7 +2026,7 @@
                 <target>Enviar la invitación.</target>
             </trans-unit>
             <trans-unit id="503" translate="yes" reformat="yes" xml:space="default">
-                <source>Block Account</source>
+                <source>Block account</source>
                 <target>Bloquear la cuenta</target>
             </trans-unit>
             <trans-unit id="504" translate="yes" reformat="yes" xml:space="default">
@@ -2185,6 +2185,78 @@
             <trans-unit id="542" translate="yes" reformat="yes" xml:space="default">
                 <source>Nationality</source>
                 <target>Nacionalidad</target>
+            </trans-unit>
+            <trans-unit id="543" translate="yes" reformat="yes" xml:space="default">
+                <source>Change number</source>
+                <target>Cambiar de número</target>
+            </trans-unit>
+            <trans-unit id="544" translate="yes" reformat="yes" xml:space="default">
+                <source>Change product</source>
+                <target>Cambiar de producto</target>
+            </trans-unit>
+            <trans-unit id="545" translate="yes" reformat="yes" xml:space="default">
+                <source>Services</source>
+                <target>Servicios</target>
+            </trans-unit>
+            <trans-unit id="546" translate="yes" reformat="yes" xml:space="default">
+                <source>New Sim-card</source>
+                <target>Nueva Tarjeta SIM</target>
+            </trans-unit>
+            <trans-unit id="547" translate="yes" reformat="yes" xml:space="default">
+                <source>Purchase new SIM-card</source>
+                <target>Comprar nueva tarjeta SIM</target>
+            </trans-unit>
+            <trans-unit id="548" translate="yes" reformat="yes" xml:space="default">
+                <source>Select SIM type</source>
+                <target>Seleccionar tipo de SIM</target>
+            </trans-unit>
+            <trans-unit id="549" translate="yes" reformat="yes" xml:space="default">
+                <source>New SIM-card confirmation</source>
+                <target>Confirmación de nueva tarjeta SIM</target>
+            </trans-unit>
+            <trans-unit id="550" translate="yes" reformat="yes" xml:space="default">
+                <source>Old mobile number</source>
+                <target>Antiguo número de teléfono</target>
+            </trans-unit>
+            <trans-unit id="551" translate="yes" reformat="yes" xml:space="default">
+                <source>New mobile number</source>
+                <target>Nuevo número de teléfono</target>
+            </trans-unit>
+            <trans-unit id="552" translate="yes" reformat="yes" xml:space="default">
+                <source>Customer name</source>
+                <target>Nombre de usuario</target>
+            </trans-unit>
+            <trans-unit id="553" translate="yes" reformat="yes" xml:space="default">
+                <source>Product Detail</source>
+                <target>Detalles del producto</target>
+            </trans-unit>
+            <trans-unit id="554" translate="yes" reformat="yes" xml:space="default">
+                <source>You can change your number maximum two times in a month.</source>
+                <target>Puede cambiar su número un máximo de dos veces al mes.</target>
+            </trans-unit>
+            <trans-unit id="555" translate="yes" reformat="yes" xml:space="default">
+                <source>You can't change your number more than two times in a month.</source>
+                <target>No puede cambiar su número más de dos veces al mes.</target>
+            </trans-unit>
+            <trans-unit id="556" translate="yes" reformat="yes" xml:space="default">
+                <source>Product Name</source>
+                <target>Nombre del Producto</target>
+            </trans-unit>
+            <trans-unit id="557" translate="yes" reformat="yes" xml:space="default">
+                <source>Submit</source>
+                <target>Enviar</target>
+            </trans-unit>
+            <trans-unit id="558" translate="yes" reformat="yes" xml:space="default">
+                <source>Your product change will be valid from the first day of the comming month.</source>
+                <target>Su cambio de producto será válido a partir del primer día del próximo mes.</target>
+            </trans-unit>
+            <trans-unit id="559" translate="yes" reformat="yes" xml:space="default">
+                <source>Your product change request is submitted.</source>
+                <target>Su petición de cambio de producto ha sido enviada.</target>
+            </trans-unit>
+            <trans-unit id="560" translate="yes" reformat="yes" xml:space="default">
+                <source>You have already ordered a change of product.</source>
+                <target>Ya se ha pedido un cambio de producto.</target>
             </trans-unit>
         </body>
     </file>

@@ -531,7 +531,7 @@ class emailLib {
         endif;
     }
 
-    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject) {
+    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject=null) {
 
         $c = new Criteria();
         $c->add(CustomerPeer::ID, $inviteuserid);
@@ -541,9 +541,6 @@ class emailLib {
         $customer_id = trim($customer->getId());
 
 
-        $subject = $subject;
-        $subject = $subject;
-        
         $sender_name = sfConfig::get('app_email_sender_name_sup');
         $sender_email = sfConfig::get('app_email_sender_email_sup');
 
@@ -556,13 +553,8 @@ class emailLib {
                     'recepient_name' => $recepient_name,
                     'wrap' => true,
                 ));
-//        $message_body   ='
-//Härmed bekräftas att du har fått provision insatt på ditt konto för att du har tipsat en vän om Smartsim från wls.
-//Gå in på ”Mina sidor” och gå till ”Övrig historik” under ”Samtalshistorik” så ser du vad du har tjänat.<br/>Med vänlig hälsning,
-//<br/>
-//wls<br/>
-//www.WLS2.zerocall.com';
-        //$referrer_id        = trim($customer->getReferrerId());
+        $subject =__('Bonus awarded');
+
         //send to user
         if ($recepient_email != ''):
             $email = new EmailQueue();
@@ -1796,7 +1788,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,
                 ));
 
-        $subject = __('Change Number Confirmation');
+        $subject = __('Change number confirmation');
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
         $customer_id = trim($customer->getId());
@@ -1815,7 +1807,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email->setReceipientEmail($recepient_email);
             $email->setAgentId($agent_company_id);
             $email->setCutomerId($customer_id);
-            $email->setEmailType('Change Number ');
+            $email->setEmailType('Change number');
             $email->setMessage($message_body);
             $email->save();
         }
@@ -1829,7 +1821,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email2->setReceipientEmail($recepient_agent_email);
             $email2->setAgentId($agent_company_id);
             $email2->setCutomerId($customer_id);
-            $email2->setEmailType('Change Number ');
+            $email2->setEmailType('Change number');
             $email2->setMessage($message_body);
 
             $email2->save();
@@ -1843,7 +1835,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email3->setReceipientEmail($sender_email);
             $email3->setAgentId($agent_company_id);
             $email3->setCutomerId($customer_id);
-            $email3->setEmailType('Change Number ');
+            $email3->setEmailType('Change number');
             $email3->setMessage($message_body);
             $email3->save();
         endif;
@@ -1856,7 +1848,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Change Number ');
+            $email4->setEmailType('Change number');
             $email4->setMessage($message_body);
             $email4->save();
         endif;
