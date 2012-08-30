@@ -18,7 +18,7 @@ jQuery(function(){
         },
         messages: {
             existingNumber:{
-                required: "<?php echo __('Please Enter Old Mobile Number')?>",
+                required: "<?php echo __('You must fill in this field')?>",
                 minlength: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>",
                 digits: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>"
             },
