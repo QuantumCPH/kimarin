@@ -1990,12 +1990,12 @@
                 <target>Mehrwertsteuer</target>
             </trans-unit>
             <trans-unit id="493" translate="yes" reformat="yes" xml:space="default">
-                <source>Charge by Kimarin Customer Support</source>
-                <target>Gebühr von Kimarin Kundenservice</target>
+                <source>Charge by Customer Support</source>
+                <target>Gebühr von Kundenservice</target>
             </trans-unit>
             <trans-unit id="494" translate="yes" reformat="yes" xml:space="default">
-                <source>Refill by Kimarin Customer Support</source>
-                <target>Von Kimarin Kundenservice aufzufüllen</target>
+                <source>Refill by Customer Support</source>
+                <target>Von Kundenservice aufzufüllen</target>
             </trans-unit>
             <trans-unit id="495" translate="yes" reformat="yes" xml:space="default">
                 <source>Refill via agent</source>
@@ -2308,10 +2308,6 @@
             <trans-unit id="569" translate="yes" reformat="yes" xml:space="default">
                 <source>New product</source>
                 <target>Neue produkts</target>
-            </trans-unit>
-            <trans-unit id="570" translate="yes" reformat="yes" xml:space="default">
-                <source>Charge by Kimarin Customer Support</source>
-                <target>Gebühr von Kimarin Kundenservice</target>
             </trans-unit>
         </body>
     </file>
