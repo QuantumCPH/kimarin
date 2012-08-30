@@ -36,6 +36,7 @@
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td ><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
                   <td nowrap><?php 
+                      $TDI=$transaction->getTransactionDescriptionId();
                   if($transaction->getDescription()=="Registrering inkl. taletid"){
                       echo "SmartSim inkludert Pott";                      
                   }else{
@@ -44,9 +45,11 @@
                         }else{
                           echo __($tdescription = $transaction->getDescription());  
                         } 
+                          $tramount=$transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1);
+                              echo "(".number_format($tramount,2).")";
                   }?></td>
                   <td align="right"><?php
-                     $TDI=$transaction->getTransactionDescriptionId();
+                 
                   
                      if($TDI==6){
                              echo  "0.00" ;
@@ -66,7 +69,10 @@
 //                            }else{
                                 echo sfConfig::get('app_currency_code');
 //                            } ?></td>
-                  <td><a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')">
+                  <td>
+                      
+                      
+                      <a href="#" class="receipt"  <?php   if($TDI==6){ }else{ ?> onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')"  <?php } ?>>
                             <?php //echo $tdescription;
                               if(strstr($tdescription, "bonus")){
                                 echo __('Bonus');
@@ -75,18 +81,7 @@
                               }  
                             ?>
                       </a></td>
-<!--                  <td nowrap="nowrap"><a href="#" style=" white-space: nowrap" class="receipt" onclick="iprint(preview_<?php echo $transaction->getId();?>);return false;"><?php echo __('Print'); ?>
-                  </a>
-                      <iframe id="preview_<?php echo $transaction->getId();?>" name="preview_<?php echo $transaction->getId();?>" src="<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>"  style="display:none">
-                     </iframe>
-                        <script>
-                            function printForm() { window.focus(); window.print(); }
-                            function iprint(ptarget)
-                            {
-                                ptarget.focus();
-                                window.print();
-                            } 
-                        </script>-->
+ 
                       </td>
                  
                      
