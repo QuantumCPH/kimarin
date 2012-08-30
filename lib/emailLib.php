@@ -531,7 +531,7 @@ class emailLib {
         endif;
     }
 
-    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject) {
+    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject=null) {
 
         $c = new Criteria();
         $c->add(CustomerPeer::ID, $inviteuserid);
@@ -541,9 +541,6 @@ class emailLib {
         $customer_id = trim($customer->getId());
 
 
-        $subject = $subject;
-        $subject = $subject;
-        
         $sender_name = sfConfig::get('app_email_sender_name_sup');
         $sender_email = sfConfig::get('app_email_sender_email_sup');
 
@@ -556,13 +553,8 @@ class emailLib {
                     'recepient_name' => $recepient_name,
                     'wrap' => true,
                 ));
-//        $message_body   ='
-//Härmed bekräftas att du har fått provision insatt på ditt konto för att du har tipsat en vän om Smartsim från wls.
-//Gå in på ”Mina sidor” och gå till ”Övrig historik” under ”Samtalshistorik” så ser du vad du har tjänat.<br/>Med vänlig hälsning,
-//<br/>
-//wls<br/>
-//www.WLS2.zerocall.com';
-        //$referrer_id        = trim($customer->getReferrerId());
+        $subject =__('Bonus awarded');
+
         //send to user
         if ($recepient_email != ''):
             $email = new EmailQueue();
