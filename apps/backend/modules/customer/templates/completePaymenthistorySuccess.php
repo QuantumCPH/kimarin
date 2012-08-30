@@ -48,7 +48,8 @@
                 $amount_total = 0;
                 $incrment=1;
                 foreach($transactions as $transaction): ?>
-
+   <?php      $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId()); 
+      $TDI=$transaction->getTransactionDescriptionId();?>
                  <?php
                   if($incrment%2==0){
                    $class= 'class="even"';
@@ -60,8 +61,28 @@
                 <tr <?php echo $class;?>>
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td><?php echo  $transaction->getCreatedAt('d-m-Y') ?></td>
-                  <td><?php echo $transaction->getDescription() ?></td>
-                  <td align="right"><?php echo  number_format($transaction->getAmount(),2);  $amount_total += $transaction->getAmount() ?>
+                  <td><?php echo $transaction->getDescription(); 
+                  if($TDI==6){
+                             $tramount=$order->getExtraRefill()/(sfConfig::get('app_vat_percentage')+1);
+                              echo "(".number_format($tramount,2).")";
+                         
+                     }elseif($TDI==10){
+                           
+                              echo "(".number_format($order->getExtraRefill(),2).")";
+                     }  ?></td>
+                  <td align="right">
+                      
+                      
+                      <?php 
+                        if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{
+                      echo  number_format($transaction->getAmount(),2);  $amount_total += $transaction->getAmount();
+                     }
+                      ?>
                             <?php 
 //                            if($lang=="pl"){
 //                                echo ('plz');
