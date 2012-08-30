@@ -94,7 +94,7 @@
 	</form>
 	</div>
 	<div class="login-right"><h4><?php echo __('Did you forget your password?') ?></h4>
-	<form id="forgot_password_form" method="post" action="<?php echo url_for('customer/sendPassword') ?>">
+	<form id="forgot_password_form" name="frmforget" method="post" action="<?php echo url_for('customer/sendPassword') ?>">
 
         <label <?php echo $clsForgotField;?>><?php echo __('Your mobile number:');//echo __('Write e-mail address you used for registration.<br /><br />Your password will be sent to you via this email.') ?></label>
 	<input   class="input"  type="text" name="mobile" id="forgot_password_email" /><br />
@@ -125,7 +125,8 @@
                         //alert(valid);
                         if (!valid) { // if email is not valid
                             jq('#forgot_password_mobile').focus();
-                            alert('<?php echo __('Enter your mobile number to receive your password.') ?>');
+                            alert('<?php echo __('Please enter a valid 8 to 14 digit mobile number.') ?>');
+                            document.frmforget.mobile.focus();
                             return false;
                         }
 
