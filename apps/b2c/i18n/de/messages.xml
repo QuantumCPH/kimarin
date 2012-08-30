@@ -2297,6 +2297,18 @@
                 <source>You have already ordered a change of product.</source>
                 <target>Sie haben bereits einen Produktwechsel bestellt.</target>
             </trans-unit>
+            <trans-unit id="567" translate="yes" reformat="yes" xml:space="default">
+                <source>Change product - payment confirmation</source>
+                <target>Produkt wechseln - zahlungsbestätigung</target>
+            </trans-unit>
+            <trans-unit id="568" translate="yes" reformat="yes" xml:space="default">
+                <source>Change number - payment confirmation</source>
+                <target>Nummer wechseln - zahlungsbestätigung</target>
+            </trans-unit>
+            <trans-unit id="569" translate="yes" reformat="yes" xml:space="default">
+                <source>New product</source>
+                <target>Neue produkts</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -1788,7 +1788,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,
                 ));
 
-        $subject = __('Change number confirmation');
+        $subject = __('Change number - payment confirmation');
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
         $customer_id = trim($customer->getId());
@@ -1886,7 +1886,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,
                 ));
 
-    $subject = __('Change product payment confirmation');
+    $subject = __('Change product - payment confirmation');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');
