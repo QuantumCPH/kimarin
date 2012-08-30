@@ -3441,21 +3441,25 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
         $c->addAnd(ProductTypePeer::ID,2);
         $c->addAnd(CustomerOrderPeer::CREATED_AT,$date, Criteria::LESS_THAN);
+        $c->addAnd(CustomerOrderPeer::ORDER_STATUS_ID,3);
         $c->addGroupByColumn(CustomerPeer::ID);
         $c->addDescendingOrderByColumn (CustomerOrderPeer::CREATED_AT);
         $customers = CustomerPeer::doSelect($c);
 
         foreach($customers as $customer){
-           // echo $customer->getId();
+            echo $customer->getId();
            $balance =  Telienta::getBalance($customer);
            if($balance>0){
-               $transaction = new Transaction();
+               $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
                $transaction->setAmount(-$balance);
-               $transaction->setDescription("Balance Expired");
                $transaction->setTransactionStatusId(3);
                $transaction->setCustomerId($customer->getId());
+               $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+               $transaction->setTransactionDescriptionId($transactiondescription->getId());
+               $transaction->setDescription($transactiondescription->getTitle());
                $transaction->save();
-               Telienta::charge($customer, $balance, "Balance Expired");
+               
+               Telienta::charge($customer, $balance, $transactiondescription->getTitle());
            }
         }
 
