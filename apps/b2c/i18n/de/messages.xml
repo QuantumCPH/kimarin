@@ -2309,6 +2309,10 @@
                 <source>New product</source>
                 <target>Neue produkts</target>
             </trans-unit>
+            <trans-unit id="570" translate="yes" reformat="yes" xml:space="default">
+                <source>Charge by Kimarin Customer Support</source>
+                <target>Gebühr von Kimarin Kundenservice</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
