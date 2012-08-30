@@ -2273,11 +2273,7 @@
             <trans-unit id="564" translate="yes" reformat="yes" xml:space="default">
                 <source>New product</source>
                 <target>Nueva producto</target>
-            </trans-unit>
-            <trans-unit id="565" translate="yes" reformat="yes" xml:space="default">
-                <source>Charge by Kimarin Customer Support</source>
-                <target>Cargo por el servicio de atención al cliente de Kimarin</target>
-            </trans-unit>
+            </trans-unit>            
         </body>
     </file>
 </xliff>
