@@ -121,9 +121,9 @@ use_helper('Number');
         <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
 
-<p><?php echo __('Cheers') ?></p>
+<!--<p><?php echo __('Cheers') ?></p>
 
 <p>
 <?php echo __('Support') ?><br />
 <?php echo sfConfig::get('app_site_title');?>
-</p>        
+</p>        -->
