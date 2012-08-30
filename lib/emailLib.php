@@ -539,14 +539,11 @@ class emailLib {
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
         $customer_id = trim($customer->getId());
-
-
         $sender_name = sfConfig::get('app_email_sender_name_sup');
         $sender_email = sfConfig::get('app_email_sender_email_sup');
-
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
- 
+
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('pScripts/bonus_web_reg', array(
                     'customer' => $customerr,

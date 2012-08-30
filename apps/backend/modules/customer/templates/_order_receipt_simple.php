@@ -121,7 +121,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
 <?php    if($TDI==6){  ?>
   
-   <tr>
+  <tr>
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
     <?php  echo __('Discount Customer Support');   ?>
