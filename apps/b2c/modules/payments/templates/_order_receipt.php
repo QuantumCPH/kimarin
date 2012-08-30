@@ -171,7 +171,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <tr> 
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
-    <?php 
+   
     
      <?php   if($TDI==6){
          echo __('Airtime refill');
@@ -188,7 +188,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     ?>
     
         
-        ?>
+      
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
