@@ -124,7 +124,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <tr>
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
-    <?php  echo __('Discount Customer Support');   ?>
+    <?php  echo __('Airtime bonus');   ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
