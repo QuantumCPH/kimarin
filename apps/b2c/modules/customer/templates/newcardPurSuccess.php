@@ -29,7 +29,7 @@
                         </select>
                     </td>
                 </tr>
-             <?php if($price!=''){ ?>
+             <?php if($product_id!=''){ ?>
                 <tr>
                     <td><?php echo __("Product price") ?>:</td>
                     <td class="padding"><?php echo number_format($price, 2);echo sfConfig::get('app_currency_code'); ?></td>
