@@ -280,7 +280,7 @@
 			 <?php endif; ?>
              <div class='inline-error-signup'><?php echo $error_password?$form['password']->renderError():'&nbsp;'?></div>
              <?php
-               if($sLang=='de'){
+               if($_GET['lang']=='de'){
                    $style = "float:right !important;width:188px;font-weight:normal;text-align:right !important;";
                }else{
                    $style = 'float:right !important;width:141px;font-weight:normal;text-align:right !important;';
