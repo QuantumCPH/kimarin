@@ -1,1 +1,0 @@
-<a href="<?php echo url_for('sale_activity/create'); ?>"  class="external_link" target="_self">Create New</a>

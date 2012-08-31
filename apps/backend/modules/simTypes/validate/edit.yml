@@ -1,4 +1,0 @@
-fields:
-  sim_types{title}:
-    required:
-      msg:              Sim type title cannot be left blank.   

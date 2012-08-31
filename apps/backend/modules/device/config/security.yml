@@ -1,6 +1,0 @@
-default:
-  is_secure: on
-activation:
-  is_secure: off
-rejection:
-  is_secure: off

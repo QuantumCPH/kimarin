@@ -1,4 +1,0 @@
-fields:
-  nationality{title}:
-    required:
-      msg:              Nationality title cannot be left blank.   

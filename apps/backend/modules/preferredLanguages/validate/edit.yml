@@ -1,7 +1,0 @@
-fields:
-  preferred_languages{language}:
-    required:
-      msg:              Language cannot be left blank.   
-  preferred_languages{language_code}:
-    required:
-      msg:              Language Code cannot be left blank.       
