@@ -1099,7 +1099,7 @@
             </trans-unit>
             <trans-unit id="271" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter your message.</source>
-                <target>Escriba el mensaje.</target>
+                <target>Escriviu el missatge.</target>
             </trans-unit>
             <trans-unit id="272" translate="yes" reformat="yes" xml:space="default">
                 <source>Your %1% account balance is low. Please refill your %1% account. Thank you.</source>
