@@ -72,19 +72,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <th colspan="3"><?php echo __('Order Receipt') ?>(  <?php if ($order->getIsFirstOrder())
     {
         echo $order->getProduct()->getName();
-        if($transaction->getDescription()=="Anmeldung inc. sprechen"){
-          echo "<br />["; echo __('Smartsim including pot'); echo "]";
-        }else{
-            echo  '<br />['. __($transaction->getDescription()) .']';
-        }
+       
     }
     else
     {
-	if($transaction->getDescription()=="Refill"){
-          echo "Refill";
-        }else{
+	 
           echo __($transaction->getDescription());
-        }
+        
     }
     ?>)</th>
     <th><?php echo __('Order number') ?> <?php echo $order->getId() ?></th>
