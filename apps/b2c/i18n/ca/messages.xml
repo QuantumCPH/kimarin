@@ -112,7 +112,7 @@
       
             <trans-unit id="27" translate="yes" reformat="yes" xml:space="default">
                 <source>Payment</source>
-                <target>Pago</target>
+                <target>Pagament</target>
             </trans-unit>
             <trans-unit id="28" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number</source>
@@ -127,7 +127,7 @@
                 <target>Nom</target>
             </trans-unit>
             <trans-unit id="31" translate="yes" reformat="yes" xml:space="default">
-                <source>last name</source>
+                <source>Last name</source>
                 <target>Segon cognom</target>
             </trans-unit>
             <trans-unit id="32" translate="yes" reformat="yes" xml:space="default">
@@ -490,7 +490,7 @@
             </trans-unit>
             <trans-unit id="120" translate="yes" reformat="yes" xml:space="default">
                 <source>Payment details:</source>
-                <target>Detalles del pago:</target>
+                <target>Dades de pagament:</target>
             </trans-unit>
             <trans-unit id="121" translate="yes" reformat="yes" xml:space="default">
                 <source>Step 1</source>
@@ -522,7 +522,7 @@
             </trans-unit>
                <trans-unit id="128" translate="yes" reformat="yes" xml:space="default">
                 <source>Last name</source>
-                <target>Pasado nombre</target>
+                <target>Segon cognom</target>
             </trans-unit>
                <trans-unit id="129" translate="yes" reformat="yes" xml:space="default">
                 <source>Address</source>
@@ -1976,7 +1976,7 @@
                 <target>Sol-licitar altres productes.</target>
             </trans-unit>    
             <trans-unit id="491" translate="yes" reformat="yes" xml:space="default">
-                <source>Refill by Customer Support</source>
+                <source>Refill by customer support</source>
                 <target>Recàrrega pel servei d'atenció al client de</target>
             </trans-unit>
             <trans-unit id="492" translate="yes" reformat="yes" xml:space="default">
