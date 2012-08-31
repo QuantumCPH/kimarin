@@ -144,8 +144,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
                          
                      }elseif($TDI==10){
                            echo  "0.00" ;   
-                     }else{ echo number_format($subtotal,2) ?><?php echo sfConfig::get('app_currency_code');  
-                     } ?> </td>
+                     }else{ echo number_format($subtotal,2);  
+                     } ?> <?php echo sfConfig::get('app_currency_code'); ?></td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
