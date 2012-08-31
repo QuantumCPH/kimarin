@@ -165,7 +165,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
         }       
         ?>
          </ul><br clear="both" />
-         <p><?php echo __("All amounts are excl. IVA (%1%).",array("%1%"=>sfConfig::get('app_vat')));?></p>
+         <p><?php echo __("All amounts are excl. IVA.");?></p>
          <p><?php echo __("The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. ",array("%1%"=>sfConfig::get('app_currency_code')));echo __("The refill amount is valid for 180 days.");?></p>
          <p>&nbsp;</p>
          <ul>
