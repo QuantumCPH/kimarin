@@ -551,7 +551,6 @@ class emailLib {
                        'order' => $order,
                     'transaction' => $transaction,
                      'vat' => $vat,
-                    'agent_name' => $recepient_agent_name,
                    
                     'wrap' => true,
                 ));
