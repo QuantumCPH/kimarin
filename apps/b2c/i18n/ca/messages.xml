@@ -458,7 +458,7 @@
             </trans-unit>
             <trans-unit id="112" translate="yes" reformat="yes" xml:space="default">
                 <source>Destination number&lt;br /&gt;(without leading 0)</source>
-                <target>Destino Número &lt;br /&gt; (sin conducir 0)</target>
+                <target>Número del &lt;br /&gt; (sense 0 inicial)</target>
             </trans-unit>
             <trans-unit id="113" translate="yes" reformat="yes" xml:space="default">
                 <source>Characters</source>
@@ -1953,8 +1953,8 @@
                 <target>Kennwort</target>
             </trans-unit>
             <trans-unit id="485" translate="yes" reformat="yes" xml:space="default">
-                <source>Destination number</source>
-                <target>Número del destinatari (sense 0 inicial)</target>
+                <source>Destination number&lt;br /&gt;(without leading 0)</source>
+                <target>Número del destinatari&lt;br /&gt;(sense 0 inicial)</target>
             </trans-unit>
             <trans-unit id="486" translate="yes" reformat="yes" xml:space="default">
                 <source>Welcome to MY ACCOUNT</source>
