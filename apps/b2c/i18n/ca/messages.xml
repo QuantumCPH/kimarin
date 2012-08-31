@@ -116,7 +116,7 @@
             </trans-unit>
             <trans-unit id="28" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number</source>
-                <target>Móvil número</target>
+                <target>Número de mòbil</target>
             </trans-unit>
             <trans-unit id="29" translate="yes" reformat="yes" xml:space="default">
                 <source>Product</source>
@@ -739,7 +739,8 @@
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
                 <target>Número de orden.</target>
-            </trans-unit><trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
+            </trans-unit>
+            <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number</source>
                 <target>Número de mòbil</target>
             </trans-unit>
