@@ -531,7 +531,7 @@ class emailLib {
         endif;
     }
 
-    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject=null) {
+    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject=null,$order,$transaction) {
 
         $c = new Criteria();
         $c->add(CustomerPeer::ID, $inviteuserid);
@@ -548,6 +548,8 @@ class emailLib {
         $message_body = get_partial('pScripts/bonus_web_reg', array(
                     'customer' => $customerr,
                     'recepient_name' => $recepient_name,
+                       'order' => $order,
+                    'transaction' => $transaction,
                     'wrap' => true,
                 ));
         $subject =__('Bonus awarded');
