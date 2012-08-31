@@ -714,7 +714,7 @@
             </trans-unit>
             <trans-unit id="175" translate="yes" reformat="yes" xml:space="default">
                 <source>The products you have ordered will be sent by mail shortly. Your customer number is </source>
-                <target>En breu, rebreu per correu els productes que heu sol·licitat.  El vostre número de client és</target>
+                <target>En breu, rebreu per correu els productes que heu sol·licitat.  El vostre número de client és </target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>SMS history</source>
