@@ -112,7 +112,7 @@
       
             <trans-unit id="27" translate="yes" reformat="yes" xml:space="default">
                 <source>Payment</source>
-                <target>Pago</target>
+                <target>Pagament</target>
             </trans-unit>
             <trans-unit id="28" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number</source>
