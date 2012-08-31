@@ -2326,8 +2326,8 @@
                 <target>Ihr aktuelles Produkt ist</target>
             </trans-unit>
             <trans-unit id="574" translate="yes" reformat="yes" xml:space="default">
-                <source>Sent by</source>
-                <target>Gesandt von</target>
+                <source>-Sent by</source>
+                <target>-Gesandt von</target>
             </trans-unit>
             <trans-unit id="575" translate="yes" reformat="yes" xml:space="default">
                 <source>Refill - Scratch card</source>

@@ -2297,8 +2297,8 @@
                 <target>Confirmació del canvi de producte</target>
             </trans-unit>
             <trans-unit id="571" translate="yes" reformat="yes" xml:space="default">
-                <source>Sent by</source>
-                <target>Enviat per</target>
+                <source>-Sent by</source>
+                <target>-Enviat per</target>
             </trans-unit>
             <trans-unit id="572" translate="yes" reformat="yes" xml:space="default">
                 <source>Refill - Scratch card</source>
