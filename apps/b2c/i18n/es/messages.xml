@@ -743,7 +743,7 @@
                 <target>Número de orden.</target>
             </trans-unit><trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number</source>
-                <target>Móvil Número</target>
+                <target>Número de móvil</target>
             </trans-unit>
             <trans-unit id="182" translate="yes" reformat="yes" xml:space="default">
                 <source>Smartsim including pot</source>

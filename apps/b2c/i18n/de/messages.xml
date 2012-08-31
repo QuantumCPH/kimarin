@@ -116,7 +116,7 @@
             </trans-unit>
             <trans-unit id="28" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number</source>
-                <target>Handy-Nummer</target>
+                <target>Mobilfunknummer</target>
             </trans-unit>
             <trans-unit id="29" translate="yes" reformat="yes" xml:space="default">
                 <source>product</source>
