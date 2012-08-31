@@ -1,0 +1,18 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      PostalCharges
+    theme:            default
+    css:              /sf/sf_admin/css/admin_main.css
+    list:
+      title: 'Postal Charges'
+      display: [charges, enablecountry, status]
+      fields:
+        enablecountry: {name: Country}
+      object_actions:
+        _edit: ~
+    edit:
+      actions:
+        _list: ~
+        _save: ~
+        _save_and_add: ~

@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nationality
+    theme:            default
+    css:             /sf/sf_admin/css/admin_main.css
+    list:
+      title:          Nationality List
+      display:        [title]
+      object_actions:
+        _edit: ~
+      
+    edit:
+      title:          Nationality
+      actions:
+        _list: ~
+        _save: ~
+        _save_and_add: ~
+      
+        
+    create:
+      title:          Add Nationality 
