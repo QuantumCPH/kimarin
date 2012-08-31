@@ -3191,7 +3191,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                           
 
                         
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$inviteOrder,$transaction_i);
+                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,NULL,$inviteOrder,$transaction_i);
                         $this->updatePreferredCulture();
                     }
                 }
