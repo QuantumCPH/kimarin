@@ -188,11 +188,11 @@
             </trans-unit>
             <trans-unit id="46" translate="yes" reformat="yes" xml:space="default">
                 <source>Total amount</source>
-                <target>Totalizado cantidad</target>
+                <target>Import total</target>
             </trans-unit>
             <trans-unit id="47" translate="yes" reformat="yes" xml:space="default">
                 <source>Total</source>
-                <target>Import total</target>
+                <target>Total</target>
             </trans-unit>
             <trans-unit id="48" translate="yes" reformat="yes" xml:space="default">
                 <source>Customer Number</source>
