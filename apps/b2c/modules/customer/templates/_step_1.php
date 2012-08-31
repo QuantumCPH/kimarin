@@ -354,7 +354,7 @@
             }elseif($sf_user->getCulture()=='es'){
                 $url = "http://kimarin.es/es/terms-conditions-es.html";
             }elseif($sf_user->getCulture()=='ca'){
-                $url = "http://kimarin.es/ca/terms-conditions-ca.html";
+                $url = "http://kimarin.es/cat/terms-conditions-cat.html";
             }else{
                 $url = "http://kimarin.es/terms-conditions-en.html"; 
             }
