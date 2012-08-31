@@ -127,7 +127,7 @@
                 <target>Nom</target>
             </trans-unit>
             <trans-unit id="31" translate="yes" reformat="yes" xml:space="default">
-                <source>last name</source>
+                <source>Last name</source>
                 <target>Segon cognom</target>
             </trans-unit>
             <trans-unit id="32" translate="yes" reformat="yes" xml:space="default">
@@ -522,7 +522,7 @@
             </trans-unit>
                <trans-unit id="128" translate="yes" reformat="yes" xml:space="default">
                 <source>Last name</source>
-                <target>Pasado nombre</target>
+                <target>Segon cognom</target>
             </trans-unit>
                <trans-unit id="129" translate="yes" reformat="yes" xml:space="default">
                 <source>Address</source>
