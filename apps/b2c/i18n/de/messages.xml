@@ -754,7 +754,7 @@
             </trans-unit>
             <trans-unit id="184" translate="yes" reformat="yes" xml:space="default">
                 <source>Your customer number is </source>
-                <target>Ihre Kundennummer ist</target>
+                <target>Ihre Kundennummer ist </target>
             </trans-unit>
             <trans-unit id="185" translate="yes" reformat="yes" xml:space="default">
                 <source>You will receive your package within %1%.</source>
