@@ -76,7 +76,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 <table class="receipt" cellspacing="0" width="600px">
   <tr bgcolor="#CCCCCC" class="receipt_header">
-      <th colspan="4" ><?php echo __('Order Receipt') ?></th>
+      <th colspan="4"  align="left" ><?php echo __('Order Receipt') ?></th>
   
   </tr>
  <tr>
@@ -86,7 +86,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <td  colspan="4"><b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?></td>
    </tr>
   <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th colspan="3"><?php echo __('Order Receipt') ?>(
+    <th colspan="3"  align="left" ><?php echo __('Order Receipt') ?>(
         <?php if ($order->getIsFirstOrder())
     {
 		echo $order->getProduct()->getName() .
