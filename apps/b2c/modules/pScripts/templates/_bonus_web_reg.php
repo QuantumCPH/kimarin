@@ -76,14 +76,14 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 <table class="receipt" cellspacing="0" width="600px">
   <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th ><?php echo __('Order Receipt') ?></th>
+      <th colspan="4" ><?php echo __('Order Receipt') ?></th>
   
   </tr>
  <tr>
-  <td><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
+     <td colspan="4"><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
     </tr>
    <tr>
-  <td><b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?></td>
+  <td  colspan="4"><b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?></td>
    </tr>
   <tr bgcolor="#CCCCCC" class="receipt_header">
     <th colspan="3"><?php echo __('Order Receipt') ?>(
