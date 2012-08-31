@@ -116,7 +116,7 @@
             </trans-unit>
             <trans-unit id="28" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number</source>
-                <target>Móvil número</target>
+                <target>Número de mòbil</target>
             </trans-unit>
             <trans-unit id="29" translate="yes" reformat="yes" xml:space="default">
                 <source>Product</source>
@@ -300,7 +300,7 @@
             </trans-unit>
             <trans-unit id="74" translate="yes" reformat="yes" xml:space="default">
                 <source>Order number</source>
-                <target>Número de client</target>
+                <target>Número de comanda</target>
             </trans-unit>
             <trans-unit id="75" translate="yes" reformat="yes" xml:space="default">
                 <source>Date and time</source>
@@ -739,7 +739,8 @@
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
                 <target>Número de orden.</target>
-            </trans-unit><trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
+            </trans-unit>
+            <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number</source>
                 <target>Número de mòbil</target>
             </trans-unit>
@@ -753,7 +754,7 @@
             </trans-unit>
             <trans-unit id="184" translate="yes" reformat="yes" xml:space="default">
                 <source>Your customer number is </source>
-                <target>Su número de cliente es</target>
+                <target>Su número de cliente es </target>
             </trans-unit>
             <trans-unit id="185" translate="yes" reformat="yes" xml:space="default">
                 <source>You will receive your package within %1%.</source>
@@ -2165,7 +2166,7 @@
             </trans-unit>
             <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to your e-mail address shortly.</source>
-                <target>La seva contrasenya li serà enviada a la seva adreça de correu electrònic en breu.</target>
+                <target>En breu, enviarem la vostra contrasenya a l'adreça de correu electrònic.</target>
             </trans-unit>
             <trans-unit id="539" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>

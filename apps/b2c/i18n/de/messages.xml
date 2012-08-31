@@ -116,7 +116,7 @@
             </trans-unit>
             <trans-unit id="28" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number</source>
-                <target>Handy-Nummer</target>
+                <target>Mobilfunknummer</target>
             </trans-unit>
             <trans-unit id="29" translate="yes" reformat="yes" xml:space="default">
                 <source>product</source>
@@ -754,7 +754,7 @@
             </trans-unit>
             <trans-unit id="184" translate="yes" reformat="yes" xml:space="default">
                 <source>Your customer number is </source>
-                <target>Ihre Kundennummer ist</target>
+                <target>Ihre Kundennummer ist </target>
             </trans-unit>
             <trans-unit id="185" translate="yes" reformat="yes" xml:space="default">
                 <source>You will receive your package within %1%.</source>
@@ -2199,7 +2199,7 @@
             </trans-unit>
             <trans-unit id="544" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to your e-mail address shortly.</source>
-                <target>Ihr Passwort wird an Ihre E-Mail-Adresse in Kürze zugesandt.</target>
+                <target>Ihr Passwort wird an Ihre E-Mail-Addresse in kürze zugesandt.</target>
             </trans-unit>
              <trans-unit id="545" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
