@@ -198,7 +198,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }else{ echo number_format($subtotal = $transaction->getAmount()-$vat,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   
- 
+  
     <?php   if($TDI==6){   ?>
                            <tr> 
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
