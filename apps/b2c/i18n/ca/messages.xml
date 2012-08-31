@@ -490,7 +490,7 @@
             </trans-unit>
             <trans-unit id="120" translate="yes" reformat="yes" xml:space="default">
                 <source>Payment details:</source>
-                <target>Detalles del pago:</target>
+                <target>Dades de pagament:</target>
             </trans-unit>
             <trans-unit id="121" translate="yes" reformat="yes" xml:space="default">
                 <source>Step 1</source>
