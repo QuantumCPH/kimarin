@@ -50,7 +50,7 @@
             </trans-unit>
             <trans-unit id="12" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
-                <target>Número de orden.</target>
+                <target>Número de comanda.</target>
             </trans-unit>
             <trans-unit id="13" translate="yes" reformat="yes" xml:space="default">
                 <source>US Mobile Number</source>
@@ -738,7 +738,7 @@
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
-                <target>Número de orden.</target>
+                <target>Número de comanda.</target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number</source>
