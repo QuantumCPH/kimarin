@@ -2048,8 +2048,8 @@
                 <target>Crear contrasenya</target>
             </trans-unit>
             <trans-unit id="509" translate="yes" reformat="yes" xml:space="default">
-                <source>"%value%" is too long (14 characters max)</source>
-                <target>"%value%" és massa llarg (14 caràcters màx.)</target>
+                <source>"%value%" is too long (14 characters max).</source>
+                <target>"%value%" és massa llarg (14 caràcters màx).</target>
             </trans-unit>
             <trans-unit id="510" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password must be at least 6 digits or characters.</source>
