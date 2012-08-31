@@ -3892,8 +3892,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                    $this->customer=CustomerPeer::retrieveByPK(34);
 
                         
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$inviteOrder,$transaction_i);
-                        $this->updatePreferredCulture();   
+                        emailLib::sendCustomerConfirmRegistrationEmail($inviterCustomer->getCustomerId(),$this->customer,$inviteOrder,$transaction_i);
+                        $this->updatePreferredCulture();  
+                          return sfView::NONE;
       
   }
     
