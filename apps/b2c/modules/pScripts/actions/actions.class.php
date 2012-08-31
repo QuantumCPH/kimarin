@@ -3191,7 +3191,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                           
 
                         
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer);
+                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$inviteOrder,$transaction_i);
                         $this->updatePreferredCulture();
                     }
                 }
@@ -3881,5 +3881,18 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         return $hex;
     }
 
- 
+  public function executeEmailTestCenter(sfWebRequest $request){
+      
+     $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
+                    $this->setPreferredCulture($inviterCustomer);
+                    
+                          
+
+                        
+                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$inviteOrder,$transaction_i);
+                        $this->updatePreferredCulture();   
+      
+  }
+    
+    
 }
