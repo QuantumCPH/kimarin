@@ -1122,8 +1122,8 @@
                 <target>Primer apellido</target>
             </trans-unit>
             <trans-unit id="277" translate="yes" reformat="yes" xml:space="default">
-                <source>This mobile number is already registered to a 1 customer.</source>
-                <target>Este número de móvil ya está registrado a un cliente de 1.</target>
+                <source>This mobile number is already registered to a %1% customer.</source>
+                <target>Este número de móvil ya está registrado a un cliente de %1%.</target>
             </trans-unit>
             <trans-unit id="278" translate="yes" reformat="yes" xml:space="default">
                 <source>N.I.E/Passport Number already existing.</source>
