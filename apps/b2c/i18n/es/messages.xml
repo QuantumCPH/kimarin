@@ -2294,6 +2294,22 @@
                 <source>Sent by</source>
                 <target>Enviado por</target>
             </trans-unit>
+            <trans-unit id="571" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill - Scratch card</source>
+                <target>Recarga - Scratch card</target>
+            </trans-unit>
+            <trans-unit id="572" translate="yes" reformat="yes" xml:space="default">
+                <source>Bonus Invite a Friend</source>
+                <target>Bonificación Invita a un amigo</target>
+            </trans-unit>
+            <trans-unit id="573" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime bonus</source>
+                <target>Bonificación de tiempo de uso</target>
+            </trans-unit>
+            <trans-unit id="574" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime refill</source>
+                <target>Recarga de tiempo de uso</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

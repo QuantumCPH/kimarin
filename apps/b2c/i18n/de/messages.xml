@@ -2333,6 +2333,18 @@
                 <source>Refill - Scratch card</source>
                 <target>Aufladung - Scratch card</target>
             </trans-unit>
+            <trans-unit id="576" translate="yes" reformat="yes" xml:space="default">
+                <source>Bonus Invite a Friend</source>
+                <target>Bonus Einen Freund Einladen</target>
+            </trans-unit>
+            <trans-unit id="577" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime bonus</source>
+                <target>Gesprächstzeitbonus</target>
+            </trans-unit>
+            <trans-unit id="578" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime refill</source>
+                <target>Aufladung von Gesprächstzeit</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
