@@ -983,7 +983,7 @@
             </trans-unit>
             <trans-unit id="241" translate="yes" reformat="yes" xml:space="default">
                 <source>Active mobile number</source>
-                <target>Aktiv Handy No</target>
+                <target>Aktive Mobiltelefonnummer</target>
             </trans-unit>
             <trans-unit id="242" translate="yes" reformat="yes" xml:space="default">
                 <source>Automatic Replenishment is: Inactive</source>
@@ -2050,8 +2050,8 @@
                 <target>Konto ist gesperrt.</target>
             </trans-unit>
             <trans-unit id="508" translate="yes" reformat="yes" xml:space="default">
-                <source>All amounts are excl. IVA (%1%).</source>
-                <target>Alle Beträge sind zugüglich Mehrwertsteuer (%1%).</target>
+                <source>All amounts are excl. IVA.</source>
+                <target>Alle Beträge sind zugüglich Mehrwertsteuer.</target>
             </trans-unit>
             <trans-unit id="509" translate="yes" reformat="yes" xml:space="default">
                 <source>"%value%" is too long (14 characters max).</source>
@@ -2203,7 +2203,7 @@
             </trans-unit>
              <trans-unit id="545" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
-                <target>Kein Kunde ist mit diesem número de mòbil registriert.</target>
+                <target>Unter dieser mobilfunknummer ist kein Nutzer registriert.</target>
             </trans-unit>
             <trans-unit id="546" translate="yes" reformat="yes" xml:space="default">
                 <source>English</source>
