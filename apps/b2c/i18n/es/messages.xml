@@ -2273,7 +2273,27 @@
             <trans-unit id="564" translate="yes" reformat="yes" xml:space="default">
                 <source>New product</source>
                 <target>Nueva producto</target>
-            </trans-unit>            
+            </trans-unit>    
+            <trans-unit id="565" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill by Kimarin</source>
+                <target>Recarga por Kimarin</target>
+            </trans-unit>
+            <trans-unit id="567" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime bonus</source>
+                <target>Bonificación de tiempo de uso</target>
+            </trans-unit>
+            <trans-unit id="568" translate="yes" reformat="yes" xml:space="default">
+                <source>Confirmation product change</source>
+                <target>Confirmación cambio de producto</target>
+            </trans-unit>
+            <trans-unit id="569" translate="yes" reformat="yes" xml:space="default">
+                <source>Now your current product is</source>
+                <target>Ahora su producto es</target>
+            </trans-unit>
+            <trans-unit id="570" translate="yes" reformat="yes" xml:space="default">
+                <source>Sent by</source>
+                <target>Enviado por</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

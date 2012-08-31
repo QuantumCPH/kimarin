@@ -483,11 +483,11 @@
             </trans-unit>
             <trans-unit id="118" translate="yes" reformat="yes" xml:space="default">
                 <source>Register</source>
-                <target>Registrieren</target>
+                <target>Registrierung</target>
             </trans-unit>
             <trans-unit id="119" translate="yes" reformat="yes" xml:space="default">
                 <source>You must fill in this field.</source>
-                <target>Müssen ausgefüllt werden</target>
+                <target>Dieses Feld muss ausgefüllt werden.</target>
             </trans-unit>
             <trans-unit id="120" translate="yes" reformat="yes" xml:space="default">
                 <source>Payment details:</source>
@@ -1167,7 +1167,7 @@
             </trans-unit>
             <trans-unit id="287" translate="yes" reformat="yes" xml:space="default">
                 <source>You must fill in this field.</source>
-                <target>Dieses Feld ist obligatorisch</target>
+                <target>Dieses Feld muss ausgefüllt werden.</target>
             </trans-unit>
             <trans-unit id="288" translate="yes" reformat="yes" xml:space="default">
                 <source>Afghanistan</source>
@@ -2308,6 +2308,30 @@
             <trans-unit id="569" translate="yes" reformat="yes" xml:space="default">
                 <source>New product</source>
                 <target>Neue produkts</target>
+            </trans-unit>
+            <trans-unit id="570" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill by Kimarin</source>
+                <target>Aufladung von Kimarin</target>
+            </trans-unit>
+            <trans-unit id="571" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime bonus</source>
+                <target>Gesprächstzeitbonus</target>
+            </trans-unit>
+            <trans-unit id="572" translate="yes" reformat="yes" xml:space="default">
+                <source>Confirmation product change</source>
+                <target>Bestätigung Produktwechsel</target>
+            </trans-unit>
+            <trans-unit id="573" translate="yes" reformat="yes" xml:space="default">
+                <source>Now your current product is</source>
+                <target>Ihr aktuelles Produkt ist</target>
+            </trans-unit>
+            <trans-unit id="574" translate="yes" reformat="yes" xml:space="default">
+                <source>Sent by</source>
+                <target>Gesandt von</target>
+            </trans-unit>
+            <trans-unit id="575" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill - Scratch card</source>
+                <target>Aufladung - Scratch card</target>
             </trans-unit>
         </body>
     </file>

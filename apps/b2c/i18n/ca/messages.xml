@@ -2276,6 +2276,34 @@
                 <source>New product</source>
                 <target>Producte nova</target>
             </trans-unit>
+            <trans-unit id="566" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill by Kimarin</source>
+                <target>Recàrrega pel Kimarin</target>
+            </trans-unit>
+            <trans-unit id="567" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime bonus</source>
+                <target>Bonificació de temps d'ús</target>
+            </trans-unit>
+            <trans-unit id="568" translate="yes" reformat="yes" xml:space="default">
+                <source>Confirmation product change</source>
+                <target>Confirmació modificació del producte</target>
+            </trans-unit>
+            <trans-unit id="569" translate="yes" reformat="yes" xml:space="default">
+                <source>Now your current product is</source>
+                <target>El vostre producte actual és</target>
+            </trans-unit>
+            <trans-unit id="570" translate="yes" reformat="yes" xml:space="default">
+                <source>Confirmation of product change</source>
+                <target>Confirmació del canvi de producte</target>
+            </trans-unit>
+            <trans-unit id="571" translate="yes" reformat="yes" xml:space="default">
+                <source>Sent by</source>
+                <target>Enviat per</target>
+            </trans-unit>
+            <trans-unit id="572" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill - Scratch card</source>
+                <target>Recàrrega - Scratch card</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
