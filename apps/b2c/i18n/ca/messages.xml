@@ -734,7 +734,7 @@
             </trans-unit>
             <trans-unit id="180" translate="yes" reformat="yes" xml:space="default">
                 <source>Order Receipt</source>
-                <target>Rebut de la comanda,</target>
+                <target>Rebut de la comanda</target>
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>

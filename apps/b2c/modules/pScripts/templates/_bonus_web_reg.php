@@ -83,18 +83,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <td  colspan="4"><b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?></td>
    </tr>
   <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th colspan="3"  align="left" ><?php echo __('Order Receipt') ?>(
-        <?php if ($order->getIsFirstOrder())
-    {
-		echo $order->getProduct()->getName() .
-		'<br />['. $transaction->getDescription() .']';
-    }
-    else
-    {
-		echo $transaction->getDescription();
-    }
-    ?>
-        )</th>
+    <th colspan="3"  align="left" ><?php echo __('Order Receipt') ?></th>
     <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
   </tr>
   <tr>
