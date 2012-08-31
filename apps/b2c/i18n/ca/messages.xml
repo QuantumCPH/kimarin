@@ -204,7 +204,7 @@
             </trans-unit>
             <trans-unit id="50" translate="yes" reformat="yes" xml:space="default">
                 <source>Active mobile number</source>
-                <target>Activo móvil número</target>
+                <target>Número de mòbil actiu</target>
             </trans-unit>
             <trans-unit id="51" translate="yes" reformat="yes" xml:space="default">
                 <source>Your status:</source>
@@ -2040,8 +2040,8 @@
                 <target>La cuenta está bloqueada.</target>
             </trans-unit>
             <trans-unit id="507" translate="yes" reformat="yes" xml:space="default">
-                <source>All amounts are excl. IVA (%1%).</source>
-                <target>Els imports no inclouen IVA (%1%).</target>
+                <source>All amounts are excl. IVA.</source>
+                <target>Els imports no inclouen IVA.</target>
             </trans-unit>
             <trans-unit id="508" translate="yes" reformat="yes" xml:space="default">
                 <source>Create password</source>
@@ -2169,7 +2169,7 @@
             </trans-unit>
             <trans-unit id="539" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
-                <target>Cap client està registrat amb aquest número de telèfon mòbil.</target>
+                <target>No hi ha cap client registrat amb aquesta número de mòbil.</target>
             </trans-unit>
             <trans-unit id="540" translate="yes" reformat="yes" xml:space="default">
                 <source>English</source>
