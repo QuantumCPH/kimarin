@@ -2166,7 +2166,7 @@
             </trans-unit>
             <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to your e-mail address shortly.</source>
-                <target>La seva contrasenya li serà enviada a la seva adreça de correu electrònic en breu.</target>
+                <target>En breu, enviarem la vostra contrasenya a l'adreça de correu electrònic indicada.</target>
             </trans-unit>
             <trans-unit id="539" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
