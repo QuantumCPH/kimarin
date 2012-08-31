@@ -3883,10 +3883,13 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
   public function executeEmailTestCenter(sfWebRequest $request){
       
-     $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
+      
+      
+     $inviterCustomer = CustomerPeer::retrieveByPK(38);
                     $this->setPreferredCulture($inviterCustomer);
-                    
-                          
+                    $inviteOrder=  CustomerOrderPeer::retrieveByPK(304);
+                   $transaction_i= TransactionPeer::retrieveByPK(296);
+                   $this->customer=CustomerPeer::retrieveByPK(34);
 
                         
                         emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$inviteOrder,$transaction_i);
