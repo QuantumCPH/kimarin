@@ -862,7 +862,7 @@
             </trans-unit>
             <trans-unit id="211" translate="yes" reformat="yes" xml:space="default">
                 <source>The passwords don't match.</source>
-                <target>Las contraseñas no coinciden</target>
+                <target>Les contrasenyes no coincideixen.</target>
             </trans-unit>
             <trans-unit id="212" translate="yes" reformat="yes" xml:space="default">
                 <source>Thank you for registeration your account at %1%. You will soon receive a delivery confirmation</source>
