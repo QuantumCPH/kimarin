@@ -255,7 +255,7 @@ class paymentsActions extends sfActions {
 
         $transaction = TransactionPeer::retrieveByPK($transaction_id);
 
-        if($transaction_id>92){
+        if($transaction_id>93){
           $vatValue=sfConfig::get('app_vat_percentage');
         }else{
          $vatValue=(.18);
