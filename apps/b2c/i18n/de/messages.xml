@@ -2107,11 +2107,11 @@
             </trans-unit>
             <trans-unit id="522" translate="yes" reformat="yes" xml:space="default">
                 <source>Airtime value refilled on your account %1%%2% PLUS %3%%2% = %4%%2%</source>
-                <target>Auf Ihrem Konto aufgeladener Gesprächstzeit-Betrag %1%%2% PLUS %3%%2% = %4%%2%</target>
+                <target>Auf Ihrem Konto aufgeladener Gesprächszeit-Betrag %1%%2% PLUS %3%%2% = %4%%2%</target>
             </trans-unit>
             <trans-unit id="523" translate="yes" reformat="yes" xml:space="default">
                 <source>Airtime value refilled on your account %1%%2%</source>
-                <target>Auf Ihrem Konto aufgeladener Gesprächstzeit-Betrag %1%%2%</target>
+                <target>Auf Ihrem Konto aufgeladener Gesprächszeit-Betrag %1%%2%</target>
             </trans-unit>
             <trans-unit id="524" translate="yes" reformat="yes" xml:space="default">
                 <source>The refill amount is valid for 180 days.</source>
@@ -2315,7 +2315,7 @@
             </trans-unit>
             <trans-unit id="571" translate="yes" reformat="yes" xml:space="default">
                 <source>Airtime bonus</source>
-                <target>Gesprächstzeitbonus</target>
+                <target>Gesprächszeitbonus</target>
             </trans-unit>
             <trans-unit id="572" translate="yes" reformat="yes" xml:space="default">
                 <source>Confirmation product change</source>
@@ -2339,11 +2339,11 @@
             </trans-unit>
             <trans-unit id="577" translate="yes" reformat="yes" xml:space="default">
                 <source>Airtime bonus</source>
-                <target>Gesprächstzeitbonus</target>
+                <target>Gesprächszeitbonus</target>
             </trans-unit>
             <trans-unit id="578" translate="yes" reformat="yes" xml:space="default">
                 <source>Airtime refill</source>
-                <target>Aufladung von Gesprächstzeit</target>
+                <target>Aufladung von Gesprächszeit</target>
             </trans-unit>
         </body>
     </file>
