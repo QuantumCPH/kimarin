@@ -42,7 +42,7 @@
                     <td><?php echo __("Total amount") ?>:</td>
                     <td class="padding"><?php echo number_format($total, 2);echo sfConfig::get('app_currency_code'); ?></td>
                 </tr>
-                <input type="hidden" name="amount" id="total" value="<?php echo $total; ?>" />
+                <input type="hidden" name="amount" id="total" value="<?php echo number_format($total, 2); ?>" />
                 <input type="hidden" name="cmd" value="_xclick" />
                 <input type="hidden" name="no_note" value="1" />
                 <input type="hidden" name="lc" value="UK" />
