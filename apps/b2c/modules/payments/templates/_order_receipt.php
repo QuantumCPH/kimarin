@@ -274,7 +274,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 		$expected_delivery = $global_setting_expected_delivery->getValue();
 	else
 		$expected_delivery = "3 business days";
-?>
+?></p>
 <p style="font-weight: bold;">
 	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
 </p>

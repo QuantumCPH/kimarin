@@ -21,10 +21,12 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
 <p><?php echo __(sfConfig::get('app_site_title')) ?></p>
 <br />-->
 
-<table width="665px">
-    <tr style="border:0px solid #fff">
-        <td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
-    </tr>
+<table width="600px">
+<tr style="border:0px solid #fff">
+
+		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
+
+	</tr>
 </table>
 <table class="receipt" cellspacing="0" width="600px" style="border: 2px solid #ccc;">
    <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;"> 
@@ -81,5 +83,11 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
     <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;"> 
     <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
   </tr>
-</table>
+</table><br />
+<p style="font-weight: bold;">
+	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
+        <br><?php echo __('E-mail') ?>:&nbsp;
+	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
+        <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
+</p>
         
