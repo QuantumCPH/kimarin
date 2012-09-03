@@ -2003,7 +2003,7 @@
             </trans-unit>
             <trans-unit id="496" translate="yes" reformat="yes" xml:space="default">
                 <source>Fee for change of number</source>
-                <target>Gebühr für Belastung der Nummer</target>
+                <target>Gebühr für Wechsel der Nummer</target>
             </trans-unit>
             <trans-unit id="497" translate="yes" reformat="yes" xml:space="default">
                 <source>E-mail</source>

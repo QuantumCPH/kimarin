@@ -48,7 +48,7 @@ use_helper('Number');
 <table class="receipt" cellspacing="0" width="600px">
   <tr bgcolor="#CCCCCC" class="receipt_header">
     <th colspan="3"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
+    <th><?php echo __('Order No') ?> <?php echo $order->getId() ?></th>
   </tr>
 
   <tr>
@@ -120,10 +120,3 @@ use_helper('Number');
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
         <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
-
-<!--<p><?php echo __('Cheers') ?></p>
-
-<p>
-<?php echo __('Support') ?><br />
-<?php echo sfConfig::get('app_site_title');?>
-</p>        -->
