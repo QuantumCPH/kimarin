@@ -74,17 +74,17 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
     <td>&nbsp;</td>
     <td><strong><?php echo __('Total') ?></strong></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><strong><?php echo number_format($subtotal+$vat,2) ?><?php echo sfConfig::get('app_currency_code')?></strong></td>
+    <td align="right" style="font-size: 14px;padding-right: 65px;"><strong><?php echo number_format($subtotal+$vat,2) ?><?php echo sfConfig::get('app_currency_code')?></strong></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
-  <tr class="footer" style='font-family:"Times New Roman", Times, serif;'>
+  <tr class="footer" style='font-size: 14px;font-family:"Times New Roman", Times, serif;'>
     <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;"> 
     <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
   </tr>
 </table><br />
-<p style='font-weight: bold;font-family:"Times New Roman", Times, serif;'>
+<p style='font-size: 14px;font-weight: bold;font-family:"Times New Roman", Times, serif;'>
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
         <br><?php echo __('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
