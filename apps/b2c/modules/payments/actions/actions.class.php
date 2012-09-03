@@ -289,9 +289,9 @@ class paymentsActions extends sfActions {
            }
         
         //if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
-        if(strstr($transaction->getDescription(),"Refill")){
+        //if(strstr($transaction->getDescription(),"Refill")){
             $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
-        }
+        //}
 
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,
