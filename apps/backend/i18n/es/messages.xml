@@ -50,7 +50,7 @@
             </trans-unit>
             <trans-unit id="12" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
-                <target>Número de orden.</target>
+                <target>Número de pedido.</target>
             </trans-unit>
             <trans-unit id="13" translate="yes" reformat="yes" xml:space="default">
                 <source>US Mobile Number</source>
@@ -738,10 +738,10 @@
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
-                <target>Número de orden.</target>
+                <target>Número de pedido.</target>
             </trans-unit><trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number</source>
-                <target>Móvil Número</target>
+                <target>Número de móvil</target>
             </trans-unit>
             <trans-unit id="182" translate="yes" reformat="yes" xml:space="default">
                 <source>Smartsim including pot</source>
@@ -821,7 +821,7 @@
             </trans-unit>
             <trans-unit id="201" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number: %s</source>
-                <target>Móvil Número: %s</target>
+                <target>Número de móvil %s</target>
             </trans-unit>
             <trans-unit id="202" translate="yes" reformat="yes" xml:space="default">
                 <source>Invalid mobile number or password.</source>
@@ -2155,6 +2155,14 @@
             <trans-unit id="535" translate="yes" reformat="yes" xml:space="default">
                 <source>Your mobile number.</source>
                 <target>Su número de teléfono móvil.</target>
+            </trans-unit>
+            <trans-unit id="536" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime bonus</source>
+                <target>Bonificación de tiempo de uso</target>
+            </trans-unit>
+            <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime refill</source>
+                <target>Recarga de tiempo de uso</target>
             </trans-unit>
         </body>
     </file>

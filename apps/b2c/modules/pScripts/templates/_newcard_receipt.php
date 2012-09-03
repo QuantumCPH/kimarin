@@ -31,7 +31,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
 <table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;font-family:"Times New Roman", Times, serif;'>
    <tr bgcolor="#CCCCCC" class="receipt_header" style='font-weight: bold;text-transform: uppercase;font-family:"Times New Roman", Times, serif;font-size: 14px;'> 
     <th colspan="3" align="left" style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Order Receipt') ?></th>
-    <th style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Order No') ?>: <?php echo $order->getId() ?></th>
+    <th style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr>
     <td colspan="4" class="payer_summary" style='font-size: 14px;font-family:"Times New Roman", Times, serif;'>
@@ -49,7 +49,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
     <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Date') ?></td>
     <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Description') ?></td>
     <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?></td>
+    <td align="right" style='padding-right: 65px;font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Amount') ?></td>
   </tr>
   <tr> 
     <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
