@@ -14,7 +14,7 @@
             </trans-unit>
             <trans-unit id="3" translate="yes" reformat="yes" xml:space="default">
                 <source>E-mail</source>
-                <target>E-Mail</target>
+                <target>Post</target>
             </trans-unit>
             <trans-unit id="4" translate="yes" reformat="yes" xml:space="default">
                 <source>Password</source>
