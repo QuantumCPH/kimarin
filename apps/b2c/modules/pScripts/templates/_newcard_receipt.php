@@ -28,7 +28,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
 </table>
 <table class="receipt" cellspacing="0" width="600px" style="border: 2px solid #ccc;">
    <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;"> 
-    <th colspan="3"><?php echo __('Order Receipt') ?></th>
+    <th colspan="3" align="left"><?php echo __('Order Receipt') ?></th>
     <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
   </tr>
   <tr>
