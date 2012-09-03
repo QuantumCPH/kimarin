@@ -10,11 +10,11 @@ use_helper('Number');
 <table cellspacing="0" width="600px" style="border: 2px solid #ccc;">
     <tr bgcolor="#CCCCCC" style="font-weight: bold;text-transform: uppercase;">
             <th colspan="3" align="left"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No') ?> <?php echo $order->getId() ?></th>
+    <th><?php echo __('Order No') ?>: <?php echo $order->getId() ?></th>
     </tr>
     <tr>
         <td colspan="4">
-          <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
+          <?php echo __('Customer number') ?>:   <?php echo $customer->getUniqueId(); ?><br/>
           <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
           <?php echo $customer->getAddress() ?><br/>
           <?php echo sprintf('%s %s', $customer->getPoBoxNumber(),$customer->getCity() ) ?><br/>
