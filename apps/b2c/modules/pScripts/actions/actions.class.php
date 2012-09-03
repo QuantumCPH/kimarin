@@ -3394,26 +3394,51 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
        $tilentaCallHistryResult = Telienta::callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
   if($tilentaCallHistryResult){
   foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
-        $cuCalls = new CustomerCalls();
-        $cuCalls->setAccountId($xdr->account_id);
-        $cuCalls->setBillStatus($xdr->bill_status);
-        $cuCalls->setBillTime($xdr->bill_time);
-        $cuCalls->setChargedAmount($xdr->charged_amount);
-        $cuCalls->setChargedQuantity($xdr->charged_quantity);
-        $cuCalls->setCld($xdr->CLD);
-        $cuCalls->setCli($xdr->CLI);
-        $cuCalls->setConnectTime($xdr->connect_time);
-        $cuCalls->setCountry($xdr->country);
-        $cuCalls->setCustomerId($customer->getId());
-        $cuCalls->setDescription($xdr->description);
-        $cuCalls->setDisconnectCause($xdr->disconnect_cause);
-        $cuCalls->setDisconnectTime($xdr->disconnect_time);
-        $cuCalls->setICustomer($customer->getICustomer());
-        $cuCalls->setIXdr($xdr->i_xdr);
-        $cuCalls->setStatus(1);
-        $cuCalls->setSubdivision($xdr->subdivision);
-        $cuCalls->setUnixConnectTime($xdr->unix_connect_time);
-        $cuCalls->save();
+        $emCalls = new EmployeeCustomerCallhistory();
+                $emCalls->setAccountId($xdr->account_id);
+                $emCalls->setBillStatus($xdr->bill_status);
+                $emCalls->setBillTime($xdr->bill_time);
+                $emCalls->setChargedAmount($xdr->charged_amount);
+                $emCalls->setChargedQuantity($xdr->charged_quantity);
+                $emCalls->setPhoneNumber($xdr->CLD);
+                $emCalls->setCli($xdr->CLI);
+                $emCalls->setConnectTime($xdr->connect_time);
+
+                $country = $xdr->country;
+                $cc = new Criteria();
+                $cc->add(CountryPeer::NAME,$country, Criteria::LIKE);
+                $ccount = CountryPeer::doCount($cc);
+                if($ccount > 0){
+                   $csel = CountryPeer::doSelectOne($cc);
+                   $countryid = $csel->getId();
+                }else{
+                   $cin = new Country();
+                   $cin->setName($country);
+                   $cin->save();
+                   $countryid = $cin->getId();
+                }
+                $emCalls->setParentTable('customer');
+                $emCalls->setCountryId($countryid);
+                    $ce = new Criteria();
+                    $ce->add(TelintaAccountsPeer::ACCOUNT_TITLE,$xdr->account_id);
+                    $ce->addAnd(TelintaAccountsPeer::PARENT_TABLE,'customer');
+                    $ce->add(TelintaAccountsPeer::STATUS,3);
+                    if(TelintaAccountsPeer::doCount($ce)>0){
+                        $emp = TelintaAccountsPeer::doSelectOne($ce);
+                        $emCalls->setParentId($emp->getParentId());
+                    }
+
+                $emCalls->setDescription($xdr->description);
+                $emCalls->setDisconnectCause($xdr->disconnect_cause);
+                $emCalls->setDisconnectTime($xdr->disconnect_time);
+               // $emCalls->setDurationMinutes($duration_minutes);
+                $emCalls->setICustomer($customer->getICustomer());
+                $emCalls->setIXdr($xdr->i_xdr);
+                $emCalls->setStatus(3);
+                $emCalls->setSubdivision($xdr->subdivision);
+                $emCalls->setUnixConnectTime($xdr->unix_connect_time);
+                $emCalls->setUnixDisconnectTime($xdr->unix_disconnect_time);
+                $emCalls->save();
   }
 
 
