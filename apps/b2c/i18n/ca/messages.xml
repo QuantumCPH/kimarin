@@ -737,8 +737,8 @@
                 <target>Rebut de la comanda</target>
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
-                <source>Order No.</source>
-                <target>Número de comanda.</target>
+                <source>Order No</source>
+                <target>Número de comanda</target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number</source>
@@ -2205,7 +2205,7 @@
                 <target>Serveis</target>
             </trans-unit>
             <trans-unit id="547" translate="yes" reformat="yes" xml:space="default">
-                <source>New Sim-card</source>
+                <source>New SIM-card</source>
                 <target>Targeta SIM nova</target>
             </trans-unit>
             <trans-unit id="548" translate="yes" reformat="yes" xml:space="default">
