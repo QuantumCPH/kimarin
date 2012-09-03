@@ -22,7 +22,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
 <br />-->
 
 <table width="600px">
-<tr style="border:0px solid #fff;font-family:Calibri;">
+<tr style="border:0px solid #fff;">
 
 		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
 
