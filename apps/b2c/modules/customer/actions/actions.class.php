@@ -1258,7 +1258,7 @@ class customerActions extends sfActions {
 
 
         $cunt = new Criteria();
-        $cunt->add(CountryPeer::WEB_SMS_STATUS,3);
+        //$cunt->add(CountryPeer::WEB_SMS_STATUS,3);
         $cunt->addAscendingOrderByColumn(CountryPeer::NAME);
         $countries = CountryPeer::doSelect($cunt);
         $this->msgSent = "";
@@ -1268,7 +1268,7 @@ class customerActions extends sfActions {
 
         $message = $request->getParameter('message');
 
-
+       // echo $this->getContext()->getI18N()->__("-Sent by");
         if ($message) {
             $this->msgSent = "No";
             $country_code = $request->getParameter('country');
@@ -1281,15 +1281,15 @@ class customerActions extends sfActions {
 
             $messages = array();
             if (strlen($message) < 142) {
-                $messages[1] = $message . "-Sent by Kimarin-";
+                $messages[1] = $message . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
             } else if (strlen($message) > 142 and strlen($message) < 302) {
 
-                $messages[1] = substr($message, 1, 142) . "-Sent by Kimarin-";
-                $messages[2] = substr($message, 143) . "-Sent by Kimarin-";
+                $messages[1] = substr($message, 1, 142) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
+                $messages[2] = substr($message, 143) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
             } else if (strlen($message) > 382) {
-                $messages[1] = substr($message, 1, 142) . "-Sent by Kimarin-";
-                $messages[2] = substr($message, 143, 302) . "-Sent by Kimarin-";
-                $messages[3] = substr($message, 303, 432) . "-Sent by Kimarin-";
+                $messages[1] = substr($message, 1, 142) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
+                $messages[2] = substr($message, 143, 302) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
+                $messages[3] = substr($message, 303, 432) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
             }
 
             foreach ($messages as $sms_text) {

@@ -150,7 +150,9 @@ class CustomerForm extends BaseCustomerForm
 					'pattern'=>$mobilePattern,
                                         'max_length'=>14,
 				),
-				array('invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid 8 to 14 digit mobile number.'))
+                                  array( 'max_length' => sfContext::getInstance()->getI18N()->__('"%value%" is too long (14 characters max).'),
+                                        //'min_length' => '"%value%" is too short 4 characters min.',
+				 'invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid 8 to 14 digit mobile number.'))
 			)
 		)
 	  );

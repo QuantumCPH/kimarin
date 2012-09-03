@@ -75,29 +75,15 @@ $wrap_content  = isset($wrap)?$wrap:false;
 </table>
 
 <table class="receipt" cellspacing="0" width="600px">
-  <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th ><?php echo __('Order Receipt') ?></th>
   
-  </tr>
  <tr>
-  <td><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
+     <td colspan="4"><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
     </tr>
    <tr>
-  <td><b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?></td>
+  <td  colspan="4"><b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?></td>
    </tr>
   <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th colspan="3"><?php echo __('Order Receipt') ?>(
-        <?php if ($order->getIsFirstOrder())
-    {
-		echo $order->getProduct()->getName() .
-		'<br />['. $transaction->getDescription() .']';
-    }
-    else
-    {
-		echo $transaction->getDescription();
-    }
-    ?>
-        )</th>
+    <th colspan="3"  align="left" ><?php echo __('Order Receipt') ?></th>
     <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
   </tr>
   <tr>
@@ -235,9 +221,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	else
 		$expected_delivery = "3 business days";
 ?>
-<p style="font-weight: bold;">
-	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
-</p>
+ 
 <?php endif; ?>
 
 <p style="font-weight: bold;">

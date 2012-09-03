@@ -14,19 +14,21 @@ class BaseCountryFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'name'         => new sfWidgetFormFilterInput(),
-      'code'         => new sfWidgetFormFilterInput(),
-      'calling_code' => new sfWidgetFormFilterInput(),
-      'cbf_rate'     => new sfWidgetFormFilterInput(),
-      'taisys_rate'  => new sfWidgetFormFilterInput(),
+      'name'           => new sfWidgetFormFilterInput(),
+      'code'           => new sfWidgetFormFilterInput(),
+      'calling_code'   => new sfWidgetFormFilterInput(),
+      'cbf_rate'       => new sfWidgetFormFilterInput(),
+      'taisys_rate'    => new sfWidgetFormFilterInput(),
+      'web_sms_status' => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
-      'name'         => new sfValidatorPass(array('required' => false)),
-      'code'         => new sfValidatorPass(array('required' => false)),
-      'calling_code' => new sfValidatorPass(array('required' => false)),
-      'cbf_rate'     => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
-      'taisys_rate'  => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'name'           => new sfValidatorPass(array('required' => false)),
+      'code'           => new sfValidatorPass(array('required' => false)),
+      'calling_code'   => new sfValidatorPass(array('required' => false)),
+      'cbf_rate'       => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'taisys_rate'    => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'web_sms_status' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('country_filters[%s]');
@@ -44,12 +46,13 @@ class BaseCountryFormFilter extends BaseFormFilterPropel
   public function getFields()
   {
     return array(
-      'id'           => 'Number',
-      'name'         => 'Text',
-      'code'         => 'Text',
-      'calling_code' => 'Text',
-      'cbf_rate'     => 'Number',
-      'taisys_rate'  => 'Number',
+      'id'             => 'Number',
+      'name'           => 'Text',
+      'code'           => 'Text',
+      'calling_code'   => 'Text',
+      'cbf_rate'       => 'Number',
+      'taisys_rate'    => 'Number',
+      'web_sms_status' => 'Number',
     );
   }
 }

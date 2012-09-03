@@ -91,9 +91,9 @@ class CustomerFormB2C extends CustomerForm
                         )
 		    )
 	    );
-            $this->mergePostValidator(
-	        new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_confirm', array(), array('invalid' => sfContext::getInstance()->getI18N()->__("The passwords don't match.")))
-	    );
+//            $this->mergePostValidator(
+//	        new sfValidatorSchemaCompare('password', sfValidatorSchemaCompare::EQUAL, 'password_confirm', array(), array('invalid' => sfContext::getInstance()->getI18N()->__("The passwords don't match.")))
+//	    );
 
 	}
 

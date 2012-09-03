@@ -50,7 +50,7 @@
             </trans-unit>
             <trans-unit id="12" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
-                <target>Número de orden.</target>
+                <target>Número de pedido.</target>
             </trans-unit>
             <trans-unit id="13" translate="yes" reformat="yes" xml:space="default">
                 <source>US Mobile Number</source>
@@ -740,10 +740,10 @@
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
-                <target>Número de orden.</target>
+                <target>Número de pedido.</target>
             </trans-unit><trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number</source>
-                <target>Móvil Número</target>
+                <target>Número de móvil</target>
             </trans-unit>
             <trans-unit id="182" translate="yes" reformat="yes" xml:space="default">
                 <source>Smartsim including pot</source>
@@ -755,7 +755,7 @@
             </trans-unit>
             <trans-unit id="184" translate="yes" reformat="yes" xml:space="default">
                 <source>Your customer number is </source>
-                <target>Su número de cliente es</target>
+                <target>Su número de cliente es </target>
             </trans-unit>
             <trans-unit id="185" translate="yes" reformat="yes" xml:space="default">
                 <source>You will receive your package within %1%.</source>
@@ -983,7 +983,7 @@
             </trans-unit>
             <trans-unit id="241" translate="yes" reformat="yes" xml:space="default">
                 <source>Active mobile number</source>
-                <target>Activa Móvil No</target>
+                <target>Número de móvil activo</target>
             </trans-unit>
             <trans-unit id="242" translate="yes" reformat="yes" xml:space="default">
                 <source>Automatic Replenishment is: Inactive</source>
@@ -2042,8 +2042,8 @@
                 <target>La cuenta está bloqueada.</target>
             </trans-unit>
             <trans-unit id="507" translate="yes" reformat="yes" xml:space="default">
-                <source>All amounts are excl. IVA (%1%).</source>
-                <target>Los importes no incluyen IVA (%1%).</target>
+                <source>All amounts are excl. IVA.</source>
+                <target>Los importes no incluyen IVA.</target>
             </trans-unit>
             <trans-unit id="508" translate="yes" reformat="yes" xml:space="default">
                 <source>Create password</source>
@@ -2144,7 +2144,7 @@
             </trans-unit>
             <trans-unit id="532" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to the above e-mail address shortly.</source>
-                <target>En breve enviaremos su contraseña a la dirección de correo electrónico indicada.</target>
+                <target>En breve enviaremos su contraseña a la dirección de correo electrónico.</target>
             </trans-unit>
             <trans-unit id="533" translate="yes" reformat="yes" xml:space="default">
                 <source>If you have any questions please feel free to contact our customer support center at</source>
@@ -2164,7 +2164,7 @@
             </trans-unit>
             <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
-                <target>Ningún cliente está registrado con este número de teléfono móvil.</target>
+                <target>No hay ningún cliente registrado con esta dirección número de móvil.</target>
             </trans-unit>
             <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
                 <source>English</source>
@@ -2273,7 +2273,43 @@
             <trans-unit id="564" translate="yes" reformat="yes" xml:space="default">
                 <source>New product</source>
                 <target>Nueva producto</target>
-            </trans-unit>            
+            </trans-unit>    
+            <trans-unit id="565" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill by Kimarin</source>
+                <target>Recarga por Kimarin</target>
+            </trans-unit>
+            <trans-unit id="567" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime bonus</source>
+                <target>Bonificación de tiempo de uso</target>
+            </trans-unit>
+            <trans-unit id="568" translate="yes" reformat="yes" xml:space="default">
+                <source>Confirmation product change</source>
+                <target>Confirmación cambio de producto</target>
+            </trans-unit>
+            <trans-unit id="569" translate="yes" reformat="yes" xml:space="default">
+                <source>Now your current product is</source>
+                <target>Ahora su producto es</target>
+            </trans-unit>
+            <trans-unit id="570" translate="yes" reformat="yes" xml:space="default">
+                <source>-Sent by</source>
+                <target>-Enviado por</target>
+            </trans-unit>
+            <trans-unit id="571" translate="yes" reformat="yes" xml:space="default">
+                <source>Refill - Scratch card</source>
+                <target>Recarga - Scratch card</target>
+            </trans-unit>
+            <trans-unit id="572" translate="yes" reformat="yes" xml:space="default">
+                <source>Bonus Invite a Friend</source>
+                <target>Bonificación Invita a un amigo</target>
+            </trans-unit>
+            <trans-unit id="573" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime bonus</source>
+                <target>Bonificación de tiempo de uso</target>
+            </trans-unit>
+            <trans-unit id="574" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime refill</source>
+                <target>Recarga de tiempo de uso</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

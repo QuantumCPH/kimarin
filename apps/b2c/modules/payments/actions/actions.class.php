@@ -265,16 +265,32 @@ class paymentsActions extends sfActions {
        // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
         if ($customerorder) {
+            if($transaction_id>489){
             $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage');
+            }else{
+              $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) *(.18);   
+            }
         }elseif($transaction->getTransactionTypeId()==2){
             $vat = 0;
         }
         else{
+             if($transaction_id>489){
             $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+             }else{
+                 
+                $vat = $customer_order->getProduct()->getRegistrationFee() * (.18);   
+             }
         }
+        
+           if($transaction_id>489){
+               $vatPerValue=sfConfig::get('app_vat_percentage');
+           }else{
+               $vatPerValue=(.18); 
+           }
+        
         //if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
         if(strstr($transaction->getDescription(),"Refill")){
-            $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
+            $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
         }
 
         $this->renderPartial('payments/order_receipt', array(
