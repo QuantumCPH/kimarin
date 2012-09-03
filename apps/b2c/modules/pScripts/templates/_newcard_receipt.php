@@ -3,7 +3,7 @@ use_helper('I18N');
 use_helper('Number');
 $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentage')
 ?>
-<p><?php echo __('To') ?>&nbsp;<?php echo $customer->getFirstName()." ".$customer->getLastName();?></p>
+<!--<p><?php echo __('To') ?>&nbsp;<?php echo $customer->getFirstName()." ".$customer->getLastName();?></p>
 
 <p><?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?></p>
 
@@ -19,15 +19,15 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
 <p><?php echo __('Best regards,') ?></p>
 
 <p><?php echo __(sfConfig::get('app_site_title')) ?></p>
-<br />
+<br />-->
 
 <table width="665px">
     <tr style="border:0px solid #fff">
         <td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
     </tr>
 </table>
-<table class="receipt" cellspacing="0" width="600px">
-   <tr bgcolor="#CCCCCC" class="receipt_header"> 
+<table class="receipt" cellspacing="0" width="600px" style="border: 2px solid #ccc;">
+   <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;"> 
     <th colspan="3"><?php echo __('Order Receipt') ?></th>
     <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
   </tr>
@@ -43,7 +43,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
       <?php if($agent_name!=''){ echo __('Agent Name') ?>:  <?php echo $agent_name; } ?>
     </td>
   </tr>
-  <tr class="order_summary_header" bgcolor="#CCCCCC"> 
+  <tr class="order_summary_header" bgcolor="#CCCCCC" style="font-weight: bold;text-transform: uppercase;"> 
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
