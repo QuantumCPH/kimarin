@@ -20,7 +20,9 @@ class BaseCbfFormFilter extends BaseFormFilterPropel
       'st'            => new sfWidgetFormFilterInput(),
       'country_id'    => new sfWidgetFormFilterInput(),
       'mobile_number' => new sfWidgetFormFilterInput(),
+      'customer_id'   => new sfWidgetFormFilterInput(),
       'created_at'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
+      'status'        => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -30,7 +32,9 @@ class BaseCbfFormFilter extends BaseFormFilterPropel
       'st'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'country_id'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'mobile_number' => new sfValidatorPass(array('required' => false)),
+      'customer_id'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'created_at'    => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'status'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('cbf_filters[%s]');
@@ -55,7 +59,9 @@ class BaseCbfFormFilter extends BaseFormFilterPropel
       'st'            => 'Number',
       'country_id'    => 'Number',
       'mobile_number' => 'Text',
+      'customer_id'   => 'Number',
       'created_at'    => 'Date',
+      'status'        => 'Number',
     );
   }
 }

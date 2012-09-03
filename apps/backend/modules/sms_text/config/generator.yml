@@ -11,4 +11,8 @@ generator:
         _edit: ~
     edit:
       display: [text_heading, for_text, message_text]
+      actions:
+        _list: ~
+        _save: ~
+        _save_and_add: ~
      

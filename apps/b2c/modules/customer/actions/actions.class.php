@@ -169,6 +169,9 @@ class customerActions extends sfActions {
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
         if($request->getParameter('lang') != ''){
             $this->getUser()->setCulture($request->getParameter('lang'));
+            $this->sLang = $request->getParameter('lang');
+        }else{
+            $this->sLang = 'en';
         }
 
 
@@ -619,6 +622,7 @@ class customerActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($this->order->getId());
         $transaction->setCustomerId($this->order->getCustomerId());
+         $transaction->setVat($this->order->getExtraRefill()*sfConfig::get('app_vat_percentage'));
 
         //save
         $transaction->save();
@@ -845,7 +849,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->transactions = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = round($pager->getNbResults() / $items_per_page,0);
     }
 
     public function executePasswordchange(sfWebRequest $request) {
@@ -1254,7 +1258,7 @@ class customerActions extends sfActions {
 
 
         $cunt = new Criteria();
-        $cunt->add(CountryPeer::WEB_SMS_STATUS,3);
+        //$cunt->add(CountryPeer::WEB_SMS_STATUS,3);
         $cunt->addAscendingOrderByColumn(CountryPeer::NAME);
         $countries = CountryPeer::doSelect($cunt);
         $this->msgSent = "";
@@ -1264,7 +1268,7 @@ class customerActions extends sfActions {
 
         $message = $request->getParameter('message');
 
-
+       // echo $this->getContext()->getI18N()->__("-Sent by");
         if ($message) {
             $this->msgSent = "No";
             $country_code = $request->getParameter('country');
@@ -1277,15 +1281,15 @@ class customerActions extends sfActions {
 
             $messages = array();
             if (strlen($message) < 142) {
-                $messages[1] = $message . "-Sent by Kimarin-";
+                $messages[1] = $message . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
             } else if (strlen($message) > 142 and strlen($message) < 302) {
 
-                $messages[1] = substr($message, 1, 142) . "-Sent by Kimarin-";
-                $messages[2] = substr($message, 143) . "-Sent by Kimarin-";
+                $messages[1] = substr($message, 1, 142) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
+                $messages[2] = substr($message, 143) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
             } else if (strlen($message) > 382) {
-                $messages[1] = substr($message, 1, 142) . "-Sent by Kimarin-";
-                $messages[2] = substr($message, 143, 302) . "-Sent by Kimarin-";
-                $messages[3] = substr($message, 303, 432) . "-Sent by Kimarin-";
+                $messages[1] = substr($message, 1, 142) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
+                $messages[2] = substr($message, 143, 302) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
+                $messages[3] = substr($message, 303, 432) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
             }
 
             foreach ($messages as $sms_text) {
@@ -1823,6 +1827,7 @@ class customerActions extends sfActions {
         $transaction = TransactionPeer::doSelectOne($c);
         $transaction->setAmount($item_amount);
         $transaction->setDescription($product->getDescription());
+         $transaction->setVat($product->getRegistrationFee()*sfConfig::get('app_vat_percentage'));
         $transaction->save();
 
 
@@ -1962,7 +1967,7 @@ class customerActions extends sfActions {
             $ccu->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
             $ccheck = CustomerPeer::doCount($ccu);
             if ($ccheck > 0) {
-                $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__('New mobile number already exists.'));
+                $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__('This mobile number is already registered to a %1% customer.',array("%1%"=>sfConfig::get("app_site_title"))));
                 return $this->redirect('customer/changenumberservice');
             } else {
                 $order = new CustomerOrder();
@@ -1983,6 +1988,7 @@ class customerActions extends sfActions {
                 $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->setVat($this->vat);
                 $transaction->save();
             }
         }
@@ -2100,7 +2106,7 @@ class customerActions extends sfActions {
             $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
             $transaction->setTransactionDescriptionId($transactiondescription->getId());
             $transaction->setDescription($transactiondescription->getTitle());
-
+            $transaction->setVat($this->vat);
             $transaction->save();
 
 
@@ -2199,7 +2205,7 @@ class customerActions extends sfActions {
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
-
+        $transaction->setVat($this->vat);
         $transaction->save();
         $ccp = new CustomerChangeProduct();
         $ccp->setCustomerId($this->customer->getId());

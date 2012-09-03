@@ -531,7 +531,7 @@ class emailLib {
         endif;
     }
 
-    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject=null) {
+    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject=null,$order,$transaction) {
 
         $c = new Criteria();
         $c->add(CustomerPeer::ID, $inviteuserid);
@@ -539,18 +539,19 @@ class emailLib {
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
         $customer_id = trim($customer->getId());
-
-
         $sender_name = sfConfig::get('app_email_sender_name_sup');
         $sender_email = sfConfig::get('app_email_sender_email_sup');
-
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
- 
+        $vat=0;
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('pScripts/bonus_web_reg', array(
                     'customer' => $customerr,
                     'recepient_name' => $recepient_name,
+                       'order' => $order,
+                    'transaction' => $transaction,
+                     'vat' => $vat,
+                   
                     'wrap' => true,
                 ));
         $subject =__('Bonus awarded');
@@ -1788,7 +1789,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,
                 ));
 
-        $subject = __('Change number confirmation');
+        $subject = __('Change number - payment confirmation');
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
         $customer_id = trim($customer->getId());
@@ -1886,7 +1887,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,
                 ));
 
-    $subject = __('Change product payment confirmation');
+    $subject = __('Change product - payment confirmation');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');

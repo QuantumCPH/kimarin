@@ -279,7 +279,15 @@
 			 </span>
 			 <?php endif; ?>
              <div class='inline-error-signup'><?php echo $error_password?$form['password']->renderError():'&nbsp;'?></div>
-             <label style="float:right;width:141px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:70px;<?php else:?>margin-right: 1px; <?php endif; ?>"><?php echo __('Min. 6 digits or characters') ?></label>
+             <?php
+               if($sLang=='de'){
+                   $style = "float:right !important;width:188px;font-weight:normal;text-align:right !important;";
+               }else{
+                   $style = 'float:right !important;width:141px;font-weight:normal;text-align:right !important;';
+               }
+             ?>
+             <label style="<?php echo $style;if ($error_mobile_number): ?> margin-right:70px;<?php else:?>margin-right: 1px; <?php endif; ?>">
+             <?php echo __('Min. 6 digits or characters') ?></label>
             </li>
             <!-- end password -->
             <?php
@@ -346,7 +354,7 @@
             }elseif($sf_user->getCulture()=='es'){
                 $url = "http://kimarin.es/es/terms-conditions-es.html";
             }elseif($sf_user->getCulture()=='ca'){
-                $url = "http://kimarin.es/ca/terms-conditions-ca.html";
+                $url = "http://kimarin.es/cat/terms-conditions-cat.html";
             }else{
                 $url = "http://kimarin.es/terms-conditions-en.html"; 
             }

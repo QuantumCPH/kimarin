@@ -29,11 +29,11 @@ function countChar(str)
 	        },
 	        phone: {
 	          number: true,
-                  minlength:8
+                  rangelength:[8,14]
 	        }
 	        },
 	        messages: {
-	          message: "Please enter a comment."
+	          message: "<?php echo __('Please enter your message.')?>"
 	        }
 	      });
 	    });

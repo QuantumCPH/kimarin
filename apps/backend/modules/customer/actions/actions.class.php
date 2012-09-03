@@ -482,6 +482,7 @@ class customerActions extends autocustomerActions {
     public function executeSelectRefillCustomer($request) {
         $ct = new Criteria();
         $ct->add(TransactionDescriptionPeer::TRANSACTION_TYPE_ID, 1); // For refill
+        $ct->addOr(TransactionDescriptionPeer::TRANSACTION_TYPE_ID, 4); // For Bonous
         $ct->add(TransactionDescriptionPeer::B2C, 1); // For refill
         $ct->addAnd(TransactionDescriptionPeer::TRANSACTION_SECTION_ID, 1); // 1, Description is for Admin and 2, for  Agent
         $this->transactionDescriptions = TransactionDescriptionPeer::doSelect($ct);

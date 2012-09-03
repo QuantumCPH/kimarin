@@ -48,7 +48,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
-	<p><?php echo __('Dear Customer') ?></p>
+	<p><?php echo $customer->getFirstName()." ".$customer->getLastName(); ?></p>
 	<p>
 	<?php echo __('Thank you for ordering <b>%1%</b> and becoming %2% Customer. We welcome you to a new and huge mobile world. ',array('%1%'=>$order->getProduct()->getName(),'%2%'=>sfConfig::get('app_site_title'))); echo __('Your customer number is '); ?>  <?php echo $customer->getUniqueid();?>. <?php echo __(' There, you can use in your dealings with customer service')?>
 	</p>
@@ -69,24 +69,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="receipt" cellspacing="0" width="600px">
 	
   <tr bgcolor="#CCCCCC" class="receipt_header">   	
-    <th colspan="3"><?php echo __('Order Receipt') ?>(  <?php if ($order->getIsFirstOrder())
-    {
-        echo $order->getProduct()->getName();
-        if($transaction->getDescription()=="Anmeldung inc. sprechen"){
-          echo "<br />["; echo __('Smartsim including pot'); echo "]";
-        }else{
-            echo  '<br />['. $transaction->getDescription() .']';
-        }
-    }
-    else
-    {
-	if($transaction->getDescription()=="Refill"){
-          echo __("Refill");
-        }else{
-          echo __($transaction->getDescription());
-        }
-    }
-    ?>)</th>
+    <th colspan="3"><?php echo __('Order Receipt') ?></th>
     <th><?php echo __('Order number') ?> <?php echo $order->getId() ?></th>
   </tr>
   <tr> 
@@ -117,7 +100,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  
   <tr> 
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
-     <td><?php echo $transaction->getDescription(); ?></td>
+     <td><?php echo __($transaction->getDescription()); ?></td>
     <td><?php echo $order->getQuantity() ?>
     	</td>
    

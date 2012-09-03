@@ -235,9 +235,9 @@ $.extend($.validator, {
 	},
 
 	messages: {
-		required: "<br/>Debe rellenar este campo",
+		required: "<br/>Heu d'emplenar aquest camp",
 		remote: "Bitte geben Sie die Gültig Eindeutige ID mit 6 Stellen",
-		email: "<br/>Bitte geben Sie eine gültige E-Mail-Adresse.",
+		email: "<br/>Introduïu una adreça vàlida de correu electrònic.",
 		url: "Bitte geben Sie eine gültige URL.",
 		date: "Bitte geben Sie ein gültiges Datum.",
 		dateISO: "Bitte geben Sie eine gültige Datum (ISO).",
@@ -250,8 +250,8 @@ $.extend($.validator, {
 		accept: "Bitte geben Sie einen Wert mit einer gültigen Erweiterung.",
 		maxlength: $.format("Bitte geben Sie nicht mehr als {0} Zeichen."),
 		minlength: $.format("Bitte geben Sie mindestens {0} Zeichen."),
-		rangelength: $.format("Escriba un número de móvil válido de {0} a {1} dígitos."),
-		range: $.format("Escriba un número de móvil válido de {0} a {1} dígitos."),
+		rangelength: $.format("Escriviu un número de mòbil vàlid de {0} a {1} dígits."),
+		range: $.format("Escriviu un número de mòbil vàlid de {0} a {1} dígits."),
 		max: $.format("Bitte geben Sie einen Wert kleiner oder gleich {0}."),
 		min: $.format("Bitte geben Sie einen Wert größer oder gleich {0}.")
 	},

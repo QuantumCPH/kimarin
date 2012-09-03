@@ -3191,7 +3191,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                           
 
                         
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer);
+                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,NULL,$inviteOrder,$transaction_i);
                         $this->updatePreferredCulture();
                     }
                 }
@@ -3466,21 +3466,26 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
         $c->addAnd(ProductTypePeer::ID,2);
         $c->addAnd(CustomerOrderPeer::CREATED_AT,$date, Criteria::LESS_THAN);
+        $c->addAnd(CustomerOrderPeer::ORDER_STATUS_ID,3);
         $c->addGroupByColumn(CustomerPeer::ID);
         $c->addDescendingOrderByColumn (CustomerOrderPeer::CREATED_AT);
         $customers = CustomerPeer::doSelect($c);
 
         foreach($customers as $customer){
-           // echo $customer->getId();
+            echo $customer->getId();
            $balance =  Telienta::getBalance($customer);
            if($balance>0){
                $transaction = new Transaction();
+               $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
                $transaction->setAmount(-$balance);
-               $transaction->setDescription("Balance Expired");
                $transaction->setTransactionStatusId(3);
                $transaction->setCustomerId($customer->getId());
+               $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+               $transaction->setTransactionDescriptionId($transactiondescription->getId());
+               $transaction->setDescription($transactiondescription->getTitle());
                $transaction->save();
-               Telienta::charge($customer, $balance, "Balance Expired");
+               
+               Telienta::charge($customer, $balance, $transactiondescription->getTitle());
            }
         }
 
@@ -3629,7 +3634,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
   }
  
    public function executeChangeCustomerProduct(sfWebRequest $request){
-   
+   if(date("d")!=1){die;}
             $ccp = new Criteria();
             $ccp->add(CustomerChangeProductPeer::STATUS, 2);
             $ChangeCustomers=CustomerChangeProductPeer::doSelect($ccp);
@@ -3741,9 +3746,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->save();
         }*/
         $cst = new Criteria();
-        $cst->add(SimTypesPeer::TITLE, '%'.$order->getProduct()->getName().'%', Criteria::LIKE);
+        $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
-        $sim_type_id=$simtype->getId();
+       echo $sim_type_id=$simtype->getId();
         $exest = $order->getExeStatus();
         if ($exest!=1) {
 
@@ -3901,5 +3906,22 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         return $hex;
     }
 
- 
+  public function executeEmailTestCenter(sfWebRequest $request){
+      
+      
+      
+     $inviterCustomer = CustomerPeer::retrieveByPK(38);
+                    $this->setPreferredCulture($inviterCustomer);
+                    $inviteOrder=  CustomerOrderPeer::retrieveByPK(304);
+                   $transaction_i= TransactionPeer::retrieveByPK(296);
+                   $this->customer=CustomerPeer::retrieveByPK(34);
+
+                        
+                        emailLib::sendCustomerConfirmRegistrationEmail($inviterCustomer->getId(),$this->customer,null,$inviteOrder,$transaction_i);
+                        $this->updatePreferredCulture();  
+                          return sfView::NONE;
+      
+  }
+    
+    
 }

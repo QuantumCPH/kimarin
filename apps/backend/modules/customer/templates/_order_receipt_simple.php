@@ -90,11 +90,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?>
       <?php
-	  /*$eC = new Criteria();
-	  $eC->add(EnableCountryPeer::ID, $customer->getCountryId());
-	  $eC = EnableCountryPeer::doSelectOne($eC);
-	  echo $eC->getName();*/
-	  //echo $customer->getCountry()->getName() ?>
+	
+        $TDI=$transaction->getTransactionDescriptionId(); ?>
       <br /><br />
       <?php echo __('Mobile Number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>   <br/>
@@ -110,13 +107,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <tr>
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
-    <?php if ($order->getIsFirstOrder())
-    {
-		echo $order->getProduct()->getName() .
-		'<br />['. $transaction->getDescription() .']';
-    }
-    else
-    {
+    <?php   if($TDI==6){
+         echo __('Airtime refill');
+        
+    }else{
+    
 		echo $transaction->getDescription();
     }
     ?>
@@ -124,7 +119,18 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
-
+<?php    if($TDI==6){  ?>
+  
+  <tr>
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td>
+    <?php  echo __('Airtime bonus');   ?>
+	</td>
+    <td><?php echo $order->getQuantity() ?></td>
+    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
+  </tr>
+  
+  <?php   }    ?>
 
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
@@ -133,13 +139,24 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal,2) ?><?php echo sfConfig::get('app_currency_code');?> </td>
+    <td align="right" style="padding-right: 65px;"><?php    if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{ echo number_format($subtotal,2);  
+                     } ?> <?php echo sfConfig::get('app_currency_code'); ?></td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
    <td><?php echo __('IVA') ?> <!-- (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?> </td>
+    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{ echo number_format($vat,2);  } ?><?php echo sfConfig::get('app_currency_code');?> </td>
   </tr>
   <?php
   //echo $postalcharge.'ss';
@@ -160,9 +177,17 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php if(@$postalcharge && $order->getIsFirstOrder()){ echo number_format($transaction->getAmount()+@$postalcharge,2); }else{ echo number_format($transaction->getAmount(),2); } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
+    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{ if(@$postalcharge && $order->getIsFirstOrder()){         echo number_format($transaction->getAmount()+@$postalcharge,2); }else{ echo number_format($transaction->getAmount(),2);    }  } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
 
   </tr>
+  
+  
+  
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
