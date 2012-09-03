@@ -14,7 +14,7 @@ use_helper('Number');
     </tr>
     <tr>
         <td colspan="4">
-          <?php echo __('Customer Number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
+          <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
           <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
           <?php echo $customer->getAddress() ?><br/>
           <?php echo sprintf('%s %s', $customer->getPoBoxNumber(),$customer->getCity() ) ?><br/>
@@ -25,7 +25,7 @@ use_helper('Number');
          // echo $eC->getName();
           ?>
           <br /><br />
-          <?php echo __('Mobile Number') ?>: <br />
+          <?php echo __('Mobile number') ?>: <br />
           <?php echo $customer->getMobileNumber() ?><br />
           <?php if($agent_name!=''){ echo __('Agent Name') ?>:  <?php echo $agent_name; } ?>
         </td>
