@@ -2199,7 +2199,7 @@
                 <target>Servicios</target>
             </trans-unit>
             <trans-unit id="546" translate="yes" reformat="yes" xml:space="default">
-                <source>New Sim-card</source>
+                <source>New SIM-card</source>
                 <target>Nueva Tarjeta SIM</target>
             </trans-unit>
             <trans-unit id="547" translate="yes" reformat="yes" xml:space="default">
