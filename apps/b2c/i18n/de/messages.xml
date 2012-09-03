@@ -14,7 +14,7 @@
             </trans-unit>
             <trans-unit id="3" translate="yes" reformat="yes" xml:space="default">
                 <source>E-mail</source>
-                <target>Post</target>
+                <target>E-Mail</target>
             </trans-unit>
             <trans-unit id="4" translate="yes" reformat="yes" xml:space="default">
                 <source>Password</source>
@@ -2251,7 +2251,7 @@
             </trans-unit>
             <trans-unit id="555" translate="yes" reformat="yes" xml:space="default">
                 <source>New SIM-card confirmation</source>
-                <target>Neue SIM-Kartenbestätigung</target>
+                <target>Bestätigung neue SIM-Karte</target>
             </trans-unit>
             <trans-unit id="556" translate="yes" reformat="yes" xml:space="default">
                 <source>Old mobile number</source>
