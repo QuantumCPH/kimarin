@@ -737,8 +737,8 @@
                 <target>Rebut de la comanda</target>
             </trans-unit>
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
-                <source>Order No.</source>
-                <target>Número de comanda.</target>
+                <source>Order No</source>
+                <target>Número de comanda</target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number</source>

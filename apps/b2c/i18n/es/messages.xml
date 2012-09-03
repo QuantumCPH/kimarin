@@ -49,8 +49,8 @@
                 <target>Estimado cliente</target>
             </trans-unit>
             <trans-unit id="12" translate="yes" reformat="yes" xml:space="default">
-                <source>Order No.</source>
-                <target>Número de pedido.</target>
+                <source>Order No</source>
+                <target>Número de pedido</target>
             </trans-unit>
             <trans-unit id="13" translate="yes" reformat="yes" xml:space="default">
                 <source>US Mobile Number</source>

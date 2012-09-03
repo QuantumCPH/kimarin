@@ -49,7 +49,7 @@
                 <target>Sehr geehrter Kunde</target>
             </trans-unit>
             <trans-unit id="12" translate="yes" reformat="yes" xml:space="default">
-                <source>Order No.</source>
+                <source>Order No</source>
                 <target>Bestellnummer</target>
             </trans-unit>
             <trans-unit id="13" translate="yes" reformat="yes" xml:space="default">
