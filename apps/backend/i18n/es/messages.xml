@@ -2156,6 +2156,14 @@
                 <source>Your mobile number.</source>
                 <target>Su número de teléfono móvil.</target>
             </trans-unit>
+            <trans-unit id="536" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime bonus</source>
+                <target>Bonificación de tiempo de uso</target>
+            </trans-unit>
+            <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime refill</source>
+                <target>Recarga de tiempo de uso</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
