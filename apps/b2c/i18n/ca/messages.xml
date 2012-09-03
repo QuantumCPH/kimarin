@@ -46,7 +46,7 @@
             </trans-unit>
             <trans-unit id="11" translate="yes" reformat="yes" xml:space="default">
                 <source>Dear Customer</source>
-                <target>Estimado cliente</target>
+                <target>Benvolgut client</target>
             </trans-unit>
             <trans-unit id="12" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>

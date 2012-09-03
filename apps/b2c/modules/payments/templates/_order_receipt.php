@@ -69,7 +69,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="receipt" cellspacing="0" width="600px">
 	
   <tr bgcolor="#CCCCCC" class="receipt_header">   	
-    <th colspan="3"><?php echo __('Order Receipt') ?> <?php if ($order->getIsFirstOrder())
+    <th colspan="3"><?php echo __('Order Receipt')?>: <?php if ($order->getIsFirstOrder())
     {
         echo "(".$order->getProduct()->getName().")";
        
@@ -81,11 +81,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
         
     }
     ?> </th>
-    <th><?php echo __('Order number') ?> <?php echo $order->getId() ?></th>
+    <th><?php echo __('Order number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr> 
     <td colspan="4" class="payer_summary">
-      <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
+      <?php echo __('Customer number') ?>:   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>

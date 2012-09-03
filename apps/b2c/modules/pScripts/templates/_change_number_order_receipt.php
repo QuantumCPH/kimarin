@@ -10,7 +10,7 @@ use_helper('Number');
 <table cellspacing="0" width="600px" style="border: 2px solid #ccc;">
     <tr bgcolor="#CCCCCC" style="font-weight: bold;text-transform: uppercase;">
             <th colspan="3" align="left"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No') ?>: <?php echo $order->getId() ?></th>
+    <th><?php echo __('Order number') ?>: <?php echo $order->getId() ?></th>
     </tr>
     <tr>
         <td colspan="4">

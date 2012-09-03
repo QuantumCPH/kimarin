@@ -29,12 +29,12 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
 	</tr>
 </table>
 <table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;font-family:"Times New Roman", Times, serif;'>
-   <tr bgcolor="#CCCCCC" class="receipt_header" style='font-weight: bold;text-transform: uppercase;font-family:"Times New Roman", Times, serif;'> 
-    <th colspan="3" align="left"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No') ?>: <?php echo $order->getId() ?></th>
+   <tr bgcolor="#CCCCCC" class="receipt_header" style='font-weight: bold;text-transform: uppercase;font-family:"Times New Roman", Times, serif;font-size: 14px;'> 
+    <th colspan="3" align="left" style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Order Receipt') ?></th>
+    <th style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr>
-    <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;'>
+    <td colspan="4" class="payer_summary" style='font-size: 14px;font-family:"Times New Roman", Times, serif;'>
       <?php echo __('Customer Number')?>:   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
@@ -45,46 +45,46 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
       <?php if($agent_name!=''){ echo __('Agent Name') ?>:  <?php echo $agent_name; } ?>
     </td>
   </tr>
-  <tr class="order_summary_header" bgcolor="#CCCCCC" style='font-weight: bold;text-transform: uppercase;font-family:"Times New Roman", Times, serif;'> 
-    <td><?php echo __('Date') ?></td>
-    <td><?php echo __('Description') ?></td>
-    <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?></td>
+  <tr class="order_summary_header" bgcolor="#CCCCCC" style='font-weight: bold;font-size: 14px;text-transform: uppercase;'> 
+    <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Date') ?></td>
+    <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Description') ?></td>
+    <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Quantity') ?></td>
+    <td align="right" style='padding-right: 65px;font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Amount') ?></td>
   </tr>
-  <tr style='font-family:"Times New Roman", Times, serif;'> 
-    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
-    <td><?php echo __($transaction->getDescription());?></td>
-    <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $order->getProduct()->getRegistrationFee(),2) ?><?php echo sfConfig::get('app_currency_code')?></td>
+  <tr> 
+    <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __($transaction->getDescription());?></td>
+    <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo $order->getQuantity() ?></td>
+    <td align="right" style='padding-right: 65px;font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo number_format($subtotal = $order->getProduct()->getRegistrationFee(),2) ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr><td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td></tr>
-  <tr class="footer" style='font-family:"Times New Roman", Times, serif;'> 
+  <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('Subtotal') ?></td>
+    <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><strong><?php echo __('Subtotal') ?></strong></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td align="right" style='font-size: 14px;padding-right: 65px;font-family:"Times New Roman", Times, serif;'><strong><?php echo number_format($subtotal,2) ?><?php echo sfConfig::get('app_currency_code')?></strong></td>
   </tr>
-  <tr class="footer" style='font-family:"Times New Roman", Times, serif;'> 
+  <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('IVA') ?></td>
+    <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><strong><?php echo __('IVA') ?></strong></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td align="right" style='font-size: 14px;padding-right: 65px;font-family:"Times New Roman", Times, serif;'><strong><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code')?></strong></td>
   </tr>
-  <tr class="footer" style='font-family:"Times New Roman", Times, serif;'>
+  <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('Total') ?></td>
+    <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><strong><?php echo __('Total') ?></strong></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal+$vat,2) ?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td align="right" style='font-size: 14px;padding-right: 65px;font-family:"Times New Roman", Times, serif;'><strong><?php echo number_format($subtotal+$vat,2) ?><?php echo sfConfig::get('app_currency_code')?></strong></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
-  <tr class="footer" style='font-family:"Times New Roman", Times, serif;'>
-    <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;"> 
+  <tr class="footer" style=''>
+    <td class="payer_summary" colspan="4" style='font-weight:normal; white-space: nowrap;font-size: 14px;font-family:"Times New Roman", Times, serif;'> 
     <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
   </tr>
 </table><br />
-<p style='font-weight: bold;font-family:"Times New Roman", Times, serif;'>
+<p style='font-size: 14px;font-weight: bold;font-family:"Times New Roman", Times, serif;'>
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
         <br><?php echo __('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
