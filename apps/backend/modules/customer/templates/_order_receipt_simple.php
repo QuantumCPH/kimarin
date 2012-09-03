@@ -81,7 +81,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }
     ?>
         </th>
-    <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
+    <th><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr>
     <td colspan="4" class="payer_summary">

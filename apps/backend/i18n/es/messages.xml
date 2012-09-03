@@ -2164,6 +2164,10 @@
                 <source>Airtime refill</source>
                 <target>Recarga de tiempo de uso</target>
             </trans-unit>
+            <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
+                <source>Order Number</source>
+                <target>Número de pedido</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
