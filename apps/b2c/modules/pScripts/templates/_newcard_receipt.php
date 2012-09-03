@@ -49,7 +49,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
     <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Date') ?></td>
     <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Description') ?></td>
     <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?></td>
+    <td align="right" style='padding-right: 65px;font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Amount') ?></td>
   </tr>
   <tr> 
     <td style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
