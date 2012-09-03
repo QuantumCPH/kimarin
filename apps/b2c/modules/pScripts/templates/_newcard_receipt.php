@@ -50,7 +50,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
     <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?></td>
   </tr>
   <tr> 
-    <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td><?php echo __($transaction->getDescription());?></td>
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $order->getProduct()->getRegistrationFee(),2) ?><?php echo sfConfig::get('app_currency_code')?></td>
