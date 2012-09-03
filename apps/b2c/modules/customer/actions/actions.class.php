@@ -849,7 +849,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->transactions = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = round($pager->getNbResults() / $items_per_page,0);
     }
 
     public function executePasswordchange(sfWebRequest $request) {

@@ -69,24 +69,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="receipt" cellspacing="0" width="600px">
 	
   <tr bgcolor="#CCCCCC" class="receipt_header">   	
-    <th colspan="3"><?php echo __('Order Receipt') ?>(  <?php if ($order->getIsFirstOrder())
-    {
-        echo $order->getProduct()->getName();
-        if($transaction->getDescription()=="Anmeldung inc. sprechen"){
-          echo "<br />["; echo __('Smartsim including pot'); echo "]";
-        }else{
-            echo  '<br />['. $transaction->getDescription() .']';
-        }
-    }
-    else
-    {
-	if($transaction->getDescription()=="Refill"){
-          echo __("Refill");
-        }else{
-          echo __($transaction->getDescription());
-        }
-    }
-    ?>)</th>
+    <th colspan="3"><?php echo __('Order Receipt') ?></th>
     <th><?php echo __('Order number') ?> <?php echo $order->getId() ?></th>
   </tr>
   <tr> 
