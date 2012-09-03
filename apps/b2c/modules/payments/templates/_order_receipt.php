@@ -3,7 +3,7 @@ use_helper('I18N');
 use_helper('Number');
 ?>
 <style>
-	p {
+        p {
 		margin: 8px auto;
 	}
 	
