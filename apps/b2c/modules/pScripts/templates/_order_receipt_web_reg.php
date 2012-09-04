@@ -84,7 +84,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 </table>
 <table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;'>
   <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;"> 
-    <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Receipt')." (".$order->getProduct()->getName()." )" ?></th>
+    <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Receipt')." (".$order->getProduct()->getName().")" ?></th>
     <th style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr> 
@@ -142,8 +142,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;font-weight: bold;'><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
     <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($subTotal = $order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee(),2) ?><?php echo sfConfig::get('app_currency_code')?></td>
-  </tr>
-  
+  </tr>  
   <tr class="footer">
     <td>&nbsp;</td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;font-weight: bold;'><?php echo __('Delivery charges') ?>  </td>
