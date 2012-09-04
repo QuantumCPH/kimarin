@@ -69,7 +69,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 </table>
 <table class="receipt" cellspacing="0" width="600px">
   <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th colspan="3"><?php echo __('Order Receipt') ?>
+      <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Receipt') ?>
         <?php if ($order->getIsFirstOrder())
     {
 		echo $order->getProduct()->getName() .
@@ -81,10 +81,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }
     ?>
         </th>
-    <th><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
+    <th style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr>
-    <td colspan="4" class="payer_summary">
+    <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
       <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
@@ -99,14 +99,14 @@ $wrap_content  = isset($wrap)?$wrap:false;
     </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC">
-    <td><?php echo __('Date') ?></td>
-    <td><?php echo __('Description') ?></td>
-    <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?><!--(<?php echo sfConfig::get('app_currency_code') ?>)--></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'> <?php echo __('Date') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Description') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Quantity') ?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Amount') ?><!--(<?php echo sfConfig::get('app_currency_code') ?>)--></td>
   </tr>
   <tr>
-    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
-    <td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
     <?php   if($TDI==6){
          echo __('Airtime refill');
         
@@ -116,30 +116,30 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }
     ?>
 	</td>
-    <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getQuantity() ?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 <?php    if($TDI==6){  ?>
   
   <tr>
-    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
-    <td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
     <?php  echo __('Airtime bonus');   ?>
 	</td>
-    <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getQuantity() ?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'>-<?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   
   <?php   }    ?>
 
   <tr>
-  	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
+  	<td colspan="4" style='border-bottom: 2px solid #c0c0c0;font-family:"Times New Roman", Times, serif;font-size: 14px;'>&nbsp;</td>
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('Subtotal') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php    if($TDI==6){
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php    if($TDI==6){
                              echo  "0.00" ;
                          
                      }elseif($TDI==10){
@@ -149,9 +149,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
-   <td><?php echo __('IVA') ?> <!-- (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
+   <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('IVA') ?> <!-- (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php   if($TDI==6){
                              echo  "0.00" ;
                          
                      }elseif($TDI==10){
@@ -164,20 +164,20 @@ $wrap_content  = isset($wrap)?$wrap:false;
   if(@$postalcharge && $order->getIsFirstOrder()){?>
   <tr class="footer">
     <td></td>
-    <td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
     <?php
        echo __('Forsendelses omkostninger');
      ?>
     </td>
     <td><?php //echo $order->getQuantity() ?></td>
-    <td><?php echo @$postalcharge ; ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo @$postalcharge ; ?></td>
   </tr>
   <?php } ?>
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('Total') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php   if($TDI==6){
                              echo  "0.00" ;
                          
                      }elseif($TDI==10){
@@ -192,7 +192,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
   <tr class="footer">
-    <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;">
+    <td class="payer_summary" colspan="4" style='font-weight:normal; white-space: nowrap; font-family:"Times New Roman", Times, serif;font-size: 14px;'>
     <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
   </tr>
 </table>
