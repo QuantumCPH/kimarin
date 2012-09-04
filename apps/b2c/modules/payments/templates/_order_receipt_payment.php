@@ -111,7 +111,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
     </tr>
-    <tr style="font-weight: bold;text-transform: uppercase;">
+    <tr style="font-weight: bold;">
         <td>&nbsp;</td>
         <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Subtotal') ?></td>
         <td>&nbsp;</td>
