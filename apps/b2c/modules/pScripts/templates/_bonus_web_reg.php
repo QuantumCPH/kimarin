@@ -49,24 +49,20 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
-	<p><?php echo __('To') ?>&nbsp;<?php echo $recepient_name;//$customer->getFirstName();?></p>
-	
-
-	
-	
-	<p>
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear Customer') ?>&nbsp;<?php echo $recepient_name;//$customer->getFirstName();?>,</p>
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('%1% has added 10.00%2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.',array('%1%'=>sfConfig::get('app_site_title'), '%2%'=>sfConfig::get('app_currency_code'))); ?>
 	</p>
-        <p>
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
             <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 	</p>
-        <p>
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('Best regards,') ?>
 	</p>
-        <p>
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __(sfConfig::get('app_site_title')) ?>
 	</p>
-	<br />
+	<br /><br />
 <?php endif; ?>
 <table width="600px">
 	<tr style="border:0px solid #fff">
@@ -77,24 +73,25 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="receipt" cellspacing="0" width="600px">
   
  <tr>
-     <td colspan="4"><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
+     <td colspan="4" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
     </tr>
    <tr>
-  <td  colspan="4"><b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?></td>
+  <td  colspan="4"></td>
    </tr>
   <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th colspan="3"  align="left" ><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
+    <th colspan="3"  align="left"  style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Receipt') ?></th>
+    <th><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr>
-    <td colspan="4" class="payer_summary">
-      <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
+    <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+      <?php echo __('Customer number') ?>:   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?>
-      <?php
-	
+      <?php	
         $TDI=$transaction->getTransactionDescriptionId(); ?>
+      <br /><br />
+      <b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?>
       <br /><br />
       <?php echo __('Mobile Number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>   <br/>
@@ -102,17 +99,16 @@ $wrap_content  = isset($wrap)?$wrap:false;
     </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC">
-    <td><?php echo __('Date') ?></td>
-    <td><?php echo __('Description') ?></td>
-    <td><?php echo __('Quantity') ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?><!--(<?php echo sfConfig::get('app_currency_code') ?>)--></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Date') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Description') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Quantity') ?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Amount') ?><!--(<?php echo sfConfig::get('app_currency_code') ?>)--></td>
   </tr>
    
    
   <tr> 
-    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
-    <td>
-   
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>   
     
      <?php   if($TDI==6){
          echo __('Airtime refill');
@@ -127,12 +123,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
         }  
     }
     ?>
-    
-        
-      
 	</td>
-    <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php  if($TDI==6){
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getQuantity() ?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php  if($TDI==6){
        echo number_format($subtotal = $order->getExtraRefill()-$vat,2);
          }elseif($TDI==10){
           echo number_format($subtotal = $order->getExtraRefill()-$vat,2); 
@@ -142,23 +135,23 @@ $wrap_content  = isset($wrap)?$wrap:false;
   
     <?php   if($TDI==6){   ?>
                            <tr> 
-    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
-    <td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
       <?php  echo __('Airtime bonus');   ?>
 	</td>
-    <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $order->getExtraRefill()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getQuantity() ?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'>-<?php echo number_format($subtotal = $order->getExtraRefill()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
                          
               <?php       }elseif($TDI==10){  ?>
                              
                     <tr> 
-    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
-    <td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
       <?php  echo __('Bonus Invite a Friend');   ?>
 	</td>
-    <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $order->getExtraRefill()-$vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getQuantity() ?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'>-<?php echo number_format($subtotal = $order->getExtraRefill()-$vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>            
                           
                  <?php    }   ?>
@@ -167,9 +160,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('Subtotal') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php   if($TDI==6){
                              echo  "0.00" ;
                          
                      }elseif($TDI==10){
@@ -178,9 +171,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>  
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('IVA');?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('IVA');?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php    if($TDI==6){
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php    if($TDI==6){
                              echo  "0.00" ;
                          
                      }elseif($TDI==10){
@@ -190,9 +183,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
  
   <tr class="footer">
     <td>&nbsp;</td>
-    <td><?php echo __('Total') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php   if($TDI==6){
                              echo  "0.00" ;
                          
                      }elseif($TDI==10){
@@ -200,16 +193,16 @@ $wrap_content  = isset($wrap)?$wrap:false;
                      }else{ echo number_format($transaction->getAmount(),2); } ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr>
-  	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
+  	<td colspan="4" style='border-bottom: 2px solid #c0c0c0;'>&nbsp;</td>
   </tr>
   <tr class="footer">
-    <td class="payer_summary" colspan="4" style="font-weight:normal; white-space: nowrap;"> 
+    <td class="payer_summary" colspan="4" style='font-weight:normal; white-space: nowrap;font-family:"Times New Roman", Times, serif;font-size: 14px;'> 
     <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
   </tr>
 </table>
 <?php if($wrap_content): ?>
 <br />
-<p>
+<p style='font-weight:normal;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 <?php
 	$c = new  Criteria();
 	$c->add(GlobalSettingPeer::NAME, 'expected_delivery_time_agent_order');
@@ -221,22 +214,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	else
 		$expected_delivery = "3 business days";
 ?>
- 
+</p> 
 <?php endif; ?>
 
-<p style="font-weight: bold;">
+<p style='font-weight: bold;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
         <br><?php echo __('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
         <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
-
-<!--<p style="font-weight: bold;"><?php echo __('Cheers') ?></p>
-
-<p style="font-weight: bold;">
-
-<?php echo __('%1% Support',array('%1%'=>sfConfig::get('app_site_title'))) ?>&nbsp;
-
-</p>-->
-
     

@@ -548,10 +548,9 @@ class emailLib {
         $message_body = get_partial('pScripts/bonus_web_reg', array(
                     'customer' => $customerr,
                     'recepient_name' => $recepient_name,
-                       'order' => $order,
+                    'order' => $order,
                     'transaction' => $transaction,
-                     'vat' => $vat,
-                   
+                    'vat' => $vat,                   
                     'wrap' => true,
                 ));
         $subject =__('Bonus awarded');
