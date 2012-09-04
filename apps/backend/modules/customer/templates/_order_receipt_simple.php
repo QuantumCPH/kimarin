@@ -112,7 +112,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         
     }else{
     
-		echo $transaction->getDescription();
+		echo __($transaction->getDescription());
     }
     ?>
 	</td>
