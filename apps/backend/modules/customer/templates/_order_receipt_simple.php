@@ -67,7 +67,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  <td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png');?></td>
     </tr>
 </table>
-<table class="receipt" cellspacing="0" width="600px">
+<table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;'>
   <tr bgcolor="#CCCCCC" class="receipt_header">
       <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;text-transform: uppercase;'><?php echo __('Order Receipt') ?>
         <?php if ($order->getIsFirstOrder())
