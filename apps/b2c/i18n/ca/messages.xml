@@ -2090,7 +2090,7 @@
             </trans-unit>
             <trans-unit id="519" translate="yes" reformat="yes" xml:space="default">
                 <source>The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. </source>
-                <target>El valor del temps d'ús sobre el saldo del seu compte no pot sobrepassar els 250,00%1% en cap moment. </target>
+                <target>El valor del temps d'ús sobre el saldo del seu compte no pot sobrepassar els 250.00%1% en cap moment. </target>
             </trans-unit>
             <trans-unit id="520" translate="yes" reformat="yes" xml:space="default">
                 <source>%1% Refill Payment details:</source>
