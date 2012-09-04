@@ -534,7 +534,7 @@ class emailLib {
     public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject=null,$order,$transaction) {
 
         $c = new Criteria();
-        $c->add(CustomerPeer::ID, $inviteuserid);
+        $c->add(CustomerPeer::ID, $inviteuserid);        
         $customer = CustomerPeer::doSelectOne($c);
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
@@ -543,10 +543,11 @@ class emailLib {
         $sender_email = sfConfig::get('app_email_sender_email_sup');
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        
         $vat=0;
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('pScripts/bonus_web_reg', array(
-                    'customer' => $customerr,
+                    'customer' => $customer,
                     'recepient_name' => $recepient_name,
                     'order' => $order,
                     'transaction' => $transaction,
