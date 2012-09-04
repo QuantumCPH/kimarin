@@ -85,7 +85,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr>
     <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-      <?php echo __('Customer number') ?>  : <?php echo $customer->getUniqueId(); ?><br/>
+      <?php echo __('Customer number') ?>: <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?>
