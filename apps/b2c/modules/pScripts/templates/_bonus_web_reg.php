@@ -89,7 +89,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php	
         $TDI=$transaction->getTransactionDescriptionId(); ?>
       <br /><br />
-      <b><?php echo __('Registered friend')?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?>
+      <b><?php echo __('Registered friend')?>:</b> <?php echo $registered_customer_name;?>
       <br /><br />
       <?php echo __('Mobile Number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>   <br/>

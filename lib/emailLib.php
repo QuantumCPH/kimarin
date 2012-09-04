@@ -544,12 +544,14 @@ class emailLib {
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
         
+        $registered_customer_name = sprintf('%s %s', $customerr->getFirstName(), $customerr->getLastName());
         
         $vat=0;
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('pScripts/bonus_web_reg', array(
                     'customer' => $customer,
                     'recepient_name' => $recepient_name,
+                    'registered_customer_name' => $registered_customer_name,
                     'order' => $order,
                     'transaction' => $transaction,
                     'vat' => $vat,                   
@@ -1995,7 +1997,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'wrap' => false,
                 ));
 
-    $subject = __('Confirmation of product change');
+        $subject = __('Confirmation of product change');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');

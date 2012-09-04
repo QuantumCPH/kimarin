@@ -3150,7 +3150,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     // make a new transaction to show in payment history
                     $transaction_i = new Transaction();
 
-                $transaction_i->setAmount($comsion);
+                $transaction_i->setAmount($extrarefill);
                 $transactiondescriptionB=  TransactionDescriptionPeer::retrieveByPK(10);
                 $transaction_i->setTransactionTypeId($transactiondescriptionB->getTransactionType());
                 $transaction_i->setTransactionDescriptionId($transactiondescriptionB->getId());
@@ -3635,7 +3635,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
   }
  
    public function executeChangeCustomerProduct(sfWebRequest $request){
-   if(date("d")!=1){die;}
+   //if(date("d")!=1){die;}
             $ccp = new Criteria();
             $ccp->add(CustomerChangeProductPeer::STATUS, 2);
             $ChangeCustomers=CustomerChangeProductPeer::doSelect($ccp);
