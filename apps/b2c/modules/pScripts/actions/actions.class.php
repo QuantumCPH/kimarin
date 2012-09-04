@@ -3635,7 +3635,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
   }
  
    public function executeChangeCustomerProduct(sfWebRequest $request){
-   //if(date("d")!=1){die;}
+   if(date("d")!=1){die;}
             $ccp = new Criteria();
             $ccp->add(CustomerChangeProductPeer::STATUS, 2);
             $ChangeCustomers=CustomerChangeProductPeer::doSelect($ccp);
