@@ -1375,21 +1375,24 @@ class customerActions extends sfActions {
             $invite->setCustomerId($this->customer->getId());
             $invite->setMessage($message);
             $invite->save();
-
+            $message = "<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>".$message.'</p>';
+            
             $subject = $this->getContext()->getI18N()->__("%1% invitation", array('%1%' => sfConfig::get('app_site_title')));
 
             $name = $this->customer->getFirstName() . ' ' . $this->customer->getLastName();
-
-            $message_body = /* $this->getContext()->getI18N()->__('Hi ') . */$recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation has been sent to you by") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("who is a registered %1% customer.", array('%1%' => sfConfig::get('app_site_title')));
-
-            $message_body_end = /* $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="' . sfConfig::get('app_customer_url') . 'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.", array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>' . $this->getContext()->getI18N()->__('Read more') . ' <a href="' . sfConfig::get('app_site_url') . '">' . sfConfig::get('app_site_url') . '</a>';
-
+            $message_body = "<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>";
+            $message_body .= /* $this->getContext()->getI18N()->__('Hi ') . */$recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation has been sent to you by") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("who is a registered %1% customer.", array('%1%' => sfConfig::get('app_site_title')));
+            $message_body .= '</p>';
+            
+            $message_body_end ="<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>";
+            $message_body_end .= /* $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="' . sfConfig::get('app_customer_url') . 'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.", array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>' . $this->getContext()->getI18N()->__('Read more') . ' <a href="' . sfConfig::get('app_site_url') . '">' . sfConfig::get('app_site_url') . '</a>';
+            $message_body_end .= '</p>';
 
             //send email
             if ($recepient_name != ''):
                 $email = new EmailQueue();
                 $email->setSubject($subject);
-                $email->setMessage($message_body . "<br />" . $message . "<br/>" . $message_body_end);
+                $email->setMessage($message_body .  $message .  $message_body_end);
                 $email->setReceipientName($recepient_name);
                 $email->setReceipientEmail($recepient_email);
 
