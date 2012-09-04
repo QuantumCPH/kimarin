@@ -75,9 +75,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <!-- <tr>
      <td colspan="4" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
     </tr>-->
-   <tr>
-  <td  colspan="4"></td>
-   </tr>
+ 
   <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;">
     <th colspan="3"  align="left"  style='font-family:"Times New Roman", Times, serif;font-size: 14px;font-weight: bold;'><?php echo __('Order Receipt') ?></th>
     <th style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
@@ -158,7 +156,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
-  <tr class="footer" style="font-weight: bold;text-transform: uppercase;"> 
+  <tr class="footer" style="font-weight: bold;"> 
     <td>&nbsp;</td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
@@ -169,7 +167,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
                            echo  "0.00" ;   
                      }else{ echo number_format($subtotal,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>  
-  <tr class="footer" style="font-weight: bold;text-transform: uppercase;"> 
+  <tr class="footer" style="font-weight: bold;"> 
     <td>&nbsp;</td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('IVA');?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
@@ -181,7 +179,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
                      }else{   echo number_format($vat,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
  
-  <tr class="footer" style="font-weight: bold;text-transform: uppercase;">
+  <tr class="footer" style="font-weight: bold;">
     <td>&nbsp;</td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
