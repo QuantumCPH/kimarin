@@ -1392,7 +1392,7 @@ class customerActions extends sfActions {
             if ($recepient_name != ''):
                 $email = new EmailQueue();
                 $email->setSubject($subject);
-                $email->setMessage($message_body . "<br />" . $message . "<br/>" . $message_body_end);
+                $email->setMessage($message_body .  $message .  $message_body_end);
                 $email->setReceipientName($recepient_name);
                 $email->setReceipientEmail($recepient_email);
 
