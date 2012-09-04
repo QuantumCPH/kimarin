@@ -69,7 +69,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 </table>
 <table class="receipt" cellspacing="0" width="600px">
   <tr bgcolor="#CCCCCC" class="receipt_header">
-      <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Receipt') ?>
+      <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;text-transform: uppercase;'><?php echo __('Order Receipt') ?>
         <?php if ($order->getIsFirstOrder())
     {
 		echo $order->getProduct()->getName() .
@@ -99,10 +99,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
     </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC">
-    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'> <?php echo __('Date') ?></td>
-    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Description') ?></td>
-    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Quantity') ?></td>
-    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Amount') ?><!--(<?php echo sfConfig::get('app_currency_code') ?>)--></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;text-transform: uppercase;'> <?php echo __('Date') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;text-transform: uppercase;'><?php echo __('Description') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;text-transform: uppercase;'><?php echo __('Quantity') ?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;text-transform: uppercase;'><?php echo __('Amount') ?><!--(<?php echo sfConfig::get('app_currency_code') ?>)--></td>
   </tr>
   <tr>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
@@ -137,7 +137,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
-    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Subtotal') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;'><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
     <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php    if($TDI==6){
                              echo  "0.00" ;
@@ -149,7 +149,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer">
     <td>&nbsp;</td>
-   <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('IVA') ?> <!-- (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
+   <td style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;'><?php echo __('IVA') ?> <!-- (<?php echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
     <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php   if($TDI==6){
                              echo  "0.00" ;
@@ -175,7 +175,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <?php } ?>
   <tr class="footer">
     <td>&nbsp;</td>
-    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Total') ?></td>
+    <td style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;'><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
     <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php   if($TDI==6){
                              echo  "0.00" ;
