@@ -3133,7 +3133,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $invite = InvitePeer::doSelectOne($invite_c);
                 if ($invite) {
                     $invite->setInviteStatus(3);
-                   
+                    $invite->setInvitedCustomerId($this->customer->getId());
                     $products = new Criteria();
                     $products->add(ProductPeer::ID, 2);
                     $products = ProductPeer::doSelectOne($products);
@@ -3179,6 +3179,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     //This is for Recharge the Account
                   
                     $transaction_i->save();
+                    $invite->setBonusTransactionId($transaction_i->getId());
                     $invite->save();
 
                     $invitevar = $invite->getCustomerId();

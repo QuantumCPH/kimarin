@@ -100,6 +100,12 @@ $wrap_content  = isset($wrap)?$wrap:false;
       $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId()); 
       $TDI=$transaction->getTransactionDescriptionId();   ?>
       <br /><br />
+      <?php if($registered_customer_name) {?>
+      <b><?php echo __('Registered friend')?>:</b> <?php echo $registered_customer_name;?>
+      <br /><br />
+      <?php } ?>
+
+
       <?php    $unid=$customer->getUniqueid(); ?>
      <?php     $customer->getMobileNumber()    ?>
       <?php echo __('Mobile number') ?>: <br />
