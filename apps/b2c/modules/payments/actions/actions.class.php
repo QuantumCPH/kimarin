@@ -293,11 +293,25 @@ class paymentsActions extends sfActions {
             $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
         //}
 
+        $registered_customer_name = false;
+        $refferedC = new Criteria();
+        $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID,$transaction->getId());
+        $refferedC->add(InvitePeer::INVITE_STATUS,3);
+        
+        if(InvitePeer::doCount($refferedC)>0){
+        
+            $invite = InvitePeer::doSelectOne($refferedC);
+            $invitedCustomer = CustomerPeer::retrieveByPK($invite->getInvitedCustomerId());
+            $registered_customer_name = $invitedCustomer->getFirstName()." ".$invitedCustomer->getLastName();
+
+        }
+
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,
             'order' => CustomerOrderPeer::retrieveByPK($transaction->getOrderId()),
             'transaction' => $transaction,
             'vat' => $vat,
+            'registered_customer_name' => $registered_customer_name,
             'postalcharge'=>$postalcharge,
             'customerorder'=>$customerorder,
         ));
