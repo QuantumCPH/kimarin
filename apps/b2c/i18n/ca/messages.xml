@@ -2290,7 +2290,7 @@
             </trans-unit>
             <trans-unit id="569" translate="yes" reformat="yes" xml:space="default">
                 <source>Now your current product is</source>
-                <target>El vostre producte actual és</target>
+                <target>El teu producte actual és</target>
             </trans-unit>
             <trans-unit id="570" translate="yes" reformat="yes" xml:space="default">
                 <source>Confirmation of product change</source>
@@ -2316,6 +2316,14 @@
                 <source>Airtime refill</source>
                 <target>Recarrega de temps d'ús</target>
             </trans-unit>
+            <trans-unit id="576" translate="yes" reformat="yes" xml:space="default">
+                <source>Airtime refill</source>
+                <target>Recarrega de temps d'ús</target>
+            </trans-unit>
+            <trans-unit id="577" translate="yes" reformat="yes" xml:space="default">
+                <source>Your order for change of product has been successfully implemented</source>
+                <target>S'ha executat correctament la teva petició de canvi de producte</target>
+            </trans-unit>            
         </body>
     </file>
 </xliff>
