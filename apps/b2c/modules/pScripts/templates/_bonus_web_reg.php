@@ -53,9 +53,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('%1% has added 10.00%2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.',array('%1%'=>sfConfig::get('app_site_title'), '%2%'=>sfConfig::get('app_currency_code'))); ?>
 	</p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+<!--        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
             <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
-	</p>
+	</p>-->
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('Best regards,') ?>
 	</p>
@@ -70,7 +70,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</tr>
 </table>
 
-<table class="receipt" cellspacing="0" width="600px">
+<table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;font-family:"Times New Roman", Times, serif;'>
   
 <!-- <tr>
      <td colspan="4" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
@@ -80,7 +80,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
    </tr>
   <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;">
     <th colspan="3"  align="left"  style='font-family:"Times New Roman", Times, serif;font-size: 14px;font-weight: bold;'><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
+    <th style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr>
     <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
@@ -91,7 +91,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php	
         $TDI=$transaction->getTransactionDescriptionId(); ?>
       <br /><br />
-      <b><?php echo __('Registered friend') ?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?>
+      <b><?php echo __('Registered friend')?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?>
       <br /><br />
       <?php echo __('Mobile Number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>   <br/>

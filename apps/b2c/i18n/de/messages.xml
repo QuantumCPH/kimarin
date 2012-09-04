@@ -946,8 +946,8 @@
                 <target>Bonus-Empfänger</target>
             </trans-unit>
             <trans-unit id="232" translate="yes" reformat="yes" xml:space="default">
-                <source>Registered Friend</source>
-                <target>Registrierte Freund</target>
+                <source>Registered friend</source>
+                <target>Registrierter Freund</target>
             </trans-unit>
             <trans-unit id="233" translate="yes" reformat="yes" xml:space="default">
                 <source>Registration</source>
