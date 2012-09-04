@@ -54,7 +54,7 @@
             </trans-unit>
             <trans-unit id="13" translate="yes" reformat="yes" xml:space="default">
                 <source>US Mobile Number</source>
-                <target>US Handy-Nummer</target>
+                <target>US Mobilfunknummer</target>
             </trans-unit>
             <trans-unit id="14" translate="yes" reformat="yes" xml:space="default">
                 <source>Date</source>
@@ -740,9 +740,10 @@
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
                 <target>Bestellnummer</target>
-            </trans-unit><trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
+            </trans-unit>
+            <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile Number</source>
-                <target>Handy-Nummer</target>
+                <target>Mobilfunknummer</target>
             </trans-unit>
             <trans-unit id="182" translate="yes" reformat="yes" xml:space="default">
                 <source>Smartsim including pot</source>
