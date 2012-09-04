@@ -117,13 +117,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
         <td>&nbsp;</td>
         <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($subtotal = $order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
     </tr>
-    <tr style="font-weight: bold;text-transform: uppercase;">
+    <tr style="font-weight: bold;">
         <td>&nbsp;</td>
         <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('IVA') ?></td>
         <td>&nbsp;</td>
         <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
     </tr>
-    <tr style="font-weight: bold;text-transform: uppercase;">
+    <tr style="font-weight: bold;">
         <td>&nbsp;</td>
         <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Total') ?></td>
         <td>&nbsp;</td>
@@ -133,7 +133,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
     </tr>
     <tr>
-        <td colspan="4" style='font-weight:normal; white-space: nowrap;font-family:"Times New Roman", Times, serif;font-size: 14px;'> <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?></td>
+        <td colspan="4" style='font-weight:normal; white-space: nowrap;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?></td>
     </tr>
 </table>
 <?php if($wrap_content): ?>
