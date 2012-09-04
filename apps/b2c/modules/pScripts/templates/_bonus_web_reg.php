@@ -82,17 +82,17 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr>
     <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-      <?php echo __('Customer number') ?>:   <?php echo $customerr->getUniqueId(); ?><br/>
-      <?php echo sprintf("%s %s", $customerr->getFirstName(), $customerr->getLastName())?><br/>
-      <?php echo $customerr->getAddress() ?><br/>
-      <?php echo sprintf('%s %s', $customerr->getPoBoxNumber(), $customerr->getCity()) ?>
+      <?php echo __('Customer number') ?>:   <?php echo $customer->getUniqueId(); ?><br/>
+      <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
+      <?php echo $customer->getAddress() ?><br/>
+      <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?>
       <?php	
         $TDI=$transaction->getTransactionDescriptionId(); ?>
       <br /><br />
-      <b><?php echo __('Registered friend')?>:</b> <?php echo sprintf("%s %s", $customerr->getFirstName(), $customerr->getLastName())?>
+      <b><?php echo __('Registered friend')?>:</b> <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?>
       <br /><br />
       <?php echo __('Mobile Number') ?>: <br />
-      <?php echo $customerr->getMobileNumber() ?>   <br/>
+      <?php echo $customer->getMobileNumber() ?>   <br/>
       <?php //echo __('Paid Through'); ?> <?php //echo __('Agent'); ?>
     </td>
   </tr>
