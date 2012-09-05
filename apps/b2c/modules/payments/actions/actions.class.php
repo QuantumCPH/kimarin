@@ -255,6 +255,12 @@ class paymentsActions extends sfActions {
 
         $transaction = TransactionPeer::retrieveByPK($transaction_id);
 
+        if($transaction_id>93){
+          $vatValue=sfConfig::get('app_vat_percentage');
+        }else{
+         $vatValue=(.18);
+        }
+        
         $this->forward404Unless($transaction->getCustomerId() == $this->customer->getId(), 'Not allowed');
 
         //set customer order
@@ -263,13 +269,13 @@ class paymentsActions extends sfActions {
         $customerorder = $customer_order->getIsFirstOrder();
         if ($customer_order) {
             $vat = $customer_order->getIsFirstOrder() ?
-                    ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage') : 0;
+                    ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * $vatValue : 0;
         }
         else
             die('Error retreiving');
         //if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
         if(strstr($transaction->getDescription(),"Refill")){
-            $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
+            $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatValue+1));
         }
 
         $this->renderPartial('payments/order_receipt', array(
