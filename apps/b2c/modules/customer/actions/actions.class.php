@@ -1331,7 +1331,7 @@ class customerActions extends sfActions {
         $this->redirectUnless($this->customer, "@homepage");
         $c = new Criteria();
         $c->add(CbfPeer::CUSTOMER_ID, $this->customer->getId());
-//        $c->add(CbfPeer::STATUS, 3);
+        $c->add(CbfPeer::STATUS, 3);
         $c->addDescendingOrderByColumn(CbfPeer::CREATED_AT);
         $items_per_page = 25; //shouldn't be 0
         $this->page = $request->getParameter('page');
