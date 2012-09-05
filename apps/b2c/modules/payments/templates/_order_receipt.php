@@ -49,6 +49,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
  
 <?php if($wrap_content): ?>
 	<p><?php echo __('Dear Customer') ?></p>
+        <p><?php echo __('Your account has been blocked.') ?></p>
+        
 	<p>
 	<?php echo __('Thank you for ordering <b>%1%</b> and becoming %2% Customer. We welcome you to a new and huge mobile world. ',array('%1%'=>$order->getProduct()->getName(),'%2%'=>sfConfig::get('app_site_title'))); echo __('Your customer number is '); ?>  <?php echo $customer->getUniqueid();?>. <?php echo __(' There, you can use in your dealings with customer service')?>
 	</p>
