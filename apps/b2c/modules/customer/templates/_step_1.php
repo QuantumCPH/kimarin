@@ -25,7 +25,8 @@
 			 <?php endif; ?>
                 
              <div class='inline-error-signup'><?php echo $error_mobile_number?$form['mobile_number']->renderError():'&nbsp;'?>
-                 </div>                
+                 </div>  
+                <label style="float:right;width:85px;font-weight:normal;<?php if ($error_mobile_number): ?> margin-right:68px; <?php else: ?>margin-right: 0px;<?php endif; ?>">ex. 0701234567</label>
             </li>
             <!-- end mobile_number -->  
             <?php 
