@@ -50,7 +50,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
-	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('To') ?>&nbsp;<?php echo $customer->getFirstName()." ".$customer->getLastName();?></p>
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear customer') ?>&nbsp;<?php //echo $customer->getFirstName()." ".$customer->getLastName();?></p>
 	
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?>
@@ -59,14 +59,14 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('The products you have ordered will be sent by mail shortly. Your customer number is '); echo $customer->getUniqueid();?>. <?php //echo __(' There, you can use in your dealings with customer service'); ?></p>
 	
-	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<!--<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
             <?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
-<!--            <br /><?php echo __('E-mail') ?>:&nbsp;
-            <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>-->
+            <br /><?php echo __('E-mail') ?>:&nbsp;
+            <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
             <br /><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 	<?php //echo __('Do not hesitate to contact us if you have any questions.') ?>
 	</p>
-<!--        <p>
+      <p>
             <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 	</p>-->
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
@@ -84,7 +84,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 </table>
 <table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;'>
   <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;"> 
-    <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Receipt')." (".$order->getProduct()->getName().")" ?></th>
+    <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Receipt')." (".$order->getProduct()->getName()." [".__('Registration')."])" ?></th>
     <th style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr> 

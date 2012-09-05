@@ -2156,7 +2156,7 @@
             </trans-unit>
             <trans-unit id="534" translate="yes" reformat="yes" xml:space="default">
                 <source>The products you have ordered will be sent by mail shortly. Your customer number is </source>
-                <target>Die von Ihnen bestellten Produkte werden in Kürze per E-Mail versandt. Ihre Kundennummer lautet </target>
+                <target>Die von Ihnen bestellten Produkte werden in Kürze per Post versandt. Ihre Kundennummer lautet </target>
             </trans-unit>
             <trans-unit id="535" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password has been changed. Please use the following information to enter MY ACCOUNT.</source>
