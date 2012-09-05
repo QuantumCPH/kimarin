@@ -75,9 +75,5 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
  <p style="font-weight: bold;"><?php echo __('Best regards') ?></p>
 
-<p style="font-weight: bold;">
-
-<?php echo  sfConfig::get('app_site_title'); ?>&nbsp;
-
-</p> 
+<p style="font-weight: bold;"><?php echo  sfConfig::get('app_site_title'); ?>&nbsp;</p> 
 
