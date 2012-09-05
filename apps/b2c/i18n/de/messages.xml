@@ -2164,11 +2164,11 @@
             </trans-unit>
             <trans-unit id="536" translate="yes" reformat="yes" xml:space="default">
                 <source>This invitation has been sent to you by</source>
-                <target>Diese Einladung wurde Ihnen von  …. gesandt,</target>
+                <target>Diese Einladung wurde Ihnen von </target>
             </trans-unit>
             <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
                 <source>who is a registered %1% customer.</source>
-                <target>Diese Person ist ein angemeldeter %1%-Kunde.</target>
+                <target>gesandt. Diese Person ist ein angemeldeter %1%-Kunde.</target>
             </trans-unit>
             <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
                 <source>Go to %1%'s web site for registration.</source>
