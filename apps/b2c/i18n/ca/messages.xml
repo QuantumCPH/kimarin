@@ -717,7 +717,7 @@
                 <target>En breu, rebreu per correu els productes que heu sol·licitat.  El vostre número de client és </target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
-                <source>SMS history</source>
+                <source>SMS History</source>
                 <target>Registre de SMS</target>
             </trans-unit>
             <trans-unit id="177" translate="yes" reformat="yes" xml:space="default">
