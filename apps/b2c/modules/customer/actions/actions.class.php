@@ -1915,7 +1915,7 @@ class customerActions extends sfActions {
         $customer->setBlock(1);
         $customer->save();
         
-        emailLib::sendBlockCustomerEmail();
+        emailLib::sendBlockCustomerEmail($customer);
         $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Konto er deaktivert.'));
         $this->getUser()->getAttributeHolder()->removeNameSpace('usersession');
         $this->getUser()->setAuthenticated(false);
