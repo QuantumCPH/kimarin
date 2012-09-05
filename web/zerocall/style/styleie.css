@@ -653,31 +653,31 @@ margin-top:12px;
 .navegaciones a.logout-s{ background-position:-87px -380px}
 
 /****** German ********/
-.navigationen{ width:575px; float:left;}
+.navigationen{ width: 657px; float:left;}
 .navigationen a{ width:82px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/german.jpg); background-repeat:no-repeat; margin-right:0px;}
 .navigationen a.dashboard{ background-position:0px 0px}
 .navigationen a.dashboard:hover{ background-position:-90px 0px}
 .navigationen a.dashboard-s{ background-position:-90px 0px}
 
-.navigationen a.refil{ background-position:0px -64px;}
-.navigationen a.refil:hover{ background-position:-90px -64px}
-.navigationen a.refil-s{ background-position:-90px -64px}
+.navigationen a.refil{ background-position:-6px -64px;}
+.navigationen a.refil:hover{ background-position:-96px -64px}
+.navigationen a.refil-s{ background-position:-96px -64px}
 
-.navigationen a.callhistory{ background-position:0px -124px;}
-.navigationen a.callhistory:hover{ background-position:-90px -124px;}
-.navigationen a.callhistory-s{ background-position:-90px -124px;}
+.navigationen a.callhistory{ background-position:-11px -124px;}
+.navigationen a.callhistory:hover{ background-position:-101px -124px;}
+.navigationen a.callhistory-s{ background-position:-101px -124px;}
 
 .navigationen a.paymenthistory{ background-position:-4px -186px}
 .navigationen a.paymenthistory:hover{ background-position:-94px -186px}
-.navigationen a.paymenthistory-s{ background-position:-90px -186px}
+.navigationen a.paymenthistory-s{ background-position:-94px -186px}
 
-.navigationen a.settings{ background-position:0px -250px}
-.navigationen a.settings:hover{ background-position:-90px -250px}
-.navigationen a.settings-s{ background-position:-90px -250px}
+.navigationen a.settings{ background-position:0px -250px;margin-right: 10px;margin-left: 6px;}
+.navigationen a.settings:hover{ background-position:-90px -250px;margin-right: 10px;margin-left: 6px;}
+.navigationen a.settings-s{ background-position:-90px -250px;margin-right: 10px;margin-left: 6px;}
 
-.navigationen a.websms{ background-position:3px -313px}
-.navigationen a.websms:hover{ background-position:-87px -313px}
-.navigationen a.websms-s{ background-position:-87px -313px}
+.navigationen a.websms{ background-position:-5px -313px;}
+.navigationen a.websms:hover{ background-position:-95px -313px;}
+.navigationen a.websms-s{ background-position:-95px -313px;}
 
 .navigationen a.logout{ background-position:3px -380px;}
 .navigationen a.logout:hover{ background-position:-87px -380px}
