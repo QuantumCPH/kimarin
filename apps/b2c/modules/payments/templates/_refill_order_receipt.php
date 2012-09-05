@@ -100,10 +100,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId()); 
       $TDI=$transaction->getTransactionDescriptionId();   ?>
       <br /><br />
-      <?php if($registered_customer_name) {?>
-      <b><?php echo __('Registered friend')?>:</b> <?php echo $registered_customer_name;?>
-      <br /><br />
-      <?php } ?>
+      
 
 
       <?php    $unid=$customer->getUniqueid(); ?>
@@ -112,13 +109,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php echo $customer->getMobileNumber() ?>
   </td>
   </tr>
-  <tr class="order_summary_header" bgcolor="#CCCCCC"> 
+  <tr class="order_summary_header" bgcolor="#CCCCCC" style="font-weight: bold;text-transform: uppercase;"> 
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Date') ?></td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Description') ?></td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Quantity') ?></td>
   <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Amount') ?><!--  (<?php //echo sfConfig::get('app_currency_code');?>)--></td>
   </tr>
-<?php if($customerorder){?>  
+<?php $customerorder = false;if($customerorder){?>  
   <tr> 
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
@@ -225,7 +222,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
-  <tr class="footer"> 
+  <tr class="footer" style="font-weight: bold;"> 
     <td>&nbsp;</td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
@@ -236,7 +233,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
                            echo  "0.00" ;   
                      }else{ echo number_format($subtotal,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>  
-  <tr class="footer"> 
+  <tr class="footer" style="font-weight: bold;"> 
     <td>&nbsp;</td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('IVA');?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
@@ -249,7 +246,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <?php    
   }  ?>
-  <tr class="footer">
+  <tr class="footer" style="font-weight: bold;">
     <td>&nbsp;</td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
