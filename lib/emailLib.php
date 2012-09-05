@@ -2071,7 +2071,86 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
     }
   
     
+    
+    
+   
+    public static function sendBlockCustomerEmail(Customer $customer) {
      
+        
+        $recepient_email = trim($customer->getEmail());
+        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        $customer_id = trim($customer->getId());
+        $referrer_id = trim($customer->getReferrerId());
+ 
+        //$this->renderPartial('affiliate/order_receipt', array(
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('customer/block_customer', array(
+                    'customer' => $customer,
+                    'wrap' => false,
+                ));
+
+        $subject = __('Block account');
+        //Support Information
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+           $sender_namers = sfConfig::get('app_email_sender_name_sup');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_sup');
+        
+        //------------------Sent The Email To Customer
+        if (trim($recepient_email) != '') {
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recepient_name);
+            $email->setReceipientEmail($recepient_email);
+            $email->setAgentId($referrer_id);
+            $email->setCutomerId($customer_id);
+            $email->setEmailType(sfConfig::get('app_site_title') . 'Block account');
+            $email->setMessage($message_body);
+            $email->save();
+        }
+        //----------------------------------------
+        
+        //--------------Sent The Email To okhan
+        if (trim($sender_email) != ''):
+            $email3 = new EmailQueue();
+            $email3->setSubject($subject);
+            $email3->setReceipientName($sender_name);
+            $email3->setReceipientEmail($sender_email);
+            $email3->setAgentId($referrer_id);
+            $email3->setCutomerId($customer_id);
+            $email3->setEmailType(sfConfig::get('app_site_title') . 'Block account');
+            $email3->setMessage($message_body);
+            $email3->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To CDU
+        if (trim($sender_emailcdu) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namecdu);
+            $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($referrer_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . 'Block account');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+          if (trim($sender_emailrs) != ''):
+            $email5 = new EmailQueue();
+            $email5->setSubject($subject);
+            $email5->setReceipientName($sender_namers);
+            $email5->setReceipientEmail($sender_emailrs);
+            $email5->setAgentId($referrer_id);
+            $email5->setCutomerId($customer_id);
+            $email5->setEmailType(sfConfig::get('app_site_title') . 'Block account');
+            $email5->setMessage($message_body);
+            $email5->save();
+        endif;
+    }
+  
+       
     
     
 }
