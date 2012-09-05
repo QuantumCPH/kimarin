@@ -125,7 +125,7 @@
                         //alert(valid);
                         if (!valid) { // if email is not valid
                             jq('#forgot_password_mobile').focus();
-                            alert('<?php echo __('Please enter a valid 8 to 14 digit mobile number.') ?>');
+                            alert('<?php echo __('Enter your mobile number to receive your password.') ?>');
                             document.frmforget.mobile.focus();
                             return false;
                         }

@@ -345,7 +345,7 @@ class emailLib {
 
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
-        $message_body = get_partial('payments/order_receipt', array(
+        $message_body = get_partial('payments/refill_order_receipt', array(
                     'customer' => $customer,
                     'order' => $order,
                     'transaction' => $transaction,
@@ -376,43 +376,43 @@ class emailLib {
         }
         //----------------------------------------
         //------------------Sent the Email To Agent
-        if (trim($recepient_agent_email) != ''):
-            $email2 = new EmailQueue();
-            $email2->setSubject($subject);
-            $email2->setReceipientName($recepient_agent_name);
-            $email2->setReceipientEmail($recepient_agent_email);
-            $email2->setAgentId($referrer_id);
-            $email2->setCutomerId($customer_id);
-            $email2->setEmailType(sfConfig::get('app_site_title') . ' Customer Registration');
-            $email2->setMessage($message_body);
-            $email2->save();
-        endif;
+//        if (trim($recepient_agent_email) != ''):
+//            $email2 = new EmailQueue();
+//            $email2->setSubject($subject);
+//            $email2->setReceipientName($recepient_agent_name);
+//            $email2->setReceipientEmail($recepient_agent_email);
+//            $email2->setAgentId($referrer_id);
+//            $email2->setCutomerId($customer_id);
+//            $email2->setEmailType(sfConfig::get('app_site_title') . ' Customer Registration');
+//            $email2->setMessage($message_body);
+//            $email2->save();
+//        endif;
         //---------------------------------------
         //--------------Sent The Email To okhan
-        if (trim($sender_email) != ''):
-            $email3 = new EmailQueue();
-            $email3->setSubject($subject);
-            $email3->setReceipientName($sender_name);
-            $email3->setReceipientEmail($sender_email);
-            $email3->setAgentId($referrer_id);
-            $email3->setCutomerId($customer_id);
-            $email3->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
-            $email3->setMessage($message_body);
-            $email3->save();
-        endif;
+//        if (trim($sender_email) != ''):
+//            $email3 = new EmailQueue();
+//            $email3->setSubject($subject);
+//            $email3->setReceipientName($sender_name);
+//            $email3->setReceipientEmail($sender_email);
+//            $email3->setAgentId($referrer_id);
+//            $email3->setCutomerId($customer_id);
+//            $email3->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
+//            $email3->setMessage($message_body);
+//            $email3->save();
+//        endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
-        if (trim($sender_emailcdu) != ''):
-            $email4 = new EmailQueue();
-            $email4->setSubject($subject);
-            $email4->setReceipientName($sender_namecdu);
-            $email4->setReceipientEmail($sender_emailcdu);
-            $email4->setAgentId($referrer_id);
-            $email4->setCutomerId($customer_id);
-            $email4->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
-            $email4->setMessage($message_body);
-            $email4->save();
-        endif;
+//        if (trim($sender_emailcdu) != ''):
+//            $email4 = new EmailQueue();
+//            $email4->setSubject($subject);
+//            $email4->setReceipientName($sender_namecdu);
+//            $email4->setReceipientEmail($sender_emailcdu);
+//            $email4->setAgentId($referrer_id);
+//            $email4->setCutomerId($customer_id);
+//            $email4->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
+//            $email4->setMessage($message_body);
+//            $email4->save();
+//        endif;
         //-----------------------------------------
     }
 
