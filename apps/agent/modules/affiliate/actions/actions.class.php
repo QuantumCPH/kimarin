@@ -408,7 +408,10 @@ class affiliateActions extends sfActions {
         $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
+         $c = new Criteria();
+        $c->add(ProductPeer::PRODUCT_TYPE_ID, 2);
 
+        $this->refillProducts = ProductPeer::doSelect($c);
         //get Agent commission package
         $cpc = new Criteria();
         $cpc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
