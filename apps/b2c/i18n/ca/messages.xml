@@ -45,7 +45,7 @@
                 <target>Contraseña es enviado a su dirección de correo electrónico.</target>
             </trans-unit>
             <trans-unit id="11" translate="yes" reformat="yes" xml:space="default">
-                <source>Dear Customer</source>
+                <source>Dear customer</source>
                 <target>Benvolgut client</target>
             </trans-unit>
             <trans-unit id="12" translate="yes" reformat="yes" xml:space="default">

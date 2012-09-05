@@ -3,23 +3,16 @@ use_helper('I18N');
 use_helper('Number');
 $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentage')
 ?>
-<!--<p><?php echo __('To') ?>&nbsp;<?php echo $customer->getFirstName()." ".$customer->getLastName();?></p>
+<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear customer') ?>&nbsp;<?php //echo $customer->getFirstName()." ".$customer->getLastName();?></p>
 
-<p><?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?></p>
+<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?></p>
 
-<p><?php echo __('The products you have ordered will be sent by mail shortly. Your customer number is '); echo $customer->getUniqueid();?>.</p>
+<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('The products you have ordered will be sent by mail shortly. Your customer number is '); echo $customer->getUniqueid();?>.</p>
 
-<p>
-    <?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
-    <br><?php echo __('E-mail') ?>:&nbsp;
-    <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
-    <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
-</p>
+<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Best regards,') ?></p>
 
-<p><?php echo __('Best regards,') ?></p>
-
-<p><?php echo __(sfConfig::get('app_site_title')) ?></p>
-<br />-->
+<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __(sfConfig::get('app_site_title')) ?></p>
+<br />
 
 <table width="600px">
 <tr style="border:0px solid #fff;">
