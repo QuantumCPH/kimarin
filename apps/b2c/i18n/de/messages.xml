@@ -14,7 +14,7 @@
             </trans-unit>
             <trans-unit id="3" translate="yes" reformat="yes" xml:space="default">
                 <source>E-mail</source>
-                <target>Post</target>
+                <target>E-mail</target>
             </trans-unit>
             <trans-unit id="4" translate="yes" reformat="yes" xml:space="default">
                 <source>Password</source>
@@ -2008,7 +2008,7 @@
             </trans-unit>
             <trans-unit id="497" translate="yes" reformat="yes" xml:space="default">
                 <source>E-mail</source>
-                <target>Post</target>
+                <target>E-mail</target>
             </trans-unit>
             <trans-unit id="498" translate="yes" reformat="yes" xml:space="default">
                 <source>Telephone</source>
