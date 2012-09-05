@@ -3629,7 +3629,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $callbacklog->setuniqueId($uniqueId);
         $callbacklog->setcallingCode($countrycode);
         $callbacklog->save();
-        $this->setPreferredCulture($this->customer);
+        $this->setPreferredCulture($customer);
         emailLib::sendCustomerChangeNumberEmail($customer, $order);
         $this->updatePreferredCulture();
         return sfView::NONE;
