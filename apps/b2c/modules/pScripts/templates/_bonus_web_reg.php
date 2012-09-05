@@ -49,7 +49,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
-	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear customer') ?>&nbsp;<?php //echo $recepient_name;//$customer->getFirstName();?>,</p>
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear customer') ?>,</p>
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('%1% has added 10.00%2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.',array('%1%'=>sfConfig::get('app_site_title'), '%2%'=>sfConfig::get('app_currency_code'))); ?>
 	</p>
