@@ -63,7 +63,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 ?> 
   <tr>
   	<td colspan="4" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'> 
-            <?php echo __('Dear Customer'); ?>   <?php //echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?>  ,<br/>
+            <?php echo __('Dear customer'); ?>   <?php //echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?>  ,<br/>
  
    <?php echo __('Your order for change of product has been successfully implemented');  ?>.<br/>
  <?php echo __('Now your current product is'); ?>: (<?php echo $product->getName();   ?>).

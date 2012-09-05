@@ -45,7 +45,7 @@
                 <target>Das Passwort ist Ihre E-Mail-Adresse gesendet.</target>
             </trans-unit>
             <trans-unit id="11" translate="yes" reformat="yes" xml:space="default">
-                <source>Dear Customer</source>
+                <source>Dear customer</source>
                 <target>Sehr geehrter Kunde</target>
             </trans-unit>
             <trans-unit id="12" translate="yes" reformat="yes" xml:space="default">
