@@ -66,7 +66,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 	</tr>
 </table>
-<table class="receipt" cellspacing="0" width="600px">
+<table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;font-family:"Times New Roman", Times, serif;'>
 	
   <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;">   	
     <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Receipt')?> <?php if ($order->getIsFirstOrder())
