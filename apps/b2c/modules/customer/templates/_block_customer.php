@@ -56,7 +56,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 </table>
 
  
-<p><?php echo __('Dear Customer') ?></p>
+<p><?php echo __('Dear customer') ?></p>
    <p><?php echo __('Your account has been blocked.') ?></p>
          <p><?php echo __('Your customer number is') ?>: <?php   echo $customer->getUniqueId();   ?></p>
 

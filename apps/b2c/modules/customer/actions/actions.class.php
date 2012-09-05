@@ -1385,7 +1385,7 @@ class customerActions extends sfActions {
             $message_body .= '</p>';
             
             $message_body_end ="<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>";
-            $message_body_end .= /* $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="' . sfConfig::get('app_customer_url') . 'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.", array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>' . $this->getContext()->getI18N()->__('Read more') . ' <a href="' . sfConfig::get('app_site_url') . '">' . sfConfig::get('app_site_url') . '</a>';
+            $message_body_end .= /* $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="' . sfConfig::get('app_customer_url') . 'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.", array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>' . $this->getContext()->getI18N()->__('Read more') . ' <a href="' . sfConfig::get('app_live_site_url') . '">' . sfConfig::get('app_live_site_url') . '</a>';
             $message_body_end .= '</p>';
 
             //send email

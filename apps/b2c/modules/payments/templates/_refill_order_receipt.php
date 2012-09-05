@@ -81,7 +81,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         
     }
     ?> </th>
-    <th style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order number') ?>: <?php echo $order->getId() ?></th>
+    <th align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr> 
     <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>

@@ -3566,7 +3566,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
        // var_dump($change_number);
         $new_mobile = $change_number->getNewNumber();
         $countrycode = sfConfig::get("app_country_code");
-        $new_mobile_number = $countrycode.$new_mobile;
+        
         $uniqueId = $customer->getUniqueid();
 
         $un = new Criteria();
@@ -3583,7 +3583,14 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $telintaAccount = TelintaAccountsPeer::doSelectOne($cp);
             Telienta::terminateAccount($telintaAccount);
         }
-
+        $getFirstnumberofMobile = substr($new_mobile, 0, 1); 
+        if ($getFirstnumberofMobile == 0) {
+                    $TelintaMobile = substr($new_mobile, 1);
+                    $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
+        } else {
+            $TelintaMobile = sfConfig::get('app_country_code') . $new_mobile;
+        }
+        $new_mobile_number = $TelintaMobile;
         Telienta::createAAccount($new_mobile_number, $customer);
 
         $cb = new Criteria;
@@ -3602,7 +3609,12 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $getvoipInfos = SeVoipNumberPeer::doSelectOne($getvoipInfo); //->getId();
         if (isset($getvoipInfos)) {
             $voipnumbers = $getvoipInfos->getNumber();
-            $voipnumbers = substr($voipnumbers, 2);
+            $getFirstnumberofMobile = substr($voipnumbers, 0, 2); 
+             if ($getFirstnumberofMobile == sfConfig::get('app_country_code')) {
+                 $voipnumbers = substr($voipnumbers, 2);
+             }else{
+                 $voipnumbers = $getvoipInfos->getNumber();
+             }    
 
             $tc = new Criteria();
             $tc->add(TelintaAccountsPeer::ACCOUNT_TITLE, $voipnumbers);
@@ -3629,8 +3641,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $callbacklog->setuniqueId($uniqueId);
         $callbacklog->setcallingCode($countrycode);
         $callbacklog->save();
-
+        $this->setPreferredCulture($customer);
         emailLib::sendCustomerChangeNumberEmail($customer, $order);
+        $this->updatePreferredCulture();
         return sfView::NONE;
   }
  
