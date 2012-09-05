@@ -71,8 +71,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <tr bgcolor="#CCCCCC" class="receipt_header">   	
     <th colspan="3"><?php echo __('Order Receipt')?> <?php if ($order->getIsFirstOrder())
     {
-        echo "(".$order->getProduct()->getName().")";
-       
+        ?>
+       <span style='font-family:"Times New Roman", Times, serif;font-size: 12px;'><?php echo " (".$order->getProduct()->getName()." [".__('Registration')."])" ?></span>
+       <?php
+
     }
     else
     {
