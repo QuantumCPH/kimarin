@@ -2372,7 +2372,7 @@
             </trans-unit>
             <trans-unit id="585" translate="yes" reformat="yes" xml:space="default">
                 <source>Your customer number is</source>
-                <target>Ihre Kunden-Nummer ist</target>
+                <target>Ihre Kundennummer laute</target>
             </trans-unit>
         </body>
     </file>
