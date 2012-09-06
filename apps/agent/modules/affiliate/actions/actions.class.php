@@ -426,11 +426,10 @@ class affiliateActions extends sfActions {
         if ($request->isMethod('post')) {
             $mobile_number = $request->getParameter('mobile_number');
             $extra_refill = $request->getParameter('extra_refill');
-            $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
+           // $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
 
-            $transaction = new Transaction();
-            $order = new CustomerOrder();
+          
             $customer = NULL;
             $cc = new Criteria();
             $cc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
@@ -449,108 +448,10 @@ class affiliateActions extends sfActions {
                 return;
             }
             if ($validated) {
-                $c = new Criteria();
-                $c->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
-                $customer_product = CustomerProductPeer::doSelectOne($c)->getProduct();
-                $order->setCustomerId($customer->getId());
-                $order->setProductId($customer_product->getId());
-                $order->setQuantity(1);
-                $order->setExtraRefill($extra_refill);
-                $order->setIsFirstOrder(false);
-                $order->setOrderStatusId(sfConfig::get('app_status_new'));
-                $order->save();
-
-                $transaction->setOrderId($order->getId());
-                $transaction->setCustomerId($customer->getId());
-                $transaction->setAmount($extra_refill);
-
-                $transactiondescription=TransactionDescriptionPeer::retrieveByPK(11);
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
-                $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                $transaction->setDescription($transactiondescription->getTitle());
-                //$transaction->setDescription('Refill');
-                $transaction->setAgentCompanyId($agent->getId());
-
-                $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
-
-                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
-
-                $cp = new Criteria;
-                $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
-                $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                $agentproductcount = AgentProductPeer::doCount($cp);
-                if ($agentproductcount > 0) {
-                    $p = new Criteria;
-                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                    $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                    $agentproductcomesion = AgentProductPeer::doSelectOne($p);
-                    $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
-                }
-
-                ////////   commission setting  through  agent commision//////////////////////
-
-                if ($agentcomession) {
-                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
-                    }
-                } else {
-                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
-                    }
-                }
-                //calculated amount for agent commission
-                if ($agent->getIsPrepaid() == true) {
-                    if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
-                        $is_recharged = false;
-                        $balance_error = 1;
-                    }
-                }
-
-                if ($is_recharged) {
-                    $transaction->save();
-                    if ($agent->getIsPrepaid() == true) {
-                        $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
-                        $agent->save();
-                        $remainingbalance = $agent->getBalance();
-                        $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
-                        $amount = -$amount;
-                        $aph = new AgentPaymentHistory();
-                        $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                        $aph->setCustomerId($transaction->getCustomerId());
-                        $aph->setExpeneseType(2);
-                        $aph->setAmount($amount);
-                        $aph->setRemainingBalance($remainingbalance);
-                        $aph->save();
-                    }
-
-                    $uniqueId = $customer->getUniqueid();
-                    $OpeningBalance = $transaction->getAmount();
-                    $OpeningBalance = $OpeningBalance/(sfConfig::get('app_vat_percentage')+1);
-                    Telienta::recharge($customer, $OpeningBalance,"Refill");
-                    //set status
-                    $order->setOrderStatusId(sfConfig::get('app_status_completed'));
-                    $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
-
-                    $order->save();
-                    $transaction->save();
-                    $this->customer = $order->getCustomer();
-                    //  $this->getUser()->setCulture('de');
-                    $this->setPreferredCulture($this->customer);
-                        emailLib::sendRefillEmail($this->customer, $order);
-                    $this->updatePreferredCulture();
-                    //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
-//                                      echo 'rehcarged, redirecting';
-                    $this->redirect('affiliate/receipts');
-                } else {
-//                                        echo 'NOT rehcarged, redirecting';
-                    $this->balance_error = 1;
-                    $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
-                } //end else
+             
+                  $this->redirect('affiliate/refillDetail?pid='.$extra_refill.'&cid='.$customer->getId());
+                
+                
             } else {
 //                                        echo 'Form Invalid, redirecting';
                 $this->balance_error = 1;
@@ -1899,4 +1800,122 @@ class affiliateActions extends sfActions {
     private function updatePreferredCulture() {
         $this->getUser()->setCulture($this->currentCulture);
     }
+    public function executeRefillProcess(sfWebRequest $request) {
+        
+            $customer=  CustomerPeer::retrieveByPK($request->getParameter('cid'));
+        $product=  ProductPeer::retrieveByPK($request->getParameter('pid'));
+      $transaction = new Transaction();
+            $order = new CustomerOrder();
+            $extra_refill=$request->getParameter('totalAmount');
+       $c = new Criteria();
+                $order->setCustomerId($customer->getId());
+                $order->setProductId($product->getId());
+                $order->setQuantity(1);
+                $order->setExtraRefill($request->getParameter('productRefillAmount'));
+                $order->setIsFirstOrder(false);
+                $order->setOrderStatusId(sfConfig::get('app_status_new'));
+                $order->save();
+
+                $transaction->setOrderId($order->getId());
+                $transaction->setCustomerId($customer->getId());
+                $transaction->setAmount($extra_refill);
+
+                $transactiondescription=TransactionDescriptionPeer::retrieveByPK(11);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->setVat($request->getParameter('vat'));
+                $transaction->setAgentCompanyId($agent->getId());
+
+                $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
+
+                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+
+                $cp = new Criteria;
+                $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
+                $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+                $agentproductcount = AgentProductPeer::doCount($cp);
+                if ($agentproductcount > 0) {
+                    $p = new Criteria;
+                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                    $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+                    $agentproductcomesion = AgentProductPeer::doSelectOne($p);
+                    $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
+                }
+
+                ////////   commission setting  through  agent commision//////////////////////
+
+                if ($agentcomession) {
+                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
+                    }
+                } else {
+                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
+                    }
+                }
+                //calculated amount for agent commission
+                if ($agent->getIsPrepaid() == true) {
+                    if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
+                        $is_recharged = false;
+                        $balance_error = 1;
+                    }
+                }
+
+                if ($is_recharged) {
+                    $transaction->save();
+                    if ($agent->getIsPrepaid() == true) {
+                        $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
+                        $agent->save();
+                        $remainingbalance = $agent->getBalance();
+                        $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
+                        $amount = -$amount;
+                        $aph = new AgentPaymentHistory();
+                        $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                        $aph->setCustomerId($transaction->getCustomerId());
+                        $aph->setExpeneseType(2);
+                        $aph->setAmount($amount);
+                        $aph->setRemainingBalance($remainingbalance);
+                        $aph->save();
+                    }
+
+                    $uniqueId = $customer->getUniqueid();
+                    $OpeningBalance = $transaction->getAmount();
+                    $OpeningBalance = $OpeningBalance/(sfConfig::get('app_vat_percentage')+1);
+                    Telienta::recharge($customer, $OpeningBalance,"Refill");
+                    //set status
+                    $order->setOrderStatusId(sfConfig::get('app_status_completed'));
+                    $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
+
+                    $order->save();
+                    $transaction->save();
+                    $this->customer = $order->getCustomer();
+                    //  $this->getUser()->setCulture('de');
+                    $this->setPreferredCulture($this->customer);
+                        emailLib::sendRefillEmail($this->customer, $order);
+                    $this->updatePreferredCulture();
+                    //   $this->getUser()->setCulture('en');
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
+//                                      echo 'rehcarged, redirecting';
+                    $this->redirect('affiliate/receipts');
+                } else {
+//                                        echo 'NOT rehcarged, redirecting';
+                    $this->balance_error = 1;
+                    $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
+                } //end else
+    
+    
+    }
+    
+    
+     public function executeRefillDetail(sfWebRequest $request) {
+          changeLanguageCulture::languageCulture($request, $this);
+        $this->targetUrl = $this->getTargetUrl(); 
+        $this->customer=  CustomerPeer::retrieveByPK($request->getParameter('cid'));
+        $this->product=  ProductPeer::retrieveByPK($request->getParameter('pid'));
+     }
 }
