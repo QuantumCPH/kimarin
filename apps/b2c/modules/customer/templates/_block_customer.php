@@ -67,6 +67,6 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
         <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
- <p style="font-weight: bold;"><?php echo __('Best regards'); ?>,</p>
+ <p style="font-weight: bold;"><?php echo __('Best regards,'); ?></p>
 <p style="font-weight: bold;"><?php echo  sfConfig::get('app_site_title'); ?></p> 
 

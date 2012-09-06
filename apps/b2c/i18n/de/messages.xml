@@ -2370,6 +2370,10 @@
                 <source>Please contact %1% Customer Support to re-open your account</source>
                 <target>Bitte kontaktieren Sie das %1% Kundencenter, um Ihr Konto wieder zu aktivieren</target>
             </trans-unit>
+            <trans-unit id="585" translate="yes" reformat="yes" xml:space="default">
+                <source>Your customer number is</source>
+                <target>Ihre Kunden-Nummer ist</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

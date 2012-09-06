@@ -2340,6 +2340,10 @@
                 <source>Please contact %1% Customer Support to re-open your account</source>
                 <target>Si us plau, contacti amb el Servei Tècnic de %1% per recuperar el seu compte</target>
             </trans-unit>
+             <trans-unit id="581" translate="yes" reformat="yes" xml:space="default">
+                <source>Your customer number is</source>
+                <target>El vostre número de client és</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
