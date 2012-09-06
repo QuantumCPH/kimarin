@@ -1896,8 +1896,8 @@ class affiliateActions extends sfActions {
                     }
 
                     $uniqueId = $customer->getUniqueid();
-                    $OpeningBalance = $transaction->getAmount();
-                    $OpeningBalance = $OpeningBalance/(sfConfig::get('app_vat_percentage')+1);
+                    $OpeningBalance = $order->getExtraRefill();
+                    
                     Telienta::recharge($customer, $OpeningBalance,"Refill");
                     //set status
                     $order->setOrderStatusId(sfConfig::get('app_status_completed'));
@@ -1911,7 +1911,7 @@ class affiliateActions extends sfActions {
                         emailLib::sendRefillEmail($this->customer, $order);
                     $this->updatePreferredCulture();
                     //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $order->getExtraRefill(), "%3%" => sfConfig::get('app_currency_code'))));
 //                                      echo 'rehcarged, redirecting';
                     $this->redirect('affiliate/receipts');
                 } else {
