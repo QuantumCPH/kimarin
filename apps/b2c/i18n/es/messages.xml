@@ -783,7 +783,7 @@
             </trans-unit>
             <trans-unit id="191" translate="yes" reformat="yes" xml:space="default">
                 <source>Your Password have been saved.</source>
-                <target>Su contraseña se han salvado.</target>
+                <target>Su contraseña ha sido guardada.</target>
             </trans-unit>
             <trans-unit id="192" translate="yes" reformat="yes" xml:space="default">
                 <source>%1% invitation</source>
@@ -898,8 +898,8 @@
                 <target>País</target>
             </trans-unit>
             <trans-unit id="220" translate="yes" reformat="yes" xml:space="default">
-                <source>NOTICE:</source>
-                <target>AVISO:</target>
+                <source>Notice</source>
+                <target>Aviso</target>
             </trans-unit>
             <trans-unit id="221" translate="yes" reformat="yes" xml:space="default">
                 <source>Please fill in this field</source>
@@ -2164,7 +2164,7 @@
             </trans-unit>
             <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
-                <target>No hay ningún cliente registrado con esta dirección número de móvil.</target>
+                <target>No hay ningún usuario registrado con ese número de móvil.</target>
             </trans-unit>
             <trans-unit id="538" translate="yes" reformat="yes" xml:space="default">
                 <source>English</source>
@@ -2318,9 +2318,25 @@
                 <source>Your order for change of product has been successfully implemented</source>
                 <target>Su petición de cambio de producto ha sido llevada a cabo con éxito</target>
             </trans-unit>
-            <trans-unit id="580" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="577" translate="yes" reformat="yes" xml:space="default">
                 <source>Confirmation of product change</source>
                 <target>Confirmación del cambio de producto</target>
+            </trans-unit>
+            <trans-unit id="578" translate="yes" reformat="yes" xml:space="default">
+                <source>Enter your mobile number to receive your password</source>
+                <target>Introduzca su número de móvil para recibir su contraseña</target>
+            </trans-unit>
+            <trans-unit id="579" translate="yes" reformat="yes" xml:space="default">
+                <source>Balance expired</source>
+                <target>Su saldo ha vencidoa</target>
+            </trans-unit>
+            <trans-unit id="580" translate="yes" reformat="yes" xml:space="default">
+                <source>Your %1% account has been blocked</source>
+                <target>Su cuenta %1% ha sido bloqueada</target>
+            </trans-unit>
+            <trans-unit id="581" translate="yes" reformat="yes" xml:space="default">
+                <source>Please contact %1% Customer Support to re-open your account</source>
+                <target>Por favor contacte con el Servicio Técnico de Kimarin para recuperar su cuenta</target>
             </trans-unit>
             
         </body>

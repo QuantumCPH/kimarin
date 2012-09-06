@@ -69,7 +69,7 @@ if ($msgSent != '') {
                     <li>  </li>
 
                     <li bgcolor="f0f0f0">
-                        <?php echo __("NOTICE:"); ?> <br />
+                        <?php echo __("Notice"); ?>: <br />
 		  - <?php echo __("Messages from 1 to 142 characters will be considered as 1 SMS") ?><br />
 		  - <?php echo __("Messages from 143 to 302 characters will be considered as 2 SMS") ?> <br />
 		  - <?php echo __("Messages from 303 to 432 characters will be considered as 3 SMS") ?> <br />
