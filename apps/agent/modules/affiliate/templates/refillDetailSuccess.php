@@ -12,7 +12,7 @@
     
     ?>
     <form name="" method="post"  action="<?php echo url_for($targetUrl.'affiliate/refillProcess') ?>">
-    <input type="hidden" value="<?php echo  $customer->getMobileNumber(); ?>" name="customer_id" />
+    <input type="hidden" value="<?php echo  $customer->getId(); ?>" name="customer_id" />
     <input type="hidden" value="<?php echo  $product->getId();  ?>" name="product_id" />
     <input type="hidden" value="<?php echo  $totalAmount;  ?>" name="totalAmount" />
     <input type="hidden" value="<?php echo  $vat;  ?>" name="vat" />

@@ -1807,7 +1807,7 @@ class affiliateActions extends sfActions {
       $transaction = new Transaction();
             $order = new CustomerOrder();
             $extra_refill=$request->getParameter('totalAmount');
-       $c = new Criteria();
+      
                 $order->setCustomerId($customer->getId());
                 $order->setProductId($product->getId());
                 $order->setQuantity(1);
