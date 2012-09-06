@@ -1900,7 +1900,7 @@ class affiliateActions extends sfActions {
                     //set status
                     $order->setOrderStatusId(sfConfig::get('app_status_completed'));
                     $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
-
+                    $order->setExeStatus(1);
                     $order->save();
                     $transaction->save();
                     $this->customer = $order->getCustomer();
@@ -1918,7 +1918,7 @@ class affiliateActions extends sfActions {
                     $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
                 } //end else
     
-    
+     return sfView::NONE;
     }
     
     
