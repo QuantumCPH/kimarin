@@ -1831,7 +1831,6 @@ class affiliateActions extends sfActions {
                 $transaction->setOrderId($order->getId());
                 $transaction->setCustomerId($customer->getId());
                 $transaction->setAmount($extra_refill);
-
                 $transactiondescription=TransactionDescriptionPeer::retrieveByPK(11);
                 $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());

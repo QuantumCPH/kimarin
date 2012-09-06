@@ -40,7 +40,7 @@ class CARBORDFISH_SMS {
             'ST' => self::$ST
         );
         $queryString = http_build_query($data, '', '&');
-        $queryString = smsCharacter::smsCharacterReplacement($queryString);
+      //  $queryString = smsCharacter::smsCharacterReplacement($queryString);
         $res = file_get_contents('http://sms1.cardboardfish.com:9001/HTTPSMS?' . $queryString);
         sleep(0.15);
 
