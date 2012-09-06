@@ -1802,12 +1802,24 @@ class affiliateActions extends sfActions {
     }
     public function executeRefillProcess(sfWebRequest $request) {
         
-            $customer=  CustomerPeer::retrieveByPK($request->getParameter('cid'));
-        $product=  ProductPeer::retrieveByPK($request->getParameter('pid'));
+            $customer=  CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
+        $product=  ProductPeer::retrieveByPK($request->getParameter('product_id'));
+          $is_recharged = true;
+          $agentcomession=FALSE;
+          $ca = new Criteria();
+        $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $agent = AgentCompanyPeer::doSelectOne($ca);
+         $c = new Criteria();
+       
+        //get Agent commission package
+        $cpc = new Criteria();
+        $cpc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
+        $commission_package = AgentCommissionPackagePeer::doSelectOne($cpc);
+        
       $transaction = new Transaction();
             $order = new CustomerOrder();
             $extra_refill=$request->getParameter('totalAmount');
-       $c = new Criteria();
+      
                 $order->setCustomerId($customer->getId());
                 $order->setProductId($product->getId());
                 $order->setQuantity(1);
@@ -1884,13 +1896,13 @@ class affiliateActions extends sfActions {
                     }
 
                     $uniqueId = $customer->getUniqueid();
-                    $OpeningBalance = $transaction->getAmount();
-                    $OpeningBalance = $OpeningBalance/(sfConfig::get('app_vat_percentage')+1);
+                    $OpeningBalance = $order->getExtraRefill();
+                    
                     Telienta::recharge($customer, $OpeningBalance,"Refill");
                     //set status
                     $order->setOrderStatusId(sfConfig::get('app_status_completed'));
                     $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
-
+                    $order->setExeStatus(1);
                     $order->save();
                     $transaction->save();
                     $this->customer = $order->getCustomer();
@@ -1899,7 +1911,7 @@ class affiliateActions extends sfActions {
                         emailLib::sendRefillEmail($this->customer, $order);
                     $this->updatePreferredCulture();
                     //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $order->getExtraRefill(), "%3%" => sfConfig::get('app_currency_code'))));
 //                                      echo 'rehcarged, redirecting';
                     $this->redirect('affiliate/receipts');
                 } else {
@@ -1908,7 +1920,7 @@ class affiliateActions extends sfActions {
                     $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
                 } //end else
     
-    
+     return sfView::NONE;
     }
     
     
