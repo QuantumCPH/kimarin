@@ -2325,7 +2325,7 @@
                 <target>S'ha executat correctament la teva petició de canvi de producte</target>
             </trans-unit>
             <trans-unit id="578" translate="yes" reformat="yes" xml:space="default">
-                <source>Enter your mobile number to receive your password</source>
+                <source>Enter your mobile number to receive your password.</source>
                 <target>Introdueixi el seu número de mòbil per rebre la seva contrasenya</target>
             </trans-unit>
             <trans-unit id="579" translate="yes" reformat="yes" xml:space="default">

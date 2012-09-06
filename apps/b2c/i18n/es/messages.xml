@@ -2323,7 +2323,7 @@
                 <target>Confirmación del cambio de producto</target>
             </trans-unit>
             <trans-unit id="578" translate="yes" reformat="yes" xml:space="default">
-                <source>Enter your mobile number to receive your password</source>
+                <source>Enter your mobile number to receive your password.</source>
                 <target>Introduzca su número de móvil para recibir su contraseña</target>
             </trans-unit>
             <trans-unit id="579" translate="yes" reformat="yes" xml:space="default">

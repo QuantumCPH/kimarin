@@ -2355,7 +2355,7 @@
                 <target>Bestätigung des Produktwechsels</target>
             </trans-unit>
             <trans-unit id="581" translate="yes" reformat="yes" xml:space="default">
-                <source>Enter your mobile number to receive your password</source>
+                <source>Enter your mobile number to receive your password.</source>
                 <target>Geben Sie Ihre Mobilfunknummer ein, um Ihr Passwort zu bekommen</target>
             </trans-unit>
             <trans-unit id="582" translate="yes" reformat="yes" xml:space="default">
