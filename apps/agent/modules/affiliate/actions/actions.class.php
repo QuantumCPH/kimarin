@@ -1802,8 +1802,8 @@ class affiliateActions extends sfActions {
     }
     public function executeRefillProcess(sfWebRequest $request) {
         
-            $customer=  CustomerPeer::retrieveByPK($request->getParameter('cid'));
-        $product=  ProductPeer::retrieveByPK($request->getParameter('pid'));
+            $customer=  CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
+        $product=  ProductPeer::retrieveByPK($request->getParameter('product_id'));
       $transaction = new Transaction();
             $order = new CustomerOrder();
             $extra_refill=$request->getParameter('totalAmount');
