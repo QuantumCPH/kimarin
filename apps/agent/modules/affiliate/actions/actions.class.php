@@ -1804,6 +1804,16 @@ class affiliateActions extends sfActions {
         
             $customer=  CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
         $product=  ProductPeer::retrieveByPK($request->getParameter('product_id'));
+        
+          $ca = new Criteria();
+        $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $agent = AgentCompanyPeer::doSelectOne($ca);
+         $c = new Criteria();
+       
+        //get Agent commission package
+        $cpc = new Criteria();
+        $cpc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
+        $commission_package = AgentCommissionPackagePeer::doSelectOne($cpc);
       $transaction = new Transaction();
             $order = new CustomerOrder();
             $extra_refill=$request->getParameter('totalAmount');
