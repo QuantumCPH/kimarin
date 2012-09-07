@@ -956,7 +956,7 @@ class customerActions extends sfActions {
 
                 $customer->save();
 
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Password have been saved.'));
+                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Password has been saved.'));
             }
             // echo 'after';
         }
@@ -1914,8 +1914,11 @@ class customerActions extends sfActions {
         }
         $customer->setBlock(1);
         $customer->save();
-        
+
+        $this->setPreferredCulture($customer);
         emailLib::sendBlockCustomerEmail($customer);
+        $this->updatePreferredCulture();
+
         $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Konto er deaktivert.'));
         $this->getUser()->getAttributeHolder()->removeNameSpace('usersession');
         $this->getUser()->setAuthenticated(false);

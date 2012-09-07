@@ -782,7 +782,7 @@
                 <target>Vielen Dank für Ihre Bestellung &lt;b&gt;%1%&lt;/b&gt; und immer %1% Kunden. Wir begrüßen Sie zu einem neuen und riesigen mobilen Welt.</target>
             </trans-unit>
             <trans-unit id="191" translate="yes" reformat="yes" xml:space="default">
-                <source>Your Password have been saved.</source>
+                <source>Your Password has been saved.</source>
                 <target>Ihr Passwort wurde gespeichert.</target>
             </trans-unit>
             <trans-unit id="192" translate="yes" reformat="yes" xml:space="default">
