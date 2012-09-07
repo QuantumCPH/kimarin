@@ -782,7 +782,7 @@
                 <target>Gracias por ordenar &lt;b&gt;%1%&lt;/b&gt; y convertirse en %1% Atención al Cliente. Le damos la bienvenida a un mundo móvil nuevo y de gran.</target>
             </trans-unit>
             <trans-unit id="191" translate="yes" reformat="yes" xml:space="default">
-                <source>Your Password have been saved.</source>
+                <source>Your Password has been saved.</source>
                 <target>Su contraseña ha sido guardada.</target>
             </trans-unit>
             <trans-unit id="192" translate="yes" reformat="yes" xml:space="default">
