@@ -1915,7 +1915,7 @@ class customerActions extends sfActions {
         $customer->setBlock(1);
         $customer->save();
 
-        $this->setPreferredCulture($this->customer);
+        $this->setPreferredCulture($customer);
         emailLib::sendBlockCustomerEmail($customer);
         $this->updatePreferredCulture();
 
