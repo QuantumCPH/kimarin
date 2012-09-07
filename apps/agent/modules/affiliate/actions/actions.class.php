@@ -1929,4 +1929,23 @@ class affiliateActions extends sfActions {
         $this->customer=  CustomerPeer::retrieveByPK($request->getParameter('cid'));
         $this->product=  ProductPeer::retrieveByPK($request->getParameter('pid'));
      }
+      public function executePurchaseNewSim(sfWebRequest $request) {
+          changeLanguageCulture::languageCulture($request, $this);
+          $this->error_msg="";
+           $this->product_id = '';
+        $cst = new Criteria();
+        $cst->add(ProductPeer::PRODUCT_TYPE_ID, 6);
+        $this->simtypes = ProductPeer::doSelect($cst);
+       
+     }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
 }
