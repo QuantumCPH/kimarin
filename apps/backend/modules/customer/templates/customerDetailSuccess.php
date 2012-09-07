@@ -167,14 +167,14 @@ if(isset($val) && $val!=""){  ?>
                             <td><?php  echo $old_number->getUniqueNumber();?></td>
                         </tr>
                         <?php }?>
-                        <tr>
+<!--                        <tr>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Usage Email Alerts</td>
                          <td>  <?php  echo ($customer->getUsageAlertEmail()==1)?"Yes":"No";     ?>   </td>
                         </tr  >
                         <tr>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Usage SMS Alerts</td>
                          <td>  <?php  echo ($customer->getUsageAlertSMS()==1)?"Yes":"No";     ?>   </td>
-                        </tr  >
+                        </tr  >-->
                           <tr><td  id="sf_admin_list_th_auto_refill" class="leftHeadign" >Comments</td>
                   <td><?php echo $customer->getComments(); ?></td>
                 </tr>
