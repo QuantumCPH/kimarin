@@ -22,6 +22,10 @@
                 foreach($transactions as $transaction): ?>
 
                  <?php
+                 
+                 
+                $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
+                 
                   if($incrment%2==0){
                  $class= 'class="even"';
                   }else{
@@ -30,16 +34,42 @@
                       }
  $incrment++;
                   ?>
+                              
+                              <?php    $TDI=$transaction->getTransactionDescriptionId();  ?>
                 <tr <?php echo $class;   ?>>
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
-                  <td><?php echo $transaction->getDescription() ?></td>
-                  <td  align="right"><?php echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount() ?>
+                  <td><?php echo $transaction->getDescription() ?> <?php
+                   
+                  
+                     if($TDI==6){
+                         $tramount=$order->getExtraRefill()/(sfConfig::get('app_vat_percentage')+1);
+                              echo "(".number_format($tramount,2).")";
+                         
+                     }elseif($TDI==10){
+                         
+                           
+                              echo "(".number_format($order->getExtraRefill(),2).")";
+                     }  ?> </td>
+                  <td  align="right">
+                      
+                      <?php
+                   
+                  
+                     if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{
+                    echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount(); 
+                    
+                     }
+                    ?>
                             <?php
                                 echo (sfConfig::get('app_currency_code'));
                           ?></td>
-                
-                </tr>
+                                </tr>
                 <?php endforeach; ?>
                 <?php if(count($transactions)==0): ?>
                 <tr>
@@ -52,8 +82,9 @@
                             <?php 
                                 echo (sfConfig::get('app_currency_code'));
                        ?></td>
-                	
-                </tr>	
+                              </tr>	
                 <?php endif; ?>
               </table>
   </div> 
+
+

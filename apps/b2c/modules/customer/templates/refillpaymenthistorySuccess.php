@@ -9,7 +9,7 @@
 </style>
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Payment History')) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Payment history')) ) ?>
   <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'paymenthistory', 'customer_id'=>$customer->getId())) ?>
       
@@ -22,20 +22,23 @@
               <!--Always use tables for tabular data-->
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                 <tr>
-                  <td width="91" class="title"><?php echo __('Order number') ?></td>
-                  <td width="104" class="title" nowrap><?php echo __('Date and time') ?></td>
-                  <td width="117" class="title"><?php echo __('Description') ?></td>
-                  <td width="103" class="title" align="right"><?php echo __('Amount') ?></td>
-                  <td width="82" class="title"><?php echo __('Type') ?></td>
+                  <td width="91" class="title"><strong><?php echo __('Order number') ?></strong></td>
+                  <td width="104" class="title" nowrap><strong><?php echo __('Date and time') ?></strong></td>
+                  <td width="117" class="title"><strong><?php echo __('Description') ?></strong></td>
+                  <td width="103" class="title" align="right"><strong><?php echo __('Amount') ?></strong></td>
+                  <td width="82" class="title"><strong><?php echo __('Type') ?></strong></td>
                   <td width="18" class="title"></td>
                 </tr>
                 <?php 
                 $amount_total = 0;
                 foreach($transactions as $transaction): ?>
+                
+                <?php      $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId());   ?>
                 <tr>
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td ><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
                   <td nowrap><?php 
+                      $TDI=$transaction->getTransactionDescriptionId();
                   if($transaction->getDescription()=="Registrering inkl. taletid"){
                       echo "SmartSim inkludert Pott";                      
                   }else{
@@ -44,9 +47,28 @@
                         }else{
                           echo __($tdescription = $transaction->getDescription());  
                         } 
+                         if($TDI==6){
+                             $tramount=$order->getExtraRefill()/(sfConfig::get('app_vat_percentage')+1);
+                              echo "(".number_format($tramount,2).")";
+                         
+                     }elseif($TDI==10){
+                           
+                              echo "(".number_format($order->getExtraRefill(),2).")";
+                     } 
                   }?></td>
                   <td align="right"><?php
-                    echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount();?>
+                 
+                  
+                     if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{
+                    echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount(); 
+                    
+                     }
+                    ?>
                             <?php 
 //                            if($lang=="pl"){
 //                               // echo ('plz');
@@ -55,7 +77,10 @@
 //                            }else{
                                 echo sfConfig::get('app_currency_code');
 //                            } ?></td>
-                  <td><a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')">
+                  <td>
+                      
+                      
+                      <a href="#" class="receipt"   onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')"  >
                             <?php //echo $tdescription;
                               if(strstr($tdescription, "bonus")){
                                 echo __('Bonus');
@@ -64,19 +89,7 @@
                               }  
                             ?>
                       </a></td>
-<!--                  <td nowrap="nowrap"><a href="#" style=" white-space: nowrap" class="receipt" onclick="iprint(preview_<?php echo $transaction->getId();?>);return false;"><?php echo __('Print'); ?>
-                  </a>
-                      <iframe id="preview_<?php echo $transaction->getId();?>" name="preview_<?php echo $transaction->getId();?>" src="<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>"  style="display:none">
-                     </iframe>
-                        <script>
-                            function printForm() { window.focus(); window.print(); }
-                            function iprint(ptarget)
-                            {
-                                ptarget.focus();
-                                window.print();
-                            } 
-                        </script>-->
-                      </td>
+ 
                  
                      
                  

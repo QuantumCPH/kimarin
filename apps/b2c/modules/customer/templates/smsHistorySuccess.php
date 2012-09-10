@@ -1,6 +1,7 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('SMS History')) ) ?>
+
 <div class="alert_bar">
 	<?php echo __('Your SMS history will be updated 5 - 10 minutes after you have sent your SMS.') ?>
 </div>
@@ -53,9 +54,9 @@
             <li>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                   <tr>
-                    <td class="title"><?php echo __('Date and time') ?></td>
-                    <td class="title" width="40%"><?php echo __('Destination number') ?></td>                    
-                    <td class="title" align="right" style="padding-right: 20px;"><?php echo __('Cost') ?></td>
+                    <td class="title"><strong><?php echo __('Date and time') ?></strong></td>
+                    <td class="title" width="40%"><strong><?php echo __('Destination number') ?></strong></td>                    
+                    <td class="title" align="right" style="padding-right: 20px;"><strong><?php echo __('Cost') ?></strong></td>
                   </tr>
 
                 <?php
@@ -89,7 +90,7 @@
                          <td align="right"><?php echo number_format($amount_total, 2) ?> <?php echo sfConfig::get('app_currency_code')?></td>
                 </tr>
                 <?php endif; ?>
-                <tr><td colspan="3" style="text-align: right">All amounts excl. IVA.</td></tr>
+                <tr><td colspan="3" style="text-align: right"><?php echo __('All amounts excl. IVA.');?></td></tr>
               </table>
             </li>
             <?php if($total_pages>1): ?>

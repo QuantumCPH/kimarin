@@ -162,6 +162,16 @@ $sf_user->setCulture('en');
                             } else {
                                  echo link_to(__('Change Number'), 'affiliate/changenumberservice');
                             }
+                             if ($modulName == "affiliate" && $actionName == 'changeProductService') {
+                                echo link_to(__('Change Product'), 'affiliate/changeProductService', array('class' => 'subSelect'));
+                            } else {
+                                 echo link_to(__('Change Product'), 'affiliate/changeProductService');
+                            }
+                             if ($modulName == "affiliate" && $actionName == 'purchaseNewSim') {
+                                echo link_to(__('Purchase new SIM-card'), 'affiliate/purchaseNewSim', array('class' => 'subSelect'));
+                            } else {
+                                 echo link_to(__('Purchase new SIM-card'), 'affiliate/purchaseNewSim');
+                            }
                             ?>
                         </div>
                     </li>                    

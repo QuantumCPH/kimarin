@@ -1,7 +1,11 @@
 @charset "utf-8";
 /* CSS Document */
 * {margin:0px;padding:0px;}
-body {font-family:Helvetica, sans-serif; font-size:14px; color:#0c74a5;font-style: normal;}
+body {font-family:Calibri; font-size:14px; color:#0c74a5;font-style: normal;}
+h1{ font-size:20px;}
+h2{ font-size:18px;}
+h3{ font-size:16px;}
+h4{font-size:14px;}
 #wrap {width:780px;margin:0px auto;}
 #header {width:780px;height:119px;}
 #logo {width:168px; height:79px; float:left;}
@@ -62,11 +66,19 @@ body {font-family:Helvetica, sans-serif; font-size:14px; color:#0c74a5;font-styl
 
 #login-modal{ background-image:url(../images/bg-login.jpg); background-repeat:no-repeat; width:381px; height:200px; padding:21px;}
 #login-modal h4{ margin-bottom:10px; font-size:14px;}
-.input{ width:140px; font-size:12px; padding:3px; border:1px solid #999999; margin-bottom:9px;}
-#login-modal label{ font-size:12px;}
+.input{ width:140px; font-size:13px; padding:3px; border:1px solid #999999; margin-bottom:9px;}
+#login-modal label{ font-size:13px;}
 #login-modal button{ background-image:url(../images/bg-login-btn.jpg); width:77px;  height:28px;  font-size:13px; border:0px; color:#fff; padding-bottom:0px; padding-top:0px;}
-#login-modal p{ margin-bottom:21px;}
-.loginblock{ margin-bottom: 13px;}
+#login-modal p{ margin-bottom:10px;}
+.loginblock{ margin-bottom: 11px;}
+.loginblock-en{ margin-bottom: 16px;}
+.loginfield-de{display:block !important;height:38px !important;width: 148px !important;}
+.forgotField-de{display:block;height:19px;width: 148px;}
+.loginfield-ca{display:block !important;height:35px !important;width: 148px !important;}
+.forgotField-ca{display:block;height:37px;width: 148px;}
+.loginfield{display:block;height:18px;width: 148px;}
+.forgotField{display:block;height:19px;width: 148px;}
+
 .login-left{ float:left; width:152px;}
 .login-right{ float:left; width:200px; padding-left:20px;}
 .luk{ font-size:12px; color:#999999; cursor:pointer;}
@@ -82,7 +94,7 @@ body {font-family:Helvetica, sans-serif; font-size:14px; color:#0c74a5;font-styl
 float:left;
 height:100px;
 margin-right:8px;
-padding:56px 10px 20px;
+padding:48px 10px 20px;
 width:232px;
 }
 .right-col .box-a{background-image:url(../images/bg-box-a.png); background-repeat:no-repeat;}
@@ -91,21 +103,21 @@ width:232px;
 .right-col .box h3 span{ color:#000;}*/
 .right-col .box small{ font-size:11px;}
 .right-col .box p{ margin-top:5px; margin-bottom:20px; font-size:12px;padding:0px;}
-.right-col .box a{
+a.sidebar_button{
     background-image: url("../images/bg-greenbutton-.png");
     background-position: 0 0;
     background-repeat: no-repeat;
     color: #ffffff;
-    display: block;
     font-size: 11px;
     height: 16px;
-    width:auto !important;
     padding-bottom: 0px;
-    padding-left: 10px;
+    padding-left: 5px;
     padding-right: 10px;
-    padding-top: 4px;
+    padding-top: 3px;
     text-decoration: none;
     white-space: nowrap;
+    display: block;
+    float: left;
 }
 .right-col .box a span{
     background-image: url("../images/bg-greenbutton-.png");
@@ -155,7 +167,7 @@ width:232px;
 .split-form ul li label{width:129px; float:left; padding-top:3px; font-weight:bold; }
 .split-form ul li input{width:110px; border:1px solid #999999; font-size:12px; padding:3px;}
 .split-form ul li select{width:110px; border:1px solid #999999;font-size:11px; padding:3px; }
-.split-form ul li select.strselect{width:37px;font-size:9px; padding:0px; }
+.split-form ul li select.strselect{width:37px;font-size:11px; padding:0px; }
 .split-form ul li select.quater{width:55px; border:1px solid #999999;font-size:11px; padding:3px; margin-right:3px; }
 .split-form ul li input.chkbx{width:20px; padding:0px; border:0px}
 .split-form ul li.fr {float:right;width:250px; text-align:right;}
@@ -230,7 +242,7 @@ a.receipt{ background-image:url(../images/next.png); background-repeat:no-repeat
     padding-right:3px;
     padding-top:4px;
 }
-.loginbuttun{ width:77px !important; }
+.loginbuttun{ width:88px !important; }
 .split-form-sign-up ul li.buttonplacement{ position: relative; right:14px;}
 .split-form-sign-up ul li button{ background-image:url("../images/button-orange-big.png");border:0 none;color:#FFFFFF;font-size:22px;height:48px;margin-top:20px;padding-bottom:7px;padding-top:5px; width:132px;}
 
@@ -286,30 +298,32 @@ ul.paging {
 ul.paging li {
 	float: left;
 	padding: 3px;
-	border:1px solid #CC441A;
+	border:1px solid #0C74A5;
 	margin:0 5px;
-	background:#E88937;
+	background:#0C74A5;
 	width: 15px;
 	clear: none;
 	-moz-border-radius: 2px;
 }
 
 ul.paging li a {
-	color:	#CD481D;
+	color:	#fff !important;
 	text-align: center;
 	display:block;
 	width: 100%;
 	height: 100%;
+        text-decoration: none;
 }
 
 ul.paging li.selected a {
 	color:	#fff;
-	text-decoration: none;
+        text-decoration: underline;
 }
 
 ul.paging li.selected{
-	background: #CD481D;
-	color: white;	
+	background: #E88937;
+	color: white;
+        border:1px solid #E88937;
 }
 	
 div.footer ul li {
@@ -350,13 +364,12 @@ margin-bottom:20px;
 clear:both;
 color:#0C74A5;
 float:left;
-font-size:11px;
+font-size:12px;
 margin-bottom:7px;
 margin-top:5px;
-width:135px;
+width:142px;
+line-height: 11px !important;
 }
-
-
 
 #sidebar {
 float:right;
@@ -409,7 +422,7 @@ width:252px;
 .inline-error{
 	color:#FF0000;
 	float:right;
-	margin-right:83px;
+	margin-right:0 ;
 	text-align:right;
 	white-space:normal;
 }
@@ -421,18 +434,20 @@ width:252px;
 
 #customer_date_of_birth_year
 {
-	width: 41px!important;
+	width: 51px!important;
 }
 
 .alert_bar {
 	border: 1px solid #FFCD02;
 	-moz-border-radius: 0 0 5px 5px;
-	line-height: 31px;
+	line-height: 17px;
 	background:#FFFFCC url(../../images/alert.png) 5px 5px no-repeat;
 	padding-left: 28px; 
-        padding-top: 8px;
-        width: 470px;
+        padding-top: 7px;
         height: 20px;
+}
+.refill_de{
+        height: 29px !important; 
 }
 .sms_alert_bar {
 	border: 1px solid #FFCD02;
@@ -607,66 +622,98 @@ margin-top:12px;
     width: 132px;
 }
 /****** Spanish ********/
-.navegaciones{ width:575px; float:left;}
-.navegaciones a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-es.gif); background-repeat:no-repeat; margin-right:0px;}
-.navegaciones a.dashboard{ background-position:-5px 0px}
+.navegaciones{ width:645px; float:left;}
+.navegaciones a{ width:92px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/spanish.jpg); background-repeat:no-repeat; margin-right:0px;}
+.navegaciones a.dashboard{ background-position:0px 0px}
 .navegaciones a.dashboard:hover{ background-position:-90px 0px}
 .navegaciones a.dashboard-s{ background-position:-90px 0px}
 
-.navegaciones a.refil{ background-position:-5px -56px;}
-.navegaciones a.refil:hover{ background-position:-90px -56px}
-.navegaciones a.refil-s{ background-position:-90px -56px}
+.navegaciones a.refil{ background-position:0px -64px;}
+.navegaciones a.refil:hover{ background-position:-90px -64px}
+.navegaciones a.refil-s{ background-position:-90px -64px}
 
-.navegaciones a.callhistory{ background-position:-5px -112px;}
-.navegaciones a.callhistory:hover{ background-position:-90px -112px;}
-.navegaciones a.callhistory-s{ background-position:-90px -112px;}
+.navegaciones a.callhistory{ background-position:0px -126px;}
+.navegaciones a.callhistory:hover{ background-position:-90px -126px;}
+.navegaciones a.callhistory-s{ background-position:-90px -126px;}
 
-.navegaciones a.paymenthistory{ background-position:-5px -169px}
-.navegaciones a.paymenthistory:hover{ background-position:-90px -169px}
-.navegaciones a.paymenthistory-s{ background-position:-90px -169px}
+.navegaciones a.paymenthistory{ background-position:5px -187px}
+.navegaciones a.paymenthistory:hover{ background-position:-85px -187px}
+.navegaciones a.paymenthistory-s{ background-position:-85px -187px}
 
-.navegaciones a.settings{ background-position:-5px -227px}
-.navegaciones a.settings:hover{ background-position:-90px -227px}
-.navegaciones a.settings-s{ background-position:-90px -227px}
+.navegaciones a.settings{ background-position:0px -250px}
+.navegaciones a.settings:hover{ background-position:-90px -250px}
+.navegaciones a.settings-s{ background-position:-90px -250px}
 
-.navegaciones a.websms{ background-position:-5px -284px}
-.navegaciones a.websms:hover{ background-position:-90px -284px}
-.navegaciones a.websms-s{ background-position:-90px -284px}
+.navegaciones a.websms{ background-position:3px -313px}
+.navegaciones a.websms:hover{ background-position:-87px -313px}
+.navegaciones a.websms-s{ background-position:-87px -313px}
 
-.navegaciones a.logout{ background-position:-3px -340px;}
-.navegaciones a.logout:hover{ background-position:-87px -340px}
-.navegaciones a.logout-s{ background-position:-87px -340px}
+.navegaciones a.logout{ background-position:3px -380px;}
+.navegaciones a.logout:hover{ background-position:-87px -380px}
+.navegaciones a.logout-s{ background-position:-87px -380px}
 
 /****** German ********/
-.navigationen{ width:575px; float:left;}
-.navigationen a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-de.gif); background-repeat:no-repeat; margin-right:0px;}
-.navigationen a.dashboard{ background-position:-5px 0px}
+.navigationen{ width: 657px; float:left;}
+.navigationen a{ width:82px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/german.jpg); background-repeat:no-repeat; margin-right:0px;}
+.navigationen a.dashboard{ background-position:0px 0px}
 .navigationen a.dashboard:hover{ background-position:-90px 0px}
 .navigationen a.dashboard-s{ background-position:-90px 0px}
 
-.navigationen a.refil{ background-position:-5px -56px;}
-.navigationen a.refil:hover{ background-position:-90px -56px}
-.navigationen a.refil-s{ background-position:-90px -56px}
+.navigationen a.refil{ background-position:-6px -64px;}
+.navigationen a.refil:hover{ background-position:-96px -64px}
+.navigationen a.refil-s{ background-position:-96px -64px}
 
-.navigationen a.callhistory{ background-position:-5px -113px;}
-.navigationen a.callhistory:hover{ background-position:-90px -113px;}
-.navigationen a.callhistory-s{ background-position:-90px -113px;}
+.navigationen a.callhistory{ background-position:-11px -124px;}
+.navigationen a.callhistory:hover{ background-position:-101px -124px;}
+.navigationen a.callhistory-s{ background-position:-101px -124px;}
 
-.navigationen a.paymenthistory{ background-position:-5px -169px}
-.navigationen a.paymenthistory:hover{ background-position:-90px -169px}
-.navigationen a.paymenthistory-s{ background-position:-90px -169px}
+.navigationen a.paymenthistory{ background-position:-4px -186px}
+.navigationen a.paymenthistory:hover{ background-position:-94px -186px}
+.navigationen a.paymenthistory-s{ background-position:-94px -186px}
 
-.navigationen a.settings{ background-position:-5px -227px}
-.navigationen a.settings:hover{ background-position:-90px -227px}
-.navigationen a.settings-s{ background-position:-90px -227px}
+.navigationen a.settings{ background-position:0px -250px;margin-right: 10px;margin-left: 6px;}
+.navigationen a.settings:hover{ background-position:-90px -250px;margin-right: 10px;margin-left: 6px;}
+.navigationen a.settings-s{ background-position:-90px -250px;margin-right: 10px;margin-left: 6px;}
 
-.navigationen a.websms{ background-position:-2px -283px}
-.navigationen a.websms:hover{ background-position:-87px -283px}
-.navigationen a.websms-s{ background-position:-87px -283px}
+.navigationen a.websms{ background-position:-5px -313px;}
+.navigationen a.websms:hover{ background-position:-95px -313px;}
+.navigationen a.websms-s{ background-position:-95px -313px;}
 
-.navigationen a.logout{ background-position:-3px -340px;}
-.navigationen a.logout:hover{ background-position:-87px -340px}
-.navigationen a.logout-s{ background-position:-87px -340px}
+.navigationen a.logout{ background-position:3px -380px;}
+.navigationen a.logout:hover{ background-position:-87px -380px}
+.navigationen a.logout-s{ background-position:-87px -380px}
+
+/****** Catalan ********/
+.navegacions{ width:645px; float:left;}
+.navegacions a{ width:92px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/catalan.jpg); background-repeat:no-repeat; margin-right:0px;}
+.navegacions a.dashboard{ background-position:0px 0px}
+.navegacions a.dashboard:hover{ background-position:-90px 0px}
+.navegacions a.dashboard-s{ background-position:-90px 0px}
+
+.navegacions a.refil{ background-position:0px -64px;}
+.navegacions a.refil:hover{ background-position:-90px -64px}
+.navegacions a.refil-s{ background-position:-90px -64px}
+
+.navegacions a.callhistory{ background-position:0px -126px;}
+.navegacions a.callhistory:hover{ background-position:-90px -126px;}
+.navegacions a.callhistory-s{ background-position:-90px -126px;}
+
+.navegacions a.paymenthistory{ background-position:2px -187px}
+.navegacions a.paymenthistory:hover{ background-position:-88px -187px}
+.navegacions a.paymenthistory-s{ background-position:-88px -187px}
+
+.navegacions a.settings{ background-position:0px -250px}
+.navegacions a.settings:hover{ background-position:-90px -250px}
+.navegacions a.settings-s{ background-position:-90px -250px}
+
+.navegacions a.websms{ background-position:3px -313px}
+.navegacions a.websms:hover{ background-position:-87px -313px}
+.navegacions a.websms-s{ background-position:-87px -313px}
+
+.navegacions a.logout{ background-position:3px -380px;}
+.navegacions a.logout:hover{ background-position:-87px -380px}
+.navegacions a.logout-s{ background-position:-87px -380px}
+
 
 label.extra_refill{
     display: block;
@@ -753,7 +800,16 @@ p{
     margin-left: 140px;
 }
 .yourpassword{
-    margin-top: 13px;
+    margin: 9px 0 21px !important;
+    font-size: 13px;
+}
+.yourpassword-es{
+    margin: 16px 0 14px !important;
+    font-size: 13px;
+}
+.yourpassword-ca{
+    margin-top: 1px !important;
+    font-size: 13px;
 }
 .loginpagediv{ 
     width:520px;
@@ -764,4 +820,50 @@ p{
     width:500px;
     margin-top: 15px;
     margin-left: 144px;
+}
+label.error{
+   color:#f00 !important;
+   font-weight: normal !important;
+   margin-left: 5px;
+}
+input.changeNum{
+   margin-left:188px!important;
+}
+.newcard {width:137px; border:1px solid #999999;font-size:11px; padding:3px; }
+.dashboardbutton{
+    width:105px !important;
+    margin-left: 0 !important;
+}
+div.dashboardproduct{
+    background: url('../images/dashboardproducts.png') no-repeat;
+    width:160px;
+    height:74px;
+    margin:0 10px 10px 0;
+    padding:44px 10px 10px;
+    float:left;
+    position: relative;
+    font-size: 12px;
+}
+div.dashboardproduct a.sidebar_button{
+    position: absolute;
+    bottom:8px;
+}
+span.alertmsg{
+    color:#CD481D;
+    font-style: italic;
+}
+ul.changenumber{
+    width:442px !important;    
+}
+ul.changenumber li{width:390px !important;}
+ul.changenumber li label{width: 195px !important;}
+ul.changenumber li label.error{
+    float:right!important;margin-right: -5px;margin-left: 0!important;
+}
+div.inline-error-signup{
+    color: #FF0000;
+    float: right;
+    margin-right: 65px;
+    text-align: right;
+    white-space: normal;
 }

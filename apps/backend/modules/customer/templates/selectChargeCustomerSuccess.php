@@ -26,7 +26,7 @@
              <div class="content">
                  <select id="transaction_description" name="transaction_description" class="required">                    
                     <?php    foreach($transactionDescriptions as $transactionDescription){?>
-                    <option value="<?php echo $transactionDescription->getTitle();   ?>"><?php echo $transactionDescription->getTitle();   ?></option>
+                    <option value="<?php echo $transactionDescription->getId();   ?>"><?php echo $transactionDescription->getTitle();   ?></option>
                     <?php } ?>
                 </select>
             </div>
@@ -34,7 +34,7 @@
         <div class="form-row">
             <label for="agent_commission_agent_company_id"><strong>Charge Amount</strong></label>
             <div class="content">
-                <input type="text" name="charge_amount"  class="required number" />  <?php echo sfConfig::get('app_currency_code');?>
+                <input type="text" name="charge_amount"  class="required number" min="0" />  <?php echo sfConfig::get('app_currency_code');?>
             </div>
         </div>
         <div class="form-row">

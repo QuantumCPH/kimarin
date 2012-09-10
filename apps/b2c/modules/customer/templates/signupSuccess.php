@@ -3,5 +3,5 @@
 	
 	echo $form->renderGlobalErrors();
 	
-	include_partial("step_1", array('form'=>$form));
+	include_partial("step_1", array('form'=>$form,'sLang'=>$sLang));
 ?>

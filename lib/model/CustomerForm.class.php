@@ -150,7 +150,9 @@ class CustomerForm extends BaseCustomerForm
 					'pattern'=>$mobilePattern,
                                         'max_length'=>14,
 				),
-				array('invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid 8 to 14 digit mobile number.'))
+                                  array( 'max_length' => sfContext::getInstance()->getI18N()->__('"%value%" is too long (14 characters max).'),
+                                        //'min_length' => '"%value%" is too short 4 characters min.',
+				 'invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid 8 to 14 digit mobile number.'))
 			)
 		)
 	  );
@@ -425,12 +427,12 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 //    array('required'=>sfContext::getInstance()->getI18N()->__('Please choose a date of birth'))
 //);
     //date of birth
-       $this->validatorSchema->setPostValidator(
-  new sfValidatorSchemaCompare('date_of_birth', sfValidatorSchemaCompare::NOT_EQUAL, null,
-    array(),
-    array('invalid' => 'You must fill this field')
-  )
-);
+//       $this->validatorSchema->setPostValidator(
+//  new sfValidatorSchemaCompare('date_of_birth', sfValidatorSchemaCompare::NOT_EQUAL, null,
+//    array(),
+//    array('invalid' => 'You must fill this field')
+//  )
+//);
        
        $setdate=date('Y');
        $setstartdate=$setdate-13;
@@ -584,7 +586,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
         $this->mergePostValidator(new sfValidatorSchemaCompare('password',
                                           sfValidatorSchemaCompare::EQUAL, 'password_confirm',
                                           array(),
-                                          array('invalid' => sfContext::getInstance()->getI18n()->__(' '))
+                                          array('invalid' => sfContext::getInstance()->getI18n()->__('The passwords don\'t match.'))
                                                   ));
 
 
@@ -630,7 +632,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 	$this->widgetSchema['customer_status_id'] = new sfWidgetFormInputHidden();
 
 	//set help
-	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the 1 terms and conditions.',array('1',sfConfig::get("app_site_title"))));
+	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the %1% terms and conditions.',array('%1%'=>sfConfig::get("app_site_title"))));
 	$this->widgetSchema->setHelp('is_newsletter_subscriber', sfContext::getInstance()->getI18n()->__('Yes, subscribe me to newsletter'));
 	$this->widgetSchema->setHelp('auto_refill', sfContext::getInstance()->getI18N()->__('Auto refill?'));
 	$this->validatorSchema->addOption('allow_extra_fields', true);
@@ -642,7 +644,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 	$this->widgetSchema->setLabels(
 		array(
 			'po_box_number'=>'Postcode',
-			'telecom_operator_id'=>'Mobile service provider',
+			'telecom_operator_id'=>'Mobile service<br />provider',
 			'manufacturer'=>'Mobile brand',
                         'to_date'=>'to date',
                         'from_date'=>'from date',
@@ -650,14 +652,14 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 			'device_id'=>'Mobile Model',
                         'password'=>'Create password',
 			'password_confirm'=>'Confirm password',
-			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)*',
+			'date_of_birth'=>'Date of birth<br />(dd-mm-yyyy)',
                         'second_last_name'=>'Middle name',
                         'nie_passport_number'=>'N.I.E. or passport<br />number',  
                         'preferred_language_id'=>'Preferred language', 
                         'province_id'=>'Province',
                         'sim_type_id'=>'SIM type',
-                        'nationality_id'=>'Country of citizenship',
-                        'mobile_number'=>'Mobile number 0034',
+                        'nationality_id'=>'Nationality',
+                        'mobile_number'=>'Mobile number<br />0034',
                         'city'=>'Town/city',
                         'email'=>'E-mail'
 		)
@@ -694,7 +696,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
   	if (CustomerPeer::doCount($c)>=1)
   	{
   	      throw new sfValidatorErrorSchema($validator, array(
-	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This mobile number is already registered to a 1 customer.',array('1',sfConfig::get('app_site_title')))),
+	        'mobile_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This mobile number is already registered to a %1% customer.',array('%1%'=>sfConfig::get('app_site_title')))),
 	      ));	
   	}
   	
@@ -712,7 +714,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
             if (CustomerPeer::doCount($c)>=1)
             {
                   throw new sfValidatorErrorSchema($validator, array(
-                    'nie_passport_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This N.I.E. or passport number is already registered to a 1 customer.',array('1',sfConfig::get('app_site_title')))),
+                    'nie_passport_number' => new sfValidatorError($validator, sfContext::getInstance()->getI18N()->__('This N.I.E. or passport number is already registered to a %1% customer.',array('%1%'=>sfConfig::get('app_site_title')))),
                   ));	
             }
         }

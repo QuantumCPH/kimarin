@@ -84,7 +84,7 @@
                     <option value="">--Select--</option>
                 <?php
                   foreach($planguages as $language){
-               ?>
+                ?>
                     <option value="<?php echo $language->getId();?>" <?php echo ($language->getId()==$editCust->getPreferredLanguageId())?'selected="selected"':'';?>><?php echo $language->getLanguage();?></option>
                <?php       
                   }
@@ -139,7 +139,7 @@
                 </select>
             </td>
         </tr>
-        <tr>
+<!--        <tr>
             <td style="padding: 5px;">Usage Email Alerts</td>
             <td style="padding: 5px;">
                 <input type="checkbox" name="usage_email" <?php if($editCust->getUsageAlertEmail()) echo" checked=checked"?> />&nbsp;
@@ -152,7 +152,7 @@
                 <input type="checkbox" name="usage_sms" <?php if($editCust->getUsageAlertSMS()) echo" checked=checked"?> />&nbsp;
                 
             </td>
-        </tr>
+        </tr>-->
             <tr>
             <td>Comments:</td>
             <td><textarea name="comments"  id="customer_comments"><?php echo $editCust->getComments(); ?></textarea>
