@@ -78,7 +78,7 @@
                    //   echo "Smartsim inklusive pott";
                       
                   }else{
-                    echo  $transaction->getDescription();
+                    echo  __($transaction->getDescription());
                   }
                    ?></td>
                   <td><?php echo $transaction->getAmount(); $amount_total += $transaction->getAmount() ?>

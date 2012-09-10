@@ -30,7 +30,7 @@
         // Now scan for illegal characters
         for(idx=0;idx<strlen;idx++){
             if(validChar.indexOf(entry.charAt(idx))<0){
-                alert("Entry must be in numeric format!");return false;
+                alert("<?php echo __('Entry must be in numeric format!');?>");return false;
             }
         } // end scan
         return true;
@@ -40,7 +40,6 @@
 
 
 <?php include_partial('dashboard_header', array('customer' => $customer, 'section' => __('Web SMS'))) ?>
-<br />
 <?php
 //echo $res_cbf;
 if ($msgSent != '') {
@@ -63,17 +62,16 @@ if ($msgSent != '') {
             <form action=<?php echo url_for('customer/websms', true) ?>  method="post" id="websms" onsubmit="isHex(this.value)">
                 <h3 style="width: 400px;"><?php echo __("Your account balance is") ?>:<?php echo number_format($balance, 2); ?><?php echo sfConfig::get('app_currency_code') ?></h3>
 <?php } else { ?>
-
-                <h3 style="width: 400px;"><?php echo __("Your Current Balance is:") ?> <?php echo number_format($balance, 2); ?> <?php echo sfConfig::get('app_currency_code') ?></h3>
-                <?php echo __("Your %1% account balance is low. Please refill your %1% account. Thank you.", array("%1%" => sfConfig::get("app_site_title"))); ?> <b><a href="<?php echo url_for('customer/refill', true) ?><?php echo "/customer_id/" . $customer->getId() ?>">her</a></b>
+                <h3 style="width: 400px;"><?php echo __("Your account balance is") ?> <?php echo number_format($balance, 2); ?> <?php echo sfConfig::get('app_currency_code') ?></h3>
+                <?php echo __("Your %1% account balance is low. Please refill your %1% account. Thank you.", array("%1%" => sfConfig::get("app_site_title"))); ?> <b><a href="<?php echo url_for('customer/refill', true) ?><?php echo "/customer_id/" . $customer->getId() ?>"><?php echo __('Refill')?></a></b>
 <?php } ?>
                 <ul>
                     <li>  </li>
 
                     <li bgcolor="f0f0f0">
-                        <?php echo __("NOTICE:"); ?> <br />
+                        <?php echo __("Notice"); ?>: <br />
 		  - <?php echo __("Messages from 1 to 142 characters will be considered as 1 SMS") ?><br />
-		  - <?php echo __("Messages from 143 to 302 characters will be considered as 2 SMS ") ?> <br />
+		  - <?php echo __("Messages from 143 to 302 characters will be considered as 2 SMS") ?> <br />
 		  - <?php echo __("Messages from 303 to 432 characters will be considered as 3 SMS") ?> <br />
 		  - <?php echo __("Messages with more than 432 characters will be truncated automatically.") ?> <br />
             <!--          - <?php //echo __("SMS charges may apply")  ?> <br />-->

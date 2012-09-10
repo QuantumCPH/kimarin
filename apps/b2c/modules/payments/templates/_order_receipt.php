@@ -3,7 +3,7 @@ use_helper('I18N');
 use_helper('Number');
 ?>
 <style>
-	p {
+        p {
 		margin: 8px auto;
 	}
 	
@@ -69,29 +69,25 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="receipt" cellspacing="0" width="600px">
 	
   <tr bgcolor="#CCCCCC" class="receipt_header">   	
-    <th colspan="3"><?php echo __('Order receipt') ?>(  <?php if ($order->getIsFirstOrder())
+    <th colspan="3"><?php echo __('Order Receipt')?> <?php if ($order->getIsFirstOrder())
     {
-        echo $order->getProduct()->getName();
-        if($transaction->getDescription()=="Anmeldung inc. sprechen"){
-          echo "<br />["; echo __('Smartsim including pot'); echo "]";
-        }else{
-            echo  '<br />['. $transaction->getDescription() .']';
-        }
+        ?>
+       <span style='font-family:"Times New Roman", Times, serif;font-size: 12px;'><?php echo " (".$order->getProduct()->getName()." [".__('Registration')."])" ?></span>
+       <?php
+
     }
     else
     {
-	if($transaction->getDescription()=="Refill"){
-          echo "Refill";
-        }else{
-          echo $transaction->getDescription();
-        }
+	 
+        //  echo __($transaction->getDescription());
+        
     }
-    ?>)</th>
-    <th><?php echo __('Order number') ?> <?php echo $order->getId() ?></th>
+    ?> </th>
+    <th><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
   </tr>
   <tr> 
     <td colspan="4" class="payer_summary">
-      <?php echo __('Customer number') ?>   <?php echo $customer->getUniqueId(); ?><br/>
+      <?php echo __('Customer number') ?>:   <?php echo $customer->getUniqueId(); ?><br/>
       <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s %s', $customer->getPoBoxNumber(), $customer->getCity()) ?><br/>
@@ -101,7 +97,17 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	  $eC = EnableCountryPeer::doSelectOne($eC);
 	 // echo $eC->getName();
 	  //echo $customer->getCountry()->getName() ?> 
+      
+      <?php  
+      $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId()); 
+      $TDI=$transaction->getTransactionDescriptionId();   ?>
       <br /><br />
+      <?php if($registered_customer_name) {?>
+      <b><?php echo __('Registered friend')?>:</b> <?php echo $registered_customer_name;?>
+      <br /><br />
+      <?php } ?>
+
+
       <?php    $unid=$customer->getUniqueid(); ?>
      <?php     $customer->getMobileNumber()    ?>
       <?php echo __('Mobile number') ?>: <br />
@@ -154,31 +160,70 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($postalcharge,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
-  <?php  ?>
-  
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('IVA') ?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
+    <td><?php echo __('IVA') ;?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <?php } else{  //////// for Othere orders
   ?>
+  
+
   <tr> 
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
-    <?php 
-         if($transaction->getDescription()=="Refill"){
+   
+    
+     <?php   if($TDI==6){
+         echo __('Airtime refill');
+         }elseif($TDI==10){
+             $vat = 0;
+           echo __('Airtime refill');    
+    }else{
+    
+		 if($transaction->getDescription()=="Refill"){
            echo "Refill ".$transaction->getAmount();
         }else{
-           echo $transaction->getDescription();  
+           echo __($transaction->getDescription());
         }  
-        ?>
+    }
+    ?>
+    
+        
+      
 	</td>
-    <td><?php echo $order->getQuantity() ?>
-    </td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td><?php echo $order->getQuantity() ?></td>
+    <td align="right" style="padding-right: 65px;"><?php  if($TDI==6){
+       echo number_format($subtotal = $order->getExtraRefill()-$vat,2);
+         }elseif($TDI==10){
+          echo number_format($subtotal = $order->getExtraRefill()-$vat,2); 
+    }else{ echo number_format($subtotal = $transaction->getAmount()-$vat,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
+  
+  
+    <?php   if($TDI==6){   ?>
+                           <tr> 
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td>
+      <?php  echo __('Airtime bonus');   ?>
+	</td>
+    <td><?php echo $order->getQuantity() ?></td>
+    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $order->getExtraRefill()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+  </tr>
+                         
+              <?php       }elseif($TDI==10){  ?>
+                             
+                    <tr> 
+    <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
+    <td>
+      <?php  echo __('Bonus Invite a Friend');   ?>
+	</td>
+    <td><?php echo $order->getQuantity() ?></td>
+    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $order->getExtraRefill()-$vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
+  </tr>            
+                          
+                 <?php    }   ?>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
@@ -186,21 +231,36 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{ echo number_format($subtotal,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>  
   <tr class="footer"> 
     <td>&nbsp;</td>
-    <td><?php echo __('IVA') ?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
+    <td><?php echo __('IVA');?><!-- (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($vat,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php    if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{   echo number_format($vat,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <?php    
-  }?>
+  }  ?>
   <tr class="footer">
     <td>&nbsp;</td>
     <td><?php echo __('Total') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($transaction->getAmount(),2); ?><?php echo sfConfig::get('app_currency_code')?></td>
+    <td align="right" style="padding-right: 65px;"><?php   if($TDI==6){
+                             echo  "0.00" ;
+                         
+                     }elseif($TDI==10){
+                           echo  "0.00" ;   
+                     }else{ echo number_format($transaction->getAmount(),2); } ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
@@ -223,7 +283,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 		$expected_delivery = $global_setting_expected_delivery->getValue();
 	else
 		$expected_delivery = "3 business days";
-?>
+?></p>
 <p style="font-weight: bold;">
 	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
 </p>

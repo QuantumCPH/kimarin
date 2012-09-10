@@ -48,7 +48,7 @@
             </li>
             
             <li>
-              <label for="customer_sim_type"><?php echo __('Sim Type');  ?></label><input type="text" value="<?php echo $customer->getSimType();?>" readonly="readonly" />
+              <label for="customer_sim_type"><?php echo __('SIM type');  ?></label><input type="text" value="<?php echo $customer->getSimType();?>" readonly="readonly" />
             </li>
             <?php
             $error_preferred_language_id = false;
@@ -167,7 +167,7 @@
           </ul>
                     
       </div>
-            <div class="fr col"><span>&nbsp;</span>
+            <div class="fr col">
         <ul>
             <?php
             $error_province_id = false;;
@@ -343,7 +343,7 @@
 <!--            <input type="submit" style="border: 0px;" class="settingbutton" name="submit"  value="<?php echo __('Update') ?>">-->
              
 <!--            <button onclick="$('#newCustomerForm').submit();" style="cursor: pointer"><?php echo __('Next') ?></button>-->
-            <div class="butonsigninsmall-outer" style="margin-top:17px;"><span class="butonsigninsmall-left"></span><input type="submit" class="butonsigninsmall" style="margin-left:0px !important;"  name="submit" value="<?php echo __('Update') ?>"  /><span class="butonsigninsmall-right"></span></div>
+            <div class="butonsigninsmall-outer" style="margin-top:17px;"><input type="submit" class="butonsigninsmall" style="margin-left:0px !important;"  name="submit" value="<?php echo __('Update') ?>"  /><span class="butonsigninsmall-right"></span></div>
           </div>
       </div>
     </div> <!-- end split-form -->

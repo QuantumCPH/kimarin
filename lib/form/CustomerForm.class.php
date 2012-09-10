@@ -219,7 +219,7 @@ class CustomerForm extends BaseCustomerForm
 	$this->widgetSchema['customer_status_id'] = new sfWidgetFormInputHidden();
 
 	//set help
-	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the 1 terms and conditions.',array('1',sfConfig::get("app_site_title"))));
+	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the %1% terms and conditions.',array('%1%'=>sfConfig::get("app_site_title"))));
 	$this->widgetSchema->setHelp('is_newsletter_subscriber', sfContext::getInstance()->getI18n()->__('Yes, subscribe me to newsletter'));
 	$this->widgetSchema->setHelp('auto_refill', sfContext::getInstance()->getI18N()->__('Auto refill?'));
 	$this->validatorSchema->addOption('allow_extra_fields', true);
@@ -231,7 +231,7 @@ class CustomerForm extends BaseCustomerForm
 	$this->widgetSchema->setLabels(
 		array(
 			'po_box_number'=>'Postcode',
-			'telecom_operator_id'=>'Mobile service provider',
+			'telecom_operator_id'=>'Mobile service<br />provider',
 			'manufacturer'=>'Mobile brand',
                         'to_date'=>'To date',
                         'from_date'=>'From date',
@@ -245,8 +245,8 @@ class CustomerForm extends BaseCustomerForm
                         'preferred_language_id'=>'Preferred language', 
                         'province_id'=>'Province',
                         'sim_type_id'=>'SIM type',
-                        'nationality_id'=>'Country of citizenship',
-                        'mobile_number'=>'Mobile number 0034',
+                        'nationality_id'=>'Nationality',
+                        'mobile_number'=>'Mobile number<br />0034',
                         'city'=>'Town/city',
                         'email'=>'E-mail'
 		)

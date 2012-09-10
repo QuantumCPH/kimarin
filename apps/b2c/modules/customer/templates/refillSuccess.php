@@ -150,8 +150,8 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
   <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill" target="_parent">
      <div style="width:510px;">
      <div  style="width:510px;float:left;"> 
-          <div class="refillhead"><?php echo __('Manual filling:') ?></div>
-          <p> <?php echo __('You can refill your Kimarin Account with the following amounts:')?></p>
+          <div class="refillhead"><?php echo __('Manual refill.') ?></div>
+          <p> <?php echo __('You can refill your %1% Account with the following amounts:',array("%1%"=>sfConfig::get('app_site_title')))?></p>
          <ul class="welcome">
          	<!-- customer product -->
 	<?php   
@@ -159,14 +159,14 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
                 foreach($refillProducts as $refill){ 
                     if($refill->getBonus()) $bonus = __('PLUS %1%%2%',array("%1%"=>number_format($refill->getBonus(),2),"%2%"=>sfConfig::get('app_currency_code')));
         ?>
-            <li><?php   echo number_format($refill->getRegistrationFee(),2).sfConfig::get('app_currency_code'); echo __(" (airtime value: %1%%2% %3%)",array("%1%"=>number_format($refill->getRegistrationFee(),2),"%2%"=>sfConfig::get('app_currency_code'),"%3%"=>$bonus));
+            <li><?php   echo number_format($refill->getRegistrationFee(),2).sfConfig::get('app_currency_code'); echo __(" (airtime value:");echo __(" %1%%2% %3%)",array("%1%"=>number_format($refill->getRegistrationFee(),2),"%2%"=>sfConfig::get('app_currency_code'),"%3%"=>$bonus));
                     //"&nbsp;Bonus:".$refill->getBonus()."&nbsp;Total Including Vat:".(sfConfig::get('app_vat_percentage')+1)*$refill->getRegistrationFee();?></li>
         <?php
         }       
         ?>
          </ul><br clear="both" />
-         <p><?php echo __("All amounts are excl. IVA (%1%).",array("%1%"=>sfConfig::get('app_vat')));?></p>
-         <p><?php echo __("The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. The refill amount is valid for 180 days.",array("%1%"=>sfConfig::get('app_currency_code')));?></p>
+         <p><?php echo __("All amounts are excl. IVA.");?></p>
+         <p><?php echo __("The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. ",array("%1%"=>sfConfig::get('app_currency_code')));echo __("The refill amount is valid for 180 days.");?></p>
          <p>&nbsp;</p>
          <ul>
           	<!-- extra_refill -->

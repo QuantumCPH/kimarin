@@ -345,7 +345,7 @@ class emailLib {
 
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
-        $message_body = get_partial('payments/order_receipt', array(
+        $message_body = get_partial('payments/refill_order_receipt', array(
                     'customer' => $customer,
                     'order' => $order,
                     'transaction' => $transaction,
@@ -531,38 +531,34 @@ class emailLib {
         endif;
     }
 
-    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject) {
+    public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject=null,$order,$transaction) {
 
         $c = new Criteria();
-        $c->add(CustomerPeer::ID, $inviteuserid);
+        $c->add(CustomerPeer::ID, $inviteuserid);        
         $customer = CustomerPeer::doSelectOne($c);
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
         $customer_id = trim($customer->getId());
-
-
-        $subject = $subject;
-        $subject = $subject;
-        
         $sender_name = sfConfig::get('app_email_sender_name_sup');
         $sender_email = sfConfig::get('app_email_sender_email_sup');
-
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
- 
+        
+        $registered_customer_name = sprintf('%s %s', $customerr->getFirstName(), $customerr->getLastName());
+        
+        $vat=0;
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('pScripts/bonus_web_reg', array(
-                    'customer' => $customerr,
+                    'customer' => $customer,
                     'recepient_name' => $recepient_name,
+                    'registered_customer_name' => $registered_customer_name,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,                   
                     'wrap' => true,
                 ));
-//        $message_body   ='
-//Härmed bekräftas att du har fått provision insatt på ditt konto för att du har tipsat en vän om Smartsim från wls.
-//Gå in på ”Mina sidor” och gå till ”Övrig historik” under ”Samtalshistorik” så ser du vad du har tjänat.<br/>Med vänlig hälsning,
-//<br/>
-//wls<br/>
-//www.WLS2.zerocall.com';
-        //$referrer_id        = trim($customer->getReferrerId());
+        $subject =__('Bonus awarded');
+
         //send to user
         if ($recepient_email != ''):
             $email = new EmailQueue();
@@ -1454,9 +1450,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $tc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $transaction = TransactionPeer::doSelectOne($tc);
         //if(strstr($transaction->getDescription(),"Refill") || strstr($transaction->getDescription(),"Charge")){
-        if(strstr($transaction->getDescription(),"Refill")){
+        //if(strstr($transaction->getDescription(),"Refill")){
          $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
-        }
+        //}
         //This Section For Get The Agent Information
         $agent_company_id = $customer->getReferrerId();
         if ($agent_company_id != '') {
@@ -1563,6 +1559,600 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         //-----------------------------------------
     }
 
+
+    public static function sendCustomerRegistrationViaRetail(Customer $customer, $order) {
+        $product_price = $order->getProduct()->getPrice() - $order->getExtraRefill();
+        $vat = .20 * $product_price;
+
+
+
+        $tc = new Criteria();
+        $tc->add(TransactionPeer::ORDER_ID, $order->getId());
+        $transaction = TransactionPeer::doSelectOne($tc);
+
+
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('pScripts/order_receipt_sms', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,
+                    'agent_name' => $recepient_agent_name,
+                    'wrap' => false,
+                ));
+
+        $subject = __('Payment Confirmation');
+
+
+
+        $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
+        $sender_name = sfConfig::get('app_email_sender_name', 'Kimarin');
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Kimarin');
+        //---------------------------------------
+        //--------------Sent The Email To Support
+
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_name);
+        $email3->setReceipientEmail($sender_email);
+        $email3->setEmailType('Retail Activation');
+        $email3->setMessage($message_body);
+        $email3->save();
+
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_namecdu);
+        $email3->setReceipientEmail($sender_emailcdu);
+        $email3->setEmailType('Retail Activation');
+        $email3->setMessage($message_body);
+        $email3->save();
+        //-----------------------------------------
+    }
+
+        public static function sendErrorInAutoReg($subject, $message) {
+
+        //To RS.
+        $email = new EmailQueue();
+        $email->setSubject($subject);
+        $email->setReceipientName("Raheel Safdar");
+        $email->setReceipientEmail("rs@zapna.com");
+        $email->setEmailType('Auto Registration Error');
+        $email->setMessage($message);
+        $email->save();
+
+    }
+
+    public static function sendRetailRefillEmail(Customer $customer, $order) {
+        $vat = 0;
+
+        $tc = new Criteria();
+        $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
+        $tc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+        $transaction = TransactionPeer::doSelectOne($tc);
+
+        //$this->renderPartial('affiliate/order_receipt', array(
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('pScripts/order_receipt_sms', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,
+                    'agent_name' => $recepient_agent_name,
+                    'wrap' => false,
+                ));
+
+        $subject = __('Payment Confirmation');
+        $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
+        $sender_name = sfConfig::get('app_email_sender_name', 'Kimarin');
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Kimarin');
+        //---------------------------------------
+        //--------------Sent The Email To Support
+
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_name);
+        $email3->setReceipientEmail($sender_email);
+        $email3->setEmailType('Retail Refil');
+        $email3->setMessage($message_body);
+        $email3->save();
+
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_namecdu);
+        $email3->setReceipientEmail($sender_emailcdu);
+        $email3->setEmailType('Retail Refil');
+        $email3->setMessage($message_body);
+        $email3->save();
+
+
+        //-----------------------------------------
+
+    }
+
+    public static function sendCustomerNewcardEmail(Customer $customer, $order, $transaction) {
+
+        
+        $recepient_email = trim($customer->getEmail());
+        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        $customer_id = trim($customer->getId());
+        $referrer_id = trim($customer->getReferrerId());
+        if ($referrer_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $referrer_id);
+            $recepient_agent_email = AgentCompanyPeer::doSelectOne($c)->getEmail();
+            $recepient_agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $recepient_agent_email = '';
+            $recepient_agent_name = '';
+        }
+
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('pScripts/newcard_receipt', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    /*'vat' => $vat,
+                    'agent_name' => $recepient_agent_name,
+                    'wrap' => false,*/
+                ));
+
+        $subject = __('New SIM-card confirmation');
+        //Support Information
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+
+        //------------------Sent The Email To Customer
+        if (trim($recepient_email) != '') {
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recepient_name);
+            $email->setReceipientEmail($recepient_email);
+            $email->setAgentId($referrer_id);
+            $email->setCutomerId($customer_id);
+            $email->setEmailType('New Sim Card Purchase');
+            $email->setMessage($message_body);
+            $email->save();
+        }
+        //----------------------------------------
+        //------------------Sent the Email To Agent
+        /*if (trim($recepient_agent_email) != ''):
+            $email2 = new EmailQueue();
+            $email2->setSubject($subject);
+            $email2->setReceipientName($recepient_agent_name);
+            $email2->setReceipientEmail($recepient_agent_email);
+            $email2->setAgentId($referrer_id);
+            $email2->setCutomerId($customer_id);
+            $email2->setEmailType('New Sim Card Purchase');
+            $email2->setMessage($message_body);
+            $email2->save();
+        endif;*/
+        //---------------------------------------
+        //--------------Sent The Email To okhan
+        if (trim($sender_email) != ''):
+            $email3 = new EmailQueue();
+            $email3->setSubject($subject);
+            $email3->setReceipientName($sender_name);
+            $email3->setReceipientEmail($sender_email);
+            $email3->setAgentId($referrer_id);
+            $email3->setCutomerId($customer_id);
+            $email3->setEmailType('New Sim Card Purchase');
+            $email3->setMessage($message_body);
+            $email3->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To CDU
+        if (trim($sender_emailcdu) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namecdu);
+            $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($referrer_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType('New Sim Card Purchase');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
+
+    }
+    
+    public static function sendCustomerChangeNumberEmail(Customer $customer, $order) {
+        
+        $vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+
+        $tc = new Criteria();
+        $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
+        $tc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+        $transaction = TransactionPeer::doSelectOne($tc);
+
+        //This Section For Get The Agent Information
+        $agent_company_id = $customer->getReferrerId();
+        if ($agent_company_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $agent_company_id);
+            $recepient_agent_email = AgentCompanyPeer::doSelectOne($c)->getEmail();
+            $recepient_agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $recepient_agent_email = '';
+            $recepient_agent_name = '';
+        }
+        //$this->renderPartial('affiliate/order_receipt', array(
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('pScripts/change_number_order_receipt', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,
+                    'agent_name' => $recepient_agent_name,
+                    'wrap' => false,
+                ));
+
+        $subject = __('Change number - payment confirmation');
+        $recepient_email = trim($customer->getEmail());
+        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        $customer_id = trim($customer->getId());
+
+        //Support Information
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        //------------------Sent The Email To Customer
+        if (trim($recepient_email) != '') {
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recepient_name);
+            $email->setReceipientEmail($recepient_email);
+            $email->setAgentId($agent_company_id);
+            $email->setCutomerId($customer_id);
+            $email->setEmailType('Change number');
+            $email->setMessage($message_body);
+            $email->save();
+        }
+        //----------------------------------------
+        //------------------Sent the Email To Agent
+        if (trim($recepient_agent_email) != ''):
+
+            $email2 = new EmailQueue();
+            $email2->setSubject($subject);
+            $email2->setReceipientName($recepient_agent_name);
+            $email2->setReceipientEmail($recepient_agent_email);
+            $email2->setAgentId($agent_company_id);
+            $email2->setCutomerId($customer_id);
+            $email2->setEmailType('Change number');
+            $email2->setMessage($message_body);
+
+            $email2->save();
+        endif;
+        //---------------------------------------
+        //--------------Sent The Email To okhan
+        if (trim($sender_email) != ''):
+            $email3 = new EmailQueue();
+            $email3->setSubject($subject);
+            $email3->setReceipientName($sender_name);
+            $email3->setReceipientEmail($sender_email);
+            $email3->setAgentId($agent_company_id);
+            $email3->setCutomerId($customer_id);
+            $email3->setEmailType('Change number');
+            $email3->setMessage($message_body);
+            $email3->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To cdu
+        if (trim($sender_emailcdu) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namecdu);
+            $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($agent_company_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType('Change number');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
+    }
+
+  
+    public static function sendCustomerChangeProduct(Customer $customer, $order,$transaction) {
+     
+        $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
+    
+        $recepient_email = trim($customer->getEmail());
+        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        $customer_id = trim($customer->getId());
+        $referrer_id = trim($customer->getReferrerId());
+
+        if ($referrer_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $referrer_id);
+            $recepient_agent_email = AgentCompanyPeer::doSelectOne($c)->getEmail();
+            $recepient_agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $recepient_agent_email = '';
+            $recepient_agent_name = '';
+        }
+
+        //$this->renderPartial('affiliate/order_receipt', array(
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('payments/order_receipt_payment', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,
+                    'agent_name' => $recepient_agent_name,
+                    'wrap' => false,
+                ));
+
+    $subject = __('Change product - payment confirmation');
+        //Support Information
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+           $sender_namers = sfConfig::get('app_email_sender_name_sup');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_sup');
+        
+        //------------------Sent The Email To Customer
+        if (trim($recepient_email) != '') {
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recepient_name);
+            $email->setReceipientEmail($recepient_email);
+            $email->setAgentId($referrer_id);
+            $email->setCutomerId($customer_id);
+            $email->setEmailType(sfConfig::get('app_site_title') . ' Customer Change Product');
+            $email->setMessage($message_body);
+            $email->save();
+        }
+        //----------------------------------------
+        //------------------Sent the Email To Agent
+        if (trim($recepient_agent_email) != ''):
+            $email2 = new EmailQueue();
+            $email2->setSubject($subject);
+            $email2->setReceipientName($recepient_agent_name);
+            $email2->setReceipientEmail($recepient_agent_email);
+            $email2->setAgentId($referrer_id);
+            $email2->setCutomerId($customer_id);
+            $email2->setEmailType(sfConfig::get('app_site_title') . ' Customer  Change Product');
+            $email2->setMessage($message_body);
+            $email2->save();
+        endif;
+        //---------------------------------------
+        //--------------Sent The Email To okhan
+        if (trim($sender_email) != ''):
+            $email3 = new EmailQueue();
+            $email3->setSubject($subject);
+            $email3->setReceipientName($sender_name);
+            $email3->setReceipientEmail($sender_email);
+            $email3->setAgentId($referrer_id);
+            $email3->setCutomerId($customer_id);
+            $email3->setEmailType(sfConfig::get('app_site_title') . 'Customer  Change Product');
+            $email3->setMessage($message_body);
+            $email3->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To CDU
+        if (trim($sender_emailcdu) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namecdu);
+            $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($referrer_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . 'Customer  Change Product');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+          if (trim($sender_emailrs) != ''):
+            $email5 = new EmailQueue();
+            $email5->setSubject($subject);
+            $email5->setReceipientName($sender_namers);
+            $email5->setReceipientEmail($sender_emailrs);
+            $email5->setAgentId($referrer_id);
+            $email5->setCutomerId($customer_id);
+            $email5->setEmailType(sfConfig::get('app_site_title') . 'Customer  Change Product');
+            $email5->setMessage($message_body);
+            $email5->save();
+        endif;
+    }
+  
+    
+    
+   
+    public static function sendCustomerChangeProductConfirm(Customer $customer, $order,$transaction) {
+     
+        $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
+    
+        $recepient_email = trim($customer->getEmail());
+        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        $customer_id = trim($customer->getId());
+        $referrer_id = trim($customer->getReferrerId());
+
+        if ($referrer_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $referrer_id);
+            $recepient_agent_email = AgentCompanyPeer::doSelectOne($c)->getEmail();
+            $recepient_agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $recepient_agent_email = '';
+            $recepient_agent_name = '';
+        }
+
+        //$this->renderPartial('affiliate/order_receipt', array(
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('payments/order_receipt_product_change', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,
+                    'agent_name' => $recepient_agent_name,
+                    'wrap' => false,
+                ));
+
+        $subject = __('Confirmation of product change');
+        //Support Information
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+           $sender_namers = sfConfig::get('app_email_sender_name_sup');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_sup');
+        
+        //------------------Sent The Email To Customer
+        if (trim($recepient_email) != '') {
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recepient_name);
+            $email->setReceipientEmail($recepient_email);
+            $email->setAgentId($referrer_id);
+            $email->setCutomerId($customer_id);
+            $email->setEmailType(sfConfig::get('app_site_title') . 'Confirmation of product change');
+            $email->setMessage($message_body);
+            $email->save();
+        }
+        //----------------------------------------
+        //------------------Sent the Email To Agent
+        if (trim($recepient_agent_email) != ''):
+            $email2 = new EmailQueue();
+            $email2->setSubject($subject);
+            $email2->setReceipientName($recepient_agent_name);
+            $email2->setReceipientEmail($recepient_agent_email);
+            $email2->setAgentId($referrer_id);
+            $email2->setCutomerId($customer_id);
+            $email2->setEmailType(sfConfig::get('app_site_title') . 'Confirmation of product change');
+            $email2->setMessage($message_body);
+            $email2->save();
+        endif;
+        //---------------------------------------
+        //--------------Sent The Email To okhan
+        if (trim($sender_email) != ''):
+            $email3 = new EmailQueue();
+            $email3->setSubject($subject);
+            $email3->setReceipientName($sender_name);
+            $email3->setReceipientEmail($sender_email);
+            $email3->setAgentId($referrer_id);
+            $email3->setCutomerId($customer_id);
+            $email3->setEmailType(sfConfig::get('app_site_title') . 'Confirmation of product change');
+            $email3->setMessage($message_body);
+            $email3->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To CDU
+        if (trim($sender_emailcdu) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namecdu);
+            $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($referrer_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . 'Confirmation of product change');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+          if (trim($sender_emailrs) != ''):
+            $email5 = new EmailQueue();
+            $email5->setSubject($subject);
+            $email5->setReceipientName($sender_namers);
+            $email5->setReceipientEmail($sender_emailrs);
+            $email5->setAgentId($referrer_id);
+            $email5->setCutomerId($customer_id);
+            $email5->setEmailType(sfConfig::get('app_site_title') . 'Confirmation of product change');
+            $email5->setMessage($message_body);
+            $email5->save();
+        endif;
+    }
+  
+    
+    
+    
+   
+    public static function sendBlockCustomerEmail(Customer $customer) {
+     
+        
+        $recepient_email = trim($customer->getEmail());
+        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        $customer_id = trim($customer->getId());
+        $referrer_id = trim($customer->getReferrerId());
+ 
+        //$this->renderPartial('affiliate/order_receipt', array(
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $message_body = get_partial('customer/block_customer', array(
+                    'customer' => $customer,
+                    'wrap' => false,
+                ));
+
+        $subject = __('Block account');
+        //Support Information
+        $sender_name = sfConfig::get('app_email_sender_name');
+        $sender_email = sfConfig::get('app_email_sender_email');
+        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+           $sender_namers = sfConfig::get('app_email_sender_name_sup');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_sup');
+        
+        //------------------Sent The Email To Customer
+        if (trim($recepient_email) != '') {
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recepient_name);
+            $email->setReceipientEmail($recepient_email);
+            $email->setAgentId($referrer_id);
+            $email->setCutomerId($customer_id);
+            $email->setEmailType(sfConfig::get('app_site_title') . 'Block account');
+            $email->setMessage($message_body);
+            $email->save();
+        }
+        //----------------------------------------
+        
+        //--------------Sent The Email To okhan
+        if (trim($sender_email) != ''):
+            $email3 = new EmailQueue();
+            $email3->setSubject($subject);
+            $email3->setReceipientName($sender_name);
+            $email3->setReceipientEmail($sender_email);
+            $email3->setAgentId($referrer_id);
+            $email3->setCutomerId($customer_id);
+            $email3->setEmailType(sfConfig::get('app_site_title') . 'Block account');
+            $email3->setMessage($message_body);
+            $email3->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To CDU
+        if (trim($sender_emailcdu) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namecdu);
+            $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($referrer_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . 'Block account');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+          if (trim($sender_emailrs) != ''):
+            $email5 = new EmailQueue();
+            $email5->setSubject($subject);
+            $email5->setReceipientName($sender_namers);
+            $email5->setReceipientEmail($sender_emailrs);
+            $email5->setAgentId($referrer_id);
+            $email5->setCutomerId($customer_id);
+            $email5->setEmailType(sfConfig::get('app_site_title') . 'Block account');
+            $email5->setMessage($message_body);
+            $email5->save();
+        endif;
+    }
+  
+       
+    
+    
 }
 
 ?>

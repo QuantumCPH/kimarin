@@ -86,7 +86,7 @@ class affiliateActions extends sfActions {
                 $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
             }
             $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-            $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
+            $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
             if (TransactionPeer::doSelectOne($tc)) {
                 $registrations[$i] = TransactionPeer::doSelectOne($tc);
             }
@@ -100,8 +100,8 @@ class affiliateActions extends sfActions {
         //echo count($registrations);
         $ar = new Criteria();
         $ar->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-        $ar->add(TransactionPeer::DESCRIPTION, 'Registration', Criteria::NOT_EQUAL);
-        $ar->addAnd(TransactionPeer::DESCRIPTION, 'Fee for change number (' . $agent->getName() . ')', Criteria::NOT_EQUAL);
+        $ar->add(TransactionPeer::TRANSACTION_TYPE_ID, 3, Criteria::NOT_EQUAL);
+        $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,13, Criteria::NOT_EQUAL);
         if ($startdate != "" && $enddate != "") {
             $ar->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $ar->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -117,7 +117,7 @@ class affiliateActions extends sfActions {
 
         $cn = new Criteria();
         $cn->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-        $cn->addAnd(TransactionPeer::DESCRIPTION, 'Fee for change number (' . $agent->getName() . ')', Criteria::EQUAL);
+        $cn->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,13, Criteria::EQUAL);
         if ($startdate != "" && $enddate != "") {
             $cn->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $cn->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -193,8 +193,6 @@ class affiliateActions extends sfActions {
 
     public function executeNewsListing(sfWebRequest $request) {
         $this->forward404Unless($this->getUser()->isAuthenticated());
-
-
         $c = new Criteria();
         $c->addDescendingOrderByColumn(NewupdatePeer::STARTING_DATE);
         $news = NewupdatePeer::doSelect($c);
@@ -257,7 +255,7 @@ class affiliateActions extends sfActions {
                 //echo $customer->getId();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
                 if (TransactionPeer::doSelectOne($tc)) {
                     $registrations[$i] = TransactionPeer::doSelectOne($tc);
                 }
@@ -288,7 +286,7 @@ class affiliateActions extends sfActions {
             $this->registration_commission = $registration_commission;
             $cc = new Criteria();
             $cc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-            $cc->addAnd(TransactionPeer::DESCRIPTION, 'Refill');
+            $cc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
             $cc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             if ($startdate != "" && $enddate != "") {
                     $cc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
@@ -323,7 +321,7 @@ class affiliateActions extends sfActions {
             $ef_com = 0.00;
             foreach ($ef as $efo) {
                 $description = substr($efo->getDescription(), 0, 26);
-                $stringfinds = 'Refill via agent';
+                $stringfinds = 'Refill';
                 if (strstr($efo->getDescription(), $stringfinds)) {
                     //if($description== 'LandNCall AB Refill via agent ')
                     $ef_sum = $ef_sum + $efo->getAmount();
@@ -354,7 +352,7 @@ class affiliateActions extends sfActions {
                 $tc = new Criteria();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $sms_customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
                 $sms_registrations[$i] = TransactionPeer::doSelectOne($tc);
                 if (count($sms_registrations) >= 1) {
                     $sms_registration_earnings = $sms_registration_earnings + $sms_registrations[$i]->getAmount();
@@ -370,7 +368,8 @@ class affiliateActions extends sfActions {
 
             $nc = new Criteria();
             $nc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-            $nc->addAnd(TransactionPeer::DESCRIPTION, 'Fee for change number (' . $agent->getName() . ')');
+            $nc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
+            $nc->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 13);
             $nc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $nc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
             $number_changes = TransactionPeer::doSelect($nc);
@@ -409,7 +408,10 @@ class affiliateActions extends sfActions {
         $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
+         $c = new Criteria();
+        $c->add(ProductPeer::PRODUCT_TYPE_ID, 2);
 
+        $this->refillProducts = ProductPeer::doSelect($c);
         //get Agent commission package
         $cpc = new Criteria();
         $cpc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
@@ -424,11 +426,10 @@ class affiliateActions extends sfActions {
         if ($request->isMethod('post')) {
             $mobile_number = $request->getParameter('mobile_number');
             $extra_refill = $request->getParameter('extra_refill');
-            $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
+           // $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
 
-            $transaction = new Transaction();
-            $order = new CustomerOrder();
+          
             $customer = NULL;
             $cc = new Criteria();
             $cc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
@@ -447,106 +448,10 @@ class affiliateActions extends sfActions {
                 return;
             }
             if ($validated) {
-                $c = new Criteria();
-                $c->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
-                $customer_product = CustomerProductPeer::doSelectOne($c)->getProduct();
-                $order->setCustomerId($customer->getId());
-                $order->setProductId($customer_product->getId());
-                $order->setQuantity(1);
-                $order->setExtraRefill($extra_refill);
-                $order->setIsFirstOrder(false);
-                $order->setOrderStatusId(sfConfig::get('app_status_new'));
-                $order->save();
-
-                $transaction->setOrderId($order->getId());
-                $transaction->setCustomerId($customer->getId());
-                $transaction->setAmount($extra_refill);
-
-                //get agent name
-                $transaction->setDescription($this->getContext()->getI18N()->__('Refill via agent') . '(' . $agent->getName() . ')');
-                //$transaction->setDescription('Refill');
-                $transaction->setAgentCompanyId($agent->getId());
-
-                $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
-
-                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
-
-                $cp = new Criteria;
-                $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
-                $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                $agentproductcount = AgentProductPeer::doCount($cp);
-                if ($agentproductcount > 0) {
-                    $p = new Criteria;
-                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                    $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                    $agentproductcomesion = AgentProductPeer::doSelectOne($p);
-                    $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
-                }
-
-                ////////   commission setting  through  agent commision//////////////////////
-
-                if ($agentcomession) {
-                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
-                    }
-                } else {
-                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
-                    }
-                }
-                //calculated amount for agent commission
-                if ($agent->getIsPrepaid() == true) {
-                    if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
-                        $is_recharged = false;
-                        $balance_error = 1;
-                    }
-                }
-
-                if ($is_recharged) {
-                    $transaction->save();
-                    if ($agent->getIsPrepaid() == true) {
-                        $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
-                        $agent->save();
-                        $remainingbalance = $agent->getBalance();
-                        $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
-                        $amount = -$amount;
-                        $aph = new AgentPaymentHistory();
-                        $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                        $aph->setCustomerId($transaction->getCustomerId());
-                        $aph->setExpeneseType(2);
-                        $aph->setAmount($amount);
-                        $aph->setRemainingBalance($remainingbalance);
-                        $aph->save();
-                    }
-
-                    $uniqueId = $customer->getUniqueid();
-                    $OpeningBalance = $transaction->getAmount();
-                    $OpeningBalance = $OpeningBalance/(sfConfig::get('app_vat_percentage')+1);
-                    Telienta::recharge($customer, $OpeningBalance);
-                    //set status
-                    $order->setOrderStatusId(sfConfig::get('app_status_completed'));
-                    $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
-
-                    $order->save();
-                    $transaction->save();
-                    $this->customer = $order->getCustomer();
-                    //  $this->getUser()->setCulture('de');
-                    $this->setPreferredCulture($this->customer);
-                        emailLib::sendRefillEmail($this->customer, $order);
-                    $this->updatePreferredCulture();
-                    //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
-//                                      echo 'rehcarged, redirecting';
-                    $this->redirect('affiliate/receipts');
-                } else {
-//                                        echo 'NOT rehcarged, redirecting';
-                    $this->balance_error = 1;
-                    $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
-                } //end else
+             
+                  $this->redirect('affiliate/refillDetail?pid='.$extra_refill.'&cid='.$customer->getId());
+                
+                
             } else {
 //                                        echo 'Form Invalid, redirecting';
                 $this->balance_error = 1;
@@ -766,14 +671,13 @@ class affiliateActions extends sfActions {
 
 
         $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee() + ($order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage')));
-        $transaction->setDescription('Registration');
-
+        $transactiondescription=TransactionDescriptionPeer::retrieveByPK(12);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
-
-
-
-        //$transaction->setTransactionStatusId() // default value 1
+       //$transaction->setTransactionStatusId() // default value 1
 
         $transaction->save();
         $this->order = $order;
@@ -1363,8 +1267,11 @@ class affiliateActions extends sfActions {
                 $transaction->setOrderId($order->getId());
                 $transaction->setCustomerId($customer->getId());
                 $transaction->setAmount($extra_refill);
-                //get agent nam
-                $transaction->setDescription('Fee for change number (' . $agent->getName() . ')');
+                   $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(13);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
+            //    $transaction->setDescription('Fee for change number (' . $agent->getName() . ')');
                 $transaction->setAgentCompanyId($agent->getId());
                 //assign commission to transaction;
                 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1632,7 +1539,7 @@ class affiliateActions extends sfActions {
                 //echo $customer->getId();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
                 if ($startdate != "" && $enddate != "") {
                     $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                     $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -1660,7 +1567,7 @@ class affiliateActions extends sfActions {
             $this->registration_commission = $registration_commission;
             $cc = new Criteria();
             $cc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-            $cc->addAnd(TransactionPeer::DESCRIPTION, 'Refill');
+            $cc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID,1);
             $cc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             if ($startdate != "" && $enddate != "") {
                 $cc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
@@ -1690,7 +1597,7 @@ class affiliateActions extends sfActions {
             $ef_com = 0.00;
             foreach ($ef as $efo) {
                 $description = substr($efo->getDescription(), 0, 26);
-                $stringfinds = 'Refill via agent';
+                $stringfinds = 'Refill';
                 if (strstr($efo->getDescription(), $stringfinds)) {
                     //if($description== 'LandNCall AB Refill via agent ')
                     $ef_sum = $ef_sum + $efo->getAmount();
@@ -1715,7 +1622,7 @@ class affiliateActions extends sfActions {
                 $tc = new Criteria();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $sms_customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
                 if ($startdate != "" && $enddate != "") {
                     $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                     $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -1778,7 +1685,7 @@ class affiliateActions extends sfActions {
                 //echo $customer->getId();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
                 if ($startdate != "" && $enddate != "") {
                     $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                     $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -1806,7 +1713,7 @@ class affiliateActions extends sfActions {
             $this->registration_commission = $registration_commission;
             $cc = new Criteria();
             $cc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-            $cc->addAnd(TransactionPeer::DESCRIPTION, 'Refill');
+            $cc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID,1);
             $cc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             if ($startdate != "" && $enddate != "") {
                 $cc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
@@ -1836,7 +1743,7 @@ class affiliateActions extends sfActions {
             $ef_com = 0.00;
             foreach ($ef as $efo) {
                 $description = substr($efo->getDescription(), 0, 26);
-                $stringfinds = 'Refill via agent';
+                $stringfinds = 'Refill';
                 if (strstr($efo->getDescription(), $stringfinds)) {
                     //if($description== 'LandNCall AB Refill via agent ')
                     $ef_sum = $ef_sum + $efo->getAmount();
@@ -1861,7 +1768,7 @@ class affiliateActions extends sfActions {
                 $tc = new Criteria();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $sms_customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::DESCRIPTION, 'Registration');
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
                 if ($startdate != "" && $enddate != "") {
                     $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                     $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -1893,4 +1800,152 @@ class affiliateActions extends sfActions {
     private function updatePreferredCulture() {
         $this->getUser()->setCulture($this->currentCulture);
     }
+    public function executeRefillProcess(sfWebRequest $request) {
+        
+            $customer=  CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
+        $product=  ProductPeer::retrieveByPK($request->getParameter('product_id'));
+          $is_recharged = true;
+          $agentcomession=FALSE;
+          $ca = new Criteria();
+        $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $agent = AgentCompanyPeer::doSelectOne($ca);
+         $c = new Criteria();
+       
+        //get Agent commission package
+        $cpc = new Criteria();
+        $cpc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
+        $commission_package = AgentCommissionPackagePeer::doSelectOne($cpc);
+        
+      $transaction = new Transaction();
+            $order = new CustomerOrder();
+            $extra_refill=$request->getParameter('totalAmount');
+      
+                $order->setCustomerId($customer->getId());
+                $order->setProductId($product->getId());
+                $order->setQuantity(1);
+                $order->setExtraRefill($request->getParameter('productRefillAmount'));
+                $order->setIsFirstOrder(false);
+                $order->setOrderStatusId(sfConfig::get('app_status_new'));
+                $order->save();
+
+                $transaction->setOrderId($order->getId());
+                $transaction->setCustomerId($customer->getId());
+                $transaction->setAmount($extra_refill);
+                $transactiondescription=TransactionDescriptionPeer::retrieveByPK(11);
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->setVat($request->getParameter('vat'));
+                $transaction->setAgentCompanyId($agent->getId());
+
+                $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
+
+                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+
+                $cp = new Criteria;
+                $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
+                $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+                $agentproductcount = AgentProductPeer::doCount($cp);
+                if ($agentproductcount > 0) {
+                    $p = new Criteria;
+                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                    $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+                    $agentproductcomesion = AgentProductPeer::doSelectOne($p);
+                    $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
+                }
+
+                ////////   commission setting  through  agent commision//////////////////////
+
+                if ($agentcomession) {
+                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
+                    }
+                } else {
+                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
+                    }
+                }
+                //calculated amount for agent commission
+                if ($agent->getIsPrepaid() == true) {
+                    if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
+                        $is_recharged = false;
+                        $balance_error = 1;
+                    }
+                }
+
+                if ($is_recharged) {
+                    $transaction->save();
+                    if ($agent->getIsPrepaid() == true) {
+                        $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
+                        $agent->save();
+                        $remainingbalance = $agent->getBalance();
+                        $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
+                        $amount = -$amount;
+                        $aph = new AgentPaymentHistory();
+                        $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                        $aph->setCustomerId($transaction->getCustomerId());
+                        $aph->setExpeneseType(2);
+                        $aph->setAmount($amount);
+                        $aph->setRemainingBalance($remainingbalance);
+                        $aph->save();
+                    }
+
+                    $uniqueId = $customer->getUniqueid();
+                    $OpeningBalance = $order->getExtraRefill();
+                    
+                    Telienta::recharge($customer, $OpeningBalance,"Refill");
+                    //set status
+                    $order->setOrderStatusId(sfConfig::get('app_status_completed'));
+                    $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
+                    $order->setExeStatus(1);
+                    $order->save();
+                    $transaction->save();
+                    $this->customer = $order->getCustomer();
+                    //  $this->getUser()->setCulture('de');
+                    $this->setPreferredCulture($this->customer);
+                        emailLib::sendRefillEmail($this->customer, $order);
+                    $this->updatePreferredCulture();
+                    //   $this->getUser()->setCulture('en');
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $order->getExtraRefill(), "%3%" => sfConfig::get('app_currency_code'))));
+//                                      echo 'rehcarged, redirecting';
+                    $this->redirect('affiliate/receipts');
+                } else {
+//                                        echo 'NOT rehcarged, redirecting';
+                    $this->balance_error = 1;
+                    $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
+                } //end else
+    
+     return sfView::NONE;
+    }
+    
+    
+     public function executeRefillDetail(sfWebRequest $request) {
+          changeLanguageCulture::languageCulture($request, $this);
+        $this->targetUrl = $this->getTargetUrl(); 
+        $this->customer=  CustomerPeer::retrieveByPK($request->getParameter('cid'));
+        $this->product=  ProductPeer::retrieveByPK($request->getParameter('pid'));
+     }
+      public function executePurchaseNewSim(sfWebRequest $request) {
+          changeLanguageCulture::languageCulture($request, $this);
+          $this->error_msg="";
+           $this->product_id = '';
+        $cst = new Criteria();
+        $cst->add(ProductPeer::PRODUCT_TYPE_ID, 6);
+        $this->simtypes = ProductPeer::doSelect($cst);
+       
+     }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
 }

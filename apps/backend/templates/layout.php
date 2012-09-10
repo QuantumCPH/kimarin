@@ -137,9 +137,9 @@
                      }?>
                        <?php
                     if($actionName=='selectChargeCustomer' && $modulName=="customer"){
-                       echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer', array('class'=>'subSelect'));
+                     //  echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer', array('class'=>'subSelect'));
                     }else{
-                       echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer');
+                     //  echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer');
                     }
                     ?>
                        <?php
@@ -149,7 +149,7 @@
                        echo link_to(__('Refill Customers'), 'customer/selectRefillCustomer');
                     }
                     ?>
-                                           <?php
+                   <?php
                     if($actionName=='completePaymenthistory' && $modulName=="customer"){
                        echo link_to(__('Payment History'), 'customer/completePaymenthistory', array('class'=>'subSelect'));
                     }else{
@@ -296,7 +296,55 @@
                         echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert');
                      }
                      ?>
-
+  <?php
+                     if($actionName=='registrationType' && $modulName=="invoice"){
+                        echo link_to(__('Registered Customers Method Report'), 'invoice/registrationType', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Registered Customers Method Report'), 'invoice/registrationType');
+                     }
+                     ?>
+ <?php
+                     if($actionName=='totalSaleStat' && $modulName=="invoice"){
+                        echo link_to(__('Sales Statistic -Total overview daily basis'), 'invoice/totalSaleStat', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Sales Statistic -Total overview daily basis'), 'invoice/totalSaleStat');
+                     }
+                     ?>
+                    <?php
+                     if($actionName=='totalRefilSale' && $modulName=="invoice"){
+                        echo link_to(__('Customer Refill Packages Report'), 'invoice/totalRefilSale', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Customer Refill Packages Report'), 'invoice/totalRefilSale');
+                     }
+                     ?>
+                     <?php
+                     if($actionName=='totalProductSale' && $modulName=="invoice"){
+                        echo link_to(__('Registered Customers with Products Report'), 'invoice/totalProductSale', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Registered Customers with Products Report'), 'invoice/totalProductSale');
+                     }
+                     ?>
+                      <?php
+                     if($actionName=='customerRegistrationReport' && $modulName=="invoice"){
+                        echo link_to(__('Customer Registration Report'), 'invoice/customerRegistrationReport', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Customer Registration Report'), 'invoice/customerRegistrationReport');
+                     }
+                     ?>
+                     <?php
+                     if($actionName=='agentProductSale' && $modulName=="invoice"){
+                        echo link_to(__('Agent sales overview Report'), 'invoice/agentProductSale', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Agent sales overview Report'), 'invoice/agentProductSale');
+                     }
+                     ?>
+                      <?php
+                     if($actionName=='countryStat' && $modulName=="invoice"){
+                        echo link_to(__('Country Stat Report'), 'invoice/countryStat', array('class'=>'subSelect'));
+                     }else{
+                        echo link_to(__('Country Stat Report'), 'invoice/countryStat');
+                     }
+                     ?>
                 </div>
             </li>
 
