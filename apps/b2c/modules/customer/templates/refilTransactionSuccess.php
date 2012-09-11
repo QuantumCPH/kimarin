@@ -52,7 +52,7 @@
             </p>
             
             <br/>
-            <form method="post" action="<?php echo $target; ?>customer/sendRefilToPaypal">
+            <form method="post" action="<?php echo $target; ?>customer/sendRefilToPaypal"  target="_parent">
                 <input type="hidden" value="<?php echo $queryString; ?>" name="qstr" />
                 <?php if($customerBalance+$order->getExtraRefill() < 250){ ?>
                 <div style="margin-top:40px;">
