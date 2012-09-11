@@ -2149,12 +2149,12 @@ class customerActions extends sfActions {
             
             
              if($lang=='en'){
-               $return_url ="www.kimarin.es/newsim-payment-thanks.html";
-                $cancel_url ="www.kimarin.es/newsim-payment-reject.html";  
+               $return_url ="http://www.kimarin.es/newsim-payment-thanks.html";
+                $cancel_url ="http://www.kimarin.es/newsim-payment-reject.html";  
                  
              }else{
-               $return_url ="www.kimarin.es/".$lang."/newsim-payment-thanks_".$lang.".html"; 
-                $cancel_url = "www.kimarin.es/".$lang."/newsim-payment-reject_".$lang.".html";
+               $return_url ="http://www.kimarin.es/".$lang."/newsim-payment-thanks_".$lang.".html"; 
+                $cancel_url = "http://www.kimarin.es/".$lang."/newsim-payment-reject_".$lang.".html";
                  
              }
 //            $return_url = $this->targetUrl . "customer/dashboard";
