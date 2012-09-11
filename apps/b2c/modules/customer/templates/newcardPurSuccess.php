@@ -21,7 +21,7 @@
                 <tr>
                     <td><?php echo __("SIM type") ?>:</td>
                     <td class="padding" style="padding-right:10px">
-                        <form id="form" name="form" method="POST" action="<?php echo url_for($targetUrl.'customer/newcardPur') ?>">
+                        <form id="form" name="form" method="POST" action="">
                             <select name="sim_type" onchange="this.form.submit()" class="required newcard">
                                 <option value=""><?php echo __("Select SIM type") ?></option>
                                 <?php foreach($simtypes as $simtype){  ?>
@@ -58,8 +58,9 @@
                             <input type="hidden" name="lastName" value="<?php echo $order->getCustomer()->getLastName();?>"  />
                             <input type="hidden" name="payer_email" value="<?php echo $order->getCustomer()->getEmail();?>"  />
                             <input type="hidden" name="item_number" value="<?php echo $order->getId();?>" />
+                            <input type="hidden" name="item_name" value="<?php echo $transaction_title;?>" />
                             <input type="hidden" name="rm" value="2" />
-                            <input type="submit" class="butonsigninsmall" style="margin-left:28px !important;padding-left: 25px; padding-right: 25px" name="buy" value="<?php echo __('Pay') ?>" >
+                            <input type="submit" class="butonsigninsmall" style="margin-left:28px !important;padding-left: 25px; padding-right: 25px" name="buy" value="<?php echo __('Pay') ?>"/>
                         </form>
                     </td>
                 </tr>

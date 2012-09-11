@@ -2093,6 +2093,7 @@ class customerActions extends sfActions {
             $this->price = $simtype->getRegistrationFee();
             $this->vat = $this->price * sfConfig::get('app_vat_percentage');
             $this->total = $this->price + $this->vat;
+            
             //$product_name=$simtype->getName();
 
             $this->order = new CustomerOrder();
@@ -2113,51 +2114,50 @@ class customerActions extends sfActions {
             $transactiondescription = TransactionDescriptionPeer::retrieveByPK(14);
             $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
             $transaction->setTransactionDescriptionId($transactiondescription->getId());
-            $transaction->setDescription($transactiondescription->getTitle());
+            $transaction->setDescription($this->transaction_title);
             $transaction->setVat($this->vat);
             $transaction->save();
 
+            $this->transaction_title=$transactiondescription->getTitle();
+        }
+        if ($request->getParameter('buy') != '') {
+
+            $order_id = $request->getParameter('item_number');
+            $item_amount = $request->getParameter('amount');
+            $lang = $this->getUser()->getCulture();
+            $return_url = $this->target . "customer/dashboard";
+            $cancel_url = $this->target . "customer/dashboard";
 
 
-            if ($request->getParameter('buy') != '') {
-                $this->target = $this->getTargetUrl();
+            $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
+            $notify_url = $this->getTargetUrl() . 'pScripts/calbacknewcard?p=' . $callbackparameters;
 
-                $order_id = $request->getParameter('item_number');
-                $item_amount = $request->getParameter('amount');
-                $lang = $this->getUser()->getCulture();
-                $return_url = $this->target . "customer/dashboard";
-                $cancel_url = $this->target . "customer/dashboard";
+            $email2 = new DibsCall();
+            $email2->setCallurl($notify_url);
 
+            $email2->save();
 
-                $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
-                $notify_url = $this->getTargetUrl() . 'pScripts/calbacknewcard?p=' . $callbackparameters;
+            $querystring = '';
 
-                $email2 = new DibsCall();
-                $email2->setCallurl($notify_url);
+            $item_name = $request->getParameter('item_name');
 
-                $email2->save();
+            //loop for posted values and append to querystring
+            foreach ($_POST as $key => $value) {
+                $value = urlencode(stripslashes($value));
+                $querystring .= "$key=$value&";
+            }
 
-                $querystring = '';
-
-                $item_name = $transactiondescription->getTitle();
-
-                //loop for posted values and append to querystring
-                foreach ($_POST as $key => $value) {
-                    $value = urlencode(stripslashes($value));
-                    $querystring .= "$key=$value&";
-                }
-
-                $querystring .= "item_name=" . urlencode($item_name) . "&";
-                $querystring .= "return=" . urldecode($return_url) . "&";
-                $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
-                $querystring .= "notify_url=" . urldecode($notify_url);
-                if ($order_id && $item_amount) {
-                    Payment::SendPayment($querystring);
-                } else {
-                    echo 'error';
-                }
+            $querystring .= "item_name=" . urlencode($item_name) . "&";
+            $querystring .= "return=" . urldecode($return_url) . "&";
+            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+            $querystring .= "notify_url=" . urldecode($notify_url);
+            if ($order_id && $item_amount) {
+                Payment::SendPayment($querystring);
+            } else {
+                echo 'error';
             }
         }
+        
     }
 
     public function executeChangeProductSubscription(sfWebRequest $request) {
