@@ -47,7 +47,7 @@
                 <tr>
                     <td>&nbsp;</td>
                     <td>
-                        <form id="form1" name="form1" method="POST" action="<?php echo url_for($targetUrl.'customer/newcardPur') ?>"  target="_parent">
+                        <form id="form1" name="form1" method="POST" action=""  target="_parent">
                             <input type="hidden" name="amount" id="total" value="<?php echo number_format($total, 2); ?>" />
                             <input type="hidden" name="cmd" value="_xclick" />
                             <input type="hidden" name="no_note" value="1" />
