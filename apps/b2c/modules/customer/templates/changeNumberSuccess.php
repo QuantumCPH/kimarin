@@ -6,7 +6,7 @@
 
     <?php include_partial('navigation', array('selected' => 'dashboard', 'customer_id' => $customer->getId())) ?>
          <div class="split-form">
-          <form name="" method="post"  action="<?php echo url_for($targetUrl.'customer/numberProcess') ?>">
+          <form name="" method="post"  action="<?php echo url_for($targetUrl.'customer/numberProcess') ?>" target="_parent">
     <input type="hidden" value="<?php echo  $customer->getMobileNumber(); ?>" name="mobile_number" />
     <input type="hidden" value="<?php echo  $product->getId();  ?>" name="productid" />
     <input type="hidden" value="<?php echo  $product->getPrice();  ?>" name="extra_refill" />
