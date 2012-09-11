@@ -16,7 +16,7 @@
 <br/><br/>&nbsp;<br/>&nbsp;<br/>
 <div class="split-form">
   <div class="fl">
-        <form id="form" method="POST" action="">
+        <form id="form" method="POST" action=""  target="_parent">
             <table width="100%" cellspacing="0" border="0">
                 <tr>
                     <td><?php echo __("SIM type") ?>:</td>
