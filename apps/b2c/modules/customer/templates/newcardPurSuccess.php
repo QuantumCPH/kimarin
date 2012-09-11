@@ -44,26 +44,27 @@
                     <td><?php echo __("Total amount") ?>:</td>
                     <td class="padding"><?php echo number_format($total, 2);echo sfConfig::get('app_currency_code'); ?></td>
                 </tr>
-                <form id="form1" name="form1" method="POST" action="<?php echo url_for($targetUrl.'customer/newcardPur') ?>"  target="_parent">
-                    <input type="hidden" name="amount" id="total" value="<?php echo number_format($total, 2); ?>" />
-                    <input type="hidden" name="cmd" value="_xclick" />
-                    <input type="hidden" name="no_note" value="1" />
-                    <input type="hidden" name="lc" value="UK" />
-                    <input type="hidden" name="currency_code" value="<?php echo sfConfig::get('app_currency_symbol')?>" />
-                    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest" />
-                    <input type="hidden" name="firstName" value="<?php echo $order->getCustomer()->getFirstName();?>"  />
-                    <input type="hidden" name="lastName" value="<?php echo $order->getCustomer()->getLastName();?>"  />
-                    <input type="hidden" name="payer_email" value="<?php echo $order->getCustomer()->getEmail();?>"  />
-                    <input type="hidden" name="item_number" value="<?php echo $order->getId();?>" />
-                    <input type="hidden" name="rm" value="2" />
-                </form>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                        <form id="form1" name="form1" method="POST" action="<?php echo url_for($targetUrl.'customer/newcardPur') ?>"  target="_parent">
+                            <input type="hidden" name="amount" id="total" value="<?php echo number_format($total, 2); ?>" />
+                            <input type="hidden" name="cmd" value="_xclick" />
+                            <input type="hidden" name="no_note" value="1" />
+                            <input type="hidden" name="lc" value="UK" />
+                            <input type="hidden" name="currency_code" value="<?php echo sfConfig::get('app_currency_symbol')?>" />
+                            <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest" />
+                            <input type="hidden" name="firstName" value="<?php echo $order->getCustomer()->getFirstName();?>"  />
+                            <input type="hidden" name="lastName" value="<?php echo $order->getCustomer()->getLastName();?>"  />
+                            <input type="hidden" name="payer_email" value="<?php echo $order->getCustomer()->getEmail();?>"  />
+                            <input type="hidden" name="item_number" value="<?php echo $order->getId();?>" />
+                            <input type="hidden" name="rm" value="2" />
+                            <input type="submit" class="butonsigninsmall" style="margin-left:28px !important;padding-left: 25px; padding-right: 25px" name="buy" value="<?php echo __('Pay') ?>" >
+                        </form>
+                    </td>
+                </tr>
              <?php }?>
-                <tr><td>&nbsp;</td><td><input type="submit" class="butonsigninsmall" style="margin-left:28px !important;padding-left: 25px; padding-right: 25px" name="buy" value="<?php echo __('Pay') ?>" /></td></tr>
             </table><br />
-
-            
-            
-      \
     </div>
   </div>
 </div>
