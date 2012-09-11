@@ -281,6 +281,8 @@ echo  date('i:s',$callval);
                         </td></tr>-->
 
                     <?php } ?>
+                <tr><td colspan="6" align="right">  All amounts excl. IVA.</td></tr>
+              
                 </table>
 
 
