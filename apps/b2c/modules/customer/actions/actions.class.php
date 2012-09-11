@@ -2125,8 +2125,8 @@ class customerActions extends sfActions {
             $order_id = $request->getParameter('item_number');
             $item_amount = $request->getParameter('amount');
             $lang = $this->getUser()->getCulture();
-            $return_url = $this->target . "customer/dashboard";
-            $cancel_url = $this->target . "customer/dashboard";
+            $return_url = $this->targetUrl . "customer/dashboard";
+            $cancel_url = $this->targetUrl . "customer/dashboard";
 
 
             $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
