@@ -147,7 +147,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
           <div style="float:left;"><input type="submit" class="butonsigninsmall" style="width:101px;margin-left:-13px !important;" name="button" value="<?php echo __('Enable') ?>" /></div>
   </form>
   </div>
-  <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill" target="_parent">
+  <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill">
      <div style="width:510px;">
      <div  style="width:510px;float:left;"> 
           <div class="refillhead"><?php echo __('Manual refill.') ?></div>
