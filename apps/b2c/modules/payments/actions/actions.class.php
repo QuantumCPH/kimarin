@@ -354,7 +354,7 @@ class paymentsActions extends sfActions {
       
       //  $return_url = "http://www.kimarineurope.com/registration-thanks.html";
         
-        if($lang='en'){
+        if($lang=='en'){
         $return_url = "http://www.kimarin.es/registration-thanks.html";
         $cancel_url = "http://www.kimarin.es/registration-reject.html";
         }else{

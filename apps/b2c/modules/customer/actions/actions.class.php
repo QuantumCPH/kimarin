@@ -1837,7 +1837,7 @@ class customerActions extends sfActions {
         $lang = $this->getUser()->getCulture();
         
         
-           if($lang='en'){
+           if($lang=='en'){
               $return_url = "http://www.kimarin.es/refill-thanks.html";
         $cancel_url = "http://www.kimarin.es/refill-reject.html";   
            }else{
@@ -2138,7 +2138,7 @@ class customerActions extends sfActions {
             $lang = $this->getUser()->getCulture();
             
             
-             if($lang='en'){
+             if($lang=='en'){
                $return_url ="www.kimarin.es/newsim-payment-thanks.html";
                 $cancel_url ="www.kimarin.es/newsim-payment-reject.html";  
                  
@@ -2264,7 +2264,7 @@ class customerActions extends sfActions {
 //        $return_url = $this->target . "customer/dashboard";
 //        $cancel_url = $this->target . "customer/dashboard";
         
-          if($lang='en'){
+          if($lang=='en'){
               
         $return_url ="www.kimarin.es/changenumber-payment-thanks.html";
         $cancel_url = "www.kimarin.es/changenumber-payment-reject.html";    
