@@ -80,7 +80,7 @@
                   <td>
                       
                       
-                      <a href="#" class="receipt"   onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')"  >
+                      <a href="#" class="receipt"  target="_parent"  onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')"  >
                             <?php //echo $tdescription;
                               if(strstr($tdescription, "bonus")){
                                 echo __('Bonus');
