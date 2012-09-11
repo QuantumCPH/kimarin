@@ -2079,7 +2079,7 @@ class customerActions extends sfActions {
         $this->product_id = '';
         $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', null, 'usersession'));
         $this->redirectUnless($this->customer, "@homepage");
-
+        $this->targetUrl = $this->getTargetUrl();
         $cst = new Criteria();
         $cst->add(ProductPeer::PRODUCT_TYPE_ID, 6);
         $this->simtypes = ProductPeer::doSelect($cst);
