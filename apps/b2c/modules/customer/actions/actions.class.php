@@ -2114,11 +2114,12 @@ class customerActions extends sfActions {
             $transactiondescription = TransactionDescriptionPeer::retrieveByPK(14);
             $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
             $transaction->setTransactionDescriptionId($transactiondescription->getId());
+            $this->transaction_title=$transactiondescription->getTitle();
             $transaction->setDescription($this->transaction_title);
             $transaction->setVat($this->vat);
             $transaction->save();
 
-            $this->transaction_title=$transactiondescription->getTitle();
+           
         }
         if ($request->getParameter('buy') != '') {
 
