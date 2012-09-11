@@ -1845,8 +1845,8 @@ class customerActions extends sfActions {
         $cancel_url = "http://www.kimarin.es/".$lang."/refill-reject_".$lang.".html";   
            }
       
-        $return_url = "http://www.kimarin.es/".$langPara."refill-thanks_".$langPara.".html";
-        $cancel_url = "http://www.kimarin.es/refill-reject_".$langPara.".html";
+//        $return_url = "http://www.kimarin.es/".$langPara."refill-thanks_".$langPara.".html";
+//        $cancel_url = "http://www.kimarin.es/refill-reject_".$langPara.".html";
         //   $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
 
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
