@@ -435,7 +435,7 @@ class customerActions extends autocustomerActions {
                 $order->setProductId($customer_product->getId());
                 $order->setQuantity(1);
                 $order->setExtraRefill($extra_refill);
-                $order->setIsFirstOrder(false);
+                $order->setIsFirstOrder(2);
                 $order->setOrderStatusId(1);
                 //$order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 $order->save();
