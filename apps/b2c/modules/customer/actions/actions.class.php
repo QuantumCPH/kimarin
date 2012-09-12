@@ -167,7 +167,7 @@ class customerActions extends sfActions {
 
         if ($request->getParameter('invite_id')) {
             //setcookie("user", "XXXXXXX", time()+3600);
-            $this->getResponse()->setCookie('invite_id', $request->getParameter('ref'),time()+36000);
+            $this->getResponse()->setCookie('invite_id', $request->getParameter('invite_id'),time()+36000);
             //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
             $this->redirect("http://www.kimarin.es/register.html");
         }
