@@ -3,9 +3,7 @@
 <div class="loginheading"><?php include_partial('customer/dashboard_header', array('customer'=> null, 'section'=>__('MY ACCOUNT')) ) ?></div>
 <div style="clear:both;height:1px;"></div>
 	<?php if ($sf_user->hasFlash('send_password_message')): ?>
-	<div class="alert_bar">
-		<?php echo $sf_user->getFlash('send_password_message') ?>
-	</div>
+	<div class="ok_alert_bar"><?php echo $sf_user->getFlash('send_password_message') ?></div>
 	<?php endif;?>
          <div class="maintext">
             <?php echo __('Welcome to MY ACCOUNT');?><br />

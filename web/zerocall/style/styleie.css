@@ -459,6 +459,15 @@ width:252px;
         line-height: 16px;
 }
 
+.ok_alert_bar {
+	border: 1px solid #FFCD02;
+	-moz-border-radius: 0 0 5px 5px;
+	background:#FFFFCC url(../../images/ok-sms.png) 5px 5px no-repeat;
+	width: 470px;
+        height: 21px;
+        padding: 5px;
+        padding-left: 28px;
+}
 
 
 *+html .alert_bar { 
