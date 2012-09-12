@@ -126,8 +126,8 @@ $day31=0;
 $daytotal1=0;
   $i=0;
    
-      $conn = Propel::getConnection();
-  $query = 'select pt.title
+    $conn = Propel::getConnection();
+ echo $query = 'select pt.title
  ,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3  AND co.is_first_order=1  AND DATE( co.created_at) ="'.$year.'-'.$month.'-01") AS day1_calls
 ,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3  AND co.is_first_order=1  AND DATE( co.created_at ) ="'.$year.'-'.$month.'-02") AS day2_calls
 ,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3  AND co.is_first_order=1  AND DATE( co.created_at ) ="'.$year.'-'.$month.'-03" ) AS day3_calls
