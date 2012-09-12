@@ -235,7 +235,7 @@ $.extend($.validator, {
 	},
 
 	messages: {
-		required: "<br/>Dieses Feld ist obligatorisch",
+		required: "<br/>Dieses Feld muss ausgefüllt werden.",
 		remote: "Bitte geben Sie die Gültig Eindeutige ID mit 6 Stellen",
 		email: "<br/>Bitte geben Sie eine gültige E-Mail-Adresse.",
 		url: "Bitte geben Sie eine gültige URL.",
