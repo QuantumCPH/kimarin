@@ -30,7 +30,7 @@
         // Now scan for illegal characters
         for(idx=0;idx<strlen;idx++){
             if(validChar.indexOf(entry.charAt(idx))<0){
-                alert("<?php echo __('Entry must be in numeric format!');?>");return false;
+                jAlert("<?php echo __('Entry must be in numeric format!');?>","");return false;
             }
         } // end scan
         return true;
@@ -142,11 +142,11 @@ if ($msgSent != '') {
                 <br />
                 <input type="submit" class="buton" name="submit"  value="<?php echo __("Send SMS") ?>" onclick="
                  if(document.getElementById('number').value==''){
-                     alert('<?php echo __("Please enter the destination number.") ?>');
+                     jAlert('<?php echo __("Please enter the destination number.") ?>','');
                      document.getElementById('number').focus();
                      return false;
                  }else if(document.getElementById('message').value==''){
-                     alert('<?php echo __("Please enter your message.") ?>');
+                     jAlert('<?php echo __("Please enter your message.") ?>','');
                      document.getElementById('message').focus();
                      return false;
                  }else{
