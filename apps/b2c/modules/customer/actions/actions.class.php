@@ -167,9 +167,9 @@ class customerActions extends sfActions {
 
         if ($request->getParameter('invite_id')) {
             //setcookie("user", "XXXXXXX", time()+3600);
-            $this->getResponse()->setCookie('invite_id', $request->getParameter('ref'),time()+36000);
+            $this->getResponse()->setCookie('invite_id', $request->getParameter('invite_id'),time()+36000);
             //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
-            $this->redirect("http://www.kimarin.se/register.html");
+            $this->redirect("http://www.kimarin.es/register.html");
         }
 
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
@@ -797,7 +797,9 @@ class customerActions extends sfActions {
 
         $ct = new Criteria();
         $ct->add(TransactionPeer::CUSTOMER_ID, $this->customer->getId());
-        $ct->add(TransactionPeer::TRANSACTION_STATUS_ID, sfConfig::get('app_status_completed'));
+        $ct->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, sfConfig::get('app_status_completed'));
+        $ct->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 6, Criteria::NOT_EQUAL);
+        $ct->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 10, Criteria::NOT_EQUAL);
         $ct->addSelectColumn('SUM(' . TransactionPeer::AMOUNT. ') AS total');
         $sum = TransactionPeer::doSelectStmt($ct);
         $resultset = $sum->fetch(PDO::FETCH_OBJ);
