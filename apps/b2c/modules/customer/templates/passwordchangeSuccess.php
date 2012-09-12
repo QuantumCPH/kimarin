@@ -65,13 +65,11 @@
              <div class='inline-error' style="margin-right: 18px !important;"><?php echo $error_password_confirm?$form['password_confirm']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end confirm password -->
-            
+           <li style="width: 287px !important;"> 
            <div>
-               <input type="submit" class="butonsigninsmall"  name="submit"  style="cursor: pointer;margin-left:0px !important;margin-top: 10px !important;"  value="<?php echo __('Update') ?>" >
-
-
+               <input type="submit" class="butonsigninsmall"  name="submit"  style="cursor: pointer;margin-left:0px !important;margin-top: 10px !important;"  value="<?php echo __('Update') ?>" />
           </div>
-
+           </li>
           </ul>
 
       </div>
