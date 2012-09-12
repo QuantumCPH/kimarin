@@ -788,6 +788,15 @@ class customerActions extends sfActions {
 
         $this->redirectUnless($this->customer, "@homepage");
 
+        $ct = new Criteria();
+        $ct->add(TransactionPeer::CUSTOMER_ID, $this->customer->getId());
+        $ct->add(TransactionPeer::TRANSACTION_STATUS_ID, sfConfig::get('app_status_completed'));
+        $ct->addSelectColumn('SUM(' . TransactionPeer::AMOUNT. ') AS total');
+        $sum = TransactionPeer::doSelectStmt($ct);
+        $resultset = $sum->fetch(PDO::FETCH_OBJ);
+        $this->total=$resultset->total;
+
+
         //get  transactions
         $c = new Criteria();
 
@@ -849,7 +858,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->transactions = $pager->getResults();
-        $this->total_pages = round($pager->getNbResults() / $items_per_page, 0);
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
     }
 
     public function executePasswordchange(sfWebRequest $request) {
