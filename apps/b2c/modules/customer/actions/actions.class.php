@@ -1858,8 +1858,18 @@ class customerActions extends sfActions {
 
 
         $lang = $this->getUser()->getCulture();
-        $return_url = "http://www.kimarin.es/refill-thanks.html";
-        $cancel_url = "http://www.kimarin.es/refill-reject.html";
+        
+        
+           if($lang=='en'){
+              $return_url = "http://www.kimarin.es/refill-thanks.html";
+        $cancel_url = "http://www.kimarin.es/refill-reject.html";   
+           }else{
+                             $return_url = "http://www.kimarin.es/".$lang."/refill-thanks_".$lang.".html";
+        $cancel_url = "http://www.kimarin.es/".$lang."/refill-reject_".$lang.".html";   
+           }
+      
+//        $return_url = "http://www.kimarin.es/".$langPara."refill-thanks_".$langPara.".html";
+//        $cancel_url = "http://www.kimarin.es/refill-reject_".$langPara.".html";
         //   $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
 
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
@@ -2029,10 +2039,22 @@ class customerActions extends sfActions {
 
         $lang = $this->getUser()->getCulture();
 
-        $return_url = $this->getTargetUrl() . "customer/dashboard";
-        $cancel_url = $this->getTargetUrl() . "customer/dashboard";
 
-        $order_id = $request->getParameter('item_number');
+//        $return_url = $this->getTargetUrl()."customer/dashboard";
+//        $cancel_url = $this->getTargetUrl()."customer/dashboard";
+        
+        
+          if($lang=='en'){
+              
+        $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
+        $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
+          }else{
+         $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
+        $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
+          }
+        
+        $order_id = $request->getParameter('item_number'); 
+
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
 
@@ -2102,7 +2124,7 @@ class customerActions extends sfActions {
         $this->product_id = '';
         $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', null, 'usersession'));
         $this->redirectUnless($this->customer, "@homepage");
-
+        $this->targetUrl = $this->getTargetUrl();
         $cst = new Criteria();
         $cst->add(ProductPeer::PRODUCT_TYPE_ID, 6);
         $this->simtypes = ProductPeer::doSelect($cst);
@@ -2116,6 +2138,7 @@ class customerActions extends sfActions {
             $this->price = $simtype->getRegistrationFee();
             $this->vat = $this->price * sfConfig::get('app_vat_percentage');
             $this->total = $this->price + $this->vat;
+            
             //$product_name=$simtype->getName();
 
             $this->order = new CustomerOrder();
@@ -2136,51 +2159,62 @@ class customerActions extends sfActions {
             $transactiondescription = TransactionDescriptionPeer::retrieveByPK(14);
             $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
             $transaction->setTransactionDescriptionId($transactiondescription->getId());
-            $transaction->setDescription($transactiondescription->getTitle());
+            $this->transaction_title=$transactiondescription->getTitle();
+            $transaction->setDescription($this->transaction_title);
             $transaction->setVat($this->vat);
             $transaction->save();
 
+           
+        }
+        if ($request->getParameter('buy') != '') {
+
+            $order_id = $request->getParameter('item_number');
+            $item_amount = $request->getParameter('amount');
+            $lang = $this->getUser()->getCulture();
+            
+            
+             if($lang=='en'){
+               $return_url ="http://www.kimarin.es/newsim-payment-thanks.html";
+                $cancel_url ="http://www.kimarin.es/newsim-payment-reject.html";  
+                 
+             }else{
+               $return_url ="http://www.kimarin.es/".$lang."/newsim-payment-thanks_".$lang.".html"; 
+                $cancel_url = "http://www.kimarin.es/".$lang."/newsim-payment-reject_".$lang.".html";
+                 
+             }
+//            $return_url = $this->targetUrl . "customer/dashboard";
+//            $cancel_url = $this->targetUrl . "customer/dashboard";
 
 
-            if ($request->getParameter('buy') != '') {
-                $this->target = $this->getTargetUrl();
+            $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
+            $notify_url = $this->getTargetUrl() . 'pScripts/calbacknewcard?p=' . $callbackparameters;
 
-                $order_id = $request->getParameter('item_number');
-                $item_amount = $request->getParameter('amount');
-                $lang = $this->getUser()->getCulture();
-                $return_url = $this->target . "customer/dashboard";
-                $cancel_url = $this->target . "customer/dashboard";
+            $email2 = new DibsCall();
+            $email2->setCallurl($notify_url);
 
+            $email2->save();
 
-                $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
-                $notify_url = $this->getTargetUrl() . 'pScripts/calbacknewcard?p=' . $callbackparameters;
+            $querystring = '';
 
-                $email2 = new DibsCall();
-                $email2->setCallurl($notify_url);
+            $item_name = $request->getParameter('item_name');
 
-                $email2->save();
+            //loop for posted values and append to querystring
+            foreach ($_POST as $key => $value) {
+                $value = urlencode(stripslashes($value));
+                $querystring .= "$key=$value&";
+            }
 
-                $querystring = '';
-
-                $item_name = $transactiondescription->getTitle();
-
-                //loop for posted values and append to querystring
-                foreach ($_POST as $key => $value) {
-                    $value = urlencode(stripslashes($value));
-                    $querystring .= "$key=$value&";
-                }
-
-                $querystring .= "item_name=" . urlencode($item_name) . "&";
-                $querystring .= "return=" . urldecode($return_url) . "&";
-                $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
-                $querystring .= "notify_url=" . urldecode($notify_url);
-                if ($order_id && $item_amount) {
-                    Payment::SendPayment($querystring);
-                } else {
-                    echo 'error';
-                }
+            $querystring .= "item_name=" . urlencode($item_name) . "&";
+            $querystring .= "return=" . urldecode($return_url) . "&";
+            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+            $querystring .= "notify_url=" . urldecode($notify_url);
+            if ($order_id && $item_amount) {
+                Payment::SendPayment($querystring);
+            } else {
+                echo 'error';
             }
         }
+        
     }
 
     public function executeChangeProductSubscription(sfWebRequest $request) {
@@ -2258,10 +2292,21 @@ class customerActions extends sfActions {
         $item_amount = $request->getParameter('amount');
         $ccpid = $request->getParameter('ccpid');
         $lang = $this->getUser()->getCulture();
-        $return_url = $this->target . "customer/dashboard";
-        $cancel_url = $this->target . "customer/dashboard";
-
-
+        
+        
+       
+       
+//        $return_url = $this->target . "customer/dashboard";
+//        $cancel_url = $this->target . "customer/dashboard";
+        
+          if($lang=='en'){
+              
+        $return_url ="http://www.kimarin.es/changeproduct-thanks.html";
+        $cancel_url = "http://www.kimarin.es/changeproduct-reject.html";    
+          }else{
+         $return_url ="http://www.kimarin.es/".$lang."/changeproduct-thanks_".$lang.".html";
+        $cancel_url = "http://www.kimarin.es/".$lang."/changeproduct-reject_".$lang.".html";
+          }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount . '-' . $ccpid;
         $notify_url = $this->getTargetUrl() . 'pScripts/calbackChangeProduct?p=' . $callbackparameters;
 

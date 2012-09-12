@@ -30,7 +30,7 @@
         // Now scan for illegal characters
         for(idx=0;idx<strlen;idx++){
             if(validChar.indexOf(entry.charAt(idx))<0){
-                alert("<?php echo __('Entry must be in numeric format!');?>");return false;
+                jAlert("<?php echo __('Entry must be in numeric format!');?>","");return false;
             }
         } // end scan
         return true;
@@ -58,7 +58,7 @@ if ($msgSent != '') {
         <div class="fl col">
 
 
-<?php if (!($balance <= 0.00 )) { ?>
+<?php if (!($balance <= 0.0 )) { ?>
             <form action=<?php echo url_for('customer/websms', true) ?>  method="post" id="websms" onsubmit="isHex(this.value)">
                 <h3 style="width: 400px;"><?php echo __("Your account balance is") ?>:<?php echo number_format($balance, 2); ?><?php echo sfConfig::get('app_currency_code') ?></h3>
 <?php } else { ?>
@@ -137,21 +137,23 @@ if ($msgSent != '') {
                     </td>
                 </tr>
                 </table>
+                       
                 <br />
                 <input type="submit" class="buton" name="submit"  value="<?php echo __("Send SMS") ?>" onclick="
                  if(document.getElementById('number').value==''){
-                     alert('<?php echo __("Please enter the destination number.") ?>');
+                     jAlert('<?php echo __("Please enter the destination number.") ?>','');
                      document.getElementById('number').focus();
                      return false;
                  }else if(document.getElementById('message').value==''){
-                     alert('<?php echo __("Please enter your message.") ?>');
+                     jAlert('<?php echo __("Please enter your message.") ?>','');
                      document.getElementById('message').focus();
                      return false;
                  }else{
                      return true;
                  }" />
                  <br />
-
+                    </li>
+                </ul>
 
              </form>
 
