@@ -617,6 +617,7 @@ class customerActions extends sfActions {
         $this->order->setQuantity(1);
         $refills_options = ProductPeer::getRefillChoices();
         $this->order->setExtraRefill($refills_options[0]);
+        $this->order->setIsFirstOrder(2);
         $this->order->save();
 
         //new transaction
@@ -2026,7 +2027,7 @@ class customerActions extends sfActions {
                 $order->setCustomerId($customer->getId());
                 $order->setProductId($product_id);
                 $order->setQuantity(1);
-                // $order->setExtraRefill($extra_refill);
+                $order->setIsFirstOrder(3);
                 $order->setOrderStatusId(sfConfig::get('app_status_new'));
 
                 $order->save();
@@ -2158,8 +2159,10 @@ class customerActions extends sfActions {
             $this->order->setCustomer($this->customer);
             $this->order->setQuantity(1);
             $this->order->setExtraRefill(0);
-            $this->order->save();
+            $this->order->setIsFirstOrder(6);
 
+            $this->order->save();
+            
             //new transaction
             $transaction = new Transaction();
 
@@ -2268,6 +2271,8 @@ class customerActions extends sfActions {
         $order->setQuantity(1);
         $order->setExtraRefill($product->getInitialBalance());
         $order->setOrderStatusId(1);
+        $order->setIsFirstOrder(7);
+
 
         $order->save();
         $this->order = $order;
