@@ -182,7 +182,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
             <?php } ?>
             <li id="selectAmt" class="refilselect">
               <label for="extra_refill" ><?php echo __('Select amount to be refilled:') ?></label>
-              <span style="margin-left:99px;"><?php echo $form['extra_refill']?></span>
+              <span style="margin-left:122px;"><?php echo $form['extra_refill']?></span>
             </li>
 
             <?php if($sf_user->hasFlash('error_message')): ?>
