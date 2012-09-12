@@ -59,7 +59,7 @@ if ($msgSent != '') {
 
 
 <?php 
- if (!$balance) { ?>
+ if (!$balance && $balanc>=1) { ?>
             <form action=<?php echo url_for('customer/websms', true) ?>  method="post" id="websms" onsubmit="isHex(this.value)">
                 <h3 style="width: 400px;"><?php echo __("Your account balance is") ?>:<?php echo number_format($balance, 2); ?><?php echo sfConfig::get('app_currency_code') ?></h3>
 <?php } else { ?>
