@@ -74,7 +74,7 @@
 			
 			if (!valid) { // if email is not valid
 				jq('#login_form #mobile_number').focus();
-				alert('<?php echo __('Enter a valid mobile number.') ?>');
+				 jAlert('<?php echo __('Enter a valid mobile number.') ?>','');
 				return false;			
 			}
 			
@@ -82,7 +82,7 @@
 			
 			if (!valid) { // if password is not valid
 				jq('#login_form #password').focus();
-				alert('<?php echo __('Please enter your password.') ?>');
+				 jAlert('<?php echo __('Please enter your password.') ?>','');
 				return false;			
 			}			
 			
@@ -123,12 +123,13 @@
                         //alert(valid);
                         if (!valid) { // if email is not valid
                             jq('#forgot_password_mobile').focus();
-                            alert('<?php echo __('Enter your mobile number to receive your password.') ?>');
-                            document.frmforget.mobile.focus();
+                           
+                            jAlert('<?php echo __('Enter your mobile number to receive your password.'); ?>', '');
+                         //   document.frmforget.mobile.focus();
                             return false;
                         }
 
-
+// alert('<?php//echo __('Enter your mobile number to receive your password.') ?>');
 		});
 	</script>
 	</form></div>

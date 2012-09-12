@@ -114,7 +114,7 @@ if ($sf_user->hasFlash('error_message')): ?>
 			    {
 			    	//$j('#login_error').text('&nbsp;');
 			    	//window.location.href = '<?php echo url_for('customer/dashboard', true) ?>';
-			    	alert('<?php __('Password is sent to your email address.') ?>');
+			    	alert('<?php __('Password is sent to your email address.') ?>','');
 			    }
 			  }
 			});			
