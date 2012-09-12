@@ -707,7 +707,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
   {
   	
   	$c = new Criteria();
-  	if($values['nie_passport_number']!="" && $values['nie_passport_number']!=0){
+  	if($values['nie_passport_number']!=""){
             $c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $values['nie_passport_number']);
             $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
 
