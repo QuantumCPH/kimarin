@@ -23,7 +23,7 @@
  
             
               <li style="width: 287px !important;">
-             <label for="customer_password" class="required"><?php echo __('Old Password') ?> </label><em class="required">*</em>
+             <label for="customer_password" class="required pcon"><?php echo __('Old Password') ?> </label><em class="required">*</em>
                 <input type="password" id="customer_old_password" name="customer[oldpassword]" value="<?php if ($oldpassword){}?>">
                
                 <?php if ($oldpasswordError): ?>
@@ -39,7 +39,7 @@
             	$error_password = true;
             ?>
             <li style="width: 287px !important;">
-             <?php echo $form['password']->renderLabel() ?>
+             <?php echo $form['password']->renderLabel(null, array('class'=>'pcon')) ?>
              <?php echo $form['password']->render(array('value' => '')) ?>
              <?php if ($error_password): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -55,7 +55,7 @@
             	$error_password_confirm = true;
             ?>
             <li style="width: 287px !important;">
-             <?php echo $form['password_confirm']->renderLabel() ?>
+             <?php echo $form['password_confirm']->renderLabel(null, array('class'=>'pcon')) ?>
              <?php echo $form['password_confirm'] ?>
              <?php if ($error_password_confirm): ?>
              <span id="cardno_decl" class="alertstep1">
