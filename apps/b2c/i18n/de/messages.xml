@@ -1206,7 +1206,7 @@
                 <source>Australia</source>
                 <target>Australien</target>
             </trans-unit>
-			<trans-unit id="297" translate="yes" reformat="yes" xml:space="default">
+	   <trans-unit id="297" translate="yes" reformat="yes" xml:space="default">
                 <source>Austria</source>
                 <target>Österreich</target>
             </trans-unit>
@@ -1286,11 +1286,11 @@
                 <source>Cambodia</source>
                 <target>Kambodscha</target>
             </trans-unit>
-			<trans-unit id="317" translate="yes" reformat="yes" xml:space="default">
+	    <trans-unit id="317" translate="yes" reformat="yes" xml:space="default">
                 <source>Cameroon</source>
                 <target>Kamerun</target>
             </trans-unit>
-			<trans-unit id="318" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="318" translate="yes" reformat="yes" xml:space="default">
                 <source>Canada</source>
                 <target>Kanada</target>
             </trans-unit>

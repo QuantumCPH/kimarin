@@ -2318,11 +2318,10 @@
                 <source>Your order for change of product has been successfully implemented</source>
                 <target>Su petición de cambio de producto ha sido llevada a cabo con éxito</target>
             </trans-unit>
-            <trans-unit id="580" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="577" translate="yes" reformat="yes" xml:space="default">
                 <source>Confirmation of product change</source>
                 <target>Confirmación del cambio de producto</target>
             </trans-unit>
-            
         </body>
     </file>
 </xliff>
