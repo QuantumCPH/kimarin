@@ -103,7 +103,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong><?php echo __('Total') ?></strong></td>
-                        <td  align="left" style="text-align:right;"><?php echo number_format($amount_total,2) ?>
+                        <td  align="left" style="text-align:right;"><?php echo number_format($total,2);//echo number_format($amount_total,2) ?>
                             <?php 
 //                            if($lang=="pl"){
 //                                echo ('plz');
