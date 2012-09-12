@@ -277,7 +277,7 @@ echo " ";   echo substr($Telintambs, 15,2);
   <?php include_partial('sidebar') ?>
 <script type="text/javascript">
  function confirmBlock(){   
-   var c = confirm('<?php echo __("Are you sure you want to block your account")?>');
+   var c = jConfirm('<?php echo __("Are you sure you want to block your account")?>','','');
    
     if(c){
       jAlert('<?php echo __("Your account will be blocked");?>',''); 
