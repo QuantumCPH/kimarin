@@ -277,13 +277,22 @@ echo " ";   echo substr($Telintambs, 15,2);
   <?php include_partial('sidebar') ?>
 <script type="text/javascript">
  function confirmBlock(){   
-   var c = jConfirm('<?php echo __("Are you sure you want to block your account")?>','');
-   jAlert(c);
-    if(c){
-      jAlert('<?php echo __("Your account will be blocked");?>',''); 
-      window.location="<?php echo url_for('customer/blockCustomer', true) ?>";
-    } else { 
-      return false; 
-    }
+//   var c = jConfirm('<?php echo __("Are you sure you want to block your account")?>','');
+//   jAlert(c);
+//    if(c){
+//      jAlert('<?php echo __("Your account will be blocked");?>',''); 
+//      window.location="<?php echo url_for('customer/blockCustomer', true) ?>";
+//    } else { 
+//      return false; 
+//    }
+
+jConfirm('<?php echo __("Are you sure you want to block your account")?>', 'Confirmation Dialog', function(r) {
+     if(r){
+    jAlert('<?php echo __("Your account will be blocked");?>', ' ');
+     }else { 
+         return false;
+     }
+});
+
   }  
 </script>
