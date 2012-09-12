@@ -17,13 +17,13 @@
  
 
 
-		<div class="fl col">
+		<div class="fl col" style="width:345px !important;">
         <?php echo $form->renderHiddenFields() ?>
           <ul>
  
             
-              <li style="width: 277px !important;">
-             <label for="customer_password" class="required"><?php echo __('Old Password') ?> </label><em class="required">*</em>
+              <li style="width: 287px !important;">
+             <label for="customer_password" class="required pcon"><?php echo __('Old Password') ?> </label><em class="required">*</em>
                 <input type="password" id="customer_old_password" name="customer[oldpassword]" value="<?php if ($oldpassword){}?>">
                
                 <?php if ($oldpasswordError): ?>
@@ -38,8 +38,8 @@
             if($form['password']->hasError())
             	$error_password = true;
             ?>
-            <li style="width: 277px !important;">
-             <?php echo $form['password']->renderLabel() ?>
+            <li style="width: 287px !important;">
+             <?php echo $form['password']->renderLabel(null, array('class'=>'pcon')) ?>
              <?php echo $form['password']->render(array('value' => '')) ?>
              <?php if ($error_password): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -54,8 +54,8 @@
             if($form['password_confirm']->hasError())
             	$error_password_confirm = true;
             ?>
-            <li style="width: 277px !important;">
-             <?php echo $form['password_confirm']->renderLabel() ?>
+            <li style="width: 287px !important;">
+             <?php echo $form['password_confirm']->renderLabel(null, array('class'=>'pcon')) ?>
              <?php echo $form['password_confirm'] ?>
              <?php if ($error_password_confirm): ?>
              <span id="cardno_decl" class="alertstep1">

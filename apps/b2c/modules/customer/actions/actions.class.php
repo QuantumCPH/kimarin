@@ -797,7 +797,9 @@ class customerActions extends sfActions {
 
         $ct = new Criteria();
         $ct->add(TransactionPeer::CUSTOMER_ID, $this->customer->getId());
-        $ct->add(TransactionPeer::TRANSACTION_STATUS_ID, sfConfig::get('app_status_completed'));
+        $ct->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, sfConfig::get('app_status_completed'));
+        $ct->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 6, Criteria::NOT_EQUAL);
+        $ct->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 10, Criteria::NOT_EQUAL);
         $ct->addSelectColumn('SUM(' . TransactionPeer::AMOUNT. ') AS total');
         $sum = TransactionPeer::doSelectStmt($ct);
         $resultset = $sum->fetch(PDO::FETCH_OBJ);
