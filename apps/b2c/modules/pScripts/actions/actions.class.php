@@ -3143,6 +3143,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $inviteOrder->setProductId(2);
                     $inviteOrder->setQuantity(1);
                     $inviteOrder->setOrderStatusId(3);
+                      $inviteOrder->setIsFirstOrder(4);
                     $inviteOrder->setCustomerId($invite->getCustomerId());
                     $inviteOrder->setExtraRefill($extrarefill);
                     $inviteOrder->save();
