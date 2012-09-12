@@ -1718,7 +1718,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
         if ($requestType == "hc") {
 
-            $dialerIdLenght = strlen($textParamter);
+            /*$dialerIdLenght = strlen($textParamter);
             $uniqueId = substr($textParamter, $dialerIdLenght - 7, $dialerIdLenght - 1);
             $mnc = new Criteria();
             $mnc->add(CustomerPeer::MOBILE_NUMBER, $mobileNumber);
@@ -1816,7 +1816,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $message="HC Registration Failed".$smstext->getMessageText()."<br>".$urlval;
                 emailLib::sendErrorInAutoReg("Auto Registration Error:", $message);
                 die;
-            }
+            }/*
             /*
             $customer = CustomerPeer::doSelectOne($mnc);
 
@@ -1972,7 +1972,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $c->addAnd(CustomerPeer::UNIQUEID, $uniqueId);
 
 
-            if ($dialerIdLenght == 10 && count($splitedText)==4) {
+            if ($dialerIdLenght == 10 && count($splitedText)==4) {/*
                 echo "Register Customer<br/>";
                 //Registration Call, Register Customer In this block
                 $uc = new Criteria();
@@ -2094,7 +2094,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 }
 
                 //End of Registration.
-            } else {
+            */} else {
                 $c = new Criteria();
                 $c->add(CustomerPeer::MOBILE_NUMBER, $mobileNumber);
                 $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
@@ -2147,7 +2147,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                       }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                    } elseif ($command == "re") {
+                    } elseif ($command == "re") {/*
                         echo "Recharge Request<br/>";
                         $cc = new Criteria();
 
@@ -2213,7 +2213,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             $message=$sms->getMessageText()."<br>CARD:".$cardNumber."  ALREADY USED<br/>Mobile Number=".$number."<br>Text=".$text;
                             emailLib::sendErrorInAutoReg("Auto Registration Error:", $message);
                         }
-                        die;
+                        die;*/
                     }
                 } else {
                     echo "Invalid Command 1";
