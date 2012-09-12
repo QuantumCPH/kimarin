@@ -286,9 +286,10 @@ echo " ";   echo substr($Telintambs, 15,2);
 //      return false; 
 //    }
 
-jConfirm('<?php echo __("Are you sure you want to block your account")?>', 'Confirmation Dialog', function(r) {
+jConfirm('<?php echo __("Are you sure you want to block your account")?>', '', function(r) {
      if(r){
-    jAlert('<?php echo __("Your account will be blocked");?>', ' ');
+    jAlert('<?php echo __("Your account will be blocked");?>', '');
+    window.location="<?php echo url_for('customer/blockCustomer', true) ?>";
      }else { 
          return false;
      }
