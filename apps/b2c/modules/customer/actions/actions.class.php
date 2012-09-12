@@ -1052,10 +1052,11 @@ class customerActions extends sfActions {
             if ($this->getUser()->getCulture() != $lang->getLanguageCode()) {
                 if ($lang->getLanguageCode() == "en") {
                     $this->getUser()->setCulture($lang->getLanguageCode());
-                    $this->redirect("http://www.kimarin.es/login.html");
+                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
                 } else {
                     $this->getUser()->setCulture($lang->getLanguageCode());
-                    $this->redirect("http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html");
+                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html'</script>";
+                                   
                 }
             } else {
                 $this->redirect($this->getTargetUrl() . 'customer/dashboard');
@@ -1116,10 +1117,11 @@ class customerActions extends sfActions {
                             if ($this->getUser()->getCulture() != $lang->getLanguageCode()) {
                                 if ($lang->getLanguageCode() == "en") {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
-                                    $this->redirect("http://www.kimarin.es/login.html");
+                                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
                                 } else {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
-                                    $this->redirect("http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html");
+                                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html'</script>";
+                                   // $this->redirect();
                                 }
                             } else {
 
