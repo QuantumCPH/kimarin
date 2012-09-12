@@ -22,7 +22,7 @@
           <ul>
  
             
-              <li>
+              <li style="width: 277px !important;">
              <label for="customer_password" class="required"><?php echo __('Old Password') ?> </label><em class="required">*</em>
                 <input type="password" id="customer_old_password" name="customer[oldpassword]" value="<?php if ($oldpassword){}?>">
                
@@ -31,14 +31,14 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
                 <?php endif; ?>
-             <div class='inline-error'><?php if ($oldpasswordError){echo __('Your old password is not correct.');} ?>&nbsp;</div>
+             <div class='inline-error' style="margin-right: 18px !important;"><?php if ($oldpasswordError){echo __('Your old password is not correct.');} ?>&nbsp;</div>
             </li>
             <?php
             $error_password = false;;
             if($form['password']->hasError())
             	$error_password = true;
             ?>
-            <li>
+            <li style="width: 277px !important;">
              <?php echo $form['password']->renderLabel() ?>
              <?php echo $form['password']->render(array('value' => '')) ?>
              <?php if ($error_password): ?>
@@ -46,7 +46,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_password?$form['password']->renderError():'&nbsp;'?></div>
+             <div class='inline-error' style="margin-right: 18px !important;"><?php echo $error_password?$form['password']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end password -->
             <?php
@@ -54,7 +54,7 @@
             if($form['password_confirm']->hasError())
             	$error_password_confirm = true;
             ?>
-            <li>
+            <li style="width: 277px !important;">
              <?php echo $form['password_confirm']->renderLabel() ?>
              <?php echo $form['password_confirm'] ?>
              <?php if ($error_password_confirm): ?>
@@ -62,7 +62,7 @@
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
 			 </span>
 			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_password_confirm?$form['password_confirm']->renderError():'&nbsp;'?></div>
+             <div class='inline-error' style="margin-right: 18px !important;"><?php echo $error_password_confirm?$form['password_confirm']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end confirm password -->
             
