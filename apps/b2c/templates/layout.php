@@ -17,6 +17,7 @@
 <?php use_javascript('jquery.formatCurrency-1.3.0.min.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('i18n/jquery.formatCurrency.all.js', '', array('absolute'=>true)) ?>
     <?php use_javascript('jquery-ui-1.8.16.custom.min.js', '', array('absolute'=>true)) ?>
+       <?php use_javascript('jquery.ui.draggable.js', '', array('absolute'=>true)) ?>
 <?php use_javascript('jquery.corner.js');?>    
      
 <!--[if IE]>
@@ -32,7 +33,10 @@
 
   <?php use_stylesheet('ui-lightness/jquery-ui-1.8.16.custom.css', '', array('absolute'=>true)) ?>
  <!--<![endif]-->
-  
+   <?php use_stylesheet('jquery.alerts.css', 'last', array('absolute'=>true)) ?> 
+   <?php use_javascript('jquery.alerts.js', '', array('absolute'=>true)) ?>
+
+ 
 </head>
 <body>
 
