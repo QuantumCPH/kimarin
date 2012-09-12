@@ -165,6 +165,12 @@ class customerActions extends sfActions {
 
     public function executeSignup(sfWebRequest $request) {
 
+        if ($request->getParameter('invite_id')) {
+            //setcookie("user", "XXXXXXX", time()+3600);
+            $this->getResponse()->setCookie('invite_id', $request->getParameter('ref'),time()+36000);
+            //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
+            $this->redirect("http://www.kimarin.se/register.html");
+        }
 
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
         if ($request->getParameter('lang') != '') {
@@ -173,6 +179,7 @@ class customerActions extends sfActions {
         } else {
             $this->sLang = 'en';
         }
+
 
 
         $this->form = new CustomerFormB2C();
@@ -188,11 +195,11 @@ class customerActions extends sfActions {
             $visitor->save();
         }
 
-        if ($id != NULL) {
+        if ($this->getRequest()->getCookie('invite_id') != NULL) {
             $c = new Criteria();
             //$c->add(InvitePeer::ID,$id);
             //$c->add(InvitePeer::INVITE_STATUS,'2');
-            $invite = InvitePeer::retrieveByPK($id);
+            $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
             if ($invite) {
                 $invite->setInviteStatus('2');
                 $invite->save();
@@ -218,7 +225,7 @@ class customerActions extends sfActions {
             unset($this->form['imsi']);
             unset($this->form['uniqueid']);
 
-            $this->processForm($request, $this->form, $id);
+            $this->processForm($request, $this->form, $this->getRequest()->getCookie('invite_id'));
         }
     }
 
