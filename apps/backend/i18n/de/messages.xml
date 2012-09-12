@@ -54,7 +54,7 @@
             </trans-unit>
             <trans-unit id="13" translate="yes" reformat="yes" xml:space="default">
                 <source>US Mobile Number</source>
-                <target>US Handy-Nummer</target>
+                <target>US Mobilfunknummer</target>
             </trans-unit>
             <trans-unit id="14" translate="yes" reformat="yes" xml:space="default">
                 <source>Date</source>
@@ -740,10 +740,9 @@
             <trans-unit id="181" translate="yes" reformat="yes" xml:space="default">
                 <source>Order No.</source>
                 <target>Bestellnummer</target>
-            </trans-unit><trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
-                <source>Mobile Number</source>
-                <target>Handy-Nummer</target>
             </trans-unit>
+
+            
             <trans-unit id="182" translate="yes" reformat="yes" xml:space="default">
                 <source>Smartsim including pot</source>
                 <target>SmartSim mit Topf</target>
@@ -822,11 +821,11 @@
             </trans-unit>
             <trans-unit id="201" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number: %s</source>
-                <target>Handy-Nummer: %s</target>
+                <target>Mobilfunknummer: %s</target>
             </trans-unit>
             <trans-unit id="202" translate="yes" reformat="yes" xml:space="default">
                 <source>Invaild mobile number or password.</source>
-                <target>Invaild Handy-Nummer oder Passwort.</target>
+                <target>Invaild Mobilfunknummer oder Passwort.</target>
             </trans-unit>
             <trans-unit id="203" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid 8 to 14 digit mobile number.</source>
