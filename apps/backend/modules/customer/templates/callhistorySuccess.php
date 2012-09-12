@@ -273,7 +273,6 @@ echo  date('i:s',$callval);
         <?php endif;
           if($pus==0){
         ?>
-
 <!--                    <tr><td colspan="6" align="left">Samtalstyp  type detail <br/> Int. = Internationella samtal<br/>
                             Cb M = Callback mottaga<br/>
                         	Cb S = Callback samtal<br/>
@@ -281,6 +280,7 @@ echo  date('i:s',$callval);
                         </td></tr>-->
 
                     <?php } ?>
+                <tr><td colspan="6" align="right">  All amounts excl. IVA.</td></tr>
                 </table>
 
 
