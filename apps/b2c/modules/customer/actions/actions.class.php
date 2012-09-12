@@ -1049,17 +1049,9 @@ class customerActions extends sfActions {
 
         if ($this->customer) {
             $lang = PreferredLanguagesPeer::retrieveByPK($this->customer->getPreferredLanguageId());
-            if ($this->getUser()->getCulture() != $lang->getLanguageCode()) {
-                if ($lang->getLanguageCode() == "en") {
-                    $this->getUser()->setCulture($lang->getLanguageCode());
-                    $this->redirect("http://www.kimarin.es/login.html");
-                } else {
-                    $this->getUser()->setCulture($lang->getLanguageCode());
-                    $this->redirect("http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html");
-                }
-            } else {
+            
                 $this->redirect($this->getTargetUrl() . 'customer/dashboard');
-            }
+            
         } else {
 
             if ($request->isMethod('post') && $request->getParameter('mobile_number') != '' && $request->getParameter('password') != '') {
@@ -1116,10 +1108,11 @@ class customerActions extends sfActions {
                             if ($this->getUser()->getCulture() != $lang->getLanguageCode()) {
                                 if ($lang->getLanguageCode() == "en") {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
-                                    $this->redirect("http://www.kimarin.es/login.html");
+                                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
                                 } else {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
-                                    $this->redirect("http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html");
+                                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html'</script>";
+                                   // $this->redirect();
                                 }
                             } else {
 
