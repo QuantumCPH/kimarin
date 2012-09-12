@@ -169,7 +169,7 @@ class customerActions extends sfActions {
             //setcookie("user", "XXXXXXX", time()+3600);
             $this->getResponse()->setCookie('invite_id', $request->getParameter('ref'),time()+36000);
             //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
-            $this->redirect("http://www.kimarin.se/register.html");
+            $this->redirect("http://www.kimarin.es/register.html");
         }
 
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
