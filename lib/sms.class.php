@@ -14,7 +14,7 @@ class CARBORDFISH_SMS {
     private static $S = 'H';
     private static $UN = 'zapna1';
     private static $P = 'Zapna2010';
-    private static $SA = 'Zeorcall';
+    private static $SA = 'Kimarin';
     private static $ST = 5;
 
     /*
