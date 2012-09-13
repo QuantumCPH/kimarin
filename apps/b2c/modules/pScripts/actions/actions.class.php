@@ -3666,7 +3666,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                    $tcb->setIAccount($telintaAccountR->getIAccount());
                    $tcb->setICustomer($customer->getICustomer());
                    $tcb->setAccountTitle($voipnumbers);
-                   $tcb->setAccountType('cb');
+                   $tcb->setAccountType('r');
                    $tcb->setStatus(3);
                    $tcb->save();
                 }     
