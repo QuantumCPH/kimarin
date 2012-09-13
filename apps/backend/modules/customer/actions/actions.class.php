@@ -428,6 +428,7 @@ class customerActions extends autocustomerActions {
 //                                echo '<br />';
                 //create order
                 //get customer first product purchase
+                $customerBalance = Telienta::getBalance($customer);
                 $c = new Criteria();
                 $c->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
                 $customer_product = CustomerProductPeer::doSelectOne($c)->getProduct();
@@ -439,29 +440,33 @@ class customerActions extends autocustomerActions {
                 $order->setOrderStatusId(1);
                 //$order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 $order->save();
-             
-                $transaction->setOrderId($order->getId());
-                $transaction->setCustomerId($customer->getId());
-                $transaction->setAmount($extra_refill);
-                $transactiondescription=  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
-                $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                $transaction->setDescription($transactiondescription->getTitle());
-                $transaction->setTransactionFrom('2');
-                 $transaction->setVat($request->getParameter('refill_amount')*sfConfig::get('app_vat_percentage'));
-                $transaction->save();
-                Telienta::recharge($customer, $transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1),$transactiondescription->getTitle());
-                //set status
-                $order->setOrderStatusId(3);
-                $transaction->setTransactionStatusId(3);
-                $order->save();
-                $transaction->save();
-                $this->customer = $order->getCustomer();
-                $this->setPreferredCulture($this->customer);
-                emailLib::sendAdminRefillEmail($this->customer, $order);
-                $this->updatePreferredCulture();
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $request->getParameter('refill_amount'), "%3%" => sfConfig::get('app_currency_code'))));
-                //                                        echo 'rehcarged, redirecting';
+                if($customerBalance+$order->getExtraRefill() >= 250){
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__("Payment has not been accepted as customer account balance will exceed 250%1%.",array("%1%"=>sfConfig::get("app_currency_code")))); 
+                }else{
+                    $transaction->setOrderId($order->getId());
+                    $transaction->setCustomerId($customer->getId());
+                    $transaction->setAmount($extra_refill);
+                    $transactiondescription=  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
+                    $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                    $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                    $transaction->setDescription($transactiondescription->getTitle());
+                    $transaction->setTransactionFrom('2');
+                    $transaction->setVat($request->getParameter('refill_amount')*sfConfig::get('app_vat_percentage'));
+                    $transaction->save();
+                    Telienta::recharge($customer, $transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1),$transactiondescription->getTitle());
+                    //set status
+                    $order->setOrderStatusId(3);
+                    $transaction->setTransactionStatusId(3);
+                    $order->save();
+                    $transaction->save();
+                    $this->customer = $order->getCustomer();
+                    $this->setPreferredCulture($this->customer);
+                    emailLib::sendAdminRefillEmail($this->customer, $order);
+                    $this->updatePreferredCulture();
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $request->getParameter('refill_amount'), "%3%" => sfConfig::get('app_currency_code'))));
+
+                }
+                 //                                        echo 'rehcarged, redirecting';
                 $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');
             } else {
                 //                                        echo 'NOT rehcarged, redirecting';
