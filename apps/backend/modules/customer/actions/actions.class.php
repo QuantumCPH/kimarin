@@ -389,7 +389,7 @@ class customerActions extends autocustomerActions {
         if (($request->getParameter('mobile_number')) && $request->getParameter('refill_amount') != '') {
             $validated = false;
             $mobile_number = $request->getParameter('mobile_number');
-            $extra_refill = $request->getParameter('refill_amount');
+            $amount = $request->getParameter('refill_amount');
             
               
                 $cc = new Criteria();
@@ -401,7 +401,7 @@ class customerActions extends autocustomerActions {
                   $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');  
                 }
             
-            $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
+            $extra_refill = $amount*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
             $transaction = new Transaction();
             $order = new CustomerOrder();
@@ -415,7 +415,13 @@ class customerActions extends autocustomerActions {
 
             if ($customer and $mobile_number != "") {
                 $validated = true;
-            } else {
+                if($amount<=0){
+                    $validated = false;
+                    $is_recharged = false;
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Amount must be greater than 0.'));
+                    $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');
+                }
+            }else {
                 $validated = false;
                 $is_recharged = false;
                 $this->error_mobile_number = 'invalid mobile number';
@@ -449,14 +455,16 @@ class customerActions extends autocustomerActions {
                 $order->setOrderStatusId(1);
                 //$order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 $order->save();
-                if($customerBalance+$order->getExtraRefill() >= 250){
+                $transactiondescription =  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
+                $transactionTid = $transactiondescription->getTransactionTypeId();
+                if($customerBalance+$order->getExtraRefill() >= 250 && $transactionTid != 4){
                     $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__("Payment has not been accepted as customer account balance will exceed 250%1%.",array("%1%"=>sfConfig::get("app_currency_code")))); 
                 }else{
                     $transaction->setOrderId($order->getId());
                     $transaction->setCustomerId($customer->getId());
                     $transaction->setAmount($extra_refill);
                     $transactiondescription=  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
-                    $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                    $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                     $transaction->setTransactionDescriptionId($transactiondescription->getId());
                     $transaction->setDescription($transactiondescription->getTitle());
                     $transaction->setTransactionFrom('2');
