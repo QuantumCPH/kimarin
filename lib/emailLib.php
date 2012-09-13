@@ -1261,46 +1261,39 @@ Med vänlig hälsning<br/><br/>
     public static function sendUniqueIdsShortage() {
 
         $subject = 'Unique Ids finished.';
-        $message_body = "<table width='600px'><tr style='border:0px solid #fff'><td colspan='4' align='right' style='text-align:right; border:0px solid #fff'></tr></table><table cellspacing='0' width='600px'><tr><td>
-             " . $message . " <br/><br/>
-Uniuqe Ids finsihed.<br/><br/>
-" . sfConfig::get('app_site_title') . "<br/><a href='" . sfConfig::get('app_site_url') . "'>" . sfConfig::get('app_site_url') . "</a></td></tr></table>";
+        $message_body = "<table cellspacing='0' width='600px'><tr><td>Uniuqe Ids finsihed.<br/><br/>
+                        " . sfConfig::get('app_site_title') . "<br/><a href='" . sfConfig::get('app_site_url') . "'>" . sfConfig::get('app_site_url') . "</a>
+                            </td></tr></table>";
 
-        //Support Informationt
-        $sender_name = sfConfig::get('app_email_sender_name');
-        $sender_email = sfConfig::get('app_email_sender_email');
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_cdu');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_cdu');
 
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
-        
+        $recipient_name_support = sfConfig::get('app_recipient_name_support');
+        $recipient_email_support = sfConfig::get('app_recipient_email_support');
 
-
-        //--------------Sent The Email To okhan
-        if (trim($sender_email) != ''):
-            $email3 = new EmailQueue();
-            $email3->setSubject($subject);
-            $email3->setReceipientName($sender_name);
-            $email3->setReceipientEmail($sender_email);
-            $email3->setAgentId($referrer_id);
-            $email3->setCutomerId($customer_id);
-            $email3->setEmailType('Unique Ids Finished');
-            $email3->setMessage($message_body);
-            $email3->save();
+        //********************Sent The Email To RS******************************
+        if (trim($recipient_email_rs) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_rs);
+            $email->setReceipientEmail($recipient_email_rs);
+            $email->setEmailType('Unique Ids Finished');
+            $email->setMessage($message_body);
+            $email->save();
         endif;
-        //-----------------------------------------
-        //--------------Sent The Email To CDU
-        if (trim($sender_emailcdu) != ''):
-            $email4 = new EmailQueue();
-            $email4->setSubject($subject);
-            $email4->setReceipientName($sender_namecdu);
-            $email4->setReceipientEmail($sender_emailcdu);
-            $email4->setAgentId($referrer_id);
-            $email4->setCutomerId($customer_id);
-            $email4->setEmailType('Unique Ids Finished');
-            $email4->setMessage($message_body);
-            $email4->save();
+        //**********************************************************************
+
+        //********************Sent The Email To Support*************************
+        if (trim($recipient_email_support) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_support);
+            $email->setReceipientEmail($recipient_email_support);
+            $email->setEmailType('Unique Ids Finished');
+            $email->setMessage($message_body);
+            $email->save();
         endif;
-        //-----------------------------------------
+        //**********************************************************************
     }
 
     public static function sendUniqueIdsIssueAgent($uniqueid, Customer $customer) {
@@ -1395,29 +1388,35 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
     public static function sendErrorInTelinta($subject, $message) {
 
-        $sender_name = sfConfig::get('app_email_sender_name_sup');
-        $sender_email = sfConfig::get('app_email_sender_email_sup');
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_cdu');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_cdu');
 
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        $recipient_name_support = sfConfig::get('app_recipient_name_support');
+        $recipient_email_support = sfConfig::get('app_recipient_email_support');
 
-        //To RS.
-        $email = new EmailQueue();
-        $email->setSubject($subject);
-        $email->setReceipientName($sender_namecdu);
-        $email->setReceipientEmail($sender_emailcdu);
-        $email->setEmailType('Telinta Error');
-        $email->setMessage($message);
-        $email->save();
+        //********************Sent The Email To RS******************************
+        if (trim($recipient_email_rs) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_rs);
+            $email->setReceipientEmail($recipient_email_rs);
+            $email->setEmailType('Telinta Error');
+            $email->setMessage($message);
+            $email->save();
+        endif;
+        //**********************************************************************
 
-        //To Support @ Zerocall
-        $email = new EmailQueue();
-        $email->setSubject($subject);
-        $email->setReceipientName($sender_name);
-        $email->setReceipientEmail($sender_email);
-        $email->setEmailType('Telinta Error');
-        $email->setMessage($message);
-        $email->save();
+        //********************Sent The Email To Support*************************
+        if (trim($recipient_email_support) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_support);
+            $email->setReceipientEmail($recipient_email_support);
+            $email->setEmailType('Telinta Error');
+            $email->setMessage($message);
+            $email->save();
+        endif;
+        //**********************************************************************
     }
 
     public static function sendAdminRefilEmail(AgentCompany $agent, $agent_order) {
@@ -1848,14 +1847,35 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         public static function sendErrorInAutoReg($subject, $message) {
 
-        //To RS.
-        $email = new EmailQueue();
-        $email->setSubject($subject);
-        $email->setReceipientName("Raheel Safdar");
-        $email->setReceipientEmail("rs@zapna.com");
-        $email->setEmailType('Auto Registration Error');
-        $email->setMessage($message);
-        $email->save();
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_cdu');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_cdu');
+
+        $recipient_name_support = sfConfig::get('app_recipient_name_support');
+        $recipient_email_support = sfConfig::get('app_recipient_email_support');
+
+        //********************Sent The Email To RS******************************
+        if (trim($recipient_email_rs) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_rs);
+            $email->setReceipientEmail($recipient_email_rs);
+            $email->setEmailType('Auto Registration Error');
+            $email->setMessage($message);
+            $email->save();
+        endif;
+        //**********************************************************************
+
+        //********************Sent The Email To Support*************************
+        if (trim($recipient_email_support) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_support);
+            $email->setReceipientEmail($recipient_email_support);
+            $email->setEmailType('Auto Registration Error');
+            $email->setMessage($message);
+            $email->save();
+        endif;
+        //**********************************************************************
 
     }
 
