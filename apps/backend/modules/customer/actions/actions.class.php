@@ -337,7 +337,7 @@ class customerActions extends autocustomerActions {
                 $order->setProductId($customer_product->getId());
                 $order->setQuantity(1);
                 $order->setExtraRefill(-$extra_refill_wovat);
-                $order->setIsFirstOrder(false);
+                $order->setIsFirstOrder(8);
                 $order->setOrderStatusId(1);
                 //$order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 $order->save();
@@ -428,6 +428,15 @@ class customerActions extends autocustomerActions {
 //                                echo '<br />';
                 //create order
                 //get customer first product purchase
+                
+                $tsid=$transactiondescription->getId();
+                
+                if($tsid==6){
+                    
+                  $isfid=9;  
+                }else{
+                  $isfid=2;     
+                }
                 $customerBalance = Telienta::getBalance($customer);
                 $c = new Criteria();
                 $c->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
@@ -436,7 +445,7 @@ class customerActions extends autocustomerActions {
                 $order->setProductId($customer_product->getId());
                 $order->setQuantity(1);
                 $order->setExtraRefill($extra_refill);
-                $order->setIsFirstOrder(2);
+                $order->setIsFirstOrder($isfid);
                 $order->setOrderStatusId(1);
                 //$order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 $order->save();
