@@ -258,6 +258,14 @@ class paymentsActions extends sfActions {
 
         $transaction = TransactionPeer::retrieveByPK($transaction_id);
 
+
+        if($transaction_id>489){
+          $vatValue=sfConfig::get('app_vat_percentage');
+        }else{
+         $vatValue=(.18);
+        }
+        
+
         $this->forward404Unless($transaction->getCustomerId() == $this->customer->getId(), 'Not allowed');
 
         //set customer order
@@ -345,8 +353,15 @@ class paymentsActions extends sfActions {
         $lang=$this->getUser()->getCulture();
       
       //  $return_url = "http://www.kimarineurope.com/registration-thanks.html";
+        
+        if($lang=='en'){
         $return_url = "http://www.kimarin.es/registration-thanks.html";
         $cancel_url = "http://www.kimarin.es/registration-reject.html";
+        }else{
+        $return_url = "http://www.kimarin.es/".$lang."/registration-thanks_".$lang.".html";
+        $cancel_url = "http://www.kimarin.es/".$lang."/registration-reject_".$lang.".html";   
+          
+        }
         
         $callbackparameters = $lang.'-'.$order_id.'-'.$item_amount;
         $notify_url = $this->getTargetUrl().'pScripts/confirmpayment?p='.$callbackparameters;        

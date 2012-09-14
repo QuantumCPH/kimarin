@@ -16,8 +16,7 @@ function countChar(str)
 	      $("#form1").validate({
 	        rules: {
 	          name: {
-                     required: true,
-                      maxlength:50
+                     required: true
               },// simple rule, converted to {required:true}
 
 	          email: {// compound rule
@@ -33,7 +32,9 @@ function countChar(str)
 	        }
 	        },
 	        messages: {
-	          message: "<?php echo __('Please enter your message.')?>"
+	          message: "<?php echo __('Please enter your message.')?>",
+                  phone: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>",
+                  email: "<?php echo __('Please enter a valid e-mail address.')?>"
 	        }
 	      });
 	    });
@@ -59,7 +60,7 @@ function countChar(str)
 
             if(isset ($_POST['email']) && isset ($_POST['name'])&& isset ($_POST['message'] ))
             {?>
-<div class="alert_bar">
+<div class="ok_alert_bar">
 	
               <?php echo __("Your invitation to ").$_POST['name'].__(" has been sent."); ?>
 

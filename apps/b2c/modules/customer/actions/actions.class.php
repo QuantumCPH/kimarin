@@ -165,14 +165,21 @@ class customerActions extends sfActions {
 
     public function executeSignup(sfWebRequest $request) {
 
+        if ($request->getParameter('invite_id')) {
+            //setcookie("user", "XXXXXXX", time()+3600);
+            $this->getResponse()->setCookie('invite_id', $request->getParameter('invite_id'),time()+36000);
+            //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
+            $this->redirect("http://www.kimarin.es/register.html");
+        }
 
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
-        if($request->getParameter('lang') != ''){
+        if ($request->getParameter('lang') != '') {
             $this->getUser()->setCulture($request->getParameter('lang'));
             $this->sLang = $request->getParameter('lang');
-        }else{
+        } else {
             $this->sLang = 'en';
         }
+
 
 
         $this->form = new CustomerFormB2C();
@@ -188,11 +195,11 @@ class customerActions extends sfActions {
             $visitor->save();
         }
 
-        if ($id != NULL) {
+        if ($this->getRequest()->getCookie('invite_id') != NULL) {
             $c = new Criteria();
             //$c->add(InvitePeer::ID,$id);
             //$c->add(InvitePeer::INVITE_STATUS,'2');
-            $invite = InvitePeer::retrieveByPK($id);
+            $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
             if ($invite) {
                 $invite->setInviteStatus('2');
                 $invite->save();
@@ -218,7 +225,7 @@ class customerActions extends sfActions {
             unset($this->form['imsi']);
             unset($this->form['uniqueid']);
 
-            $this->processForm($request, $this->form, $id);
+            $this->processForm($request, $this->form, $this->getRequest()->getCookie('invite_id'));
         }
     }
 
@@ -610,6 +617,7 @@ class customerActions extends sfActions {
         $this->order->setQuantity(1);
         $refills_options = ProductPeer::getRefillChoices();
         $this->order->setExtraRefill($refills_options[0]);
+        $this->order->setIsFirstOrder(2);
         $this->order->save();
 
         //new transaction
@@ -622,7 +630,7 @@ class customerActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($this->order->getId());
         $transaction->setCustomerId($this->order->getCustomerId());
-         $transaction->setVat($this->order->getExtraRefill()*sfConfig::get('app_vat_percentage'));
+        $transaction->setVat($this->order->getExtraRefill() * sfConfig::get('app_vat_percentage'));
 
         //save
         $transaction->save();
@@ -788,6 +796,17 @@ class customerActions extends sfActions {
 
         $this->redirectUnless($this->customer, "@homepage");
 
+        $ct = new Criteria();
+        $ct->add(TransactionPeer::CUSTOMER_ID, $this->customer->getId());
+        $ct->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, sfConfig::get('app_status_completed'));
+        $ct->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 6, Criteria::NOT_EQUAL);
+        $ct->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 10, Criteria::NOT_EQUAL);
+        $ct->addSelectColumn('SUM(' . TransactionPeer::AMOUNT. ') AS total');
+        $sum = TransactionPeer::doSelectStmt($ct);
+        $resultset = $sum->fetch(PDO::FETCH_OBJ);
+        $this->total=$resultset->total;
+
+
         //get  transactions
         $c = new Criteria();
 
@@ -849,7 +868,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->transactions = $pager->getResults();
-        $this->total_pages = round($pager->getNbResults() / $items_per_page,0);
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
     }
 
     public function executePasswordchange(sfWebRequest $request) {
@@ -1042,14 +1061,15 @@ class customerActions extends sfActions {
         $this->target = $this->getTargetUrl();
         $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', '', 'usersession'));
 
-        if($request->getParameter('lang') != ''){
-            $this->getUser()->setCulture($request->getParameter('lang')); 
+        if ($request->getParameter('lang') != '') {
+            $this->getUser()->setCulture($request->getParameter('lang'));
         }
 
 
         if ($this->customer) {
-
-            $this->redirect($this->getTargetUrl() . 'customer/dashboard');
+            $lang = PreferredLanguagesPeer::retrieveByPK($this->customer->getPreferredLanguageId());
+            
+                $this->redirect($this->getTargetUrl() . 'customer/dashboard');
             
         } else {
 
@@ -1083,8 +1103,7 @@ class customerActions extends sfActions {
                     $this->getUser()->setAttribute('customer_id', $customer->getId(), 'usersession');
                     $this->getUser()->setAuthenticated(true);
 
-                    $lang = PreferredLanguagesPeer::retrieveByPK($customer->getPreferredLanguageId());
-                    $this->getUser()->setCulture($lang->getLanguageCode());
+
 
 
 
@@ -1101,7 +1120,23 @@ class customerActions extends sfActions {
                         if (isset($pathArray['HTTP_REFERER']) && $pathArray['HTTP_REFERER'] != '') {
                             $this->redirect($pathArray['HTTP_REFERER']);
                         } else {
-                            $this->redirect($this->getTargetUrl() . 'customer/dashboard');
+
+
+
+                            $lang = PreferredLanguagesPeer::retrieveByPK($customer->getPreferredLanguageId());
+                            if ($this->getUser()->getCulture() != $lang->getLanguageCode()) {
+                                if ($lang->getLanguageCode() == "en") {
+                                    $this->getUser()->setCulture($lang->getLanguageCode());
+                                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
+                                } else {
+                                    $this->getUser()->setCulture($lang->getLanguageCode());
+                                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html'</script>";
+                                   // $this->redirect();
+                                }
+                            } else {
+
+                                $this->redirect($this->getTargetUrl() . 'customer/dashboard');
+                            }
                         }
                     }
                 } else {
@@ -1268,7 +1303,7 @@ class customerActions extends sfActions {
 
         $message = $request->getParameter('message');
 
-       // echo $this->getContext()->getI18N()->__("-Sent by");
+        // echo $this->getContext()->getI18N()->__("-Sent by");
         if ($message) {
             $this->msgSent = "No";
             $country_code = $request->getParameter('country');
@@ -1281,15 +1316,15 @@ class customerActions extends sfActions {
 
             $messages = array();
             if (strlen($message) < 142) {
-                $messages[1] = $message . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
+                $messages[1] = $message . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
             } else if (strlen($message) > 142 and strlen($message) < 302) {
 
-                $messages[1] = substr($message, 1, 142) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
-                $messages[2] = substr($message, 143) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
+                $messages[1] = substr($message, 1, 142) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
+                $messages[2] = substr($message, 143) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
             } else if (strlen($message) > 382) {
-                $messages[1] = substr($message, 1, 142) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
-                $messages[2] = substr($message, 143, 302) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
-                $messages[3] = substr($message, 303, 432) . $this->getContext()->getI18N()->__("-Sent by")." Kimarin-";
+                $messages[1] = substr($message, 1, 142) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
+                $messages[2] = substr($message, 143, 302) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
+                $messages[3] = substr($message, 303, 432) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
             }
 
             foreach ($messages as $sms_text) {
@@ -1375,16 +1410,16 @@ class customerActions extends sfActions {
             $invite->setCustomerId($this->customer->getId());
             $invite->setMessage($message);
             $invite->save();
-            $message = "<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>".$message.'</p>';
-            
+            $message = "<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>" . $message . '</p>';
+
             $subject = $this->getContext()->getI18N()->__("%1% invitation", array('%1%' => sfConfig::get('app_site_title')));
 
             $name = $this->customer->getFirstName() . ' ' . $this->customer->getLastName();
             $message_body = "<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>";
             $message_body .= /* $this->getContext()->getI18N()->__('Hi ') . */$recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation has been sent to you by") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("who is a registered %1% customer.", array('%1%' => sfConfig::get('app_site_title')));
             $message_body .= '</p>';
-            
-            $message_body_end ="<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>";
+
+            $message_body_end = "<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>";
             $message_body_end .= /* $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="' . sfConfig::get('app_customer_url') . 'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.", array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>' . $this->getContext()->getI18N()->__('Read more') . ' <a href="' . sfConfig::get('app_live_site_url') . '">' . sfConfig::get('app_live_site_url') . '</a>';
             $message_body_end .= '</p>';
 
@@ -1392,7 +1427,7 @@ class customerActions extends sfActions {
             if ($recepient_name != ''):
                 $email = new EmailQueue();
                 $email->setSubject($subject);
-                $email->setMessage($message_body .  $message .  $message_body_end);
+                $email->setMessage($message_body . $message . $message_body_end);
                 $email->setReceipientName($recepient_name);
                 $email->setReceipientEmail($recepient_email);
 
@@ -1830,13 +1865,23 @@ class customerActions extends sfActions {
         $transaction = TransactionPeer::doSelectOne($c);
         $transaction->setAmount($item_amount);
         $transaction->setDescription($product->getDescription());
-         $transaction->setVat($product->getRegistrationFee()*sfConfig::get('app_vat_percentage'));
+        $transaction->setVat($product->getRegistrationFee() * sfConfig::get('app_vat_percentage'));
         $transaction->save();
 
 
         $lang = $this->getUser()->getCulture();
-        $return_url = "http://www.kimarin.es/refill-thanks.html";
-        $cancel_url = "http://www.kimarin.es/refill-reject.html";
+        
+        
+           if($lang=='en'){
+              $return_url = "http://www.kimarin.es/refill-thanks.html";
+        $cancel_url = "http://www.kimarin.es/refill-reject.html";   
+           }else{
+                             $return_url = "http://www.kimarin.es/".$lang."/refill-thanks_".$lang.".html";
+        $cancel_url = "http://www.kimarin.es/".$lang."/refill-reject_".$lang.".html";   
+           }
+      
+//        $return_url = "http://www.kimarin.es/".$langPara."refill-thanks_".$langPara.".html";
+//        $cancel_url = "http://www.kimarin.es/refill-reject_".$langPara.".html";
         //   $notify_url = $this->getTargetUrl().'pScripts/calbackrefill?lang='.$lang.'&order_id='.$order_id.'&amountval='.$item_amount;
 
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
@@ -1946,7 +1991,7 @@ class customerActions extends sfActions {
         $this->disable = false;
         if ($change_number_count >= 2) {
             $this->disable = true;
-            $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__("You can't change your number more than two times in a month."));
+            //$this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__("You can't change your number more than two times in a month."));
         }
     }
 
@@ -1975,14 +2020,14 @@ class customerActions extends sfActions {
             $ccu->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
             $ccheck = CustomerPeer::doCount($ccu);
             if ($ccheck > 0) {
-                $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__('This mobile number is already registered to a %1% customer.',array("%1%"=>sfConfig::get("app_site_title"))));
+                $this->getUser()->setFlash('change_number_message', $this->getContext()->getI18N()->__('This mobile number is already registered to a %1% customer.', array("%1%" => sfConfig::get("app_site_title"))));
                 return $this->redirect('customer/changenumberservice');
             } else {
                 $order = new CustomerOrder();
                 $order->setCustomerId($customer->getId());
                 $order->setProductId($product_id);
                 $order->setQuantity(1);
-                // $order->setExtraRefill($extra_refill);
+                $order->setIsFirstOrder(3);
                 $order->setOrderStatusId(sfConfig::get('app_status_new'));
 
                 $order->save();
@@ -2006,10 +2051,22 @@ class customerActions extends sfActions {
 
         $lang = $this->getUser()->getCulture();
 
-        $return_url = $this->getTargetUrl()."customer/dashboard";
-        $cancel_url = $this->getTargetUrl()."customer/dashboard";
+
+//        $return_url = $this->getTargetUrl()."customer/dashboard";
+//        $cancel_url = $this->getTargetUrl()."customer/dashboard";
+        
+        
+          if($lang=='en'){
+              
+        $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
+        $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
+          }else{
+         $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
+        $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
+          }
         
         $order_id = $request->getParameter('item_number'); 
+
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
 
@@ -2079,7 +2136,7 @@ class customerActions extends sfActions {
         $this->product_id = '';
         $this->customer = CustomerPeer::retrieveByPK($this->getUser()->getAttribute('customer_id', null, 'usersession'));
         $this->redirectUnless($this->customer, "@homepage");
-
+        $this->targetUrl = $this->getTargetUrl();
         $cst = new Criteria();
         $cst->add(ProductPeer::PRODUCT_TYPE_ID, 6);
         $this->simtypes = ProductPeer::doSelect($cst);
@@ -2093,6 +2150,7 @@ class customerActions extends sfActions {
             $this->price = $simtype->getRegistrationFee();
             $this->vat = $this->price * sfConfig::get('app_vat_percentage');
             $this->total = $this->price + $this->vat;
+            
             //$product_name=$simtype->getName();
 
             $this->order = new CustomerOrder();
@@ -2101,8 +2159,10 @@ class customerActions extends sfActions {
             $this->order->setCustomer($this->customer);
             $this->order->setQuantity(1);
             $this->order->setExtraRefill(0);
-            $this->order->save();
+            $this->order->setIsFirstOrder(6);
 
+            $this->order->save();
+            
             //new transaction
             $transaction = new Transaction();
 
@@ -2113,51 +2173,62 @@ class customerActions extends sfActions {
             $transactiondescription = TransactionDescriptionPeer::retrieveByPK(14);
             $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
             $transaction->setTransactionDescriptionId($transactiondescription->getId());
-            $transaction->setDescription($transactiondescription->getTitle());
+            $this->transaction_title=$transactiondescription->getTitle();
+            $transaction->setDescription($this->transaction_title);
             $transaction->setVat($this->vat);
             $transaction->save();
 
+           
+        }
+        if ($request->getParameter('buy') != '') {
+
+            $order_id = $request->getParameter('item_number');
+            $item_amount = $request->getParameter('amount');
+            $lang = $this->getUser()->getCulture();
+            
+            
+             if($lang=='en'){
+               $return_url ="http://www.kimarin.es/newsim-payment-thanks.html";
+                $cancel_url ="http://www.kimarin.es/newsim-payment-reject.html";  
+                 
+             }else{
+               $return_url ="http://www.kimarin.es/".$lang."/newsim-payment-thanks_".$lang.".html"; 
+                $cancel_url = "http://www.kimarin.es/".$lang."/newsim-payment-reject_".$lang.".html";
+                 
+             }
+//            $return_url = $this->targetUrl . "customer/dashboard";
+//            $cancel_url = $this->targetUrl . "customer/dashboard";
 
 
-            if ($request->getParameter('buy') != '') {
-                $this->target = $this->getTargetUrl();
+            $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
+            $notify_url = $this->getTargetUrl() . 'pScripts/calbacknewcard?p=' . $callbackparameters;
 
-                $order_id = $request->getParameter('item_number');
-                $item_amount = $request->getParameter('amount');
-                $lang = $this->getUser()->getCulture();
-                $return_url = $this->target . "customer/dashboard";
-                $cancel_url = $this->target . "customer/dashboard";
+            $email2 = new DibsCall();
+            $email2->setCallurl($notify_url);
 
+            $email2->save();
 
-                $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
-                $notify_url = $this->getTargetUrl() . 'pScripts/calbacknewcard?p=' . $callbackparameters;
+            $querystring = '';
 
-                $email2 = new DibsCall();
-                $email2->setCallurl($notify_url);
+            $item_name = $request->getParameter('item_name');
 
-                $email2->save();
+            //loop for posted values and append to querystring
+            foreach ($_POST as $key => $value) {
+                $value = urlencode(stripslashes($value));
+                $querystring .= "$key=$value&";
+            }
 
-                $querystring = '';
-
-                $item_name = $transactiondescription->getTitle();
-
-                //loop for posted values and append to querystring
-                foreach ($_POST as $key => $value) {
-                    $value = urlencode(stripslashes($value));
-                    $querystring .= "$key=$value&";
-                }
-
-                $querystring .= "item_name=" . urlencode($item_name) . "&";
-                $querystring .= "return=" . urldecode($return_url) . "&";
-                $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
-                $querystring .= "notify_url=" . urldecode($notify_url);
-                if ($order_id && $item_amount) {
-                    Payment::SendPayment($querystring);
-                } else {
-                    echo 'error';
-                }
+            $querystring .= "item_name=" . urlencode($item_name) . "&";
+            $querystring .= "return=" . urldecode($return_url) . "&";
+            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+            $querystring .= "notify_url=" . urldecode($notify_url);
+            if ($order_id && $item_amount) {
+                Payment::SendPayment($querystring);
+            } else {
+                echo 'error';
             }
         }
+        
     }
 
     public function executeChangeProductSubscription(sfWebRequest $request) {
@@ -2185,7 +2256,7 @@ class customerActions extends sfActions {
         $this->targetUrl = $this->getTargetUrl();
 
         $product_id = $request->getParameter('product');
-          $this->oldProduct = ProductPeer::retrieveByPK($product_id);
+        $this->oldProduct = ProductPeer::retrieveByPK($product_id);
 
         $product = ProductPeer::retrieveByPK(16);
         $this->product = $product;
@@ -2200,6 +2271,8 @@ class customerActions extends sfActions {
         $order->setQuantity(1);
         $order->setExtraRefill($product->getInitialBalance());
         $order->setOrderStatusId(1);
+        $order->setIsFirstOrder(7);
+
 
         $order->save();
         $this->order = $order;
@@ -2235,10 +2308,21 @@ class customerActions extends sfActions {
         $item_amount = $request->getParameter('amount');
         $ccpid = $request->getParameter('ccpid');
         $lang = $this->getUser()->getCulture();
-        $return_url = $this->target . "customer/dashboard";
-        $cancel_url = $this->target . "customer/dashboard";
-
-
+        
+        
+       
+       
+//        $return_url = $this->target . "customer/dashboard";
+//        $cancel_url = $this->target . "customer/dashboard";
+        
+          if($lang=='en'){
+              
+        $return_url ="http://www.kimarin.es/changeproduct-thanks.html";
+        $cancel_url = "http://www.kimarin.es/changeproduct-reject.html";    
+          }else{
+         $return_url ="http://www.kimarin.es/".$lang."/changeproduct-thanks_".$lang.".html";
+        $cancel_url = "http://www.kimarin.es/".$lang."/changeproduct-reject_".$lang.".html";
+          }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount . '-' . $ccpid;
         $notify_url = $this->getTargetUrl() . 'pScripts/calbackChangeProduct?p=' . $callbackparameters;
 

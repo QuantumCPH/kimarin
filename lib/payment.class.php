@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Description of payment gateway
  *
@@ -13,11 +12,12 @@ class Payment {
     public static function SendPayment($querystring){
         $environment   = sfConfig::get('app_environment');
         $querystring = "?business=".urlencode(self::$PaypalEmail)."&".$querystring;
-        if($environment=='live'){
+         if($environment=='live'){
             $paypalUrl = 'https://www.paypal.com/cgi-bin/webscr';
-        }else{
+         }else{
             $paypalUrl = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-        }
+         }
+       
         
         //die($paypalUrl.$querystring);
         header("Location:".$paypalUrl.$querystring);

@@ -256,7 +256,7 @@
             </trans-unit>
             <trans-unit id="63" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter your password.</source>
-                <target>Bitte geben Sie ein Passwort.</target>
+                <target>Bitte geben Sie Ihr Passwort ein.</target>
             </trans-unit>
             <trans-unit id="64" translate="yes" reformat="yes" xml:space="default">
                 <source>Forgot password?</source>
@@ -623,7 +623,7 @@
             </trans-unit>
               <trans-unit id="153" translate="yes" reformat="yes" xml:space="default">
                 <source>Manual refill.</source>
-                <target>Manuelle Befüllung.</target>
+                <target>Manuelle Aufladung.</target>
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
                 <source>Select amount to be refilled:</source>
@@ -2004,7 +2004,7 @@
             </trans-unit>
             <trans-unit id="496" translate="yes" reformat="yes" xml:space="default">
                 <source>Fee for change of number</source>
-                <target>Gebühr für Wechsel der Nummer</target>
+                <target>Gebühr für Nummernwechsel</target>
             </trans-unit>
             <trans-unit id="497" translate="yes" reformat="yes" xml:space="default">
                 <source>E-mail</source>
@@ -2308,7 +2308,7 @@
             </trans-unit>
             <trans-unit id="569" translate="yes" reformat="yes" xml:space="default">
                 <source>New product</source>
-                <target>Neue produkts</target>
+                <target>Neue produkt</target>
             </trans-unit>
             <trans-unit id="570" translate="yes" reformat="yes" xml:space="default">
                 <source>Refill by Kimarin</source>
@@ -2352,7 +2352,7 @@
             </trans-unit>
             <trans-unit id="580" translate="yes" reformat="yes" xml:space="default">
                 <source>Confirmation of product change</source>
-                <target>Bestätigung des Produktwechsels</target>
+                <target>Bestätigung des Produktwechsel</target>
             </trans-unit>
             <trans-unit id="581" translate="yes" reformat="yes" xml:space="default">
                 <source>Enter your mobile number to receive your password.</source>
