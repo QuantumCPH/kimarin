@@ -434,7 +434,7 @@ class customerActions extends autocustomerActions {
 //                                echo '<br />';
                 //create order
                 //get customer first product purchase
-                
+                $transactiondescription =  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
                 $tsid=$transactiondescription->getId();
                 
                 if($tsid==6){
@@ -455,7 +455,7 @@ class customerActions extends autocustomerActions {
                 $order->setOrderStatusId(1);
                 //$order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 $order->save();
-                $transactiondescription =  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
+                
                 $transactionTid = $transactiondescription->getTransactionTypeId();
                 if($customerBalance+$order->getExtraRefill() >= 250 && $transactionTid != 4){
                     $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__("Payment has not been accepted as customer account balance will exceed 250%1%.",array("%1%"=>sfConfig::get("app_currency_code")))); 
