@@ -443,6 +443,7 @@ class customerActions extends autocustomerActions {
                 }else{
                   $isfid=2;     
                 }
+               
                 $customerBalance = Telienta::getBalance($customer);
                 $c = new Criteria();
                 $c->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
