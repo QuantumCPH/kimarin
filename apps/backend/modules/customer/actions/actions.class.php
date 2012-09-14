@@ -434,7 +434,7 @@ class customerActions extends autocustomerActions {
 //                                echo '<br />';
                 //create order
                 //get customer first product purchase
-                
+                $transactiondescription =  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
                 $tsid=$transactiondescription->getId();
                 
                 if($tsid==6){
@@ -455,7 +455,7 @@ class customerActions extends autocustomerActions {
                 $order->setOrderStatusId(1);
                 //$order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 $order->save();
-                $transactiondescription =  TransactionDescriptionPeer::retrieveByPK($request->getParameter('transaction_description'));
+                
                 $transactionTid = $transactiondescription->getTransactionTypeId();
                 if($customerBalance+$order->getExtraRefill() >= 250 && $transactionTid != 4){
                     $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__("Payment has not been accepted as customer account balance will exceed 250%1%.",array("%1%"=>sfConfig::get("app_currency_code")))); 
@@ -478,7 +478,7 @@ class customerActions extends autocustomerActions {
                     $transaction->save();
                     $this->customer = $order->getCustomer();
                     $this->setPreferredCulture($this->customer);
-                    emailLib::sendAdminRefillEmail($this->customer, $order);
+                 //   emailLib::sendAdminRefillEmail($this->customer, $order);
                     $this->updatePreferredCulture();
                     $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $request->getParameter('refill_amount'), "%3%" => sfConfig::get('app_currency_code'))));
 
