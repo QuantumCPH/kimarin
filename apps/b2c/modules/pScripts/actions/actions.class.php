@@ -1718,7 +1718,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
         if ($requestType == "hc") {
 
-            $dialerIdLenght = strlen($textParamter);
+            /*$dialerIdLenght = strlen($textParamter);
             $uniqueId = substr($textParamter, $dialerIdLenght - 7, $dialerIdLenght - 1);
             $mnc = new Criteria();
             $mnc->add(CustomerPeer::MOBILE_NUMBER, $mobileNumber);
@@ -1816,7 +1816,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $message="HC Registration Failed".$smstext->getMessageText()."<br>".$urlval;
                 emailLib::sendErrorInAutoReg("Auto Registration Error:", $message);
                 die;
-            }
+            }/*
             /*
             $customer = CustomerPeer::doSelectOne($mnc);
 
@@ -1972,7 +1972,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $c->addAnd(CustomerPeer::UNIQUEID, $uniqueId);
 
 
-            if ($dialerIdLenght == 10 && count($splitedText)==4) {
+            if ($dialerIdLenght == 10 && count($splitedText)==4) {/*
                 echo "Register Customer<br/>";
                 //Registration Call, Register Customer In this block
                 $uc = new Criteria();
@@ -2094,7 +2094,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 }
 
                 //End of Registration.
-            } else {
+            */} else {
                 $c = new Criteria();
                 $c->add(CustomerPeer::MOBILE_NUMBER, $mobileNumber);
                 $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
@@ -2147,7 +2147,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                       }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                    } elseif ($command == "re") {
+                    } elseif ($command == "re") {/*
                         echo "Recharge Request<br/>";
                         $cc = new Criteria();
 
@@ -2213,7 +2213,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             $message=$sms->getMessageText()."<br>CARD:".$cardNumber."  ALREADY USED<br/>Mobile Number=".$number."<br>Text=".$text;
                             emailLib::sendErrorInAutoReg("Auto Registration Error:", $message);
                         }
-                        die;
+                        die;*/
                     }
                 } else {
                     echo "Invalid Command 1";
@@ -3143,6 +3143,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $inviteOrder->setProductId(2);
                     $inviteOrder->setQuantity(1);
                     $inviteOrder->setOrderStatusId(3);
+                      $inviteOrder->setIsFirstOrder(4);
                     $inviteOrder->setCustomerId($invite->getCustomerId());
                     $inviteOrder->setExtraRefill($extrarefill);
                     $inviteOrder->save();
@@ -3573,16 +3574,12 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $un->add(CallbackLogPeer::UNIQUEID, $uniqueId);
         $un->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
         $activeNumber = CallbackLogPeer::doSelectOne($un);
-
+//var_dump($activeNumber);
         // As each customer have a single account search the previous account and terminate it.
         $cp = new Criteria;
         $cp->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'a' . $activeNumber->getMobileNumber());
         $cp->addAnd(TelintaAccountsPeer::STATUS, 3);
-
-        if (TelintaAccountsPeer::doCount($cp) > 0) {
-            $telintaAccount = TelintaAccountsPeer::doSelectOne($cp);
-            Telienta::terminateAccount($telintaAccount);
-        }
+        
         $getFirstnumberofMobile = substr($new_mobile, 0, 1); 
         if ($getFirstnumberofMobile == 0) {
                     $TelintaMobile = substr($new_mobile, 1);
@@ -3591,7 +3588,28 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $TelintaMobile = sfConfig::get('app_country_code') . $new_mobile;
         }
         $new_mobile_number = $TelintaMobile;
-        Telienta::createAAccount($new_mobile_number, $customer);
+        
+        if (TelintaAccountsPeer::doCount($cp) > 0) {
+            $telintaAccount = TelintaAccountsPeer::doSelectOne($cp);
+            $a_acount = "a".$new_mobile_number;
+            
+            $accountInfo = array('i_account'=>$telintaAccount->getIAccount(),"id"=>$a_acount);
+            if(Telienta::updateAccount($accountInfo)){
+               $telintaAccount->setStatus(5); 
+               $telintaAccount->save();
+               
+               $ta = new TelintaAccounts();
+               $ta->setParentTable("customer");
+               $ta->setParentId($customer->getId());
+               $ta->setIAccount($telintaAccount->getIAccount());
+               $ta->setICustomer($customer->getICustomer());
+               $ta->setAccountTitle($a_acount);
+               $ta->setAccountType('a');
+               $ta->setStatus(3);
+               $ta->save();
+            }            
+        }
+        
 
         $cb = new Criteria;
         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb' . $activeNumber->getMobileNumber());
@@ -3599,8 +3617,23 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
         if (TelintaAccountsPeer::doCount($cb) > 0) {
             $telintaAccountsCB = TelintaAccountsPeer::doSelectOne($cb);
-           // Telienta::terminateAccount($telintaAccountsCB);
-           // Telienta::createCBAccount($new_mobile_number, $customer);
+            $cb_acount = "cb".$new_mobile_number;
+            
+            $accountInfo = array('i_account'=>$telintaAccount->getIAccount(),"id"=>$cb_acount);
+            if(Telienta::updateAccount($accountInfo)){
+               $telintaAccountsCB->setStatus(5); 
+               $telintaAccountsCB->save();
+               
+               $tcb = new TelintaAccounts();
+               $tcb->setParentTable("customer");
+               $tcb->setParentId($customer->getId());
+               $tcb->setIAccount($telintaAccountsCB->getIAccount());
+               $tcb->setICustomer($customer->getICustomer());
+               $tcb->setAccountTitle($cb_acount);
+               $tcb->setAccountType('cb');
+               $tcb->setStatus(3);
+               $tcb->save();
+            }            
         }
 
         $getvoipInfo = new Criteria();
@@ -3621,9 +3654,24 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $tc->add(TelintaAccountsPeer::STATUS, 3);
             if (TelintaAccountsPeer::doCount($tc) > 0) {
                 $telintaAccountR = TelintaAccountsPeer::doSelectOne($tc);
-                Telienta::terminateAccount($telintaAccountR);
+                
+                $accountInfo = array('i_account'=>$telintaAccountR->getIAccount(),"id"=>$voipnumbers);
+                if(Telienta::updateAccount($accountInfo)){
+                   $telintaAccountR->setStatus(5); 
+                   $telintaAccountR->save();
+
+                   $tcb = new TelintaAccounts();
+                   $tcb->setParentTable("customer");
+                   $tcb->setParentId($customer->getId());
+                   $tcb->setIAccount($telintaAccountR->getIAccount());
+                   $tcb->setICustomer($customer->getICustomer());
+                   $tcb->setAccountTitle($voipnumbers);
+                   $tcb->setAccountType('r');
+                   $tcb->setStatus(3);
+                   $tcb->save();
+                }     
             }
-            Telienta::createReseNumberAccount($voipnumbers, $customer, $new_mobile_number);
+          //  Telienta::createReseNumberAccount($voipnumbers, $customer, $new_mobile_number);
         }
 
         $change_number->setStatus(1);

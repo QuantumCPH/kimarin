@@ -628,7 +628,7 @@
             </trans-unit>
             <trans-unit id="154" translate="yes" reformat="yes" xml:space="default">
                 <source>Select amount to be refilled:</source>
-                <target>Seleccione la cantidad que se cargue:</target>
+                <target>Seleccione el importe que desea recargar:</target>
             </trans-unit>
               <trans-unit id="147" translate="yes" reformat="yes" xml:space="default">
                 <source>Refill</source>
@@ -823,7 +823,7 @@
             </trans-unit>
             <trans-unit id="201" translate="yes" reformat="yes" xml:space="default">
                 <source>Mobile number: %s</source>
-                <target>Móvil número: %s</target>
+                <target>Número de móvil: %s</target>
             </trans-unit>
             <trans-unit id="202" translate="yes" reformat="yes" xml:space="default">
                 <source>Invalid mobile number or password.</source>
@@ -2140,7 +2140,7 @@
             </trans-unit>
             <trans-unit id="531" translate="yes" reformat="yes" xml:space="default">
                 <source>"%value%" is too long (14 characters max).</source>
-                <target>"%value%" es demasiado largo (14 caracteres máx).</target>
+                <target>"%value%" es demasiado largo (14 caracteres máx.).</target>
             </trans-unit>
             <trans-unit id="532" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to the above e-mail address shortly.</source>
@@ -2160,7 +2160,7 @@
             </trans-unit>
              <trans-unit id="536" translate="yes" reformat="yes" xml:space="default">
                 <source>Your password will be sent to your e-mail address shortly.</source>
-                <target>Su contraseña le será enviada a su dirección de correo electrónico en breve.</target>
+                <target>En breve enviaremos su contraseña a la dirección de correo electrónico.</target>
             </trans-unit>
             <trans-unit id="537" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
@@ -2342,7 +2342,6 @@
                 <source>Your customer number is</source>
                 <target>Su número de cliente es</target>
             </trans-unit>
-            
         </body>
     </file>
 </xliff>

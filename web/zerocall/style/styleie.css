@@ -160,10 +160,10 @@ a.sidebar_button{
 .navigations a.logout:hover{ background-position:-90px -382px}
 .navigations a.logout-s{ background-position:-90px -382px}
 
-.split-form{padding-top:20px; float:left; clear:both; width:515px; padding-bottom:30px;}
-.col{width:250px; float: left !important; position: relative}
+.split-form{padding-top:20px; float:left; clear:both; width:527px; padding-bottom:30px;}
+.col{width:255px; float: left !important; position: relative}
 .split-form ul{list-style:none;}
-.split-form ul li{list-style:none; margin-bottom:10px;  clear:both;width:260px; white-space:nowrap; z-index:100; position:relative; }
+.split-form ul li{list-style:none; margin-bottom:10px;  clear:both;width:267px; white-space:nowrap; z-index:100; position:relative; }
 .split-form ul li label{width:129px; float:left; padding-top:3px; font-weight:bold; }
 .split-form ul li input{width:110px; border:1px solid #999999; font-size:12px; padding:3px;}
 .split-form ul li select{width:110px; border:1px solid #999999;font-size:11px; padding:3px; }
@@ -392,8 +392,7 @@ width:252px;
 .alertstep1{
 	position: relative;
 	top: 3px;
-	
-	
+	left: -4px;	
 }
 
 .alertstep1 img {
@@ -460,6 +459,15 @@ width:252px;
         line-height: 16px;
 }
 
+.ok_alert_bar {
+	border: 1px solid #FFCD02;
+	-moz-border-radius: 0 0 5px 5px;
+	background:#FFFFCC url(../../images/ok-sms.png) 5px 5px no-repeat;
+	width: 470px;
+        height: 21px;
+        padding: 5px;
+        padding-left: 28px;
+}
 
 
 *+html .alert_bar { 
@@ -866,4 +874,7 @@ div.inline-error-signup{
     margin-right: 65px;
     text-align: right;
     white-space: normal;
+}
+label.pcon{
+    width:136px !important;
 }

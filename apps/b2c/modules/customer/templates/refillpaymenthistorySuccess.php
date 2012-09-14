@@ -79,8 +79,8 @@
 //                            } ?></td>
                   <td>
                       
-                      
-                      <a href="#" class="receipt"   onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')"  >
+                   <?php    // onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) //  ')"  ?>
+                      <a href="<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>" class="receipt"    >
                             <?php //echo $tdescription;
                               if(strstr($tdescription, "bonus")){
                                 echo __('Bonus');
@@ -103,7 +103,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong><?php echo __('Total') ?></strong></td>
-                        <td  align="left" style="text-align:right;"><?php echo number_format($amount_total,2) ?>
+                        <td  align="left" style="text-align:right;"><?php echo number_format($total,2);//echo number_format($amount_total,2) ?>
                             <?php 
 //                            if($lang=="pl"){
 //                                echo ('plz');
