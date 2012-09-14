@@ -120,7 +120,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td><?php echo __('Quantity') ?></td>
   <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?><!--  (<?php //echo sfConfig::get('app_currency_code');?>)--></td>
   </tr>
-<?php  echo $customerorder;if($customerorder==1){?>  
+<?php  if($customerorder==1){?>  
   <tr> 
     <td><?php echo $order->getCreatedAt('d-m-Y') ?></td>
     <td>
