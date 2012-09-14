@@ -781,8 +781,8 @@
                 <target>Gracias por ordenar &lt;b&gt;%1%&lt;/b&gt; y convertirse en %1% Atención al Cliente. Le damos la bienvenida a un mundo móvil nuevo y de gran.</target>
             </trans-unit>
             <trans-unit id="191" translate="yes" reformat="yes" xml:space="default">
-                <source>Your Password have been saved.</source>
-                <target>Su contraseña se han salvado.</target>
+                <source>Your Password has been saved.</source>
+                <target>S'ha guardat la seva contrasenya.</target>
             </trans-unit>
             <trans-unit id="192" translate="yes" reformat="yes" xml:space="default">
                 <source>%1% invitation</source>
@@ -897,8 +897,8 @@
                 <target>País</target>
             </trans-unit>
             <trans-unit id="220" translate="yes" reformat="yes" xml:space="default">
-                <source>NOTICE:</source>
-                <target>AVISO:</target>
+                <source>Notice</source>
+                <target>Avís</target>
             </trans-unit>
             <trans-unit id="221" translate="yes" reformat="yes" xml:space="default">
                 <source>Please fill in this field</source>
@@ -2034,7 +2034,7 @@
             </trans-unit>
             <trans-unit id="505" translate="yes" reformat="yes" xml:space="default">
                 <source>Your account will be blocked</source>
-                <target>Su cuenta será bloqueada</target>
+                <target>El seu compte serà bloquejat</target>
             </trans-unit>
             <trans-unit id="506" translate="yes" reformat="yes" xml:space="default">
                 <source>Account is blocked.</source>
@@ -2170,7 +2170,7 @@
             </trans-unit>
             <trans-unit id="539" translate="yes" reformat="yes" xml:space="default">
                 <source>No customer is registered with this mobile number.</source>
-                <target>No hi ha cap client registrat amb aquesta número de mòbil.</target>
+                <target>No hi ha cap usuari registrat amb aquest número de mòbil.</target>
             </trans-unit>
             <trans-unit id="540" translate="yes" reformat="yes" xml:space="default">
                 <source>English</source>
@@ -2323,7 +2323,27 @@
             <trans-unit id="577" translate="yes" reformat="yes" xml:space="default">
                 <source>Your order for change of product has been successfully implemented</source>
                 <target>S'ha executat correctament la teva petició de canvi de producte</target>
-            </trans-unit>            
+            </trans-unit>
+            <trans-unit id="578" translate="yes" reformat="yes" xml:space="default">
+                <source>Enter your mobile number to receive your password.</source>
+                <target>Introdueixi el seu número de mòbil per rebre la seva contrasenya</target>
+            </trans-unit>
+            <trans-unit id="579" translate="yes" reformat="yes" xml:space="default">
+                <source>Balance expired</source>
+                <target>El seu saldo ha caducat</target>
+            </trans-unit>
+            <trans-unit id="580" translate="yes" reformat="yes" xml:space="default">
+                <source>Your %1% account has been blocked</source>
+                <target>El seu compte %1% ha estat bloquejat</target>
+            </trans-unit>
+            <trans-unit id="581" translate="yes" reformat="yes" xml:space="default">
+                <source>Please contact %1% Customer Support to re-open your account</source>
+                <target>Si us plau, contacti amb el Servei Tècnic de %1% per recuperar el seu compte</target>
+            </trans-unit>
+             <trans-unit id="581" translate="yes" reformat="yes" xml:space="default">
+                <source>Your customer number is</source>
+                <target>El vostre número de client és</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

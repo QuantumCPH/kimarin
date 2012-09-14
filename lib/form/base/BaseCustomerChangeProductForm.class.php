@@ -14,7 +14,7 @@ class BaseCustomerChangeProductForm extends BaseFormPropel
     $this->setWidgets(array(
       'id'             => new sfWidgetFormInputHidden(),
       'customer_id'    => new sfWidgetFormInput(),
-      'product_id'     => new sfWidgetFormInput(),
+      'product_id'     => new sfWidgetFormPropelChoice(array('model' => 'Product', 'add_empty' => false)),
       'created_at'     => new sfWidgetFormDateTime(),
       'status'         => new sfWidgetFormInput(),
       'execuated_at'   => new sfWidgetFormDateTime(),
@@ -25,7 +25,7 @@ class BaseCustomerChangeProductForm extends BaseFormPropel
     $this->setValidators(array(
       'id'             => new sfValidatorPropelChoice(array('model' => 'CustomerChangeProduct', 'column' => 'id', 'required' => false)),
       'customer_id'    => new sfValidatorInteger(),
-      'product_id'     => new sfValidatorInteger(),
+      'product_id'     => new sfValidatorPropelChoice(array('model' => 'Product', 'column' => 'id')),
       'created_at'     => new sfValidatorDateTime(),
       'status'         => new sfValidatorInteger(),
       'execuated_at'   => new sfValidatorDateTime(),

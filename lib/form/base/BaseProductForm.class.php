@@ -36,6 +36,7 @@ class BaseProductForm extends BaseFormPropel
       'is_in_b2b'             => new sfWidgetFormInputCheckbox(),
       'product_type_id'       => new sfWidgetFormPropelChoice(array('model' => 'ProductType', 'add_empty' => false)),
       'bonus'                 => new sfWidgetFormInput(),
+      'sim_type_id'           => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -44,8 +45,8 @@ class BaseProductForm extends BaseFormPropel
       'price'                 => new sfValidatorNumber(),
       'description'           => new sfValidatorString(array('max_length' => 200, 'required' => false)),
       'initial_balance'       => new sfValidatorNumber(),
-      'registration_fee'      => new sfValidatorInteger(array('required' => false)),
-      'subscription_fee'      => new sfValidatorInteger(array('required' => false)),
+      'registration_fee'      => new sfValidatorNumber(array('required' => false)),
+      'subscription_fee'      => new sfValidatorNumber(array('required' => false)),
       'created_at'            => new sfValidatorDateTime(),
       'updated_at'            => new sfValidatorDateTime(array('required' => false)),
       'is_extra_fill_applied' => new sfValidatorBoolean(),
@@ -63,6 +64,7 @@ class BaseProductForm extends BaseFormPropel
       'is_in_b2b'             => new sfValidatorBoolean(),
       'product_type_id'       => new sfValidatorPropelChoice(array('model' => 'ProductType', 'column' => 'id')),
       'bonus'                 => new sfValidatorNumber(array('required' => false)),
+      'sim_type_id'           => new sfValidatorPropelChoice(array('model' => 'SimTypes', 'column' => 'id', 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('product[%s]');
