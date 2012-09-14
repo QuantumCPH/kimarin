@@ -272,7 +272,7 @@ class paymentsActions extends sfActions {
         $customer_order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
        // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
-        if ($customerorder) {
+        if ($customerorder==1) {
             if($transaction_id>489){
             $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage');
             }else{
