@@ -102,7 +102,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <tr> 
     <td><?php echo $order->getCreatedAt('m-d-Y') ?></td>
     <td>
-    <?php if ($order->getIsFirstOrder())
+    <?php if ($order->getIsFirstOrder()==1)
     {
         echo $order->getProduct()->getName();
         echo  '<br />['. __($transaction->getDescription()) .']';
