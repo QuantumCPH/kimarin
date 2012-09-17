@@ -93,7 +93,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	
         $TDI=$transaction->getTransactionDescriptionId(); ?>
       <br /><br />
-      <?php echo __('Mobile Number') ?>: <br />
+      <?php echo __('Mobile number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>   <br/>
       <?php //echo __('Paid Through'); ?> <?php //echo __('Agent'); ?>
     </td>
@@ -222,14 +222,3 @@ $wrap_content  = isset($wrap)?$wrap:false;
         <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
 
-<!--<p>
-	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
-	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
-</p>
-
-<p><?php echo __('Cheers') ?></p>
-
-<p>
-<?php echo __('Support') ?><br />
-<?php echo sfConfig::get('app_site_title')?>
-</p>-->

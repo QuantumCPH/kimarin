@@ -69,7 +69,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="receipt" cellspacing="0" width="600px">
 	
   <tr bgcolor="#CCCCCC" class="receipt_header">   	
-    <th colspan="3"><?php echo __('Order Receipt')?> <?php if ($order->getIsFirstOrder())
+    <th colspan="3"><?php echo __('Order Receipt')?> <?php if ($order->getIsFirstOrder()==1)
     {
         ?>
        <span style='font-family:"Times New Roman", Times, serif;font-size: 12px;'><?php echo " (".$order->getProduct()->getName()." [".__('Registration')."])" ?></span>
@@ -295,12 +295,4 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
         <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
-
-<!--<p style="font-weight: bold;"><?php echo __('Cheers') ?></p>
-
-<p style="font-weight: bold;">
-
-<?php echo __('%1% Support',array('%1%'=>sfConfig::get('app_site_title'))) ?>&nbsp;
-
-</p>-->
 
