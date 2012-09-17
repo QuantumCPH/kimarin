@@ -93,7 +93,7 @@
    
     <tbody>
 <?php
-$csv_output=0;
+$csv_output="";
 $day1=0;
 $day2=0;
 $day3=0;
