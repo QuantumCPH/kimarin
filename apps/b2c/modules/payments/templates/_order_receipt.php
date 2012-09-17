@@ -296,11 +296,3 @@ $wrap_content  = isset($wrap)?$wrap:false;
         <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
 
-<!--<p style="font-weight: bold;"><?php echo __('Cheers') ?></p>
-
-<p style="font-weight: bold;">
-
-<?php echo __('%1% Support',array('%1%'=>sfConfig::get('app_site_title'))) ?>&nbsp;
-
-</p>-->
-
