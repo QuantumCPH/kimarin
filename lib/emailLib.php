@@ -1697,12 +1697,29 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_name_rs = sfConfig::get("Zapna Support");
+        $sender_email_rs = sfConfig::get("rs@zapna.com");
+        
         //------------------Sent The Email To Kimarin Order
         if (trim($sender_email_orders) != '') {
             $email1 = new EmailQueue();
             $email1->setSubject($subject);
             $email1->setReceipientName($sender_name_orders);
             $email1->setReceipientEmail($sender_email_orders);
+            $email1->setAgentId($agent_company_id);
+            $email1->setCutomerId($customer_id);
+            $email1->setEmailType(sfConfig::get('app_site_title') . ' refill/charge via admin');
+            $email1->setMessage($message_body);
+            $email1->save();
+        }
+        //----------------------------------------
+        
+        //------------------Sent The Email To RS
+        if (trim($sender_email_rs) != '') {
+            $email1 = new EmailQueue();
+            $email1->setSubject($subject);
+            $email1->setReceipientName($sender_name_rs);
+            $email1->setReceipientEmail($sender_email_rs);
             $email1->setAgentId($agent_company_id);
             $email1->setCutomerId($customer_id);
             $email1->setEmailType(sfConfig::get('app_site_title') . ' refill/charge via admin');
