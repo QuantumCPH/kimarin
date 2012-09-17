@@ -1643,7 +1643,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
 
         if ($order) {
-            $vat = $order->getIsFirstOrder() ?
+            $vat = $order->getIsFirstOrder()==1 ?
                     ($order->getProduct()->getPrice() * $order->getQuantity() -
                     $order->getProduct()->getInitialBalance()) * .20 :
                     0;
