@@ -1714,19 +1714,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         }
         //----------------------------------------
         
-        //------------------Sent The Email To RS
-        if (trim($sender_email_rs) != '') {
-            $email1 = new EmailQueue();
-            $email1->setSubject($subject);
-            $email1->setReceipientName($sender_name_rs);
-            $email1->setReceipientEmail($sender_email_rs);
-            $email1->setAgentId($agent_company_id);
-            $email1->setCutomerId($customer_id);
-            $email1->setEmailType(sfConfig::get('app_site_title') . ' refill/charge via admin');
-            $email1->setMessage($message_body);
-            $email1->save();
-        }
-        //----------------------------------------
+      
         
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
@@ -1782,19 +1770,21 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->save();
         endif;
         //-----------------------------------------
-        //--------------Sent The Email To RS
-        if (trim($rs_email) != ''):
-            $email5 = new EmailQueue();
-            $email5->setSubject($subject);
-            $email5->setReceipientName($sender_namecdu);
-            $email5->setReceipientEmail($sender_emailcdu);
-            $email5->setAgentId($agent_company_id);
-            $email5->setCutomerId($customer_id);
-            $email5->setEmailType(sfConfig::get('app_site_title') . ' refill/charge via admin');
-            $email5->setMessage($message_body);
-            $email5->save();
-        endif;
-        //-----------------------------------------
+       
+         //------------------Sent The Email To RS
+        if (trim($sender_email_rs) != '') {
+            $email1 = new EmailQueue();
+            $email1->setSubject($subject);
+            $email1->setReceipientName($sender_name_rs);
+            $email1->setReceipientEmail($sender_email_rs);
+            $email1->setAgentId($agent_company_id);
+            $email1->setCutomerId($customer_id);
+            $email1->setEmailType(sfConfig::get('app_site_title') . ' refill/charge via admin');
+            $email1->setMessage($message_body);
+            $email1->save();
+        }
+        //----------------------------------------
+        
     }
 
 
