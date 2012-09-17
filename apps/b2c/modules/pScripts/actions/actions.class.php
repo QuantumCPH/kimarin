@@ -3272,7 +3272,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
        $order=CustomerOrderPeer::retrieveByPK($order_id);
            $customer=CustomerPeer::retrieveByPK($order->getCustomerId());
 
-                if($order->getIsFirstOrder()){
+                if($order->getIsFirstOrder()==1){
       emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
 
                 }else{

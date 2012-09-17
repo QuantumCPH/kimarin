@@ -73,12 +73,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
         <?php if ($order->getIsFirstOrder()==1)
     {
 		echo $order->getProduct()->getName() .
-		'<br />['. $transaction->getDescription() .']';
+		'<br />['. __($transaction->getDescription()) .']';
     }
-    else
-    {
-		//echo $transaction->getDescription();
-    }
+    
     ?>
         </th>
     <th style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;text-transform: uppercase;'><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
@@ -161,7 +158,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <?php
   //echo $postalcharge.'ss';
   
-  if(@$postalcharge && $order->getIsFirstOrder()){?>
+  if(@$postalcharge && $order->getIsFirstOrder()==1){?>
   <tr class="footer">
     <td></td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
@@ -182,7 +179,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
                          
                      }elseif($TDI==10){
                            echo  "0.00" ;   
-                     }else{ if(@$postalcharge && $order->getIsFirstOrder()){         echo number_format($transaction->getAmount()+@$postalcharge,2); }else{ echo number_format($transaction->getAmount(),2);    }  } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
+                     }else{ if(@$postalcharge && $order->getIsFirstOrder()==1){         echo number_format($transaction->getAmount()+@$postalcharge,2); }else{ echo number_format($transaction->getAmount(),2);    }  } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
 
   </tr>
   
