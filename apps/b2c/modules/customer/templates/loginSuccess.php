@@ -129,7 +129,7 @@
                             return false;
                         }
 
-// alert('<?php//echo __('Enter your mobile number to receive your password.') ?>');
+// alert('<?php //echo __('Enter your mobile number to receive your password.') ?>');
 		});
 	</script>
 	</form></div>
