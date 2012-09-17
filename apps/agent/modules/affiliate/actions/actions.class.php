@@ -153,7 +153,7 @@ class affiliateActions extends sfActions {
         $customer_order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
 
         if ($customer_order) {
-            $vat = $customer_order->getIsFirstOrder() ?
+            $vat = $customer_order->getIsFirstOrder()==1 ?
                     $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage') :
                     0;
         }
@@ -170,7 +170,7 @@ class affiliateActions extends sfActions {
             $recepient_agent_name = '';
         }
 
-        if ($customer_order->getIsFirstOrder()) {
+        if ($customer_order->getIsFirstOrder()==1) {
             $this->renderPartial('affiliate/order_receipt', array(
                 'customer' => $this->customer,
                 'order' => CustomerOrderPeer::retrieveByPK($transaction->getOrderId()),
@@ -777,7 +777,7 @@ class affiliateActions extends sfActions {
             if ($agentcomession) {
 
 
-                if ($order->getIsFirstOrder()) {
+                if ($order->getIsFirstOrder()==1) {
                     if ($agentproductcomesion->getIsRegShareValuePc()) {
                         $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getRegShareValue());
                     } else {
@@ -793,7 +793,7 @@ class affiliateActions extends sfActions {
                 }
             } else {
 
-                if ($order->getIsFirstOrder()) {
+                if ($order->getIsFirstOrder()==1) {
                     if ($commission_package->getIsRegShareValuePc()) {
                         $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getRegShareValue());
                     } else {
