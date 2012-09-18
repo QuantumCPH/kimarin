@@ -6,7 +6,7 @@ generator:
     css:             /sf/sf_admin/css/admin_main.css
     list:
       title:            Sim Type List
-      display:        [id,title]
+      display:        [title]
       
     edit:
       title:          Sim Type

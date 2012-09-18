@@ -22,6 +22,10 @@
                 foreach($transactions as $transaction): ?>
 
                  <?php
+                 
+                 
+                $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
+                 
                   if($incrment%2==0){
                  $class= 'class="even"';
                   }else{
@@ -39,10 +43,13 @@
                    
                   
                      if($TDI==6){
-                              echo "(".number_format($transaction->getAmount(),2).")";
+                         $tramount=$order->getExtraRefill()/(sfConfig::get('app_vat_percentage')+1);
+                              echo "(".number_format($tramount,2).")";
                          
                      }elseif($TDI==10){
-                            echo "(".number_format($transaction->getAmount(),2).")";
+                         
+                           
+                              echo "(".number_format($order->getExtraRefill(),2).")";
                      }  ?> </td>
                   <td  align="right">
                       

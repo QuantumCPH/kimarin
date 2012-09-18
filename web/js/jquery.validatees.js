@@ -250,8 +250,8 @@ $.extend($.validator, {
 		accept: "Bitte geben Sie einen Wert mit einer gültigen Erweiterung.",
 		maxlength: $.format("Bitte geben Sie nicht mehr als {0} Zeichen."),
 		minlength: $.format("Bitte geben Sie mindestens {0} Zeichen."),
-		rangelength: $.format("Bitte geben Sie einen Wert zwischen {0} und {1} Zeichen lang sein."),
-		range: $.format("Bitte geben Sie einen Wert zwischen {0} und {1} Zeichen lang sein."),
+		rangelength: $.format("Escriba un número de móvil válido de {0} a {1} dígitos."),
+		range: $.format("Escriba un número de móvil válido de {0} a {1} dígitos."),
 		max: $.format("Bitte geben Sie einen Wert kleiner oder gleich {0}."),
 		min: $.format("Bitte geben Sie einen Wert größer oder gleich {0}.")
 	},

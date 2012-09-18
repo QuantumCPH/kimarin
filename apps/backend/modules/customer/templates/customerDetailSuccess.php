@@ -167,14 +167,14 @@ if(isset($val) && $val!=""){  ?>
                             <td><?php  echo $old_number->getUniqueNumber();?></td>
                         </tr>
                         <?php }?>
-                        <tr>
+<!--                        <tr>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Usage Email Alerts</td>
                          <td>  <?php  echo ($customer->getUsageAlertEmail()==1)?"Yes":"No";     ?>   </td>
                         </tr  >
                         <tr>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Usage SMS Alerts</td>
                          <td>  <?php  echo ($customer->getUsageAlertSMS()==1)?"Yes":"No";     ?>   </td>
-                        </tr  >
+                        </tr  >-->
                           <tr><td  id="sf_admin_list_th_auto_refill" class="leftHeadign" >Comments</td>
                   <td><?php echo $customer->getComments(); ?></td>
                 </tr>
@@ -184,22 +184,69 @@ if(isset($val) && $val!=""){  ?>
         if(isset($unid) && $unid!=""){
             $un = new Criteria();
             $un->add(CallbackLogPeer::UNIQUEID, $unid);
-
             $un -> addDescendingOrderByColumn(CallbackLogPeer::CREATED);
             $unumber = CallbackLogPeer::doSelectOne($un);
+            // This Condition For - It register Via Web
+            if($unumber->getCheckStatus()=='2'){
+                $getFirstnumberofMobile = substr($unumber->getMobileNumber(), 0,1);     // bcdef
+                if($getFirstnumberofMobile==0){
+                  $TelintaMobile = substr($unumber->getMobileNumber(), 1);
+                  $TelintaMobile =  sfConfig::get('app_country_code').$TelintaMobile ;
+                }else{
+                  $TelintaMobile = ''.$unumber->getMobileNumber();
+                }
+              $TelintaMobile="00".$TelintaMobile;
 
-               if($pus==1){
-   $us = new Criteria();
-            $us->add(UsNumberPeer::CUSTOMER_ID, $cuid);
-             $usnumber = UsNumberPeer::doSelectOne($us);
-           //  echo   $usnumber->getUsMobileNumber();
+                 $Telintambs=$TelintaMobile;
 
-               }else{
-                 //  echo $unumber->getMobileNumber();
-                   echo  "0034".$customer->getMobileNumber();
-               }
+ echo substr($Telintambs, 0,4); echo " "; echo substr($Telintambs, 4,3);
+echo "    ";   echo substr($Telintambs, 7,2);
+echo " ";   echo substr($Telintambs, 9,2);
+echo " ";   echo substr($Telintambs, 11,2);
+echo " ";   echo substr($Telintambs, 13,2);
+echo " ";   echo substr($Telintambs, 15,2);
+            }else{
+               $TelintaMobile="00".$unumber->getMobileNumber();
 
-         }else{  }  ?> </td>
+
+
+                 $Telintambs=$TelintaMobile;
+
+ echo substr($Telintambs, 0,4); echo " ";   echo substr($Telintambs, 4,3);
+echo " ";   echo substr($Telintambs, 7,2);
+echo " ";   echo substr($Telintambs, 9,2);
+echo " ";   echo substr($Telintambs, 11,2);
+echo " ";   echo substr($Telintambs, 13,2);
+echo " ";   echo substr($Telintambs, 15,2);
+            }
+         }else{
+                $getFirstnumberofMobile = substr($customer->getMobileNumber(), 0,1);     // bcdef
+                if($getFirstnumberofMobile==0){
+                    $TelintaMobile = substr($customer->getMobileNumber(), 1);
+                   $TelintaMobile =  '0034'.$TelintaMobile ;
+  $Telintambs=$TelintaMobile;
+
+ echo substr($Telintambs, 0,4); echo " ";   echo substr($Telintambs, 4,3);
+echo " ";   echo substr($Telintambs, 7,2);
+echo " ";   echo substr($Telintambs, 9,2);
+echo " ";   echo substr($Telintambs, 11,2);
+echo " ";   echo substr($Telintambs, 13,2);
+echo " ";   echo substr($Telintambs, 15,2);
+                }else{
+                  $TelintaMobile = '0034'.$customer->getMobileNumber();
+
+                    $Telintambs=$TelintaMobile;
+
+ echo substr($Telintambs, 0,4); echo " ";   echo substr($Telintambs, 4,3);
+echo " ";   echo substr($Telintambs, 7,2);
+echo " ";   echo substr($Telintambs, 9,2);
+echo " ";   echo substr($Telintambs, 11,2);
+echo " ";   echo substr($Telintambs, 13,2);
+echo " ";   echo substr($Telintambs, 15,2);
+                }
+           
+          
+         }?> </td>
                          </tr>
                          <?php  $uid=0;
                       $uid=$customer->getUniqueid();

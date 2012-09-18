@@ -1,6 +1,6 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer' => $customer, 'section' => __('Call History'))) ?>
+<?php include_partial('dashboard_header', array('customer' => $customer, 'section' => __('Call history'))) ?>
 <script type="text/javascript">
     jQuery(function() {
 
@@ -73,7 +73,7 @@
                         <?php } else {
 
  ?>                 
-                      <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription Charges"); ?> </h2></div><br />
+                      <div class="callhistoryheadings"><h2><h2><?php echo __("Subscription charges"); ?> </h2></div><br />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="callhistory">
                         <tr>
                             <td width="26%" class="title"><?php echo __('Date and time') ?></td>

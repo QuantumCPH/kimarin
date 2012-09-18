@@ -187,6 +187,7 @@ class paymentsActions extends sfActions {
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
         //$transaction->setTransactionStatusId() // default value 1
+        $transaction->setVat((($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage')));
         $transaction->save();
         $this->order = $order;
         $this->forward404Unless($this->order);
@@ -257,23 +258,60 @@ class paymentsActions extends sfActions {
 
         $transaction = TransactionPeer::retrieveByPK($transaction_id);
 
+
+        if($transaction_id>93){
+          $vatValue=sfConfig::get('app_vat_percentage');
+        }else{
+         $vatValue=(.18);
+        }
+        
+
         $this->forward404Unless($transaction->getCustomerId() == $this->customer->getId(), 'Not allowed');
 
         //set customer order
         $customer_order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
        // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
-        if ($customerorder) {
+        if ($customerorder==1) {
+            if($transaction_id>93){
             $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage');
+            }else{
+              $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) *(.18);   
+            }
         }elseif($transaction->getTransactionTypeId()==2){
             $vat = 0;
         }
         else{
-           // $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+             if($transaction_id>93){
+            $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+             }else{
+                 
+                $vat = $customer_order->getProduct()->getRegistrationFee() * (.18);   
+             }
         }
+        
+           if($transaction_id>93){
+               $vatPerValue=sfConfig::get('app_vat_percentage');
+           }else{
+               $vatPerValue=(.18); 
+           }
+        
         //if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
-        if(strstr($transaction->getDescription(),"Refill")){
-            $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
+        //if(strstr($transaction->getDescription(),"Refill")){
+            $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
+        //}
+
+        $registered_customer_name = false;
+        $refferedC = new Criteria();
+        $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID,$transaction->getId());
+        $refferedC->add(InvitePeer::INVITE_STATUS,3);
+        
+        if(InvitePeer::doCount($refferedC)>0){
+        
+            $invite = InvitePeer::doSelectOne($refferedC);
+            $invitedCustomer = CustomerPeer::retrieveByPK($invite->getInvitedCustomerId());
+            $registered_customer_name = $invitedCustomer->getFirstName()." ".$invitedCustomer->getLastName();
+
         }
 
         $this->renderPartial('payments/order_receipt', array(
@@ -281,6 +319,7 @@ class paymentsActions extends sfActions {
             'order' => CustomerOrderPeer::retrieveByPK($transaction->getOrderId()),
             'transaction' => $transaction,
             'vat' => $vat,
+            'registered_customer_name' => $registered_customer_name,
             'postalcharge'=>$postalcharge,
             'customerorder'=>$customerorder,
         ));
@@ -314,8 +353,15 @@ class paymentsActions extends sfActions {
         $lang=$this->getUser()->getCulture();
       
       //  $return_url = "http://www.kimarineurope.com/registration-thanks.html";
+        
+        if($lang=='en'){
         $return_url = "http://www.kimarin.es/registration-thanks.html";
         $cancel_url = "http://www.kimarin.es/registration-reject.html";
+        }else{
+        $return_url = "http://www.kimarin.es/".$lang."/registration-thanks_".$lang.".html";
+        $cancel_url = "http://www.kimarin.es/".$lang."/registration-reject_".$lang.".html";   
+          
+        }
         
         $callbackparameters = $lang.'-'.$order_id.'-'.$item_amount;
         $notify_url = $this->getTargetUrl().'pScripts/confirmpayment?p='.$callbackparameters;        

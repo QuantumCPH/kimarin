@@ -9,7 +9,7 @@
 </style>
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Payment History')) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Payment history')) ) ?>
   <div class="left-col">
     <?php include_partial('navigation', array('selected'=>'paymenthistory', 'customer_id'=>$customer->getId())) ?>
       
@@ -32,10 +32,13 @@
                 <?php 
                 $amount_total = 0;
                 foreach($transactions as $transaction): ?>
+                
+                <?php      $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId());   ?>
                 <tr>
                   <td><?php  echo $transaction->getOrderId() ?></td>
                   <td ><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
                   <td nowrap><?php 
+                      $TDI=$transaction->getTransactionDescriptionId();
                   if($transaction->getDescription()=="Registrering inkl. taletid"){
                       echo "SmartSim inkludert Pott";                      
                   }else{
@@ -44,9 +47,17 @@
                         }else{
                           echo __($tdescription = $transaction->getDescription());  
                         } 
+                         if($TDI==6){
+                             $tramount=$order->getExtraRefill()/(sfConfig::get('app_vat_percentage')+1);
+                              echo "(".number_format($tramount,2).")";
+                         
+                     }elseif($TDI==10){
+                           
+                              echo "(".number_format($order->getExtraRefill(),2).")";
+                     } 
                   }?></td>
                   <td align="right"><?php
-                     $TDI=$transaction->getTransactionDescriptionId();
+                 
                   
                      if($TDI==6){
                              echo  "0.00" ;
@@ -66,7 +77,10 @@
 //                            }else{
                                 echo sfConfig::get('app_currency_code');
 //                            } ?></td>
-                  <td><a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>')">
+                  <td>
+                      
+                   <?php    // onclick="javascript: window.open('<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) //  ')"  ?>
+                      <a href="<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>" class="receipt"    >
                             <?php //echo $tdescription;
                               if(strstr($tdescription, "bonus")){
                                 echo __('Bonus');
@@ -75,19 +89,7 @@
                               }  
                             ?>
                       </a></td>
-<!--                  <td nowrap="nowrap"><a href="#" style=" white-space: nowrap" class="receipt" onclick="iprint(preview_<?php echo $transaction->getId();?>);return false;"><?php echo __('Print'); ?>
-                  </a>
-                      <iframe id="preview_<?php echo $transaction->getId();?>" name="preview_<?php echo $transaction->getId();?>" src="<?php echo url_for('payments/showReceipt?tid='.$transaction->getId(), true) ?>"  style="display:none">
-                     </iframe>
-                        <script>
-                            function printForm() { window.focus(); window.print(); }
-                            function iprint(ptarget)
-                            {
-                                ptarget.focus();
-                                window.print();
-                            } 
-                        </script>-->
-                      </td>
+ 
                  
                      
                  
@@ -101,7 +103,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong><?php echo __('Total') ?></strong></td>
-                        <td  align="left" style="text-align:right;"><?php echo number_format($amount_total,2) ?>
+                        <td  align="left" style="text-align:right;"><?php echo number_format($total,2);//echo number_format($amount_total,2) ?>
                             <?php 
 //                            if($lang=="pl"){
 //                                echo ('plz');

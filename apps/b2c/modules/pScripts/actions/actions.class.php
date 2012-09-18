@@ -1718,7 +1718,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
         if ($requestType == "hc") {
 
-            $dialerIdLenght = strlen($textParamter);
+            /*$dialerIdLenght = strlen($textParamter);
             $uniqueId = substr($textParamter, $dialerIdLenght - 7, $dialerIdLenght - 1);
             $mnc = new Criteria();
             $mnc->add(CustomerPeer::MOBILE_NUMBER, $mobileNumber);
@@ -1816,7 +1816,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $message="HC Registration Failed".$smstext->getMessageText()."<br>".$urlval;
                 emailLib::sendErrorInAutoReg("Auto Registration Error:", $message);
                 die;
-            }
+            }/*
             /*
             $customer = CustomerPeer::doSelectOne($mnc);
 
@@ -1972,7 +1972,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $c->addAnd(CustomerPeer::UNIQUEID, $uniqueId);
 
 
-            if ($dialerIdLenght == 10 && count($splitedText)==4) {
+            if ($dialerIdLenght == 10 && count($splitedText)==4) {/*
                 echo "Register Customer<br/>";
                 //Registration Call, Register Customer In this block
                 $uc = new Criteria();
@@ -2094,7 +2094,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 }
 
                 //End of Registration.
-            } else {
+            */} else {
                 $c = new Criteria();
                 $c->add(CustomerPeer::MOBILE_NUMBER, $mobileNumber);
                 $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
@@ -2147,7 +2147,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                       }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                    } elseif ($command == "re") {
+                    } elseif ($command == "re") {/*
                         echo "Recharge Request<br/>";
                         $cc = new Criteria();
 
@@ -2181,7 +2181,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             $transaction->setCustomerId($order->getCustomerId());
                             $transaction->save();
 
-                            if (Telienta::recharge($customer, $scratchCard->getCardPrice(), "Refill")) {
+                            if (Telienta::recharge($customer, $scratchCard->getCardPrice(), $transactiondescription->getTitle())) {
                                 $scratchCard->setStatus(1);
                                 $scratchCard->setUsedAt(date("Y-m-d H:i:s"));
                                 $scratchCard->setCustomerId($customer->getId());
@@ -2213,7 +2213,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             $message=$sms->getMessageText()."<br>CARD:".$cardNumber."  ALREADY USED<br/>Mobile Number=".$number."<br>Text=".$text;
                             emailLib::sendErrorInAutoReg("Auto Registration Error:", $message);
                         }
-                        die;
+                        die;*/
                     }
                 } else {
                     echo "Invalid Command 1";
@@ -3133,7 +3133,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $invite = InvitePeer::doSelectOne($invite_c);
                 if ($invite) {
                     $invite->setInviteStatus(3);
-                   
+                    $invite->setInvitedCustomerId($this->customer->getId());
                     $products = new Criteria();
                     $products->add(ProductPeer::ID, 2);
                     $products = ProductPeer::doSelectOne($products);
@@ -3143,6 +3143,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $inviteOrder->setProductId(2);
                     $inviteOrder->setQuantity(1);
                     $inviteOrder->setOrderStatusId(3);
+                      $inviteOrder->setIsFirstOrder(4);
                     $inviteOrder->setCustomerId($invite->getCustomerId());
                     $inviteOrder->setExtraRefill($extrarefill);
                     $inviteOrder->save();
@@ -3150,7 +3151,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     // make a new transaction to show in payment history
                     $transaction_i = new Transaction();
 
-                $transaction_i->setAmount($comsion);
+                $transaction_i->setAmount($extrarefill);
                 $transactiondescriptionB=  TransactionDescriptionPeer::retrieveByPK(10);
                 $transaction_i->setTransactionTypeId($transactiondescriptionB->getTransactionType());
                 $transaction_i->setTransactionDescriptionId($transactiondescriptionB->getId());
@@ -3174,11 +3175,12 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $OpeningBalance = $extrarefill;
                     //This is for Recharge the Customer
                 
-                         Telienta::recharge($this->customers, $OpeningBalance,"Tipsa en van " . $invite->getInviteNumber());
+                         Telienta::recharge($this->customers, $OpeningBalance,$transactiondescriptionB->getTitle());
 
                     //This is for Recharge the Account
                   
                     $transaction_i->save();
+                    $invite->setBonusTransactionId($transaction_i->getId());
                     $invite->save();
 
                     $invitevar = $invite->getCustomerId();
@@ -3187,15 +3189,11 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
                     $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
                     $this->setPreferredCulture($inviterCustomer);
-                           if($this->getUser()->getCulture()=='en'){
-
-                                  $subject ='Bonus awarded';
-                           }else{
-                                 $subject ='Bonus tildeles';
-                           }
+                    
+                          
 
                         
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,$subject);
+                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(),$this->customer,NULL,$inviteOrder,$transaction_i);
                         $this->updatePreferredCulture();
                     }
                 }
@@ -3274,7 +3272,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
        $order=CustomerOrderPeer::retrieveByPK($order_id);
            $customer=CustomerPeer::retrieveByPK($order->getCustomerId());
 
-                if($order->getIsFirstOrder()){
+                if($order->getIsFirstOrder()==1){
       emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
 
                 }else{
@@ -3398,26 +3396,51 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
        $tilentaCallHistryResult = Telienta::callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
   if($tilentaCallHistryResult){
   foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
-        $cuCalls = new CustomerCalls();
-        $cuCalls->setAccountId($xdr->account_id);
-        $cuCalls->setBillStatus($xdr->bill_status);
-        $cuCalls->setBillTime($xdr->bill_time);
-        $cuCalls->setChargedAmount($xdr->charged_amount);
-        $cuCalls->setChargedQuantity($xdr->charged_quantity);
-        $cuCalls->setCld($xdr->CLD);
-        $cuCalls->setCli($xdr->CLI);
-        $cuCalls->setConnectTime($xdr->connect_time);
-        $cuCalls->setCountry($xdr->country);
-        $cuCalls->setCustomerId($customer->getId());
-        $cuCalls->setDescription($xdr->description);
-        $cuCalls->setDisconnectCause($xdr->disconnect_cause);
-        $cuCalls->setDisconnectTime($xdr->disconnect_time);
-        $cuCalls->setICustomer($customer->getICustomer());
-        $cuCalls->setIXdr($xdr->i_xdr);
-        $cuCalls->setStatus(1);
-        $cuCalls->setSubdivision($xdr->subdivision);
-        $cuCalls->setUnixConnectTime($xdr->unix_connect_time);
-        $cuCalls->save();
+        $emCalls = new EmployeeCustomerCallhistory();
+                $emCalls->setAccountId($xdr->account_id);
+                $emCalls->setBillStatus($xdr->bill_status);
+                $emCalls->setBillTime($xdr->bill_time);
+                $emCalls->setChargedAmount($xdr->charged_amount);
+                $emCalls->setChargedQuantity($xdr->charged_quantity);
+                $emCalls->setPhoneNumber($xdr->CLD);
+                $emCalls->setCli($xdr->CLI);
+                $emCalls->setConnectTime($xdr->connect_time);
+
+                $country = $xdr->country;
+                $cc = new Criteria();
+                $cc->add(CountryPeer::NAME,$country, Criteria::LIKE);
+                $ccount = CountryPeer::doCount($cc);
+                if($ccount > 0){
+                   $csel = CountryPeer::doSelectOne($cc);
+                   $countryid = $csel->getId();
+                }else{
+                   $cin = new Country();
+                   $cin->setName($country);
+                   $cin->save();
+                   $countryid = $cin->getId();
+                }
+                $emCalls->setParentTable('customer');
+                $emCalls->setCountryId($countryid);
+                    $ce = new Criteria();
+                    $ce->add(TelintaAccountsPeer::ACCOUNT_TITLE,$xdr->account_id);
+                    $ce->addAnd(TelintaAccountsPeer::PARENT_TABLE,'customer');
+                    $ce->add(TelintaAccountsPeer::STATUS,3);
+                    if(TelintaAccountsPeer::doCount($ce)>0){
+                        $emp = TelintaAccountsPeer::doSelectOne($ce);
+                        $emCalls->setParentId($emp->getParentId());
+                    }
+
+                $emCalls->setDescription($xdr->description);
+                $emCalls->setDisconnectCause($xdr->disconnect_cause);
+                $emCalls->setDisconnectTime($xdr->disconnect_time);
+               // $emCalls->setDurationMinutes($duration_minutes);
+                $emCalls->setICustomer($customer->getICustomer());
+                $emCalls->setIXdr($xdr->i_xdr);
+                $emCalls->setStatus(3);
+                $emCalls->setSubdivision($xdr->subdivision);
+                $emCalls->setUnixConnectTime($xdr->unix_connect_time);
+                $emCalls->setUnixDisconnectTime($xdr->unix_disconnect_time);
+                $emCalls->save();
   }
 
 
@@ -3445,21 +3468,26 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
         $c->addAnd(ProductTypePeer::ID,2);
         $c->addAnd(CustomerOrderPeer::CREATED_AT,$date, Criteria::LESS_THAN);
+        $c->addAnd(CustomerOrderPeer::ORDER_STATUS_ID,3);
         $c->addGroupByColumn(CustomerPeer::ID);
         $c->addDescendingOrderByColumn (CustomerOrderPeer::CREATED_AT);
         $customers = CustomerPeer::doSelect($c);
 
         foreach($customers as $customer){
-           // echo $customer->getId();
+            echo $customer->getId();
            $balance =  Telienta::getBalance($customer);
            if($balance>0){
                $transaction = new Transaction();
+               $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
                $transaction->setAmount(-$balance);
-               $transaction->setDescription("Balance Expired");
                $transaction->setTransactionStatusId(3);
                $transaction->setCustomerId($customer->getId());
+               $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+               $transaction->setTransactionDescriptionId($transactiondescription->getId());
+               $transaction->setDescription($transactiondescription->getTitle());
                $transaction->save();
-               Telienta::charge($customer, $balance, "Balance Expired");
+               
+               Telienta::charge($customer, $balance, $transactiondescription->getTitle());
            }
         }
 
@@ -3539,25 +3567,49 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
        // var_dump($change_number);
         $new_mobile = $change_number->getNewNumber();
         $countrycode = sfConfig::get("app_country_code");
-        $new_mobile_number = $countrycode.$new_mobile;
+        
         $uniqueId = $customer->getUniqueid();
 
         $un = new Criteria();
         $un->add(CallbackLogPeer::UNIQUEID, $uniqueId);
         $un->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
         $activeNumber = CallbackLogPeer::doSelectOne($un);
-
+//var_dump($activeNumber);
         // As each customer have a single account search the previous account and terminate it.
         $cp = new Criteria;
         $cp->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'a' . $activeNumber->getMobileNumber());
         $cp->addAnd(TelintaAccountsPeer::STATUS, 3);
-
+        
+        $getFirstnumberofMobile = substr($new_mobile, 0, 1); 
+        if ($getFirstnumberofMobile == 0) {
+                    $TelintaMobile = substr($new_mobile, 1);
+                    $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
+        } else {
+            $TelintaMobile = sfConfig::get('app_country_code') . $new_mobile;
+        }
+        $new_mobile_number = $TelintaMobile;
+        
         if (TelintaAccountsPeer::doCount($cp) > 0) {
             $telintaAccount = TelintaAccountsPeer::doSelectOne($cp);
-            Telienta::terminateAccount($telintaAccount);
+            $a_acount = "a".$new_mobile_number;
+            
+            $accountInfo = array('i_account'=>$telintaAccount->getIAccount(),"id"=>$a_acount);
+            if(Telienta::updateAccount($accountInfo)){
+               $telintaAccount->setStatus(5); 
+               $telintaAccount->save();
+               
+               $ta = new TelintaAccounts();
+               $ta->setParentTable("customer");
+               $ta->setParentId($customer->getId());
+               $ta->setIAccount($telintaAccount->getIAccount());
+               $ta->setICustomer($customer->getICustomer());
+               $ta->setAccountTitle($a_acount);
+               $ta->setAccountType('a');
+               $ta->setStatus(3);
+               $ta->save();
+            }            
         }
-
-        Telienta::createAAccount($new_mobile_number, $customer);
+        
 
         $cb = new Criteria;
         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb' . $activeNumber->getMobileNumber());
@@ -3565,8 +3617,23 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
         if (TelintaAccountsPeer::doCount($cb) > 0) {
             $telintaAccountsCB = TelintaAccountsPeer::doSelectOne($cb);
-           // Telienta::terminateAccount($telintaAccountsCB);
-           // Telienta::createCBAccount($new_mobile_number, $customer);
+            $cb_acount = "cb".$new_mobile_number;
+            
+            $accountInfo = array('i_account'=>$telintaAccount->getIAccount(),"id"=>$cb_acount);
+            if(Telienta::updateAccount($accountInfo)){
+               $telintaAccountsCB->setStatus(5); 
+               $telintaAccountsCB->save();
+               
+               $tcb = new TelintaAccounts();
+               $tcb->setParentTable("customer");
+               $tcb->setParentId($customer->getId());
+               $tcb->setIAccount($telintaAccountsCB->getIAccount());
+               $tcb->setICustomer($customer->getICustomer());
+               $tcb->setAccountTitle($cb_acount);
+               $tcb->setAccountType('cb');
+               $tcb->setStatus(3);
+               $tcb->save();
+            }            
         }
 
         $getvoipInfo = new Criteria();
@@ -3575,16 +3642,36 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $getvoipInfos = SeVoipNumberPeer::doSelectOne($getvoipInfo); //->getId();
         if (isset($getvoipInfos)) {
             $voipnumbers = $getvoipInfos->getNumber();
-            $voipnumbers = substr($voipnumbers, 2);
+            $getFirstnumberofMobile = substr($voipnumbers, 0, 2); 
+             if ($getFirstnumberofMobile == sfConfig::get('app_country_code')) {
+                 $voipnumbers = substr($voipnumbers, 2);
+             }else{
+                 $voipnumbers = $getvoipInfos->getNumber();
+             }    
 
             $tc = new Criteria();
             $tc->add(TelintaAccountsPeer::ACCOUNT_TITLE, $voipnumbers);
             $tc->add(TelintaAccountsPeer::STATUS, 3);
             if (TelintaAccountsPeer::doCount($tc) > 0) {
                 $telintaAccountR = TelintaAccountsPeer::doSelectOne($tc);
-                Telienta::terminateAccount($telintaAccountR);
+                
+                $accountInfo = array('i_account'=>$telintaAccountR->getIAccount(),"id"=>$voipnumbers);
+                if(Telienta::updateAccount($accountInfo)){
+                   $telintaAccountR->setStatus(5); 
+                   $telintaAccountR->save();
+
+                   $tcb = new TelintaAccounts();
+                   $tcb->setParentTable("customer");
+                   $tcb->setParentId($customer->getId());
+                   $tcb->setIAccount($telintaAccountR->getIAccount());
+                   $tcb->setICustomer($customer->getICustomer());
+                   $tcb->setAccountTitle($voipnumbers);
+                   $tcb->setAccountType('r');
+                   $tcb->setStatus(3);
+                   $tcb->save();
+                }     
             }
-            Telienta::createReseNumberAccount($voipnumbers, $customer, $new_mobile_number);
+          //  Telienta::createReseNumberAccount($voipnumbers, $customer, $new_mobile_number);
         }
 
         $change_number->setStatus(1);
@@ -3602,13 +3689,14 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $callbacklog->setuniqueId($uniqueId);
         $callbacklog->setcallingCode($countrycode);
         $callbacklog->save();
-
+        $this->setPreferredCulture($customer);
         emailLib::sendCustomerChangeNumberEmail($customer, $order);
+        $this->updatePreferredCulture();
         return sfView::NONE;
   }
  
    public function executeChangeCustomerProduct(sfWebRequest $request){
-   
+   if(date("d")!=1){die;}
             $ccp = new Criteria();
             $ccp->add(CustomerChangeProductPeer::STATUS, 2);
             $ChangeCustomers=CustomerChangeProductPeer::doSelect($ccp);
@@ -3648,12 +3736,12 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $cProduct->setStatusId(3);
         $cProduct->save();
         
-          $OpeningBalance = $order->getExtraRefill();
-            Telienta::recharge($this->customer, $OpeningBalance,'Refill');
+        //  $OpeningBalance = $order->getExtraRefill();
+         //   Telienta::recharge($this->customer, $OpeningBalance,'Refill');
             $this->setPreferredCulture($this->customer);
-            emailLib::sendCustomerChangeProduct($this->customer, $order, $transaction);
+            emailLib::sendCustomerChangeProductConfirm($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
-        
+      //  order_receipt_product_change
                     }
           return sfView::NONE;   
             
@@ -3720,9 +3808,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->save();
         }*/
         $cst = new Criteria();
-        $cst->add(SimTypesPeer::TITLE, '%'.$order->getProduct()->getName().'%', Criteria::LIKE);
+        $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
-        $sim_type_id=$simtype->getId();
+       echo $sim_type_id=$simtype->getId();
         $exest = $order->getExeStatus();
         if ($exest!=1) {
 
@@ -3880,5 +3968,22 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         return $hex;
     }
 
- 
+  public function executeEmailTestCenter(sfWebRequest $request){
+      
+      
+      
+     $inviterCustomer = CustomerPeer::retrieveByPK(38);
+                    $this->setPreferredCulture($inviterCustomer);
+                    $inviteOrder=  CustomerOrderPeer::retrieveByPK(304);
+                   $transaction_i= TransactionPeer::retrieveByPK(296);
+                   $this->customer=CustomerPeer::retrieveByPK(34);
+
+                        
+                        emailLib::sendCustomerConfirmRegistrationEmail($inviterCustomer->getId(),$this->customer,null,$inviteOrder,$transaction_i);
+                        $this->updatePreferredCulture();  
+                          return sfView::NONE;
+      
+  }
+    
+    
 }

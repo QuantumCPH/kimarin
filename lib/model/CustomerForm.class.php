@@ -150,7 +150,9 @@ class CustomerForm extends BaseCustomerForm
 					'pattern'=>$mobilePattern,
                                         'max_length'=>14,
 				),
-				array('invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid 8 to 14 digit mobile number.'))
+                                  array( 'max_length' => sfContext::getInstance()->getI18N()->__('"%value%" is too long (14 characters max).'),
+                                        //'min_length' => '"%value%" is too short 4 characters min.',
+				 'invalid'=>sfContext::getInstance()->getI18N()->__('Please enter a valid 8 to 14 digit mobile number.'))
 			)
 		)
 	  );
@@ -584,7 +586,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
         $this->mergePostValidator(new sfValidatorSchemaCompare('password',
                                           sfValidatorSchemaCompare::EQUAL, 'password_confirm',
                                           array(),
-                                          array('invalid' => sfContext::getInstance()->getI18n()->__(' '))
+                                          array('invalid' => sfContext::getInstance()->getI18n()->__('The passwords don\'t match.'))
                                                   ));
 
 
@@ -705,7 +707,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
   {
   	
   	$c = new Criteria();
-  	if($values['nie_passport_number']!="" && $values['nie_passport_number']!=0){
+  	if($values['nie_passport_number']!=""){
             $c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $values['nie_passport_number']);
             $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID,3);
 

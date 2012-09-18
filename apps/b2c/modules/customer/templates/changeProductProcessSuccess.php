@@ -1,12 +1,12 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change Product') ) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change product') ) ) ?>
 <br />
 <div class="left-col">
 
     <?php include_partial('navigation', array('selected' => 'dashboard', 'customer_id' => $customer->getId())) ?>
          <div class="split-form">
-          <form name="" method="post"  action="<?php echo url_for($targetUrl.'customer/changeNumberProcessPay') ?>">
+          <form name="" method="post"  action="<?php echo url_for($targetUrl.'customer/changeNumberProcessPay') ?>"  target="_parent">
    
     <input type="hidden" value="<?php echo  $product->getId();  ?>" name="productid" />
     <input type="hidden" value="<?php echo  $product->getPrice();  ?>" name="extra_refill" />
@@ -14,9 +14,13 @@
    
     <ul class="fl col changenumber">
         <li>
-            <label><?php echo __("Product Name");?>:</label>
-            <label><?php echo  $product->getName();  ?></label><br />
-        </li>        
+            <label><?php echo __("Change product");?></label>
+            <label><?php //echo  $product->getName();  ?></label><br />
+        </li> 
+         <li>
+            <label><?php echo __("New product");?>:</label>
+            <label><?php echo  $oldProduct->getName();  ?></label><br />
+        </li> 
         <li>
             <label><?php echo __("Amount");?>:</label>
             <label><?php echo  number_format($prodPrice = $product->getRegistrationFee(),2); ?><?php echo  sfConfig::get("app_currency_code"); ?></label><br />

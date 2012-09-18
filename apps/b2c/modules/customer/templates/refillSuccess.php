@@ -147,7 +147,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
           <div style="float:left;"><input type="submit" class="butonsigninsmall" style="width:101px;margin-left:-13px !important;" name="button" value="<?php echo __('Enable') ?>" /></div>
   </form>
   </div>
-  <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill" target="_parent">
+  <form action="<?php echo $target;?>customer/refilTransaction" method="post" id="refill">
      <div style="width:510px;">
      <div  style="width:510px;float:left;"> 
           <div class="refillhead"><?php echo __('Manual refill.') ?></div>
@@ -165,7 +165,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
         }       
         ?>
          </ul><br clear="both" />
-         <p><?php echo __("All amounts are excl. IVA (%1%).",array("%1%"=>sfConfig::get('app_vat')));?></p>
+         <p><?php echo __("All amounts are excl. IVA.");?></p>
          <p><?php echo __("The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. ",array("%1%"=>sfConfig::get('app_currency_code')));echo __("The refill amount is valid for 180 days.");?></p>
          <p>&nbsp;</p>
          <ul>
@@ -182,7 +182,7 @@ if($is_auto_refill_activated){  ?>  <div class="left-col">
             <?php } ?>
             <li id="selectAmt" class="refilselect">
               <label for="extra_refill" ><?php echo __('Select amount to be refilled:') ?></label>
-              <span style="margin-left:99px;"><?php echo $form['extra_refill']?></span>
+              <span style="margin-left:122px;"><?php echo $form['extra_refill']?></span>
             </li>
 
             <?php if($sf_user->hasFlash('error_message')): ?>

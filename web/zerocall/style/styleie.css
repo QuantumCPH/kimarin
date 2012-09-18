@@ -160,10 +160,10 @@ a.sidebar_button{
 .navigations a.logout:hover{ background-position:-90px -382px}
 .navigations a.logout-s{ background-position:-90px -382px}
 
-.split-form{padding-top:20px; float:left; clear:both; width:515px; padding-bottom:30px;}
-.col{width:250px; float: left !important; position: relative}
+.split-form{padding-top:20px; float:left; clear:both; width:527px; padding-bottom:30px;}
+.col{width:255px; float: left !important; position: relative}
 .split-form ul{list-style:none;}
-.split-form ul li{list-style:none; margin-bottom:10px;  clear:both;width:260px; white-space:nowrap; z-index:100; position:relative; }
+.split-form ul li{list-style:none; margin-bottom:10px;  clear:both;width:267px; white-space:nowrap; z-index:100; position:relative; }
 .split-form ul li label{width:129px; float:left; padding-top:3px; font-weight:bold; }
 .split-form ul li input{width:110px; border:1px solid #999999; font-size:12px; padding:3px;}
 .split-form ul li select{width:110px; border:1px solid #999999;font-size:11px; padding:3px; }
@@ -300,7 +300,7 @@ ul.paging li {
 	padding: 3px;
 	border:1px solid #0C74A5;
 	margin:0 5px;
-	background:#E88937;
+	background:#0C74A5;
 	width: 15px;
 	clear: none;
 	-moz-border-radius: 2px;
@@ -312,16 +312,18 @@ ul.paging li a {
 	display:block;
 	width: 100%;
 	height: 100%;
+        text-decoration: none;
 }
 
 ul.paging li.selected a {
 	color:	#fff;
-	text-decoration: none;
+        text-decoration: underline;
 }
 
 ul.paging li.selected{
-	background: #0C74A5;
-	color: white;	
+	background: #E88937;
+	color: white;
+        border:1px solid #E88937;
 }
 	
 div.footer ul li {
@@ -390,8 +392,7 @@ width:252px;
 .alertstep1{
 	position: relative;
 	top: 3px;
-	
-	
+	left: -4px;	
 }
 
 .alertstep1 img {
@@ -420,7 +421,7 @@ width:252px;
 .inline-error{
 	color:#FF0000;
 	float:right;
-	margin-right:83px;
+	margin-right:0 ;
 	text-align:right;
 	white-space:normal;
 }
@@ -458,6 +459,15 @@ width:252px;
         line-height: 16px;
 }
 
+.ok_alert_bar {
+	border: 1px solid #FFCD02;
+	-moz-border-radius: 0 0 5px 5px;
+	background:#FFFFCC url(../../images/ok-sms.png) 5px 5px no-repeat;
+	width: 470px;
+        height: 21px;
+        padding: 5px;
+        padding-left: 28px;
+}
 
 
 *+html .alert_bar { 
@@ -651,31 +661,31 @@ margin-top:12px;
 .navegaciones a.logout-s{ background-position:-87px -380px}
 
 /****** German ********/
-.navigationen{ width:575px; float:left;}
+.navigationen{ width: 657px; float:left;}
 .navigationen a{ width:82px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/german.jpg); background-repeat:no-repeat; margin-right:0px;}
 .navigationen a.dashboard{ background-position:0px 0px}
 .navigationen a.dashboard:hover{ background-position:-90px 0px}
 .navigationen a.dashboard-s{ background-position:-90px 0px}
 
-.navigationen a.refil{ background-position:0px -64px;}
-.navigationen a.refil:hover{ background-position:-90px -64px}
-.navigationen a.refil-s{ background-position:-90px -64px}
+.navigationen a.refil{ background-position:-6px -64px;}
+.navigationen a.refil:hover{ background-position:-96px -64px}
+.navigationen a.refil-s{ background-position:-96px -64px}
 
-.navigationen a.callhistory{ background-position:0px -124px;}
-.navigationen a.callhistory:hover{ background-position:-90px -124px;}
-.navigationen a.callhistory-s{ background-position:-90px -124px;}
+.navigationen a.callhistory{ background-position:-11px -124px;}
+.navigationen a.callhistory:hover{ background-position:-101px -124px;}
+.navigationen a.callhistory-s{ background-position:-101px -124px;}
 
 .navigationen a.paymenthistory{ background-position:-4px -186px}
 .navigationen a.paymenthistory:hover{ background-position:-94px -186px}
-.navigationen a.paymenthistory-s{ background-position:-90px -186px}
+.navigationen a.paymenthistory-s{ background-position:-94px -186px}
 
-.navigationen a.settings{ background-position:0px -250px}
-.navigationen a.settings:hover{ background-position:-90px -250px}
-.navigationen a.settings-s{ background-position:-90px -250px}
+.navigationen a.settings{ background-position:0px -250px;margin-right: 10px;margin-left: 6px;}
+.navigationen a.settings:hover{ background-position:-90px -250px;margin-right: 10px;margin-left: 6px;}
+.navigationen a.settings-s{ background-position:-90px -250px;margin-right: 10px;margin-left: 6px;}
 
-.navigationen a.websms{ background-position:3px -313px}
-.navigationen a.websms:hover{ background-position:-87px -313px}
-.navigationen a.websms-s{ background-position:-87px -313px}
+.navigationen a.websms{ background-position:-5px -313px;}
+.navigationen a.websms:hover{ background-position:-95px -313px;}
+.navigationen a.websms-s{ background-position:-95px -313px;}
 
 .navigationen a.logout{ background-position:3px -380px;}
 .navigationen a.logout:hover{ background-position:-87px -380px}
@@ -696,9 +706,9 @@ margin-top:12px;
 .navegacions a.callhistory:hover{ background-position:-90px -126px;}
 .navegacions a.callhistory-s{ background-position:-90px -126px;}
 
-.navegacions a.paymenthistory{ background-position:4px -187px}
-.navegacions a.paymenthistory:hover{ background-position:-86px -187px}
-.navegacions a.paymenthistory-s{ background-position:-86px -187px}
+.navegacions a.paymenthistory{ background-position:2px -187px}
+.navegacions a.paymenthistory:hover{ background-position:-88px -187px}
+.navegacions a.paymenthistory-s{ background-position:-88px -187px}
 
 .navegacions a.settings{ background-position:0px -250px}
 .navegacions a.settings:hover{ background-position:-90px -250px}
@@ -825,7 +835,7 @@ label.error{
    margin-left: 5px;
 }
 input.changeNum{
-   margin-left:128px!important;
+   margin-left:188px!important;
 }
 .newcard {width:137px; border:1px solid #999999;font-size:11px; padding:3px; }
 .dashboardbutton{
@@ -850,4 +860,21 @@ span.alertmsg{
     color:#CD481D;
     font-style: italic;
 }
-
+ul.changenumber{
+    width:442px !important;    
+}
+ul.changenumber li{width:390px !important;}
+ul.changenumber li label{width: 195px !important;}
+ul.changenumber li label.error{
+    float:right!important;margin-right: -5px;margin-left: 0!important;
+}
+div.inline-error-signup{
+    color: #FF0000;
+    float: right;
+    margin-right: 65px;
+    text-align: right;
+    white-space: normal;
+}
+label.pcon{
+    width:136px !important;
+}

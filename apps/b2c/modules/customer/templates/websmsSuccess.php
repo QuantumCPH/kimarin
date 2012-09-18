@@ -30,7 +30,7 @@
         // Now scan for illegal characters
         for(idx=0;idx<strlen;idx++){
             if(validChar.indexOf(entry.charAt(idx))<0){
-                alert("<?php echo __('Entry must be in numeric format!');?>");return false;
+                jAlert("<?php echo __('Entry must be in numeric format!');?>","");return false;
             }
         } // end scan
         return true;
@@ -58,20 +58,22 @@ if ($msgSent != '') {
         <div class="fl col">
 
 
-<?php if (!($balance <= 0.00 )) { ?>
+<?php
+
+ if (number_format($balance, 2)>0) { ?>
             <form action=<?php echo url_for('customer/websms', true) ?>  method="post" id="websms" onsubmit="isHex(this.value)">
                 <h3 style="width: 400px;"><?php echo __("Your account balance is") ?>:<?php echo number_format($balance, 2); ?><?php echo sfConfig::get('app_currency_code') ?></h3>
 <?php } else { ?>
                 <h3 style="width: 400px;"><?php echo __("Your account balance is") ?> <?php echo number_format($balance, 2); ?> <?php echo sfConfig::get('app_currency_code') ?></h3>
-                <?php echo __("Your %1% account balance is low. Please refill your %1% account. Thank you.", array("%1%" => sfConfig::get("app_site_title"))); ?> <b><a href="<?php echo url_for('customer/refill', true) ?><?php echo "/customer_id/" . $customer->getId() ?>">her</a></b>
+                <?php echo __("Your %1% account balance is low. Please refill your %1% account. Thank you.", array("%1%" => sfConfig::get("app_site_title"))); ?> <b><a href="<?php echo url_for('customer/refill', true) ?><?php echo "/customer_id/" . $customer->getId() ?>"><?php echo __('Refill')?></a></b>
 <?php } ?>
                 <ul>
                     <li>  </li>
 
                     <li bgcolor="f0f0f0">
-                        <?php echo __("NOTICE:"); ?> <br />
+                        <?php echo __("Notice"); ?>: <br />
 		  - <?php echo __("Messages from 1 to 142 characters will be considered as 1 SMS") ?><br />
-		  - <?php echo __("Messages from 143 to 302 characters will be considered as 2 SMS ") ?> <br />
+		  - <?php echo __("Messages from 143 to 302 characters will be considered as 2 SMS") ?> <br />
 		  - <?php echo __("Messages from 303 to 432 characters will be considered as 3 SMS") ?> <br />
 		  - <?php echo __("Messages with more than 432 characters will be truncated automatically.") ?> <br />
             <!--          - <?php //echo __("SMS charges may apply")  ?> <br />-->
@@ -137,21 +139,23 @@ if ($msgSent != '') {
                     </td>
                 </tr>
                 </table>
+                       
                 <br />
                 <input type="submit" class="buton" name="submit"  value="<?php echo __("Send SMS") ?>" onclick="
                  if(document.getElementById('number').value==''){
-                     alert('<?php echo __("Please enter the destination number.") ?>');
+                     jAlert('<?php echo __("Please enter the destination number.") ?>','');
                      document.getElementById('number').focus();
                      return false;
                  }else if(document.getElementById('message').value==''){
-                     alert('<?php echo __("Please enter your message.") ?>');
+                     jAlert('<?php echo __("Please enter your message.") ?>','');
                      document.getElementById('message').focus();
                      return false;
                  }else{
                      return true;
                  }" />
                  <br />
-
+                    </li>
+                </ul>
 
              </form>
 

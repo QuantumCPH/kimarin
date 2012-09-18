@@ -235,7 +235,7 @@ $.extend($.validator, {
 	},
 
 	messages: {
-		required: "<br/>Dieses Feld ist obligatorisch",
+		required: "<br/>Dieses Feld muss ausgefüllt werden.",
 		remote: "Bitte geben Sie die Gültig Eindeutige ID mit 6 Stellen",
 		email: "<br/>Bitte geben Sie eine gültige E-Mail-Adresse.",
 		url: "Bitte geben Sie eine gültige URL.",
@@ -250,8 +250,8 @@ $.extend($.validator, {
 		accept: "Bitte geben Sie einen Wert mit einer gültigen Erweiterung.",
 		maxlength: $.format("Bitte geben Sie nicht mehr als {0} Zeichen."),
 		minlength: $.format("Bitte geben Sie mindestens {0} Zeichen."),
-		rangelength: $.format("Bitte geben Sie einen Wert zwischen {0} und {1} Zeichen lang sein."),
-		range: $.format("Bitte geben Sie einen Wert zwischen {0} und {1} Zeichen lang sein."),
+		rangelength: $.format("Bitte geben Sie eine gültige {0}- bis {1}-stellige Mobilfunknummer an."),
+		range: $.format("Bitte geben Sie eine gültige {0}- bis {1}-stellige Mobilfunknummer an."),
 		max: $.format("Bitte geben Sie einen Wert kleiner oder gleich {0}."),
 		min: $.format("Bitte geben Sie einen Wert größer oder gleich {0}.")
 	},

@@ -19,7 +19,9 @@ class BaseCbfForm extends BaseFormPropel
       'st'            => new sfWidgetFormInput(),
       'country_id'    => new sfWidgetFormInput(),
       'mobile_number' => new sfWidgetFormInput(),
+      'customer_id'   => new sfWidgetFormInput(),
       'created_at'    => new sfWidgetFormDateTime(),
+      'status'        => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -30,7 +32,9 @@ class BaseCbfForm extends BaseFormPropel
       'st'            => new sfValidatorInteger(array('required' => false)),
       'country_id'    => new sfValidatorInteger(array('required' => false)),
       'mobile_number' => new sfValidatorString(array('max_length' => 20, 'required' => false)),
+      'customer_id'   => new sfValidatorInteger(array('required' => false)),
       'created_at'    => new sfValidatorDateTime(array('required' => false)),
+      'status'        => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('cbf[%s]');

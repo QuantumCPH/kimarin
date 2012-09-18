@@ -343,7 +343,7 @@
 <!--            <input type="submit" style="border: 0px;" class="settingbutton" name="submit"  value="<?php echo __('Update') ?>">-->
              
 <!--            <button onclick="$('#newCustomerForm').submit();" style="cursor: pointer"><?php echo __('Next') ?></button>-->
-            <div class="butonsigninsmall-outer" style="margin-top:17px;"><span class="butonsigninsmall-left"></span><input type="submit" class="butonsigninsmall" style="margin-left:0px !important;"  name="submit" value="<?php echo __('Update') ?>"  /><span class="butonsigninsmall-right"></span></div>
+            <div class="butonsigninsmall-outer" style="margin-top:17px;"><input type="submit" class="butonsigninsmall" style="margin-left:0px !important;"  name="submit" value="<?php echo __('Update') ?>"  /><span class="butonsigninsmall-right"></span></div>
           </div>
       </div>
     </div> <!-- end split-form -->

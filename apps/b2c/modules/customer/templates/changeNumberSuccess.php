@@ -1,12 +1,12 @@
 <?php use_helper('I18N') ?>
 <?php use_helper('Number') ?>
-<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change Number') ) ) ?>
+<?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Change number') ) ) ?>
 <br />
 <div class="left-col">
 
     <?php include_partial('navigation', array('selected' => 'dashboard', 'customer_id' => $customer->getId())) ?>
          <div class="split-form">
-          <form name="" method="post"  action="<?php echo url_for($targetUrl.'customer/numberProcess') ?>">
+          <form name="" method="post"  action="<?php echo url_for($targetUrl.'customer/numberProcess') ?>" target="_parent">
     <input type="hidden" value="<?php echo  $customer->getMobileNumber(); ?>" name="mobile_number" />
     <input type="hidden" value="<?php echo  $product->getId();  ?>" name="productid" />
     <input type="hidden" value="<?php echo  $product->getPrice();  ?>" name="extra_refill" />
@@ -14,15 +14,15 @@
     <input type="hidden" value="<?php echo  $countrycode;  ?>" name="countrycode" />
     <ul class="fl col changenumber">
         <li>
-            <label><?php echo __("New Mobile Number");?>:</label>
+            <label><?php echo __("New mobile number");?>:</label>
             <label><?php echo  $newNumber;  ?></label><br />
         </li>
         <li>
-            <label><?php echo __("Customer Name");?>:</label>
+            <label><?php echo __("Customer name");?>:</label>
             <label><?php echo  $customer->getFirstName(); ?>&nbsp;<?php echo  $customer->getLastName(); ?></label><br />
         </li>
         <li>
-            <label><?php echo __("Old Mobile Number");?>:</label>
+            <label><?php echo __("Old mobile number");?>:</label>
             <label><?php echo  $customer->getMobileNumber(); ?></label><br />
         </li>
         <li>

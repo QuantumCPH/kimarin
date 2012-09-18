@@ -290,11 +290,11 @@
                     onmouseover="mcancelclosetime()"
                     onmouseout="mclosetime()">
                     <?php
-                     if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
-                        echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert', array('class'=>'subSelect'));
-                     }else{
-                        echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert');
-                     }
+//                     if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
+//                        echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert', array('class'=>'subSelect'));
+//                     }else{
+//                        echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert');
+//                     }
                      ?>
   <?php
                      if($actionName=='registrationType' && $modulName=="invoice"){
@@ -513,13 +513,7 @@
                           echo link_to(__('Telecom Operator'), 'telecom_operator/index');
                         }
                         ?>
-                           <?php
-                        if($actionName=='deActivateCustomer' && $modulName=="customer"){
-                          echo link_to(__('DeActivat eCustomer'), 'customer/deActivateCustomer',array('class'=>'subSelect'));
-                        }else{
-                          echo link_to(__('DeActivat eCustomer'), 'customer/deActivateCustomer');
-                        }
-                        ?>
+                           
                            <?php
                         if($actionName=='index' && $modulName=="transactionDescription"){
                           echo link_to(__('Transaction Description'), 'transactionDescription/index',array('class'=>'subSelect'));

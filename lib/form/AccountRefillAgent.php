@@ -24,6 +24,9 @@
     								'invalid'	=> 'Mobile number doesn\'t exists',
     							)),
     							
+                            
+                            
+                            
     			'extra_refill' => new sfValidatorChoice(array('choices'=>ProductPeer::getRefillChoices()))
     		
 			));

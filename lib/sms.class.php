@@ -14,7 +14,7 @@ class CARBORDFISH_SMS {
     private static $S = 'H';
     private static $UN = 'zapna1';
     private static $P = 'Zapna2010';
-    private static $SA = 'Zeorcall';
+    private static $SA = 'Kimarin';
     private static $ST = 5;
 
     /*
@@ -41,6 +41,8 @@ class CARBORDFISH_SMS {
         );
         $queryString = http_build_query($data, '', '&');
         $queryString = smsCharacter::smsCharacterReplacement($queryString);
+     
+    
         $res = file_get_contents('http://sms1.cardboardfish.com:9001/HTTPSMS?' . $queryString);
         sleep(0.15);
 
