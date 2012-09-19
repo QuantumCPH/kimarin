@@ -1643,7 +1643,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
 
         if ($order) {
-            $vat = $order->getIsFirstOrder() ?
+            $vat = $order->getIsFirstOrder()==1 ?
                     ($order->getProduct()->getPrice() * $order->getQuantity() -
                     $order->getProduct()->getInitialBalance()) * .20 :
                     0;
@@ -1697,6 +1697,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_name_rs = "Zapna Support";
+        $sender_email_rs = "rs@zapna.com";
+        
         //------------------Sent The Email To Kimarin Order
         if (trim($sender_email_orders) != '') {
             $email1 = new EmailQueue();
@@ -1710,6 +1713,8 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email1->save();
         }
         //----------------------------------------
+        
+      
         
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
@@ -1756,8 +1761,8 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         if (trim($sender_emailcdu) != ''):
             $email4 = new EmailQueue();
             $email4->setSubject($subject);
-            $email4->setReceipientName($sender_name_sup);
-            $email4->setReceipientEmail($sender_email_sup);
+            $email4->setReceipientName($sender_namecdu);
+            $email4->setReceipientEmail($sender_emailcdu);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
             $email4->setEmailType(sfConfig::get('app_site_title') . ' Refill/charge via admin');
@@ -1765,19 +1770,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->save();
         endif;
         //-----------------------------------------
-        //--------------Sent The Email To RS
-        if (trim($rs_email) != ''):
-            $email5 = new EmailQueue();
-            $email5->setSubject($subject);
-            $email5->setReceipientName($sender_namecdu);
-            $email5->setReceipientEmail($sender_emailcdu);
-            $email5->setAgentId($agent_company_id);
-            $email5->setCutomerId($customer_id);
-            $email5->setEmailType(sfConfig::get('app_site_title') . ' refill/charge via admin');
-            $email5->setMessage($message_body);
-            $email5->save();
-        endif;
-        //-----------------------------------------
+       
+        
+        
     }
 
 
