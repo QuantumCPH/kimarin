@@ -295,12 +295,12 @@ class paymentsActions extends sfActions {
            }else{
                $vatPerValue=(.18); 
            }
-        
+        die($transaction_id);
         //if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
         //if(strstr($transaction->getDescription(),"Refill")){
             $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
         //}
-die($vat);
+
         $registered_customer_name = false;
         $refferedC = new Criteria();
         $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID,$transaction->getId());
