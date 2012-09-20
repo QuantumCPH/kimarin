@@ -3477,6 +3477,13 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             echo $customer->getId();
            $balance =  Telienta::getBalance($customer);
            if($balance>0){
+               $order = new CustomerOrder();
+               $order->setExtraRefill(-$balance);
+               $order->setCustomerId($customer->getId());
+               $order->setOrderStatusId(3);
+               $order->setIsFirstOrder(10);  //// product type remove 
+               $order->save();
+               
                $transaction = new Transaction();
                $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
                $transaction->setAmount(-$balance);
