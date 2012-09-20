@@ -2252,7 +2252,7 @@
             </trans-unit>
             <trans-unit id="555" translate="yes" reformat="yes" xml:space="default">
                 <source>New SIM-card confirmation</source>
-                <target>Bestätigung neue SIM-Karte</target>
+                <target>Neue SIM-Kartenbestätigung</target>
             </trans-unit>
             <trans-unit id="556" translate="yes" reformat="yes" xml:space="default">
                 <source>Old mobile number</source>
