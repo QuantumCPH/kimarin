@@ -259,7 +259,7 @@ class paymentsActions extends sfActions {
         $transaction = TransactionPeer::retrieveByPK($transaction_id);
 
 
-        if($transaction_id>93){
+        if($transaction_id>489){
           $vatValue=sfConfig::get('app_vat_percentage');
         }else{
          $vatValue=(.18);
@@ -273,7 +273,9 @@ class paymentsActions extends sfActions {
        // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
         if ($customerorder==1) {
-            if($transaction_id>93){
+
+            if($transaction_id>489){
+
             $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage');
             }else{
               $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) *(.18);   
@@ -282,7 +284,7 @@ class paymentsActions extends sfActions {
             $vat = 0;
         }
         else{
-             if($transaction_id>93){
+             if($transaction_id>489){
             $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
              }else{
                  
@@ -290,7 +292,7 @@ class paymentsActions extends sfActions {
              }
         }
         
-           if($transaction_id>93){
+           if($transaction_id>489){
                $vatPerValue=sfConfig::get('app_vat_percentage');
            }else{
                $vatPerValue=(.18); 
