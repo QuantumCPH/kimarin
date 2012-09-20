@@ -192,16 +192,16 @@
         </tr>  
         
      <?php   } ?>
-        <tr>
+<!--        <tr>
       <td colspan="12">
 <form name="export" action="exportExcel" method="post">
 <input type="submit" value="Export Data">
-<input type="hidden" value="<? echo $csv_hdr; ?>" name="csv_hdr">
+<input type="hidden" value="<?php // echo $csv_hdr; ?>" name="csv_hdr">
 <input type="hidden" value="Customer-registration-report" name="file_name">
-<input type="hidden" value="<? echo $csv_output; ?>" name="csv_output">
+<input type="hidden" value="<?php // echo $csv_output; ?>" name="csv_output">
 </form>
       </td>
       
-  </tr>
+  </tr>-->
   </tbody>
 </table>
