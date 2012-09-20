@@ -133,7 +133,7 @@ $daytotal1=0;
   $i=0;
    
       $conn = Propel::getConnection();
- echo  $query = 'select pt.title
+  $query = 'select pt.title
  ,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3  AND co.is_first_order=pt.id  AND DATE( co.created_at) ="'.$year.'-'.$month.'-01") AS day1_calls
 ,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3  AND co.is_first_order=pt.id  AND DATE( co.created_at ) ="'.$year.'-'.$month.'-02") AS day2_calls
 ,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3  AND co.is_first_order=pt.id  AND DATE( co.created_at ) ="'.$year.'-'.$month.'-03" ) AS day3_calls
@@ -166,7 +166,7 @@ $daytotal1=0;
 ,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3  AND co.is_first_order=pt.id  AND DATE( co.created_at ) ="'.$year.'-'.$month.'-30") AS day30_calls
 ,(SELECT count( co.id ) FROM customer_order  as co  left join product as p  on  p.id=co.product_id WHERE    p.product_type_id=pt.id  AND co.order_status_id=3  AND co.is_first_order=pt.id  AND DATE( co.created_at ) ="'.$year.'-'.$month.'-31") AS day31_calls 
  from product_type pt limit 2';
- die;
+ 
     $statement = $conn->prepare($query);
     $statement->execute();
   while ($rowObj = $statement->fetch(PDO::FETCH_OBJ))
