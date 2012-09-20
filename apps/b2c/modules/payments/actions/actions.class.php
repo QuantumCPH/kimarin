@@ -300,7 +300,7 @@ class paymentsActions extends sfActions {
         //if(strstr($transaction->getDescription(),"Refill")){
             $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
         //}
-
+die($vat);
         $registered_customer_name = false;
         $refferedC = new Criteria();
         $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID,$transaction->getId());
