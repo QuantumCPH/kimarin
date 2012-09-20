@@ -53,9 +53,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('%1% has added 10.00%2% of airtime to your account balance for inviting a friend to register as a %1% customer. Thank you.',array('%1%'=>sfConfig::get('app_site_title'), '%2%'=>sfConfig::get('app_currency_code'))); ?>
 	</p>
-<!--        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-            <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
-	</p>-->
+
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('Best regards,') ?>
 	</p>
@@ -72,9 +70,6 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 <table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;font-family:"Times New Roman", Times, serif;'>
   
-<!-- <tr>
-     <td colspan="4" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><b><?php echo __('Receiver of bonus for inviting a friend') ?>:</b> <?php echo $recepient_name; ?></td>
-    </tr>-->
  
   <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;">
     <th colspan="3"  align="left"  style='font-family:"Times New Roman", Times, serif;font-size: 14px;font-weight: bold;'><?php echo __('Order Receipt') ?></th>

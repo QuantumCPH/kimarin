@@ -831,7 +831,7 @@
             </trans-unit>
             <trans-unit id="203" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid 8 to 14 digit mobile number.</source>
-                <target>Bitte geben Sie eine gültige 8- bis 14-stellige Mobilfunknummer an.</target>
+                <target>Bitte geben Sie eine gültige 8- bis&lt;br /&gt;14-stellige Mobilfunknummer an.</target>
             </trans-unit>
             <trans-unit id="204" translate="yes" reformat="yes" xml:space="default">
                 <source>Please accept the terms and conditions</source>
