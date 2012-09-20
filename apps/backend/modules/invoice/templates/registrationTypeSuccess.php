@@ -257,17 +257,17 @@ $i++;
          <td><?php  echo  $daytotal1;    $csv_output .= $daytotal1. "\n";   ?></td>
   </tr>
   
-  <tr>
+<!--  <tr>
       <td colspan="34">
 <form name="export" action="exportExcel" method="post">
 <input type="submit" value="Export Data">
-<input type="hidden" value="<? echo $csv_hdr; ?>" name="csv_hdr">
+<input type="hidden" value="<?php // echo $csv_hdr; ?>" name="csv_hdr">
 <input type="hidden" value="Registration_Type" name="file_name">
-<input type="hidden" value="<? echo $csv_output; ?>" name="csv_output">
+<input type="hidden" value="<?php  // echo $csv_output; ?>" name="csv_output">
 </form>
       </td>
       
-  </tr>
+  </tr>-->
   </tbody>
 </table>
  

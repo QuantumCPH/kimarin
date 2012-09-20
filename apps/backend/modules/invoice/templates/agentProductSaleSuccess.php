@@ -342,17 +342,17 @@ $i++;
          <td><?php  echo  $daytotal1A;     $csv_output .= $daytotal1A. "\n";   ?></td>
   </tr>
   
-   <tr>
+<!--   <tr>
       <td colspan="33">
 <form name="export" action="exportExcel" method="post">
 <input type="submit" value="Export Data">
-<input type="hidden" value="<? echo $csv_hdr; ?>" name="csv_hdr">
+<input type="hidden" value="<?php //echo $csv_hdr; ?>" name="csv_hdr">
 <input type="hidden" value="Agent-Product-sale" name="file_name">
-<input type="hidden" value="<? echo $csv_output; ?>" name="csv_output">
+<input type="hidden" value="<?php //echo $csv_output; ?>" name="csv_output">
 </form>
       </td>
       
-  </tr>
+  </tr>-->
   </tbody>
 </table>
  
