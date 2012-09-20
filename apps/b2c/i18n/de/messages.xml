@@ -663,7 +663,7 @@
             </trans-unit>
             <trans-unit id="162" translate="yes" reformat="yes" xml:space="default">
                 <source>Cost &lt;small&gt;(Ex. VAT)&lt;/small&gt;</source>
-                <target>Kosten &lt;small&gt;(Ohne. Mehrwertsteuer)&lt;/small&gt;</target>
+                <target>Kosten &lt;small&gt;(Ohne. IVA)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
                 <source>Call Type</source>
@@ -1988,7 +1988,7 @@
             </trans-unit>
             <trans-unit id="492" translate="yes" reformat="yes" xml:space="default">
                 <source>IVA</source>
-                <target>Mehrwertsteuer</target>
+                <target>IVA</target>
             </trans-unit>
             <trans-unit id="493" translate="yes" reformat="yes" xml:space="default">
                 <source>Charge by Customer Support</source>
@@ -2052,7 +2052,7 @@
             </trans-unit>
             <trans-unit id="508" translate="yes" reformat="yes" xml:space="default">
                 <source>All amounts are excl. IVA.</source>
-                <target>Alle Beträge sind zugüglich Mehrwertsteuer.</target>
+                <target>Alle Beträge sind zugüglich IVA.</target>
             </trans-unit>
             <trans-unit id="509" translate="yes" reformat="yes" xml:space="default">
                 <source>"%value%" is too long (14 characters max).</source>
@@ -2144,7 +2144,7 @@
             </trans-unit>
             <trans-unit id="531" translate="yes" reformat="yes" xml:space="default">
                 <source>All amounts excl. IVA.</source>
-                <target>Alle Beträge zzgl. Mehrwertsteuer</target>
+                <target>Alle Beträge zzgl. IVA</target>
             </trans-unit>
             <trans-unit id="532" translate="yes" reformat="yes" xml:space="default">
                 <source>Charged</source>
