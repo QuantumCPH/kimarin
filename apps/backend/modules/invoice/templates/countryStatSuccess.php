@@ -318,7 +318,7 @@ for ($i = 1; $i <= $totalDays; $i++) {
         </tr>
 
        <tr>
-<td colspan="12">
+<td colspan="30">
 <form name="export" action="exportExcel" method="post">
 <input type="submit" value="Export Data">
 <input type="hidden" value="<?php  echo $csv_hdr;  ?>" name="csv_hdr">
