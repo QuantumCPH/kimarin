@@ -2066,7 +2066,7 @@ class customerActions extends sfActions {
            $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
           }
          
-     echo  "adfdf".    $order_id = $request->getParameter('item_number'); 
+        $order_id = $request->getParameter('item_number'); 
      
         $order = CustomerOrderPeer::retrieveByPK($order_id); 
         $ct = new Criteria();
@@ -2092,14 +2092,14 @@ class customerActions extends sfActions {
 
         $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
 
-        $email2 = new DibsCall();
-        $email2->setCallurl($notify_url);
-
-        $email2->save();
+//        $email2 = new DibsCall();
+//        $email2->setCallurl($notify_url);
+//
+//        $email2->save();
 
         $mobile_number = $request->getParameter('mobile_number');
         $newnumber = $request->getParameter('newnumber');
-        var_dump($order);
+    //    var_dump($order);
         $customerid = $order->getCustomerId();
 
         $changenumberdetail = new ChangeNumberDetail();
