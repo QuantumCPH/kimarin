@@ -2071,7 +2071,7 @@ class customerActions extends sfActions {
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
         $ct = new Criteria();
-        $ct->add(TransationPeer::OrderID,$order_id);
+        $ct->add(TransactionPeer::OrderID,$order_id);
         $transaction = TransactionPeer::doSelectOne($ct);
 
         $item_amount = $request->getParameter('amount');
