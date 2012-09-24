@@ -2070,12 +2070,14 @@ class customerActions extends sfActions {
 
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
+        $ct = new Criteria();
+        $ct->add(TransationPeer::OrderID,$order_id);
+        $transaction = TransactionPeer::doSelectOne($ct);
 
         $item_amount = $request->getParameter('amount');
-        echo $item_amount;
-        die;
+        
         if ($item_amount == "") {
-            $item_amount = number_format($order->getExtraRefill(), 2);
+            $item_amount = $transaction->getAmount();
         }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
 
