@@ -78,7 +78,7 @@ class customerActions extends sfActions {
             if ($availableUniqueCount == 0) {
                 echo $customer->getSimTypeId();
                 // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                emailLib::sendUniqueIdsShortage();
+                emailLib::sendUniqueIdsShortage($customer->getSimTypeId());
                 $this->redirect($this->getTargetUrl() . 'customer/shortUniqueIds');
             }
             $uniqueId = $availableUniqueId->getUniqueNumber();
@@ -308,7 +308,7 @@ class customerActions extends sfActions {
         if ($uniqueId == '') {
             $message_body = "Uniqueid Is not assign Of this Mobile Number $TelintaMobile";
             //Send Email to User/Agent/Support --- when Customer Refilll --- 01/15/11
-            emailLib::sendErrorTelinta($this->customer, $message_body);
+            emailLib::sendErrorTelinta($message_body);
         }
         //This is for Retrieve balance From Telinta
         // $telintaGetBalance = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?action=getbalance&name=' . $uniqueId . '&type=customer');
@@ -2177,6 +2177,24 @@ class customerActions extends sfActions {
             $transaction->setDescription($this->transaction_title);
             $transaction->setVat($this->vat);
             $transaction->save();
+
+            $cst = new Criteria();
+            $cst->add(SimTypesPeer::ID, $simtype->getSimTypeId());
+            $simtype = SimTypesPeer::doSelectOne($cst);
+            $sim_type_id=$simtype->getId();
+
+            $uc = new Criteria();
+            $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+            $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
+            $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+            $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
+
+            if($availableUniqueCount  == 0){
+                // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
+                emailLib::sendUniqueIdsShortage($sim_type_id);
+                $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+            }
 
            
         }
