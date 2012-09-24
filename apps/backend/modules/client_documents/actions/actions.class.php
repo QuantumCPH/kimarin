@@ -12,11 +12,11 @@ class client_documentsActions extends sfActions
 {	
   public function executeIndex(sfWebRequest $request)
   {
-  	$DB_Server 	= "localhost";
-	$DB_Username 	= "root";
-	$DB_Password 	= "@wsxzaQ1";
-        //$DB_Password 	= "";
-	$DB_DBName   	= "kimarin";
+  	$DB_Server 	= sfConfig::get("app_db_server");
+	$DB_Username 	= sfConfig::get("app_db_username");
+	$DB_Password 	= sfConfig::get("app_db_password");
+	$DB_DBName   	= sfConfig::get("app_db_name");
+        
 	$success= mysql_pconnect($DB_Server, $DB_Username, $DB_Password);	
 	mysql_select_db($DB_DBName);
             
@@ -30,11 +30,11 @@ class client_documentsActions extends sfActions
   public function executeCreate(sfWebRequest $request)
   {
   	
-	$DB_Server 	= "localhost";
-	$DB_Username 	= "root";
-	$DB_Password 	= "@wsxzaQ1";
-        //$DB_Password 	= "";
-	$DB_DBName   	= "kimarin";
+	$DB_Server 	= sfConfig::get("app_db_server");
+	$DB_Username 	= sfConfig::get("app_db_username");
+	$DB_Password 	= sfConfig::get("app_db_password");
+	$DB_DBName   	= sfConfig::get("app_db_name");
+        
 	$success= mysql_pconnect($DB_Server, $DB_Username, $DB_Password);	
 	mysql_select_db($DB_DBName);
 	
@@ -65,11 +65,11 @@ class client_documentsActions extends sfActions
   {
   	$EditId = $request->getParameter('id');
 	$this->editId = $EditId;
-  	$DB_Server 	= "localhost";
-	$DB_Username 	= "root";
-	$DB_Password 	= "@wsxzaQ1";
-        //$DB_Password 	= "";
-	$DB_DBName   	= "kimarin";
+  	$DB_Server 	= sfConfig::get("app_db_server");
+	$DB_Username 	= sfConfig::get("app_db_username");
+	$DB_Password 	= sfConfig::get("app_db_password");
+	$DB_DBName   	= sfConfig::get("app_db_name");
+        
 	$success= mysql_pconnect($DB_Server, $DB_Username, $DB_Password);	
 	mysql_select_db($DB_DBName);
 	$editid = $request->getParameter('id');	
@@ -105,11 +105,11 @@ class client_documentsActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-  	$DB_Server 	= "localhost";
-	$DB_Username 	= "root";
-	$DB_Password 	= "@wsxzaQ1";
-        //$DB_Password 	= "";
-	$DB_DBName   	= "kimarin";
+  	$DB_Server 	= sfConfig::get("app_db_server");
+	$DB_Username 	= sfConfig::get("app_db_username");
+	$DB_Password 	= sfConfig::get("app_db_password");
+	$DB_DBName   	= sfConfig::get("app_db_name");
+        
 	$success= mysql_pconnect($DB_Server, $DB_Username, $DB_Password);	
 	mysql_select_db($DB_DBName);
 	
