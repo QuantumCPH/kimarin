@@ -15,13 +15,13 @@
      <div class="form-row">
          <label> Start date/time</label> 
          <div class="content">
-           <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 90px;"  />
+           <input type="text"   name="startdate" autocomplete="off" id="stdate" style="width: 90px;"  />
          </div>
      </div>    
      <div class="form-row">
        <label>  End date/time</label> 
        <div class="content">
-           <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 90px;"  />
+           <input type="text"   name="enddate" autocomplete="off" id="endate" style="width: 90px;"  />
        </div>    
      </div>   
      <div class="form-row">
