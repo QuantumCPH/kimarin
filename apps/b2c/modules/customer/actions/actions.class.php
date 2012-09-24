@@ -2075,7 +2075,7 @@ class customerActions extends sfActions {
         $transaction = TransactionPeer::doSelectOne($ct);
        
         $item_amount = $request->getParameter('amount');
-         echo $transaction->getAmount();die;
+        // echo $transaction->getAmount();die;
         if ($item_amount == "") {
             $item_amount = $transaction->getAmount();
         }
