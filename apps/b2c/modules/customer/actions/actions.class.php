@@ -2005,7 +2005,7 @@ class customerActions extends sfActions {
         $existingNumber = $this->customer->getMobileNumber();
         $this->newNumber = $request->getParameter('newNumber');
         $newNumber = $this->newNumber;
-        $product_id = $request->getParameter('productid');
+        $product_id = $request->getParameter('product');
         $this->product = ProductPeer::retrieveByPK($product_id);
 
         $this->vat = $this->product->getRegistrationFee() * sfConfig::get('app_vat_percentage');
