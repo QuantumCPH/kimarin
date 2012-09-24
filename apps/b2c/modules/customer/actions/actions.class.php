@@ -2070,6 +2070,8 @@ class customerActions extends sfActions {
 
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
+        echo $request->getParameter('amount');
+        die;
 
         $item_amount = $request->getParameter('amount');
         if ($item_amount == "") {
