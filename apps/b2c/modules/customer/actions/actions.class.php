@@ -2068,16 +2068,24 @@ class customerActions extends sfActions {
         
         $order_id = $request->getParameter('item_number'); 
 
-
-        $order = CustomerOrderPeer::retrieveByPK($order_id);
         $ct = new Criteria();
-        $ct->add(TransactionPeer::ORDER_ID,$order_id);
-        $transaction = TransactionPeer::doSelectOne($ct);
-       
+        $ct->add(TransactionPeer::ORDER_ID, $order_id);
+        $tCount = TransactionPeer::doCount($ct);
+        if ($tCount > 0) {
+            $transaction = TransactionPeer::doSelectOne($ct);
+            $item_name = $transaction->getDescription();
+            $transaction_amount = $transaction->getAmount();
+        } else {
+            $item_name = "Fee for change number";
+        }
+        
+        echo $transaction_amount;
+        $order = CustomerOrderPeer::retrieveByPK($order_id);               
         $item_amount = $request->getParameter('amount');
-         echo $transaction->getAmount();
-        if ($item_amount == "") {echo $transaction->getAmount();die;
-            $item_amount = $transaction->getAmount();
+        
+        
+        if ($item_amount == "") {
+            $item_amount = $transaction_amount;
         }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
 
@@ -2101,15 +2109,7 @@ class customerActions extends sfActions {
 
         $querystring = '';
 
-        $ct = new Criteria();
-        $ct->add(TransactionPeer::ORDER_ID, $order_id);
-        $tCount = TransactionPeer::doCount($ct);
-        if ($tCount > 0) {
-            $transaction = TransactionPeer::doSelectOne($ct);
-            $item_name = $transaction->getDescription();
-        } else {
-            $item_name = "Fee for change number";
-        }
+        
 
 
         //loop for posted values and append to querystring
