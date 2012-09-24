@@ -2059,15 +2059,16 @@ class customerActions extends sfActions {
         
           if($lang=='en'){
               
-        $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
-        $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
+           $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
+           $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
           }else{
-         $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
-        $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
+           $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
+           $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
           }
-        
+         
      echo      $order_id = $request->getParameter('item_number'); 
-
+     
+        $order = CustomerOrderPeer::retrieveByPK($order_id); 
         $ct = new Criteria();
         $ct->add(TransactionPeer::ORDER_ID, $order_id);
         $tCount = TransactionPeer::doCount($ct);
@@ -2080,7 +2081,7 @@ class customerActions extends sfActions {
         }
         
         
-        $order = CustomerOrderPeer::retrieveByPK($order_id);               
+                     
         $item_amount = $request->getParameter('amount');
         
         
