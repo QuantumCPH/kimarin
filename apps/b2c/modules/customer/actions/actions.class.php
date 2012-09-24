@@ -2009,6 +2009,7 @@ class customerActions extends sfActions {
         $this->product = ProductPeer::retrieveByPK($product_id);
 
         $this->vat = $this->product->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+
         $this->amount = $this->product->getRegistrationFee() + $this->vat;
         $amount = $this->amount;
         $this->countrycode = sfConfig::get('app_country_code');
@@ -2058,33 +2059,47 @@ class customerActions extends sfActions {
         
           if($lang=='en'){
               
-        $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
-        $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
+           $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
+           $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
           }else{
-         $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
-        $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
+           $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
+           $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
           }
-        
+         
         $order_id = $request->getParameter('item_number'); 
-
-
-        $order = CustomerOrderPeer::retrieveByPK($order_id);
-
+     
+        $order = CustomerOrderPeer::retrieveByPK($order_id); 
+        $ct = new Criteria();
+        $ct->add(TransactionPeer::ORDER_ID, $order_id);
+        $tCount = TransactionPeer::doCount($ct);
+        if ($tCount > 0) {
+            $transaction = TransactionPeer::doSelectOne($ct);
+            $item_name = $transaction->getDescription();
+            $transaction_amount = $transaction->getAmount();
+        } else {
+            $item_name = "Fee for change number";
+        }
+        
+        
+                     
         $item_amount = $request->getParameter('amount');
+        
+        
         if ($item_amount == "") {
-            $item_amount = number_format($order->getExtraRefill(), 2);
+            $item_amount = $transaction_amount;
         }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
 
         $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
 
-        $email2 = new DibsCall();
-        $email2->setCallurl($notify_url);
-
-        $email2->save();
+//        $email2 = new DibsCall();
+//        $email2->setCallurl($notify_url);
+//
+//        $email2->save();
 
         $mobile_number = $request->getParameter('mobile_number');
         $newnumber = $request->getParameter('newnumber');
+    //    var_dump($order);
         $customerid = $order->getCustomerId();
 
         $changenumberdetail = new ChangeNumberDetail();
@@ -2096,15 +2111,7 @@ class customerActions extends sfActions {
 
         $querystring = '';
 
-        $ct = new Criteria();
-        $ct->add(TransactionPeer::ORDER_ID, $order_id);
-        $tCount = TransactionPeer::doCount($ct);
-        if ($tCount > 0) {
-            $transaction = TransactionPeer::doSelectOne($ct);
-            $item_name = $transaction->getDescription();
-        } else {
-            $item_name = "Fee for change number";
-        }
+        
 
 
         //loop for posted values and append to querystring
