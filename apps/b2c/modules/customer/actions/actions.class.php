@@ -2073,12 +2073,12 @@ class customerActions extends sfActions {
         $ct = new Criteria();
         $ct->add(TransactionPeer::ORDER_ID,$order_id);
         $transaction = TransactionPeer::doSelectOne($ct);
-
+       
         $item_amount = $request->getParameter('amount');
-        
+         
         if ($item_amount == "") {
             $item_amount = $transaction->getAmount();
-        }
+        }echo $transaction->getAmount();die;
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
 
         $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
