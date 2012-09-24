@@ -2079,9 +2079,9 @@ class customerActions extends sfActions {
             $item_name = "Fee for change number";
         }
         
-        echo $transaction_amount;
+        
         $order = CustomerOrderPeer::retrieveByPK($order_id);               
-        $item_amount = $request->getParameter('amount');
+     echo   $item_amount = $request->getParameter('amount');
         
         
         if ($item_amount == "") {
