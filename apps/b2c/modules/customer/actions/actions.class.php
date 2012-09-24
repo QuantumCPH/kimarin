@@ -2070,10 +2070,10 @@ class customerActions extends sfActions {
 
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
-        echo $request->getParameter('amount');
-        die;
 
         $item_amount = $request->getParameter('amount');
+        echo $item_amount;
+        die;
         if ($item_amount == "") {
             $item_amount = number_format($order->getExtraRefill(), 2);
         }
