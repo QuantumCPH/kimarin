@@ -2075,10 +2075,10 @@ class customerActions extends sfActions {
         $transaction = TransactionPeer::doSelectOne($ct);
        
         $item_amount = $request->getParameter('amount');
-         
+         echo $transaction->getAmount();die;
         if ($item_amount == "") {
             $item_amount = $transaction->getAmount();
-        }echo $transaction->getAmount();die;
+        }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
 
         $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
