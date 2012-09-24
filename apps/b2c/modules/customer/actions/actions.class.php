@@ -1127,7 +1127,7 @@ class customerActions extends sfActions {
                             if ($this->getUser()->getCulture() != $lang->getLanguageCode()) {
                                 if ($lang->getLanguageCode() == "en") {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
-                                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
+                                   echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
                                 } else {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
                                     echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html'</script>";

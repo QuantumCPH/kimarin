@@ -121,20 +121,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
 </table>
 
-<p style="font-weight: bold;">
+<p style='font-weight: bold; font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
         <br><?php echo __('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
         <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
-<!--<p>
-	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
-	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
-</p>
-
-<p><?php echo __('Cheers') ?></p>
-
-<p>
-<?php echo __('Support') ?><br />
-<?php echo sfConfig::get('app_site_title')?> 
-</p>-->
