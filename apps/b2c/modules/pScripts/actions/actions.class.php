@@ -3091,8 +3091,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
                         if($availableUniqueCount  == 0){
                             // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                            emailLib::sendUniqueIdsShortage();
-                            $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+                            emailLib::sendUniqueIdsShortage($this->customer->getSimTypeId());
+                            exit;
+                            //$this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
                         }
                         $uniqueId = $availableUniqueId->getUniqueNumber();
                         $this->customer->setUniqueid($uniqueId);
@@ -3817,7 +3818,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $cst = new Criteria();
         $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
-       echo $sim_type_id=$simtype->getId();
+        echo $sim_type_id=$simtype->getId();
         $exest = $order->getExeStatus();
         if ($exest!=1) {
 
@@ -3836,8 +3837,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
             if($availableUniqueCount  == 0){
                 // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                emailLib::sendUniqueIdsShortage();
-                $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+                emailLib::sendUniqueIdsShortage($sim_type_id);
+                exit;
+                //$this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
             }
 
             $callbacklog = new CallbackLog();
