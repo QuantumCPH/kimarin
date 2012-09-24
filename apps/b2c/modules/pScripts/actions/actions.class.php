@@ -3481,6 +3481,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                $order = new CustomerOrder();
                $order->setExtraRefill(-$balance);
                $order->setCustomerId($customer->getId());
+               $order->setProductId(17);
                $order->setOrderStatusId(3);
                $order->setIsFirstOrder(10);  //// product type remove 
                $order->save();
@@ -3488,6 +3489,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                $transaction = new Transaction();
                $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
                $transaction->setAmount(-$balance);
+               $transaction->setOrderId($order->getId());
                $transaction->setTransactionStatusId(3);
                $transaction->setCustomerId($customer->getId());
                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
