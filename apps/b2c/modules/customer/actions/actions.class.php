@@ -2066,7 +2066,7 @@ class customerActions extends sfActions {
            $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
           }
          
-     echo      $order_id = $request->getParameter('item_number'); 
+     echo  "adfdf".    $order_id = $request->getParameter('item_number'); 
      
         $order = CustomerOrderPeer::retrieveByPK($order_id); 
         $ct = new Criteria();
