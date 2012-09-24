@@ -2076,7 +2076,7 @@ class customerActions extends sfActions {
        
         $item_amount = $request->getParameter('amount');
         // echo $transaction->getAmount();die;
-        if ($item_amount == "") {
+        if ($item_amount == "") {echo $transaction->getAmount();die;
             $item_amount = $transaction->getAmount();
         }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
