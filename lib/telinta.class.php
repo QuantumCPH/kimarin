@@ -16,7 +16,7 @@ set_time_limit(10000000);
 class Telienta {
 
     private static $currency = 'EUR';
-    private static $iParentReseller = 82829;
+    private static $iParentReseller = 90673;
     private static $iParentUS = 82214;
     private static $a_iProduct = 11803;
     private static $cb_iProduct = 11804;
@@ -53,7 +53,7 @@ class Telienta {
                                 )));
             } catch (SoapFault $e) {
                 if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                    emailLib::sendErrorInTelinta("Error in Customer Registration", "We have faced an issue in Customer registration on telinta. this is the error for cusotmer with  id: " . $customer->getId() . " and error is " . $e->faultstring . "  <br/> Please Investigate.");
+                    emailLib::sendErrorInTelinta("Error in Customer Registration", "We have faced an issue in Customer registration on telinta. This is the error for cusotmer with Id: " . $customer->getId() . " and error is " . $e->faultstring . ".  <br/> Please Investigate.");
 
                     return false;
                 }
@@ -62,7 +62,7 @@ class Telienta {
             $retry_count++;
         }
         if ($retry_count == $max_retries) {
-            emailLib::sendErrorInTelinta("Error in Customer Registration", "We have faced an issue in Customer registration on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+            emailLib::sendErrorInTelinta("Error in Customer Registration", "We have faced an issue in Customer registration on telinta. This is the error for cusotmer with Id: " . $customer->getId() . ". Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
             return false;
         }
 
@@ -112,7 +112,7 @@ class Telienta {
                                     )));
                 } catch (SoapFault $e) {
                     if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                        emailLib::sendErrorInTelinta("Account update_account_followme: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account update_account_followme on telinta. this is the error for cusotmer with  id: " . $customer->getId() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                        emailLib::sendErrorInTelinta("Account update_account_followme: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account update_account_followme on telinta. this is the error for cusotmer with  id: " . $customer->getId() . " error is " . $e->faultstring . ".  <br/> Please Investigate.");
 
                         return false;
                     }
@@ -123,7 +123,7 @@ class Telienta {
                 $retry_count++;
             }
             if ($retry_count == $max_retries) {
-                emailLib::sendErrorInTelinta("Account update_followme_number: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account update_followme_number on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+                emailLib::sendErrorInTelinta("Account update_followme_number: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account update_followme_number on telinta. Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
                 return false;
             }
 
@@ -145,7 +145,7 @@ class Telienta {
                             ));
                 } catch (SoapFault $e) {
                     if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                        emailLib::sendErrorInTelinta("Account add_followme_number: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account add_followme_number on telinta. this is the error for cusotmer with  id: " . $customer->getId() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                        emailLib::sendErrorInTelinta("Account add_followme_number: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account add_followme_number on telinta. this is the error for cusotmer with  id: " . $customer->getId() . " error is " . $e->faultstring . ".  <br/> Please Investigate.");
 
                         return false;
                     }
@@ -154,7 +154,7 @@ class Telienta {
                 $retry_count++;
             }
             if ($retry_count == $max_retries) {
-                emailLib::sendErrorInTelinta("Account add_followme_number: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account add_followme_number on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+                emailLib::sendErrorInTelinta("Account add_followme_number: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account add_followme_number on telinta. Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
                 return false;
             }
         }
@@ -172,7 +172,7 @@ class Telienta {
                 $account = $pb->terminate_account(array('i_account' => $telintaAccount->getIAccount()));
             } catch (SoapFault $e) {
                 if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                    emailLib::sendErrorInTelinta("Account Deletion: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account Deletion on telinta. this is the error for cusotmer with  id: " . $telintaAccount->getIAccount() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                    emailLib::sendErrorInTelinta("Account Deletion: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account Deletion on telinta. This is the error for cusotmer with IAccount: " . $telintaAccount->getIAccount() . " and error is " . $e->faultstring . ".  <br/> Please Investigate.");
 
                     return false;
                 }
@@ -181,7 +181,7 @@ class Telienta {
             $retry_count++;
         }
         if ($retry_count == $max_retries) {
-            emailLib::sendErrorInTelinta("Account Deletion: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account Deletion on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+            emailLib::sendErrorInTelinta("Account Deletion: " . $telintaAccount->getIAccount() . " Error!", "We have faced an issue in Customer Account Deletion on telinta. This is the error for cusotmer with IAccount: " . $telintaAccount->getIAccount() . ". Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
             return false;
         }
 
@@ -205,7 +205,7 @@ class Telienta {
                         ));
             } catch (SoapFault $e) {
                 if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                    emailLib::sendErrorInTelinta("Error in getBalance", "We have faced an issue on Success in getBalnace on telinta. this is the error for cusotmer with  id: " . $customer->getId() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                    emailLib::sendErrorInTelinta("Error in Get Balance", "We have faced an issue on Success in getBalnace on telinta. This is the error for cusotmer with Id: " . $customer->getId() . " and error is " . $e->faultstring . ".  <br/> Please Investigate.");
 
                     return false;
                 }
@@ -214,7 +214,7 @@ class Telienta {
             $retry_count++;
         }
         if ($retry_count == $max_retries) {
-            emailLib::sendErrorInTelinta("Error in getBalance", "We have faced an issue on Success in getBalnace on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+            emailLib::sendErrorInTelinta("Error in Get Balance", "We have faced an issue on Success in getBalnace on telinta. This is the error for cusotmer with Id: " . $customer->getId() . ". Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
             return false;
         }
         $Balance = $cInfo->customer_info->balance;
@@ -272,7 +272,7 @@ class Telienta {
             } catch (SoapFault $e) {
                 if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
 
-                    emailLib::sendErrorInTelinta("Customer Call History: " . $icustomer . " Error!", "We have faced an issue with Customer while Fetching Call History  this is the error for cusotmer with  ICustomer: " . $icustomer . " and the i_service is: " . $iService . "error is " . $e->faultstring . "  <br/> Please Investigate.");
+                    emailLib::sendErrorInTelinta("Customer Call History: " . $icustomer . " Error!", "We have faced an issue with Customer while Fetching Call History. This is the error for cusotmer with ICustomer: " . $icustomer . " and the i_service is: " . $iService . " and error is " . $e->faultstring . ".  <br/> Please Investigate.");
                     return false;
                 }
             }
@@ -280,7 +280,7 @@ class Telienta {
             $retry_count++;
         }
         if ($retry_count == $max_retries) {
-            emailLib::sendErrorInTelinta("Customer Call History: " . $icustomer . " Error!", "We have faced an issue with Customer while Fetching Call History on telinta.  and the i_service is:" . $iService . " .Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+            emailLib::sendErrorInTelinta("Customer Call History: " . $icustomer . " Error!", "We have faced an issue with Customer while Fetching Call History on telinta. This is the error for cusotmer with ICustomer: " . $icustomer . " and the i_service is: " . $iService . ". Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
             return false;
         }
 
@@ -357,7 +357,7 @@ class Telienta {
                                 )));
             } catch (SoapFault $e) {
                 if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                    emailLib::sendErrorInTelinta("Account Creation: " . $accountName . " Error!", "We have faced an issue in Customer Account Creation on telinta. this is the error for cusotmer with  id: " . $customer->getId() . " and on Account " . $accountName . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                    emailLib::sendErrorInTelinta("Account Creation: " . $accountName . " Error!", "We have faced an issue in Customer Account Creation on telinta. This is the error for cusotmer with Id: " . $customer->getId() . " and on Account " . $accountName . " and error is " . $e->faultstring . ".  <br/> Please Investigate.");
 
                     return false;
                 }
@@ -366,7 +366,7 @@ class Telienta {
             $retry_count++;
         }
         if ($retry_count == $max_retries) {
-            emailLib::sendErrorInTelinta("Account Creation: " . $accountName . " Error!", "We have faced an issue in Customer Account Creation on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+            emailLib::sendErrorInTelinta("Account Creation: " . $accountName . " Error!", "We have faced an issue in Customer Account Creation on telinta. This is the error for cusotmer with Id: " . $customer->getId() . " and on Account " . $accountName . ". Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
             return false;
         }
 
@@ -401,7 +401,7 @@ class Telienta {
                         ));
             } catch (SoapFault $e) {
                 if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                    emailLib::sendErrorInTelinta("Customer Transcation: " . $customer->getId() . " Error!", "We have faced an issue with Customer while making transaction " . $action . " with balance:" . $amount . " this is the error for cusotmer with  Customer ID: " . $customer->getId() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                    emailLib::sendErrorInTelinta("Customer Transcation: " . $customer->getId() . " Error!", "We have faced an issue with Customer while making transaction " . $action . " with balance: " . $amount . ". This is the error for cusotmer with Customer ID: " . $customer->getId() . " and error is " . $e->faultstring . ".  <br/> Please Investigate.");
 
                     return false;
                 }
@@ -410,7 +410,7 @@ class Telienta {
             $retry_count++;
         }
         if ($retry_count == $max_retries) {
-            emailLib::sendErrorInTelinta("Customer Transcation: " . $customer->getId() . " Error!", "We have faced an issue with Customer while making transaction on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+            emailLib::sendErrorInTelinta("Customer Transcation: " . $customer->getId() . " Error!", "We have faced an issue with Customer while making transaction " . $action . " with balance: " . $amount . ". This is the error for cusotmer with Customer ID: " . $customer->getId() . ". Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
             return false;
         }
 
@@ -432,7 +432,7 @@ class Telienta {
                 $account = $pb->update_account(array('account_info' => $accountInfo));
             } catch (SoapFault $e) {
                 if ($e->faultstring != 'Could not connect to host') {
-                    emailLib::sendErrorInTelinta("Account Update: " . $accountInfo['i_account'] . " Error!", "We have faced an issue in Customer Account updation on telinta. this is the error fo Account" . $accountTitle . " error is " . $e->faultstring . " <br/> Please Investigate.");
+                    emailLib::sendErrorInTelinta("Account Update: " . $accountInfo['i_account'] . " Error!", "We have faced an issue in Customer Account updation on telinta. This is the error for Account " . $accountInfo['i_account'] . " and error is " . $e->faultstring . ". <br/> Please Investigate.");
                     return false;
                 }
             }
@@ -440,7 +440,7 @@ class Telienta {
             $retry_count++;
         }
         if ($retry_count == $max_retries) {
-            emailLib::sendErrorInTelinta("Account Update: " . $accountInfo['i_account'] . " Error!", "We have faced an issue in Customer Account updation on telinta. Error is Even After Max Retries" . $max_retries . " <br/> Please Investigate.");
+            emailLib::sendErrorInTelinta("Account Update: " . $accountInfo['i_account'] . " Error!", "We have faced an issue in Customer Account updation on telinta. This is the error for Account " . $accountInfo['i_account']. ". Error is Even After Max Retries " . $max_retries . ". <br/> Please Investigate.");
             return false;
         }
         return true;

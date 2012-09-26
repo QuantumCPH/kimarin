@@ -70,15 +70,12 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;'>
   <tr bgcolor="#CCCCCC" class="receipt_header">
       <th colspan="3" align="left" style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;text-transform: uppercase;'><?php echo __('Order Receipt') ?>
-        <?php if ($order->getIsFirstOrder())
+        <?php if ($order->getIsFirstOrder()==1)
     {
 		echo $order->getProduct()->getName() .
-		'<br />['. $transaction->getDescription() .']';
+		'<br />['. __($transaction->getDescription()) .']';
     }
-    else
-    {
-		//echo $transaction->getDescription();
-    }
+    
     ?>
         </th>
     <th style='font-family:"Times New Roman", Times, serif;font-size: 14px; font-weight: bold;text-transform: uppercase;'><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
@@ -93,7 +90,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	
         $TDI=$transaction->getTransactionDescriptionId(); ?>
       <br /><br />
-      <?php echo __('Mobile Number') ?>: <br />
+      <?php echo __('Mobile number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?>   <br/>
       <?php //echo __('Paid Through'); ?> <?php //echo __('Agent'); ?>
     </td>
@@ -161,7 +158,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   <?php
   //echo $postalcharge.'ss';
   
-  if(@$postalcharge && $order->getIsFirstOrder()){?>
+  if(@$postalcharge && $order->getIsFirstOrder()==1){?>
   <tr class="footer">
     <td></td>
     <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
@@ -182,12 +179,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
                          
                      }elseif($TDI==10){
                            echo  "0.00" ;   
-                     }else{ if(@$postalcharge && $order->getIsFirstOrder()){         echo number_format($transaction->getAmount()+@$postalcharge,2); }else{ echo number_format($transaction->getAmount(),2);    }  } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
+                     }else{ if(@$postalcharge && $order->getIsFirstOrder()==1){         echo number_format($transaction->getAmount()+@$postalcharge,2); }else{ echo number_format($transaction->getAmount(),2);    }  } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
 
   </tr>
-  
-  
-  
+   
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
@@ -214,22 +209,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?>
 </p>
 <?php endif; ?>
+ 
 
-<p style="font-weight: bold;">
+<p style='font-weight: bold; font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+ 
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
         <br><?php echo __('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
         <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
 
-<!--<p>
-	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
-	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
-</p>
-
-<p><?php echo __('Cheers') ?></p>
-
-<p>
-<?php echo __('Support') ?><br />
-<?php echo sfConfig::get('app_site_title')?>
-</p>-->
