@@ -78,7 +78,7 @@ class customerActions extends sfActions {
             if ($availableUniqueCount == 0) {
                 echo $customer->getSimTypeId();
                 // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                emailLib::sendUniqueIdsShortage();
+                emailLib::sendUniqueIdsShortage($customer->getSimTypeId());
                 $this->redirect($this->getTargetUrl() . 'customer/shortUniqueIds');
             }
             $uniqueId = $availableUniqueId->getUniqueNumber();
@@ -308,7 +308,7 @@ class customerActions extends sfActions {
         if ($uniqueId == '') {
             $message_body = "Uniqueid Is not assign Of this Mobile Number $TelintaMobile";
             //Send Email to User/Agent/Support --- when Customer Refilll --- 01/15/11
-            emailLib::sendErrorTelinta($this->customer, $message_body);
+            emailLib::sendErrorTelinta($message_body);
         }
         //This is for Retrieve balance From Telinta
         // $telintaGetBalance = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?action=getbalance&name=' . $uniqueId . '&type=customer');
@@ -1127,7 +1127,7 @@ class customerActions extends sfActions {
                             if ($this->getUser()->getCulture() != $lang->getLanguageCode()) {
                                 if ($lang->getLanguageCode() == "en") {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
-                                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
+                                   echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
                                 } else {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
                                     echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html'</script>";
@@ -2009,6 +2009,7 @@ class customerActions extends sfActions {
         $this->product = ProductPeer::retrieveByPK($product_id);
 
         $this->vat = $this->product->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+
         $this->amount = $this->product->getRegistrationFee() + $this->vat;
         $amount = $this->amount;
         $this->countrycode = sfConfig::get('app_country_code');
@@ -2058,33 +2059,47 @@ class customerActions extends sfActions {
         
           if($lang=='en'){
               
-        $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
-        $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
+           $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
+           $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
           }else{
-         $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
-        $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
+           $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
+           $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
           }
-        
+         
         $order_id = $request->getParameter('item_number'); 
-
-
-        $order = CustomerOrderPeer::retrieveByPK($order_id);
-
+     
+        $order = CustomerOrderPeer::retrieveByPK($order_id); 
+        $ct = new Criteria();
+        $ct->add(TransactionPeer::ORDER_ID, $order_id);
+        $tCount = TransactionPeer::doCount($ct);
+        if ($tCount > 0) {
+            $transaction = TransactionPeer::doSelectOne($ct);
+            $item_name = $transaction->getDescription();
+            $transaction_amount = $transaction->getAmount();
+        } else {
+            $item_name = "Fee for change number";
+        }
+        
+        
+                     
         $item_amount = $request->getParameter('amount');
+        
+        
         if ($item_amount == "") {
-            $item_amount = number_format($order->getExtraRefill(), 2);
+            $item_amount = $transaction_amount;
         }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
 
         $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
 
-        $email2 = new DibsCall();
-        $email2->setCallurl($notify_url);
-
-        $email2->save();
+//        $email2 = new DibsCall();
+//        $email2->setCallurl($notify_url);
+//
+//        $email2->save();
 
         $mobile_number = $request->getParameter('mobile_number');
         $newnumber = $request->getParameter('newnumber');
+    //    var_dump($order);
         $customerid = $order->getCustomerId();
 
         $changenumberdetail = new ChangeNumberDetail();
@@ -2096,15 +2111,7 @@ class customerActions extends sfActions {
 
         $querystring = '';
 
-        $ct = new Criteria();
-        $ct->add(TransactionPeer::ORDER_ID, $order_id);
-        $tCount = TransactionPeer::doCount($ct);
-        if ($tCount > 0) {
-            $transaction = TransactionPeer::doSelectOne($ct);
-            $item_name = $transaction->getDescription();
-        } else {
-            $item_name = "Fee for change number";
-        }
+        
 
 
         //loop for posted values and append to querystring
@@ -2177,6 +2184,24 @@ class customerActions extends sfActions {
             $transaction->setDescription($this->transaction_title);
             $transaction->setVat($this->vat);
             $transaction->save();
+
+            $cst = new Criteria();
+            $cst->add(SimTypesPeer::ID, $simtype->getSimTypeId());
+            $simtype = SimTypesPeer::doSelectOne($cst);
+            $sim_type_id=$simtype->getId();
+
+            $uc = new Criteria();
+            $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+            $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
+            $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+            $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
+
+            if($availableUniqueCount  == 0){
+                // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
+                emailLib::sendUniqueIdsShortage($sim_type_id);
+                $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+            }
 
            
         }
