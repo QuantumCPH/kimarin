@@ -329,7 +329,7 @@ class customerActions extends sfActions {
         $cp->addAnd(ProductPeer::INCLUDE_IN_ZEROCALL,1, Criteria::EQUAL);
         $this->activeproducts = ProductPeer::doCount($cp);
         
-        echo $this->activeproducts;
+        //echo $this->activeproducts;
     }
 
     //This Function add Again new Feature Wls2 --
