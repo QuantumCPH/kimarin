@@ -2,7 +2,8 @@
 	use_helper('Number');
 	$sf_user->setCulture('da_DK');
        
-      
+      $csv_hdr="";
+ $csv_output="";
         
 ?>
 <div id="sf_admin_container"><h3>Report on Dates  From :  <?php  echo date('d-m-Y H:i:s', strtotime($startdate)); ?>     To : <?php  echo date('d-m-Y H:i:s', strtotime($enddate)); ?></h3></div>
@@ -14,13 +15,13 @@
      <div class="form-row">
          <label> Start date/time</label> 
          <div class="content">
-           <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 90px;"  />
+           <input type="text"   name="startdate" autocomplete="off" id="stdate" style="width: 90px;"  />
          </div>
      </div>    
      <div class="form-row">
        <label>  End date/time</label> 
        <div class="content">
-           <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 90px;"  />
+           <input type="text"   name="enddate" autocomplete="off" id="endate" style="width: 90px;"  />
        </div>    
      </div>   
      <div class="form-row">
@@ -50,8 +51,11 @@
   while ($rowObj = $statement->fetch(PDO::FETCH_OBJ))
     {
    
-   ?>
-        <tr class="headings"><th colspan="12"> Customer Registered Through <?php  echo $rowObj->description; ?></th></tr><br/>
+   ?>  <?php
+
+ $csv_hdr = "Customer Id,First Name,Last Name,Mobile No,Password,Address,City,PO-BOX,Email,Created At,Unique ID,Product Name";    ?>   
+    
+        <tr class="headings"><th colspan="12">Customer Registered Through <?php  echo $rowObj->description;    $csv_output .="Customer Registered Through".$rowObj->description.",,,,,,,,,,\n";  ?></th></tr><br/>
         <tr class="headings">
              <th>Customer Id</th>
             <th>First Name</th>
@@ -81,22 +85,24 @@
         $class= 'class="odd"';
     } ?>
       <tr  <?php echo $class;?>>
-            <td> <?php  echo $rowObjs->id; ?></td>
-            <td><?php  echo $rowObjs->first_name; ?></td>
-            <td><?php  echo $rowObjs->last_name; ?></td>
-            <td><?php  echo $rowObjs->mobile_number; ?></td>
-            <td><?php  echo $rowObjs->plain_text; ?></td>
-            <td><?php  echo $rowObjs->address; ?></td>
-            <td><?php  echo $rowObjs->city; ?></td>
-            <td><?php  echo $rowObjs->po_box_number; ?></td>
-            <td><?php  echo $rowObjs->email; ?></td>
-            <td><?php  echo $rowObjs->created_at; ?></td>
-            <td><?php  echo $rowObjs->uniqueid; ?></td>
-            <td><?php    $conn = Propel::getConnection();
+          
+          <?php      $conn = Propel::getConnection();
      $querycp = 'select p.name from product as p left join  customer_product  as cp on p.id=cp.product_id where cp.customer_id="'.$rowObjs->id.'"  and p.product_type_id=1';
     $statementcp = $conn->prepare($querycp);
     $statementcp->execute();
-  $rowObjcp = $statementcp->fetch(PDO::FETCH_OBJ);     echo $rowObjcp->name;          ?></td>
+  $rowObjcp = $statementcp->fetch(PDO::FETCH_OBJ);  ?>
+            <td> <?php  echo $rowObjs->id;      $csv_output .= $rowObjs->id.", ";  ?></td>
+            <td><?php  echo $rowObjs->first_name;   $csv_output .= $rowObjs->first_name.", ";  ?></td>
+            <td><?php  echo $rowObjs->last_name;  $csv_output .= $rowObjs->last_name.", ";  ?></td>
+            <td><?php  echo $rowObjs->mobile_number;  $csv_output .= $rowObjs->mobile_number.", ";  ?></td>
+            <td><?php  echo $rowObjs->plain_text;  $csv_output .= $rowObjs->plain_text.", ";  ?></td>
+            <td><?php  echo $rowObjs->address;  $csv_output .= $rowObjs->address.", ";  ?></td>
+            <td><?php  echo $rowObjs->city;  $csv_output .= $rowObjs->city.", ";  ?></td>
+            <td><?php  echo $rowObjs->po_box_number;  $csv_output .= $rowObjs->po_box_number.", ";  ?></td>
+            <td><?php  echo $rowObjs->email;  $csv_output .= $rowObjs->email.", ";  ?></td>
+            <td><?php  echo $rowObjs->created_at;  $csv_output .= $rowObjs->created_at.", ";  ?></td>
+            <td><?php  echo $rowObjs->uniqueid;  $csv_output .= $rowObjs->uniqueid.", ";  ?></td>
+            <td><?php    echo $rowObjcp->name;     $csv_output .= $rowObjcp->name."\n";      ?></td>
            
         </tr> 
         
@@ -125,7 +131,7 @@
     {
    
    ?>
-        <tr class="headings"><th colspan="12"> Not Completed Customer Registered Through <?php  echo $rowObj->description; ?></th></tr><br/>
+        <tr class="headings"><th colspan="12"> Not Completed Customer Registered Through <?php  echo $rowObj->description;  $csv_output .= " Not Completed Customer Registered Through".$rowObj->description.",,,,,,,,,,\n";?></th></tr><br/>
         <tr class="headings">
             <th>Customer Id</th>
             <th>First Name</th>
@@ -153,24 +159,27 @@
         $class= 'class="even"';
     }else{
         $class= 'class="odd"';
-    } ?>
-      <tr  <?php echo $class;?>>
-            <td> <?php  echo $rowObjs->id; ?></td>
-            <td><?php  echo $rowObjs->first_name; ?></td>
-            <td><?php  echo $rowObjs->last_name; ?></td>
-            <td><?php  echo $rowObjs->mobile_number; ?></td>
-            <td><?php  echo $rowObjs->plain_text; ?></td>
-            <td><?php  echo $rowObjs->address; ?></td>
-            <td><?php  echo $rowObjs->city; ?></td>
-            <td><?php  echo $rowObjs->po_box_number; ?></td>
-            <td><?php  echo $rowObjs->email; ?></td>
-            <td><?php  echo $rowObjs->created_at; ?></td>
-            <td><?php  echo $rowObjs->uniqueid; ?></td>
-            <td><?php    $conn = Propel::getConnection();
+    } ?> 
+        
+        <?php     $conn = Propel::getConnection();
      $querycp = 'select p.name from product as p left join  customer_product  as cp on p.id=cp.product_id where cp.customer_id="'.$rowObjs->id.'"  and p.product_type_id=1';
     $statementcp = $conn->prepare($querycp);
     $statementcp->execute();
-  $rowObjcp = $statementcp->fetch(PDO::FETCH_OBJ);     echo $rowObjcp->name;          ?></td>
+  $rowObjcp = $statementcp->fetch(PDO::FETCH_OBJ);    ?>
+      <tr  <?php echo $class;?>>
+             <td> <?php  echo $rowObjs->id;      $csv_output .= $rowObjs->id.", ";  ?></td>
+            <td><?php  echo $rowObjs->first_name;   $csv_output .= $rowObjs->first_name.", ";  ?></td>
+            <td><?php  echo $rowObjs->last_name;  $csv_output .= $rowObjs->last_name.", ";  ?></td>
+            <td><?php  echo $rowObjs->mobile_number;  $csv_output .= $rowObjs->mobile_number.", ";  ?></td>
+            <td><?php  echo $rowObjs->plain_text;  $csv_output .= $rowObjs->plain_text.", ";  ?></td>
+            <td><?php  echo $rowObjs->address;  $csv_output .= $rowObjs->address.", ";  ?></td>
+            <td><?php  echo $rowObjs->city;  $csv_output .= $rowObjs->city.", ";  ?></td>
+            <td><?php  echo $rowObjs->po_box_number;  $csv_output .= $rowObjs->po_box_number.", ";  ?></td>
+            <td><?php  echo $rowObjs->email;  $csv_output .= $rowObjs->email.", ";  ?></td>
+            <td><?php  echo $rowObjs->created_at;  $csv_output .= $rowObjs->created_at.", ";  ?></td>
+            <td><?php  echo $rowObjs->uniqueid;  $csv_output .= $rowObjs->uniqueid.", ";  ?></td>
+            <td><?php    echo $rowObjcp->name;     $csv_output .= $rowObjcp->name."\n";      ?></td>
+         
            
         </tr> 
         
@@ -183,5 +192,16 @@
         </tr>  
         
      <?php   } ?>
+<!--        <tr>
+      <td colspan="12">
+<form name="export" action="exportExcel" method="post">
+<input type="submit" value="Export Data">
+<input type="hidden" value="<?php // echo $csv_hdr; ?>" name="csv_hdr">
+<input type="hidden" value="Customer-registration-report" name="file_name">
+<input type="hidden" value="<?php // echo $csv_output; ?>" name="csv_output">
+</form>
+      </td>
+      
+  </tr>-->
   </tbody>
 </table>

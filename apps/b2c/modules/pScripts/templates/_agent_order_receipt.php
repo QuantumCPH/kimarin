@@ -82,14 +82,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <th colspan="3"><?php echo __('Order Receipt') ?></th>
     <th><?php echo __('Order No.') ?> <?php echo $order; ?></th>
   </tr>
-
   <tr class="order_summary_header" bgcolor="#CCCCCC"> 
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
     <td align="right" style="padding-right:65px;"><?php echo __('Amount') ?><!-- (<?php //echo sfConfig::get('app_currency_code')?>)--></td>
   </tr>
-  <tr> 
+    <tr> 
     <td><?php echo $createddate ?></td>
     <td>
    <?php echo __('Agent Refill');?>
@@ -137,14 +136,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
 </p>
 <?php endif; ?>
-
 <p>
 	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
 </p>
-
 <p><?php echo __('Cheers') ?></p>
-
 <p>
 <?php echo __('Support') ?><br />
 <?php echo sfConfig::get('app_site_title');?>

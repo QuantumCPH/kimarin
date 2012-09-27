@@ -3091,8 +3091,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
                         if($availableUniqueCount  == 0){
                             // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                            emailLib::sendUniqueIdsShortage();
-                            $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+                            emailLib::sendUniqueIdsShortage($this->customer->getSimTypeId());
+                            exit;
+                            //$this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
                         }
                         $uniqueId = $availableUniqueId->getUniqueNumber();
                         $this->customer->setUniqueid($uniqueId);
@@ -3272,7 +3273,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
        $order=CustomerOrderPeer::retrieveByPK($order_id);
            $customer=CustomerPeer::retrieveByPK($order->getCustomerId());
 
-                if($order->getIsFirstOrder()){
+                if($order->getIsFirstOrder()==1){
       emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
 
                 }else{
@@ -3307,7 +3308,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 //        $this->fromdate = date("Y-m-d", $fromdate);
 //        $this->todate = $fromdate;
             
-              $fromdate = mktime(0, 0, 0, date("m")-1, date("d") - 1, date("Y"));
+              $fromdate = mktime(0, 0, 0, date("m"), date("d") - 1, date("Y"));
     $this->fromdate = date("Y-m-d", $fromdate);
           $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
        $this->todate =date("Y-m-d", $todate);
@@ -3477,9 +3478,18 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             echo $customer->getId();
            $balance =  Telienta::getBalance($customer);
            if($balance>0){
+               $order = new CustomerOrder();
+               $order->setExtraRefill(-$balance);
+               $order->setCustomerId($customer->getId());
+               $order->setProductId(17);
+               $order->setOrderStatusId(3);
+               $order->setIsFirstOrder(10);  //// product type remove 
+               $order->save();
+               
                $transaction = new Transaction();
                $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
                $transaction->setAmount(-$balance);
+               $transaction->setOrderId($order->getId());
                $transaction->setTransactionStatusId(3);
                $transaction->setCustomerId($customer->getId());
                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
@@ -3810,7 +3820,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $cst = new Criteria();
         $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
-       echo $sim_type_id=$simtype->getId();
+        echo $sim_type_id=$simtype->getId();
         $exest = $order->getExeStatus();
         if ($exest!=1) {
 
@@ -3829,8 +3839,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
             if($availableUniqueCount  == 0){
                 // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                emailLib::sendUniqueIdsShortage();
-                $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+                emailLib::sendUniqueIdsShortage($sim_type_id);
+                exit;
+                //$this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
             }
 
             $callbacklog = new CallbackLog();
@@ -3847,7 +3858,6 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $availableUniqueId->setStatus(1);
             $availableUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
             $availableUniqueId->save();
-
             $this->customer->setUniqueid($availableUniqueId->getUniqueNumber());
             $this->customer->setSimTypeId($sim_type_id);
             $this->customer->save();
@@ -3984,6 +3994,98 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                           return sfView::NONE;
       
   }
-    
+ 
+ public function executeCardNumber(sfWebRequest $request) {
+
+
+        function random($len) {
+
+
+            $return = '';
+            for ($i = 0; $i < $len; ++$i) {
+                if (!isset($urandom)) {
+                    if ($i % 2 == 0)
+                        mt_srand(time() % 2147 * 1000000 + (double) microtime() * 1000000);
+                    $rand = 48 + mt_rand() % 64;
+                } else
+                    $rand=48 + ord($urandom[$i]) % 64;
+
+                if ($rand > 57)
+                    $rand+=7;
+                if ($rand > 90)
+                    $rand+=6;
+                if ($rand > 80)
+                    $rand-=5;
+
+
+                if ($rand == 123)
+                    $rand = 45;
+                if ($rand == 124)
+                    $rand = 46;
+                $return.=$rand;
+            }
+            return $return;
+        }
+
+        $cardcount = 0;
+        $serial = 100000;
+        $i = 1;
+        while ($i <= 20000) {
+
+
+            $val = random(20);
+
+            $randLength = strlen($val);
+
+            if ($randLength > 11) {
+                $resultvalue = (int) $randLength - 11;
+
+                $rtvalue = mt_rand(1, $resultvalue);
+
+                $resultvalue = substr($val, $rtvalue, 11);
+
+                $cardnumber = "02149" . $resultvalue;
+            }
+
+            $CRcardcount = 0;
+            $cq = new Criteria();
+            $cq->add(CardNumbersPeer::CARD_NUMBER, $cardnumber);
+            $CRcardcount = CardNumbersPeer::doCount($cq);
+
+            if ($CRcardcount == 1) {
+                
+            } else {
+
+                $cardTotalcount = 0;
+                $ct = new Criteria();
+                $cardTotalcount = CardNumbersPeer::doCount($ct);
+                if ($cardTotalcount < 4000) {
+                    $cardcount = 0;
+
+                    $c = new Criteria();
+                    $c->add(CardNumbersPeer::CARD_PRICE, 100);
+                    $cardcount = CardNumbersPeer::doCount($c);
+                    if ($cardcount < 2000) {
+
+                        $price =100;
+                        $cr = new CardNumbers();
+                        $cr->setCardNumber($cardnumber);
+                        $cr->setCardPrice($price);
+                        $cr->setCardSerial($serial);
+                        $cr->save();
+                        $serial++;
+                    } 
+                } else {
+                    $i = 2000;
+                }
+            }
+            $i++;
+        }
+
+
+        return sfView::NONE;
+    }
+
+   
     
 }

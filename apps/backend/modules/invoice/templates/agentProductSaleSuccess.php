@@ -52,8 +52,10 @@
 <table width="75%" cellspacing="0" cellpadding="2" class="tblAlign">
     <thead>
         <tr class="headings">
-        
-<!--    <th>ID</th>-->
+        <?php
+ $csv_hdr="";
+ $csv_hdr = "Agent Sales,Day 1,Day 2,Day 3,Day 4,Day 5,Day 6,Day 7,Day 8,Day 9,Day 10,Day 11,Day 12,Day 13,Day 14,Day 15,Day 16,Day 17,Day 18,Day 19,Day 20,Day 21,Day 22,Day 23,Day 24,Day 25,Day 26,Day 27,Day 28,Day 29,Day 30,Day 31,Total";    ?>   
+    
     <th>Agent's Sales</th>
     <th>Day 1</th>
     <th>Day 2</th>
@@ -128,6 +130,7 @@ $daytotal1A=0;
 ?>
  
  <?php
+ $csv_output="";
             $conn = Propel::getConnection();
    $queryC = 'select ac.id,ac.name as agentname from customer as c left join agent_company  as ac on c.referrer_id=ac.id where c.referrer_id>0 group by ac.id';
     $statementC = $conn->prepare($queryC);
@@ -140,6 +143,7 @@ $daytotal1A=0;
        <td colspan="33"  ><b><?php echo $rowObjCus->agentname; ?></b></td> </tr>      
         
 <?php
+  $csv_output .= $rowObjCus->agentname.",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,\n"; 
 $day1=0;
 $day2=0;
 $day3=0;
@@ -222,42 +226,41 @@ FROM product where product.is_in_store=1 or product.include_in_zerocall=1';
 ?>
 
         <tr <?php echo $class;?>>
-         
-<!--   <td><?php  //echo $rowObj->is_first_order;   ?></td>-->
-    <td><?php  echo $rowObj->name;    ?></td>
-   <td><?php   $day1+=$rowObj->day1_calls;   echo $rowObj->day1_calls;?></td>
-   <td><?php  $day2+=$rowObj->day2_calls; echo $rowObj->day2_calls;   ?></td>
-  <td><?php  $day3+=$rowObj->day3_calls; echo $rowObj->day3_calls;   ?></td>
-   <td><?php  $day4+=$rowObj->day4_calls; echo $rowObj->day4_calls;   ?></td>
-    <td><?php  $day5+=$rowObj->day5_calls; echo $rowObj->day5_calls;   ?></td>
-     <td><?php  $day6+=$rowObj->day6_calls; echo $rowObj->day6_calls;   ?></td>
-    <td><?php  $day7+=$rowObj->day7_calls; echo $rowObj->day7_calls;   ?></td>
- <td><?php  $day8+=$rowObj->day8_calls; echo $rowObj->day8_calls;   ?></td>
- <td><?php  $day9+=$rowObj->day9_calls; echo $rowObj->day9_calls;   ?></td>
- <td><?php  $day10+=$rowObj->day10_calls; echo $rowObj->day10_calls;   ?></td>
- <td><?php  $day11+=$rowObj->day11_calls; echo $rowObj->day11_calls;   ?></td>
- <td><?php  $day12+=$rowObj->day12_calls; echo $rowObj->day12_calls;   ?></td>
- <td><?php  $day13+=$rowObj->day13_calls; echo $rowObj->day13_calls;   ?></td>
- <td><?php  $day14+=$rowObj->day14_calls; echo $rowObj->day14_calls;   ?></td>
- <td><?php  $day15+=$rowObj->day15_calls; echo $rowObj->day15_calls;   ?></td>
- <td><?php  $day16+=$rowObj->day16_calls; echo $rowObj->day16_calls;   ?></td>
-   <td><?php  $day17+=$rowObj->day17_calls; echo $rowObj->day17_calls;   ?></td>
-  <td><?php  $day18+=$rowObj->day18_calls; echo $rowObj->day18_calls;   ?></td>
-<td><?php  $day19+=$rowObj->day19_calls; echo $rowObj->day19_calls;   ?></td>
-<td><?php  $day20+=$rowObj->day20_calls; echo $rowObj->day20_calls;   ?></td>
- <td><?php  $day21+=$rowObj->day21_calls; echo $rowObj->day21_calls;   ?></td>
-<td><?php  $day22+=$rowObj->day22_calls; echo $rowObj->day22_calls;   ?></td>
-<td><?php  $day23+=$rowObj->day23_calls; echo $rowObj->day23_calls;   ?></td>
-<td><?php  $day24+=$rowObj->day24_calls; echo $rowObj->day24_calls;   ?></td>
-<td><?php  $day25+=$rowObj->day25_calls; echo $rowObj->day25_calls;   ?></td>
-<td><?php  $day26+=$rowObj->day26_calls; echo $rowObj->day26_calls;   ?></td>
-<td><?php  $day27+=$rowObj->day27_calls; echo $rowObj->day27_calls;   ?></td>
-<td><?php  $day28+=$rowObj->day28_calls; echo $rowObj->day28_calls;   ?></td>
-<td><?php  $day29+=$rowObj->day29_calls; echo $rowObj->day29_calls;   ?></td>
-<td><?php  $day30+=$rowObj->day30_calls; echo $rowObj->day30_calls;   ?></td>
- <td><?php  $day31+=$rowObj->day31_calls;  echo $rowObj->day31_calls;   ?></td>
+ 
+    <td><?php  echo $rowObj->name;   $csv_output .= $rowObj->name. ", ";     ?></td>
+<td><?php   $day1+=$rowObj->day1_calls;   echo $rowObj->day1_calls;    $csv_output .= $rowObj->day1_calls. ", ";  ?></td>
+   <td><?php  $day2+=$rowObj->day2_calls; echo $rowObj->day2_calls;    $csv_output .= $rowObj->day2_calls. ", ";   ?></td>
+  <td><?php  $day3+=$rowObj->day3_calls; echo $rowObj->day3_calls;    $csv_output .= $rowObj->day3_calls. ", ";   ?></td>
+   <td><?php  $day4+=$rowObj->day4_calls; echo $rowObj->day4_calls;   $csv_output .= $rowObj->day4_calls. ", ";   ?></td>
+    <td><?php  $day5+=$rowObj->day5_calls; echo $rowObj->day5_calls;   $csv_output .= $rowObj->day5_calls. ", ";    ?></td>
+     <td><?php  $day6+=$rowObj->day6_calls; echo $rowObj->day6_calls;   $csv_output .= $rowObj->day6_calls. ", ";    ?></td>
+    <td><?php  $day7+=$rowObj->day7_calls; echo $rowObj->day7_calls;   $csv_output .= $rowObj->day7_calls. ", ";    ?></td>
+ <td><?php  $day8+=$rowObj->day8_calls; echo $rowObj->day8_calls;    $csv_output .= $rowObj->day8_calls. ", ";   ?></td>
+ <td><?php  $day9+=$rowObj->day9_calls; echo $rowObj->day9_calls;    $csv_output .= $rowObj->day9_calls. ", ";   ?></td>
+ <td><?php  $day10+=$rowObj->day10_calls; echo $rowObj->day10_calls;   $csv_output .= $rowObj->day10_calls. ", ";    ?></td>
+ <td><?php  $day11+=$rowObj->day11_calls; echo $rowObj->day11_calls;    $csv_output .= $rowObj->day11_calls. ", ";   ?></td>
+ <td><?php  $day12+=$rowObj->day12_calls; echo $rowObj->day12_calls;    $csv_output .= $rowObj->day12_calls. ", ";   ?></td>
+ <td><?php  $day13+=$rowObj->day13_calls; echo $rowObj->day13_calls;   $csv_output .= $rowObj->day13_calls. ", ";    ?></td>
+ <td><?php  $day14+=$rowObj->day14_calls; echo $rowObj->day14_calls;   $csv_output .= $rowObj->day14_calls. ", ";    ?></td>
+ <td><?php  $day15+=$rowObj->day15_calls; echo $rowObj->day15_calls;   $csv_output .= $rowObj->day15_calls. ", ";    ?></td>
+ <td><?php  $day16+=$rowObj->day16_calls; echo $rowObj->day16_calls;   $csv_output .= $rowObj->day16_calls. ", ";    ?></td>
+   <td><?php  $day17+=$rowObj->day17_calls; echo $rowObj->day17_calls;   $csv_output .= $rowObj->day17_calls. ", ";    ?></td>
+  <td><?php  $day18+=$rowObj->day18_calls; echo $rowObj->day18_calls;   $csv_output .= $rowObj->day18_calls. ", ";    ?></td>
+<td><?php  $day19+=$rowObj->day19_calls; echo $rowObj->day19_calls;    $csv_output .= $rowObj->day19_calls. ", ";   ?></td>
+<td><?php  $day20+=$rowObj->day20_calls; echo $rowObj->day20_calls;   $csv_output .= $rowObj->day20_calls. ", ";    ?></td>
+ <td><?php  $day21+=$rowObj->day21_calls; echo $rowObj->day21_calls;   $csv_output .= $rowObj->day21_calls. ", ";    ?></td>
+<td><?php  $day22+=$rowObj->day22_calls; echo $rowObj->day22_calls;   $csv_output .= $rowObj->day22_calls. ", ";    ?></td>
+<td><?php  $day23+=$rowObj->day23_calls; echo $rowObj->day23_calls;   $csv_output .= $rowObj->day23_calls. ", ";    ?></td>
+<td><?php  $day24+=$rowObj->day24_calls; echo $rowObj->day24_calls;   $csv_output .= $rowObj->day24_calls. ", ";    ?></td>
+<td><?php  $day25+=$rowObj->day25_calls; echo $rowObj->day25_calls;   $csv_output .= $rowObj->day25_calls. ", ";    ?></td>
+<td><?php  $day26+=$rowObj->day26_calls; echo $rowObj->day26_calls;    $csv_output .= $rowObj->day26_calls. ", ";   ?></td>
+<td><?php  $day27+=$rowObj->day27_calls; echo $rowObj->day27_calls;    $csv_output .= $rowObj->day27_calls. ", ";   ?></td>
+<td><?php  $day28+=$rowObj->day28_calls; echo $rowObj->day28_calls;    $csv_output .= $rowObj->day28_calls. ", ";   ?></td>
+<td><?php  $day29+=$rowObj->day29_calls; echo $rowObj->day29_calls;    $csv_output .= $rowObj->day29_calls. ", ";   ?></td>
+<td><?php  $day30+=$rowObj->day30_calls; echo $rowObj->day30_calls;    $csv_output .= $rowObj->day30_calls. ", ";   ?></td>
+ <td><?php  $day31+=$rowObj->day31_calls;  echo $rowObj->day31_calls;    $csv_output .= $rowObj->day31_calls. ", ";   ?></td>
     <td>  <?php echo $total=$rowObj->day1_calls+$rowObj->day2_calls+$rowObj->day3_calls+$rowObj->day4_calls+$rowObj->day5_calls+$rowObj->day6_calls+$rowObj->day7_calls+$rowObj->day8_calls+$rowObj->day9_calls+$rowObj->day10_calls+$rowObj->day11_calls+$rowObj->day12_calls+$rowObj->day13_calls+$rowObj->day14_calls+$rowObj->day15_calls+$rowObj->day16_calls+$rowObj->day17_calls+$rowObj->day18_calls+$rowObj->day19_calls+$rowObj->day19_calls+$rowObj->day20_calls+$rowObj->day21_calls+$rowObj->day22_calls+$rowObj->day23_calls+$rowObj->day24_calls+$rowObj->day25_calls+$rowObj->day26_calls+$rowObj->day27_calls+$rowObj->day28_calls+$rowObj->day29_calls+$rowObj->day30_calls+$rowObj->day31_calls;
-        $daytotal1+=$total;    ?>    </td>   
+        $daytotal1+=$total;     $csv_output .=$total. "\n";     ?>    </td>   
             
             
         </tr>
@@ -268,76 +271,88 @@ $i++;
 }  ?>
         
           <tr>
-              <td><b> Agent Total</b></td>
-    <td><?php echo $day1;  $day1A+=$day1;    ?></td>
-   <td><?php echo $day2; $day2A+=$day2;    ?></td>
-     <td><?php echo $day3;  $day3A+=$day3;    ?></td>
-      <td><?php echo $day4; $day4A+=$day4;    ?></td>
-   <td><?php echo  $day5; $day5A+=$day5;    ?></td>
-     <td><?php echo $day6;  $day6A+=$day6;    ?></td>
-    <td><?php echo $day7; $day7A+=$day7;    ?></td>
-     <td><?php echo $day8; $day8A+=$day8;    ?></td>
-     <td><?php echo $day9;  $day9A+=$day9;    ?></td>
-     <td><?php echo $day10; $day10A+=$day10;    ?></td>
-      <td><?php echo $day11; $day11A+=$day11;    ?></td>
-      <td><?php echo $day12;  $day12A+=$day12;    ?></td>
-     <td><?php echo $day13; $day13A+=$day13;    ?></td>
-     <td><?php echo $day14; $day14A+=$day14;    ?></td>
-     <td><?php echo $day15;  $day15A+=$day15;    ?></td>
-    <td><?php echo $day16;   $day16A+=$day16;    ?></td>
-    <td><?php echo $day17;  $day17A+=$day17;    ?></td>
-    <td><?php echo $day18; $day18A+=$day18;    ?></td>
-     <td><?php echo $day19; $day19A+=$day19;    ?></td>
-     <td><?php echo $day20; $day20A+=$day20;    ?></td>
-     <td><?php echo $day21; $day21A+=$day21;    ?></td>
-   <td><?php echo $day22; $day22A+=$day22;    ?></td>
-     <td><?php echo $day23; $day23A+=$day23;    ?></td>
-     <td><?php echo $day24; $day24A+=$day24;    ?></td>
-        <td><?php echo $day25; $day25A+=$day25;    ?></td>
-        <td><?php echo $day26;  $day26A+=$day26;    ?></td>
-       <td><?php echo $day27; $day27A+=$day27;    ?></td>
-      <td><?php echo $day28; $day28A+=$day28;    ?></td>
-       <td><?php echo $day29; $day29A+=$day29;    ?></td>
-         <td><?php echo $day30; $day30A+=$day30;    ?></td>
-       <td><?php echo $day31;  $day31A+=$day31;    ?></td>
-         <td><?php  echo $daytotal1; $daytotal1A+=$daytotal1;    ?></td>
+              <td><b><?php $csv_output .="Agent Total ".","; echo "Agent Total";  ?> </b></td>
+    <td><?php echo $day1;  $day1A+=$day1;   $csv_output .= $day1. ", ";   ?></td>
+   <td><?php echo $day2; $day2A+=$day2;   $csv_output .= $day2. ", ";   ?></td>
+     <td><?php echo $day3;  $day3A+=$day3;   $csv_output .= $day3. ", ";   ?></td>
+      <td><?php echo $day4; $day4A+=$day4;   $csv_output .= $day4. ", ";   ?></td>
+   <td><?php echo  $day5; $day5A+=$day5;   $csv_output .= $day5. ", ";   ?></td>
+     <td><?php echo $day6;  $day6A+=$day6;  $csv_output .= $day6. ", ";    ?></td>
+    <td><?php echo $day7; $day7A+=$day7;    $csv_output .= $day7. ", ";  ?></td>
+     <td><?php echo $day8; $day8A+=$day8;   $csv_output .= $day8. ", ";   ?></td>
+     <td><?php echo $day9;  $day9A+=$day9;   $csv_output .= $day9. ", ";   ?></td>
+     <td><?php echo $day10; $day10A+=$day10;   $csv_output .= $day10. ", ";  ?></td>
+      <td><?php echo $day11; $day11A+=$day11;   $csv_output .= $day11. ", ";   ?></td>
+      <td><?php echo $day12;  $day12A+=$day12;   $csv_output .= $day12. ", ";   ?></td>
+     <td><?php echo $day13; $day13A+=$day13;   $csv_output .= $day13. ", ";   ?></td>
+     <td><?php echo $day14; $day14A+=$day14;   $csv_output .= $day14. ", ";   ?></td>
+     <td><?php echo $day15;  $day15A+=$day15;   $csv_output .= $day15. ", ";   ?></td>
+    <td><?php echo $day16;   $day16A+=$day16;   $csv_output .= $day16. ", ";   ?></td>
+    <td><?php echo $day17;  $day17A+=$day17;    $csv_output .= $day17. ", ";  ?></td>
+    <td><?php echo $day18; $day18A+=$day18;   $csv_output .= $day18. ", ";   ?></td>
+     <td><?php echo $day19; $day19A+=$day19;  $csv_output .= $day19. ", ";   ?></td>
+     <td><?php echo $day20; $day20A+=$day20; $csv_output .= $day20. ", ";     ?></td>
+     <td><?php echo $day21; $day21A+=$day21;     $csv_output .= $day21. ", ";  ?></td>
+   <td><?php echo $day22; $day22A+=$day22;    $csv_output .= $day22. ", ";   ?></td>
+     <td><?php echo $day23; $day23A+=$day23;   $csv_output .= $day23. ", ";   ?></td>
+     <td><?php echo $day24; $day24A+=$day24;  $csv_output .= $day24. ", ";    ?></td>
+        <td><?php echo $day25; $day25A+=$day25;  $csv_output .= $day25. ", ";    ?></td>
+        <td><?php echo $day26;  $day26A+=$day26;    $csv_output .= $day26. ", ";   ?></td>
+       <td><?php echo $day27; $day27A+=$day27;   $csv_output .= $day27. ", ";   ?></td>
+      <td><?php echo $day28; $day28A+=$day28; $csv_output .= $day28. ", ";   ?></td>
+       <td><?php echo $day29; $day29A+=$day29; $csv_output .= $day29. ", ";   ?></td>
+         <td><?php echo $day30; $day30A+=$day30;   $csv_output .= $day30. ", ";   ?></td>
+       <td><?php echo $day31;  $day31A+=$day31;    $csv_output .= $day31. ", ";    ?></td>
+         <td><?php  echo $daytotal1; $daytotal1A+=$daytotal1;    $csv_output .= $daytotal1. "\n";  ?></td>
   </tr>
   <?php  } ?>
     <tr>
-              <td><b>ALL Agent Total</b></td>
-    <td><?php echo  $day1A;    ?></td>
-   <td><?php echo  $day2A;    ?></td>
-     <td><?php echo  $day3A;    ?></td>
-      <td><?php echo  $day4A;    ?></td>
-   <td><?php echo  $day5A;    ?></td>
-     <td><?php echo  $day6A;    ?></td>
-    <td><?php echo  $day7A;    ?></td>
-     <td><?php echo  $day8A;    ?></td>
-     <td><?php echo  $day9A;    ?></td>
-     <td><?php echo  $day10A;    ?></td>
-      <td><?php echo  $day11A;    ?></td>
-      <td><?php echo  $day12A;    ?></td>
-     <td><?php echo  $day13A;    ?></td>
-     <td><?php echo  $day14A;    ?></td>
-     <td><?php echo  $day15A;    ?></td>
-    <td><?php echo  $day16A;    ?></td>
-    <td><?php echo  $day17A;    ?></td>
-    <td><?php echo  $day18A;    ?></td>
-     <td><?php echo  $day19A;    ?></td>
-     <td><?php echo  $day20A;    ?></td>
-     <td><?php echo  $day21A;    ?></td>
-   <td><?php echo  $day22A;    ?></td>
-     <td><?php echo  $day23A;    ?></td>
-     <td><?php echo  $day24A;    ?></td>
-        <td><?php echo  $day25A;    ?></td>
-        <td><?php echo  $day26A;    ?></td>
-       <td><?php echo  $day27A;    ?></td>
-      <td><?php echo  $day28A;    ?></td>
-       <td><?php echo  $day29A;    ?></td>
-         <td><?php echo  $day30A;    ?></td>
-       <td><?php echo  $day31A;    ?></td>
-         <td><?php  echo  $daytotal1A    ?></td>
+              <td><b><?php $csv_output .="ALL Agent Total".","; echo "ALL Agent Total";  ?> </b></td>
+    <td><?php echo  $day1A;  $csv_output .= $day1A. ", ";    ?></td>
+   <td><?php echo  $day2A; $csv_output .= $day2A. ", ";     ?></td>
+     <td><?php echo  $day3A; $csv_output .= $day3A. ", ";     ?></td>
+      <td><?php echo  $day4A;  $csv_output .= $day4A. ", ";    ?></td>
+   <td><?php echo  $day5A;  $csv_output .= $day5A. ", ";    ?></td>
+     <td><?php echo  $day6A;  $csv_output .= $day6A. ", ";    ?></td>
+    <td><?php echo  $day7A;   $csv_output .= $day7A. ", ";   ?></td>
+     <td><?php echo  $day8A;  $csv_output .= $day8A. ", ";    ?></td>
+     <td><?php echo  $day9A;   $csv_output .= $day9A. ", ";   ?></td>
+     <td><?php echo  $day10A;  $csv_output .= $day10A. ", ";    ?></td>
+      <td><?php echo  $day11A; $csv_output .= $day11A. ", ";     ?></td>
+      <td><?php echo  $day12A; $csv_output .= $day12A. ", ";     ?></td>
+     <td><?php echo  $day13A;  $csv_output .= $day13A. ", ";    ?></td>
+     <td><?php echo  $day14A;  $csv_output .= $day14A. ", ";    ?></td>
+     <td><?php echo  $day15A; $csv_output .= $day15A. ", ";     ?></td>
+    <td><?php echo  $day16A;  $csv_output .= $day16A. ", ";    ?></td>
+    <td><?php echo  $day17A;  $csv_output .= $day17A. ", ";    ?></td>
+    <td><?php echo  $day18A;  $csv_output .= $day18A. ", ";    ?></td>
+     <td><?php echo  $day19A; $csv_output .= $day19A. ", ";     ?></td>
+     <td><?php echo  $day20A;  $csv_output .= $day20A. ", ";    ?></td>
+     <td><?php echo  $day21A;  $csv_output .= $day21A. ", ";    ?></td>
+   <td><?php echo  $day22A;   $csv_output .= $day22A. ", ";   ?></td>
+     <td><?php echo  $day23A;  $csv_output .= $day23A. ", ";    ?></td>
+     <td><?php echo  $day24A;  $csv_output .= $day24A. ", ";    ?></td>
+        <td><?php echo  $day25A;  $csv_output .= $day25A. ", ";    ?></td>
+        <td><?php echo  $day26A;  $csv_output .= $day26A. ", ";    ?></td>
+       <td><?php echo  $day27A;  $csv_output .= $day27A. ", ";    ?></td>
+      <td><?php echo  $day28A;   $csv_output .= $day28A. ", ";   ?></td>
+       <td><?php echo  $day29A;  $csv_output .= $day29A. ", ";    ?></td>
+         <td><?php echo  $day30A; $csv_output .= $day30A. ", ";     ?></td>
+       <td><?php echo  $day31A;   $csv_output .= $day31A. ", ";   ?></td>
+         <td><?php  echo  $daytotal1A;     $csv_output .= $daytotal1A. "\n";   ?></td>
   </tr>
+  
+<!--   <tr>
+      <td colspan="33">
+<form name="export" action="exportExcel" method="post">
+<input type="submit" value="Export Data">
+<input type="hidden" value="<?php //echo $csv_hdr; ?>" name="csv_hdr">
+<input type="hidden" value="Agent-Product-sale" name="file_name">
+<input type="hidden" value="<?php //echo $csv_output; ?>" name="csv_output">
+</form>
+      </td>
+      
+  </tr>-->
   </tbody>
 </table>
  

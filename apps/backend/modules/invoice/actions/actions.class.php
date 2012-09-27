@@ -730,5 +730,36 @@ return number_format($bill_charge/100.00, 2);
 	{   }
          function executeCountryStat(sfWebRequest $request){
                  }
+  function executeExportExcel(sfWebRequest $request){
+              
+     $out = '';
+
+//Next we'll check to see if our variables posted and if they did we'll simply append them to out.
+if (isset($_POST['csv_hdr'])) {
+$out .= $_POST['csv_hdr'];
+$out .= "\n";
+}
+
+if (isset($_POST['csv_output'])) {
+$out .= $_POST['csv_output'];
+}
+if (isset($_POST['file_name'])) {
+$file = $_POST['file_name'];
+}
+//Now we're ready to create a file. This method generates a filename based on the current date & time.
+$filename = $file."_".date("Y-m-d_H-i",time());
+
+//Generate the CSV file header
+header("Content-type: application/vnd.ms-excel");
+header("Content-disposition: csv" . date("Y-m-d") . ".csv");
+header("Content-disposition: filename=".$filename.".csv");
+
+//Print the contents of out to the generated file.
+print $out;
+
+//Exit the script
+exit; 
+     return sfView::NONE;  
+      }
 
 }
