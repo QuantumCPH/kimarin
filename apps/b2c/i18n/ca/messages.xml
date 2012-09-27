@@ -610,7 +610,7 @@
             </trans-unit>
               <trans-unit id="150" translate="yes" reformat="yes" xml:space="default">
                 <source>Refill</source>
-                <target>Recàrrega</target>
+                <target>Recarregar</target>
             </trans-unit>
               <trans-unit id="151" translate="yes" reformat="yes" xml:space="default">
                 <source>Send Invitation</source>
