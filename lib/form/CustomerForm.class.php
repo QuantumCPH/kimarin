@@ -78,6 +78,8 @@ class CustomerForm extends BaseCustomerForm
                     'order_by' => array('Title','asc'),
                     'add_empty' => '-',
             ));
+            
+            
             //----------------------------------------------------------
             //-----------------For get the Preferred languages---------------------
             $this->widgetSchema['preferred_language_id'] = new sfWidgetFormPropelChoice(array(
