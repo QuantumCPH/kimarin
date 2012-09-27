@@ -275,7 +275,7 @@ class CustomerForm extends BaseCustomerForm
             $this->widgetSchema['sim_type_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'SimTypes',
                    'add_empty' => '-',
-                    'order_by' => array('Title','asc'),
+//                    'order_by' => array('Title','asc'),
                  
             ));
             //----------------------------------------------------------
@@ -362,7 +362,7 @@ class CustomerForm extends BaseCustomerForm
             $this->widgetSchema['sim_type_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'SimTypes',
                         'add_empty' => '-',
-                    'order_by' => array('Title','asc'),
+//                    'order_by' => array('Title','asc'),
                     
             ));
             //----------------------------------------------------------
