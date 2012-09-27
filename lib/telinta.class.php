@@ -16,7 +16,7 @@ set_time_limit(10000000);
 class Telienta {
 
     private static $currency = 'EUR';
-    private static $iParentReseller = 82829;  //live=82829    stage=90673
+    private static $iParentReseller = 90673;  //live=82829    stage=90673
     private static $iParentUS = 82214;
     private static $a_iProduct = 11803;
     private static $cb_iProduct = 11804;
