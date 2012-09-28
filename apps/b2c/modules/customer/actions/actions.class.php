@@ -1054,7 +1054,7 @@ class customerActions extends sfActions {
                 //	echo 'validated';
                 $customer = $this->form->save();
 
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your settings changes have been saved.'));
+                $this->getUser()->setFlash('settings', $this->getContext()->getI18N()->__('Your settings changes have been saved.'));
             }
             // echo 'after';
         }
