@@ -283,6 +283,14 @@ class Telienta {
         return true;
     }
 
+    public function createCBAccount($TelintaMobile, $customer){
+        
+    }
+
+    public function createReseNumberAccount($VOIPNumber, Customer $customer, $currentActiveNumber, $voip_iProduct=11805){
+
+    }
+
     //// Private Area.
     private function createAccount(Customer $customer, $mobileNumber, $accountType, $iProduct, $followMeEnabled='N') {
         $account = false;
