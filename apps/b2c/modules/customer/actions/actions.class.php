@@ -982,7 +982,7 @@ class customerActions extends sfActions {
 
                 $customer->save();
 
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Password has been saved.'));
+                $this->getUser()->setFlash('updated', $this->getContext()->getI18N()->__('Your Password has been saved.'));
             }
             // echo 'after';
         }
