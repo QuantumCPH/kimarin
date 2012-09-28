@@ -323,6 +323,13 @@ class customerActions extends sfActions {
         $c->addAnd(CustomerChangeProductPeer::STATUS, 2);
         $ccpCount = CustomerChangeProductPeer::doCount($c);
         $this->ccpCount = $ccpCount;
+        
+        $cp = new Criteria();
+        $cp->add(ProductPeer::ID, $this->customerProduct->getProductId(),Criteria::NOT_EQUAL);
+        $cp->addAnd(ProductPeer::INCLUDE_IN_ZEROCALL,1, Criteria::EQUAL);
+        $this->activeproducts = ProductPeer::doCount($cp);
+        
+        //echo $this->activeproducts;
     }
 
     //This Function add Again new Feature Wls2 --

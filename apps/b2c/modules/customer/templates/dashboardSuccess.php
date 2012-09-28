@@ -263,7 +263,7 @@ echo " ";   echo substr($Telintambs, 15,2);
           
         <div class="dashboardproduct">
             <h4 class="web_sms"><?php echo __('Change product') ?></h4>
-            <a title="<?php echo __('Change product')?>" class="sidebar_button" rel="bookmark" href="<?php  if($ccpCount>0){  echo "#"; }else{ echo url_for('customer/changeProductSubscription', true);  } ?>"><?php echo __('Change product')?></a>
+            <a title="<?php echo __('Change product')?>" class="sidebar_button" rel="bookmark" href="<?php  if($ccpCount>0 || $activeproducts==0){  echo "#"; }else{ echo url_for('customer/changeProductSubscription', true);  } ?>"><?php echo __('Change product')?></a>
         </div>
         
         <div class="dashboardproduct">
