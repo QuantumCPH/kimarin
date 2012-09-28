@@ -7,11 +7,27 @@
          <?php echo __($sf_user->getFlash('message')) ?>
         </div>
     <?php endif; ?>
+<script type="text/javascript">
+jQuery(function(){
+    jQuery('#changeproduct').validate({
+        rules: {
+            product:{
+                required: true
+            }
+        },
+        messages: {
+            product:{
+                required: "<div class='error_cp'><?php echo __('You must fill in this field')?></div>"
+            }
+        }
+    });
+});
+</script>
 <div class="left-col">    
     <?php include_partial('navigation', array('selected' => 'dashboard', 'customer_id' => $customer->getId())) ?><br />
     
     <div class="split-form">
-        <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeProductProcess') ?>">
+        <form method="post" name="changenumber" id="changeproduct" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeProductProcess') ?>">
           
              
             <p><?php echo __('Your product change will be valid from the first day of the comming month.');?></p><br />
