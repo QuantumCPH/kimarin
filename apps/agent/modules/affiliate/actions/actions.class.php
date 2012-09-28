@@ -892,10 +892,10 @@ class affiliateActions extends sfActions {
             $callbacklog->save();
 
             //Section For Telinta Add Cusomter
-
-            Telienta::ResgiterCustomer($this->customer, $order->getExtraRefill());
-            Telienta::createAAccount($TelintaMobile, $this->customer);
-            Telienta::createCBAccount($TelintaMobile, $this->customer);
+            $telintaObj = new Telienta();
+            $telintaObj->ResgiterCustomer($this->customer, $order->getExtraRefill());
+            $telintaObj->createAAccount($TelintaMobile, $this->customer);
+            $telintaObj->createCBAccount($TelintaMobile, $this->customer);
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerRegistrationViaAgentEmail($this->customer, $order);
             $this->updatePreferredCulture();
@@ -1349,13 +1349,13 @@ class affiliateActions extends sfActions {
                         $cp = new Criteria;
                         $cp->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'a' . $activeNumber->getMobileNumber());
                         $cp->addAnd(TelintaAccountsPeer::STATUS, 3);
-
+                        $telintaObj = new Telienta();
                         if (TelintaAccountsPeer::doCount($cp) > 0) {
                             $telintaAccount = TelintaAccountsPeer::doSelectOne($cp);
-                            Telienta::terminateAccount($telintaAccount);
+                            $telintaObj->terminateAccount($telintaAccount);
                         }
 
-                        Telienta::createAAccount($newMobileNo, $customer);
+                        $telintaObj->createAAccount($newMobileNo, $customer);
 
                         $cb = new Criteria;
                         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb' . $activeNumber->getMobileNumber());
@@ -1363,9 +1363,9 @@ class affiliateActions extends sfActions {
 
                         if (TelintaAccountsPeer::doCount($cb) > 0) {
                             $telintaAccountsCB = TelintaAccountsPeer::doSelectOne($cb);
-                            Telienta::terminateAccount($telintaAccountsCB);
+                            $telintaObj->terminateAccount($telintaAccountsCB);
                         }
-                        //Telienta::createCBAccount($newMobileNo, $customer);
+                        
 
                         $getvoipInfo = new Criteria();
                         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $customerids);
@@ -1380,9 +1380,9 @@ class affiliateActions extends sfActions {
                             $tc->add(TelintaAccountsPeer::STATUS, 3);
                             if (TelintaAccountsPeer::doCount($tc) > 0) {
                                 $telintaAccountR = TelintaAccountsPeer::doSelectOne($tc);
-                                Telienta::terminateAccount($telintaAccountR);
+                                $telintaObj->terminateAccount($telintaAccountR);
                             }
-                            Telienta::createReseNumberAccount($voipnumbers, $customer, $newMobileNo);
+                            $telintaObj->createReseNumberAccount($voipnumbers, $customer, $newMobileNo);
                         } else {
 
                         }
@@ -1896,8 +1896,8 @@ class affiliateActions extends sfActions {
 
                     $uniqueId = $customer->getUniqueid();
                     $OpeningBalance = $order->getExtraRefill();
-                    
-                    Telienta::recharge($customer, $OpeningBalance,"Refill");
+                    $telintaObj = new Telienta();
+                    $telintaObj->recharge($customer, $OpeningBalance,"Refill");
                     //set status
                     $order->setOrderStatusId(sfConfig::get('app_status_completed'));
                     $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
