@@ -3,7 +3,7 @@
 <?php echo $form->renderGlobalErrors() ?>
 
 <?php if ($sf_user->hasFlash('updated')): ?>
-<div class="alert_bar">
+<div class="ok_alert_bar">
 	<?php echo $sf_user->getFlash('updated') ?>
 </div>
 <?php endif;?>
