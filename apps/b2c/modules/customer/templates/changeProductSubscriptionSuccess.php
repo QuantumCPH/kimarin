@@ -39,7 +39,7 @@ jQuery(function(){
                  $c->addAnd(ProductPeer::INCLUDE_IN_ZEROCALL, 1);
                   $c->addAnd(ProductPeer::ID, $customerProduct->getProductId(),Criteria::NOT_EQUAL);
                 $products = ProductPeer::doSelect($c);  ?>
-                <select name="product">
+                <select name="product" class="required">
                     <?php foreach ($products as  $product){ ?>
                     <option value="<?php echo $product->getID(); ?>" ><?php echo $product->getName(); ?></option>
                     
