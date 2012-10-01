@@ -259,12 +259,12 @@ class paymentsActions extends sfActions {
         $transaction = TransactionPeer::retrieveByPK($transaction_id);
 
 
-        if($transaction_id>93){
-          $vatValue=sfConfig::get('app_vat_percentage');
-        }else{
-         $vatValue=(.18);
-        }
-        
+//        if($transaction_id>93){
+//          $vatValue=sfConfig::get('app_vat_percentage');
+//        }else{
+//         $vatValue=(.18);
+//        }
+//        
 
         $this->forward404Unless($transaction->getCustomerId() == $this->customer->getId(), 'Not allowed');
 
@@ -316,7 +316,8 @@ class paymentsActions extends sfActions {
             $registered_customer_name = $invitedCustomer->getFirstName()." ".$invitedCustomer->getLastName();
 
         }
-
+echo $vat;
+die;
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,
             'order' => CustomerOrderPeer::retrieveByPK($transaction->getOrderId()),
