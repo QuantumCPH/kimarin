@@ -1985,8 +1985,8 @@ class customerActions extends sfActions {
         $this->redirectUnless($this->customer, "@homepage");
         $this->targetUrl = $this->getTargetUrl();
 
-        $change_no_startdate = date('Y-m-1 h:i:s');
-        $change_no_enddate = date('Y-m-t h:i:s');
+        $change_no_startdate = date('Y-m-1 00:00:00');
+        $change_no_enddate = date('Y-m-t 23:59:59');
 
         $cn = new Criteria();
         $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID, $this->customer->getId());
