@@ -15,19 +15,7 @@ set_time_limit(10000000);
 
 class Telienta {
 
-<<<<<<< HEAD
-    private static $currency = 'EUR';
-    private static $iParentReseller = 90673;  //live=82829    stage=90673
-    private static $iParentUS = 82214;
-    private static $a_iProduct = 11803;
-    private static $cb_iProduct = 11804;
-    private static $voip_iProduct = 11805;
-    private static $telintaSOAPUrl = "https://mybilling.telinta.com";
-    private static $telintaSOAPUser = 'API_login';
-    private static $telintaSOAPPassword = 'ee4eriny';
 
-    public static function ResgiterCustomer(Customer $customer, $OpeningBalance, $creditLimit=0, $USReseller = false) {
-=======
     private $currency;
     private $iParentReseller;
     private $telintaSOAPUrl;
@@ -39,7 +27,7 @@ class Telienta {
     }
 
     public function ResgiterCustomer(Customer $customer, $OpeningBalance, $creditLimit=0) {
->>>>>>> stage
+
         $tCustomer = false;
         $max_retries = 10;
         $retry_count = 0;
