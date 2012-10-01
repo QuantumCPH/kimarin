@@ -299,10 +299,10 @@ class paymentsActions extends sfActions {
                $vatPerValue=(.18); 
            }
       
-        //if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
-        //if(strstr($transaction->getDescription(),"Refill")){
-       //     $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
-        //}
+      //  if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
+        if(strstr($transaction->getDescription(),"Refill")){
+            $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
+        }
 
         $registered_customer_name = false;
         $refferedC = new Criteria();
