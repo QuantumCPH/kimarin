@@ -176,8 +176,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
    
     
      <?php   if($TDI==6){
-         echo $vat;
-        die;
+         
          echo __('Airtime refill');
          }elseif($TDI==10){
              $vat = 0;

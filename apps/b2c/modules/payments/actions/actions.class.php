@@ -312,7 +312,9 @@ class paymentsActions extends sfActions {
             $invitedCustomer = CustomerPeer::retrieveByPK($invite->getInvitedCustomerId());
             $registered_customer_name = $invitedCustomer->getFirstName() . " " . $invitedCustomer->getLastName();
         }
-        
+
+        echo $vat;
+        die;
 
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,
