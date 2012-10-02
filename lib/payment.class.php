@@ -11,8 +11,8 @@ class Payment {
    // private static $environment   = "live";      //live             //sandbox
     public static function SendPayment($querystring){
          $environment = sfConfig::get("app_environment");
-         
-         $querystring = "?business=".urlencode(self::$PaypalEmail)."&".$querystring;
+         $paypalEmail = sfConfig::get("app_paypal_email");
+         $querystring = "?business=".urlencode($paypalEmail)."&".$querystring;
             if($environment=='live'){
             $paypalUrl = 'https://www.paypal.com/cgi-bin/webscr';
          }else{
