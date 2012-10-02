@@ -211,8 +211,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php  echo __('Airtime bonus');   ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;">-<?php         var_dump($vat);
-        die; echo number_format($subtotal = $order->getExtraRefill()/$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $order->getExtraRefill()/$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
                          
               <?php       }elseif($TDI==10){  ?>
