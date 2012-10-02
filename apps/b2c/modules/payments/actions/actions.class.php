@@ -280,7 +280,7 @@ class paymentsActions extends sfActions {
         echo "<br/>";
         echo "Registration Fee".$customer_order->getProduct()->getRegistrationFee();
         echo "<br/>";
-        echo "ProductID:".$customer_order->getProduct()->getId()."Product Name:"$customer_order->getProduct()->getName();
+        echo "ProductID:".$customer_order->getProduct()->getId()."Product Name:".$customer_order->getProduct()->getName();
         echo "<br/>";
         
         if ($customerorder == 1) {
