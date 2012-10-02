@@ -196,7 +196,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right" style="padding-right: 65px;"><?php  if($TDI==6){
-
+        echo $vat;
+        die;
        // $vat += 1;
        echo number_format($subtotal = $order->getExtraRefill()-$vat,2);
          }elseif($TDI==10){
