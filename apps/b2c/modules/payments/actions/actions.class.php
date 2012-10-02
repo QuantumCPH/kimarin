@@ -298,6 +298,8 @@ class paymentsActions extends sfActions {
 
         echo $vat;
         echo "<hr/>";
+        echo $transaction->getDescription();
+        echo "<hr/>";
         //  if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
         if (strstr($transaction->getDescription(), "Refill")) {
             $vat = $transaction->getAmount() - ($transaction->getAmount() / ($vatPerValue + 1));
