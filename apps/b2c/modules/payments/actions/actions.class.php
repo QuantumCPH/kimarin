@@ -276,7 +276,11 @@ class paymentsActions extends sfActions {
         echo "<br/>";
         echo  $transaction->getTransactionTypeId();
         echo "<br/>";
-
+        echo "Transcation ID:".$transaction_id;
+        echo "<br/>";
+        echo "Registration Fee".$customer_order->getProduct()->getRegistrationFee();
+        echo "<br/>";
+        
         if ($customerorder == 1) {
 
             
