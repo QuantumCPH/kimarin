@@ -295,7 +295,16 @@ class paymentsActions extends sfActions {
             }
         } elseif ($transaction->getTransactionTypeId() == 2) {
             $vat = 0;
-        } else {
+        }elseif ($transaction->getTransactionTypeId() == 6) {
+            if ($transaction_id > 93) {
+                $vat= $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
+                //$vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+            } else {
+                $vat= $transaction->getAmount() - ($transaction->getAmount() / (1.18));
+                //$vat = $customer_order->getProduct()->getRegistrationFee() * (.18);
+            }
+        }
+        else {
             if ($transaction_id > 93) {
                 $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
             } else {
