@@ -296,11 +296,14 @@ class paymentsActions extends sfActions {
             $vatPerValue = (.18);
         }
 
+        echo $vat;
+        echo "<hr/>";
         //  if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
         if (strstr($transaction->getDescription(), "Refill")) {
             $vat = $transaction->getAmount() - ($transaction->getAmount() / ($vatPerValue + 1));
         }
-
+        echo $vat;
+        die;
         $registered_customer_name = false;
         $refferedC = new Criteria();
         $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID, $transaction->getId());
@@ -313,8 +316,7 @@ class paymentsActions extends sfActions {
             $registered_customer_name = $invitedCustomer->getFirstName() . " " . $invitedCustomer->getLastName();
         }
 
-        echo $vat;
-        die;
+
 
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,
