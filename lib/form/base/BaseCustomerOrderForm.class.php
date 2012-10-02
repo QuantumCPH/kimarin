@@ -20,7 +20,7 @@ class BaseCustomerOrderForm extends BaseFormPropel
       'extra_refill'                => new sfWidgetFormInput(),
       'created_at'                  => new sfWidgetFormDateTime(),
       'updated_at'                  => new sfWidgetFormDateTime(),
-      'is_first_order'              => new sfWidgetFormInputCheckbox(),
+      'is_first_order'              => new sfWidgetFormInput(),
       'agent_commission_package_id' => new sfWidgetFormPropelChoice(array('model' => 'AgentCommissionPackage', 'add_empty' => true)),
       'exe_status'                  => new sfWidgetFormInput(),
     ));
@@ -34,7 +34,7 @@ class BaseCustomerOrderForm extends BaseFormPropel
       'extra_refill'                => new sfValidatorNumber(),
       'created_at'                  => new sfValidatorDateTime(),
       'updated_at'                  => new sfValidatorDateTime(array('required' => false)),
-      'is_first_order'              => new sfValidatorBoolean(),
+      'is_first_order'              => new sfValidatorInteger(),
       'agent_commission_package_id' => new sfValidatorPropelChoice(array('model' => 'AgentCommissionPackage', 'column' => 'id', 'required' => false)),
       'exe_status'                  => new sfValidatorInteger(array('required' => false)),
     ));

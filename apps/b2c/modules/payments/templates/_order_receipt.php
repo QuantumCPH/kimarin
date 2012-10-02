@@ -176,6 +176,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
    
     
      <?php   if($TDI==6){
+         
          echo __('Airtime refill');
          }elseif($TDI==10){
              $vat = 0;
@@ -195,7 +196,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
     <td align="right" style="padding-right: 65px;"><?php  if($TDI==6){
-       echo number_format($subtotal = $order->getExtraRefill()-$vat,2);
+        $vat += 1;
+       echo number_format($subtotal = $order->getExtraRefill()/$vat,2);
          }elseif($TDI==10){
           echo number_format($subtotal = $order->getExtraRefill()-$vat,2); 
     }else{ echo number_format($subtotal = $transaction->getAmount()-$vat,2); } ?><?php echo sfConfig::get('app_currency_code');?></td>
@@ -209,7 +211,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php  echo __('Airtime bonus');   ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $order->getExtraRefill()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;">-<?php echo number_format($subtotal = $order->getExtraRefill()/$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
                          
               <?php       }elseif($TDI==10){  ?>
@@ -289,7 +291,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 </p>
 <?php endif; ?>
 
-<p style="font-weight: bold;">
+<p style='font-weight: bold;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
         <br><?php echo __('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>

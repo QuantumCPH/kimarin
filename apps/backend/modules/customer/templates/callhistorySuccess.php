@@ -86,7 +86,7 @@ if($pus==1){
 
                             </tr>
                         <?php
-                        $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 4);
+                        $tilentaCallHistryResult = $telintaObj->callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 4);
                         if(count($tilentaCallHistryResult)>0){
                         foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
                          ?>
@@ -114,7 +114,7 @@ if($pus==1){
 
                             </tr>
                         <?php
-                        $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 1);
+                        $tilentaCallHistryResult = $telintaObj->callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 1);
                         if(count($tilentaCallHistryResult)>0){
                         foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
                          ?>
@@ -140,7 +140,7 @@ if($pus==1){
                                 <th class="title"><?php echo __('Amount') ?></th>
                             </tr>
                         <?php
-                        $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 2);
+                        $tilentaCallHistryResult = $telintaObj->callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59', false, 2);
                         if(count($tilentaCallHistryResult)>0){
                         foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
                          ?>
@@ -192,7 +192,7 @@ if($getFirstnumberofMobile==0){
 $numbername=$customer->getUniqueid();
 
 
-                          $tilentaCallHistryResult = Telienta::callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59');
+                          $tilentaCallHistryResult = $telintaObj->callHistory($customer, $fromdate . ' 00:00:00', $todate . ' 23:59:59');
 
 
                             foreach ($tilentaCallHistryResult->xdr_list as $xdr) { //echo "<pre>";echo var_dump($tilentaCallHistryResult);echo "</pre>";

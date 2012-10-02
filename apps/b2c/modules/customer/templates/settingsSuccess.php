@@ -2,9 +2,9 @@
 <?php include_partial('dashboard_header', array('customer'=> $customer, 'section'=>__('Settings')) ) ?>
 <?php echo $form->renderGlobalErrors() ?>
 
-<?php if ($sf_user->hasFlash('message')): ?>
-<div class="alert_bar">
-	<?php echo $sf_user->getFlash('message') ?>
+<?php if ($sf_user->hasFlash('settings')): ?>
+<div class="ok_alert_bar">
+	<?php echo $sf_user->getFlash('settings') ?>
 </div>
 <?php endif;?>
 <?php include_stylesheets_for_form($form) ?>

@@ -182,9 +182,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
                      }else{ if(@$postalcharge && $order->getIsFirstOrder()==1){         echo number_format($transaction->getAmount()+@$postalcharge,2); }else{ echo number_format($transaction->getAmount(),2);    }  } ?> <?php echo sfConfig::get('app_currency_code') ?></td>
 
   </tr>
-  
-  
-  
+   
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
   </tr>
@@ -211,8 +209,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?>
 </p>
 <?php endif; ?>
+ 
 
-<p style="font-weight: bold;">
+<p style='font-weight: bold; font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+ 
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
         <br><?php echo __('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>

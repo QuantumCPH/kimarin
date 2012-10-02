@@ -181,7 +181,7 @@ class paymentsActions extends sfActions {
         $order->save();
         $transaction->setAmount($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage')));
           $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(8);
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
@@ -259,12 +259,12 @@ class paymentsActions extends sfActions {
         $transaction = TransactionPeer::retrieveByPK($transaction_id);
 
 
-        if($transaction_id>93){
-          $vatValue=sfConfig::get('app_vat_percentage');
-        }else{
-         $vatValue=(.18);
-        }
-        
+//        if($transaction_id>93){
+//          $vatValue=sfConfig::get('app_vat_percentage');
+//        }else{
+//         $vatValue=(.18);
+//        }
+//        
 
         $this->forward404Unless($transaction->getCustomerId() == $this->customer->getId(), 'Not allowed');
 
@@ -273,9 +273,12 @@ class paymentsActions extends sfActions {
        // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
         if ($customerorder==1) {
+
+
             if($transaction_id>93){
-            $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage');
-            }else{
+            $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage'); 
+           
+           }else{
               $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) *(.18);   
             }
         }elseif($transaction->getTransactionTypeId()==2){
@@ -295,11 +298,11 @@ class paymentsActions extends sfActions {
            }else{
                $vatPerValue=(.18); 
            }
-        
-        //if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
-        //if(strstr($transaction->getDescription(),"Refill")){
+      
+      //  if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
+        if(strstr($transaction->getDescription(),"Refill")){
             $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
-        //}
+        }
 
         $registered_customer_name = false;
         $refferedC = new Criteria();

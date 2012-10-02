@@ -16,6 +16,7 @@ class customerActions extends autocustomerActions {
     private $currentCulture;
     
     public function executeDeActivateCustomer(sfWebRequest $request) {
+        $telintaObj = new Telienta();
         $response_text = 'Response From Server: <br/>';
         $this->response_text = $response_text;
         if (isset($_GET['customer_id'])) {
@@ -63,7 +64,8 @@ class customerActions extends autocustomerActions {
                             $tc->add(TelintaAccountsPeer::STATUS, 3);
                             if (TelintaAccountsPeer::doCount($tc) > 0) {
                                 $telintaAccountR = TelintaAccountsPeer::doSelectOne($tc);
-                                Telienta::terminateAccount($telintaAccountR);
+
+                                $telintaObj->terminateAccount($telintaAccountR);
                             }
                         } else {
                         }
@@ -76,7 +78,7 @@ class customerActions extends autocustomerActions {
                         $telintaAccounts = TelintaAccountsPeer::doSelect($cp);
                         foreach ($telintaAccounts as $account) {
                             $response_text .="Deleting Account: " . $account->getAccountTitle() . "<br/>";
-                            Telienta::terminateAccount($account);
+                            $telintaObj->terminateAccount($account);
                         }
                     }
                 }
@@ -172,8 +174,8 @@ class customerActions extends autocustomerActions {
         $c->add(CustomerPeer::ID, $id);
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
              $this->customer = CustomerPeer::doSelectOne($c);
-//$this->customer_balance =Telienta::getBalance($this->customer->getUniqueid());
-        $this->customer_balance = Telienta::getBalance($this->customer);
+             $telintaObj = new Telienta();
+        $this->customer_balance = $telintaObj->getBalance($this->customer);
     }
 
     public function executePaymenthistory(sfWebRequest $request) {
@@ -231,6 +233,7 @@ class customerActions extends autocustomerActions {
         //$this->total_pages = $pager->getNbResults() / $items_per_page;
     }
     public function executeCallhistory(sfWebRequest $request) {
+        $this->telintaObj = new Telienta();
         $this->customer = CustomerPeer::retrieveByPK($request->getParameter('id'));
         $this->redirectUnless($this->customer, "@homepage");
         $fromdate = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
@@ -352,8 +355,8 @@ class customerActions extends autocustomerActions {
                 $transaction->setTransactionFrom(2);
                  $transaction->setVat($request->getParameter('charge_amount')*sfConfig::get('app_vat_percentage'));
                 $transaction->save();
-
-                Telienta::charge($customer, $extra_refill_wovat, $transactiondescription->getTitle());
+                $telintaObj = new Telienta();
+                $telintaObj->charge($customer, $extra_refill_wovat, $transactiondescription->getTitle());
 
 
                 //set status
@@ -443,7 +446,8 @@ class customerActions extends autocustomerActions {
                 }else{
                   $isfid=2;     
                 }
-                $customerBalance = Telienta::getBalance($customer);
+                $telintaObj = new Telienta();
+                $customerBalance = $telintaObj->getBalance($customer);
                 $c = new Criteria();
                 $c->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
                 $customer_product = CustomerProductPeer::doSelectOne($c)->getProduct();
@@ -470,7 +474,8 @@ class customerActions extends autocustomerActions {
                     $transaction->setTransactionFrom('2');
                     $transaction->setVat($request->getParameter('refill_amount')*sfConfig::get('app_vat_percentage'));
                     $transaction->save();
-                    Telienta::recharge($customer, $transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1),$transactiondescription->getTitle());
+                    $telintaObj = new Telienta();
+                    $telintaObj->recharge($customer, $transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1),$transactiondescription->getTitle());
                     //set status
                     $order->setOrderStatusId(3);
                     $transaction->setTransactionStatusId(3);
@@ -590,7 +595,8 @@ class customerActions extends autocustomerActions {
                     foreach($tilentAccounts as $tilentAccount){
                     $accountInfo['i_account']=$tilentAccount->getIAccount();
                     $accountInfo['blocked']="N";
-                    Telienta::updateAccount($accountInfo);
+                    $telintaObj = new Telienta();
+                    $telintaObj->updateAccount($accountInfo);
                     }
                     $customer->setBlock(0);
                     $customer->save();
@@ -602,7 +608,7 @@ class customerActions extends autocustomerActions {
 
 
     public function executeUpdateUniqueId(sfWebRequest $request) {
-
+        $telintaObj = new Telienta();
         $this->customer = CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
         $this->redirectUnless($this->customer, "@homepage");
         $c = new Criteria();
@@ -618,14 +624,14 @@ class customerActions extends autocustomerActions {
             $telintaAccounts = TelintaAccountsPeer::doSelect($cp);
             foreach ($telintaAccounts as $account) {
                 echo "Deleting Account: " . $account->getAccountTitle();
-                Telienta::terminateAccount($account);
+                $telintaObj->terminateAccount($account);
             }
         }
 
-        $balance = Telienta::getBalance($this->customer);
+        $balance = $telintaObj->getBalance($this->customer);
         $this->customer->setUniqueid($this->uniqueId->getUniqueNumber());
         $this->customer->save();
-        if (Telienta::ResgiterCustomer($this->customer, $balance)) {
+        if ($telintaObj->ResgiterCustomer($this->customer, $balance)) {
             echo "<br/>Customer Account Created Successfully<br/>";
             $this->uniqueId->setStatus(1);
             $this->uniqueId->setAssignedAt(date("Y-m-d H:i:s"));
@@ -633,11 +639,11 @@ class customerActions extends autocustomerActions {
 
 
 
-            if (Telienta::createAAccount("34" .$this->customer->getMobileNumber(), $this->customer)) {
+            if ($telintaObj->createAAccount("34" .$this->customer->getMobileNumber(), $this->customer)) {
                 echo "<br/> A Account Created Successfully<br/>";
             }
 
-//            if (Telienta::createCBAccount("46" . substr($this->customer->getMobileNumber(), 1), $this->customer)) {
+//            if ($telintaObj->createCBAccount("46" . substr($this->customer->getMobileNumber(), 1), $this->customer)) {
 //                echo "<br/> CB Account Created Successfully<br/>";
 //                ;
 //            }
@@ -649,7 +655,7 @@ class customerActions extends autocustomerActions {
 //            if (isset($getvoipInfos)) {
 //                $voipnumbers = $getvoipInfos->getNumber();
 //                $voipnumbers = substr($voipnumbers, 2);
-//                Telienta::createReseNumberAccount($voipnumbers, $this->customer, $this->customer->getMobileNumber());
+//                $telintaObj->createReseNumberAccount($voipnumbers, $this->customer, $this->customer->getMobileNumber());
 //            }
 
 

@@ -76,8 +76,10 @@ class CustomerForm extends BaseCustomerForm
             $this->widgetSchema['sim_type_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'SimTypes',
                     'order_by' => array('Title','asc'),
-                    //'add_empty' => 'Choose a product',
+                    'add_empty' => '-',
             ));
+            
+            
             //----------------------------------------------------------
             //-----------------For get the Preferred languages---------------------
             $this->widgetSchema['preferred_language_id'] = new sfWidgetFormPropelChoice(array(

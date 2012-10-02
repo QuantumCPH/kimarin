@@ -663,7 +663,7 @@
             </trans-unit>
             <trans-unit id="162" translate="yes" reformat="yes" xml:space="default">
                 <source>Cost &lt;small&gt;(Ex. VAT)&lt;/small&gt;</source>
-                <target>Kosten &lt;small&gt;(Ohne. Mehrwertsteuer)&lt;/small&gt;</target>
+                <target>Kosten &lt;small&gt;(Ohne. IVA)&lt;/small&gt;</target>
             </trans-unit>
             <trans-unit id="163" translate="yes" reformat="yes" xml:space="default">
                 <source>Call Type</source>
@@ -718,7 +718,7 @@
                 <target>Ihre Ware wird ausgeliefert heute. Sie sollten über die Lieferung innerhalb von zwei Tagen. Ihre Kunden-Nummer ist </target>
             </trans-unit>
             <trans-unit id="176" translate="yes" reformat="yes" xml:space="default">
-                <source>SMS History</source>
+                <source>SMS history</source>
                 <target>SMS Verzeichnis</target>
             </trans-unit>
             <trans-unit id="177" translate="yes" reformat="yes" xml:space="default">
@@ -831,7 +831,7 @@
             </trans-unit>
             <trans-unit id="203" translate="yes" reformat="yes" xml:space="default">
                 <source>Please enter a valid 8 to 14 digit mobile number.</source>
-                <target>Bitte geben Sie eine gültige 8- bis 14-stellige Mobilfunknummer an.</target>
+                <target>Bitte geben Sie eine gültige 8- bis&lt;br /&gt;14-stellige Mobilfunknummer an.</target>
             </trans-unit>
             <trans-unit id="204" translate="yes" reformat="yes" xml:space="default">
                 <source>Please accept the terms and conditions</source>
@@ -1206,7 +1206,7 @@
                 <source>Australia</source>
                 <target>Australien</target>
             </trans-unit>
-			<trans-unit id="297" translate="yes" reformat="yes" xml:space="default">
+	   <trans-unit id="297" translate="yes" reformat="yes" xml:space="default">
                 <source>Austria</source>
                 <target>Österreich</target>
             </trans-unit>
@@ -1286,11 +1286,11 @@
                 <source>Cambodia</source>
                 <target>Kambodscha</target>
             </trans-unit>
-			<trans-unit id="317" translate="yes" reformat="yes" xml:space="default">
+	    <trans-unit id="317" translate="yes" reformat="yes" xml:space="default">
                 <source>Cameroon</source>
                 <target>Kamerun</target>
             </trans-unit>
-			<trans-unit id="318" translate="yes" reformat="yes" xml:space="default">
+            <trans-unit id="318" translate="yes" reformat="yes" xml:space="default">
                 <source>Canada</source>
                 <target>Kanada</target>
             </trans-unit>
@@ -1988,7 +1988,7 @@
             </trans-unit>
             <trans-unit id="492" translate="yes" reformat="yes" xml:space="default">
                 <source>IVA</source>
-                <target>Mehrwertsteuer</target>
+                <target>IVA</target>
             </trans-unit>
             <trans-unit id="493" translate="yes" reformat="yes" xml:space="default">
                 <source>Charge by Customer Support</source>
@@ -2052,7 +2052,7 @@
             </trans-unit>
             <trans-unit id="508" translate="yes" reformat="yes" xml:space="default">
                 <source>All amounts are excl. IVA.</source>
-                <target>Alle Beträge sind zugüglich Mehrwertsteuer.</target>
+                <target>Alle Beträge sind zugüglich IVA.</target>
             </trans-unit>
             <trans-unit id="509" translate="yes" reformat="yes" xml:space="default">
                 <source>"%value%" is too long (14 characters max).</source>
@@ -2144,7 +2144,7 @@
             </trans-unit>
             <trans-unit id="531" translate="yes" reformat="yes" xml:space="default">
                 <source>All amounts excl. IVA.</source>
-                <target>Alle Beträge zzgl. Mehrwertsteuer</target>
+                <target>Alle Beträge zzgl. IVA</target>
             </trans-unit>
             <trans-unit id="532" translate="yes" reformat="yes" xml:space="default">
                 <source>Charged</source>
@@ -2252,7 +2252,7 @@
             </trans-unit>
             <trans-unit id="555" translate="yes" reformat="yes" xml:space="default">
                 <source>New SIM-card confirmation</source>
-                <target>Bestätigung neue SIM-Karte</target>
+                <target>Neue SIM-Kartenbestätigung</target>
             </trans-unit>
             <trans-unit id="556" translate="yes" reformat="yes" xml:space="default">
                 <source>Old mobile number</source>

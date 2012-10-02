@@ -78,7 +78,7 @@ class customerActions extends sfActions {
             if ($availableUniqueCount == 0) {
                 echo $customer->getSimTypeId();
                 // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                emailLib::sendUniqueIdsShortage();
+                emailLib::sendUniqueIdsShortage($customer->getSimTypeId());
                 $this->redirect($this->getTargetUrl() . 'customer/shortUniqueIds');
             }
             $uniqueId = $availableUniqueId->getUniqueNumber();
@@ -308,11 +308,12 @@ class customerActions extends sfActions {
         if ($uniqueId == '') {
             $message_body = "Uniqueid Is not assign Of this Mobile Number $TelintaMobile";
             //Send Email to User/Agent/Support --- when Customer Refilll --- 01/15/11
-            emailLib::sendErrorTelinta($this->customer, $message_body);
+            emailLib::sendErrorTelinta($message_body);
         }
         //This is for Retrieve balance From Telinta
         // $telintaGetBalance = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?action=getbalance&name=' . $uniqueId . '&type=customer');
-        $telintaGetBalance = Telienta::getBalance($this->customer);
+        $telintaObj = new Telienta();
+        $telintaGetBalance = $telintaObj->getBalance($this->customer);
         $this->customer_balance = $telintaGetBalance;
 
         if ($this->customer_balance != null)
@@ -323,6 +324,13 @@ class customerActions extends sfActions {
         $c->addAnd(CustomerChangeProductPeer::STATUS, 2);
         $ccpCount = CustomerChangeProductPeer::doCount($c);
         $this->ccpCount = $ccpCount;
+        
+        $cp = new Criteria();
+        $cp->add(ProductPeer::ID, $this->customerProduct->getProductId(),Criteria::NOT_EQUAL);
+        $cp->addAnd(ProductPeer::INCLUDE_IN_ZEROCALL,1, Criteria::EQUAL);
+        $this->activeproducts = ProductPeer::doCount($cp);
+        
+        //echo $this->activeproducts;
     }
 
     //This Function add Again new Feature Wls2 --
@@ -373,7 +381,8 @@ class customerActions extends sfActions {
         $emailId = $this->customer->getEmail();
         $uniqueId = $this->customer->getUniqueid();
         //This is for Retrieve balance From Telinta
-        $this->customer_balance = Telienta::getBalance($this->customer);
+        $telintaObj = new Telienta();
+        $this->customer_balance = $telintaObj->getBalance($this->customer);
 
 
         //$this->customer_balance = 100;
@@ -470,8 +479,8 @@ class customerActions extends sfActions {
                         $TelintaMobile = $MaxUniqueRec->getMobileNumber();
                     }
                     //------------------------------
-
-                    Telienta::createReseNumberAccount($voipnumbers, $this->customer, $TelintaMobile);
+                    $telintaObj = new Telienta();
+                    $telintaObj->createReseNumberAccount($voipnumbers, $this->customer, $TelintaMobile);
 
 
                     $OpeningBalance = '40';
@@ -479,7 +488,7 @@ class customerActions extends sfActions {
                     //type=<account_customer>&action=manual_charge&name=<name>&amount=<amount>
                     //This is for Recharge the Customer
 
-                    Telienta::charge($this->customer, $OpeningBalance, "Resenumber Payment");
+                    $telintaObj->charge($this->customer, $OpeningBalance, "Resenumber Payment");
                 }
 
 //exit;
@@ -580,7 +589,8 @@ class customerActions extends sfActions {
             $res->addAnd(TelintaAccountsPeer::STATUS, 3);
             if (TelintaAccountsPeer::doCount($res) > 0) {
                 $telintaAccountres = TelintaAccountsPeer::doSelectOne($res);
-                Telienta::terminateAccount($telintaAccountres);
+                $telintaObj = new Telienta();
+                $telintaObj->terminateAccount($telintaAccountres);
             } else {
                 $this->redirect('customer/dashboard');
             }
@@ -975,7 +985,7 @@ class customerActions extends sfActions {
 
                 $customer->save();
 
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your Password has been saved.'));
+                $this->getUser()->setFlash('updated', $this->getContext()->getI18N()->__('Your Password has been saved.'));
             }
             // echo 'after';
         }
@@ -1047,7 +1057,7 @@ class customerActions extends sfActions {
                 //	echo 'validated';
                 $customer = $this->form->save();
 
-                $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your settings changes have been saved.'));
+                $this->getUser()->setFlash('settings', $this->getContext()->getI18N()->__('Your settings changes have been saved.'));
             }
             // echo 'after';
         }
@@ -1127,7 +1137,7 @@ class customerActions extends sfActions {
                             if ($this->getUser()->getCulture() != $lang->getLanguageCode()) {
                                 if ($lang->getLanguageCode() == "en") {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
-                                    echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
+                                   echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/login.html'</script>";
                                 } else {
                                     $this->getUser()->setCulture($lang->getLanguageCode());
                                     echo "<script type='text/javascript'>top.location.href='http://www.kimarin.es/" . $lang->getLanguageCode() . "/login.html'</script>";
@@ -1299,7 +1309,8 @@ class customerActions extends sfActions {
         $this->msgSent = "";
         $this->countries = $countries;
         $this->res_cbf = "";
-        $this->balance = (double) Telienta::getBalance($this->customer);
+        $telintaObj = new Telienta();
+        $this->balance = (double) $telintaObj->getBalance($this->customer);
 
         $message = $request->getParameter('message');
 
@@ -1345,9 +1356,10 @@ class customerActions extends sfActions {
                     $cbf->setStatus(3);
                     $cbf->save();
                     $description = "SMS charges";
-                    Telienta::charge($this->customer, $amt, $description);
+                    $telintaObj = new Telienta();
+                    $telintaObj->charge($this->customer, $amt, $description);
                     $this->msgSent = "Yes";
-                    $this->balance = (double) Telienta::getBalance($this->customer);
+                    $this->balance = (double) $telintaObj->getBalance($this->customer);
                 } else {
                     $this->res_cbf = "Response from CBF is:";
                 }
@@ -1912,7 +1924,8 @@ class customerActions extends sfActions {
             $this->queryString = $querystring;
             $this->customer = $order->getCustomer();
             $this->order = $order;
-            $this->customerBalance = Telienta::getBalance($this->customer);
+            $telintaObj = new Telienta();
+            $this->customerBalance = $telintaObj->getBalance($this->customer);
             $this->product = $product;
 
             //   $environment = "sandbox";
@@ -1951,11 +1964,11 @@ class customerActions extends sfActions {
         $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
         $c->add(TelintaAccountsPeer::STATUS, 3);
         $tilentAccounts = TelintaAccountsPeer::doSelect($c);
-
+        $telintaObj = new Telienta();
         foreach ($tilentAccounts as $tilentAccount) {
             $accountInfo['i_account'] = $tilentAccount->getIAccount();
             $accountInfo['blocked'] = "Y";
-            Telienta::updateAccount($accountInfo);
+            $telintaObj->updateAccount($accountInfo);
         }
         $customer->setBlock(1);
         $customer->save();
@@ -1978,8 +1991,8 @@ class customerActions extends sfActions {
         $this->redirectUnless($this->customer, "@homepage");
         $this->targetUrl = $this->getTargetUrl();
 
-        $change_no_startdate = date('Y-m-1 h:i:s');
-        $change_no_enddate = date('Y-m-t h:i:s');
+        $change_no_startdate = date('Y-m-1 00:00:00');
+        $change_no_enddate = date('Y-m-t 23:59:59');
 
         $cn = new Criteria();
         $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID, $this->customer->getId());
@@ -2009,6 +2022,7 @@ class customerActions extends sfActions {
         $this->product = ProductPeer::retrieveByPK($product_id);
 
         $this->vat = $this->product->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+
         $this->amount = $this->product->getRegistrationFee() + $this->vat;
         $amount = $this->amount;
         $this->countrycode = sfConfig::get('app_country_code');
@@ -2058,33 +2072,47 @@ class customerActions extends sfActions {
         
           if($lang=='en'){
               
-        $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
-        $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
+           $return_url ="http://www.kimarin.es/changenumber-payment-thanks.html";
+           $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";    
           }else{
-         $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
-        $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
+           $return_url ="http://www.kimarin.es/".$lang."/changenumber-payment-thanks_".$lang.".html";
+           $cancel_url = "http://www.kimarin.es/".$lang."/changenumber-payment-reject_".$lang.".html";
           }
-        
+         
         $order_id = $request->getParameter('item_number'); 
-
-
-        $order = CustomerOrderPeer::retrieveByPK($order_id);
-
+     
+        $order = CustomerOrderPeer::retrieveByPK($order_id); 
+        $ct = new Criteria();
+        $ct->add(TransactionPeer::ORDER_ID, $order_id);
+        $tCount = TransactionPeer::doCount($ct);
+        if ($tCount > 0) {
+            $transaction = TransactionPeer::doSelectOne($ct);
+            $item_name = $transaction->getDescription();
+            $transaction_amount = $transaction->getAmount();
+        } else {
+            $item_name = "Fee for change number";
+        }
+        
+        
+                     
         $item_amount = $request->getParameter('amount');
+        
+        
         if ($item_amount == "") {
-            $item_amount = number_format($order->getExtraRefill(), 2);
+            $item_amount = $transaction_amount;
         }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
 
         $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
 
-        $email2 = new DibsCall();
-        $email2->setCallurl($notify_url);
-
-        $email2->save();
+//        $email2 = new DibsCall();
+//        $email2->setCallurl($notify_url);
+//
+//        $email2->save();
 
         $mobile_number = $request->getParameter('mobile_number');
         $newnumber = $request->getParameter('newnumber');
+    //    var_dump($order);
         $customerid = $order->getCustomerId();
 
         $changenumberdetail = new ChangeNumberDetail();
@@ -2096,15 +2124,7 @@ class customerActions extends sfActions {
 
         $querystring = '';
 
-        $ct = new Criteria();
-        $ct->add(TransactionPeer::ORDER_ID, $order_id);
-        $tCount = TransactionPeer::doCount($ct);
-        if ($tCount > 0) {
-            $transaction = TransactionPeer::doSelectOne($ct);
-            $item_name = $transaction->getDescription();
-        } else {
-            $item_name = "Fee for change number";
-        }
+        
 
 
         //loop for posted values and append to querystring
@@ -2177,6 +2197,24 @@ class customerActions extends sfActions {
             $transaction->setDescription($this->transaction_title);
             $transaction->setVat($this->vat);
             $transaction->save();
+
+            $cst = new Criteria();
+            $cst->add(SimTypesPeer::ID, $simtype->getSimTypeId());
+            $simtype = SimTypesPeer::doSelectOne($cst);
+            $sim_type_id=$simtype->getId();
+
+            $uc = new Criteria();
+            $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+            $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
+            $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+            $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
+
+            if($availableUniqueCount  == 0){
+                // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
+                emailLib::sendUniqueIdsShortage($sim_type_id);
+                $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+            }
 
            
         }
