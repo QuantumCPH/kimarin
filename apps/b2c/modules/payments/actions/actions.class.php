@@ -271,7 +271,15 @@ class paymentsActions extends sfActions {
         $customer_order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
         // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
+
+        echo "CustomerOrder:".$customerorder;
+        echo "<br/>";
+        echo  $transaction->getTransactionTypeId();
+        echo "<br/>";
+
         if ($customerorder == 1) {
+
+            
 
 
             if ($transaction_id > 93) {
