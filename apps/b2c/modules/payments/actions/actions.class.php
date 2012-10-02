@@ -1,10 +1,10 @@
 <?php
+
 require_once(sfConfig::get('sf_lib_dir') . '/changeLanguageCulture.php');
 require_once(sfConfig::get('sf_lib_dir') . '/emailLib.php');
 require_once(sfConfig::get('sf_lib_dir') . '/commissionLib.php');
 require_once(sfConfig::get('sf_lib_dir') . '/smsCharacterReplacement.php');
 require_once(sfConfig::get('sf_lib_dir') . '/payment.class.php');
-
 
 /**
  * payments actions.
@@ -15,9 +15,11 @@ require_once(sfConfig::get('sf_lib_dir') . '/payment.class.php');
  * @version    SVN: $Id: actions.class.php,v 1.6 2010-09-19 18:53:06 orehman Exp $
  */
 class paymentsActions extends sfActions {
- private function getTargetUrl() {
+
+    private function getTargetUrl() {
         return sfConfig::get('app_customer_url');
     }
+
     /**
      * Executes index action
      *
@@ -29,9 +31,9 @@ class paymentsActions extends sfActions {
 
     public function executeThankyou(sfWebRequest $request) {
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11
-      $lnaugeval=$request->getParameter('lng');
-        if(isset($lnaugeval) && $lnaugeval!=''){
-        $this->getUser()->setCulture($request->getParameter('lng'));
+        $lnaugeval = $request->getParameter('lng');
+        if (isset($lnaugeval) && $lnaugeval != '') {
+            $this->getUser()->setCulture($request->getParameter('lng'));
         }
         $urlval = "thanks-" . $request->getParameter('transact');
 
@@ -42,15 +44,15 @@ class paymentsActions extends sfActions {
     }
 
     public function executeReject(sfWebRequest $request) {
-        
-        $Parameters=$request->getURI();
 
-       // $Parameters=$Parameters.$request->getParameter('amount');
+        $Parameters = $request->getURI();
+
+        // $Parameters=$Parameters.$request->getParameter('amount');
         $email2 = new DibsCall();
         $email2->setCallurl($Parameters);
 
         $email2->save();
-        
+
         //get the order_id
         $order_id = $request->getParameter('orderid');
         //$error_text = substr($request->getParameter('errortext'), 0, strpos($request->getParameter('errortext'), '!'));
@@ -67,8 +69,7 @@ class paymentsActions extends sfActions {
 
         $order->setOrderStatusId(4); //cancelled
 
-        $this->getUser()->setFlash('error_payment',
-                $error_text
+        $this->getUser()->setFlash('error_payment', $error_text
         );
 
         $this->order = $order;
@@ -118,8 +119,6 @@ class paymentsActions extends sfActions {
 
     public function executeSignup(sfWebRequest $request) {
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11
-      
-
         //$this->getUser()->setCulture('en');
         //$getCultue = $this->getUser()->getCulture();
         // Store data in the user session
@@ -128,13 +127,13 @@ class paymentsActions extends sfActions {
         $this->form = new PaymentForm();
 
 ///////////////////////postal charges section//////////////////////////////
-        $lang =  sfConfig::get('app_language_symbol');
+        $lang = sfConfig::get('app_language_symbol');
         $this->lang = $lang;
 
         $countrylng = new Criteria();
         $countrylng->add(EnableCountryPeer::LANGUAGE_SYMBOL, $lang);
         $countrylng = EnableCountryPeer::doSelectOne($countrylng);
-        if($countrylng){
+        if ($countrylng) {
             $countryName = $countrylng->getName();
             $languageSymbol = $countrylng->getLanguageSymbol();
             $lngId = $countrylng->getId();
@@ -143,10 +142,10 @@ class paymentsActions extends sfActions {
             $postalcharges->add(PostalChargesPeer::COUNTRY, $lngId);
             $postalcharges->add(PostalChargesPeer::STATUS, 1);
             $postalcharges = PostalChargesPeer::doSelectOne($postalcharges);
-            if($postalcharges){
-              $this->postalcharge =  $postalcharges->getCharges();
-            }else{
-                $this->postalcharge =  0;
+            if ($postalcharges) {
+                $this->postalcharge = $postalcharges->getCharges();
+            } else {
+                $this->postalcharge = 0;
             }
         }
 
@@ -179,15 +178,15 @@ class paymentsActions extends sfActions {
         //$order->setExtraRefill($extra_refil_choices[0]);//minumum refill amount
         $order->setIsFirstOrder(1);
         $order->save();
-        $transaction->setAmount($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee()+(($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage')));
-          $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(8);
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
-                $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                $transaction->setDescription($transactiondescription->getTitle());
+        $transaction->setAmount($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee() + (($this->postalcharge + $order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(8);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
         //$transaction->setTransactionStatusId() // default value 1
-        $transaction->setVat((($this->postalcharge + $order->getProduct()->getRegistrationFee())*sfConfig::get('app_vat_percentage')));
+        $transaction->setVat((($this->postalcharge + $order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
         $transaction->save();
         $this->order = $order;
         $this->forward404Unless($this->order);
@@ -227,27 +226,27 @@ class paymentsActions extends sfActions {
 
         $this->redirectUnless($this->customer, '@customer_login');
         //check to see if transaction id is there
-        $lang =  sfConfig::get('app_language_symbol');
+        $lang = sfConfig::get('app_language_symbol');
         $this->lang = $lang;
-        
+
         $countrylng = new Criteria();
-        $countrylng->add(EnableCountryPeer::LANGUAGE_SYMBOL,$lang );
+        $countrylng->add(EnableCountryPeer::LANGUAGE_SYMBOL, $lang);
         $countrylng = EnableCountryPeer::doSelectOne($countrylng);
-        if($countrylng){
+        if ($countrylng) {
             $countryName = $countrylng->getName();
             $languageSymbol = $countrylng->getLanguageSymbol();
             $lngId = $countrylng->getId();
-            
+
             $postalcharges = new Criteria();
             $postalcharges->add(PostalChargesPeer::COUNTRY, $lngId);
             $postalcharges->add(PostalChargesPeer::STATUS, 1);
             $postalcharges = PostalChargesPeer::doSelectOne($postalcharges);
             //var_dump($postalcharges);
-            if($postalcharges){
-                $postalcharge =  $postalcharges->getCharges();
-               $forIphoneAdaptor = $postalcharge;
-            }else{
-                $postalcharge =  '';
+            if ($postalcharges) {
+                $postalcharge = $postalcharges->getCharges();
+                $forIphoneAdaptor = $postalcharge;
+            } else {
+                $postalcharge = '';
             }
         }
         $transaction_id = $request->getParameter('tid');
@@ -270,52 +269,71 @@ class paymentsActions extends sfActions {
 
         //set customer order
         $customer_order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
-       // $this->customer_order = $customer_order;
+        // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
-        if ($customerorder==1) {
 
-
-            if($transaction_id>93){
-            $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) * sfConfig::get('app_vat_percentage'); 
-           
-           }else{
-              $vat = ($customer_order->getProduct()->getRegistrationFee()+$postalcharge) *(.18);   
-            }
-        }elseif($transaction->getTransactionTypeId()==2){
-            $vat = 0;
-        }
-        else{
-             if($transaction_id>93){
-            $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
-             }else{
-                 
-                $vat = $customer_order->getProduct()->getRegistrationFee() * (.18);   
-             }
-        }
+//        echo "CustomerOrder:".$customerorder;
+//        echo "<br/>";
+//        echo  $transaction->getTransactionTypeId();
+//        echo "<br/>";
+//        echo "Transcation ID:".$transaction_id;
+//        echo "<br/>";
+//        echo "Registration Fee".$customer_order->getProduct()->getRegistrationFee();
+//        echo "<br/>";
+//        echo "ProductID:".$customer_order->getProduct()->getId()."Product Name:".$customer_order->getProduct()->getName();
+//        echo "<br/>";
         
-           if($transaction_id>93){
-               $vatPerValue=sfConfig::get('app_vat_percentage');
-           }else{
-               $vatPerValue=(.18); 
-           }
-      
-      //  if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
-        if(strstr($transaction->getDescription(),"Refill")){
-            $vat = $transaction->getAmount() - ($transaction->getAmount()/($vatPerValue+1));
+        if ($customerorder == 1) {
+
+            
+
+
+            if ($transaction_id > 93) {
+                $vat = ($customer_order->getProduct()->getRegistrationFee() + $postalcharge) * sfConfig::get('app_vat_percentage');
+            } else {
+                $vat = ($customer_order->getProduct()->getRegistrationFee() + $postalcharge) * (.18);
+            }
+        } elseif ($transaction->getTransactionTypeId() == 2) {
+            $vat = 0;
+        }elseif ($transaction->getTransactionDescriptionId() == 6) {
+            if ($transaction_id > 93) {
+                $vat= $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
+            } else {
+                $vat= $transaction->getAmount() - ($transaction->getAmount() / (1.18));
+            }
+        }
+        else {
+            if ($transaction_id > 93) {
+                $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+            } else {
+
+                $vat = $customer_order->getProduct()->getRegistrationFee() * (.18);
+            }
         }
 
+        if ($transaction_id > 93) {
+            $vatPerValue = sfConfig::get('app_vat_percentage');
+        } else {
+            $vatPerValue = (.18);
+        }
+
+        //  if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
+//        if (strstr($transaction->getDescription(), "Refill")) {
+//            $vat = $transaction->getAmount() - ($transaction->getAmount() / ($vatPerValue + 1));
+//        }
         $registered_customer_name = false;
         $refferedC = new Criteria();
-        $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID,$transaction->getId());
-        $refferedC->add(InvitePeer::INVITE_STATUS,3);
-        
-        if(InvitePeer::doCount($refferedC)>0){
-        
+        $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID, $transaction->getId());
+        $refferedC->add(InvitePeer::INVITE_STATUS, 3);
+
+        if (InvitePeer::doCount($refferedC) > 0) {
+
             $invite = InvitePeer::doSelectOne($refferedC);
             $invitedCustomer = CustomerPeer::retrieveByPK($invite->getInvitedCustomerId());
-            $registered_customer_name = $invitedCustomer->getFirstName()." ".$invitedCustomer->getLastName();
-
+            $registered_customer_name = $invitedCustomer->getFirstName() . " " . $invitedCustomer->getLastName();
         }
+
+
 
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,
@@ -323,81 +341,78 @@ class paymentsActions extends sfActions {
             'transaction' => $transaction,
             'vat' => $vat,
             'registered_customer_name' => $registered_customer_name,
-            'postalcharge'=>$postalcharge,
-            'customerorder'=>$customerorder,
+            'postalcharge' => $postalcharge,
+            'customerorder' => $customerorder,
         ));
 
         return sfView::NONE;
     }
 
-
-
     public function executeCtpay(sfWebRequest $request) {
-      
+
         $urlval = $request->getParameter('transact');
         $email2 = new DibsCall();
         $email2->setCallurl($urlval);
         $email2->save();
     }
 
-  public function executeTest(sfWebRequest $request) {
+    public function executeTest(sfWebRequest $request) {
 
 
-  
-       return sfView::NONE;
+
+        return sfView::NONE;
     }
 
-    public function executeTransaction(sfWebRequest $request)
-    {
+    public function executeTransaction(sfWebRequest $request) {
         $order_id = $request->getParameter('item_number');
-        $item_amount = $request->getParameter('amount');        
-        
-        
-        $lang=$this->getUser()->getCulture();
-      
-      //  $return_url = "http://www.kimarineurope.com/registration-thanks.html";
-        
-        if($lang=='en'){
-        $return_url = "http://www.kimarin.es/registration-thanks.html";
-        $cancel_url = "http://www.kimarin.es/registration-reject.html";
-        }else{
-        $return_url = "http://www.kimarin.es/".$lang."/registration-thanks_".$lang.".html";
-        $cancel_url = "http://www.kimarin.es/".$lang."/registration-reject_".$lang.".html";   
-          
+        $item_amount = $request->getParameter('amount');
+
+
+        $lang = $this->getUser()->getCulture();
+
+        //  $return_url = "http://www.kimarineurope.com/registration-thanks.html";
+
+        if ($lang == 'en') {
+            $return_url = "http://www.kimarin.es/registration-thanks.html";
+            $cancel_url = "http://www.kimarin.es/registration-reject.html";
+        } else {
+            $return_url = "http://www.kimarin.es/" . $lang . "/registration-thanks_" . $lang . ".html";
+            $cancel_url = "http://www.kimarin.es/" . $lang . "/registration-reject_" . $lang . ".html";
         }
-        
-        $callbackparameters = $lang.'-'.$order_id.'-'.$item_amount;
-        $notify_url = $this->getTargetUrl().'pScripts/confirmpayment?p='.$callbackparameters;        
-        
+
+        $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
+        $notify_url = $this->getTargetUrl() . 'pScripts/confirmpayment?p=' . $callbackparameters;
+
         $email2 = new DibsCall();
         $email2->setCallurl($notify_url);
 
         $email2->save();
-        
-        
+
+
         $querystring = '';
-     
+
         $order = CustomerOrderPeer::retrieveByPK($order_id);
         $item_name = $order->getProduct()->getName();
-        
-	//loop for posted values and append to querystring
-	foreach($_POST as $key => $value){
-		$value = urlencode(stripslashes($value));
-		$querystring .= "$key=$value&";
-	}
-        
-        $querystring .= "item_name=".urlencode($item_name)."&";
-        $querystring .= "return=".urldecode($return_url)."&";
-        $querystring .= "cancel_return=".urldecode($cancel_url)."&";
-	$querystring .= "notify_url=".urldecode($notify_url);
-        
-        //$environment = "sandbox";
-        if($order_id && $item_amount){
-	   Payment::SendPayment($querystring);
-        }else{
-           echo 'error';  
+
+        //loop for posted values and append to querystring
+        foreach ($_POST as $key => $value) {
+            $value = urlencode(stripslashes($value));
+            $querystring .= "$key=$value&";
         }
-	return sfView::NONE;
-	//exit();
-    }   
+
+        $querystring .= "item_name=" . urlencode($item_name) . "&";
+        $querystring .= "return=" . urldecode($return_url) . "&";
+        $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+        $querystring .= "notify_url=" . urldecode($notify_url);
+
+        //$environment = "sandbox";
+        if ($order_id && $item_amount) {
+            Payment::SendPayment($querystring);
+        } else {
+            echo 'error';
+        }
+        return sfView::NONE;
+        //exit();
+    }
+
 }
