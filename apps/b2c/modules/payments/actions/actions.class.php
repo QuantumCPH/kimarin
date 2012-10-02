@@ -272,16 +272,16 @@ class paymentsActions extends sfActions {
         // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
 
-        echo "CustomerOrder:".$customerorder;
-        echo "<br/>";
-        echo  $transaction->getTransactionTypeId();
-        echo "<br/>";
-        echo "Transcation ID:".$transaction_id;
-        echo "<br/>";
-        echo "Registration Fee".$customer_order->getProduct()->getRegistrationFee();
-        echo "<br/>";
-        echo "ProductID:".$customer_order->getProduct()->getId()."Product Name:".$customer_order->getProduct()->getName();
-        echo "<br/>";
+//        echo "CustomerOrder:".$customerorder;
+//        echo "<br/>";
+//        echo  $transaction->getTransactionTypeId();
+//        echo "<br/>";
+//        echo "Transcation ID:".$transaction_id;
+//        echo "<br/>";
+//        echo "Registration Fee".$customer_order->getProduct()->getRegistrationFee();
+//        echo "<br/>";
+//        echo "ProductID:".$customer_order->getProduct()->getId()."Product Name:".$customer_order->getProduct()->getName();
+//        echo "<br/>";
         
         if ($customerorder == 1) {
 
@@ -298,10 +298,8 @@ class paymentsActions extends sfActions {
         }elseif ($transaction->getTransactionDescriptionId() == 6) {
             if ($transaction_id > 93) {
                 $vat= $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
-                //$vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
             } else {
                 $vat= $transaction->getAmount() - ($transaction->getAmount() / (1.18));
-                //$vat = $customer_order->getProduct()->getRegistrationFee() * (.18);
             }
         }
         else {
@@ -319,16 +317,10 @@ class paymentsActions extends sfActions {
             $vatPerValue = (.18);
         }
 
-        echo $vat;
-        echo "<hr/>";
-        echo $transaction->getDescription();
-        echo "<hr/>";
         //  if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
 //        if (strstr($transaction->getDescription(), "Refill")) {
 //            $vat = $transaction->getAmount() - ($transaction->getAmount() / ($vatPerValue + 1));
 //        }
-        echo $vat;
-        die;
         $registered_customer_name = false;
         $refferedC = new Criteria();
         $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID, $transaction->getId());
