@@ -282,10 +282,10 @@ class paymentsActions extends sfActions {
 //        echo "<br/>";
 //        echo "ProductID:".$customer_order->getProduct()->getId()."Product Name:".$customer_order->getProduct()->getName();
 //        echo "<br/>";
-        
+
         if ($customerorder == 1) {
 
-            
+
 
 
             if ($transaction_id > 93) {
@@ -295,14 +295,13 @@ class paymentsActions extends sfActions {
             }
         } elseif ($transaction->getTransactionTypeId() == 2) {
             $vat = 0;
-        }elseif ($transaction->getTransactionDescriptionId() == 6) {
+        } elseif ($transaction->getTransactionDescriptionId() == 6 && $transaction->getTransactionDescriptionId() == 4) {
             if ($transaction_id > 93) {
-                $vat= $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
+                $vat = $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
             } else {
-                $vat= $transaction->getAmount() - ($transaction->getAmount() / (1.18));
+                $vat = $transaction->getAmount() - ($transaction->getAmount() / (1.18));
             }
-        }
-        else {
+        } else {
             if ($transaction_id > 93) {
                 $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
             } else {
