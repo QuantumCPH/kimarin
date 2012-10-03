@@ -296,20 +296,20 @@ class paymentsActions extends sfActions {
         } elseif ($transaction->getTransactionTypeId() == 2) {
             $vat = 0;
         } elseif ($transaction->getTransactionDescriptionId() == 6 || $transaction->getTransactionDescriptionId() == 4) {
-            echo "Amount".$transaction->getAmount();
-            echo "<br/>";
+//            echo "Amount".$transaction->getAmount();
+//            echo "<br/>";
             if ($transaction_id > 93) {
 
                 $vat = $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
-                echo "vat1:".$vat;
-                echo "<br/>";
+//                echo "vat1:".$vat;
+//                echo "<br/>";
             } else {
                 $vat = $transaction->getAmount() - ($transaction->getAmount() / (1.18));
-                echo "vat2:".$vat;
-                echo "<br/>";
+//                echo "vat2:".$vat;
+//                echo "<br/>";
             }
-            echo $vat;
-            die;
+//            echo $vat;
+//            die;
         } else {
             if ($transaction_id > 93) {
                 $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
