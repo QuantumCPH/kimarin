@@ -1991,7 +1991,7 @@ class affiliateActions extends sfActions {
    
    public function executePurchaseNewSimProcess(sfWebRequest $request) { 
    
-      $uniqueId=  $request->getParameter('uniqueId');
+      $NewUniqueId=  $request->getParameter('uniqueId');
   $st = new Criteria();
             $st->add(ProductPeer::ID, $request->getParameter('productId'));
             $simtype = ProductPeer::doSelectOne($st);
@@ -2061,8 +2061,9 @@ class affiliateActions extends sfActions {
             $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
             $uc->addAnd(UniqueIdsPeer::STATUS, 0);
             $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
-            $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER,$uniqueId);
+            $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER,$NewUniqueId);
             
+           
             $availableUniqueCount = UniqueIdsPeer::doCount($uc);
             
             $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
