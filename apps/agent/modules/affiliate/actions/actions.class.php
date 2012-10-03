@@ -1991,6 +1991,7 @@ class affiliateActions extends sfActions {
    
    public function executePurchaseNewSimProcess(sfWebRequest $request) { 
    
+      $uniqueId=  $request->getParameter('uniqueId');
   $st = new Criteria();
             $st->add(ProductPeer::ID, $request->getParameter('productId'));
             $simtype = ProductPeer::doSelectOne($st);
@@ -2057,10 +2058,13 @@ class affiliateActions extends sfActions {
             $activeNumber = CallbackLogPeer::doSelectOne($cb);
 
             $uc = new Criteria();
-            $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+            $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
             $uc->addAnd(UniqueIdsPeer::STATUS, 0);
             $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
+            $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER,$uniqueId);
+            
             $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+            
             $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
 
             if($availableUniqueCount  == 0){
@@ -2184,7 +2188,24 @@ class affiliateActions extends sfActions {
           
         }
 
-      
+       public function executeValidateUniqeId(sfWebRequest $request){
+
+        $uniqueId= $request->getParameter('uniqueId');
+        $sim_type_id= $request->getParameter('sim_type');
+        $uc = new Criteria();
+        $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
+        $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+        $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
+         $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER,$uniqueId);
+        $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+        if($availableUniqueCount == 1){
+            echo "true";
+        }else{
+            echo "false";
+        }
+
+        return sfView::NONE;
+   }  
    
    
 }
