@@ -301,6 +301,8 @@ class paymentsActions extends sfActions {
             } else {
                 $vat = $transaction->getAmount() - ($transaction->getAmount() / (1.18));
             }
+            echo $vat;
+            die;
         } else {
             if ($transaction_id > 93) {
                 $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
