@@ -2169,7 +2169,7 @@ class affiliateActions extends sfActions {
             emailLib::sendCustomerNewcardEmailAgent($this->customer, $order, $transaction,$agent_company_id);
             $this->updatePreferredCulture();
                     //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% new sim is purchased successfully '));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('new sim is purchased successfully '));
 //                                      echo 'rehcarged, redirecting';
                     $this->redirect('affiliate/receipts');
                 } else {
@@ -2181,8 +2181,7 @@ class affiliateActions extends sfActions {
      return sfView::NONE;
 
         ////////////////////////////      
-          
-            
+           
             //new transaction
            
     
@@ -2207,6 +2206,114 @@ class affiliateActions extends sfActions {
 
         return sfView::NONE;
    }  
-   
-   
+   public function executeChangeProductService(sfWebRequest $request) {
+          changeLanguageCulture::languageCulture($request, $this);
+          $this->error_msg="";
+           $this->product_id = '';
+        $cst = new Criteria();
+        $cst->add(ProductPeer::PRODUCT_TYPE_ID, 1);
+         $cst->addAnd(ProductPeer::IS_IN_STORE, 1);
+        $this->simtypes = ProductPeer::doSelect($cst);
+     }
+      public function executeChangeProductServiceDetail(sfWebRequest $request){
+      
+          changeLanguageCulture::languageCulture($request, $this);
+        $simTypeId=$request->getParameter('sim_type');
+         $mobile_number = $request->getParameter('mobile_number');
+            $uc = new Criteria();
+           $uc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
+        $uc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $uc->addAnd(CustomerPeer::BLOCK, 0);
+         $this->customer = CustomerPeer::doSelectOne($uc);
+         
+         
+         
+          $this->error_msg="";
+           $this->product_id = '';
+        $cst = new Criteria();
+        $cst->add(ProductPeer::ID, $simTypeId);
+        $simtype = ProductPeer::doSelectOne($cst);
+         $this->product= $simtype;
+           $cstx = new Criteria();
+        $cstx->add(ProductPeer::ID, 16);
+        $simtypex = ProductPeer::doSelectOne($cstx);
+         $this->productx= $simtypex;
+         
+         
+         
+        $this->product_id = $simtype->getId();
+           $this->price = $simtypex->getRegistrationFee();
+            $this->vat = $this->price * sfConfig::get('app_vat_percentage');
+            $this->total = $this->price + $this->vat;
+               
+     }     
+  
+    public function executeChangeProductProcess(sfWebRequest $request) {
+
+        $this->customer = CustomerPeer::retrieveByPK($request->getParameter('customerId'));
+      
+        $this->targetUrl = $this->getTargetUrl();
+
+        $product_id = $request->getParameter('productId');
+        $this->oldProduct = ProductPeer::retrieveByPK($product_id);
+
+        $product = ProductPeer::retrieveByPK(16);
+        $this->product = $product;
+        $this->product_id = $product->getId();
+        $this->price = $product->getRegistrationFee();
+        $this->vat = $this->price * sfConfig::get('app_vat_percentage');
+        $this->total = $this->price + $this->vat;
+
+        $order = new CustomerOrder();
+        $order->setCustomerId($this->customer->getId());
+        $order->setProductId($product->getId());
+        $order->setQuantity(1);
+        $order->setExtraRefill($product->getInitialBalance());
+        $order->setOrderStatusId(3);
+         $order->setExeStatus(1);
+        $order->setIsFirstOrder(7);
+
+
+        $order->save();
+        $this->order = $order;
+        //create transaction
+        $transaction = new Transaction();
+        $transaction->setOrderId($order->getId());
+        $transaction->setCustomerId($this->customer->getId());
+        $transaction->setAmount($this->total);
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(15);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($transactiondescription->getTitle());
+        $transaction->setTransactionStatusId(3);
+        $transaction->setVat($this->vat);
+        $transaction->save();
+        $ccp = new CustomerChangeProduct();
+        $ccp->setCustomerId($this->customer->getId());
+        $ccp->setProductId($product_id);
+        $ccp->setCreatedAt(Date());
+        $ccp->setStatus(1);
+        $ccp->setOrderId($order->getId());
+        $ccp->setTransactionId($transaction->getId());
+        $ccp->save();
+               
+            $uniqueId=$this->customer->getUniqueid();
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerChangeProductAgent($this->customer, $order, $transaction);
+            $this->updatePreferredCulture();
+       
+ 
+           $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer  is Subscribed  for new Product'));
+//                                      echo 'rehcarged, redirecting';
+                    $this->redirect('affiliate/receipts');
+               
+    
+     return sfView::NONE;
+        
+    }
+
+
+     
+     
+     
 }
