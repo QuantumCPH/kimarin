@@ -468,6 +468,84 @@
         <tr>
 		<td colspan="2"></td>
 	</tr>
+        
+<!--     ////////////////////////////////////////   -->
+      <tr>
+		<td><?php echo __('Total') ?> <strong><?php echo __('revenue on Sim Sales') ?></strong></td>
+		<td align="right">
+		<?php echo  number_format($simSale_earnings,2)
+
+		?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo __('Total commission earned on Sim Sales:') ?></td>
+		<td align="right">
+		<?php echo  number_format($simSale_commission,2);
+
+
+		?>
+		</td>
+        </tr>
+
+        <tr>
+		<td colspan="2"></td>
+	</tr>  
+<!--    ///////////////////////////////////////    -->
+        <tr>
+		<td><?php echo __('Total') ?> <strong><?php echo __('revenue on Change Product') ?></strong></td>
+		<td align="right">
+		<?php echo  number_format($changeProduct_earnings,2)
+
+		?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo __('Total commission earned on Change Product:') ?></td>
+		<td align="right">
+		<?php echo  number_format($changeProduct_commission,2);
+
+
+		?>
+		</td>
+        </tr>
+
+        <tr>
+		<td colspan="2"></td>
+	</tr>  
+<!--    ///////////////////////////////////////    -->
+          <tr>
+		<td><?php echo __('Total') ?> <strong><?php echo __('revenue on Mobile Number') ?></strong></td>
+		<td align="right">
+		<?php echo  number_format($numberChange_earnings,2)
+
+		?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo __('Total commission earned on Change Mobile Number:') ?></td>
+		<td align="right">
+		<?php echo  number_format($numberChange_commission,2);
+
+
+		?>
+		</td>
+        </tr>
+
+        <tr>
+		<td colspan="2"></td>
+	</tr>  
+<!--    ///////////////////////////////////////    -->        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <tr>
             <td><?php echo __('Total') ?> <strong><?php echo __('revenue earned') ?>  </strong><?php echo __('on refill from shop:') ?></td>
 		<td align="right">

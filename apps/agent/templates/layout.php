@@ -103,7 +103,7 @@ $sf_user->setCulture('en');
                     if ($agent_company) {
                         if ($agent_company->getIsPrepaid()) {
  ?>
-                    <?php echo __('Your Balance is:') ?> <b><?php echo $agent_company->getBalance(); ?></b>
+                    <?php echo __('Your Balance is:') ?> <b><?php echo number_format($agent_company->getBalance(),2); ?><?php echo sfConfig::get('app_currency_code');?></b>
                     <?php } ?>
 <?php } ?>
                 </div>
