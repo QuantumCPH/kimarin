@@ -101,7 +101,8 @@ class affiliateActions extends sfActions {
         $ar = new Criteria();
         $ar->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
         $ar->add(TransactionPeer::TRANSACTION_TYPE_ID, 3, Criteria::NOT_EQUAL);
-        $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,13, Criteria::NOT_EQUAL);
+        $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,11, Criteria::EQUAL);
+        //  $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,13, Criteria::NOT_EQUAL);
         if ($startdate != "" && $enddate != "") {
             $ar->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $ar->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -114,7 +115,11 @@ class affiliateActions extends sfActions {
 //                    $transactions[$i]=$refill;
 //                    $i=$i+1;
 //                }
-
+   $this->registrations = $registrations;
+       $this->refills = $refills;
+        $this->counter = $i - 1;
+        
+          /////////////////// Number Change  Area///////////////////////////////
         $cn = new Criteria();
         $cn->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
         $cn->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,13, Criteria::EQUAL);
@@ -122,14 +127,43 @@ class affiliateActions extends sfActions {
             $cn->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $cn->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
         }
+        
         $cn->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $cn->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
         $numberchange = TransactionPeer::doSelect($cn);
         //var_dump($numberchange);
-        $this->registrations = $registrations;
+     
         $this->numberchanges = $numberchange;
-        $this->refills = $refills;
-        $this->counter = $i - 1;
+    
+        /////////////////// Change Product Area///////////////////////////////
+        $cp = new Criteria();
+        $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+        $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,15, Criteria::EQUAL);
+        if ($startdate != "" && $enddate != "") {
+            $cp->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+            $cp->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
+        }
+        $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+        $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+        $changeProducts = TransactionPeer::doSelect($cp);
+        
+        
+        $this->changeProducts = $changeProducts; 
+         ///////////////////New Sim Sale Area Area///////////////////////////////
+        $ns = new Criteria();
+        $ns->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+        $ns->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,14, Criteria::EQUAL);
+        if ($startdate != "" && $enddate != "") {
+            $ns->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+            $ns->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
+        }
+        $ns->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+        $ns->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+        $newSimSales = TransactionPeer::doSelect($ns);
+        
+        
+        $this->newSimSales = $newSimSales; 
+        
     }
 
     public function executePrintReceipt(sfWebRequest $request) {
@@ -365,15 +399,15 @@ class affiliateActions extends sfActions {
             $this->sms_commission_earnings = $sms_commission_earnings;
             ////////// End SMS registrations
 
-
+//////////////////// Number  Change/////////////////////////////////////////
             $nc = new Criteria();
             $nc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-            $nc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
+           // $nc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
             $nc->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 13);
             $nc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $nc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
             $number_changes = TransactionPeer::doSelect($nc);
-
+            
             $numberChange_earnings = 0.00;
             $numberChange_commission = 0.00;
             foreach ($number_changes as $number_change) {
@@ -383,9 +417,48 @@ class affiliateActions extends sfActions {
             $this->number_changes = $number_changes;
             $this->numberChange_earnings = $numberChange_earnings;
             $this->numberChange_commission = $numberChange_commission;
+////////////////////////////////Change Product ////////////////////
+ 
+            $cp = new Criteria();
+            $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+         //   $cp->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
+            $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 15);
+            $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+            $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+            $change_products = TransactionPeer::doSelect($cp);
 
+            $changeProduct_earnings = 0.00;
+            $changeProduct_commission = 0.00;
+            foreach ($change_products as $change_product) {
+                $changeProduct_earnings = $changeProduct_earnings + $change_product->getAmount();
+                $changeProduct_commission = $changeProduct_commission + $change_product->getCommissionAmount();
+            }
+            $this->change_products = $change_products;
+            $this->changeProduct_earnings = $changeProduct_earnings;
+            $this->changeProduct_commission = $changeProduct_commission;
 
+            
+            ////////////////////////////////New Sim Sale  ////////////////////
+ 
+            $cp = new Criteria();
+            $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
+           
+            $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 14);
+            $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+            $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+            $sim_sales = TransactionPeer::doSelect($cp);
 
+            $simSale_earnings = 0.00;
+            $simSale_commission = 0.00;
+            foreach ($sim_sales as $sim_sale) {
+                $simSale_earnings = $simSale_earnings + $sim_sale->getAmount();
+                $simSale_commission = $simSale_commission + $sim_sale->getCommissionAmount();
+            }
+            $this->sim_sales = $sim_sales;
+            $this->simSale_earnings = $simSale_earnings;
+            $this->simSale_commission = $simSale_commission;
+            
+            
             $this->sf_request = $request;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -2264,6 +2337,20 @@ class affiliateActions extends sfActions {
         $this->vat = $this->price * sfConfig::get('app_vat_percentage');
         $this->total = $this->price + $this->vat;
 
+        
+         $is_recharged = true;
+          $agentcomession=FALSE;
+          $ca = new Criteria();
+        $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $agent = AgentCompanyPeer::doSelectOne($ca);
+         $c = new Criteria();
+       
+        //get Agent commission package
+        $cpc = new Criteria();
+        $cpc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
+        $commission_package = AgentCommissionPackagePeer::doSelectOne($cpc);
+        
+           $transaction = new Transaction();
         $order = new CustomerOrder();
         $order->setCustomerId($this->customer->getId());
         $order->setProductId($product->getId());
@@ -2272,12 +2359,76 @@ class affiliateActions extends sfActions {
         $order->setOrderStatusId(3);
          $order->setExeStatus(1);
         $order->setIsFirstOrder(7);
+///////////////////agent area //////////////////////////
+           $transaction->setAgentCompanyId($agent->getId());
 
+                $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
+
+                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+
+                $cp = new Criteria;
+                $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
+                $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+                $agentproductcount = AgentProductPeer::doCount($cp);
+                if ($agentproductcount > 0) {
+                    $p = new Criteria;
+                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                    $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+                    $agentproductcomesion = AgentProductPeer::doSelectOne($p);
+                    $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
+                }
+
+                ////////   commission setting  through  agent commision//////////////////////
+
+                if ($agentcomession) {
+                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
+                    }
+                } else {
+                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
+                    }
+                }
+                //calculated amount for agent commission
+                if ($agent->getIsPrepaid() == true) {
+                    if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
+                        $is_recharged = false;
+                        $balance_error = 1;
+                    }
+                }
+
+                if ($is_recharged) {
+                    $transaction->save();
+                    if ($agent->getIsPrepaid() == true) {
+                        $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
+                        $agent->save();
+                        $remainingbalance = $agent->getBalance();
+                        $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
+                        $amount = -$amount;
+                        $aph = new AgentPaymentHistory();
+                        $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                        $aph->setCustomerId($transaction->getCustomerId());
+                        $aph->setExpeneseType(2);
+                        $aph->setAmount($amount);
+                        $aph->setRemainingBalance($remainingbalance);
+                        $aph->save();
+                    }
+
+        ////////////////////////agent area end/////////////////
+        
+        
+        
+        
+        
 
         $order->save();
         $this->order = $order;
         //create transaction
-        $transaction = new Transaction();
+     
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($this->customer->getId());
         $transaction->setAmount($this->total);
@@ -2287,12 +2438,13 @@ class affiliateActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(3);
         $transaction->setVat($this->vat);
+           
         $transaction->save();
         $ccp = new CustomerChangeProduct();
         $ccp->setCustomerId($this->customer->getId());
         $ccp->setProductId($product_id);
         $ccp->setCreatedAt(Date());
-        $ccp->setStatus(1);
+        $ccp->setStatus(2);
         $ccp->setOrderId($order->getId());
         $ccp->setTransactionId($transaction->getId());
         $ccp->save();
@@ -2301,19 +2453,21 @@ class affiliateActions extends sfActions {
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerChangeProductAgent($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
-       
- 
-           $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer  is Subscribed  for new Product'));
+            
+            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer  is Subscribed  for new Product'));
 //                                      echo 'rehcarged, redirecting';
                     $this->redirect('affiliate/receipts');
                
-    
-     return sfView::NONE;
         
+            } else {
+//                                        echo 'NOT rehcarged, redirecting';
+                    $this->balance_error = 1;
+                    $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
+                }  
+                 return sfView::NONE;
     }
 
 
-     
-     
+         
      
 }
