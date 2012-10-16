@@ -85,8 +85,8 @@ class affiliateActions extends sfActions {
                 $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                 $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
             }
-            $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-            $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
+            $tc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+            $tc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID,3);
             if (TransactionPeer::doSelectOne($tc)) {
                 $registrations[$i] = TransactionPeer::doSelectOne($tc);
             }
@@ -745,7 +745,7 @@ class affiliateActions extends sfActions {
 
         $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee() + ($order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage')));
         $transactiondescription=TransactionDescriptionPeer::retrieveByPK(12);
-        $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
