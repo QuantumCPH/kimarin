@@ -1252,6 +1252,15 @@ class affiliateActions extends sfActions {
         $existingNumber = $request->getParameter('existingNumber');
         $this->newNumber = $request->getParameter('newNumber');
         $this->countrycode = $request->getParameter('countrycode');
+        
+        if($request->getParameter('newNumber')==$request->getParameter('existingNumber'))
+        {
+           
+          $this->getUser()->setFlash('message', 'Both Mobile numbers are same please enter different Mobile number');
+                $this->redirect('affiliate/changenumberservice');    
+            
+        }
+            
         if (isset($_REQUEST['existingNumber']) && $_REQUEST['existingNumber'] != "") {
             $mobile = $_REQUEST['existingNumber'];
             $product = $_REQUEST['product'];
@@ -2381,6 +2390,34 @@ class affiliateActions extends sfActions {
         $uc->addAnd(CustomerPeer::BLOCK, 0);
          $this->customer = CustomerPeer::doSelectOne($uc);
          
+         
+         
+         
+           $op = new Criteria();
+           $op->add(CustomerProductPeer::CUSTOMER_ID, $this->customer->getId());
+        $op->addAnd(CustomerProductPeer::STATUS_ID, 3);
+    //    $uc->addAnd(CustomerPeer::BLOCK, 0);
+         $opproduct = CustomerProductPeer::doSelectOne($op);
+       
+         if($opproduct->getId==$simTypeId){
+          
+               $this->getUser()->setFlash('message', 'Customer Already have this Product');
+                $this->redirect('affiliate/changeProductService');    
+            
+             
+         }
+         
+            $cop = new Criteria();
+           $cop->add(CustomerChangeProductPeer::CUSTOMER_ID, $this->customer->getId());
+        $cop->addAnd(CustomerChangeProductPeer::STATUS, 2);
+            $cop->addAnd(CustomerChangeProductPeer::PRODUCT_ID, $simTypeId);
+     
+         $copproductCount = CustomerChangeProductPeer::doCount($cop);
+       
+         if($copproductCount>0){
+            $this->getUser()->setFlash('message', 'Customer Already Subscribed for this Product');
+                $this->redirect('affiliate/changeProductService');      
+         }
          
          
           $this->error_msg="";
