@@ -13,8 +13,15 @@
                 uniqueid: {
                     remote: "<?php echo $target; ?>affiliate/validateUniqueId?orderid=<?php echo $order->getId();?>"
                 }
-            }
-        });
+            },
+    messages: {
+       
+        uniqueid: {
+            required: "Please Enter the Unique Number",
+            minlength: jq.format("Enter at least {0} characters"),
+            remote: jq.format("{0} is already in use")
+    }
+    }  });
 
 
         jq("#quantity").blur(function(){
@@ -113,7 +120,7 @@
                     </li>
                     <li>
                         <label style="text-align:left"><?php echo __('Unique Id') ?>:</label>
-                        <input type="text" id="uniqueid" value="" name="uniqueid"/>
+                        <input type="text" id="uniqueid" value="" name="uniqueid" minlength="6" class="required"/>
                     </li>
                     <li>
                         <label style="text-align:left">
