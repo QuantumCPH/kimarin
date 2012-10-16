@@ -76,10 +76,10 @@ jQuery(function() {
             
 		</td>
 		<td><?php echo $customer->getMobileNumber()?></td>
-		<td align="right" style="text-align:right;">
+		<td align="right" style="text-align:right;padding-right: 50px;">
 			<?php // echo BaseUtil::format_number($registration->getAmount()) 
                           echo number_format($registration->getAmount(),2);
-                        ?>
+                        ?><?php echo sfConfig::get('app_currency_code');?>
 		</td>
 		<td>
 		<?php echo __($registration->getDescription()) ?>

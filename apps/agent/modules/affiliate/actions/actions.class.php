@@ -1265,7 +1265,7 @@ class affiliateActions extends sfActions {
 
             if (CustomerPeer::doCount($cc) == 0) {
                 $this->getUser()->setFlash('message', 'Customer Does not exist');
-                $this->redirect('affiliate/refill');
+                $this->redirect('affiliate/changenumberservice');
             }
 
             $customer = CustomerPeer::doSelectOne($cc);
