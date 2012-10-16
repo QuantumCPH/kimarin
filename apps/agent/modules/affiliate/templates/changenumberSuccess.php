@@ -37,7 +37,7 @@
             <label><?php echo   number_format($product->getRegistrationFee(),2); echo sfConfig::get('app_currency_code');  ?></label><br />
         </li>
          <li>
-            <label>Vat</label>
+            <label>IVA</label>
             <label><?php echo number_format($vat, 2);echo sfConfig::get('app_currency_code'); ?></label><br />
         </li>
          <li>

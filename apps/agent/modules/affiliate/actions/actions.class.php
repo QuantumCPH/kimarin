@@ -169,59 +169,149 @@ class affiliateActions extends sfActions {
     public function executePrintReceipt(sfWebRequest $request) {
         //is authenticated
         $this->forward404Unless($this->getUser()->isAuthenticated());
-        $this->updateNews = NewupdatePeer::doSelect(new Criteria());
+      
 
         //check to see if transaction id is there
 
         $transaction_id = $request->getParameter('tid');
         $this->forward404Unless($transaction_id);
+       changeLanguageCulture::languageCulture($request, $this);
+
+        //is authenticated
+     
+
+       
+        //check to see if transaction id is there
+        $lang = sfConfig::get('app_language_symbol');
+        $this->lang = $lang;
+
+        $countrylng = new Criteria();
+        $countrylng->add(EnableCountryPeer::LANGUAGE_SYMBOL, $lang);
+        $countrylng = EnableCountryPeer::doSelectOne($countrylng);
+        if ($countrylng) {
+            $countryName = $countrylng->getName();
+            $languageSymbol = $countrylng->getLanguageSymbol();
+            $lngId = $countrylng->getId();
+
+            $postalcharges = new Criteria();
+            $postalcharges->add(PostalChargesPeer::COUNTRY, $lngId);
+            $postalcharges->add(PostalChargesPeer::STATUS, 1);
+            $postalcharges = PostalChargesPeer::doSelectOne($postalcharges);
+            //var_dump($postalcharges);
+            if ($postalcharges) {
+                $postalcharge = $postalcharges->getCharges();
+                $forIphoneAdaptor = $postalcharge;
+            } else {
+                $postalcharge = '';
+            }
+        }
+        $transaction_id = $request->getParameter('tid');
+
+        $this->forward404Unless($transaction_id);
+
         //is this receipt really belongs to authenticated user
 
         $transaction = TransactionPeer::retrieveByPK($transaction_id);
-        $c = new Criteria();
-        $c->add(CustomerPeer::ID, $transaction->getCustomerId());
-        $this->customer = CustomerPeer::doSelectOne($c);
+
+
+           $this->customer = CustomerPeer::retrieveByPK($transaction->getCustomerId());
+       
+        
+//        if($transaction_id>93){
+//          $vatValue=sfConfig::get('app_vat_percentage');
+//        }else{
+//         $vatValue=(.18);
+//        }
+//        
 
         $this->forward404Unless($transaction->getCustomerId() == $this->customer->getId(), 'Not allowed');
+
         //set customer order
         $customer_order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
+        // $this->customer_order = $customer_order;
+        $customerorder = $customer_order->getIsFirstOrder();
 
-        if ($customer_order) {
-            $vat = $customer_order->getIsFirstOrder()==1 ?
-                    $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage') :
-                    0;
-        }
-        else
-            die('Error retreiving');
+//        echo "CustomerOrder:".$customerorder;
+//        echo "<br/>";
+//        echo  $transaction->getTransactionTypeId();
+//        echo "<br/>";
+//        echo "Transcation ID:".$transaction_id;
+//        echo "<br/>";
+//        echo "Registration Fee".$customer_order->getProduct()->getRegistrationFee();
+//        echo "<br/>";
+//        echo "ProductID:".$customer_order->getProduct()->getId()."Product Name:".$customer_order->getProduct()->getName();
+//        echo "<br/>";
+
+        if ($customerorder == 1) {
 
 
-        $agent_company_id = $this->customer->getReferrerId();
-        if ($agent_company_id != '') {
-            $c = new Criteria();
-            $c->add(AgentCompanyPeer::ID, $agent_company_id);
-            $recepient_agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+
+
+            if ($transaction_id > 93) {
+                $vat = ($customer_order->getProduct()->getRegistrationFee() + $postalcharge) * sfConfig::get('app_vat_percentage');
+            } else {
+                $vat = ($customer_order->getProduct()->getRegistrationFee() + $postalcharge) * (.18);
+            }
+        } elseif ($transaction->getTransactionTypeId() == 2) {
+            $vat = 0;
+        } elseif ($transaction->getTransactionDescriptionId() == 6 || $transaction->getTransactionDescriptionId() == 4) {
+//            echo "Amount".$transaction->getAmount();
+//            echo "<br/>";
+            if ($transaction_id > 93) {
+
+                $vat = $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
+//                echo "vat1:".$vat;
+//                echo "<br/>";
+            } else {
+                $vat = $transaction->getAmount() - ($transaction->getAmount() / (1.18));
+//                echo "vat2:".$vat;
+//                echo "<br/>";
+            }
+//            echo $vat;
+//            die;
         } else {
-            $recepient_agent_name = '';
+            if ($transaction_id > 93) {
+                $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+            } else {
+
+                $vat = $customer_order->getProduct()->getRegistrationFee() * (.18);
+            }
         }
 
-        if ($customer_order->getIsFirstOrder()==1) {
-            $this->renderPartial('affiliate/order_receipt', array(
-                'customer' => $this->customer,
-                'order' => CustomerOrderPeer::retrieveByPK($transaction->getOrderId()),
-                'transaction' => $transaction,
-                'agent_name' => $recepient_agent_name,
-                'vat' => $vat,
-            ));
+        if ($transaction_id > 93) {
+            $vatPerValue = sfConfig::get('app_vat_percentage');
         } else {
-            $this->renderPartial('affiliate/refill_order_receipt', array(
-                'customer' => $this->customer,
-                'order' => CustomerOrderPeer::retrieveByPK($transaction->getOrderId()),
-                'transaction' => $transaction,
-                'agent_name' => $recepient_agent_name,
-                'vat' => $vat,
-                'wrap' => false,
-            ));
+            $vatPerValue = (.18);
         }
+
+        //  if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
+//        if (strstr($transaction->getDescription(), "Refill")) {
+//            $vat = $transaction->getAmount() - ($transaction->getAmount() / ($vatPerValue + 1));
+//        }
+        $registered_customer_name = false;
+        $refferedC = new Criteria();
+        $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID, $transaction->getId());
+        $refferedC->add(InvitePeer::INVITE_STATUS, 3);
+
+        if (InvitePeer::doCount($refferedC) > 0) {
+
+            $invite = InvitePeer::doSelectOne($refferedC);
+            $invitedCustomer = CustomerPeer::retrieveByPK($invite->getInvitedCustomerId());
+            $registered_customer_name = $invitedCustomer->getFirstName() . " " . $invitedCustomer->getLastName();
+        }
+
+
+
+        $this->renderPartial('affiliate/order_receipt', array(
+            'customer' => $this->customer,
+            'order' => CustomerOrderPeer::retrieveByPK($transaction->getOrderId()),
+            'transaction' => $transaction,
+            'vat' => $vat,
+            'registered_customer_name' => $registered_customer_name,
+            'postalcharge' => $postalcharge,
+            'customerorder' => $customerorder,
+        ));
+
         return sfView::NONE;
     }
 
