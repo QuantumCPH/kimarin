@@ -1264,7 +1264,7 @@ class affiliateActions extends sfActions {
             $product = ProductPeer::doSelectOne($c);
 
             if (CustomerPeer::doCount($cc) == 0) {
-                $this->getUser()->setFlash('message', 'Customer Does not exist');
+                $this->getUser()->setFlash('message', 'Customer Mobile Number Does not exist');
                 $this->redirect('affiliate/changenumberservice');
             }
 
