@@ -19,7 +19,7 @@
         uniqueid: {
             required: "Please Enter the Unique Number",
             minlength: jq.format("Enter at least {0} characters"),
-            remote: jq.format("{0} is already in use")
+            remote: jq.format("Please Enter the Valid Unique Number")
     }
     }  });
 
