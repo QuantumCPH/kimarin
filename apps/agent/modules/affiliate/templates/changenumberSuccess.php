@@ -3,7 +3,15 @@
     <form name="" method="post"  action="<?php echo url_for($targetUrl.'affiliate/numberProcess') ?>">
     <input type="hidden" value="<?php echo  $customer->getMobileNumber(); ?>" name="mobile_number" />
     <input type="hidden" value="<?php echo  $product->getId();  ?>" name="productid" />
-    <input type="hidden" value="<?php echo  $product->getPrice();  ?>" name="extra_refill" />
+    <input type="hidden" value="<?php echo  $price=$product->getRegistrationFee();  ?>" name="extra_refill" />
+    
+    <?php  
+    
+    $vat = $price * sfConfig::get('app_vat_percentage');
+    $totalAmount=$vat+$price;
+    ?>
+    <input type="hidden" value="<?php echo  $vat;  ?>" name="vat" />
+    <input type="hidden" value="<?php echo  $totalAmount;  ?>" name="totalAmount" />
     <input type="hidden" value="<?php echo  $newNumber;  ?>" name="newnumber" />
     <input type="hidden" value="<?php echo  $countrycode;  ?>" name="countrycode" />
     <ul class="fl col changenumber">
@@ -24,8 +32,17 @@
             <label><?php echo $product->getDescription(); ?></label><br />
         </li>
         <li>
-            <label>Amount</label>
-            <label><?php echo  $product->getPrice(); ?></label><br />
+            <label>Product Price</label>
+            
+            <label><?php echo  $product->getRegistrationFee(); ?></label><br />
+        </li>
+         <li>
+            <label>Vat</label>
+            <label><?php echo number_format($vat, 2);echo sfConfig::get('app_currency_code'); ?></label><br />
+        </li>
+         <li>
+            <label>Total amount</label>
+            <label><?php echo  $product->getRegistrationFee(); ?></label><br />
         </li>
         <li style="margin-left:188px"><input type="submit" name="Pay" value="Pay" /><br /></li>
     </ul>

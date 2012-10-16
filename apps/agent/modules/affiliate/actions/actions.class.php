@@ -756,6 +756,8 @@ class affiliateActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
+        $vat=$order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+         $transaction->setVat($vat);
        //$transaction->setTransactionStatusId() // default value 1
 
         $transaction->save();
@@ -1309,6 +1311,9 @@ class affiliateActions extends sfActions {
             $mobile_number = $request->getParameter('mobile_number');
             $productid = $request->getParameter('productid');
             $extra_refill = $request->getParameter('extra_refill');
+             $totalAmount = $request->getParameter('totalAmount');
+              $vat = $request->getParameter('vat');
+            
             $newnumber = $request->getParameter('newnumber');
             $countrycode = $request->getParameter('countrycode');
 
@@ -1345,14 +1350,15 @@ class affiliateActions extends sfActions {
                 //create transaction
                 $transaction->setOrderId($order->getId());
                 $transaction->setCustomerId($customer->getId());
-                $transaction->setAmount($extra_refill);
+                $transaction->setAmount($totalAmount);
                    $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(13);
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
             //    $transaction->setDescription('Fee for change number (' . $agent->getName() . ')');
                 $transaction->setAgentCompanyId($agent->getId());
-                //assign commission to transaction;
+                  $transaction->setVat($vat);
+                          //assign commission to transaction;
                 /////////////////////////////////////////////////////////////////////////////////////////////////
                 $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 ///////////////////////////commision calculation by agent product ///////////////////////////////////////
@@ -1981,7 +1987,7 @@ class affiliateActions extends sfActions {
                 $transaction->setCustomerId($customer->getId());
                 $transaction->setAmount($extra_refill);
                 $transactiondescription=TransactionDescriptionPeer::retrieveByPK(11);
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setVat($request->getParameter('vat'));
