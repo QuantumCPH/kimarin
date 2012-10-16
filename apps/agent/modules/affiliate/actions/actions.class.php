@@ -1274,7 +1274,7 @@ class affiliateActions extends sfActions {
                 $this->product = $product;
             } else {
                 $this->getUser()->setFlash('message', 'Customer Does not exist');
-                $this->redirect('affiliate/refill');
+                $this->redirect('affiliate/changenumberservice');
             }
         }
     }
