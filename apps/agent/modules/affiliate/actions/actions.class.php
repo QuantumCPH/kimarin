@@ -498,6 +498,11 @@ class affiliateActions extends sfActions {
 
         if ($request->isMethod('post')) {
             $mobile_number = $request->getParameter('mobile_number');
+            
+            if(strlen($mobile_number)==0){
+                 $this->error_mobile_number = $this->getContext()->getI18N()->__('You must fill in this field');
+                   return;
+            }
             $extra_refill = $request->getParameter('extra_refill');
            // $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
@@ -507,6 +512,7 @@ class affiliateActions extends sfActions {
             $cc = new Criteria();
             $cc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
             $cc->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+              $cc->add(CustomerPeer::BLOCK, 3);
             //$cc->add(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);  // This Line disable becoz no need of fonet system in landncall -
             $customer = CustomerPeer::doSelectOne($cc);
 

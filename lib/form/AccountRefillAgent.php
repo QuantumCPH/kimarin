@@ -12,7 +12,7 @@
 			
 			$c = new Criteria();
 			$c->add(CustomerPeer::CUSTOMER_STATUS_ID, sfConfig::get('app_status_completed'));
-			$c->add(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);
+			$c->addAnd(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);
 			
 			$this->setValidators(array(
 				'mobile_number' => new sfValidatorPropelChoice(array(
