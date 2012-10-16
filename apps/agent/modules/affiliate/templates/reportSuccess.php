@@ -103,7 +103,7 @@
         </table>
         </div>
 	<?php endif; ?>
-
+       <!--///////////////////////SMS Registration/////////////////////////////////////////-->
 <?php if (count($sms_registrations)>0): ?>
         <div id="sf_admin_container"><h1><?php echo __('SMS Registration Earnings') ?></h1></div>
         
@@ -162,7 +162,7 @@
         </table>
         </div>    
 	<?php endif; ?>
-
+        <!--///////////////////////Refill/////////////////////////////////////////-->
 
 	<?php if (count($refills)>0): ?>	
         <div id="sf_admin_container"><h1><?php echo __('Refills Earnings') ?></h1></div>
@@ -216,6 +216,10 @@
         </div>
 	<?php endif; ?>
 
+
+ 
+<!--///////////////////Change NUMBER//////////////////////////////-->
+        
         <?php if (count($number_changes)>0): ?>
 	<div id="sf_admin_container"><h1><?php echo __('Mobile Number Change Earnings') ?></h1></div>
 
@@ -272,6 +276,129 @@
 	</table></div>
 	<?php endif; ?>
 
+<!--//////////////////////New Sim Sales//////////////////////////////////////////////////////////-->
+
+        
+        <?php if (count($sim_sales)>0): ?>
+	<div id="sf_admin_container"><h1><?php echo __('New Sim Sales Earnings') ?></h1></div>
+
+        <div class="borderDiv">
+           <table cellspacing="0" cellpadding="2" width="100%">
+		<tr>
+			<th>&nbsp;</th>
+			<th><?php echo __('Date') ?> </th>
+			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Sim Amount') ?></th>
+			<th><?php echo __('Commission Earned') ?></th>
+		</tr>
+		<?php
+		$i = 0;
+		foreach($sim_sales as $sim_sale):
+		?>
+		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
+			<td><?php echo ++$i ?>.</td>
+                        <td><?php echo $sim_sale->getCreatedAt('d-m-Y') ?></td>
+			<td><?php
+				$customer = CustomerPeer::retrieveByPK($sim_sale->getCustomerId());
+				//$customer2 = CustomerPeer::retrieveByPK(72);
+				//echo $customer2->getFirstName();
+				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				?>
+			</td>
+
+
+
+			<td >
+			<?php echo BaseUtil::format_number($sim_sale->getAmount())?><?php echo sfConfig::get('app_currency_code');?>
+			</td>
+                        <?php //if ( $number_change->getAmount() == 0) {?>
+<!--                            <td ><?php //echo '10.00' ?></td>-->
+                        <?php //}else{ ?>
+
+			<td ><?php echo BaseUtil::format_number($sim_sale->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
+			</td>
+                        <?php //} ?>
+
+		</tr>
+		<?php endforeach; ?>
+                </table>
+              <table width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+		<td align="right"><strong><?php echo __('Total Number of Sim Sales:') ?></strong></td><td align="right"> <?php echo $i ?></td>
+		</tr>
+		<tr>
+		<td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo BaseUtil::format_number($simSale_earnings); ?><?php echo sfConfig::get('app_currency_code');?></td>
+		</tr>
+		<tr>
+		<td align="right"><strong><?php echo __('Total Commission Earned:') ?> </strong></td><td align="right"> <?php echo BaseUtil::format_number($simSale_commission); ?><?php echo sfConfig::get('app_currency_code');?></td>
+		</tr>
+	</table></div>
+	<?php endif; ?>
+
+  
+<!--//////////////////  Change Product/////////////////////////////////-->
+
+   <?php if (count($change_products)>0): ?>
+	<div id="sf_admin_container"><h1><?php echo __('Change Product Earnings') ?></h1></div>
+
+        <div class="borderDiv">
+           <table cellspacing="0" cellpadding="2" width="100%">
+		<tr>
+			<th>&nbsp;</th>
+			<th><?php echo __('Date') ?> </th>
+			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Change Product Amount') ?></th>
+			<th><?php echo __('Commission Earned') ?></th>
+		</tr>
+		<?php
+		$i = 0;
+		foreach($change_products as $change_product):
+		?>
+		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
+			<td><?php echo ++$i ?>.</td>
+                        <td><?php echo $change_product->getCreatedAt('d-m-Y') ?></td>
+			<td><?php
+				$customer = CustomerPeer::retrieveByPK($change_product->getCustomerId());
+				//$customer2 = CustomerPeer::retrieveByPK(72);
+				//echo $customer2->getFirstName();
+				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				?>
+			</td>
+
+
+
+			<td >
+			<?php echo BaseUtil::format_number($change_product->getAmount())?><?php echo sfConfig::get('app_currency_code');?>
+			</td>
+                        <?php //if ( $number_change->getAmount() == 0) {?>
+<!--                            <td ><?php //echo '10.00' ?></td>-->
+                        <?php //}else{ ?>
+
+			<td ><?php echo BaseUtil::format_number($change_product->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
+			</td>
+                        <?php //} ?>
+
+		</tr>
+		<?php endforeach; ?>
+                </table>
+              <table width="100%" cellspacing="0" cellpadding="2">
+        <tr>
+		<td align="right"><strong><?php echo __('Total Change Product Sales:') ?></strong></td><td align="right"> <?php echo $i ?></td>
+		</tr>
+		<tr>
+		<td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo BaseUtil::format_number($changeProduct_earnings); ?><?php echo sfConfig::get('app_currency_code');?></td>
+		</tr>
+		<tr>
+		<td align="right"><strong><?php echo __('Total Commission Earned:') ?> </strong></td><td align="right"> <?php echo BaseUtil::format_number($changeProduct_commission); ?><?php echo sfConfig::get('app_currency_code');?></td>
+		</tr>
+	</table></div>
+	<?php endif; ?>
+
+
+
+
+
+<!--/////////////////////////////////////////////-->
 
         <?php else: ?>
         <div id="sf_admin_container"><h1><?php echo __('Earning Summary') ?></h1></div>
@@ -341,6 +468,84 @@
         <tr>
 		<td colspan="2"></td>
 	</tr>
+        
+<!--     ////////////////////////////////////////   -->
+      <tr>
+		<td><?php echo __('Total') ?> <strong><?php echo __('revenue on Sim Sales') ?></strong></td>
+		<td align="right">
+		<?php echo  number_format($simSale_earnings,2)
+
+		?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo __('Total commission earned on Sim Sales:') ?></td>
+		<td align="right">
+		<?php echo  number_format($simSale_commission,2);
+
+
+		?>
+		</td>
+        </tr>
+
+        <tr>
+		<td colspan="2"></td>
+	</tr>  
+<!--    ///////////////////////////////////////    -->
+        <tr>
+		<td><?php echo __('Total') ?> <strong><?php echo __('revenue on Change Product') ?></strong></td>
+		<td align="right">
+		<?php echo  number_format($changeProduct_earnings,2)
+
+		?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo __('Total commission earned on Change Product:') ?></td>
+		<td align="right">
+		<?php echo  number_format($changeProduct_commission,2);
+
+
+		?>
+		</td>
+        </tr>
+
+        <tr>
+		<td colspan="2"></td>
+	</tr>  
+<!--    ///////////////////////////////////////    -->
+          <tr>
+		<td><?php echo __('Total') ?> <strong><?php echo __('revenue on Mobile Number') ?></strong></td>
+		<td align="right">
+		<?php echo  number_format($numberChange_earnings,2)
+
+		?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo __('Total commission earned on Change Mobile Number:') ?></td>
+		<td align="right">
+		<?php echo  number_format($numberChange_commission,2);
+
+
+		?>
+		</td>
+        </tr>
+
+        <tr>
+		<td colspan="2"></td>
+	</tr>  
+<!--    ///////////////////////////////////////    -->        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <tr>
             <td><?php echo __('Total') ?> <strong><?php echo __('revenue earned') ?>  </strong><?php echo __('on refill from shop:') ?></td>
 		<td align="right">

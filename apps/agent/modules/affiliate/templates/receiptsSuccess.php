@@ -93,6 +93,7 @@ jQuery(function() {
 </table>
 
   </div>
+  
   <div id="sf_admin_container"><h1><?php echo __('Refill Receipts') ?> (<?php echo (count($refills));echo __(" receipts"); ?>)</h1></div>
         
   <div class="borderDiv"> 
@@ -140,7 +141,9 @@ jQuery(function() {
 </table>
         
   </div>
-  <div id="sf_admin_container"><h1><?php echo __('Mobile Number Change Receipts') ?> (<?php echo (count($numberchanges))." receipts" ?>)</h1></div>
+   
+      
+ <div id="sf_admin_container"><h1><?php echo __('Mobile Number Change Receipts') ?> (<?php echo (count($numberchanges))." receipts" ?>)</h1></div>
 
   <div class="borderDiv">
    <table cellspacing="0" width="100%" class="summary">
@@ -179,6 +182,102 @@ jQuery(function() {
 		</td>
 		<td>
                     <a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for($targetUrl.'affiliate/printReceipt?tid='.$numberchange->getId(), true) ?>')"> <?php echo __('Receipt') ?></a>
+		</td>
+
+	</tr>
+	<?php endforeach; ?>
+
+</table>
+      
+   </div>
+ 
+ 
+ <div id="sf_admin_container"><h1><?php echo __('New Sim Sale Receipt') ?> (<?php echo (count($newSimSales))." receipts" ?>)</h1></div>
+
+  <div class="borderDiv">
+   <table cellspacing="0" width="100%" class="summary">
+	<tr>
+		<th>&nbsp;</th>
+		<th><?php echo __('Date') ?></th>
+		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Mobile Number') ?></th>
+		<th style="text-align:right;padding-right: 25px;"><?php echo __('New Sim Sale Amount') ?></th>
+		<th><?php echo __('Description') ?></th>
+		<th><?php echo __('Show Receipt') ?></th>
+
+	</tr>
+	<?php
+	$i = 0;
+	foreach($newSimSales as $newSimSale):
+	?>
+	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
+		<td><?php echo ++$i ?>.</td>
+
+		<td><?php echo $newSimSale->getCreatedAt('d-m-Y'); ?>
+		<td><?php
+			$customer = CustomerPeer::retrieveByPK($newSimSale->getCustomerId());
+			//$customer2 = CustomerPeer::retrieveByPK(72);
+			//echo $transaction->getCustomerId();
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+			?>
+
+		</td>
+		<td><?php echo $customer->getMobileNumber()?></td>
+		<td style="text-align:right;padding-right: 25px;">
+			<?php echo number_format($newSimSale->getAmount(),2);?><?php echo sfConfig::get('app_currency_code');?>
+		</td>
+		<td>
+		<?php echo $newSimSale->getDescription() ?>
+		</td>
+		<td>
+                    <a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for($targetUrl.'affiliate/printReceipt?tid='.$newSimSale->getId(), true) ?>')"> <?php echo __('Receipt') ?></a>
+		</td>
+
+	</tr>
+	<?php endforeach; ?>
+
+</table>
+    </div>
+      
+      
+ <div id="sf_admin_container"><h1><?php echo __('Change Product  Receipts') ?> (<?php echo (count($changeProducts))." receipts" ?>)</h1></div>
+
+  <div class="borderDiv">
+   <table cellspacing="0" width="100%" class="summary">
+	<tr>
+		<th>&nbsp;</th>
+		<th><?php echo __('Date') ?></th>
+		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Mobile Number') ?></th>
+		<th style="text-align:right;padding-right: 25px;"><?php echo __('Product Subscription Amount') ?></th>
+		<th><?php echo __('Description') ?></th>
+		<th><?php echo __('Show Receipt') ?></th>
+
+	</tr>
+	<?php
+	$i = 0;
+	foreach($changeProducts as $changeProduct):
+	?>
+	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
+		<td><?php echo ++$i ?>.</td>
+
+		<td><?php echo $changeProduct->getCreatedAt('d-m-Y'); ?>
+		<td><?php
+			$customer = CustomerPeer::retrieveByPK($changeProduct->getCustomerId());
+			//$customer2 = CustomerPeer::retrieveByPK(72);
+			//echo $transaction->getCustomerId();
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+			?>
+		</td>
+		<td><?php echo $customer->getMobileNumber()?></td>
+		<td style="text-align:right;padding-right: 25px;">
+			<?php echo number_format($changeProduct->getAmount(),2);?><?php echo sfConfig::get('app_currency_code');?>
+		</td>
+		<td>
+		<?php echo $changeProduct->getDescription() ?>
+		</td>
+		<td>
+                    <a href="#" class="receipt" onclick="javascript: window.open('<?php echo url_for($targetUrl.'affiliate/printReceipt?tid='.$changeProduct->getId(), true) ?>')"> <?php echo __('Receipt') ?></a>
 		</td>
 
 	</tr>

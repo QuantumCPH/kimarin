@@ -271,7 +271,21 @@ class paymentsActions extends sfActions {
         $customer_order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
         // $this->customer_order = $customer_order;
         $customerorder = $customer_order->getIsFirstOrder();
+
+//        echo "CustomerOrder:".$customerorder;
+//        echo "<br/>";
+//        echo  $transaction->getTransactionTypeId();
+//        echo "<br/>";
+//        echo "Transcation ID:".$transaction_id;
+//        echo "<br/>";
+//        echo "Registration Fee".$customer_order->getProduct()->getRegistrationFee();
+//        echo "<br/>";
+//        echo "ProductID:".$customer_order->getProduct()->getId()."Product Name:".$customer_order->getProduct()->getName();
+//        echo "<br/>";
+
         if ($customerorder == 1) {
+
+
 
 
             if ($transaction_id > 93) {
@@ -281,6 +295,21 @@ class paymentsActions extends sfActions {
             }
         } elseif ($transaction->getTransactionTypeId() == 2) {
             $vat = 0;
+        } elseif ($transaction->getTransactionDescriptionId() == 6 || $transaction->getTransactionDescriptionId() == 4) {
+//            echo "Amount".$transaction->getAmount();
+//            echo "<br/>";
+            if ($transaction_id > 93) {
+
+                $vat = $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
+//                echo "vat1:".$vat;
+//                echo "<br/>";
+            } else {
+                $vat = $transaction->getAmount() - ($transaction->getAmount() / (1.18));
+//                echo "vat2:".$vat;
+//                echo "<br/>";
+            }
+//            echo $vat;
+//            die;
         } else {
             if ($transaction_id > 93) {
                 $vat = $customer_order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
@@ -297,10 +326,9 @@ class paymentsActions extends sfActions {
         }
 
         //  if(strstr($transaction->getDescription(),"Refill")||strstr($transaction->getDescription(),"Charge")){
-        if (strstr($transaction->getDescription(), "Refill")) {
-            $vat = $transaction->getAmount() - ($transaction->getAmount() / ($vatPerValue + 1));
-        }
-
+//        if (strstr($transaction->getDescription(), "Refill")) {
+//            $vat = $transaction->getAmount() - ($transaction->getAmount() / ($vatPerValue + 1));
+//        }
         $registered_customer_name = false;
         $refferedC = new Criteria();
         $refferedC->add(InvitePeer::BONUS_TRANSACTION_ID, $transaction->getId());
@@ -312,7 +340,8 @@ class paymentsActions extends sfActions {
             $invitedCustomer = CustomerPeer::retrieveByPK($invite->getInvitedCustomerId());
             $registered_customer_name = $invitedCustomer->getFirstName() . " " . $invitedCustomer->getLastName();
         }
-        
+
+
 
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,
