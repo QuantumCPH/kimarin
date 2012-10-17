@@ -13,8 +13,8 @@
     messages: {
       
         uniqueId: {
-            required: "Enter a unique Id",
-            remote: jq.format("{0} is already in use")
+            required: "Please Enter a 6 digit Unique Number",
+            remote: jq.format("Please Enter a Valid Unique Number")
         }
     }
         });
