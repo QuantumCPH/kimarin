@@ -81,7 +81,7 @@
             <tr>
                 <td colspan="2"></td>
             </tr>
-            <tr>
+<!--            <tr>
                 <td><?php echo __('Total') ?> <strong><?php echo __('revenue on refill') ?></strong></td>
                 <td align="right">
 <?php echo number_format($refill_revenue,2)?><?php echo sfConfig::get('app_currency_code');?>
@@ -92,7 +92,7 @@
                 <td align="right">
 <?php echo number_format($refill_com,2) ?><?php echo sfConfig::get('app_currency_code');?>
                 </td>
-            </tr>
+            </tr>-->
 
             <tr>
                 <td colspan="2"></td>
@@ -104,7 +104,7 @@
                 </td>
             </tr>
             <tr>
-                <td><?php echo __('Total') ?> <strong><?php echo __('commission earned') ?> </strong><?php echo __('on refill from shop:') ?></td>
+                <td><?php echo __('Total') ?>  <?php echo __('commission earned') ?>  <?php echo __('on refill from shop:') ?></td>
                 <td align="right">
                     <?php echo number_format($ef_com,2); ?><?php echo sfConfig::get('app_currency_code');?>
                 </td>
