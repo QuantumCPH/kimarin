@@ -2492,7 +2492,7 @@ class affiliateActions extends sfActions {
     //    $uc->addAnd(CustomerPeer::BLOCK, 0);
          $opproduct = CustomerProductPeer::doSelectOne($op);
        
-         if($opproduct->getId==$simTypeId){
+         if($opproduct->getProductId()==$simTypeId){
           
                $this->getUser()->setFlash('message', 'Customer Already have this Product');
                 $this->redirect('affiliate/changeProductService');    
