@@ -5,7 +5,7 @@ generator:
     theme:            default
     list:      
       filters: [company_id, _vat_no]
-      display: [first_name, last_name, company, vat_no, mobile_number,sim_type_id, email,app_code,is_app_registered,registration_type,password]
+      display: [first_name, last_name, company, vat_no, mobile_number,sim_type_id,unique_id, email,app_code,is_app_registered,registration_type,password]
       max_per_page: 1000
       object_actions:
         _edit: ~

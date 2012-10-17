@@ -14,12 +14,12 @@ class telinta_configActions extends sfActions {
     }
 
     public function executeNew(sfWebRequest $request) {
-       
+        
         $c = new Criteria();
         $tilentaConfigCount = TelintaConfigPeer::doCount($c);
         if ($tilentaConfigCount == 0) {
-            $pb = new PortaBillingSoapClient(CompanyEmployeActivation::$telintaSOAPUrl, 'Admin', 'Customer');
-            $session = $pb->_login(CompanyEmployeActivation::$telintaSOAPUser, CompanyEmployeActivation::$telintaSOAPPassword);
+            $pb = new PortaBillingSoapClient($this->getTelintaSoapUri(), 'Admin', 'Customer');
+            $session = $pb->_login($this->getTelintaSoapUser(), $this->getTelintaSoapPassword());
             
             if ($session) {
                 $telintaConfig = new TelintaConfig();
@@ -42,8 +42,8 @@ class telinta_configActions extends sfActions {
 
     public function executeEdit(sfWebRequest $request) {
         $this->forward404Unless($telinta_config = TelintaConfigPeer::retrieveByPk($request->getParameter('id')), sprintf('Object telinta_config does not exist (%s).', $request->getParameter('id')));
-        $pb = new PortaBillingSoapClient(CompanyEmployeActivation::$telintaSOAPUrl, 'Admin', 'Customer');
-        $session = $pb->_login(CompanyEmployeActivation::$telintaSOAPUser, CompanyEmployeActivation::$telintaSOAPPassword);
+        $pb = new PortaBillingSoapClient($this->getTelintaSoapUri(), 'Admin', 'Customer');
+        $session = $pb->_login($this->getTelintaSoapUser(), $this->getTelintaSoapPassword());
         if($session){
             $pb->_logout($telinta_config->getSession());
             $telinta_config->setSession($session);
@@ -70,7 +70,22 @@ class telinta_configActions extends sfActions {
 
         $this->redirect('telinta_config/index');
     }
-
+    
+    public function getTelintaSoapUri(){
+        $telintaSOAPUrl = sfConfig::get("app_telinta_soap_uri");
+        return $telintaSOAPUrl;
+    }
+    
+    public function getTelintaSoapUser(){
+        $telintaSOAPUser = sfConfig::get("app_telinta_soap_user");
+        return $telintaSOAPUser;
+    }
+    
+    public function getTelintaSoapPassword(){
+        $telintaSOAPPassword = sfConfig::get("app_telinta_soap_password");
+        return $telintaSOAPPassword;
+    }
+    
     protected function processForm(sfWebRequest $request, sfForm $form) {
         $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
         if ($form->isValid()) {
