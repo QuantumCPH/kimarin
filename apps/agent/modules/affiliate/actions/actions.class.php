@@ -1275,6 +1275,7 @@ class affiliateActions extends sfActions {
 
         $ca = new Criteria();
         $ca->add(AgentPaymentHistoryPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+         $ca->addDescendingOrderByColumn(AgentPaymentHistoryPeer::CREATED_AT);
         $agent = AgentPaymentHistoryPeer::doSelect($ca);
         //$this->forward404Unless($agent);
 
