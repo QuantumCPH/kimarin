@@ -54,7 +54,7 @@ jQuery(function() {
 		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
-		<th><?php echo __('Amount Refilled') ?></th>
+		<th><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
 		<th><?php echo __('Show Receipt') ?></th>
 		
@@ -104,7 +104,7 @@ jQuery(function() {
 		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
-		<th style="text-align:right;padding-right: 25px;"><?php echo __('Amount Refilled') ?></th>
+		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
 		<th><?php echo __('Show Receipt') ?></th>
 
@@ -152,7 +152,7 @@ jQuery(function() {
 		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
-		<th style="text-align:right;padding-right: 25px;"><?php echo __('Change Number Amount') ?></th>
+		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
 		<th><?php echo __('Show Receipt') ?></th>
 
@@ -201,7 +201,7 @@ jQuery(function() {
 		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
-		<th style="text-align:right;padding-right: 25px;"><?php echo __('New Sim Sale Amount') ?></th>
+		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
 		<th><?php echo __('Show Receipt') ?></th>
 
@@ -249,7 +249,7 @@ jQuery(function() {
 		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
-		<th style="text-align:right;padding-right: 25px;"><?php echo __('Product Subscription Amount') ?></th>
+		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
 		<th><?php echo __('Show Receipt') ?></th>
 
