@@ -285,6 +285,6 @@ jQuery(function() {
 
 </table>
   </div>
-        <p class="pTotal"><?php echo __('Total Receipts for transactions:') ?> <?php echo (count($registrations)+count($refills)+count($numberchanges)) ?></p>
+<!--        <p class="pTotal"><?php //echo __('Total Receipts for transactions:') ?> <?php echo (count($registrations)+count($refills)+count($numberchanges)) ?></p>-->
 
 </div>
