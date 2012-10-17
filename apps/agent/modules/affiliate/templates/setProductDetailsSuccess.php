@@ -13,8 +13,15 @@
                 uniqueid: {
                     remote: "<?php echo $target; ?>affiliate/validateUniqueId?orderid=<?php echo $order->getId();?>"
                 }
-            }
-        });
+            },
+    messages: {
+       
+        uniqueid: {
+            required: "Please Enter the Unique Number",
+            minlength: jq.format("Enter at least {0} characters"),
+            remote: jq.format("Please Enter the Valid Unique Number")
+    }
+    }  });
 
 
         jq("#quantity").blur(function(){
@@ -113,7 +120,7 @@
                     </li>
                     <li>
                         <label style="text-align:left"><?php echo __('Unique Id') ?>:</label>
-                        <input type="text" id="uniqueid" value="" name="uniqueid"/>
+                        <input type="text" id="uniqueid" value="" name="uniqueid" minlength="6" class="required"/>
                     </li>
                     <li>
                         <label style="text-align:left">
@@ -167,7 +174,7 @@
                         </span>
                     </li>
                     <li>
-                        <label style="text-align:left"><?php echo __('VAT') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
+                        <label style="text-align:left"><?php echo __('IVA') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
 <?php echo __('Total amount') ?></label>
 
                         <label class="fr ac" style="width:180px; padding-right: 0px" >
