@@ -23,21 +23,18 @@
                 <label><?php echo $customer->getMobileNumber(); ?></label>  
                 </li>
                    <li>
-                <label> <?php echo __("New Product Name") ?>:</label>
+                <label> <?php echo __("New Product") ?>:</label>
             <label>  <?php echo  $product->getName(); ?></label>
                 </li>
-                  <li>
-                <label> <?php echo __("Product Name") ?>:</label>
-            <label>  <?php echo  $productx->getName(); ?></label>
-                </li>
+ 
             <li>
-                <label> <?php echo __("Product price") ?>:</label>
+                <label> <?php echo __("Amount") ?>:</label>
             <label>  <?php echo number_format($price, 2);echo sfConfig::get('app_currency_code'); ?></label>  
                 </li>
                 
                 <li> <label><?php echo __("IVA") ?>: </label> <label> <?php echo number_format($vat, 2);echo sfConfig::get('app_currency_code'); ?></label>  </li>
                   
-                    <li> <label> <?php echo __("Total amount") ?>:</label>  <label> <?php echo number_format($total, 2);echo sfConfig::get('app_currency_code'); ?></label>  </li>
+                    <li> <label> <?php echo __("Total") ?>:</label>  <label> <?php echo number_format($total, 2);echo sfConfig::get('app_currency_code'); ?></label>  </li>
                    
                     <li>  <input type="submit" value="<?php echo __('Submit') ?>" style="margin-left:50px !important;float:none !important;" /></li>
                 </ul>

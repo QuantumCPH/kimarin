@@ -29,7 +29,7 @@
                        <label>Customer Mobile Number</label>  
                        <input type="text" name="mobile_number"  id="mobile_number" class="required" >
                     </li>    <li>
-                <label>Product</label>
+                <label>Product Name</label>
              <select name="sim_type"  class="required newcard" >
                             <option value=""><?php echo __("Select Product") ?></option>
                             <?php foreach($simtypes as $simtype){  ?>

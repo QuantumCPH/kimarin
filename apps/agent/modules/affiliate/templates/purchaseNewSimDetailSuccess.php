@@ -48,7 +48,7 @@
                 <label><?php echo $customer->getMobileNumber(); ?></label>  
                 </li>
                   <li>
-                <label> <?php echo __("Product Name") ?>:</label>
+                <label> <?php echo __("SIM type") ?>:</label>
             <label>  <?php echo  $product->getName(); ?></label>
                 </li>
             <li>

@@ -32,7 +32,7 @@
                     
                    
             <li>
-                <label>Sim Type</label>
+                <label>SIM type:</label>
              <select name="sim_type"  class="required newcard" >
                             <option value=""><?php echo __("Select SIM type") ?></option>
                             <?php foreach($simtypes as $simtype){  ?>
