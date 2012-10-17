@@ -82,10 +82,10 @@
 				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
 				?>
 			</td>
-			<td >
+			<td align="right" style="text-align:right;padding-right: 50px;">
 			<?php echo BaseUtil::format_number($registration->getAmount());?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
-			<td ><?php echo BaseUtil::format_number($registration->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
+			<td align="right" style="text-align:right;padding-right: 50px;"><?php echo BaseUtil::format_number($registration->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
 		</tr>
 		<?php endforeach; ?>
@@ -134,15 +134,15 @@
 
 
                         
-			<td >
+			<td align="right" style="text-align:right;padding-right: 50px;">
 			<?php echo BaseUtil::format_number($sms_registration->getAmount()) ?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php if ( $sms_registration->getAmount() == 0) {?>
-                            <td ><?php echo '10.00' ?>
+                            <td align="right" style="text-align:right;padding-right: 50px;"><?php echo '10.00' ?>
 			</td>
                         <?php }else{ ?>
                         
-			<td ><?php echo BaseUtil::format_number($sms_registration->getCommissionAmount()) ?><?php echo sfConfig::get('app_currency_code');?>
+			<td align="right" style="text-align:right;padding-right: 50px;"><?php echo BaseUtil::format_number($sms_registration->getCommissionAmount()) ?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php } ?>
                         
@@ -194,10 +194,10 @@
 			
 		
 
-			<td >
+			<td align="right" style="text-align:right;padding-right: 50px;">
 			<?php echo BaseUtil::format_number($refill->getAmount()) ?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
-			<td ><?php echo BaseUtil::format_number($refill->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
+			<td align="right" style="text-align:right;padding-right: 50px;"><?php echo BaseUtil::format_number($refill->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
 		</tr>
 		<?php endforeach; ?>
@@ -249,14 +249,14 @@
 
 
 
-			<td >
+			<td align="right" style="text-align:right;padding-right: 50px;">
 			<?php echo BaseUtil::format_number($number_change->getAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php //if ( $number_change->getAmount() == 0) {?>
 <!--                            <td ><?php //echo '10.00' ?></td>-->
                         <?php //}else{ ?>
 
-			<td ><?php echo BaseUtil::format_number($number_change->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
+			<td align="right" style="text-align:right;padding-right: 50px;"><?php echo BaseUtil::format_number($number_change->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php //} ?>
 
@@ -308,14 +308,14 @@
 
 
 
-			<td >
+			<td align="right" style="text-align:right;padding-right: 50px;">
 			<?php echo BaseUtil::format_number($sim_sale->getAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php //if ( $number_change->getAmount() == 0) {?>
 <!--                            <td ><?php //echo '10.00' ?></td>-->
                         <?php //}else{ ?>
 
-			<td ><?php echo BaseUtil::format_number($sim_sale->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
+			<td align="right" style="text-align:right;padding-right: 50px;"><?php echo BaseUtil::format_number($sim_sale->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php //} ?>
 
@@ -367,14 +367,14 @@
 
 
 
-			<td >
+			<td align="right" style="text-align:right;padding-right: 50px;">
 			<?php echo BaseUtil::format_number($change_product->getAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php //if ( $number_change->getAmount() == 0) {?>
 <!--                            <td ><?php //echo '10.00' ?></td>-->
                         <?php //}else{ ?>
 
-			<td ><?php echo BaseUtil::format_number($change_product->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
+			<td align="right" style="text-align:right;padding-right: 50px;"><?php echo BaseUtil::format_number($change_product->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
                         <?php //} ?>
 
