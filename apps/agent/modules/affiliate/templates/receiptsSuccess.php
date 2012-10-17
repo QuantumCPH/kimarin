@@ -31,11 +31,11 @@ jQuery(function() {
         <div class="dateBox-pt">
           <div class="formRow-pt" style="float:left;">
             <label class="datelable" style="text-align:left">From:</label>
-            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo  date('Y-m-d',strtotime(@$startdate));?>" />
+            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo  date('d-m-Y',strtotime(@$startdate));?>" />
           </div>
           <div class="formRow-pt" style="float:left;">
               <label class="datelable" style="text-align:left">To:</label>
-            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$enddate ? $enddate : date('Y-m-d');?>" />
+            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$enddate ? $enddate : date('d-m-Y');?>" />
           </div>
            <span><input type="submit" name="søg" value="Search" class="datefilterBtn" /></span>
         </div>
