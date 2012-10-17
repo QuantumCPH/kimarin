@@ -44,7 +44,7 @@
             <label>Total amount</label>
             <label><?php echo   number_format($totalAmount,2); echo sfConfig::get('app_currency_code');  ?></label><br />
         </li>
-        <li style="margin-left:188px"><input type="submit" name="Pay" value="Pay" /><br /></li>
+        <li style="margin-left:188px"><input type="submit" name="Pay" value="Submit" /><br /></li>
     </ul>
     </form>
     <div class="clr"></div>

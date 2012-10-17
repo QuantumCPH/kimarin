@@ -60,7 +60,7 @@
                   
                     <li> <label> <?php echo __("Total amount") ?>:</label>  <label> <?php echo number_format($total, 2);echo sfConfig::get('app_currency_code'); ?></label>  </li>
                    
-                    <li>  <input type="submit" value="<?php echo __('Pay') ?>" style="margin-left:50px !important;float:none !important;" /></li>
+                    <li>  <input type="submit" value="<?php echo __('Submit') ?>" style="margin-left:50px !important;float:none !important;" /></li>
                 </ul>
                         
 </form>

@@ -45,7 +45,7 @@
             <label>Total Amount</label>
             <label><?php echo   number_format($totalAmount,2); ?></label><br />
         </li>
-        <li style="margin-left:188px"><input type="submit" name="Pay" value="Pay" /><br /></li>
+        <li style="margin-left:188px"><input type="submit" name="Pay" value="Submit" /><br /></li>
     </ul>
     </form>
     <div class="clr"></div>
