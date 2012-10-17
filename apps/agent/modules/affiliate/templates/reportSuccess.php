@@ -16,8 +16,8 @@
 <script>
     jQuery(function() {
 
-        jQuery( "#startdate" ).datepicker({ dateFormat: 'yy-mm-dd' });
-        jQuery( "#enddate" ).datepicker({ dateFormat: 'yy-mm-dd'});
+        jQuery( "#startdate" ).datepicker({ dateFormat: 'dd-mm-yy' });
+        jQuery( "#enddate" ).datepicker({ dateFormat: 'dd-mm-yy'});
 
 
     });
