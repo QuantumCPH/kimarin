@@ -33,24 +33,25 @@
   <thead>
       <tr class="thheading">
       
-      <th align="left"  id="sf_admin_list_th_name">Company</th>
-      <th align="left"  id="sf_admin_list_th_name">First name</th>
+      <th width="91" align="left"  id="sf_admin_list_th_name">Company</th>
+      <th width="103" align="left"  id="sf_admin_list_th_name">First name</th>
      
-      <th align="left"  id="sf_admin_list_th_name">product</th>
+      <th width="138" align="left"  id="sf_admin_list_th_name">product</th>
     
-      <th align="left" id="sf_admin_list_th_name">Mobile number</th>
+      <th width="105" align="left" id="sf_admin_list_th_name">Mobile number</th>
 <!--       <th align="left">Resenumber</th>-->
        <?php  if(isset($companyval) && $companyval!=""){  ?>
-        <th align="left"  id="sf_admin_list_th_name">Employee balance</th>
+        <th width="136" align="left"  id="sf_admin_list_th_name">Employee balance</th>
+       
         <?php } ?>
 
-        
-      <th align="left"  id="sf_admin_list_th_name">Created at</th>
+        <th width="153" align="left"  id="sf_admin_list_th_name">Unique Id</th>
+      <th width="116" align="left"  id="sf_admin_list_th_name">Created at</th>
    
  <!--         <th align="left">App code</th>
    
       <th align="left">Password</th>-->
-        <th align="left"  id="sf_admin_list_th_name">Action</th>
+        <th width="90" align="left"  id="sf_admin_list_th_name">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -89,10 +90,7 @@
 
               echo $products->getName();
       }
-              ?>
-
-
-      </td>
+              ?>      </td>
       <td><?php echo $employee->getMobileNumber() ?></td>
 <!--      <td>-->
            <?php
@@ -115,12 +113,12 @@
 <!--</td>-->
  <?php  if(isset($companyval) && $companyval!=""){  ?>
       <td> <?php  $mobileID= $employee->getCountryMobileNumber();
-       
+        $ComtelintaObj = new CompanyEmployeActivation();
         $ct = new Criteria();
         $ct->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'a'.$mobileID);
         $ct->addAnd(TelintaAccountsPeer::STATUS, 3);
         $telintaAccount = TelintaAccountsPeer::doSelectOne($ct);
-        $accountInfo = CompanyEmployeActivation::getAccountInfo($telintaAccount->getIAccount());
+        $accountInfo = $ComtelintaObj->getAccountInfo($telintaAccount->getIAccount());
         $telintaGetBalance = $accountInfo->account_info->balance;
        
         /*
@@ -128,7 +126,7 @@
         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb'.$mobileID);
         $cb->addAnd(TelintaAccountsPeer::STATUS, 3);
         $telintaAccountcb = TelintaAccountsPeer::doSelectOne($cb);
-        $accountInfocb = CompanyEmployeActivation::getAccountInfo($telintaAccountcb->getIAccount());
+        $accountInfocb = $ComtelintaObj->getAccountInfo($telintaAccountcb->getIAccount());
         $telintaGetBalancecb = $accountInfocb->account_info->balance;
         */
 
@@ -150,7 +148,7 @@
         $res->add(TelintaAccountsPeer::ACCOUNT_TITLE, $resenummer);
         $res->addAnd(TelintaAccountsPeer::STATUS, 3);
         $telintaAccountres = TelintaAccountsPeer::doSelectOne($res);
-        $accountInfores = CompanyEmployeActivation::getAccountInfo($telintaAccountres->getIAccount());
+        $accountInfores = $ComtelintaObj->getAccountInfo($telintaAccountres->getIAccount());
         $telintaGetBalanceres = $accountInfores->account_info->balance;
 
         }
@@ -159,7 +157,9 @@
           echo sfConfig::get('app_currency_code');
                                                 ?></td>
 
+      
       <?php } ?>
+      <td><?php echo $employee->getUniqueId(); ?></td>
       <td><?php echo $employee->getCreatedAt('d-m-Y'); ?></td>
    
     <!--  <td align="center">  <?php //$appval=$employee->getIsAppRegistered();  if(isset($appval) && $appval==1){   ?> <img alt="Tick" src="/sf/sf_admin/images/tick.png">  <?php //} ?></td>

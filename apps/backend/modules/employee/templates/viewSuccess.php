@@ -83,13 +83,19 @@
 				  <div class="content">
 				  	<?php echo $employee->getMobileNumber() ?>
 				  </div>
-				</div>
+				</div>                               
                                 <div class="form-row">
 				  <label class="required">SIM Type</label>
 				  <div class="content">
 				  	<?php echo $employee->getSimType(); ?>
 				  </div>
 				</div>
+                                 <div class="form-row">
+				  <label class="required">Unique Id:</label>
+				  <div class="content">
+				  	<?php echo $employee->getUniqueId(); ?>
+				  </div>
+				 </div>
 				<div class="form-row">
 				  <label class="required">Product:</label>
 				  <div class="content">
