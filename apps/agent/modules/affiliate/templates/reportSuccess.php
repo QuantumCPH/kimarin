@@ -65,7 +65,7 @@
 			<th>&nbsp;</th>
 			<th><?php echo __('Date') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
-			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Registration Amount') ?></th>
+			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
 		<?php
@@ -114,7 +114,7 @@
 			<th>&nbsp;</th>
 			<th><?php echo __('Date') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
-			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Registration Amount') ?></th>
+			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
 		<?php
@@ -174,7 +174,7 @@
 			<th>&nbsp;</th>
 			<th><?php echo __('Date') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
-			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Refill Amount') ?></th>
+			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
 		<?php
@@ -229,7 +229,7 @@
 			<th>&nbsp;</th>
 			<th><?php echo __('Date') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
-			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Number Change Amount') ?></th>
+			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
 		<?php
@@ -288,7 +288,7 @@
 			<th>&nbsp;</th>
 			<th><?php echo __('Date') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
-			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Sim Amount') ?></th>
+			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
 		<?php
@@ -347,7 +347,7 @@
 			<th>&nbsp;</th>
 			<th><?php echo __('Date') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
-			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Change Product Amount') ?></th>
+			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
 		<?php
