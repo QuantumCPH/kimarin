@@ -73,6 +73,7 @@ class affiliateActions extends sfActions {
             $this->enddate = date('Y-m-d', strtotime($enddate));
         }else{
            $enddate = date('Y-m-d 23:59:59');
+           $this->enddate =$enddate;
         }
 
 
@@ -351,6 +352,7 @@ class affiliateActions extends sfActions {
             $this->enddate = date('Y-m-d', strtotime($enddate));
         }else{
             $enddate = date('Y-m-d 23:59:59');
+             $this->enddate = $enddate;
         }
 
 
@@ -1693,17 +1695,18 @@ class affiliateActions extends sfActions {
         $startdate = $request->getParameter('startdate');
         $enddate = $request->getParameter('enddate');
         if ($startdate != '') {
-            $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
+            $startdate = date('d-m-Y 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }else{
             $startdate = date('Y-m-d 00:00:00', strtotime($this->agent->getCreatedAt()));
             $this->startdate = $startdate;
         }
         if ($enddate != '') {
-            $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
+            $enddate = date('d-m-Y 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
         }else{
             $enddate = date('Y-m-d 23:59:59');
+             $this->enddate = $enddate;
         }
         //get All customer registrations from customer table
         try {
