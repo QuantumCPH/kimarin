@@ -51,7 +51,7 @@ jQuery(function() {
    <table cellspacing="0" width="100%" class="summary">	
 	<tr>
 		<th>&nbsp;</th>
-		<th><?php echo __('Date') ?></th>
+		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th><?php echo __('Amount Refilled') ?></th>
@@ -66,7 +66,7 @@ jQuery(function() {
 	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 		<td><?php echo ++$i ?>.</td>
              
-		<td><?php echo $registration->getCreatedAt('d-m-Y'); ?></td>
+		<td><?php echo $registration->getCreatedAt('d-m-Y H:i:s');  ?></td>
 		<td><?php 
 			$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -101,7 +101,7 @@ jQuery(function() {
    <table cellspacing="0" width="100%" class="summary">
 	<tr>
 		<th>&nbsp;</th>
-		<th><?php echo __('Date') ?></th>
+		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Amount Refilled') ?></th>
@@ -116,7 +116,7 @@ jQuery(function() {
 	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 		<td><?php echo ++$i ?>.</td>
 
-		<td><?php echo $refill->getCreatedAt('d-m-Y'); ?>
+		<td><?php echo $refill->getCreatedAt('d-m-Y H:i:s');  ?>
 		<td><?php
 			$customer = CustomerPeer::retrieveByPK($refill->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -149,7 +149,7 @@ jQuery(function() {
    <table cellspacing="0" width="100%" class="summary">
 	<tr>
 		<th>&nbsp;</th>
-		<th><?php echo __('Date') ?></th>
+		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Change Number Amount') ?></th>
@@ -164,7 +164,7 @@ jQuery(function() {
 	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 		<td><?php echo ++$i ?>.</td>
 
-		<td><?php echo $numberchange->getCreatedAt('d-m-Y'); ?>
+		<td><?php echo $numberchange->getCreatedAt('d-m-Y H:i:s');  ?>
 		<td><?php
 			$customer = CustomerPeer::retrieveByPK($numberchange->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -198,7 +198,7 @@ jQuery(function() {
    <table cellspacing="0" width="100%" class="summary">
 	<tr>
 		<th>&nbsp;</th>
-		<th><?php echo __('Date') ?></th>
+		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('New Sim Sale Amount') ?></th>
@@ -213,7 +213,7 @@ jQuery(function() {
 	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 		<td><?php echo ++$i ?>.</td>
 
-		<td><?php echo $newSimSale->getCreatedAt('d-m-Y'); ?>
+		<td><?php echo $newSimSale->getCreatedAt('d-m-Y H:i:s');  ?>
 		<td><?php
 			$customer = CustomerPeer::retrieveByPK($newSimSale->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -246,7 +246,7 @@ jQuery(function() {
    <table cellspacing="0" width="100%" class="summary">
 	<tr>
 		<th>&nbsp;</th>
-		<th><?php echo __('Date') ?></th>
+		<th><?php echo __('Date and time') ?></th>
 		<th><?php echo __('Customer name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Product Subscription Amount') ?></th>
@@ -261,7 +261,7 @@ jQuery(function() {
 	<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 		<td><?php echo ++$i ?>.</td>
 
-		<td><?php echo $changeProduct->getCreatedAt('d-m-Y'); ?>
+		<td><?php echo $changeProduct->getCreatedAt('d-m-Y H:i:s');  ?>
 		<td><?php
 			$customer = CustomerPeer::retrieveByPK($changeProduct->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);

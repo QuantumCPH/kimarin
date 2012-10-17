@@ -63,7 +63,7 @@
 		<tr>
 
 			<th>&nbsp;</th>
-			<th><?php echo __('Date') ?> </th>
+			<th><?php echo __('Date and time') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -74,7 +74,7 @@
 		?>
 		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 			<td><?php echo ++$i ?>.</td>
-                        <td><?php echo $registration->getCreatedAt('d-m-Y') ?></td>
+                        <td><?php echo $registration->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -112,7 +112,7 @@
 		<tr>
 
 			<th>&nbsp;</th>
-			<th><?php echo __('Date') ?> </th>
+			<th><?php echo __('Date and time') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -123,7 +123,7 @@
 		?>
 		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 			<td><?php echo ++$i ?>.</td>
-                        <td><?php echo $sms_registration->getCreatedAt('d-m-Y') ?></td>
+                        <td><?php echo $sms_registration->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($sms_registration->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -172,7 +172,7 @@
 		<tr>
 			
 			<th>&nbsp;</th>
-			<th><?php echo __('Date') ?> </th>
+			<th><?php echo __('Date and time') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -183,7 +183,7 @@
 		?>
 		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 			<td><?php echo ++$i ?>.</td>
-                        <td><?php echo $refill->getCreatedAt('d-m-Y') ?></td>
+                        <td><?php echo $refill->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($refill->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -227,7 +227,7 @@
            <table cellspacing="0" cellpadding="2" width="100%">
 		<tr>
 			<th>&nbsp;</th>
-			<th><?php echo __('Date') ?> </th>
+			<th><?php echo __('Date and time') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -238,7 +238,7 @@
 		?>
 		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 			<td><?php echo ++$i ?>.</td>
-                        <td><?php echo $number_change->getCreatedAt('d-m-Y') ?></td>
+                        <td><?php echo $number_change->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($number_change->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -286,7 +286,7 @@
            <table cellspacing="0" cellpadding="2" width="100%">
 		<tr>
 			<th>&nbsp;</th>
-			<th><?php echo __('Date') ?> </th>
+			<th><?php echo __('Date and time') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -297,7 +297,7 @@
 		?>
 		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 			<td><?php echo ++$i ?>.</td>
-                        <td><?php echo $sim_sale->getCreatedAt('d-m-Y') ?></td>
+                        <td><?php echo $sim_sale->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($sim_sale->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
@@ -345,7 +345,7 @@
            <table cellspacing="0" cellpadding="2" width="100%">
 		<tr>
 			<th>&nbsp;</th>
-			<th><?php echo __('Date') ?> </th>
+			<th><?php echo __('Date and time') ?> </th>
 			<th><?php echo __('Customer name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -356,7 +356,7 @@
 		?>
 		<tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
 			<td><?php echo ++$i ?>.</td>
-                        <td><?php echo $change_product->getCreatedAt('d-m-Y') ?></td>
+                        <td><?php echo $change_product->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($change_product->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);

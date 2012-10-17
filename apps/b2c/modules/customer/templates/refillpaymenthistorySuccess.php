@@ -36,7 +36,7 @@
                 <?php      $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId());   ?>
                 <tr>
                   <td><?php  echo $transaction->getOrderId() ?></td>
-                  <td ><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
+                  <td ><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s'); ?></td>
                   <td nowrap><?php 
                       $TDI=$transaction->getTransactionDescriptionId();
                   if($transaction->getDescription()=="Registrering inkl. taletid"){
