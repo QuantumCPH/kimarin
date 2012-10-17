@@ -85,7 +85,7 @@
 			<td >
 			<?php echo BaseUtil::format_number($registration->getAmount());?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
-			<td ><?php echo BaseUtil::format_number($registration->getCommissionAmount())?>
+			<td ><?php echo BaseUtil::format_number($registration->getCommissionAmount())?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
 		</tr>
 		<?php endforeach; ?>
@@ -95,10 +95,10 @@
                     <td align="right"><strong><?php echo __('Total Registration Earnings:') ?></strong></td><td align="right"> <?php echo $i ?></td>
 		</tr>
 		<tr>
-		 <td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo  number_format($registration_revenue,2); ?></td>
+		 <td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo  number_format($registration_revenue,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
 		</tr>
 		<tr>
-		 <td align="right"><strong><?php echo __('Total Commission Earned:') ?></strong></td><td align="right"> <?php echo  number_format($registration_commission,2); ?></td>
+		 <td align="right"><strong><?php echo __('Total Commission Earned:') ?></strong></td><td align="right"> <?php echo  number_format($registration_commission,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
 		</tr>
         </table>
         </div>
@@ -154,10 +154,10 @@
                     <td align="right"><strong><?php echo __('Total SMS Registration:') ?></strong></td><td align="right"> <?php echo $i ?></td>
 		</tr>
 		<tr>
-		 <td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo  number_format($sms_registration_earnings,2) ?></td>
+		 <td align="right"><strong><?php echo __('Total Earnings:') ?></strong></td><td align="right"> <?php echo  number_format($sms_registration_earnings,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
 		</tr>
 		<tr>
-		 <td align="right"><strong><?php echo __('Total Commission Earned:') ?></strong></td><td align="right"> <?php echo  number_format($sms_commission_earnings,2) ?></td>
+		 <td align="right"><strong><?php echo __('Total Commission Earned:') ?></strong></td><td align="right"> <?php echo  number_format($sms_commission_earnings,2) ?><?php echo sfConfig::get('app_currency_code');?></td>
 		</tr>
         </table>
         </div>    
