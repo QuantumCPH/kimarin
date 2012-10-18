@@ -37,7 +37,7 @@ class BaseProductFormFilter extends BaseFormFilterPropel
       'is_in_b2b'             => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'product_type_id'       => new sfWidgetFormPropelChoice(array('model' => 'ProductType', 'add_empty' => true)),
       'bonus'                 => new sfWidgetFormFilterInput(),
-      'sim_type_id'           => new sfWidgetFormFilterInput(),
+      'sim_type_id'           => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -64,7 +64,7 @@ class BaseProductFormFilter extends BaseFormFilterPropel
       'is_in_b2b'             => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'product_type_id'       => new sfValidatorPropelChoice(array('required' => false, 'model' => 'ProductType', 'column' => 'id')),
       'bonus'                 => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
-      'sim_type_id'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'sim_type_id'           => new sfValidatorPropelChoice(array('required' => false, 'model' => 'SimTypes', 'column' => 'id')),
     ));
 
     $this->widgetSchema->setNameFormat('product_filters[%s]');
@@ -106,7 +106,7 @@ class BaseProductFormFilter extends BaseFormFilterPropel
       'is_in_b2b'             => 'Boolean',
       'product_type_id'       => 'ForeignKey',
       'bonus'                 => 'Number',
-      'sim_type_id'           => 'Number',
+      'sim_type_id'           => 'ForeignKey',
     );
   }
 }

@@ -2646,7 +2646,7 @@ class affiliateActions extends sfActions {
         $transaction->setCustomerId($this->customer->getId());
         $transaction->setAmount($this->total);
         $transactiondescription = TransactionDescriptionPeer::retrieveByPK(15);
-        $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(3);
