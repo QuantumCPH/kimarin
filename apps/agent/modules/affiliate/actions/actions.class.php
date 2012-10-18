@@ -2415,7 +2415,7 @@ class affiliateActions extends sfActions {
                         $aph = new AgentPaymentHistory();
                         $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
                         $aph->setCustomerId($transaction->getCustomerId());
-                        $aph->setExpeneseType(2);
+                        $aph->setExpeneseType(8);
                         $aph->setAmount($amount);
                         $aph->setRemainingBalance($remainingbalance);
                         $aph->save();
@@ -2645,7 +2645,7 @@ class affiliateActions extends sfActions {
                         $aph = new AgentPaymentHistory();
                         $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
                         $aph->setCustomerId($transaction->getCustomerId());
-                        $aph->setExpeneseType(2);
+                        $aph->setExpeneseType(7);
                         $aph->setAmount($amount);
                         $aph->setRemainingBalance($remainingbalance);
                         $aph->save();
