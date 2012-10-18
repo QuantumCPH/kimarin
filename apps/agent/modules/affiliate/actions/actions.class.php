@@ -2580,6 +2580,18 @@ class affiliateActions extends sfActions {
         $order->setOrderStatusId(3);
          $order->setExeStatus(1);
         $order->setIsFirstOrder(7);
+           $transaction->setOrderId($order->getId());
+        $transaction->setCustomerId($this->customer->getId());
+        $transaction->setAmount($this->total);
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(15);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($transactiondescription->getTitle());
+        $transaction->setTransactionStatusId(1);
+        $transaction->setVat($this->vat);
+          $transaction->save();
+        
+        
 ///////////////////agent area //////////////////////////
            $transaction->setAgentCompanyId($agent->getId());
 
@@ -2650,15 +2662,9 @@ class affiliateActions extends sfActions {
         $this->order = $order;
         //create transaction
      
-        $transaction->setOrderId($order->getId());
-        $transaction->setCustomerId($this->customer->getId());
-        $transaction->setAmount($this->total);
-        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(15);
-        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
-        $transaction->setTransactionDescriptionId($transactiondescription->getId());
-        $transaction->setDescription($transactiondescription->getTitle());
+       
         $transaction->setTransactionStatusId(3);
-        $transaction->setVat($this->vat);
+       
            
         $transaction->save();
         $ccp = new CustomerChangeProduct();
