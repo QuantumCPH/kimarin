@@ -607,9 +607,17 @@ class affiliateActions extends sfActions {
             $cc->add(CustomerPeer::BLOCK, 0);
             //$cc->add(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);  // This Line disable becoz no need of fonet system in landncall -
             $customer = CustomerPeer::doSelectOne($cc);
-
+  
+             $telintaObj = new Telienta();
+        $telintaGetBalance = $telintaObj->getBalance($customer);
             //echo $customer->getId();
 
+          if ($telintaGetBalance>=250) {
+               $this->error_msg = $this->getContext()->getI18N()->__('Customer Balance is more then or equal to 250');
+                return;  
+          }
+      
+        
             if ($customer and $mobile_number != "") {
                 $validated = true;
             } else {
