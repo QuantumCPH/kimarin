@@ -1454,7 +1454,7 @@ class affiliateActions extends sfActions {
                 $order->setQuantity(1);
                 $order->setExtraRefill($extra_refill);
                 $order->setOrderStatusId(sfConfig::get('app_status_new'));
-
+                  $order->setIsFirstOrder(3);
                 $order->save();
 
                 //create transaction
@@ -2090,7 +2090,7 @@ class affiliateActions extends sfActions {
                 $order->setProductId($product->getId());
                 $order->setQuantity(1);
                 $order->setExtraRefill($request->getParameter('productRefillAmount'));
-                $order->setIsFirstOrder(false);
+                $order->setIsFirstOrder(2);
                 $order->setOrderStatusId(sfConfig::get('app_status_new'));
                 $order->save();
 
