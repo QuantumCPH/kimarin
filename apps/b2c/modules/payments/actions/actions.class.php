@@ -342,7 +342,7 @@ class paymentsActions extends sfActions {
         }
 
 //        if($customerorder>1){
-//            $vat=$transaction->getVat();
+            $vat=$transaction->getVat();
 //        }
 
         $this->renderPartial('payments/order_receipt', array(
