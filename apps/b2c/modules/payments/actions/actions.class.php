@@ -341,7 +341,9 @@ class paymentsActions extends sfActions {
             $registered_customer_name = $invitedCustomer->getFirstName() . " " . $invitedCustomer->getLastName();
         }
 
-
+        if($customerorder>1){
+            $vat=$transaction->getVat();
+        }
 
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,
