@@ -245,6 +245,9 @@ class emailLib {
             $recepient_agent_email = '';
             $recepient_agent_name = '';
         }
+        
+        $postalcharge=0;
+        $customerorder=1;
         $vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
@@ -254,7 +257,9 @@ class emailLib {
                     'transaction' => $transaction,
                     'vat' => $vat,
                     'agent_name' => $recepient_agent_name,
-                    'wrap' => false,
+                       'postalcharge' => $postalcharge,
+             'customerorder' =>$customerorder,
+                          'wrap' => true
                 ));
 
         $subject = __('Payment Confirmation');
