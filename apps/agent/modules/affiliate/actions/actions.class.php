@@ -301,7 +301,7 @@ class affiliateActions extends sfActions {
             $registered_customer_name = $invitedCustomer->getFirstName() . " " . $invitedCustomer->getLastName();
         }
 
-
+$vat=$transaction->getVat();
 
         $this->renderPartial('affiliate/order_receipt', array(
             'customer' => $this->customer,
@@ -2577,9 +2577,10 @@ class affiliateActions extends sfActions {
         $order->setProductId($product->getId());
         $order->setQuantity(1);
         $order->setExtraRefill($product->getInitialBalance());
-        $order->setOrderStatusId(3);
+        $order->setOrderStatusId(1);
          $order->setExeStatus(1);
         $order->setIsFirstOrder(7);
+          $order->save();
            $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($this->customer->getId());
         $transaction->setAmount($this->total);
@@ -2657,7 +2658,7 @@ class affiliateActions extends sfActions {
         
         
         
-
+        $order->setOrderStatusId(3);
         $order->save();
         $this->order = $order;
         //create transaction
