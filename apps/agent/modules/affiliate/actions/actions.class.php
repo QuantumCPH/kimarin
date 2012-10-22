@@ -600,6 +600,8 @@ $vat=$transaction->getVat();
             $is_recharged = true;
 
           
+            
+            
             $customer = NULL;
             $cc = new Criteria();
             $cc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
@@ -608,11 +610,19 @@ $vat=$transaction->getVat();
             //$cc->add(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);  // This Line disable becoz no need of fonet system in landncall -
             $customer = CustomerPeer::doSelectOne($cc);
   
+            $pr= new Criteria();
+            $pr->add(ProductPeer::ID, $extra_refill);
+            $customerProduct = ProductPeer::doSelectOne($cc);
+            
+            
+            
+            
              $telintaObj = new Telienta();
         $telintaGetBalance = $telintaObj->getBalance($customer);
             //echo $customer->getId();
 
-          if ($telintaGetBalance>=250) {
+                   $telintaGetBalanceRe=$telintaGetBalance+$customerProduct->getInitialBalance()+$customerProduct->getBonus();
+          if ($telintaGetBalanceRe>=250) {
                $this->error_msg = $this->getContext()->getI18N()->__('Customer Balance is more then or equal to 250');
                 return;  
           }
