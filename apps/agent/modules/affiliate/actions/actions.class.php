@@ -609,7 +609,11 @@ $vat=$transaction->getVat();
             $cc->add(CustomerPeer::BLOCK, 0);
             //$cc->add(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);  // This Line disable becoz no need of fonet system in landncall -
             $customer = CustomerPeer::doSelectOne($cc);
-  
+            
+            var_dump($customer);
+            die;
+              $telintaObj = new Telienta();
+        $telintaGetBalance = $telintaObj->getBalance($customer);
             $pr= new Criteria();
             $pr->add(ProductPeer::ID, $extra_refill);
             $customerProduct = ProductPeer::doSelectOne($pr);
@@ -617,8 +621,7 @@ $vat=$transaction->getVat();
             
             
             
-             $telintaObj = new Telienta();
-        $telintaGetBalance = $telintaObj->getBalance($customer);
+           
             //echo $customer->getId();
 
                    $telintaGetBalanceRe=$telintaGetBalance+$customerProduct->getInitialBalance()+$customerProduct->getBonus();
