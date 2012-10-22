@@ -76,7 +76,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
     <td class="payer_summary" colspan="4" style='font-weight:normal; white-space: nowrap;font-size: 14px;font-family:"Times New Roman", Times, serif;'> 
     <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
   </tr>
-</table><br />
+</table> 
 <p style='font-size: 14px;font-weight: bold;font-family:"Times New Roman", Times, serif;'>
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
         <br><?php echo __('E-mail') ?>:&nbsp;
