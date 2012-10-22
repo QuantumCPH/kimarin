@@ -41,19 +41,9 @@ use_helper('Number');
 </table>
 
 <table class="receipt" cellspacing="0" width="600px">
-<tr bgcolor="#CCCCCC" class="receipt_header">
-    <td colspan="4"> <?php echo sfConfig::get('app_site_title');?>
-    </td>
-  </tr>
-  <tr>
-  <td colspan="4" class="payer_summary">
-	<?php echo sfConfig::get('app_postal_address_top');?>
-	<br />
-  </td>
-  </tr>
+
   <tr bgcolor="#CCCCCC" class="receipt_header">
-    <th colspan="3"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getId() ?></th>
+   <td colspan="4"> <?php echo sfConfig::get('app_site_title');?>
   </tr>
 
   <tr>
@@ -69,7 +59,12 @@ use_helper('Number');
       <?php echo $agent->getHeadPhoneNumber() ?><br />
       
     </td>
+  </tr><tr bgcolor="#CCCCCC" class="receipt_header">
+    <th colspan="3"><?php echo __('Order Receipt') ?></th>
+    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getId() ?></th>
   </tr>
+
+  <tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC">
     <td><?php echo __('Date') ?></td>
     <td><?php //echo __('Description') ?></td>
