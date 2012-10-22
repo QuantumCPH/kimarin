@@ -602,7 +602,8 @@ $vat=$transaction->getVat();
           
             
             
-            $customer = NULL;
+            $customer ="";
+            echo $mobile_number;
             $cc = new Criteria();
             $cc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
             $cc->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
