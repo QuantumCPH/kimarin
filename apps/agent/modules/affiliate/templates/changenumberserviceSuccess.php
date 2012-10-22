@@ -29,13 +29,13 @@ jQuery(function(){
 });
 </script>
 <div id="sf_admin_container"><h1><?php echo __('Change Number') ?></h1></div>
-<h2> <p><?php echo __('You can change your number maximum two times in a month.');?></p></h2>
+
 <div class="borderDiv">
 <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'affiliate/changenumber') ?>">
 
     	<ul class="fl col">
 
-
+ <p><?php echo __('You can change your number maximum two times in a month.');?></p> 
             <li>
                 <label><?php echo __('Old Mobile Number') ?></label>
                 <input type="text" name="existingNumber" style="margin-bottom:0px"/>
