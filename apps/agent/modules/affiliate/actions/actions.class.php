@@ -1387,8 +1387,30 @@ $vat=$transaction->getVat();
                 $this->getUser()->setFlash('message', 'Customer Mobile Number Does not exist');
                 $this->redirect('affiliate/changenumberservice');
             }
+               $customer = CustomerPeer::doSelectOne($cc);
+               
+               ////////////////////////////////////////
+              $change_no_startdate = date('Y-m-1 00:00:00');
+        $change_no_enddate = date('Y-m-t 23:59:59');
 
-            $customer = CustomerPeer::doSelectOne($cc);
+        $cn = new Criteria();
+        $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID, $customer->getId());
+        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT, $change_no_startdate, Criteria::GREATER_EQUAL);
+        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT, $change_no_enddate, Criteria::LESS_EQUAL);
+        $cn->addAnd(ChangeNumberDetailPeer::STATUS, 1);
+        $change_number_count = ChangeNumberDetailPeer::doCount($cn);
+            
+           if ($change_number_count>=2) {
+                $this->getUser()->setFlash('message', 'You already change your number two times in a month.');
+                $this->redirect('affiliate/changenumberservice');
+            }  
+            
+            
+            
+            
+            
+            
+         
             if ($customer) {
                 $this->customer = $customer;
                 $this->product = $product;
