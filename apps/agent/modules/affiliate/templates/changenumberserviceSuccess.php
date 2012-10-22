@@ -35,7 +35,7 @@ jQuery(function(){
 
     	<ul class="fl col">
 
- <p><?php echo __('You can change your number maximum two times in a month.');?></p> 
+ <h2><?php echo __('You can change your number maximum two times in a month.');?></h2> 
             <li>
                 <label><?php echo __('Old Mobile Number') ?></label>
                 <input type="text" name="existingNumber" style="margin-bottom:0px"/>
