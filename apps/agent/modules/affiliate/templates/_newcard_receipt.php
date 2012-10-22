@@ -1,8 +1,9 @@
 <?php
 use_helper('I18N');
 use_helper('Number');
-$vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentage')
+//$vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentage')
 ?>
+<?php if($wrap_content): ?>
 <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear customer') ?>&nbsp;<?php //echo $customer->getFirstName()." ".$customer->getLastName();?></p>
 
 <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?></p>
@@ -13,7 +14,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
 
 <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __(sfConfig::get('app_site_title')) ?></p>
 <br />
-
+<?php endif; ?>
 <table width="600px">
 <tr style="border:0px solid #fff;">
 

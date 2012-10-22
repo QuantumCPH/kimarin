@@ -2476,8 +2476,16 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'order' => $order,
                     'transaction' => $transaction,
                     'vat' => $vat,
+                     'wrap' => true, 
                    /* 'agent_name' => $recepient_agent_name,
                     'wrap' => false,*/
+                ));
+          $message_bodyAgent = get_partial('affiliate/newcard_receipt', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,
+                    'wrap' => false, 
                 ));
 
         $subject = __('New SIM-card confirmation');
@@ -2528,7 +2536,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email2->setAgentId($referrer_id);
             $email2->setCutomerId($customer_id);
             $email2->setEmailType('New Sim Card Purchase');
-            $email2->setMessage($message_body);
+            $email2->setMessage($message_bodyAgent);
             $email2->save();
         endif; 
         //---------------------------------------
