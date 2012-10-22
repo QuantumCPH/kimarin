@@ -96,7 +96,7 @@ use_helper('Number');
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php $subTotal = $transaction->getAmount();  echo number_format($subTotal,2);  ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php $subTotal = $transaction->getAmount()-$vat;  echo number_format($subTotal,2);  ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 
   <tr class="footer">

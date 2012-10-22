@@ -105,7 +105,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         <td></td>
         <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __("Product Price"); ?></td>
         <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getQuantity() ?></td>
-        <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($order->getProduct()->getPrice(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+        <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($transaction->getAmount()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
     </tr>
     <?php } ?>
     <tr>
@@ -115,7 +115,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         <td>&nbsp;</td>
         <td style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Subtotal') ?></td>
         <td>&nbsp;</td>
-        <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($subtotal = $order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+        <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
     </tr>
     <tr style="font-weight: bold;">
         <td>&nbsp;</td>
@@ -152,7 +152,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 ?>
 </p>
 <p style='font-weight: bold;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-    <?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?>
+    <?php //echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?>
 </p>
 <?php endif; ?>
 <p style='font-weight: bold;font-family:"Times New Roman", Times, serif;font-size: 14px;'>

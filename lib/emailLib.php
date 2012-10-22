@@ -2469,14 +2469,14 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $recepient_agent_email = '';
             $recepient_agent_name = '';
         }
-
+        $vat=$transaction->getVat();
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/newcard_receipt', array(
                     'customer' => $customer,
                     'order' => $order,
                     'transaction' => $transaction,
-                    /*'vat' => $vat,
-                    'agent_name' => $recepient_agent_name,
+                    'vat' => $vat,
+                   /* 'agent_name' => $recepient_agent_name,
                     'wrap' => false,*/
                 ));
 
@@ -2580,7 +2580,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $recepient_agent_email = '';
             $recepient_agent_name = '';
         }
-
+        $vat=$transaction->getVat();
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/order_receipt_payment', array(
