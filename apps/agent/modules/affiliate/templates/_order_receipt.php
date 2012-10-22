@@ -273,24 +273,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <?php echo __('%1%',array('%1%'=>sfConfig::get('app_postal_address_bottom')))?> </td>
   </tr>
 </table>
-<?php if($wrap_content): ?>
-<br />
-<p>
-<?php
-	$c = new  Criteria();
-	$c->add(GlobalSettingPeer::NAME, 'expected_delivery_time_agent_order');
-	
-	$global_setting_expected_delivery = GlobalSettingPeer::doSelectOne($c);
-	
-	if ($global_setting_expected_delivery)
-		$expected_delivery = $global_setting_expected_delivery->getValue();
-	else
-		$expected_delivery = "3 business days";
-?></p>
-<p style="font-weight: bold;">
-	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
-</p>
-<?php endif; ?>
+ 
 
 <p style='font-weight: bold;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>

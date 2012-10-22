@@ -261,7 +261,18 @@ class emailLib {
              'customerorder' =>$customerorder,
                           'wrap' => true
                 ));
-
+        
+        
+           $message_body_agent = get_partial('affiliate/order_receipt', array(
+                    'customer' => $customer,
+                    'order' => $order,
+                    'transaction' => $transaction,
+                    'vat' => $vat,
+                    'agent_name' => $recepient_agent_name,
+                       'postalcharge' => $postalcharge,
+             'customerorder' =>$customerorder,
+                          'wrap' => false
+                ));
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
@@ -314,7 +325,7 @@ class emailLib {
             $email2->setAgentId($agent_company_id);
             $email2->setCutomerId($customer_id);
             $email2->setEmailType(sfConfig::get('app_site_title') . ' Customer registration via agent');
-            $email2->setMessage($message_body);
+            $email2->setMessage($message_body_agent);
 
             $email2->save();
         endif;
