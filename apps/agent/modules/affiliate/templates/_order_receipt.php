@@ -184,7 +184,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }else{
     
 		 if($transaction->getDescription()=="Refill"){
-           echo "Refill ".$order->getExtraRefill();
+           echo "Refill ".number_format($transaction->getAmount()-$vat,0);
         }else{
            echo __($transaction->getDescription());
         }  
