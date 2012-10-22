@@ -184,7 +184,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }else{
     
 		 if($transaction->getDescription()=="Refill"){
-           echo "Refill ".$transaction->getAmount();
+           echo "Refill ".number_format($transaction->getAmount()-$vat,0);
         }else{
            echo __($transaction->getDescription());
         }  
@@ -288,7 +288,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 		$expected_delivery = "3 business days";
 ?></p>
 <p style="font-weight: bold;">
-	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
+	<?php // echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
 </p>
 <?php endif; ?>
 
