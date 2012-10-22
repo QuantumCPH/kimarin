@@ -612,7 +612,7 @@ $vat=$transaction->getVat();
   
             $pr= new Criteria();
             $pr->add(ProductPeer::ID, $extra_refill);
-            $customerProduct = ProductPeer::doSelectOne($cc);
+            $customerProduct = ProductPeer::doSelectOne($pr);
             
             
             
