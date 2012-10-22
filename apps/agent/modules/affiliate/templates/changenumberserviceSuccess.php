@@ -32,10 +32,10 @@ jQuery(function(){
 
 <div class="borderDiv">
 <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'affiliate/changenumber') ?>">
-
+ <h2><?php echo __('You can change your number maximum two times in a month.');?></h2> 
     	<ul class="fl col">
 
- <h2><?php echo __('You can change your number maximum two times in a month.');?></h2> 
+
             <li>
                 <label><?php echo __('Old Mobile Number') ?></label>
                 <input type="text" name="existingNumber" style="margin-bottom:0px"/>
