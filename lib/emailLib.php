@@ -1537,6 +1537,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $recepient_agent_email = '';
             $recepient_agent_name = '';
         }
+        $vat=$transaction->getVat();
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/change_number_order_receipt', array(

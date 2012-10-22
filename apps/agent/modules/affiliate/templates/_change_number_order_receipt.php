@@ -87,7 +87,7 @@ use_helper('Number');
     ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($transaction->getAmount(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($transaction->getAmount()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
   <tr>
   	<td colspan="4" style="border-bottom: 2px solid #c0c0c0;">&nbsp;</td>
