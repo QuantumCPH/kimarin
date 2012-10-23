@@ -174,7 +174,7 @@
                         </span>
                     </li>
                     <li>
-                        <label style="text-align:left"><?php echo __('IVA') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
+                        <label style="text-align:left"><?php echo __('IVA') ?><br />
 <?php echo __('Total amount') ?></label>
 
                         <label class="fr ac" style="width:180px; padding-right: 0px" >
