@@ -42,8 +42,9 @@ use_helper('Number');
 
 <table class="receipt" cellspacing="0" width="600px">
 
-  <tr bgcolor="#CCCCCC" class="receipt_header">
-   <td colspan="4"> <?php echo sfConfig::get('app_site_title');?>
+ <tr bgcolor="#CCCCCC" class="receipt_header">
+    <th colspan="3"><?php echo __('Order Receipt') ?></th>
+    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getAgentOrderId(); ?></th>
   </tr>
 
   <tr>
@@ -60,9 +61,6 @@ use_helper('Number');
         <?php echo __("Contact Person") ?>: <?php echo sprintf('%s', $agent->getContactName()) ?><br/>
       
     </td>
-  </tr><tr bgcolor="#CCCCCC" class="receipt_header">
-    <th colspan="3"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getAgentOrderId(); ?></th>
   </tr>
 
   <tr>

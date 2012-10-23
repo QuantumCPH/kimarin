@@ -67,9 +67,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</tr>
 </table>
 <table class="receipt" cellspacing="0" width="600px">
-<tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <td colspan="4"> <?php echo sfConfig::get('app_site_title');?>
-    </td>
+ <tr bgcolor="#CCCCCC" class="receipt_header"> 
+    <th colspan="3"><?php echo __('Order Receipt') ?></th>
+    <th><?php echo __('Order No.') ?> <?php echo $order; ?></th>
   </tr>
   <tr>
   <td colspan="4" class="payer_summary">
@@ -83,10 +83,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         <?php echo __("Contact Person") ?>: <?php echo sprintf('%s', $agent->getContactName()) ?><br/>
   </td>
   </tr>
-  <tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <th colspan="3"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $order; ?></th>
-  </tr>
+ 
   <tr class="order_summary_header" bgcolor="#CCCCCC"> 
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
