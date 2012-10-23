@@ -1389,7 +1389,7 @@ $vat=$transaction->getVat();
             $product = ProductPeer::doSelectOne($c);
 
             if (CustomerPeer::doCount($cc) == 0) {
-                $this->getUser()->setFlash('message', 'Customer Mobile Number Does not exist');
+                $this->getUser()->setFlash('decline', 'Customer Mobile Number Does not exist');
                 $this->redirect('affiliate/changenumberservice');
             }
                $customer = CustomerPeer::doSelectOne($cc);
@@ -1406,7 +1406,7 @@ $vat=$transaction->getVat();
         $change_number_count = ChangeNumberDetailPeer::doCount($cn);
             
            if ($change_number_count>=2) {
-                $this->getUser()->setFlash('message', 'You already change your number two times in a month.');
+                $this->getUser()->setFlash('decline', 'You already change your number two times in a month.');
                 $this->redirect('affiliate/changenumberservice');
             }  
             
@@ -1420,7 +1420,7 @@ $vat=$transaction->getVat();
                 $this->customer = $customer;
                 $this->product = $product;
             } else {
-                $this->getUser()->setFlash('message', 'Customer Does not exist');
+                $this->getUser()->setFlash('decline', 'Customer Does not exist');
                 $this->redirect('affiliate/changenumberservice');
             }
         }
@@ -2540,7 +2540,7 @@ $vat=$transaction->getVat();
        
          if($opproduct->getProductId()==$simTypeId){
           
-               $this->getUser()->setFlash('message', 'Customer Already have this Product');
+               $this->getUser()->setFlash('decline', 'Customer Already have this Product');
                 $this->redirect('affiliate/changeProductService');    
             
              
@@ -2554,7 +2554,7 @@ $vat=$transaction->getVat();
          $copproductCount = CustomerChangeProductPeer::doCount($cop);
        
          if($copproductCount>0){
-            $this->getUser()->setFlash('message', 'Customer Already Subscribed for this Product');
+            $this->getUser()->setFlash('decline', 'Customer Already Subscribed for this Product');
                 $this->redirect('affiliate/changeProductService');      
          }
          
