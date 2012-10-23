@@ -2557,8 +2557,7 @@ $vat=$transaction->getVat();
             $this->getUser()->setFlash('decline', 'Customer has already subscribed for this product.');
                 $this->redirect('affiliate/changeProductService');      
          }
-         
-         
+                  
           $this->error_msg="";
            $this->product_id = '';
         $cst = new Criteria();
@@ -2719,7 +2718,7 @@ $vat=$transaction->getVat();
             emailLib::sendCustomerChangeProductAgent($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
             
-            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer  is Subscribed  for new Product'));
+            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Congratulations! Customer has subscribed for new product.'));
 //                                      echo 'rehcarged, redirecting';
                     $this->redirect('affiliate/receipts');
                
