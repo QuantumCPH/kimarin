@@ -178,7 +178,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }else{
     
 		 if($transaction->getDescription()=="Refill"){
-           echo "Refill ".$transaction->getAmount()-$vat;
+           echo "Refill ".number_format($transaction->getAmount()-$vat,0);
         }else{
            echo __($transaction->getDescription());
         }  
