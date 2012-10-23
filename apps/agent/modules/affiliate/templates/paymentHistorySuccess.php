@@ -67,7 +67,7 @@
     if($expensetype==3){  echo __("Agent Account Refill");  }
     if($expensetype==4){  echo __("Customer Refill from Shop");  }
      if($expensetype==7){  echo __("Change product");  }
-      if($expensetype==8){  echo __("New sime sale");  }
+      if($expensetype==8){  echo __("New sim sale");  }
     if($expensetype==6){  echo __("Change Number");  }
     if($expensetype==9){
         $ctd = new Criteria();
