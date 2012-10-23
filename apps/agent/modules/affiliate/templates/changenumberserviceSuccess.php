@@ -15,14 +15,14 @@ jQuery(function(){
         },
         messages: {
             existingNumber:{
-                required: "Please Enter Old Mobile Number",
+                required: "You must fill in this field",
                 minlength: "Atleast 8 digits are required",
-                digits: "Please Enter only digits"
+                digits: "Please Enter digits only."
             },
             newNumber:{
-                required: "Please Enter New Mobile Number",
+                required: "You must fill in this field",
                 minlength: "Atleast 8 digits are required",
-                digits: "Please Enter only digits"
+                digits: "Please Enter digits only."
             }
         }
     });

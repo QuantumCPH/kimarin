@@ -265,7 +265,7 @@ class emailLib {
                 ));
         
         
-           $message_body_agent = get_partial('affiliate/order_receipt', array(
+           $message_body_agent = get_partial('affiliate/order_receipt_web_reg', array(
                     'customer' => $customer,
                     'order' => $order,
                     'transaction' => $transaction,
