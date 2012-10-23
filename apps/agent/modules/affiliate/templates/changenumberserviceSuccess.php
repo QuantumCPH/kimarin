@@ -5,11 +5,13 @@ jQuery(function(){
             existingNumber:{
                 required: true,
                 minlength: 8,
+                maxlength: 14,
                 digits: true
             },
            newNumber:{
                 required: true,
                 minlength: 8,
+                maxlength: 14,
                 digits: true
             }
         },
