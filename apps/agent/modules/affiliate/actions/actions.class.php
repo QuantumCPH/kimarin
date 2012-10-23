@@ -626,7 +626,7 @@ $vat=$transaction->getVat();
 
                    $telintaGetBalanceRe=$telintaGetBalance+$customerProduct->getInitialBalance()+$customerProduct->getBonus();
           if ($telintaGetBalanceRe>=250) {
-               $this->error_msg = $this->getContext()->getI18N()->__('Customer Balance is more then or equal to 250');
+               $this->error_msg = $this->getContext()->getI18N()->__('Sorry ! Unable to refill as customer balance will execced from the upper limit.');
                 return;  
           }
             }else{
