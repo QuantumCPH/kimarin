@@ -85,7 +85,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
           <?php    $unid=$customer->getUniqueid(); ?>
           <?php     $customer->getMobileNumber()    ?>
           <?php echo __('Mobile number') ?>: <br />
-          <?php echo $customer->getMobileNumber() ?>
+          <?php echo $customer->getMobileNumber() ?><br />
+
+      <?php if($agent_name!=''){ echo __('Agent Name') ?>:  <?php echo $agent_name; } ?>
+          
         </td>
     </tr>
     <tr bgcolor="#CCCCCC" style="font-weight: bold;text-transform: uppercase;">

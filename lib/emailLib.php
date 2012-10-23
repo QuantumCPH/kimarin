@@ -1540,6 +1540,19 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $recepient_agent_name = '';
         }
         $vat=$transaction->getVat();
+        
+        
+        
+         $agent_company_id = $transaction->getAgentCompanyId();
+        if ($agent_company_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $agent_company_id);
+          
+            $agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $agent_name = '';
+            
+        }
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/change_number_order_receipt', array(
@@ -1547,7 +1560,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'order' => $order,
                     'transaction' => $transaction,
                     'vat' => $vat,
-                    'agent_name' => $recepient_agent_name,
+                    'agent_name' => $agent_name,
                     'wrap' => false,
                 ));
 
@@ -2476,6 +2489,17 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $recepient_agent_name = '';
         }
         $vat=$transaction->getVat();
+        
+         $agent_company_id = $transaction->getAgentCompanyId();
+        if ($agent_company_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $agent_company_id);
+          
+            $agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $agent_name = '';
+            
+        }
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/newcard_receipt', array(
                     'customer' => $customer,
@@ -2483,14 +2507,15 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'transaction' => $transaction,
                     'vat' => $vat,
                      'wrap' => true, 
-                   /* 'agent_name' => $recepient_agent_name,
-                    'wrap' => false,*/
+                   'agent_name' => $agent_name,
+                    /* 'wrap' => false,*/
                 ));
           $message_bodyAgent = get_partial('affiliate/newcard_receipt', array(
                     'customer' => $customer,
                     'order' => $order,
                     'transaction' => $transaction,
                     'vat' => $vat,
+                'agent_name' => $agent_name,
                     'wrap' => false, 
                 ));
 
@@ -2595,6 +2620,17 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $recepient_agent_name = '';
         }
         $vat=$transaction->getVat();
+        
+         $agent_company_id = $transaction->getAgentCompanyId();
+        if ($agent_company_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $agent_company_id);
+          
+            $agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $agent_name = '';
+            
+        }
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/order_receipt_payment', array(
@@ -2602,7 +2638,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                     'order' => $order,
                     'transaction' => $transaction,
                     'vat' => $vat,
-                    'agent_name' => $recepient_agent_name,
+                    'agent_name' => $agent_name,
                     'wrap' => false,
                 ));
 
