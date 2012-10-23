@@ -1274,6 +1274,7 @@ $vat=$transaction->getVat();
         $this->forward404Unless($agent);
 
         $this->agent = $agent;
+        $this->agent_company = $agent;
         $c = new Criteria();
         $c->add(AgentOrderPeer::AGENT_COMPANY_ID, $agent->getId());
         $c->add(AgentOrderPeer::STATUS, 3);
@@ -1302,7 +1303,7 @@ $vat=$transaction->getVat();
          $ca->addDescendingOrderByColumn(AgentPaymentHistoryPeer::CREATED_AT);
         $agent = AgentPaymentHistoryPeer::doSelect($ca);
         //$this->forward404Unless($agent);
-
+        $this->agent_company = $agent;
         $this->agents = $agent;
     }
 
