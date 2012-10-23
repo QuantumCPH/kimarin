@@ -80,7 +80,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<br />
 	<?php echo __("CVR Number") ?>: <?php echo sprintf('%s', $agent->getCvrNumber()) ?>
 	<br />
-        <?php echo __("Contact Person") ?>: <?php echo sprintf('%s', $agent->getContactName()) ?><br/>
+        <?php echo __("Contact Person") ?>: <?php echo $agent->getFirstName()." ".$agent->getMiddleName()." ".$agent->getLastName(); ?><br/>
   </td>
   </tr>
  
@@ -120,12 +120,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td align="right" style="padding-right:65px;"><?php echo number_format($subtotal,2); ?> <?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 </table>
- 
-<p><?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
-<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
-</p>
-<p><?php echo __('Cheers') ?></p>
-<p>
-<?php echo __('Support') ?><br />
-<?php echo sfConfig::get('app_site_title');?>
+<p style='font-weight: bold;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+    <?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
+    <br><?php echo __('E-mail') ?>:&nbsp;
+    <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
+    <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
