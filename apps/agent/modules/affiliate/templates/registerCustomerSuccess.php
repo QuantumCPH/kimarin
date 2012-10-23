@@ -35,7 +35,7 @@
             <li>
              <?php echo $form['nie_passport_number']->renderLabel() ?>
              <?php echo $form['nie_passport_number'];
-              $emailWidget = new sfWidgetFormInput(array(), array('class' => ''));?>
+              //$emailWidget = new sfWidgetFormInput(array(), array('class' => ''));?>
              <?php if ($error_nie_passport_number): ?>
              <span id="cardno_decl" class="alertstep1">
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
