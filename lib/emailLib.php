@@ -261,7 +261,7 @@ class emailLib {
                     'agent_name' => $recepient_agent_name,
                        'postalcharge' => $postalcharge,
              'customerorder' =>$customerorder,
-                          'wrap' => true
+                          'wrap' => false
                 ));
         
         
