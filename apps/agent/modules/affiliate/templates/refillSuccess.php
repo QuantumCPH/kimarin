@@ -2,9 +2,7 @@
         
   <div class="borderDiv"> 
 <form method="post"  class="split-form-sign-up" id="refill_form" action="<?php url_for('affiliate/refill') ?>">
-        <?php if($error_msg){?>
-            <strong><?php echo $error_msg ?></strong>
-        <?php } ?>
+      
              <div class="refillhead"><?php echo __('Manual refill.') ?></div>
           <p> <?php echo __('You can refill your %1% Account with the following amounts:',array("%1%"=>sfConfig::get('app_site_title')))?></p>
        
@@ -23,7 +21,9 @@
          </ul> 
          <p><?php echo __("All amounts are excl. IVA.");?></p>
          <p><?php echo __("The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. ",array("%1%"=>sfConfig::get('app_currency_code')));echo __("The refill amount is valid for 180 days.");?></p>
-       
+         <p>  <?php if($error_msg){?>
+             <strong class="error"><?php echo $error_msg ?></strong>
+        <?php } ?></p>
 	<ul class="fl col">
             <li>
              <?php echo $form['mobile_number']->renderLabel() ?>
