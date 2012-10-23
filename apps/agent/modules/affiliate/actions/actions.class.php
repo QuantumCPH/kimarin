@@ -1372,7 +1372,7 @@ $vat=$transaction->getVat();
         if($request->getParameter('newNumber')==$request->getParameter('existingNumber'))
         {
            
-          $this->getUser()->setFlash('message', 'Both Mobile numbers are same please enter different Mobile number');
+          $this->getUser()->setFlash('decline', 'Both Mobile numbers are same please enter different Mobile number');
                 $this->redirect('affiliate/changenumberservice');    
             
         }
