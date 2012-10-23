@@ -1303,8 +1303,16 @@ $vat=$transaction->getVat();
          $ca->addDescendingOrderByColumn(AgentPaymentHistoryPeer::CREATED_AT);
         $agent = AgentPaymentHistoryPeer::doSelect($ca);
         //$this->forward404Unless($agent);
-        $this->agent_company = $agent;
+        
         $this->agents = $agent;
+        
+         $cag = new Criteria();
+        $cag->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $agentData = AgentCompanyPeer::doSelectOne($cag);
+        $this->forward404Unless($agentData);
+
+       
+        $this->agent_company = $agentData;
     }
 
     public function executeGetmobilemodel(sfWebRequest $request) {
