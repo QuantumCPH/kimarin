@@ -93,6 +93,8 @@
  <?php echo link_to(__('Payment History'), 'affiliate/paymentHistory',array('class'=>'external_link')) ?>
 <?php endif; ?>
 <br/>
+
+
 <div id="sf_admin_container"><h1><?php echo __('Account Refill') ?></h1></div>
         
   <div class="borderDiv"> 
