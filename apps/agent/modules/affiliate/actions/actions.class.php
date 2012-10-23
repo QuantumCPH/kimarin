@@ -1406,7 +1406,7 @@ $vat=$transaction->getVat();
         $change_number_count = ChangeNumberDetailPeer::doCount($cn);
             
            if ($change_number_count>=2) {
-                $this->getUser()->setFlash('decline', 'You already change your number two times in a month.');
+                $this->getUser()->setFlash('decline', 'Customer has already availed his/her limit for this service.');
                 $this->redirect('affiliate/changenumberservice');
             }  
             
