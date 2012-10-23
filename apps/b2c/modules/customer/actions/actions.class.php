@@ -1097,12 +1097,12 @@ class customerActions extends sfActions {
                 if ($cnt > 0) {
                     $customer = CustomerPeer::doSelectOne($c);
                 } else {
-                    $c = new Criteria();
-                    $c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $mobile_number);
-                    $c->addAnd(CustomerPeer::PASSWORD, $password);
-                    $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-                    $c->addAnd(CustomerPeer::BLOCK, 0);
-                    $customer = CustomerPeer::doSelectOne($c);
+//                    $c = new Criteria();
+//                    $c->add(CustomerPeer::NIE_PASSPORT_NUMBER, $mobile_number);
+//                    $c->addAnd(CustomerPeer::PASSWORD, $password);
+//                    $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+//                    $c->addAnd(CustomerPeer::BLOCK, 0);
+//                    $customer = CustomerPeer::doSelectOne($c);
                 }
 
 
