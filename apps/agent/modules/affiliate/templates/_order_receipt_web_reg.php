@@ -92,7 +92,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php echo __('Mobile number') ?>: <br />
       <?php echo $customer->getMobileNumber() ?><br />
 
-      <?php if($agent_name!=''){ echo __('Agent name') ?>:  <?php echo $agent_name; } ?>
+      <?php if($agent_name!=''){ echo __('Agent Name') ?>:  <?php echo $agent_name; } ?>
     </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC" style="font-weight: bold;text-transform: uppercase;"> 
