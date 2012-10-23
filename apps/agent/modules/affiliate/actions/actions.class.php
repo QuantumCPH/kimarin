@@ -2540,7 +2540,7 @@ $vat=$transaction->getVat();
        
          if($opproduct->getProductId()==$simTypeId){
           
-               $this->getUser()->setFlash('decline', 'Customer Already have this Product');
+               $this->getUser()->setFlash('decline', 'Customer has already this product.');
                 $this->redirect('affiliate/changeProductService');    
             
              
@@ -2554,7 +2554,7 @@ $vat=$transaction->getVat();
          $copproductCount = CustomerChangeProductPeer::doCount($cop);
        
          if($copproductCount>0){
-            $this->getUser()->setFlash('decline', 'Customer Already Subscribed for this Product');
+            $this->getUser()->setFlash('decline', 'Customer has already subscribed for this product.');
                 $this->redirect('affiliate/changeProductService');      
          }
          
