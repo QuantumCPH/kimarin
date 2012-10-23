@@ -55,8 +55,9 @@ use_helper('Number');
 
 
       <br /><br />
-      <?php echo __('Phone Number') ?>: <br />
-      <?php echo $agent->getHeadPhoneNumber() ?><br />
+    <?php echo __("CVR Number") ?>: <?php echo sprintf('%s', $agent->getCvrNumber()) ?>
+	<br />
+        <?php echo __("Contact Person") ?>: <?php echo sprintf('%s', $agent->getContactName()) ?><br/>
       
     </td>
   </tr><tr bgcolor="#CCCCCC" class="receipt_header">
@@ -67,14 +68,14 @@ use_helper('Number');
   <tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC">
     <td><?php echo __('Date') ?></td>
-    <td><?php //echo __('Description') ?></td>
+    <td><?php echo __('Description') ?></td>
     <td><?php echo __('Quantity') ?></td>
     <td align="right" style="padding-right: 65px;"><?php echo __('Amount') ?></td>
   </tr>
   <tr>
     <td><?php echo $agent_order->getCreatedAt('d-m-Y') ?></td>
     <td>
-        
+    <?php echo __('Agent Refill');?>
     </td>
     <td>1<?php //echo $agent_order->getQuantity() ?></td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $agent_order->getAmount(),2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
