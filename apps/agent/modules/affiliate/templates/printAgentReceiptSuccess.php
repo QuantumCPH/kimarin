@@ -58,7 +58,7 @@ use_helper('Number');
       <br /><br />
     <?php echo __("CVR Number") ?>: <?php echo sprintf('%s', $agent->getCvrNumber()) ?>
 	<br />
-        <?php echo __("Contact Person") ?>: <?php echo sprintf('%s', $agent->getContactName()) ?><br/>
+        <?php echo __("Contact Person") ?>:  <?php echo $agent->getFirstName()." ".$agent->getMiddleName()." ".$agent->getLastName(); ?><br/>
       
     </td>
   </tr>
