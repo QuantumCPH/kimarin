@@ -41,22 +41,22 @@ if ($agent->getIsPrepaid()) {
         </td>
     </tr>
 
-    <tr>
+<!--    <tr>
         <td colspan="2"></td>
     </tr>
     <tr>
-        <td><?php echo __('Total') ?> <strong><?php echo __('revenue on refill') ?></strong></td>
+        <td><?php //echo __('Total') ?> <strong><?php echo __('revenue on refill') ?></strong></td>
         <td align="right">
-<?php echo number_format($refill_revenue,2);
+<?php //echo number_format($refill_revenue,2);
 ?>
         </td>
     </tr>
     <tr>
-        <td><?php echo __('Total commission earned on refill:') ?></td>
+        <td><?php //echo __('Total commission earned on refill:') ?></td>
         <td align="right">
-<?php echo number_format($refill_com,2); ?>
+<?php //echo number_format($refill_com,2); ?>
         </td>
-    </tr>
+    </tr>-->
 
     <tr>
         <td colspan="2"></td>
