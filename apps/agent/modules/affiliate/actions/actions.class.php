@@ -1189,6 +1189,7 @@ $vat=$transaction->getVat();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
         $this->agent = $agent;
+          $this->agent_company = $agent;
         $this->forward404Unless($agent);
 
 
