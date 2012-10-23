@@ -131,6 +131,17 @@ class emailLib {
         }
         $vat=0;
          $vat = $transaction->getVat();
+         
+           $agent_company_id = $transaction->getAgentCompanyId();
+        if ($agent_company_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $agent_company_id);
+          
+            $agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $agent_name = '';
+            
+        }
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/refill_order_receipt', array(
@@ -138,7 +149,7 @@ class emailLib {
                     'order' => $order,
                     'transaction' => $transaction,
                     'vat' => $vat,
-                    'agent_name' => $recepient_agent_name,
+                    'agent_name' => $agent_name,
                     'wrap' => false,
                 ));
 
