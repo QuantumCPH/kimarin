@@ -2342,6 +2342,10 @@
                 <source>Your customer number is</source>
                 <target>Su número de cliente es</target>
             </trans-unit>
+             <trans-unit id="583" translate="yes" reformat="yes" xml:space="default">
+                <source>Agent Name</source>
+                <target>Nombre del agente</target>
+            </trans-unit> 
         </body>
     </file>
 </xliff>
