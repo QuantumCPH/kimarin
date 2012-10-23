@@ -345,6 +345,18 @@ class paymentsActions extends sfActions {
             $vat=$transaction->getVat();
 //        }
 
+             $agent_company_id = $transaction->getAgentCompanyId();
+        if ($agent_company_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $agent_company_id);
+          
+            $agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $agent_name = '';
+            
+        }
+            
+            
         $this->renderPartial('payments/order_receipt', array(
             'customer' => $this->customer,
             'order' => CustomerOrderPeer::retrieveByPK($transaction->getOrderId()),
@@ -353,6 +365,7 @@ class paymentsActions extends sfActions {
             'registered_customer_name' => $registered_customer_name,
             'postalcharge' => $postalcharge,
             'customerorder' => $customerorder,
+            'agent_name' => $agent_name,
         ));
 
         return sfView::NONE;
