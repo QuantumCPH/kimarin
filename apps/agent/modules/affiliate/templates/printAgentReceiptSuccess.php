@@ -62,7 +62,7 @@ use_helper('Number');
     </td>
   </tr><tr bgcolor="#CCCCCC" class="receipt_header">
     <th colspan="3"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getId() ?></th>
+    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getAgentOrderId(); ?></th>
   </tr>
 
   <tr>
