@@ -129,6 +129,8 @@ class emailLib {
             $recepient_agent_email = '';
             $recepient_agent_name = '';
         }
+        $vat=0;
+         $vat = $transaction->getVat();
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/refill_order_receipt', array(

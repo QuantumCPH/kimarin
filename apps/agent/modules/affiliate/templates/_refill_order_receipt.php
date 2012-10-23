@@ -137,7 +137,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     ?>
 	</td>
     <td style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo $order->getQuantity() ?></td>
-    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($order->getProduct()->getPrice(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($transaction->getAmount()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
  <?php } ?>  
   <tr>
@@ -147,7 +147,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($subtotal = $order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style='padding-right: 65px;font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo number_format($subtotal = $transaction->getAmount()-$vat,2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
    <tr class="footer">
     <td>&nbsp;</td>
@@ -178,7 +178,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }else{
     
 		 if($transaction->getDescription()=="Refill"){
-           echo "Refill ".$transaction->getAmount();
+           echo "Refill ".$transaction->getAmount()-$vat;
         }else{
            echo __($transaction->getDescription());
         }  
