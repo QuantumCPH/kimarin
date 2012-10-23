@@ -251,7 +251,7 @@ class emailLib {
         $vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
-        $message_body = get_partial('affiliate/order_receipt', array(
+        $message_body = get_partial('affiliate/order_receipt_web_reg', array(
                     'customer' => $customer,
                     'order' => $order,
                     'transaction' => $transaction,
