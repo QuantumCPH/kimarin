@@ -28,8 +28,8 @@ class BaseAgentPaymentHistoryForm extends BaseFormPropel
       'customer_id'       => new sfValidatorInteger(),
       'expenese_type'     => new sfValidatorInteger(),
       'order_description' => new sfValidatorInteger(array('required' => false)),
-      'amount'            => new sfValidatorInteger(),
-      'remaining_balance' => new sfValidatorInteger(),
+      'amount'            => new sfValidatorNumber(),
+      'remaining_balance' => new sfValidatorNumber(),
       'created_at'        => new sfValidatorDateTime(),
     ));
 

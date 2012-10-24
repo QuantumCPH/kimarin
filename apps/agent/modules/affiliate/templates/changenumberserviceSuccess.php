@@ -5,33 +5,36 @@ jQuery(function(){
             existingNumber:{
                 required: true,
                 minlength: 8,
+                maxlength: 14,
                 digits: true
             },
            newNumber:{
                 required: true,
                 minlength: 8,
+                maxlength: 14,
                 digits: true
             }
         },
         messages: {
             existingNumber:{
-                required: "Please Enter Old Mobile Number",
+                required: "You must fill in this field",
                 minlength: "Atleast 8 digits are required",
-                digits: "Please Enter only digits"
+                digits: "Please Enter digits only."
             },
             newNumber:{
-                required: "Please Enter New Mobile Number",
+                required: "You must fill in this field",
                 minlength: "Atleast 8 digits are required",
-                digits: "Please Enter only digits"
+                digits: "Please Enter digits only."
             }
         }
     });
 });
 </script>
 <div id="sf_admin_container"><h1><?php echo __('Change Number') ?></h1></div>
+
 <div class="borderDiv">
 <form method="post" name="changenumber" id="changenumber" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'affiliate/changenumber') ?>">
-
+ <p><?php echo __('You can change your number maximum two times in a month.');?></p> 
     	<ul class="fl col">
 
 
@@ -43,10 +46,12 @@ jQuery(function(){
             <li>
                 <label><?php echo __('New Mobile Number') ?></label>
                 <input type="text" name="newNumber" style="margin-bottom:0px"/>
+                  <input type="hidden" name="product" value="3">
+                    <input type="hidden" name="countrycode" value="34">
 <!--                <label class="validnumber">Enter mobile number without leading 0</label>-->
             </li>
-            <li>
-                <label><?php echo __('Country') ?></label>
+<!--            <li>
+             <label><?php //echo __('Country') ?></label> 
                 <select name="countrycode" id="countrycode" >
                     <?php
                     $enableCountry = new Criteria();
@@ -55,16 +60,18 @@ jQuery(function(){
                     ?>
                         <option value="<?php echo $country->getCallingCode(); ?>"><?php echo $country->getName(); ?></option>
                         </select>
-            </li>
-            <li>
-                <label><?php echo __('Product Name') ?></label>
+            </li>-->
+<!--            <li>
+                <label><?php //echo __('Product Name') ?></label>
                 <?php  $c = new Criteria();
                 $c->add(ProductPeer::ID, 3);
                 $product = ProductPeer::doSelectOne($c);  ?>
                 <select name="product">
-                    <option value="<?php echo $product->getID(); ?>" ><?php echo $product->getName(); ?></option>
+                    <option value="<?php //echo $product->getID(); ?>" ><?php //echo $product->getName(); ?></option>
                 </select>
-            </li>
+            </li>-->
+            
+          
              <?php
           if( $browser->getBrowser() == Browser::BROWSER_IE  )
           {

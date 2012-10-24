@@ -16,25 +16,22 @@
 	</script>
 
 
-<div id="sf_admin_container"><h1><?php echo __('New Sim Card Purchase') ?></h1></div>
+<div id="sf_admin_container"><h1><?php echo __('Change Customer Product') ?></h1></div>
      
   <div class="borderDiv"> 
-<form method="post"  class="split-form-sign-up" id="purchaseNewSim" action="<?php echo url_for('affiliate/purchaseNewSimDetail') ?>">
+<form method="post"  class="split-form-sign-up" id="purchaseNewSim" action="<?php echo url_for('affiliate/changeProductServiceDetail') ?>">
         <?php if($error_msg){?>
             <strong><?php echo $error_msg ?></strong>
         <?php } ?>
-             <div class="refillhead"><?php echo __('New Sim Card Purchase.') ?></div>
+             <div class="refillhead"><?php echo __('Change Customer Product.') ?></div>
         	<ul class="fl col">
                     <li>
                        <label>Customer Mobile Number</label>  
                        <input type="text" name="mobile_number"  id="mobile_number" class="required" >
-                    </li>   
-                    
-                   
-            <li>
-                <label>SIM type:</label>
+                    </li>    <li>
+                <label>Product Name</label>
              <select name="sim_type"  class="required newcard" >
-                            <option value=""><?php echo __("Select SIM type") ?></option>
+                            <option value=""><?php echo __("Select Product") ?></option>
                             <?php foreach($simtypes as $simtype){  ?>
                             <option value="<?php echo $simtype->getId(); ?>" <?php echo ($simtype->getId()==$product_id)?'selected="selected"':''?>><?php echo $simtype->getName(); ?></option>
                             <?php   }  ?>

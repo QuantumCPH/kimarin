@@ -16,8 +16,8 @@
 <script>
     jQuery(function() {
       
-        jQuery( "#startdate" ).datepicker({ dateFormat: 'yy-mm-dd' });
-        jQuery( "#enddate" ).datepicker({ dateFormat: 'yy-mm-dd'});
+        jQuery( "#startdate" ).datepicker({ dateFormat: 'dd-mm-yy' });
+        jQuery( "#enddate" ).datepicker({ dateFormat: 'dd-mm-yy'});
 	
 		
     });
@@ -32,15 +32,15 @@
                     <div class="dateBox-pt">
                         <div class="formRow-pt" style="float:left;">
                             <label class="datelable"style="text-align:left">From:</label>
-                            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;" value="<?php echo date('Y-m-d', strtotime(@$startdate)); ?>" />
+                            <input type="text"   name="startdate" autocomplete="off" id="startdate" style="width: 110px;"  value="<?php echo date('d-m-Y',strtotime($startdate));    ?>" />
                         </div>
                         <div class="formRow-pt" style="float:left;">
                             <label class="datelable"style="text-align:left">To:</label>
-                            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;" value="<?php echo @$enddate ? $enddate : date('Y-m-d'); ?>" />
+                            <input type="text"   name="enddate" autocomplete="off" id="enddate" style="width: 110px;"  value="<?php echo date('d-m-Y',strtotime($enddate));    ?>"  />
                         </div>
                         <span><input type="submit" name="søg" value="Search" class="datefilterBtn" /></span>
                     </div>
-                </form>
+                </form> 
             </td>
         </tr>
     </table>
@@ -81,7 +81,7 @@
             <tr>
                 <td colspan="2"></td>
             </tr>
-            <tr>
+<!--            <tr>
                 <td><?php echo __('Total') ?> <strong><?php echo __('revenue on refill') ?></strong></td>
                 <td align="right">
 <?php echo number_format($refill_revenue,2)?><?php echo sfConfig::get('app_currency_code');?>
@@ -92,7 +92,7 @@
                 <td align="right">
 <?php echo number_format($refill_com,2) ?><?php echo sfConfig::get('app_currency_code');?>
                 </td>
-            </tr>
+            </tr>-->
 
             <tr>
                 <td colspan="2"></td>
@@ -104,7 +104,7 @@
                 </td>
             </tr>
             <tr>
-                <td><?php echo __('Total') ?> <strong><?php echo __('commission earned') ?> </strong><?php echo __('on refill from shop:') ?></td>
+                <td><?php echo __('Total') ?>  <?php echo __('commission earned') ?>  <?php echo __('on refill from shop:') ?></td>
                 <td align="right">
                     <?php echo number_format($ef_com,2); ?><?php echo sfConfig::get('app_currency_code');?>
                 </td>
@@ -112,6 +112,73 @@
             <tr>
                 <td colspan="2"></td>
             </tr>
+                 
+<!--     ////////////////////////////////////////   -->
+      <tr>
+		<td><?php echo __('Total') ?> <strong><?php echo __('revenue on Sim Sales') ?></strong></td>
+		<td align="right">
+		<?php echo  number_format($simSale_earnings,2)
+
+		?><?php echo sfConfig::get('app_currency_code');?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo __('Total commission earned on Sim Sales:') ?></td>
+		<td align="right">
+		<?php echo  number_format($simSale_commission,2);
+
+
+		?><?php echo sfConfig::get('app_currency_code');?>
+		</td>
+        </tr>
+
+        <tr>
+		<td colspan="2"></td>
+	</tr>  
+<!--    ///////////////////////////////////////    -->
+        <tr>
+		<td><?php echo __('Total') ?> <strong><?php echo __('revenue on Change Product') ?></strong></td>
+		<td align="right">
+		<?php echo  number_format($changeProduct_earnings,2)
+
+		?><?php echo sfConfig::get('app_currency_code');?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo __('Total commission earned on Change Product:') ?></td>
+		<td align="right">
+		<?php echo  number_format($changeProduct_commission,2);
+
+
+		?><?php echo sfConfig::get('app_currency_code');?>
+		</td>
+        </tr>
+
+        <tr>
+		<td colspan="2"></td>
+	</tr>  
+<!--    ///////////////////////////////////////    -->
+          <tr>
+		<td><?php echo __('Total') ?> <strong><?php echo __('revenue on Change Mobile Number') ?></strong></td>
+		<td align="right">
+		<?php echo  number_format($numberChange_earnings,2)
+
+		?><?php echo sfConfig::get('app_currency_code');?>
+		</td>
+	</tr>
+	<tr>
+		<td><?php echo __('Total commission earned on Change Mobile Number:') ?></td>
+		<td align="right">
+		<?php echo  number_format($numberChange_commission,2);
+
+
+		?><?php echo sfConfig::get('app_currency_code');?>
+		</td>
+        </tr>
+
+        <tr>
+		<td colspan="2"></td>
+	</tr>  
        <!--       <tr>
                 <td><?php echo __('Total') ?> <strong>revenue </strong><?php echo __('on SMS Registeration:') ?></td>
                     <td align="right">

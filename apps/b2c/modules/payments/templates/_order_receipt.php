@@ -111,7 +111,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php    $unid=$customer->getUniqueid(); ?>
      <?php     $customer->getMobileNumber()    ?>
       <?php echo __('Mobile number') ?>: <br />
-      <?php echo $customer->getMobileNumber() ?>
+      <?php echo $customer->getMobileNumber() ?> <br />
+          <?php if($agent_name!=''){ echo __('Agent Name') ?>:  <?php echo $agent_name; } ?>
   </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC"> 
@@ -184,7 +185,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }else{
     
 		 if($transaction->getDescription()=="Refill"){
-           echo "Refill ".$transaction->getAmount();
+           echo "Refill ".number_format($transaction->getAmount()-$vat,0);
         }else{
            echo __($transaction->getDescription());
         }  
@@ -288,7 +289,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 		$expected_delivery = "3 business days";
 ?></p>
 <p style="font-weight: bold;">
-	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
+	<?php // echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
 </p>
 <?php endif; ?>
 

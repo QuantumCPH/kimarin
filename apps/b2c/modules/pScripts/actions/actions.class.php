@@ -3023,7 +3023,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed')); //completed
                 $transaction->setTransactionStatusId(3); //completed
                 $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(8);
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 // echo 'transaction=ok <br /> ';

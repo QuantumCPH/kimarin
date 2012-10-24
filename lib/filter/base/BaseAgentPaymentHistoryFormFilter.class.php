@@ -28,8 +28,8 @@ class BaseAgentPaymentHistoryFormFilter extends BaseFormFilterPropel
       'customer_id'       => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'expenese_type'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'order_description' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'amount'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'remaining_balance' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'amount'            => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'remaining_balance' => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'created_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
     ));
 

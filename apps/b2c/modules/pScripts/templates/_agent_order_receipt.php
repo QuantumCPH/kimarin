@@ -61,10 +61,15 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</p>
 	<br />
 <?php endif; ?>
+        <table width="600px">
+<tr style="border:0px solid #fff;">
+<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
+	</tr>
+</table>
 <table class="receipt" cellspacing="0" width="600px">
-<tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <td colspan="4"> <?php echo sfConfig::get('app_site_title');?>
-    </td>
+ <tr bgcolor="#CCCCCC" class="receipt_header"> 
+    <th colspan="3"><?php echo __('Order Receipt') ?></th>
+    <th><?php echo __('Order No.') ?> <?php echo $order; ?></th>
   </tr>
   <tr>
   <td colspan="4" class="payer_summary">
@@ -75,13 +80,10 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<br />
 	<?php echo __("CVR Number") ?>: <?php echo sprintf('%s', $agent->getCvrNumber()) ?>
 	<br />
-        <?php echo __("Contact Person") ?>: <?php echo sprintf('%s', $agent->getContactName()) ?><br/>
+        <?php echo __("Contact Person") ?>: <?php echo $agent->getFirstName()." ".$agent->getMiddleName()." ".$agent->getLastName(); ?><br/>
   </td>
   </tr>
-  <tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <th colspan="3"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $order; ?></th>
-  </tr>
+ 
   <tr class="order_summary_header" bgcolor="#CCCCCC"> 
     <td><?php echo __('Date') ?></td>
     <td><?php echo __('Description') ?></td>
@@ -107,7 +109,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr class="footer"> 
     <td>&nbsp;</td>
-  <td><?php echo __('IVA') ?><!--   (<?php //echo $vat==0?'0%':sfConfig::get('app_vat') ?>)--></td>
+  <td><?php echo __('IVA') ?></td>
     <td>&nbsp;</td>
     <td align="right" style="padding-right:65px;"><?php echo number_format($vat,2); ?><?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
@@ -118,30 +120,9 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td align="right" style="padding-right:65px;"><?php echo number_format($subtotal,2); ?> <?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 </table>
-<?php if($wrap_content): ?>
-<br />
-<p>
-<?php
-	$c = new  Criteria();
-	$c->add(GlobalSettingPeer::NAME, 'expected_delivery_time_agent_order');
-	
-	$global_setting_expected_delivery = GlobalSettingPeer::doSelectOne($c);
-	
-	if ($global_setting_expected_delivery)
-		$expected_delivery = $global_setting_expected_delivery->getValue();
-	else
-		$expected_delivery = "3 business days";
-?>
-<p>
-	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
-</p>
-<?php endif; ?>
-<p>
-	<?php echo __('If you have any questions please feel free to contact our customer support center at '); ?>
-	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
-</p>
-<p><?php echo __('Cheers') ?></p>
-<p>
-<?php echo __('Support') ?><br />
-<?php echo sfConfig::get('app_site_title');?>
+<p style='font-weight: bold;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+    <?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
+    <br><?php echo __('E-mail') ?>:&nbsp;
+    <a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
+    <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>
