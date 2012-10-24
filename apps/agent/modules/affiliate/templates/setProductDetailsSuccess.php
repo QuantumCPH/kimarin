@@ -125,16 +125,16 @@
                     <li>
                         <label style="text-align:left">
                             <?php echo __('Registration Fee') ?>
-                            <br/>
-                            <br/>
-                            <?php echo __('Product Price'); ?>
+<!--                            <br/>
+                            <br/>-->
+                            <?php //echo __('Product Price'); ?>
                         </label>
 
 
                         <label style="width:180px; padding-right: 0px"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?> <?php echo sfConfig::get('app_currency_code')?>
-                            <br/>
-                            <br/>
-                            <?php echo number_format(format_number($order->getProduct()->getPrice()),2); ?> <?php echo sfConfig::get('app_currency_code')?>
+<!--                            <br/>
+                            <br/>-->
+                            <?php //echo number_format(format_number($order->getProduct()->getPrice()),2); ?> <?php echo sfConfig::get('app_currency_code')?>
                         </label>
 
 
