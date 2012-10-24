@@ -2795,7 +2795,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < $order_amount) {
             //$extra_refill_amount = $order_amount;
             $order->setExtraRefill($order_amount);
             $transaction->setAmount($order_amount);
@@ -3568,7 +3568,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < $order_amount) {
             //$extra_refill_amount = $order_amount;
            // $order->setExtraRefill($order_amount);
             $transaction->setAmount($order_amount);
@@ -3808,7 +3808,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < $order_amount) {
             $transaction->setAmount($order_amount);
         }
         //set active agent_package in case customer was registerred by an affiliate
@@ -3927,7 +3927,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < $order_amount) {
             $transaction->setAmount($order_amount);
         }
        
