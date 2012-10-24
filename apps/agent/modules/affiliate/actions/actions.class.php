@@ -2229,7 +2229,7 @@ $vat=$transaction->getVat();
                 $transactiondescription=TransactionDescriptionPeer::retrieveByPK(11);
                 $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->setDescription($product->getDescription());
                 $transaction->setVat($request->getParameter('vat'));
                 $transaction->setAgentCompanyId($agent->getId());
 
