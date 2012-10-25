@@ -2564,7 +2564,7 @@ $vat=$transaction->getVat();
             emailLib::sendCustomerNewcardEmailAgent($this->customer, $order, $transaction,$agent_company_id);
             $this->updatePreferredCulture();
                     //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('new sim is purchased successfully '));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('New sim is purchased successfully '));
 //                                      echo 'rehcarged, redirecting';
                     $this->redirect('affiliate/receipts');
                 } else {
