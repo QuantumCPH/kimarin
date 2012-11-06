@@ -111,7 +111,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php    $unid=$customer->getUniqueid(); ?>
      <?php     $customer->getMobileNumber()    ?>
       <?php echo __('Mobile number') ?>: <br />
-      <?php echo $customer->getMobileNumber() ?>
+      <?php echo $customer->getMobileNumber() ?> <br />
+          <?php if($agent_name!=''){ echo __('Agent Name') ?>:  <?php echo $agent_name; } ?>
   </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC"> 
@@ -130,7 +131,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     ?>
 	</td>
     <td><?php echo $order->getQuantity() ?></td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo number_format($transaction->getAmount()-$vat,2); //echo number_format($order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
 <?php if($order->getProduct()->getPrice()> 0){?> 
   <tr>
@@ -152,7 +153,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td>&nbsp;</td>
     <td><?php echo __('Subtotal') ?></td>
     <td>&nbsp;</td>
-    <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td align="right" style="padding-right: 65px;"><?php echo $subtotal = number_format($transaction->getAmount()-$vat,2); //number_format($subtotal = $order->getProduct()->getPrice()+$order->getProduct()->getRegistrationFee(),2); ?><?php echo sfConfig::get('app_currency_code');?></td>
   </tr>
    <tr class="footer">
     <td>&nbsp;</td>
@@ -184,7 +185,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     }else{
     
 		 if($transaction->getDescription()=="Refill"){
-           echo "Refill ".$transaction->getAmount();
+           echo "Refill ".number_format($transaction->getAmount()-$vat,0);
         }else{
            echo __($transaction->getDescription());
         }  
@@ -288,7 +289,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 		$expected_delivery = "3 business days";
 ?></p>
 <p style="font-weight: bold;">
-	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
+	<?php // echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?> 
 </p>
 <?php endif; ?>
 

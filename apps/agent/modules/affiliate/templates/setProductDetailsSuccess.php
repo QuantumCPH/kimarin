@@ -13,8 +13,15 @@
                 uniqueid: {
                     remote: "<?php echo $target; ?>affiliate/validateUniqueId?orderid=<?php echo $order->getId();?>"
                 }
-            }
-        });
+            },
+    messages: {
+       
+        uniqueid: {
+            required: "Please Enter the Unique Number",
+            minlength: jq.format("Enter at least {0} characters"),
+            remote: jq.format("Please Enter the Valid Unique Number")
+    }
+    }  });
 
 
         jq("#quantity").blur(function(){
@@ -113,21 +120,21 @@
                     </li>
                     <li>
                         <label style="text-align:left"><?php echo __('Unique Id') ?>:</label>
-                        <input type="text" id="uniqueid" value="" name="uniqueid"/>
+                        <input type="text" id="uniqueid" value="" name="uniqueid" minlength="6" class="required"/>
                     </li>
                     <li>
                         <label style="text-align:left">
                             <?php echo __('Registration Fee') ?>
-                            <br/>
-                            <br/>
-                            <?php echo __('Product Price'); ?>
+<!--                            <br/>
+                            <br/>-->
+                            <?php //echo __('Product Price'); ?>
                         </label>
 
 
                         <label style="width:180px; padding-right: 0px"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?> <?php echo sfConfig::get('app_currency_code')?>
-                            <br/>
-                            <br/>
-                            <?php echo number_format(format_number($order->getProduct()->getPrice()),2); ?> <?php echo sfConfig::get('app_currency_code')?>
+<!--                            <br/>
+                            <br/>-->
+                            <?php //echo number_format(format_number($order->getProduct()->getPrice()),2); ?> <?php echo sfConfig::get('app_currency_code')?>
                         </label>
 
 
@@ -167,7 +174,7 @@
                         </span>
                     </li>
                     <li>
-                        <label style="text-align:left"><?php echo __('VAT') ?> (<?php echo sfConfig::get('app_vat')?>)<br />
+                        <label style="text-align:left"><?php echo __('IVA') ?><br />
 <?php echo __('Total amount') ?></label>
 
                         <label class="fr ac" style="width:180px; padding-right: 0px" >
@@ -188,7 +195,7 @@
 <?php endif; ?>
                                 
                                 <li class="fr buttonplacement">
-                                        <input type ="submit" value ="<?php echo __('Pay') ?>"  style="cursor: pointer;">
+                                        <input type ="submit" value ="<?php echo __('Submit') ?>"  style="cursor: pointer;">
                                     </li>
                         </ul>
                         <!-- hidden fields -->

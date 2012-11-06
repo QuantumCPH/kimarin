@@ -54,6 +54,13 @@
            </select>
         </td>
       </tr>
+        <tr>
+            <td style="padding: 5px;">UniqueId:</td>
+            <td style="padding: 5px;">
+                <select name="uniqueid" id="uniqueid-select"    class="required"  >
+                </select>
+            </td>
+        </tr>
       <tr>
         <td style="padding: 5px;">Mobile number:</td>
         <td style="padding: 5px;"> <input type="text" name="mobile_number" id="employee_mobile_number"  size="25"   class="required digits"  minlength="8" /><span id="msgbox" style="display:none"></span> </td>
@@ -115,6 +122,17 @@
            
 
     
-    </div>
+    </div>    
 </form>
 </div>
+<script type="text/javascript">
+jQuery(function(){
+
+    jQuery("#employee_sim_type_id").change(function(){
+        jQuery.post("<?PHP echo sfConfig::get('app_admin_url') ?>employee/getUniqueIds",{ sim_type_id:jQuery(this).val() } ,function(data){
+           jQuery("#uniqueid-select").html(data);
+        });
+    });
+    jQuery("#employee_sim_type_id").trigger("change");
+});
+</script>

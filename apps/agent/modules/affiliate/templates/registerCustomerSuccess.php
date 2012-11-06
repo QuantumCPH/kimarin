@@ -35,7 +35,7 @@
             <li>
              <?php echo $form['nie_passport_number']->renderLabel() ?>
              <?php echo $form['nie_passport_number'];
-              $emailWidget = new sfWidgetFormInput(array(), array('class' => ''));?>
+              //$emailWidget = new sfWidgetFormInput(array(), array('class' => ''));?>
              <?php if ($error_nie_passport_number): ?>
              <span id="cardno_decl" class="alertstep1">
 			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
@@ -334,7 +334,7 @@
           <li class="fr"><img src="<?php echo image_path('../zerocall/images/moto-flipout.png') ?>" alt=" " /></li>
            -->
           <!-- end device -->
-            <?php
+<!--            <?php
             $error_is_newsletter_subscriber = false;;
             if($form['is_newsletter_subscriber']->hasError())
             	$error_is_newsletter_subscriber = true;
@@ -347,7 +347,7 @@
             <li style="margin-left: -15px">
              <?php echo $form['is_newsletter_subscriber'] ?>
              <span><?php echo $form['is_newsletter_subscriber']->renderHelp() ?></span>
-            </li>
+            </li>-->
           <!-- end newsletter -->
            
             

@@ -2795,7 +2795,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < $order_amount) {
             //$extra_refill_amount = $order_amount;
             $order->setExtraRefill($order_amount);
             $transaction->setAmount($order_amount);
@@ -3009,28 +3009,25 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $order_amount = $transaction->getAmount();
             //  echo 'retrieved transaction<br />';
 
-            if ($transaction->getAmount() > $order_amount || $transaction->getAmount() < $order_amount) {
+            if ($transaction->getAmount() > $order_amount) {
                 //error
                 $order->setOrderStatusId(sfConfig::get('app_status_error')); //error in amount
                 $transaction->setTransactionStatusId(sfConfig::get('app_status_error')); //error in amount
                 $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_error')); //error in amount
                 echo 'setting error <br /> ';
-            } else {
-                //TODO: remove it
+            } elseif(number_format($transaction->getAmount(),2) < $order_amount){
                 $transaction->setAmount($order_amount);
-
-                $order->setOrderStatusId(sfConfig::get('app_status_completed')); //completed
-                $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed')); //completed
-                $transaction->setTransactionStatusId(3); //completed
-                $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(8);
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
-                $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                $transaction->setDescription($transactiondescription->getTitle());
-                // echo 'transaction=ok <br /> ';
-                $is_transaction_ok = true;
             }
 
-                           
+            $order->setOrderStatusId(sfConfig::get('app_status_completed')); //completed
+            $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed')); //completed
+            $transaction->setTransactionStatusId(3); //completed
+            $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(8);
+            $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+            $transaction->setTransactionDescriptionId($transactiondescription->getId());
+            $transaction->setDescription($transactiondescription->getTitle());
+            // echo 'transaction=ok <br /> ';
+            $is_transaction_ok = true;               
 
             $order->setQuantity(1);
             // $order->getCustomer()->getAgentCompany();
@@ -3568,7 +3565,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < $order_amount) {
             //$extra_refill_amount = $order_amount;
            // $order->setExtraRefill($order_amount);
             $transaction->setAmount($order_amount);
@@ -3808,7 +3805,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < $order_amount) {
             $transaction->setAmount($order_amount);
         }
         //set active agent_package in case customer was registerred by an affiliate
@@ -3927,7 +3924,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < $order_amount) {
             $transaction->setAmount($order_amount);
         }
        
