@@ -2551,17 +2551,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
         changeLanguageCulture::languageCulture($request, $this);
         //-----------------------
-        $langSym = $this->getUser()->getCulture();
-        $enableCountry = new Criteria();
-        $enableCountry->add(EnableCountryPeer::LANGUAGE_SYMBOL, $langSym);
-        $country_id = EnableCountryPeer::doSelectOne($enableCountry); //->getId();
-        if ($country_id) {
-            $CallCode = $country_id->getCallingCode();
-            $countryId = $country_id->getId();
-        } else {
-            $CallCode = sfConfig::get('app_country_code');
-            $countryId = "2";
-        }
+        
+        $CallCode = sfConfig::get('app_country_code');
+        $countryId = "1";
 
 
         $usagealerts = new Criteria();
@@ -2571,7 +2563,6 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $c = new Criteria();
         $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
         $c->addJoin(CustomerProductPeer::PRODUCT_ID,ProductPeer::ID, Criteria::LEFT_JOIN);
-        $c->addAnd(ProductPeer::PRODUCT_COUNTRY_US,1, Criteria::NOT_EQUAL);
         $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $c->addAnd(CustomerPeer::COUNTRY_ID, $countryId);
         $customers = CustomerPeer::doSelect($c);
@@ -2603,8 +2594,8 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $sender = new Criteria();
                     $sender->add(UsageAlertSenderPeer::ID, $usageAlert->getSenderName());
                     $senders = UsageAlertSenderPeer::doSelectOne($sender);
-                    echo $senderName = $senders->getName();
-
+                    echo $senderName = $senders->getName();echo "<br />";
+                    echo $usageAlert->getId();
 
                     $regType = RegistrationTypePeer::retrieveByPK($customer->getRegistrationTypeId()); // && $customer->getFonetCustomerId()!=''
                     $referer = $customer->getReferrerId();
@@ -2644,9 +2635,12 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                         /**
                          * SMS Sending Code
                          * */
+                         
                         if ($customer->getUsageAlertSMS()) {
                             echo "SMS Active<br/>";
-                            $customerMobileNumber = $CallCode . substr($customer->getMobileNumber(), 1);
+                            $customerMobileNumber = $CallCode . $customer->getMobileNumber();
+                            //die($customerMobileNumber);
+                           // $customerMobileNumber = "923334414765";
                             $sms_text = $usageAlert->getSmsAlertMessage();
                             $response = ROUTED_SMS::Send($customerMobileNumber, $sms_text, $senderName);
 
@@ -2681,7 +2675,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
                         if ($customer->getUsageAlertEmail()) {
                             echo "Email Active<br/>";
-                            $message = '<img src="'.sfConfig::get('app_web_url').'images/logo.png" /><br>' . $usageAlert->getEmailAlertMessage() . '<br>Hilsen <br>' . $senderName;
+                            $message = '<img src="'.sfConfig::get('app_web_url').'images/logo.png" /><br>' . $usageAlert->getEmailAlertMessage() . '<p><br /></p>Hilsen <br>' . $senderName;
                             $this->setPreferredCulture($customer);
 
                             emailLib::sendCustomerBalanceEmail($customer, $message);
