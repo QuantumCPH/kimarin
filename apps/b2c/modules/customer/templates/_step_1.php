@@ -338,6 +338,8 @@
 			 <?php endif; ?>
              <div class='inline-error-signup'><?php echo $error_telecom_operator_id?$form['telecom_operator_id']->renderError():'&nbsp;'?></div>
             </li>
+              <input type="hidden" id="customer_business" name="customer[business]" value="0">
+            
             <!-- end telecom operator -->
                         <!-- 
           <li class="fr"><img src="<?php echo image_path('../zerocall/images/moto-flipout.png') ?>" alt=" " /></li>
