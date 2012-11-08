@@ -766,6 +766,46 @@ $vat=$transaction->getVat();
         sfView::NONE;
     }
 
+  
+       public function executeRegisterBusinessCustomer(sfWebRequest $request) {
+
+
+        $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+        $this->browser = new Browser();
+
+        $c = new Criteria();
+        $c->add(AgentCompanyPeer::ID, $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $referrer_id = AgentCompanyPeer::doSelectOne($c);
+
+        if ($request->isMethod('post')) {
+
+            $this->form = new CustomerForm();
+
+            $this->form->bind($request->getParameter("newCustomerForm"), $request->getFiles("newCustomerForm"));
+            $this->form->setDefault('referrer_id', $referrer_id);
+            unset($this->form['terms_conditions']);
+            unset($this->form['imsi']);
+            unset($this->form['uniqueid']);
+//                        //unset($this->form['password']);
+//                        unset($this->form['terms_conditions']);
+            // print_r($this->form);
+            //  die;
+
+            $this->processForm($request, $this->form);
+        } else {
+
+            $this->form = new CustomerForm();
+        }
+
+        //$this->setLayout();
+        sfView::NONE;
+    }
+
+ 
+    
+    
+    
+    
     protected function processFormone(sfWebRequest $request, sfForm $form) {
         //print_r($request->getParameter($form->getName()));
         $customer = $request->getParameter($form->getName());

@@ -2393,4 +2393,77 @@ class customerActions extends sfActions {
         return sfView::NONE;
     }
 
+    
+    public function executeRegisterBusinessCustomer(sfWebRequest $request) {
+	//$this->form = new CustomerForm();
+        if ($request->getParameter('invite_id')) {
+            //setcookie("user", "XXXXXXX", time()+3600);
+            $this->getResponse()->setCookie('invite_id', $request->getParameter('invite_id'),time()+36000);
+            //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
+            $this->redirect("http://www.kimarin.es/register.html");
+        }
+
+        //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
+        if ($request->getParameter('lang') != '') {
+            $this->getUser()->setCulture($request->getParameter('lang'));
+            $this->sLang = $request->getParameter('lang');
+        } else {
+            $this->sLang = 'en';
+        }
+
+
+
+        $this->form = new CustomerFormB2C();
+        $id = $request->getParameter('invite_id');
+        $visitor_id = $request->getParameter('visitor');
+        //$this->form->widgetSchema->setLabel('the_field_id', false);
+        if ($visitor_id != NULL) {
+            $c = new Criteria();
+            $c->add(VisitorsPeer::ID, $request->getParameter('visitor'));
+            $visitor = VisitorsPeer::doSelectOne($c);
+            $status = $visitor->getStatus();
+            $visitor->setStatus($status . "> B2C Signup Page ");
+            $visitor->save();
+        }
+
+        if ($this->getRequest()->getCookie('invite_id') != NULL) {
+            $c = new Criteria();
+            //$c->add(InvitePeer::ID,$id);
+            //$c->add(InvitePeer::INVITE_STATUS,'2');
+            $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
+            if ($invite) {
+                $invite->setInviteStatus('2');
+                $invite->save();
+            }
+        }
+
+        //set referrer id
+        if ($referrer_id = $request->getParameter('ref')) {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $referrer_id);
+
+            if (AgentCompanyPeer::doSelectOne($c))
+                $this->form->setDefault('referrer_id', $referrer_id);
+        }
+
+
+        unset($this->form['manufacturer']);
+        unset($this->form['device_id']);
+
+
+        if ($request->isMethod('post')) {
+
+            unset($this->form['imsi']);
+            unset($this->form['uniqueid']);
+
+            $this->processForm($request, $this->form, $this->getRequest()->getCookie('invite_id'));
+        }
+    }
+
+  
+    
+    
+    
+    
+    
 }
