@@ -22,8 +22,8 @@
     <ul class="fl col changenumber">
         
         <li>
-            <label>Customer Name</label>
-            <label><?php echo  $customer->getFirstName(); ?>&nbsp;<?php echo  $customer->getLastName(); ?></label><br />
+         <?php if($customer->getBusiness()){ ?>        <label>Company name</label>  <?php }else{  ?>    <label>Customer Name</label>   <?php  } ?>
+            <label><?php if($customer->getBusiness()){ echo  $customer->getFirstName(); }else{   echo  $customer->getFirstName(); echo   $customer->getLastName(); } ?></label><br />
         </li>
         <li>
             <label>Customer Mobile Number</label>
