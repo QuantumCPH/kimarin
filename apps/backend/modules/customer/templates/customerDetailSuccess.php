@@ -49,8 +49,24 @@ $pus=0;
                     <td    class="leftHeadign"  >Id</td>
                      <td  ><?php  echo $customer->getId() ?></td>
                       </tr>
-                     
-                      <tr>
+                      <?php  if($customer->getBusiness()){    ?>
+                    
+                            <tr>
+                        <td id="sf_admin_list_th_first_name" class="leftHeadign" >Company Name</td>
+                        <td><?php echo  $customer->getFirstName() ?></td>
+                       </tr>
+                   
+                      <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Name of contact person</td>
+                       <td><?php echo  $customer->getLastName() ?></td>
+                          </tr>
+                            <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >E-mail of contact person</td>
+                    <td><?php echo  $customer->getEmail(); ?></td>
+                          </tr>
+                            <?php   }else{ ?>
+                          
+                            <tr>
                         <td id="sf_admin_list_th_first_name" class="leftHeadign" >First Name</td>
                         <td><?php echo  $customer->getFirstName() ?></td>
                        </tr>
@@ -62,11 +78,18 @@ $pus=0;
                     <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Last Name</td>
                        <td><?php echo  $customer->getLastName() ?></td>
                           </tr>
-                       
+                          
+                            <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Email</td>
+                    <td><?php echo  $customer->getEmail(); ?></td>
+                          </tr>
+                            <?php   } ?>
+                           
                       <tr>
 		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Mobile Number</td>
                       <td><?php echo  $customer->getMobileNumber() ?></td>
                          </tr>
+                         
                         <tr>
 		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >N.I.E./Passport Number</td>
                         <td><?php echo  $customer->getNiePassportNumber() ?></td>
