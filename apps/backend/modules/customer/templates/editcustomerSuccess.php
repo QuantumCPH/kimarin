@@ -12,21 +12,37 @@
 <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign" border='0'>
 
         
+ <?php  if(editCust->getBusiness()){    ?>
         <tr>
+            <td style="padding: 5px;">Company Name</td>
+            <td style="padding: 5px;"><input type="text" name="firstName" value="<?php echo $editCust->getFirstName();?>" class="required" />
+            </td>
+        </tr>
+          <tr>
+            <td style="padding: 5px;">Contact Person Name</td>
+            <td style="padding: 5px;"><input type="text" name="lastName" value="<?php echo $editCust->getLastName();?>" class="required" />
+            </td>
+        </tr>
+        <?php   }else{ ?>
+        
+          <tr>
             <td style="padding: 5px;">First Name</td>
             <td style="padding: 5px;"><input type="text" name="firstName" value="<?php echo $editCust->getFirstName();?>" class="required" />
             </td>
         </tr>
-        <tr>
+          <tr>
             <td style="padding: 5px;">Last Name</td>
             <td style="padding: 5px;"><input type="text" name="lastName" value="<?php echo $editCust->getLastName();?>" class="required" />
             </td>
         </tr>
-        <tr>
+         <tr>
             <td style="padding: 5px;">Second Family Name</td>
             <td style="padding: 5px;"><input type="text" name="secondlastName" value="<?php echo $editCust->getSecondLastName();?>" />
             </td>
         </tr>
+        <?php   } ?>
+      
+       
         <tr>
             <td style="padding: 5px;">Address</td>
             <td style="padding: 5px;"><input type="text" name="address" value="<?php echo $editCust->getAddress();?>" class="required" />
@@ -57,11 +73,23 @@
             <td style="padding: 5px;"><input type="text" name="pob" value="<?php echo $editCust->getPoBoxNumber();?>" class="required" />
             </td>
         </tr>
+         <?php  if(editCust->getBusiness()){    ?>
         <tr>
+            <td style="padding: 5px;">Contact Person Email</td>
+            <td style="padding: 5px;"><input type="text" name="email" value="<?php echo $editCust->getEmail();?>"  class="required email"/>
+            </td>
+        </tr>
+        
+        
+        <?php  }else{  ?>
+         <tr>
             <td style="padding: 5px;">Email</td>
             <td style="padding: 5px;"><input type="text" name="email" value="<?php echo $editCust->getEmail();?>"  class="required email"/>
             </td>
         </tr>
+        
+        
+        <?php  } ?>
          <tr>
             <td style="padding: 5px;">Nationality</td>
             <td style="padding: 5px;">
