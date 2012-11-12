@@ -100,13 +100,18 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_po_box_number?$form['po_box_number']->renderError():'&nbsp;'?></div>
             </li>
+            <?php 
+           $businessCustomer=$customer->getBusiness();
+            
+            
+            ?>
             <?php
             $error_first_name = false;;
             if($form['first_name']->hasError())
             	$error_first_name = true;
             ?>
             <li>
-             <?php echo $form['first_name']->renderLabel() ?>
+             <?php if($businessCustomer){ echo $form['first_name']->renderLabel('Company name');  }else{  echo $form['first_name']->renderLabel();  }?>
              <?php echo $form['first_name'] ?>
              <?php if ($error_first_name): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -116,21 +121,7 @@
              <div class='inline-error'><?php echo $error_first_name?$form['first_name']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end first name -->
-            <?php
-            $error_last_name = false;;
-            if($form['last_name']->hasError())
-            	$error_last_name = true;
-            ?>
-            <li>
-             <?php echo $form['last_name']->renderLabel() ?>
-             <?php echo $form['last_name'] ?>
-             <?php if ($error_last_name): ?>
-             <span id="cardno_decl" class="alertstep1">
-			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
-			 </span>
-			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
-            </li>
+              <?php   if(!$businessCustomer){   ?>
             <?php
             $error_second_last_name = false;
             if($form['second_last_name']->hasError())
@@ -146,14 +137,34 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
             </li>
+            <?php }?>
             <!-- end second last name -->
+          <?php   if(!$businessCustomer){   ?>
+            <?php
+            $error_last_name = false;;
+            if($form['last_name']->hasError())
+            	$error_last_name = true;
+            ?>
+            <li>
+             <?php echo $form['last_name']->renderLabel() ?>
+             <?php echo $form['last_name'] ?>
+             <?php if ($error_last_name): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
+            </li>
+            
+            <?php  }?>
+           
             <?php
             $error_address = false;;
             if($form['address']->hasError())
             	$error_address = true;
             ?>
             <li>
-             <?php echo $form['address']->renderLabel() ?>
+             <?php if($businessCustomer){  echo $form['address']->renderLabel('Company address');  }else{  echo $form['address']->renderLabel();   } ?>
              <?php echo $form['address'] ?>
              <?php if ($error_address): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -283,13 +294,34 @@
             </li>
             <!-- end confirm password -->
  */ ?>
+            
+            
+             <?php   if($businessCustomer){   ?>
+            <?php
+            $error_last_name = false;;
+            if($form['last_name']->hasError())
+            	$error_last_name = true;
+            ?>
+            <li>
+             <?php  if($businessCustomer){ echo $form['last_name']->renderLabel('Name of<br/> contact person'); }else{ echo $form['last_name']->renderLabel();   } ?>
+             <?php echo $form['last_name'] ?>
+             <?php if ($error_last_name): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
+            </li>
+            
+            <?php  }?>
+            
             <?php
             $error_email = false;;
             if($form['email']->hasError())
             	$error_email = true;
             ?>
             <li>
-             <?php echo $form['email']->renderLabel() ?>
+             <?php if($businessCustomer){  echo $form['email']->renderLabel('E-mail of<br/> contact person'); }else{ echo $form['email']->renderLabel();   } ?>
              <?php echo $form['email'] ?>
              <?php if ($error_email): ?>
              <span id="cardno_decl" class="alertstep1">

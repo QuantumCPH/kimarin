@@ -30,7 +30,13 @@ use_helper('Number');
   <tr>
     <td colspan="4" class="payer_summary" style='font-size: 14px;font-family:"Times New Roman", Times, serif;'>
       <?php echo __('Customer number')?>:   <?php echo $customer->getUniqueId(); ?><br/>
-      <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
+     <?php    if($customer->getBusiness()){  ?>
+      <?php echo $customer->getFirstName(); ?><br/>
+        <?php echo $customer->getNiePassportNumber(); ?><br/>
+<?php      }else{  ?>
+          <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
+      
+  <?php     }   ?>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s %s',$customer->getPoBoxNumber(), $customer->getCity() ) ?><br/>
       <br /><br />

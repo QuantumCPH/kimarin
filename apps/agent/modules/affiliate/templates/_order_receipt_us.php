@@ -76,7 +76,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
   </tr>
   <tr> 
     <td colspan="4" class="payer_summary">
-      <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
+      <?php    if($customer->getBusiness()){  ?>
+      <?php echo $customer->getFirstName(); ?><br/>
+        <?php echo $customer->getNiePassportNumber(); ?><br/>
+<?php      }else{  ?>
+          <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>
+      
+  <?php     }   ?>
       <?php echo $customer->getAddress() ?><br/>
       <?php echo sprintf('%s, %s', $customer->getCity(), $customer->getPoBoxNumber()) ?><br/>
       <?php 

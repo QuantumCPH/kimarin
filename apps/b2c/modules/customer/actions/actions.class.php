@@ -1030,6 +1030,7 @@ class customerActions extends sfActions {
         unset($this->form['sim_type_id']);
         unset($this->form['comments']);
         unset($this->form['block']);
+          unset($this->form['business']);
         unset($this->form['usage_alert_sms']);
         unset($this->form['usage_alert_email']);
 
