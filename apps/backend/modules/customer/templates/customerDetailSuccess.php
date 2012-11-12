@@ -151,10 +151,7 @@ if(isset($val) && $val!=""){  ?>
                       <td><?php echo  $customer->getPoBoxNumber() ?></td>
 
                       </tr>
-                         <tr>
-                      <td id="sf_admin_list_th_email"  class="leftHeadign" >Email</td>
-                         <td><?php echo  $customer->getEmail() ?></td>
-                      </tr>
+                       
                          <tr>
                       <td id="sf_admin_list_th_created_at"  class="leftHeadign" >Created At</td>
                             <td><?php echo  $customer->getCreatedAt('d-m-Y') ?></td>
