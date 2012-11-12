@@ -64,7 +64,7 @@
 
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer name/Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -117,7 +117,7 @@
 
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer name/Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -181,7 +181,7 @@
 			
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer name/Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -240,7 +240,7 @@
 		<tr>
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer name/Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -303,7 +303,7 @@
 		<tr>
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer name/Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -366,7 +366,7 @@
 		<tr>
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer name/Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
