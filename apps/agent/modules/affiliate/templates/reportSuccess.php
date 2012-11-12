@@ -79,7 +79,11 @@
 				$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
 				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
 			<td align="right" style="text-align:right;padding-right: 50px;">
@@ -128,7 +132,11 @@
 				$customer = CustomerPeer::retrieveByPK($sms_registration->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
 				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
 
@@ -188,7 +196,11 @@
 				$customer = CustomerPeer::retrieveByPK($refill->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
 				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+			  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
 			
@@ -243,7 +255,11 @@
 				$customer = CustomerPeer::retrieveByPK($number_change->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
 				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+			  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
 
@@ -302,7 +318,11 @@
 				$customer = CustomerPeer::retrieveByPK($sim_sale->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
 				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+			  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
 
@@ -361,7 +381,11 @@
 				$customer = CustomerPeer::retrieveByPK($change_product->getCustomerId());
 				//$customer2 = CustomerPeer::retrieveByPK(72);
 				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+			  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
 
