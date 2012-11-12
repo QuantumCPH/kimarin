@@ -52,7 +52,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer name/Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -71,7 +71,11 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+		  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
             
 		</td>
@@ -102,7 +106,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer name/Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -121,7 +125,11 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($refill->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+			  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
 
 		</td>
@@ -150,7 +158,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer name/Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -169,7 +177,11 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($numberchange->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+		  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
 
 		</td>
@@ -199,7 +211,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer name/Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -218,7 +230,11 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($newSimSale->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+			  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
 
 		</td>
@@ -247,7 +263,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer name/Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -266,7 +282,11 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($changeProduct->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+                        if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
 		</td>
 		<td><?php echo $customer->getMobileNumber()?></td>
