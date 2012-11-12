@@ -12,7 +12,7 @@
 <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign" border='0'>
 
         
- <?php  if(editCust->getBusiness()){    ?>
+ <?php  if($editCust->getBusiness()){    ?>
         <tr>
             <td style="padding: 5px;">Company Name</td>
             <td style="padding: 5px;"><input type="text" name="firstName" value="<?php echo $editCust->getFirstName();?>" class="required" />
@@ -73,7 +73,7 @@
             <td style="padding: 5px;"><input type="text" name="pob" value="<?php echo $editCust->getPoBoxNumber();?>" class="required" />
             </td>
         </tr>
-         <?php  if(editCust->getBusiness()){    ?>
+         <?php  if($editCust->getBusiness()){    ?>
         <tr>
             <td style="padding: 5px;">Contact Person Email</td>
             <td style="padding: 5px;"><input type="text" name="email" value="<?php echo $editCust->getEmail();?>"  class="required email"/>
