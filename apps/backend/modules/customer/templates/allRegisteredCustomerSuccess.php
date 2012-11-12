@@ -15,8 +15,8 @@
             <th width="10%" style="text-align: left" >Id</th>
             <th  width="20%" style="text-align: left"  >Customer Number</th>
             <th  width="20%" style="text-align: left" >Mobile Number</th>
-            <th width="20%" style="text-align: left" >First Name</th>
-            <th  width="20%"  style="text-align: left" >Last Name</th>
+            <th width="20%" style="text-align: left" >Customer Name/Company Name</th>
+          
             <th  width="20%"  style="text-align: left" >Unique ID</th>
             <th width="10%" style="text-align: left"  >Action</th>
         </tr>
@@ -42,8 +42,8 @@
             <td><?php echo $incrment;  ?></td>
             <td><?php  echo $customer->getId() ?></td>
             <td><?php echo  $customer->getMobileNumber() ?></td>
-            <td><?php echo  $customer->getFirstName() ?></td>
-            <td><?php echo  $customer->getLastName() ?></td>
+            <td><?php if($customer->getBusiness()){ echo  $customer->getFirstName(); }else{   echo  $customer->getFirstName(); echo  $customer->getLastName(); ?></td>
+             
             <td><?php echo  $customer->getUniqueid() ?></td>
             <td><a href="<?php echo url_for('customer/editcustomer?id='.$customer->getId()) ?>"><img src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/edit_icon.png" title="edit" alt="edit" /></a>&nbsp;<a href="customerDetail?id=<?php  echo $customer->getId() ?>"><img alt="view Detail" title="view Detail" src="<?php echo sfConfig::get('app_web_url');?>sf/sf_admin/images/default_icon.png" /></a>
             </td>
