@@ -2354,11 +2354,11 @@
             </trans-unit>
              <trans-unit id="585" translate="yes" reformat="yes" xml:space="default">
                 <source>Name of contact person</source>
-                <target>Nom i cognom de la persona de contacte</target>
+                <target>Nom i cognom de&lt;br /&gt;la persona de contacte</target>
             </trans-unit>
              <trans-unit id="586" translate="yes" reformat="yes" xml:space="default">
                 <source>E-mail of contact person</source>
-                <target>Adreça electrònica de la persona de contacte</target>
+                <target>Adreça electrònica de&lt;br /&gt;la persona de contacte</target>
             </trans-unit>
              <trans-unit id="587" translate="yes" reformat="yes" xml:space="default">
                 <source>Become a Business Customer</source>

@@ -2356,11 +2356,11 @@
             </trans-unit>
              <trans-unit id="588" translate="yes" reformat="yes" xml:space="default">
                 <source>Name of contact person</source>
-                <target>Nombre y apellido de la persona de contacto</target>
+                <target>Nombre y apellido de&lt;br /&gt; la persona de contacto</target>
             </trans-unit>
              <trans-unit id="589" translate="yes" reformat="yes" xml:space="default">
                 <source>E-mail of contact person</source>
-                <target>Correo electrónico de la persona de contacte</target>
+                <target>Correo electrónico de&lt;br /&gt; la persona de contacte</target>
             </trans-unit>
              <trans-unit id="590" translate="yes" reformat="yes" xml:space="default">
                 <source>Become a Business Customer</source>
