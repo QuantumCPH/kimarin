@@ -303,7 +303,7 @@
             	$error_last_name = true;
             ?>
             <li>
-             <?php  if($businessCustomer){ echo $form['last_name']->renderLabel('Name of<br/> contact person'); }else{ echo $form['last_name']->renderLabel();   } ?>
+             <?php  if($businessCustomer){ echo $form['last_name']->renderLabel('Name of contact person'); }else{ echo $form['last_name']->renderLabel();   } ?>
              <?php echo $form['last_name'] ?>
              <?php if ($error_last_name): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -321,7 +321,7 @@
             	$error_email = true;
             ?>
             <li>
-             <?php if($businessCustomer){  echo $form['email']->renderLabel('E-mail of<br/> contact person'); }else{ echo $form['email']->renderLabel();   } ?>
+             <?php if($businessCustomer){  echo $form['email']->renderLabel('E-mail of contact person'); }else{ echo $form['email']->renderLabel();   } ?>
              <?php echo $form['email'] ?>
              <?php if ($error_email): ?>
              <span id="cardno_decl" class="alertstep1">
