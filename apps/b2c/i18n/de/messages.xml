@@ -2383,11 +2383,11 @@
                 <target>Firmenanschrift</target>
             </trans-unit>
              <trans-unit id="588" translate="yes" reformat="yes" xml:space="default">
-                <source>Name of contact person</source>
+                <source>Name of&lt;br /&gt;contact person</source>
                 <target>Name der&lt;br /&gt; Kontaktperson</target>
             </trans-unit>
              <trans-unit id="589" translate="yes" reformat="yes" xml:space="default">
-                <source>E-mail of contact person</source>
+                <source>E-mail of&lt;br /&gt;contact person</source>
                 <target>E-mail der&lt;br /&gt; Kontaktperson</target>
             </trans-unit>
              <trans-unit id="590" translate="yes" reformat="yes" xml:space="default">

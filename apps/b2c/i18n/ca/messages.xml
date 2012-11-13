@@ -2353,11 +2353,11 @@
                 <target>Adreça de l'empresa</target>
             </trans-unit>
              <trans-unit id="585" translate="yes" reformat="yes" xml:space="default">
-                <source>Name of contact person</source>
+                <source>Name of&lt;br /&gt;contact person</source>
                 <target>Nom i cognom de&lt;br /&gt;la persona de contacte</target>
             </trans-unit>
              <trans-unit id="586" translate="yes" reformat="yes" xml:space="default">
-                <source>E-mail of contact person</source>
+                <source>E-mail of&lt;br /&gt;contact person</source>
                 <target>Adreça electrònica de&lt;br /&gt;la persona de contacte</target>
             </trans-unit>
              <trans-unit id="587" translate="yes" reformat="yes" xml:space="default">
