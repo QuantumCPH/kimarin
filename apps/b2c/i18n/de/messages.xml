@@ -2374,6 +2374,27 @@
                 <source>Your customer number is</source>
                 <target>Ihre Kundennummer laute</target>
             </trans-unit>
+           <trans-unit id="586" translate="yes" reformat="yes" xml:space="default">
+                <source>Company name</source>
+                <target>Firmenname</target>
+            </trans-unit>
+             <trans-unit id="587" translate="yes" reformat="yes" xml:space="default">
+                <source>Company address</source>
+                <target>Firmenanschrift</target>
+            </trans-unit>
+             <trans-unit id="588" translate="yes" reformat="yes" xml:space="default">
+                <source>Name of contact person</source>
+                <target>Name der Kontaktperson</target>
+            </trans-unit>
+             <trans-unit id="589" translate="yes" reformat="yes" xml:space="default">
+                <source>E-mail of contact person</source>
+                <target>E-mail der Kontaktperson</target>
+            </trans-unit>
+             <trans-unit id="590" translate="yes" reformat="yes" xml:space="default">
+                <source>Become a Business Customer</source>
+                <target>Werden Sie Geschäftskunde</target>
+            </trans-unit>
+            
         </body>
     </file>
 </xliff>
