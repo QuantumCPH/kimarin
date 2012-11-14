@@ -15,7 +15,7 @@
             <th width="10%" style="text-align: left" >Id</th>
             <th  width="20%" style="text-align: left"  >Customer Number</th>
             <th  width="20%" style="text-align: left" >Mobile Number</th>
-            <th width="20%" style="text-align: left" >Customer Name </th>
+            <th width="20%" style="text-align: left" >Customer Name/Contact Person Name</th>
               <th width="20%" style="text-align: left" >Company Name</th>
           
             <th  width="20%"  style="text-align: left" >Unique ID</th>
@@ -43,7 +43,7 @@
             <td><?php echo $incrment;  ?></td>
             <td><?php  echo $customer->getId() ?></td>
             <td><?php echo  $customer->getMobileNumber() ?></td>
-            <td><?php if($customer->getBusiness()){   }else{   echo  $customer->getFirstName(); echo  $customer->getLastName(); } ?></td>
+            <td><?php if($customer->getBusiness()){    echo $customer->getLastName();  }else{   echo  $customer->getFirstName(); echo  $customer->getLastName(); } ?></td>
               <td><?php if($customer->getBusiness()){ echo  $customer->getFirstName(); }else{     } ?></td>
              
             <td><?php echo  $customer->getUniqueid() ?></td>

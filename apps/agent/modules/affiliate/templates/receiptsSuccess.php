@@ -52,7 +52,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th><?php echo __('Transaction Amount') ?></th>
@@ -73,7 +73,7 @@ jQuery(function() {
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
 		  if($customer->getBusiness()){
-                          
+                             echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
@@ -110,7 +110,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
@@ -131,7 +131,7 @@ jQuery(function() {
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
 			  if($customer->getBusiness()){
-                           
+                              echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
@@ -166,7 +166,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
@@ -187,7 +187,7 @@ jQuery(function() {
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
 		  if($customer->getBusiness()){
-                           
+                             echo $customer->getLastName(); 
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
@@ -223,7 +223,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
@@ -244,7 +244,7 @@ jQuery(function() {
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
 			  if($customer->getBusiness()){
-                            
+                               echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
@@ -279,7 +279,7 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-<th><?php echo __('Customer name') ?></th>
+<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
@@ -300,7 +300,7 @@ jQuery(function() {
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
                         if($customer->getBusiness()){
-                          
+                          echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }

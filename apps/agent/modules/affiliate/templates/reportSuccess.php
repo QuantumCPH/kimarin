@@ -64,7 +64,7 @@
 
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         <th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -80,7 +80,7 @@
 				$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
 				 
 				  if($customer->getBusiness()){
-                           
+                              echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
@@ -126,7 +126,7 @@
 
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -142,7 +142,7 @@
 				$customer = CustomerPeer::retrieveByPK($sms_registration->getCustomerId());
 				 
 				  if($customer->getBusiness()){
-                           
+                              echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
@@ -198,7 +198,7 @@
 			
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -214,7 +214,7 @@
 				$customer = CustomerPeer::retrieveByPK($refill->getCustomerId());
 				 
 				  if($customer->getBusiness()){
-                           
+                              echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
@@ -265,7 +265,7 @@
 		<tr>
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -281,7 +281,7 @@
 				$customer = CustomerPeer::retrieveByPK($number_change->getCustomerId());
 				 
 				  if($customer->getBusiness()){
-                           
+                              echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
@@ -336,7 +336,7 @@
 		<tr>
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -352,7 +352,7 @@
 				$customer = CustomerPeer::retrieveByPK($sim_sale->getCustomerId());
 				 
 				  if($customer->getBusiness()){
-                           
+                              echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
@@ -407,7 +407,7 @@
 		<tr>
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
                         	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
@@ -423,7 +423,7 @@
 				$customer = CustomerPeer::retrieveByPK($change_product->getCustomerId());
 				 
 				  if($customer->getBusiness()){
-                           
+                              echo $customer->getLastName();
                         }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
                         }
