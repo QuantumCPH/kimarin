@@ -139,7 +139,7 @@
 			<td><?php echo ++$i ?>.</td>
                         <td><?php echo $sms_registration->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
-				$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
+				$customer = CustomerPeer::retrieveByPK($sms_registration->getCustomerId());
 				 
 				  if($customer->getBusiness()){
                            
@@ -211,7 +211,7 @@
 			<td><?php echo ++$i ?>.</td>
                         <td><?php echo $refill->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
-				$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
+				$customer = CustomerPeer::retrieveByPK($refill->getCustomerId());
 				 
 				  if($customer->getBusiness()){
                            
@@ -278,7 +278,7 @@
 			<td><?php echo ++$i ?>.</td>
                         <td><?php echo $number_change->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
-				$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
+				$customer = CustomerPeer::retrieveByPK($number_change->getCustomerId());
 				 
 				  if($customer->getBusiness()){
                            
@@ -349,7 +349,7 @@
 			<td><?php echo ++$i ?>.</td>
                         <td><?php echo $sim_sale->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
-				$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
+				$customer = CustomerPeer::retrieveByPK($sim_sale->getCustomerId());
 				 
 				  if($customer->getBusiness()){
                            
@@ -420,7 +420,7 @@
 			<td><?php echo ++$i ?>.</td>
                         <td><?php echo $change_product->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
-				$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
+				$customer = CustomerPeer::retrieveByPK($change_product->getCustomerId());
 				 
 				  if($customer->getBusiness()){
                            
