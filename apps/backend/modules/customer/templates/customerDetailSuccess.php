@@ -283,19 +283,20 @@ echo " ";   echo substr($Telintambs, 15,2);
                       </tr>
 
                       <?php } ?>
-               <!--   <tr style="background-color:#EEEEFF">
-                       <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Resenummer </td>
-                        <td>  <?php  $cuid   =  $customer->getId();
-        if(isset($cuid) && $cuid!=""){
+             <tr style="background-color:#EEEEFF">
+                     <td id="sf_admin_list_th_mobile_number" class="leftHeadign">Mobile service
+provider</td>
+                        <td>  <?php  $tcid   =  $customer->getTelecomOperatorId();
+        
             $un = new Criteria();
-            $un->add(SeVoipNumberPeer::CUSTOMER_ID, $cuid);
-            $un->add(SeVoipNumberPeer::IS_ASSIGNED, 1);
-             $vounumber = SeVoipNumberPeer::doSelectOne($un);
-             if(isset($vounumber)&& $vounumber!="" ){
-            echo $vounumber->getNumber();
-             }
-         }else{  }  ?> </td>
-                         </tr> -->
+            $un->add(TelecomOperatorPeer::ID, $tcid);
+          
+             $vounumber = TelecomOperatorPeer::doSelectOne($un);
+            
+            echo $vounumber->getName();
+             
+          ?> </td>
+                         </tr>  
 
 
 

@@ -6,8 +6,7 @@
     <input type="hidden" value="<?php echo  $price=$product->getRegistrationFee();  ?>" name="extra_refill" />
     
     <?php  
-    
-    $vat = $price * sfConfig::get('app_vat_percentage');
+        $vat = $price * sfConfig::get('app_vat_percentage');
     $totalAmount=$vat+$price;
     ?>
     <input type="hidden" value="<?php echo  $vat;  ?>" name="vat" />
