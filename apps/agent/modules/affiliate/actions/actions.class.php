@@ -1060,7 +1060,8 @@ $vat=$transaction->getVat();
 
 
             $transaction->save();
-
+            TransactionPeer::AssignReceiptNumber($transaction);
+            
             if ($agent->getIsPrepaid() == true) {
 
                 if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
@@ -1720,6 +1721,7 @@ $vat=$transaction->getVat();
                 $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
                 $order->save();
                 $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
                 $this->customer = $order->getCustomer();
                 $this->setPreferredCulture($this->customer);
                 emailLib::sendChangeNumberEmail($this->customer, $order);
@@ -2339,6 +2341,7 @@ $vat=$transaction->getVat();
                     $order->setExeStatus(1);
                     $order->save();
                     $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
                     $this->customer = $order->getCustomer();
                     //  $this->getUser()->setCulture('de');
                     $this->setPreferredCulture($this->customer);
@@ -2476,6 +2479,7 @@ $vat=$transaction->getVat();
             $transaction->setVat($this->vat);
             $transaction->setTransactionStatusId(1);
             $transaction->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
             /////////////////////////////////////////////
             
             
@@ -2596,6 +2600,7 @@ $vat=$transaction->getVat();
                     $order->setExeStatus(1);
                     $order->save();
                     $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
                     $this->customer = $order->getCustomer();
                     //  $this->getUser()->setCulture('de');
                    
@@ -2759,7 +2764,7 @@ $vat=$transaction->getVat();
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
           $transaction->save();
-        
+        TransactionPeer::AssignReceiptNumber($transaction);
         
 ///////////////////agent area //////////////////////////
            $transaction->setAgentCompanyId($agent->getId());
@@ -2836,6 +2841,7 @@ $vat=$transaction->getVat();
        
            
         $transaction->save();
+        TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
         $ccp->setCustomerId($this->customer->getId());
         $ccp->setProductId($product_id);

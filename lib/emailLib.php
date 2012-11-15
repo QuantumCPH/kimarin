@@ -23,7 +23,7 @@ class emailLib {
         //$this->renderPartial('affiliate/order_receipt', array(
         $agentamount = $agent_order->getAmount();
         $createddate = $agent_order->getCreatedAt('d-m-Y');
-        $agentid = $agent_order->getAgentOrderId();
+        $agentid = $agent_order->getReceiptNo();
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('pScripts/agent_order_receipt', array(
                     'order' => $agentid,
@@ -1447,7 +1447,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         //$this->renderPartial('affiliate/order_receipt', array(
         $agentamount = $agent_order->getAmount();
         $createddate = $agent_order->getCreatedAt('d-m-Y');
-        $agentid = $agent_order->getAgentOrderId();
+        $agentid = $agent_order->getReceiptNo();
         $order_des = $agent_order->getOrderDescription();
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('agent_company/agent_order_receipt', array(

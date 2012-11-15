@@ -424,11 +424,12 @@ class companyActions extends sfActions {
             $transaction->setPaymenttype(2); //Refill
             $transaction->setDescription('Company Refill');
             $transaction->save();
-
+            
             if ($companyCVR != '') {
                 $ComtelintaObj->recharge($this->company, $refill_amount);
                 $transaction->setTransactionStatusId(3);
                 $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
                 $this->getUser()->setFlash('message', 'B2B Company Refill Successfully');
                 $this->redirect('company/paymenthistory');
             } else {

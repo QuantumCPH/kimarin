@@ -24,7 +24,7 @@ $vat=$order->getProduct()->getRegistrationFee()*sfConfig::get('app_vat_percentag
 <table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;font-family:"Times New Roman", Times, serif;'>
    <tr bgcolor="#CCCCCC" class="receipt_header" style='font-weight: bold;text-transform: uppercase;font-family:"Times New Roman", Times, serif;font-size: 14px;'> 
     <th colspan="3" align="left" style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Order Receipt') ?></th>
-    <th style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
+    <th style='font-size: 14px;font-family:"Times New Roman", Times, serif;'><?php echo __('Order Number') ?>: <?php echo $transaction->getReceiptNo(); ?></th>
   </tr>
   <tr>
     <td colspan="4" class="payer_summary" style='font-size: 14px;font-family:"Times New Roman", Times, serif;'>

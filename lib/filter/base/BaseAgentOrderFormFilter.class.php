@@ -20,6 +20,7 @@ class BaseAgentOrderFormFilter extends BaseFormFilterPropel
       'status'            => new sfWidgetFormFilterInput(),
       'created_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'order_description' => new sfWidgetFormFilterInput(),
+      'receipt_no'        => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -29,6 +30,7 @@ class BaseAgentOrderFormFilter extends BaseFormFilterPropel
       'status'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'created_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'order_description' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'receipt_no'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('agent_order_filters[%s]');
@@ -53,6 +55,7 @@ class BaseAgentOrderFormFilter extends BaseFormFilterPropel
       'status'            => 'Number',
       'created_at'        => 'Date',
       'order_description' => 'Number',
+      'receipt_no'        => 'Number',
     );
   }
 }

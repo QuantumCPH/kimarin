@@ -364,6 +364,7 @@ class customerActions extends autocustomerActions {
                 $transaction->setTransactionStatusId(3);
                 $order->save();
                 $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
                 $this->customer = $order->getCustomer();
                 $this->setPreferredCulture($this->customer);
                 emailLib::sendAdminRefillEmail($this->customer, $order);
@@ -481,6 +482,7 @@ class customerActions extends autocustomerActions {
                     $transaction->setTransactionStatusId(3);
                     $order->save();
                     $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
                     $this->customer = $order->getCustomer();
                     $this->setPreferredCulture($this->customer);
                     emailLib::sendAdminRefillEmail($this->customer, $order);

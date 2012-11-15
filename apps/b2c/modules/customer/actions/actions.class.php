@@ -409,6 +409,7 @@ class customerActions extends sfActions {
                 $transaction->setCustomerId($customerids);
                 $transaction->setTransactionStatusId(3);
                 echo 'transaction' . $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
                 echo '<br/>';
 
                 $customer = new Criteria();
@@ -1598,6 +1599,7 @@ class customerActions extends sfActions {
                 $transaction->setCustomerId($customer->getId());
                 $transaction->setTransactionStatusId(3);
                 $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
 //        echo 'transaction'.$transaction->save();
 //        echo '<br/>';
 
@@ -1716,6 +1718,7 @@ class customerActions extends sfActions {
             $transaction->setCustomerId($customer->getId());
             $transaction->setTransactionStatusId(3);
             $transaction->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
 
             // Fonet::recharge($customer, $order->getExtraRefill() );
             $this->customer = $customer;
@@ -2327,6 +2330,7 @@ class customerActions extends sfActions {
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
         $transaction->save();
+        TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
         $ccp->setCustomerId($this->customer->getId());
         $ccp->setProductId($product_id);
