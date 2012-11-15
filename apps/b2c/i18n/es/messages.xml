@@ -2366,7 +2366,14 @@
                 <source>Become a Business Customer</source>
                 <target>Hágase cliente de negocios</target>
             </trans-unit>
-            
+            <trans-unit id="591" translate="yes" reformat="yes" xml:space="default">
+                <source>Email Alert Sent</source>
+                <target>Hágase cliente de negocios</target>
+            </trans-unit>
+            <trans-unit id="592" translate="yes" reformat="yes" xml:space="default">
+                <source>Sms Alert Sent</source>
+                <target>Firmenanschrift</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

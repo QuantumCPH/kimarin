@@ -1266,7 +1266,12 @@ Med vänlig hälsning<br/><br/>
 
     public static function sendCustomerBalanceEmail(Customer $customer, $message_body) {
 
-        $subject = ' Balance Email ';
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $email_content = get_partial('pScripts/user_alert', array(
+                    'message' => $message_body
+                ));
+        
+        $subject = __('Balance Email');
         $recepient_name = '';
         $recepient_email = '';
 
@@ -1283,7 +1288,7 @@ Med vänlig hälsning<br/><br/>
         if (trim($recepient_email) != ''):
             $email = new EmailQueue();
             $email->setSubject($subject);
-            $email->setMessage($message_body);
+            $email->setMessage($email_content);
             $email->setReceipientEmail($recepient_email);
             $email->setCutomerId($customer_id);
             $email->setAgentId($referrer_id);
