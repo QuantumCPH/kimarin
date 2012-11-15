@@ -304,7 +304,7 @@ include_stylesheets_for_form($form) ?>
             	$error_last_name = true;
             ?>
             <li>
-             <?php echo $form['last_name']->renderLabel('Name of contact person') ?>
+             <?php echo $form['last_name']->renderLabel('Name of<br />contact person') ?>
              <?php echo $form['last_name'] ?>
              <?php if ($error_last_name): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -319,7 +319,7 @@ include_stylesheets_for_form($form) ?>
             	$error_email = true;
             ?>
             <li>
-             <?php echo $form['email']->renderLabel('E-mail of contact person') ?>
+             <?php echo $form['email']->renderLabel('E-mail of<br />contact person') ?>
              <?php echo $form['email'] ?>
              <?php if ($error_email): ?>
              <span id="cardno_decl" class="alertstep1">

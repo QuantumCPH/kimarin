@@ -155,7 +155,12 @@ class emailLib {
 
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
 
         //Support Information
@@ -288,7 +293,13 @@ class emailLib {
                 ));
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+         if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
+       
         $customer_id = trim($customer->getId());
 
         //Support Information
@@ -376,7 +387,12 @@ class emailLib {
 
         // $subject = __("Request for password");
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+    if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
 
@@ -407,7 +423,12 @@ class emailLib {
         $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+    if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
 
@@ -525,7 +546,12 @@ class emailLib {
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
 
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+      if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
         
@@ -599,7 +625,12 @@ class emailLib {
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
 
@@ -663,7 +694,12 @@ class emailLib {
         $c->add(CustomerPeer::ID, $inviteuserid);        
         $customer = CustomerPeer::doSelectOne($c);
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+      if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $sender_name = sfConfig::get('app_email_sender_name_sup');
         $sender_email = sfConfig::get('app_email_sender_email_sup');
@@ -804,7 +840,12 @@ class emailLib {
 
         $subject = __('Registration Confirmation');
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+       if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
 
         //Support Information
@@ -902,7 +943,12 @@ class emailLib {
 
         $subject = __('Registration  Confirmation');
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
 
         //Support Information
@@ -1220,11 +1266,21 @@ Med vänlig hälsning<br/><br/>
 
     public static function sendCustomerBalanceEmail(Customer $customer, $message_body) {
 
-        $subject = ' Balance Email ';
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
+        $email_content = get_partial('pScripts/user_alert', array(
+                    'message' => $message_body
+                ));
+        
+        $subject = __('Balance Email');
         $recepient_name = '';
         $recepient_email = '';
 
-        $recepient_name = $customer->getFirstName() . ' ' . $customer->getLastName();
+       if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $recepient_email = $customer->getEmail();
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
@@ -1232,7 +1288,7 @@ Med vänlig hälsning<br/><br/>
         if (trim($recepient_email) != ''):
             $email = new EmailQueue();
             $email->setSubject($subject);
-            $email->setMessage($message_body);
+            $email->setMessage($email_content);
             $email->setReceipientEmail($recepient_email);
             $email->setCutomerId($customer_id);
             $email->setAgentId($referrer_id);
@@ -1581,7 +1637,12 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         
         
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+ if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
 
         //Support Information
@@ -1708,7 +1769,12 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+      if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
 
         //Support Information
@@ -1966,7 +2032,12 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+        if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
         if ($referrer_id != '') {
@@ -2103,7 +2174,12 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         $subject = __('Change number - payment confirmation');
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+     if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
 
         //Support Information
@@ -2192,7 +2268,12 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
     
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+ if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
 
@@ -2316,7 +2397,12 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
     
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+ if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
 
@@ -2402,15 +2488,18 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         endif;
     }
   
-    
-    
-    
+        
    
     public static function sendBlockCustomerEmail(Customer $customer) {
      
         
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+       if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
  
@@ -2487,7 +2576,12 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+     if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
       //  $referrer_id = trim($customer->getReferrerId());
         if ($agentId != '') {
@@ -2617,7 +2711,12 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $vat = $transaction->getAmount() - ($transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1));
     
         $recepient_email = trim($customer->getEmail());
-        $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
+ if($customer->getBusiness()){
+        $recepient_name =$customer->getLastName();
+        }else{
+           $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());   
+            
+        }
         $customer_id = trim($customer->getId());
         $referrer_id = trim($customer->getReferrerId());
 
