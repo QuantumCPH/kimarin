@@ -1271,7 +1271,7 @@ Med vänlig hälsning<br/><br/>
                     'message' => $message_body
                 ));
         
-        $subject = 'Balance Email';
+        $subject = __('Balance Email');
         $recepient_name = '';
         $recepient_email = '';
 
