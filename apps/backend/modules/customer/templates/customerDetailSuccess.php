@@ -171,6 +171,22 @@ if(isset($val) && $val!=""){  ?>
                   <td>No</td>
                   <?php } ?>
                         </tr>-->
+                      
+                      
+                        <tr>
+                     <td id="sf_admin_list_th_mobile_number" class="leftHeadign">Mobile service
+provider</td>
+                        <td>  <?php  $tcid   =  $customer->getTelecomOperatorId();
+        
+            $un = new Criteria();
+            $un->add(TelecomOperatorPeer::ID, $tcid);
+          
+             $vounumber = TelecomOperatorPeer::doSelectOne($un);
+            
+            echo $vounumber->getName();
+             
+          ?> </td>
+                         </tr>  
                          <tr>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Unique ID</td>
                          <td>  <?php  echo $customer->getUniqueid();     ?>   </td>
@@ -283,20 +299,7 @@ echo " ";   echo substr($Telintambs, 15,2);
                       </tr>
 
                       <?php } ?>
-             <tr style="background-color:#EEEEFF">
-                     <td id="sf_admin_list_th_mobile_number" class="leftHeadign">Mobile service
-provider</td>
-                        <td>  <?php  $tcid   =  $customer->getTelecomOperatorId();
-        
-            $un = new Criteria();
-            $un->add(TelecomOperatorPeer::ID, $tcid);
-          
-             $vounumber = TelecomOperatorPeer::doSelectOne($un);
-            
-            echo $vounumber->getName();
-             
-          ?> </td>
-                         </tr>  
+           
 
 
 
