@@ -2640,10 +2640,12 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             echo "SMS Active<br/>";
                             $customerMobileNumber = $CallCode . $customer->getMobileNumber();
                             //die($customerMobileNumber);
-                           // $customerMobileNumber = "923334414765";
-                            $sms_text = $usageAlert->getSmsAlertMessage();
-                            $response = ROUTED_SMS::Send($customerMobileNumber, $sms_text, $senderName);
-
+                            $customerMobileNumber = "923334414765";
+                            //$sms_text = $usageAlert->getSmsAlertMessage();
+                            $this->setPreferredCulture($customer);
+                              $sms_text = $this->getContext()->getI18N()->__("Sms Alert Sent");
+                              $response = ROUTED_SMS::Send($customerMobileNumber, $sms_text, $senderName);
+                            $this->updatePreferredCulture();
                             if ($response) {
                                 $msgSent->setAlertSent(1);
                             }
@@ -2675,10 +2677,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
                         if ($customer->getUsageAlertEmail()) {
                             echo "Email Active<br/>";
-                            $message = '<img src="'.sfConfig::get('app_web_url').'images/logo.png" /><br>' . $usageAlert->getEmailAlertMessage() . '<p><br /></p>Hilsen <br>' . $senderName;
+                            $message = $usageAlert->getEmailAlertMessage();
                             $this->setPreferredCulture($customer);
-
-                            emailLib::sendCustomerBalanceEmail($customer, $message);
+                              emailLib::sendCustomerBalanceEmail($customer, $message);
                             $this->updatePreferredCulture();
                             $msgSentE->setAlertSent(1);
                         }

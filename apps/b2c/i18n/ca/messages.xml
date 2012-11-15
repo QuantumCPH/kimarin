@@ -2364,7 +2364,14 @@
                 <source>Become a Business Customer</source>
                 <target>Feu-vos client de negocis</target>
             </trans-unit>
-                    
+            <trans-unit id="588" translate="yes" reformat="yes" xml:space="default">
+                <source>Email Alert Sent</source>
+                <target>Feu-vos client de negocis</target>
+            </trans-unit>  
+             <trans-unit id="589" translate="yes" reformat="yes" xml:space="default">
+                <source>Sms Alert Sent</source>
+                <target>Adreça electrònica</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
