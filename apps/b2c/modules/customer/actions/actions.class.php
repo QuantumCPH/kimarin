@@ -1196,7 +1196,7 @@ class customerActions extends sfActions {
             $chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
        
            // $new_password = substr(base64_encode($customer->getPassword()), 0, 8);
-           $new_password =substr(str_shuffle($chars),0,8);
+           $new_password =substr(str_shuffle($chars),0,6);
             //echo $new_password.''.$customer->getPassword();
             $customer->setPlainText($new_password);
             $customer->setPassword($new_password);
