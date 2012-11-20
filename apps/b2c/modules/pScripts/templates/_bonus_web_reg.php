@@ -73,7 +73,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
  
   <tr bgcolor="#CCCCCC" class="receipt_header" style="font-weight: bold;text-transform: uppercase;">
     <th colspan="3"  align="left"  style='font-family:"Times New Roman", Times, serif;font-size: 14px;font-weight: bold;'><?php echo __('Order Receipt') ?></th>
-    <th style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Number') ?>: <?php echo $order->getId() ?></th>
+    <th style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Order Number') ?>: <?php echo $transaction->getReceiptNo(); ?></th>
   </tr>
   <tr>
     <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>

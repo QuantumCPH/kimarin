@@ -1,5 +1,3 @@
 <?php
 
-class Transaction extends BaseTransaction
-{
-}
+class Transaction extends BaseTransaction {}
