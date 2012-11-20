@@ -1192,7 +1192,10 @@ class customerActions extends sfActions {
 
         if ($customer) {
             //change the password to some thing uniuque and complex
-            $new_password = substr(base64_encode($customer->getPassword()), 0, 8);
+            $chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+       
+           // $new_password = substr(base64_encode($customer->getPassword()), 0, 8);
+           $new_password =substr(str_shuffle($chars),0,8);
             //echo $new_password.''.$customer->getPassword();
             $customer->setPlainText($new_password);
             $customer->setPassword($new_password);
