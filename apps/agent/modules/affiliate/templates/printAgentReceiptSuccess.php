@@ -44,7 +44,7 @@ use_helper('Number');
 
  <tr bgcolor="#CCCCCC" class="receipt_header">
     <th colspan="3"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getAgentOrderId(); ?></th>
+    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getReceiptNo(); ?></th>
   </tr>
 
   <tr>
