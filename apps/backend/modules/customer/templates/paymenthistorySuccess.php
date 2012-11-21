@@ -37,7 +37,7 @@
                               
                               <?php    $TDI=$transaction->getTransactionDescriptionId();  ?>
                 <tr <?php echo $class;   ?>>
-                  <td><?php  echo $transaction->ReceiptNo() ?></td>
+                  <td><?php  echo $transaction->getReceiptNo(); ?></td>
                   <td><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
                   <td><?php echo $transaction->getDescription() ?> <?php
                    
