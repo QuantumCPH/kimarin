@@ -1266,6 +1266,7 @@ $vat=$transaction->getVat();
             $agent_order = new AgentOrder();
             $agent_order->setAgentCompanyId($agent->getId());
             $agent_order->setStatus('1');
+              $agent_order->setOrderDescription('7');
             $agent_order->save();
 
             $agent_order->setAgentOrderId('a0' . $agent_order->getId());
