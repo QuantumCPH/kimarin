@@ -416,7 +416,7 @@ class customerActions extends autocustomerActions {
             //$cc->add(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);
             $customer = CustomerPeer::doSelectOne($cc);
             //echo $customer->getId();
-
+             $telintaObj = new Telienta();
              $customerBalance = $telintaObj->getBalance($customer);
             
             $finalAmount=$customerBalance+$extra_refill;
