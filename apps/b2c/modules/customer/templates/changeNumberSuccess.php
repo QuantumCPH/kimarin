@@ -18,7 +18,7 @@
             <label><?php echo  $newNumber;  ?></label><br />
         </li>
         <li>
-            <label><?php echo __("Customer name");?>:</label>
+            <label><?php   if($customer->getBusiness()){  echo __("Customer name"); }else{  echo __("Name of contact person");  }  ?>:</label>
             <label><?php  if($customer->getBusiness()){  echo  $customer->getLastName();  }else{ echo  $customer->getFirstName()." ".$customer->getLastName(); } ?></label><br />
         </li>
         <li>
