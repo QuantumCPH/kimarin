@@ -19,7 +19,7 @@
         </li>
         <li>
             <label><?php echo __("Customer name");?>:</label>
-            <label><?php echo  $customer->getFirstName(); ?>&nbsp;<?php echo  $customer->getLastName(); ?></label><br />
+            <label><?php  if($customer->getBusiness()){  echo  $customer->getLastName();  }else{ echo  $customer->getFirstName()." ".$customer->getLastName(); ?></label><br />
         </li>
         <li>
             <label><?php echo __("Old mobile number");?>:</label>
