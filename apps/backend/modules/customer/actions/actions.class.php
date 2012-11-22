@@ -417,6 +417,17 @@ class customerActions extends autocustomerActions {
             $customer = CustomerPeer::doSelectOne($cc);
             //echo $customer->getId();
 
+             $customerBalance = $telintaObj->getBalance($customer);
+            
+            $finalAmount=$customerBalance+$extra_refill;
+            
+            
+              if($finalAmount>249){
+                  $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('you could not gave more balance where Customer Balane goes above 250'));  
+                  $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');  
+                }
+            
+            
             if ($customer and $mobile_number != "") {
                 $validated = true;
                 if($amount<=0){
