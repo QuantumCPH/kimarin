@@ -2036,7 +2036,7 @@ class customerActions extends sfActions {
         $product_id = $request->getParameter('product');
         $this->product = ProductPeer::retrieveByPK($product_id);
 
-        $this->vat = $this->product->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+        $this->vat = $this->product->getRegistrationFee()* sfConfig::get('app_vat_percentage');
 
         $this->amount = $this->product->getRegistrationFee() + $this->vat;
         $amount = $this->amount;
