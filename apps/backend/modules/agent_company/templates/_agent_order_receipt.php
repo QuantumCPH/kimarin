@@ -61,22 +61,39 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</p>
 	<br />
 <?php endif; ?>
+         <table width="600px">
+<tr style="border:0px solid #fff;">
+<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
+	</tr>
+</table>
 <table class="receipt" cellspacing="0" width="600px">
-<tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <td colspan="4"><?php echo sfConfig::get('app_site_title')?>
+<tr bgcolor="#CCCCCC" class="receipt_header">
+    <td colspan="4"> <?php echo sfConfig::get('app_site_title')?> 
     </td>
   </tr>
   <tr>
   <td colspan="4" class="payer_summary">
-	<?php echo sfConfig::get('app_postal_address_top');?>
-	<br />  </td>
+	<?php echo sfConfig::get('app_site_title')?><br />
+        <?php echo sfConfig::get('app_postal_address_top');?>       
+	
+	<br />
+  </td>
   </tr>
   <tr bgcolor="#CCCCCC" class="receipt_header"> 
-    <th colspan="3"><?php echo __('Order Receipt') ?></th>
+    <th colspan="3" ><?php echo __('Order Receipt') ?></th>
     <th><?php echo __('Order No.') ?> <?php echo $order; ?></th>
   </tr>
-  <tr><td>
-    <?php if($agent_name!=''){ echo __('Agent Name') ?>:  <?php echo $agent_name; } ?>
+ <tr>
+    <td colspan="4" class="payer_summary">
+      <?php echo sprintf("%s ", $agent->getName())?><br/>
+      <?php echo $agent->getAddress() ?><br/>
+      <?php echo sprintf('%s %s', $agent->getCity(), $agent->getPostCode()) ?><br/>
+    
+      <br /><br />
+    <?php echo __("CVR Number") ?>: <?php echo sprintf('%s', $agent->getCvrNumber()) ?>
+	<br />
+        <?php echo __("Contact Person") ?>:  <?php echo $agent->getFirstName()." ".$agent->getMiddleName()." ".$agent->getLastName(); ?><br/>
+      
     </td>
   </tr>
   <tr class="order_summary_header" bgcolor="#CCCCCC"> 
@@ -120,7 +137,6 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal,2) ?><?php echo sfConfig::get('app_currency_code') ?></td>
   </tr>
 </table>
-
 <p style='font-weight: bold; font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
         <br><?php echo __('E-mail') ?>:&nbsp;
