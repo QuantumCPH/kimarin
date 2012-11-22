@@ -10,9 +10,7 @@
 		font-weight: normal;
 	}
 </style>
-
-<a href="#" onclick="showCompany()" title="company info" class="external_link"><?php echo __('Agent/Company info') ?></a>
-
+  <?php echo link_to(__('Agent/Company info'), 'agentcompany/view',array('class'=>'external_link')) ?>
 <?php if($sf_user->isAuthenticated()): ?>
      <?php if($agent_company->getIsPrepaid()): ?>
 
