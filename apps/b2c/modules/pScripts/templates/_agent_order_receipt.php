@@ -93,7 +93,14 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <tr> 
     <td><?php echo $createddate ?></td>
     <td>
-   <?php echo __('Agent Refill');?>
+   <?php 
+    if($agent_order->getOrderDescription()){
+               $c = new Criteria();
+                $c->add(TransactionDescriptionPeer::ID,$agent_order->getOrderDescription());
+                $transaction_desc = TransactionDescriptionPeer::doSelectOne($c);
+                echo $transaction_desc->getTitle();
+           } 
+    ?>  
 	</td>
     <td>1</td>
     <td align="right" style="padding-right:65px;"><?php   format_number($subtotal=$transaction);  echo number_format($subtotal,2); //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?><?php echo sfConfig::get('app_currency_code')?></td>
