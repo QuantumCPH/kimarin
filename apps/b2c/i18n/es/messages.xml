@@ -2374,6 +2374,10 @@
                 <source>Sms Alert Sent</source>
                 <target>Firmenanschrift</target>
             </trans-unit>
+             <trans-unit id="593" translate="yes" reformat="yes" xml:space="default">
+                <source>Name of contact person</source>
+                <target>Nombre y apellido de la persona de contacto</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

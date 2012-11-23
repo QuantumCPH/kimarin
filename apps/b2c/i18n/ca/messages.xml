@@ -2372,6 +2372,10 @@
                 <source>Sms Alert Sent</source>
                 <target>Adreça electrònica</target>
             </trans-unit>
+             <trans-unit id="590" translate="yes" reformat="yes" xml:space="default">
+                <source>Name of contact person</source>
+                <target>Nom i cognom de la persona de contacte</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

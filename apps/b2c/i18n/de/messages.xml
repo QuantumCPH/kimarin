@@ -2402,6 +2402,10 @@
                 <source>Sms Alert Sent</source>
                 <target>Firmenanschrift</target>
             </trans-unit>
+             <trans-unit id="593" translate="yes" reformat="yes" xml:space="default">
+                <source>Name of contact person</source>
+                <target>Name der Kontaktperson</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

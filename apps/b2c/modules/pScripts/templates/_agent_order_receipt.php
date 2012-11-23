@@ -66,7 +66,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
 	</tr>
 </table>
-<table class="receipt" cellspacing="0" style="border: 2px solid #ccc;">
+<table class="receipt" cellspacing="0" width="600px" style="border: 2px solid #ccc;">
  <tr bgcolor="#CCCCCC" class="receipt_header"> 
     <th colspan="3"  align="left" ><?php echo __('Order Receipt') ?></th>
     <th><?php echo __('Order No.') ?> <?php echo $order; ?></th>
