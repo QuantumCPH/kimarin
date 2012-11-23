@@ -968,6 +968,7 @@ class customerActions extends sfActions {
         unset($this->form['block']);
         unset($this->form['usage_alert_sms']);
         unset($this->form['usage_alert_email']);
+          unset($this->form['business']);
 
         //  unset($this->form['password']);
         // unset($this->form['password_confirm']);
