@@ -17,7 +17,7 @@
                     
                            <li>
          <?php if($customer->getBusiness()){ ?>        <label>Name of contact person:</label>  <?php }else{  ?>    <label>Customer Name</label>   <?php  } ?>
-            <label><?php if($customer->getBusiness()){ echo  $customer->getLastName(); }else{  echo $customer->getFirstName()." ".$customer->getLastName();  } ?></label><br />
+            <label><?php if($customer->getBusiness()){ echo  $customer->getLastName(); }else{  echo $customer->getFirstName()."&nbsp".$customer->getLastName();  } ?></label><br />
         </li>
                   <li>
                 <label> <?php echo __("Customer Mobile Number") ?>:</label>
