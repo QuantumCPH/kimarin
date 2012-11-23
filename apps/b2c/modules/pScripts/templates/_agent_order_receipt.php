@@ -61,7 +61,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</p>
 	<br />
 <?php endif; ?>
-        <table width="600px">
+        <table cellspacing="0" width="600px" style="border: 2px solid #ccc;">
 <tr style="border:0px solid #fff;">
 <td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
 	</tr>
