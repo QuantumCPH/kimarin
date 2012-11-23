@@ -423,7 +423,7 @@ class customerActions extends autocustomerActions {
             
             
               if($finalAmount>249){
-                  $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('you could not gave more balance where Customer Balane goes above 250'));  
+                  $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your refil has not been accepted as customer account balance will exceed 250'));  
                   $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');  
                 }
             
