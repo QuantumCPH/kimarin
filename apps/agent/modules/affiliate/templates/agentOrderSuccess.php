@@ -41,10 +41,10 @@
   <div class="borderDiv">
 <table cellspacing="0" width="100%" class="summary">
 	<tr>
-		<th width="4%" style="text-align:left">&nbsp;</th>
-		<th width="13%" style="text-align:left"><?php echo __('Date');?></th>
-		<th width="14%" style="text-align:right;padding-right: 55px;"><?php echo __('Amount');?></th>
-		<th width="69%" style="text-align:left"><?php echo __('Show Reciept');?></th>
+		<th width="10%" style="text-align:left">&nbsp;</th>
+		<th width="30%" style="text-align:left"><?php echo __('Date');?></th>
+		<th width="20%" style="text-align:right;padding-right: 55px;"><?php echo __('Amount');?></th>
+		<th width="40%" style="text-align:left"><?php echo __('Show Reciept');?></th>
 
 	</tr>
         <?php $i=0 ?>
