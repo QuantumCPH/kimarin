@@ -43,7 +43,7 @@
             <td><?php echo $incrment;  ?></td>
             <td><?php  echo $customer->getId() ?></td>
             <td><?php echo  $customer->getMobileNumber() ?></td>
-            <td><?php if($customer->getBusiness()){    echo $customer->getLastName();  }else{   echo  $customer->getFirstName(); echo  $customer->getLastName(); } ?></td>
+            <td><?php if($customer->getBusiness()){    echo $customer->getLastName();  }else{   echo  $customer->getFirstName()."&nbsp".$customer->getLastName(); } ?></td>
               <td><?php if($customer->getBusiness()){ echo  $customer->getFirstName(); }else{     } ?></td>
              
             <td><?php echo  $customer->getUniqueid() ?></td>
