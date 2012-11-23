@@ -32,7 +32,8 @@ class AgentCompany extends BaseAgentCompany
         
        $c = new Criteria();
        $c->add(TransactionPeer::AGENT_COMPANY_ID,$this->getId());
-       $c->add(TransactionPeer::DESCRIPTION,'Registration' );
+       $c->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+       $c->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
        $transactions=TransactionPeer::doSelect($c);       
        $sum=0.00;
        $per=0.00;
@@ -52,7 +53,8 @@ class AgentCompany extends BaseAgentCompany
 
        $c = new Criteria();
        $c->add(TransactionPeer::AGENT_COMPANY_ID,$this->getId());
-       $c->add(TransactionPeer::DESCRIPTION,'Refill' );
+      $c->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
+       $c->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
        $transactions=TransactionPeer::doSelect($c);
        //$agent
        //$str=array();
@@ -105,7 +107,8 @@ class AgentCompany extends BaseAgentCompany
 
        $c = new Criteria();
        $c->add(TransactionPeer::AGENT_COMPANY_ID,$this->getId());
-       $c->add(TransactionPeer::DESCRIPTION,'Registration' );
+       $c->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
+       $c->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
        $transactions=TransactionPeer::doSelect($c);
        $sum=0.00;
        $per=0.00;
@@ -124,7 +127,8 @@ class AgentCompany extends BaseAgentCompany
 
        $c = new Criteria();
        $c->add(TransactionPeer::AGENT_COMPANY_ID,$this->getId());
-       $c->add(TransactionPeer::DESCRIPTION,'Refill' );
+       $c->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
+       $c->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
        $transactions=TransactionPeer::doSelect($c);
        //$agent
        //$str=array();
