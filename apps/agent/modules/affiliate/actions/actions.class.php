@@ -1333,6 +1333,7 @@ $vat=$transaction->getVat();
         $c = new Criteria();
         $c->add(AgentOrderPeer::AGENT_COMPANY_ID, $agent->getId());
         $c->add(AgentOrderPeer::STATUS, 3);
+          $c->addDescendingOrderByColumn(AgentOrderPeer::ID);
         $this->agentOrders = AgentOrderPeer::doSelect($c);
     }
 
