@@ -49,7 +49,7 @@
     <th width="30%"><?php echo __('Transaction Type') ?></th>
     <th width="20%" style="text-align:right;padding-right: 25px;"><?php echo __('Amount') ?> </th>
     <th width="20%" style="text-align:right;padding-right: 25px;"><?php echo __('Remaining Balance') ?></th>
-    <th width="30%"><?php echo __('Date') ?> </th>
+    <th width="30%" style="text-align:right;padding-right: 25px;"><?php echo __('Date') ?> </th>
       
   </tr>
  <?php
@@ -78,7 +78,7 @@
      ?></td>
   <td style="text-align:right;padding-right: 25px;"><?php  echo number_format($agent->getAmount(),2);?><?php echo sfConfig::get('app_currency_code')?></td>
     <td style="text-align:right;padding-right: 25px;"><?php  echo number_format($agent->getRemainingBalance(),2);?><?php echo sfConfig::get('app_currency_code')?></td>
-      <td><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
+      <td style="text-align:right;padding-right: 25px;"><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
       
   </tr>
   <?php  }
