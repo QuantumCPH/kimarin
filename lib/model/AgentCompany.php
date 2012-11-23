@@ -147,26 +147,21 @@ class AgentCompany extends BaseAgentCompany
     {
 
        $c = new Criteria();
-       $c->add(TransactionPeer::AGENT_COMPANY_ID,$this->getId());       
+       $c->add(TransactionPeer::AGENT_COMPANY_ID,$this->getId()); 
+        $c->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
+       $c->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
        $transactions=TransactionPeer::doSelect($c);
        $con=new Criteria();       
        $sum=0.00;
        $per=0.00;
        foreach($transactions as $transaction)
        {
-           $description=substr($transaction->getDescription(),0 ,26);
-           if($description== 'Refill')
-           {
-              // echo $description;
-               $name=substr($transaction->getDescription(),27,-1 );
-               // echo $name;
-               if($name==$this->getName())
-                {
+           
                    $sum = $sum+ $transaction->getAmount();
                    //$per=($sum*10)/100;
 
-                }
-           }
+                
+           
        }
 
       return number_format($sum,2);
