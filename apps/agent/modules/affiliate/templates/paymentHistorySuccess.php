@@ -46,10 +46,10 @@
   if($agents){
   ?> 
   <tr>
-    <th width="21%"><?php echo __('Transaction Type') ?></th>
-    <th width="14%" style="text-align:right;padding-right: 25px;"><?php echo __('Amount') ?> </th>
-    <th width="15%" style="text-align:right;padding-right: 25px;"><?php echo __('Remaining Balance') ?></th>
-    <th width="50%"><?php echo __('Date') ?> </th>
+    <th width="30%"><?php echo __('Transaction Type') ?></th>
+    <th width="20%" style="text-align:right;padding-right: 25px;"><?php echo __('Amount') ?> </th>
+    <th width="20%" style="text-align:right;padding-right: 25px;"><?php echo __('Remaining Balance') ?></th>
+    <th width="30%"><?php echo __('Date') ?> </th>
       
   </tr>
  <?php
