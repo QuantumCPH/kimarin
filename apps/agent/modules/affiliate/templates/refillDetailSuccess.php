@@ -23,7 +23,7 @@
         
         <li>
          <?php if($customer->getBusiness()){ ?>        <label>Company name</label>  <?php }else{  ?>    <label>Customer Name</label>   <?php  } ?>
-            <label><?php if($customer->getBusiness()){ echo  $customer->getFirstName(); }else{   echo  $customer->getFirstName(); echo   $customer->getLastName(); } ?></label><br />
+            <label><?php if($customer->getBusiness()){ echo  $customer->getFirstName(); }else{   echo  $customer->getFirstName()." ".$customer->getLastName(); } ?></label><br />
         </li>
         <li>
             <label>Customer Mobile Number</label>
