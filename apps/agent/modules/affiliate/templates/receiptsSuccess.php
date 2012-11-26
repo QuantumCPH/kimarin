@@ -52,7 +52,8 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -71,10 +72,17 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+		  if($customer->getBusiness()){
+                             echo $customer->getLastName();
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
             
 		</td>
+                  <td><?php  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } ?></td>
 		<td><?php echo $customer->getMobileNumber()?></td>
 		<td align="right" style="text-align:right;padding-right: 50px;">
 			<?php // echo BaseUtil::format_number($registration->getAmount()) 
@@ -102,7 +110,8 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -121,10 +130,17 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($refill->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+			  if($customer->getBusiness()){
+                              echo $customer->getLastName();
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
 
 		</td>
+                  <td><?php  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } ?></td>
 		<td><?php echo $customer->getMobileNumber()?></td>
 		<td style="text-align:right;padding-right: 25px;">
 			<?php echo number_format($refill->getAmount(),2);?><?php echo sfConfig::get('app_currency_code');?>
@@ -150,7 +166,8 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -169,10 +186,17 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($numberchange->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+		  if($customer->getBusiness()){
+                             echo $customer->getLastName(); 
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
 
-		</td>
+		</td> 
+                <td><?php  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } ?></td>
 		<td><?php echo $customer->getMobileNumber()?></td>
 		<td style="text-align:right;padding-right: 25px;">
 			<?php echo number_format($numberchange->getAmount(),2);?><?php echo sfConfig::get('app_currency_code');?>
@@ -199,7 +223,8 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -218,10 +243,17 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($newSimSale->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+			  if($customer->getBusiness()){
+                               echo $customer->getLastName();
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
 
 		</td>
+                 <td><?php  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } ?></td>
 		<td><?php echo $customer->getMobileNumber()?></td>
 		<td style="text-align:right;padding-right: 25px;">
 			<?php echo number_format($newSimSale->getAmount(),2);?><?php echo sfConfig::get('app_currency_code');?>
@@ -247,7 +279,8 @@ jQuery(function() {
 	<tr>
 		<th>&nbsp;</th>
 		<th><?php echo __('Date and time') ?></th>
-		<th><?php echo __('Customer name') ?></th>
+<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 		<th><?php echo __('Mobile Number') ?></th>
 		<th style="text-align:right;padding-right: 25px;"><?php echo __('Transaction Amount') ?></th>
 		<th><?php echo __('Description') ?></th>
@@ -266,9 +299,16 @@ jQuery(function() {
 			$customer = CustomerPeer::retrieveByPK($changeProduct->getCustomerId());
 			//$customer2 = CustomerPeer::retrieveByPK(72);
 			//echo $transaction->getCustomerId();
+                        if($customer->getBusiness()){
+                          echo $customer->getLastName();
+                        }else{
 			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 			?>
 		</td>
+                <td><?php  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } ?></td>
 		<td><?php echo $customer->getMobileNumber()?></td>
 		<td style="text-align:right;padding-right: 25px;">
 			<?php echo number_format($changeProduct->getAmount(),2);?><?php echo sfConfig::get('app_currency_code');?>

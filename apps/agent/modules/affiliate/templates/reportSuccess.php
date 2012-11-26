@@ -64,7 +64,8 @@
 
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        <th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -77,11 +78,23 @@
                         <td><?php echo $registration->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($registration->getCustomerId());
-				//$customer2 = CustomerPeer::retrieveByPK(72);
-				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				 
+				  if($customer->getBusiness()){
+                              echo $customer->getLastName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
+                        <td><?php
+				 
+				  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } 
+				?>
+			</td>
+                        
+                        
 			<td align="right" style="text-align:right;padding-right: 50px;">
 			<?php echo BaseUtil::format_number($registration->getAmount());?><?php echo sfConfig::get('app_currency_code');?>
 			</td>
@@ -113,7 +126,8 @@
 
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -126,11 +140,22 @@
                         <td><?php echo $sms_registration->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($sms_registration->getCustomerId());
-				//$customer2 = CustomerPeer::retrieveByPK(72);
-				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				 
+				  if($customer->getBusiness()){
+                              echo $customer->getLastName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
+                        <td><?php
+				 
+				  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } 
+				?>
+			</td>
+                        
 
 
                         
@@ -173,7 +198,8 @@
 			
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -186,11 +212,22 @@
                         <td><?php echo $refill->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($refill->getCustomerId());
-				//$customer2 = CustomerPeer::retrieveByPK(72);
-				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				 
+				  if($customer->getBusiness()){
+                              echo $customer->getLastName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
+                        <td><?php
+				 
+				  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } 
+				?>
+			</td>
+                        
 			
 		
 
@@ -228,7 +265,8 @@
 		<tr>
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -241,11 +279,22 @@
                         <td><?php echo $number_change->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($number_change->getCustomerId());
-				//$customer2 = CustomerPeer::retrieveByPK(72);
-				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				 
+				  if($customer->getBusiness()){
+                              echo $customer->getLastName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
+                        <td><?php
+				 
+				  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } 
+				?>
+			</td>
+                        
 
 
 
@@ -287,7 +336,8 @@
 		<tr>
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+		<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -300,11 +350,22 @@
                         <td><?php echo $sim_sale->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($sim_sale->getCustomerId());
-				//$customer2 = CustomerPeer::retrieveByPK(72);
-				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				 
+				  if($customer->getBusiness()){
+                              echo $customer->getLastName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
+                        <td><?php
+				 
+				  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } 
+				?>
+			</td>
+                        
 
 
 
@@ -346,7 +407,8 @@
 		<tr>
 			<th>&nbsp;</th>
 			<th><?php echo __('Date and time') ?> </th>
-			<th><?php echo __('Customer name') ?></th>
+			<th><?php echo __('Customer Name/Contact Person Name ') ?></th>
+                        	<th><?php echo __('Company Name') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Transaction Amount') ?></th>
 			<th align="right" style="text-align:right;padding-right: 50px;"><?php echo __('Commission Earned') ?></th>
 		</tr>
@@ -359,12 +421,22 @@
                         <td><?php echo $change_product->getCreatedAt('d-m-Y H:i:s');  ?></td>
 			<td><?php
 				$customer = CustomerPeer::retrieveByPK($change_product->getCustomerId());
-				//$customer2 = CustomerPeer::retrieveByPK(72);
-				//echo $customer2->getFirstName();
-				echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+				 
+				  if($customer->getBusiness()){
+                              echo $customer->getLastName();
+                        }else{
+			echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName());
+                        }
 				?>
 			</td>
-
+                        <td><?php
+				 
+				  if($customer->getBusiness()){
+                            echo  $customer->getFirstName();
+                        } 
+				?>
+			</td>
+                        
 
 
 			<td align="right" style="text-align:right;padding-right: 50px;">

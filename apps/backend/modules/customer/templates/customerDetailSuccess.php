@@ -49,8 +49,24 @@ $pus=0;
                     <td    class="leftHeadign"  >Id</td>
                      <td  ><?php  echo $customer->getId() ?></td>
                       </tr>
-                     
-                      <tr>
+                      <?php  if($customer->getBusiness()){    ?>
+                    
+                            <tr>
+                        <td id="sf_admin_list_th_first_name" class="leftHeadign" >Company Name</td>
+                        <td><?php echo  $customer->getFirstName() ?></td>
+                       </tr>
+                   
+                      <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Name of contact person</td>
+                       <td><?php echo  $customer->getLastName() ?></td>
+                          </tr>
+                            <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >E-mail of contact person</td>
+                    <td><?php echo  $customer->getEmail(); ?></td>
+                          </tr>
+                            <?php   }else{ ?>
+                          
+                            <tr>
                         <td id="sf_admin_list_th_first_name" class="leftHeadign" >First Name</td>
                         <td><?php echo  $customer->getFirstName() ?></td>
                        </tr>
@@ -62,11 +78,18 @@ $pus=0;
                     <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Last Name</td>
                        <td><?php echo  $customer->getLastName() ?></td>
                           </tr>
-                       
+                          
+                            <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Email</td>
+                    <td><?php echo  $customer->getEmail(); ?></td>
+                          </tr>
+                            <?php   } ?>
+                           
                       <tr>
 		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Mobile Number</td>
                       <td><?php echo  $customer->getMobileNumber() ?></td>
                          </tr>
+                         
                         <tr>
 		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >N.I.E./Passport Number</td>
                         <td><?php echo  $customer->getNiePassportNumber() ?></td>
@@ -128,10 +151,7 @@ if(isset($val) && $val!=""){  ?>
                       <td><?php echo  $customer->getPoBoxNumber() ?></td>
 
                       </tr>
-                         <tr>
-                      <td id="sf_admin_list_th_email"  class="leftHeadign" >Email</td>
-                         <td><?php echo  $customer->getEmail() ?></td>
-                      </tr>
+                       
                          <tr>
                       <td id="sf_admin_list_th_created_at"  class="leftHeadign" >Created At</td>
                             <td><?php echo  $customer->getCreatedAt('d-m-Y') ?></td>
@@ -151,6 +171,22 @@ if(isset($val) && $val!=""){  ?>
                   <td>No</td>
                   <?php } ?>
                         </tr>-->
+                      
+                      
+                        <tr>
+                     <td id="sf_admin_list_th_mobile_number" class="leftHeadign">Mobile service
+provider</td>
+                        <td>  <?php  $tcid   =  $customer->getTelecomOperatorId();
+        
+            $un = new Criteria();
+            $un->add(TelecomOperatorPeer::ID, $tcid);
+          
+             $vounumber = TelecomOperatorPeer::doSelectOne($un);
+            
+            echo $vounumber->getName();
+             
+          ?> </td>
+                         </tr>  
                          <tr>
                         <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Unique ID</td>
                          <td>  <?php  echo $customer->getUniqueid();     ?>   </td>
@@ -263,19 +299,7 @@ echo " ";   echo substr($Telintambs, 15,2);
                       </tr>
 
                       <?php } ?>
-               <!--   <tr style="background-color:#EEEEFF">
-                       <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Resenummer </td>
-                        <td>  <?php  $cuid   =  $customer->getId();
-        if(isset($cuid) && $cuid!=""){
-            $un = new Criteria();
-            $un->add(SeVoipNumberPeer::CUSTOMER_ID, $cuid);
-            $un->add(SeVoipNumberPeer::IS_ASSIGNED, 1);
-             $vounumber = SeVoipNumberPeer::doSelectOne($un);
-             if(isset($vounumber)&& $vounumber!="" ){
-            echo $vounumber->getNumber();
-             }
-         }else{  }  ?> </td>
-                         </tr> -->
+           
 
 
 

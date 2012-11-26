@@ -2346,6 +2346,38 @@
                 <source>Agent Name</source>
                 <target>Nombre del agente</target>
             </trans-unit> 
+                       <trans-unit id="586" translate="yes" reformat="yes" xml:space="default">
+                <source>Company name</source>
+                <target>Nombre de empresa</target>
+            </trans-unit>
+             <trans-unit id="587" translate="yes" reformat="yes" xml:space="default">
+                <source>Company address</source>
+                <target>Dirección de&lt;br /&gt;la empresa</target>
+            </trans-unit>
+             <trans-unit id="588" translate="yes" reformat="yes" xml:space="default">
+                <source>Name of&lt;br /&gt;contact person</source>
+                <target>Nombre y apellido de&lt;br /&gt; la persona de contacto</target>
+            </trans-unit>
+             <trans-unit id="589" translate="yes" reformat="yes" xml:space="default">
+                <source>E-mail of&lt;br /&gt;contact person</source>
+                <target>Correo electrónico de&lt;br /&gt; la persona de contacte</target>
+            </trans-unit>
+             <trans-unit id="590" translate="yes" reformat="yes" xml:space="default">
+                <source>Become a Business Customer</source>
+                <target>Hágase cliente de negocios</target>
+            </trans-unit>
+            <trans-unit id="591" translate="yes" reformat="yes" xml:space="default">
+                <source>Email Alert Sent</source>
+                <target>Hágase cliente de negocios</target>
+            </trans-unit>
+            <trans-unit id="592" translate="yes" reformat="yes" xml:space="default">
+                <source>Sms Alert Sent</source>
+                <target>Firmenanschrift</target>
+            </trans-unit>
+             <trans-unit id="593" translate="yes" reformat="yes" xml:space="default">
+                <source>Name of contact person</source>
+                <target>Nombre y apellido de la persona de contacto</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

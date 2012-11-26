@@ -249,7 +249,8 @@ if ($order_id and $amount) {
     $agent_order->setOrderDescription($transaction_desc_id);
     $agent_order->setStatus(3);
     $agent_order->save();
-
+    TransactionPeer::AssignAgentReceiptNumber($agent_order);
+    
     $agent = AgentCompanyPeer::retrieveByPK($agent_order->getAgentCompanyId());
     $agent->setBalance($agent->getBalance() + ($amount));
     $agent->save();

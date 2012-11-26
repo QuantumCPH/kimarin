@@ -364,6 +364,7 @@ class customerActions extends autocustomerActions {
                 $transaction->setTransactionStatusId(3);
                 $order->save();
                 $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
                 $this->customer = $order->getCustomer();
                 $this->setPreferredCulture($this->customer);
                 emailLib::sendAdminRefillEmail($this->customer, $order);
@@ -415,7 +416,18 @@ class customerActions extends autocustomerActions {
             //$cc->add(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);
             $customer = CustomerPeer::doSelectOne($cc);
             //echo $customer->getId();
-
+             $telintaObj = new Telienta();
+             $customerBalance = $telintaObj->getBalance($customer);
+            
+            $finalAmount=$customerBalance+$extra_refill;
+            
+            
+              if($finalAmount>249){
+                  $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your refill has not been accepted as customer account balance will exceed 250'));  
+                  $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');  
+                }
+            
+            
             if ($customer and $mobile_number != "") {
                 $validated = true;
                 if($amount<=0){
@@ -481,6 +493,7 @@ class customerActions extends autocustomerActions {
                     $transaction->setTransactionStatusId(3);
                     $order->save();
                     $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
                     $this->customer = $order->getCustomer();
                     $this->setPreferredCulture($this->customer);
                     emailLib::sendAdminRefillEmail($this->customer, $order);
