@@ -59,7 +59,7 @@
  $incrment++;
                   ?>
                 <tr <?php echo $class;?>>
-                  <td><?php  echo $incrment; ?></td>
+                  <td><?php  echo $incrment-1; ?></td>
                   <td><?php echo  $transaction->getCreatedAt('d-m-Y') ?></td>
                   <td><?php echo $transaction->getDescription(); 
                   if($TDI==6){
