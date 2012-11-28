@@ -39,7 +39,7 @@
         </li>
         <li><input type="submit" class="butonsigninsmall changeNum" name="Pay" value="<?php echo __("Pay");?>" /><br /></li>
     </ul>
-        <input type="hidden" name="amount" id="total" value="<?php echo $amount;?>" />
+        <input type="hidden" name="amount" id="total" value="<?php echo number_format($amount,2);?>" />
         
         <input type="hidden" name="cmd" value="_xclick" /> 
         <input type="hidden" name="no_note" value="1" />
