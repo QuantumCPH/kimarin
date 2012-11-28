@@ -193,7 +193,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 		<?php echo $form->renderHiddenFields() ?>
 		
 <!--		<input type="hidden" name="merchant" value="90049676" />-->
-		<input type="hidden" name="amount" id="total" value="<?php echo $total;?>" />
+		<input type="hidden" name="amount" id="total" value="<?php echo number_format($total,2);?>" />
 <!--		<input type="hidden" name="currency" value="978" />
 		<input type="hidden" name="orderid" value="<?php echo $order_id;?>" />-->
 		<!--<input type="hidden" name="account" value="YTIP" />
