@@ -19,7 +19,7 @@
 
 
                     <th>Date Of Birth</th>
-                    <th>Auto Refill</th></tr>
+                    
                   </thead>
                   <tfoot>
                      <tr><td colspan="15" style="text-align:center;font-weight: bold;">
@@ -49,12 +49,7 @@
                   <td><?php echo  $customer->getEmail() ?></td>
                   <td><?php echo  $customer->getCreatedAt() ?></td>
                   <td><?php echo  $customer->getDateOfBirth() ?></td>
-                  <?php if ($customer->getAutoRefillAmount()!=NULL && $customer->getAutoRefillAmount()>1){ ?>
-                  <td>Yes</td>
-                  <?php } else
-                      { ?>
-                  <td>No</td>
-                  <?php } ?>
+                  
                 </tr><?php   $incrment++;    ?>
                 <?php endforeach; ?>
 
