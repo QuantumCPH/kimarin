@@ -1,6 +1,6 @@
 <?php?>
 
-<div id="sf_admin_container"><h1><?php echo  __('Partial Registered Customer by Web') ?></h1></div>
+<div id="sf_admin_container"><h1><?php echo  __('Registration Page 2 Hits and not registered') ?></h1></div>
 <table width="75%" cellspacing="0" cellpadding="2" class="tblAlign">
     <thead>
         <tr class="headings">
