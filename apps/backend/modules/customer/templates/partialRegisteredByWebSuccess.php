@@ -1,6 +1,6 @@
 <?php?>
 
-<div id="sf_admin_container"><h1><?php echo  __('Partial Registered Customer by Web') ?></h1></div>
+<div id="sf_admin_container"><h1><?php echo  __('Registration Page 2 Hits and not registered') ?></h1></div>
 <table width="75%" cellspacing="0" cellpadding="2" class="tblAlign">
     <thead>
         <tr class="headings">
@@ -19,7 +19,7 @@
 
 
                     <th>Date Of Birth</th>
-                    <th>Auto Refill</th></tr>
+                    
                   </thead>
                   <tfoot>
                      <tr><td colspan="15" style="text-align:center;font-weight: bold;">
@@ -49,12 +49,7 @@
                   <td><?php echo  $customer->getEmail() ?></td>
                   <td><?php echo  $customer->getCreatedAt() ?></td>
                   <td><?php echo  $customer->getDateOfBirth() ?></td>
-                  <?php if ($customer->getAutoRefillAmount()!=NULL && $customer->getAutoRefillAmount()>1){ ?>
-                  <td>Yes</td>
-                  <?php } else
-                      { ?>
-                  <td>No</td>
-                  <?php } ?>
+                  
                 </tr><?php   $incrment++;    ?>
                 <?php endforeach; ?>
 

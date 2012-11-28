@@ -137,9 +137,9 @@
                      }?>
                     <?php 
                      if($actionName=="partialRegisteredByWeb"){
-                         echo link_to(__('Partial Registered By Web'), 'customer/partialRegisteredByWeb', array('class'=>'subSelect')); 
+                         echo link_to(__('Registration Page 2 Hits'), 'customer/partialRegisteredByWeb', array('class'=>'subSelect')); 
                      }else{
-                         echo link_to(__('Partial Registered By Web'), 'customer/partialRegisteredByWeb');
+                         echo link_to(__('Registration Page 2 Hits'), 'customer/partialRegisteredByWeb');
                      }?>
                        <?php
                     if($actionName=='selectChargeCustomer' && $modulName=="customer"){
