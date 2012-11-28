@@ -135,6 +135,12 @@
                      }else{
                          echo link_to(__('All Blocked Customer'), 'customer/allBlockedCustomer');
                      }?>
+                    <?php 
+                     if($actionName=="partialRegisteredByWeb"){
+                         echo link_to(__('Partial Registered By Web'), 'customer/partialRegisteredByWeb', array('class'=>'subSelect')); 
+                     }else{
+                         echo link_to(__('Partial Registered By Web'), 'customer/partialRegisteredByWeb');
+                     }?>
                        <?php
                     if($actionName=='selectChargeCustomer' && $modulName=="customer"){
                      //  echo link_to(__('Charge Customer'), 'customer/selectChargeCustomer', array('class'=>'subSelect'));
