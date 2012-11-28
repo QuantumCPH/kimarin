@@ -1941,7 +1941,7 @@ class customerActions extends sfActions {
         $email2->save();
 
         $querystring = '';
-        $_POST["amount"] = $item_amount;
+        $_POST["amount"] = number_format($item_amount,2);
         if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
 
             $order = CustomerOrderPeer::retrieveByPK($order_id);

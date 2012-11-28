@@ -254,7 +254,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 
 		
 		<input type="hidden" name="merchant" value="90049676" />
-		<input type="hidden" name="amount" id="total" value="<?php echo $total;?>" />
+		<input type="hidden" name="amount" id="total" value="<?php echo number_format($total,2);?>" />
 		<input type="hidden" name="currency" value="752" />
 		<input type="hidden" name="orderid" value="<?php echo $order_id;?>" />
 		
