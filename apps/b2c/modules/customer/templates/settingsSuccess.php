@@ -244,12 +244,22 @@
              <div class='inline-error'><?php echo $error_country_id?$form['country_id']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end country -->
+            <li id="custom_mobile_div">
+             <?php echo $form['usage_alert_sms']->renderLabel() ?>
+             <?php echo $form['usage_alert_sms'] ?>
+            </li>
+            <!-- end usage_alert_sms -->
+            <li id="custom_mobile_div">
+             <?php echo $form['usage_alert_email']->renderLabel() ?>
+             <?php echo $form['usage_alert_email']; ?>
+            </li>
+            <!-- end usage_alert_email -->
             <?php
             $error_date_of_birth = false;;
             if($form['date_of_birth']->hasError())
             	$error_date_of_birth = true;
             ?>
-            <li >
+            <li>
              <?php echo $form['date_of_birth']->renderLabel() ?>
              <?php echo $form['date_of_birth']->render(array('class'=>'strselect')) ?>
              <?php if ($error_date_of_birth): ?>

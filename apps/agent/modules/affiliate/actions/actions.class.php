@@ -858,6 +858,10 @@ $vat=$transaction->getVat();
         //   var_dump($customer);die;
         if ($form->isValid()) {
             //     $customer->setPlainText($request->getParameter($form->getPassword()));
+            unset(               
+                $this->form['usage_alert_sms'],
+                $this->form['usage_alert_email']
+             );
             $customer = $form->save();
             $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
             $customer->setRegistrationTypeId('2');
@@ -886,7 +890,9 @@ $vat=$transaction->getVat();
                 $this->form['expmonth'],
                 $this->form['expyear'],
                 $this->form['cvc'],
-                $this->form['cardtype']
+                $this->form['cardtype'],
+                $this->form['usage_alert_sms'],
+                $this->form['usage_alert_email']
         );
 
 
