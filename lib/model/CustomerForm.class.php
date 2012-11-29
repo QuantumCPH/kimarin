@@ -294,7 +294,8 @@ class CustomerForm extends BaseCustomerForm
             //-----------------For get the Nationality---------------------
             $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'Nationality',
-                    'order_by' => array('Title','asc')
+                    'order_by' => array('Title','asc'),
+                    'add_empty' => '-----------',
             ));
             //----------------------------------------------------------
 
@@ -380,7 +381,8 @@ class CustomerForm extends BaseCustomerForm
             //-----------------For get the Nationality---------------------
             $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'Nationality',
-                    'order_by' => array('Title','asc')
+                    'order_by' => array('Title','asc'),
+                        'add_empty' => '----------',
             ));
             //----------------------------------------------------------
         }
