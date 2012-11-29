@@ -1705,7 +1705,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $dibsCall->setCallurl($urlval);
         $dibsCall->save();
 
-
+        die;
         $number = $request->getParameter('from');
         $mobileNumber = substr($number, 2, strlen($number) - 2);
         if ($mobileNumber[0] != "0") {
