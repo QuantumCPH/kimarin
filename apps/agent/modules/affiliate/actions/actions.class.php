@@ -751,6 +751,8 @@ $vat=$transaction->getVat();
             unset($this->form['terms_conditions']);
             unset($this->form['imsi']);
             unset($this->form['uniqueid']);
+            unset($this->form['usage_alert_sms']);
+            unset($this->form['usage_alert_email']);
 //                        //unset($this->form['password']);
 //                        unset($this->form['terms_conditions']);
             // print_r($this->form);
@@ -786,6 +788,8 @@ $vat=$transaction->getVat();
             unset($this->form['terms_conditions']);
             unset($this->form['imsi']);
             unset($this->form['uniqueid']);
+            unset($this->form['usage_alert_sms']);
+            unset($this->form['usage_alert_email']);
 //                        //unset($this->form['password']);
 //                        unset($this->form['terms_conditions']);
             // print_r($this->form);
@@ -890,9 +894,7 @@ $vat=$transaction->getVat();
                 $this->form['expmonth'],
                 $this->form['expyear'],
                 $this->form['cvc'],
-                $this->form['cardtype'],
-                $this->form['usage_alert_sms'],
-                $this->form['usage_alert_email']
+                $this->form['cardtype']
         );
 
 
