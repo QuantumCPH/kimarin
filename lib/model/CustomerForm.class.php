@@ -416,13 +416,13 @@ $this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
     ));
 
 
-$this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
-        'model'		=> 'Nationality',
-        'column'	=> 'id',
-    ),array(
-        'required'	=> sfContext::getInstance()->getI18N()->__('Please choose a nationality'),
-        'invalid'	=> 'Invalid Nationality',
-    ));
+//$this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
+//        'model'		=> 'Nationality',
+//        'column'	=> 'id',
+//    ),array(
+//        'required'	=> sfContext::getInstance()->getI18N()->__('Please choose a nationality'),
+//        'invalid'	=> 'Invalid Nationality',
+//    ));
 
 
 
