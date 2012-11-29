@@ -294,7 +294,8 @@ class CustomerForm extends BaseCustomerForm
             //-----------------For get the Nationality---------------------
             $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'Nationality',
-                    'order_by' => array('Title','asc')
+                    'order_by' => array('Title','asc'),
+                    'add_empty' => '-----------',
             ));
             //----------------------------------------------------------
 
@@ -380,7 +381,8 @@ class CustomerForm extends BaseCustomerForm
             //-----------------For get the Nationality---------------------
             $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'Nationality',
-                    'order_by' => array('Title','asc')
+                    'order_by' => array('Title','asc'),
+                        'add_empty' => '----------',
             ));
             //----------------------------------------------------------
         }
@@ -414,13 +416,13 @@ $this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
     ));
 
 
-$this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
-        'model'		=> 'Nationality',
-        'column'	=> 'id',
-    ),array(
-        'required'	=> sfContext::getInstance()->getI18N()->__('Please choose a nationality'),
-        'invalid'	=> 'Invalid Nationality',
-    ));
+//$this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
+//        'model'		=> 'Nationality',
+//        'column'	=> 'id',
+//    ),array(
+//        'required'	=> sfContext::getInstance()->getI18N()->__('Please choose a nationality'),
+//        'invalid'	=> 'Invalid Nationality',
+//    ));
 
 
 
