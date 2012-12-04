@@ -61,7 +61,7 @@ class affiliateActions extends sfActions {
         $startdate = $request->getParameter('startdate');
         $enddate = $request->getParameter('enddate');
         if ($startdate != '') {
-            $startdate = date('d-m-Y 00:00:00', strtotime($startdate));
+            $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }else{
             $startdate = date('Y-m-d 00:00:00', strtotime($agent->getCreatedAt()));
@@ -69,12 +69,14 @@ class affiliateActions extends sfActions {
         }
 
         if ($enddate != '') {
-            $enddate = date('d-m-Y 23:59:59', strtotime($enddate));
+            $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
         }else{
            $enddate = date('Y-m-d 23:59:59');
            $this->enddate =$enddate;
         }
+
+ 
 
 
         foreach ($customers as $customer) {
@@ -83,6 +85,7 @@ class affiliateActions extends sfActions {
             $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
             $tc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
             if ($startdate != "" && $enddate != "") {
+               
                 $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                 $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
             }
@@ -105,6 +108,7 @@ class affiliateActions extends sfActions {
         $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,11, Criteria::EQUAL);
         //  $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,13, Criteria::NOT_EQUAL);
         if ($startdate != "" && $enddate != "") {
+            
             $ar->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $ar->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
         }
@@ -354,14 +358,14 @@ $vat=$transaction->getVat();
         $startdate = $request->getParameter('startdate');
         $enddate = $request->getParameter('enddate');
         if ($startdate != '') {
-            $startdate = date('d-m-Y 00:00:00', strtotime($startdate));
+            $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }else{
             $startdate = date('Y-m-d 00:00:00', strtotime($this->agent->getCreatedAt()));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }
         if ($enddate != '') {
-            $enddate = date('d-m-Y 23:59:59', strtotime($enddate));
+            $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
         }else{
             $enddate = date('Y-m-d 23:59:59');
@@ -1816,14 +1820,14 @@ $vat=$transaction->getVat();
         $startdate = $request->getParameter('startdate');
         $enddate = $request->getParameter('enddate');
         if ($startdate != '') {
-            $startdate = date('d-m-Y 00:00:00', strtotime($startdate));
+            $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }else{
             $startdate = date('Y-m-d 00:00:00', strtotime($this->agent->getCreatedAt()));
             $this->startdate = $startdate;
         }
         if ($enddate != '') {
-            $enddate = date('d-m-Y 23:59:59', strtotime($enddate));
+            $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
         }else{
             $enddate = date('Y-m-d 23:59:59');
