@@ -1406,9 +1406,9 @@ class customerActions extends sfActions {
         $c->addDescendingOrderByColumn(CbfPeer::CREATED_AT);
         $items_per_page = 25; //shouldn't be 0
         $this->page = $request->getParameter('page');
-        if ($this->page == '')
+        if ($this->page == ''){
             $this->page = 1;
-
+        } 
         $pager = new sfPropelPager('Cbf', $items_per_page);
         $pager->setPage($this->page);
 
@@ -1418,6 +1418,7 @@ class customerActions extends sfActions {
 
         $this->smsRecords = $pager->getResults();
         $this->total_pages = $pager->getNbResults() / $items_per_page;
+        
     }
 
     public function executeTellAFriend(sfWebRequest $request) {
