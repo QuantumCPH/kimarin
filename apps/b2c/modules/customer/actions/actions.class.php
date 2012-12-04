@@ -1342,7 +1342,7 @@ class customerActions extends sfActions {
         if ($message) {
             $this->msgSent = "No";
             $country_code = $request->getParameter('country');
-            $number = $request->getParameter('number');
+            $number = $request->getParameter('pnumber');
             $destination = $country_code . $number;
 
             $c = new Criteria();
