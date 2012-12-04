@@ -1046,14 +1046,13 @@ class customerActions extends sfActions {
         unset($this->form['device_id']);
         unset($this->form['ticketval']);
         unset($this->form['i_customer']);
-        unset($this->form['usage_alert_sms']);
-        unset($this->form['usage_alert_email']);
+//        unset($this->form['usage_alert_sms']);
+//        unset($this->form['usage_alert_email']);
         unset($this->form['sim_type_id']);
         unset($this->form['comments']);
         unset($this->form['block']);
           unset($this->form['business']);
-        unset($this->form['usage_alert_sms']);
-        unset($this->form['usage_alert_email']);
+      
 
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
@@ -1343,7 +1342,7 @@ class customerActions extends sfActions {
         if ($message) {
             $this->msgSent = "No";
             $country_code = $request->getParameter('country');
-            $number = $request->getParameter('number');
+            $number = $request->getParameter('pnumber');
             $destination = $country_code . $number;
 
             $c = new Criteria();

@@ -751,6 +751,8 @@ $vat=$transaction->getVat();
             unset($this->form['terms_conditions']);
             unset($this->form['imsi']);
             unset($this->form['uniqueid']);
+            unset($this->form['usage_alert_sms']);
+            unset($this->form['usage_alert_email']);
 //                        //unset($this->form['password']);
 //                        unset($this->form['terms_conditions']);
             // print_r($this->form);
@@ -786,6 +788,8 @@ $vat=$transaction->getVat();
             unset($this->form['terms_conditions']);
             unset($this->form['imsi']);
             unset($this->form['uniqueid']);
+            unset($this->form['usage_alert_sms']);
+            unset($this->form['usage_alert_email']);
 //                        //unset($this->form['password']);
 //                        unset($this->form['terms_conditions']);
             // print_r($this->form);
@@ -858,6 +862,10 @@ $vat=$transaction->getVat();
         //   var_dump($customer);die;
         if ($form->isValid()) {
             //     $customer->setPlainText($request->getParameter($form->getPassword()));
+            unset(               
+                $this->form['usage_alert_sms'],
+                $this->form['usage_alert_email']
+             );
             $customer = $form->save();
             $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
             $customer->setRegistrationTypeId('2');

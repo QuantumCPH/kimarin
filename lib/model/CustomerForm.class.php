@@ -37,24 +37,24 @@ class CustomerForm extends BaseCustomerForm
                $mobileno=$_REQUEST['customer']['mobile_number']; 
                $passportnum=$_REQUEST['customer']['nie_passport_number'];
             }
-            if($passportnum!="" && $passportnum!=0){
-                $cpn = new Criteria();
-                $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
-                $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-                $countnie = CustomerPeer::doCount($cpn);
-
-                 if(isset($countnie) &&  $countnie>=1){
-                    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
-                        array(
-                            'model' => 'customer',
-                            'column' => 'nie_passport_number'
-                        ),array(
-                            'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
-                        ))
-                        ))
-                    );
-                 }
-            }
+//            if($passportnum!="" && $passportnum!=0){
+//                $cpn = new Criteria();
+//                $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
+//                $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+//                $countnie = CustomerPeer::doCount($cpn);
+//
+//                 if(isset($countnie) &&  $countnie>=1){
+//                    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+//                        array(
+//                            'model' => 'customer',
+//                            'column' => 'nie_passport_number'
+//                        ),array(
+//                            'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
+//                        ))
+//                        ))
+//                    );
+//                 }
+//            }
                 
              
             $count=0;
@@ -184,7 +184,8 @@ class CustomerForm extends BaseCustomerForm
              }
           //$this->form->getValues('mobile_number');
    if(sfContext::getInstance()->getRouting()->getCurrentInternalUri()=='customer/settings'){
-
+ // $this->setWidget('usage_alert_sms', new sfWidgetFormInputCheckbox(array(), array('class'=>'chkbx')));
+  
    }else{ 
 		
                 
@@ -596,6 +597,7 @@ $this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
 
     //terms and conditions
 	$this->setWidget('terms_conditions', new sfWidgetFormInputCheckbox(array(), array('class'=>'chkbx')));
+      
 	$this->setValidator('terms_conditions', new sfValidatorString(array('required' => true), array('required' => sfContext::getInstance()->getI18n()->__('Please accept the terms and conditions'))));
     
 	//news letter subscriber
@@ -634,7 +636,10 @@ $this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
   	
   	$this->widgetSchema['referrer_id'] = new sfWidgetFormInputHidden();	
 	$this->widgetSchema['customer_status_id'] = new sfWidgetFormInputHidden();
-
+        $this->setWidget('usage_alert_sms', new sfWidgetFormInputCheckbox(array(), array('class'=>'chkbx')));
+        $this->setWidget('usage_alert_email', new sfWidgetFormInputCheckbox(array(), array('class'=>'chkbx')));
+        
+//$this->setWidget('usage_alert_sms', new sfWidgetFormInputCheckbox(array(), array('class'=>'chkbx')));
 	//set help
 	$this->widgetSchema->setHelp('terms_conditions', sfContext::getInstance()->getI18n()->__('Please check this box to confirm that you have<br />read and accept the %1% terms and conditions.',array('%1%'=>sfConfig::get("app_site_title"))));
 	$this->widgetSchema->setHelp('is_newsletter_subscriber', sfContext::getInstance()->getI18n()->__('Yes, subscribe me to newsletter'));
