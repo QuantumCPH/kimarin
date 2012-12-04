@@ -30,7 +30,10 @@
         // Now scan for illegal characters
         for(idx=0;idx<strlen;idx++){
             if(validChar.indexOf(entry.charAt(idx))<0){
-                jAlert("<?php echo __('Entry must be in numeric format!');?>","");return false;
+                jAlert("<?php echo __('Entry must be in numeric format!');?>","");
+                jQuery("#pnumber").val("");
+                
+                return false;
             }
         } // end scan
         return true;
@@ -61,7 +64,7 @@ if ($msgSent != '') {
 <?php
 
  if (number_format($balance, 2)>0) { ?>
-            <form action=<?php echo url_for('customer/websms', true) ?>  method="post" id="websms" onsubmit="isHex(this.value)">
+            <form action=<?php echo url_for('customer/websms', true) ?>  method="post" id="websms">
                 <h3 style="width: 400px;"><?php echo __("Your account balance is") ?>:<?php echo number_format($balance, 2); ?><?php echo sfConfig::get('app_currency_code') ?></h3>
 <?php } else { ?>
                 <h3 style="width: 400px;"><?php echo __("Your account balance is") ?> <?php echo number_format($balance, 2); ?> <?php echo sfConfig::get('app_currency_code') ?></h3>
@@ -107,7 +110,7 @@ if ($msgSent != '') {
                                     <label for="destination"><?php echo __("Destination number<br />(without leading 0)") ?></label>
                                 </td>
                                 <td align="left" style="width:115px;">
-                                    <input type="text" name="number" id="number" size="15" maxlength="13" onkeydown="isHex(this.value)">
+                                    <input type="text" name="pnumber" id="pnumber" size="15" maxlength="13" onblur="isHex(this.value)" />
 
                                 </td>
                                 <td align="left" style="padding-left:5px;">
@@ -142,9 +145,9 @@ if ($msgSent != '') {
                        
                 <br />
                 <input type="submit" class="buton" name="submit"  value="<?php echo __("Send SMS") ?>" onclick="
-                 if(document.getElementById('number').value==''){
+                 if(document.getElementById('pnumber').value==''){
                      jAlert('<?php echo __("Please enter the destination number.") ?>','');
-                     document.getElementById('number').focus();
+                     document.getElementById('pnumber').focus();
                      return false;
                  }else if(document.getElementById('message').value==''){
                      jAlert('<?php echo __("Please enter your message.") ?>','');

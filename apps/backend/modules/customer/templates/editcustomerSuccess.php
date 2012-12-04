@@ -167,7 +167,7 @@
                 </select>
             </td>
         </tr>
-<!--        <tr>
+        <tr>
             <td style="padding: 5px;">Usage Email Alerts</td>
             <td style="padding: 5px;">
                 <input type="checkbox" name="usage_email" <?php if($editCust->getUsageAlertEmail()) echo" checked=checked"?> />&nbsp;
@@ -180,7 +180,7 @@
                 <input type="checkbox" name="usage_sms" <?php if($editCust->getUsageAlertSMS()) echo" checked=checked"?> />&nbsp;
                 
             </td>
-        </tr>-->
+        </tr>
             <tr>
             <td>Comments:</td>
             <td><textarea name="comments"  id="customer_comments"><?php echo $editCust->getComments(); ?></textarea>
