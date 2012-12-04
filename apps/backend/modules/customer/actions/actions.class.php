@@ -280,8 +280,10 @@ class customerActions extends autocustomerActions {
         $nationality = NationalityPeer::doSelect($cn);
         $this->nationality_list = $nationality;
         if ($request->getParameter('customerID')) {
-            $dob = $request->getParameter('dy') . "-" . $request->getParameter('dm') . "-" . $request->getParameter('dd');
-            $dob = date('Y-m-d', strtotime($dob));
+            if($request->getParameter('dy')!="" && $request->getParameter('dm')!="" && $request->getParameter('dd')!=""){
+              $dob = $request->getParameter('dy') . "-" . $request->getParameter('dm') . "-" . $request->getParameter('dd');
+              $dob = date('Y-m-d', strtotime($dob));
+            }
             $usage_email = $request->getParameter('usage_email');
             ($usage_email == "") ? $usage_email = 0 : $usage_email = 1;
             $usage_sms = $request->getParameter('usage_sms');
