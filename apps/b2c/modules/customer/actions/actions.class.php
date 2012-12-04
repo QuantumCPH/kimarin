@@ -1405,7 +1405,7 @@ class customerActions extends sfActions {
         $c->add(CbfPeer::STATUS, 3);
         $c->addDescendingOrderByColumn(CbfPeer::CREATED_AT);
 
-        $items_per_page = 7; //shouldn't be 0
+        $items_per_page = 25; //shouldn't be 0
         $this->page = $request->getParameter('page');
         if ($this->page == ''){
             $this->page = 1;
