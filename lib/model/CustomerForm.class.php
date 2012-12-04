@@ -37,24 +37,24 @@ class CustomerForm extends BaseCustomerForm
                $mobileno=$_REQUEST['customer']['mobile_number']; 
                $passportnum=$_REQUEST['customer']['nie_passport_number'];
             }
-            if($passportnum!="" && $passportnum!=0){
-                $cpn = new Criteria();
-                $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
-                $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-                $countnie = CustomerPeer::doCount($cpn);
-
-                 if(isset($countnie) &&  $countnie>=1){
-                    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
-                        array(
-                            'model' => 'customer',
-                            'column' => 'nie_passport_number'
-                        ),array(
-                            'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
-                        ))
-                        ))
-                    );
-                 }
-            }
+//            if($passportnum!="" && $passportnum!=0){
+//                $cpn = new Criteria();
+//                $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
+//                $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+//                $countnie = CustomerPeer::doCount($cpn);
+//
+//                 if(isset($countnie) &&  $countnie>=1){
+//                    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+//                        array(
+//                            'model' => 'customer',
+//                            'column' => 'nie_passport_number'
+//                        ),array(
+//                            'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
+//                        ))
+//                        ))
+//                    );
+//                 }
+//            }
                 
              
             $count=0;
