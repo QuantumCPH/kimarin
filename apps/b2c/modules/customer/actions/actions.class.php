@@ -1404,7 +1404,7 @@ class customerActions extends sfActions {
         $c->add(CbfPeer::CUSTOMER_ID, $this->customer->getId());
         $c->add(CbfPeer::STATUS, 3);
         $c->addDescendingOrderByColumn(CbfPeer::CREATED_AT);
-        $items_per_page = 25; //shouldn't be 0
+        $items_per_page = 2; //shouldn't be 0
         $this->page = $request->getParameter('page');
         if ($this->page == ''){
             $this->page = 1;
@@ -1417,9 +1417,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->smsRecords = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
-        echo $this->total_pages;
-        if($this->total_pages % 2 >0) $this->total_pages= $this->total_pages+1;
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
         
     }
 
