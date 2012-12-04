@@ -2578,7 +2578,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 echo $customer->getId().":".$customer_balance.":".$retries."<br/>";
             } while (!$customer_balance && $retries <= $maxRetries);
 
-            if($retries==$maxRetries){
+            if($retries==++$maxRetries){
                 continue;
             }
 
