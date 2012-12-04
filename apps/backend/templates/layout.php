@@ -296,11 +296,11 @@
                     onmouseover="mcancelclosetime()"
                     onmouseout="mclosetime()">
                     <?php
-//                     if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
-//                        echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert', array('class'=>'subSelect'));
-//                     }else{
-//                        echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert');
-//                     }
+                      if($actionName=='selectIntervalAlert' && $modulName=="invoice"){
+                        echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert', array('class'=>'subSelect'));
+                      }else{
+                       echo link_to(__('Low Credit Alert Report'), 'invoice/selectIntervalAlert');
+                      }
                      ?>
   <?php
                      if($actionName=='registrationType' && $modulName=="invoice"){
