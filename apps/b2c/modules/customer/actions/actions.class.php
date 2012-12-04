@@ -812,7 +812,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->transactions = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
     }
 
     public function executeRefillpaymenthistory(sfWebRequest $request) {
@@ -1311,7 +1311,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->callRecords = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
     }
 
     public function executeWebsms(sfWebRequest $request) {
