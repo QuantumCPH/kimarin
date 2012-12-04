@@ -186,7 +186,7 @@ class customerActions extends sfActions {
             $this->getUser()->setCulture($request->getParameter('lang'));
             $this->sLang = $request->getParameter('lang');
         } else {
-            $this->sLang = 'en';
+            $this->sLang = $this->getUser()->getCulture();
         }
 
 
@@ -2453,7 +2453,7 @@ class customerActions extends sfActions {
             $this->getUser()->setCulture($request->getParameter('lang'));
             $this->sLang = $request->getParameter('lang');
         } else {
-            $this->sLang = 'en';
+            $this->sLang = $this->getUser()->getCulture();
         }
 
 
