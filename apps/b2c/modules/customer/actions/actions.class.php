@@ -1418,6 +1418,8 @@ class customerActions extends sfActions {
 
         $this->smsRecords = $pager->getResults();
         $this->total_pages = $pager->getNbResults() / $items_per_page;
+        echo $this->total_pages;
+        if($this->total_pages % 2 >0) $this->total_pages= $this->total_pages+1;
         
     }
 
