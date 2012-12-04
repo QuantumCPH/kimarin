@@ -135,7 +135,7 @@
                           $dy = date('Y',strtotime($dt));
                          } 
                 ?>
-                <select name="dd" class="required">
+                <select name="dd">
                     <option value="">Day</option>
                     <?php
                     for($d = 1;$d<=31; $d++){
@@ -145,7 +145,7 @@
                     }
                     ?>
                 </select>&nbsp;
-                <select name="dm" class="required">
+                <select name="dm">
                     <option value="">Month</option>
                     <?php
                     for($m = 1;$m<=12; $m++){
@@ -155,7 +155,7 @@
                     }
                     ?>
                 </select>&nbsp;
-                <select name="dy" class="required">
+                <select name="dy">
                     <option value="">Year</option>
                     <?php
                     for($y =1901;$y<=1998; $y++){
