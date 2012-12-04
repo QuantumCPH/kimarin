@@ -2641,10 +2641,10 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             echo "SMS Active<br/>";
                             $customerMobileNumber = $CallCode . $customer->getMobileNumber();
                             //die($customerMobileNumber);
-                            $customerMobileNumber = "923334414765";
-                            //$sms_text = $usageAlert->getSmsAlertMessage();
+                        //    $customerMobileNumber = "923334414765";
+                             $sms_text = $usageAlert->getSmsAlertMessage();
                             $this->setPreferredCulture($customer);
-                              $sms_text = $this->getContext()->getI18N()->__("Sms Alert Sent");
+                              //$sms_text = $this->getContext()->getI18N()->__("Sms Alert Sent");
                               $response = ROUTED_SMS::Send($customerMobileNumber, $sms_text, $senderName);
                             $this->updatePreferredCulture();
                             if ($response) {

@@ -30,10 +30,12 @@
         // Now scan for illegal characters
         for(idx=0;idx<strlen;idx++){
             if(validChar.indexOf(entry.charAt(idx))<0){
+
                 jAlert("<?php echo __('Entry must be in numeric format!');?>","");
                 jQuery("#pnumber").val("");
                 
                 return false;
+
             }
         } // end scan
         return true;
