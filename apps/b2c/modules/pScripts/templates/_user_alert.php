@@ -58,7 +58,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo $message; ?>
 	</p>
-
+        <br /><br />
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo 'Best regards,' ?>
 	</p>
