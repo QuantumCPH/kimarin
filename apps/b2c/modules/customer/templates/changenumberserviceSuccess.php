@@ -8,11 +8,13 @@ jQuery(function(){
             existingNumber:{
                 required: true,
                 minlength: 8,
+                maxlength:14,
                 digits: true
             },
            newNumber:{
                 required: true,
                 minlength: 8,
+                maxlength:14,
                 digits: true
             }
         },
@@ -20,11 +22,13 @@ jQuery(function(){
             existingNumber:{
                 required: "<?php echo __('You must fill in this field')?>",
                 minlength: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>",
+                maxlength: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>",
                 digits: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>"
             },
             newNumber:{
                 required: "<?php echo __('You must fill in this field')?>",
                 minlength: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>",
+                maxlength: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>",
                 digits: "<?php echo __('Please enter a valid 8 to 14 digit mobile number.')?>"
             }
         }
