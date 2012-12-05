@@ -9,7 +9,6 @@ use_helper('Number');
 	
 	table.receipt {
 		width: 600px;
-		border: 2px solid #ccc;
 	}
 	
 	table.receipt td, table.receipt th {
@@ -52,14 +51,14 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</tr>
 </table>
 
-<table class="receipt" cellspacing="0" width="600px" style='font-family:"Times New Roman", Times, serif;'>
+<table class="" cellspacing="0" width="600px" style=' border:0px solid #fff;font-family:"Times New Roman", Times, serif;'>
   <tr>
-    <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+    <td colspan="4" class="" style='border:0px solid #fff;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
       <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo 'Dear customer' ?>,</p>
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-	<?php echo $message_body; ?>
+	<?php echo $message; ?>
 	</p>
-
+        <br /><br />
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo 'Best regards,' ?>
 	</p>
