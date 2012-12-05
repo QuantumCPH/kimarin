@@ -2562,9 +2562,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $usagealerts->addAnd(UsageAlertPeer::COUNTRY, $countryId);
         $usageAlerts = UsageAlertPeer::doSelect($usagealerts);
         $c = new Criteria();
-        $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
-        $c->addJoin(CustomerProductPeer::PRODUCT_ID,ProductPeer::ID, Criteria::LEFT_JOIN);
-        $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $c->addAnd(CustomerPeer::COUNTRY_ID, $countryId);
         $customers = CustomerPeer::doSelect($c);
         $telintaObj = new Telienta();
@@ -2650,8 +2648,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             if ($response) {
                                 $msgSent->setAlertSent(1);
                             }
+                             
                         }
-                        $msgSent->save();
+                       $msgSent->save();
 
                     }
 
