@@ -52,7 +52,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</tr>
 </table>
 
-<table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;font-family:"Times New Roman", Times, serif;'>
+<table class="receipt" cellspacing="0" width="600px" style='font-family:"Times New Roman", Times, serif;'>
   <tr>
     <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
       <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo 'Dear customer' ?>,</p>
