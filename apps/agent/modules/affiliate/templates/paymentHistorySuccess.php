@@ -63,9 +63,9 @@
   <tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
   <td><?php  $expensetype=$agent->getExpeneseType(); 
     if($expensetype==1){  echo __("Customer Registration");  }
-    if($expensetype==2){  echo __("Customer Refill");  }
+    if($expensetype==2){  echo __("Customer Refill  from Shop");  }
     if($expensetype==3){  echo __("Agent Account Refill");  }
-    if($expensetype==4){  echo __("Customer Refill from Shop");  }
+    if($expensetype==4){  echo __("Customer Refill");  }
      if($expensetype==7){  echo __("Change product");  }
       if($expensetype==8){  echo __("New sim sale");  }
     if($expensetype==6){  echo __("Change Number");  }
