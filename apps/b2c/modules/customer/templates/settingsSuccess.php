@@ -246,12 +246,12 @@
             <!-- end country -->
             <li id="custom_mobile_div">
              <?php echo $form['usage_alert_sms']->renderLabel() ?>
-             <?php echo $form['usage_alert_sms'] ?>
+             <?php echo $form['usage_alert_sms']->render(array('class'=>'chkbx')) ?>
             </li>
             <!-- end usage_alert_sms -->
             <li id="custom_mobile_div">
              <?php echo $form['usage_alert_email']->renderLabel() ?>
-             <?php echo $form['usage_alert_email']; ?>
+             <?php echo $form['usage_alert_email']->render(array('class'=>'chkbx')); ?>
             </li>
             <!-- end usage_alert_email -->
             <?php
