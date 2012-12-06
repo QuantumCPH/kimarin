@@ -2406,6 +2406,14 @@
                 <source>Name of contact person</source>
                 <target>Name der Kontaktperson</target>
             </trans-unit>
+            <trans-unit id="594" translate="yes" reformat="yes" xml:space="default">
+                <source>Balance SMS</source>
+                <target>Saldo SMS</target>
+            </trans-unit>
+            <trans-unit id="595" translate="yes" reformat="yes" xml:space="default">
+                <source>Balance e-mail</source>
+                <target>Saldo e-mail</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
