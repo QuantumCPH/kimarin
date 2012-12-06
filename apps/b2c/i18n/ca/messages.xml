@@ -2382,7 +2382,7 @@
             </trans-unit>
             <trans-unit id="591" translate="yes" reformat="yes" xml:space="default">
                 <source>Balance E-mail</source>
-                <target>El seu saldo e-mail</target>
+                <target>El seu saldo E-mail</target>
             </trans-unit>
         </body>
     </file>
