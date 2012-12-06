@@ -40,6 +40,7 @@
     
     <tr class="headings">
       <th  width="15%"  class="title"><?php echo __('Sr #') ?></th>
+      <th  width="15%"  class="title"><?php echo __('Receipt #') ?></th>
       <th  width="20%" class="title"><?php echo __('Date') ?></th>
       <th  width="55%" class="title"><?php echo __('Description') ?></th>
       <th width="10%" class="title"  align="right" style="text-align: right;"><?php echo __('Amount') ?></th>
@@ -60,6 +61,7 @@
                   ?>
                 <tr <?php echo $class;?>>
                   <td><?php  echo $incrment-1; ?></td>
+                  <td><?php echo  $transaction->getReceiptNo();?></td>
                   <td><?php echo  $transaction->getCreatedAt('d-m-Y') ?></td>
                   <td><?php echo $transaction->getDescription(); 
                   if($TDI==6){
