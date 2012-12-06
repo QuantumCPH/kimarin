@@ -2153,7 +2153,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $transaction = TransactionPeer::doSelectOne($tc);
 
         //This Section For Get The Agent Information
-        $agent_company_id = $customer->getReferrerId();
+       // old idea remove by khan muhammad on 06-12-2012
+       // $agent_company_id = $customer->getReferrerId();
+         $agent_company_id =$transaction->getAgentCompanyId();
         if ($agent_company_id != '') {
             $c = new Criteria();
             $c->add(AgentCompanyPeer::ID, $agent_company_id);
