@@ -2558,8 +2558,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
 
         $usagealerts = new Criteria();
-        $usagealerts->add(UsageAlertPeer::SMS_ACTIVE, 1);
-        $usagealerts->addAnd(UsageAlertPeer::COUNTRY, $countryId);
+         $usagealerts->add(UsageAlertPeer::COUNTRY, $countryId);
         $usageAlerts = UsageAlertPeer::doSelect($usagealerts);
         $c = new Criteria();
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);

@@ -153,8 +153,8 @@ class Telienta {
 
     public function recharge(Customer $customer, $amount, $description) {
         $c = new Criteria;
-        $c->add(EmailAlertSentPeer::USAGE_ALERT_STATUS_ID, null, Criteria::ISNOTNULL);
-        $c->addAnd(EmailAlertSentPeer::CUSTOMER_ID, $customer->getId());
+      
+        $c->add(EmailAlertSentPeer::CUSTOMER_ID, $customer->getId());
         $emailAlertCount = EmailAlertSentPeer::doCount($c);
         if ($emailAlertCount > 0) {
             $emailAlerts = EmailAlertSentPeer::doSelect($c);
@@ -165,8 +165,7 @@ class Telienta {
         }
 
         $c = new Criteria;
-        $c->add(SmsAlertSentPeer::USAGE_ALERT_STATUS_ID, null, Criteria::ISNOTNULL);
-        $c->addAnd(SmsAlertSentPeer::CUSTOMER_ID, $customer->getId());
+        $c->add(SmsAlertSentPeer::CUSTOMER_ID, $customer->getId());
         $smsAlertCount = SmsAlertSentPeer::doCount($c);
         if ($smsAlertCount > 0) {
             $smsAlerts = SmsAlertSentPeer::doSelect($c);
