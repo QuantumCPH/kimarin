@@ -62,9 +62,6 @@ class CustomerForm extends BaseCustomerForm
 					//'add_empty' => 'Choose a product',
 	        ));
 	        
-//        $this->widgetSchema('usage_alert_sms', new sfWidgetFormInputCheckbox(array(), array('class'=>'chkbx')));
-//        $this->widgetSchema('usage_alert_email', new sfWidgetFormInputCheckbox(array(), array('class'=>'chkbx')));
-//        
 	$this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
     								'model'		=> 'Product',
     								'column'	=> 'id',

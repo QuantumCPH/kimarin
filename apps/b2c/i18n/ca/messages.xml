@@ -2376,6 +2376,14 @@
                 <source>Name of contact person</source>
                 <target>Nom i cognom de la persona de contacte</target>
             </trans-unit>
+            <trans-unit id="590" translate="yes" reformat="yes" xml:space="default">
+                <source>Balance SMS</source>
+                <target>El seu saldo SMS</target>
+            </trans-unit>
+            <trans-unit id="591" translate="yes" reformat="yes" xml:space="default">
+                <source>Balance e-mail</source>
+                <target>El seu saldo e-mail</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
