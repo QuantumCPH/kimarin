@@ -2878,12 +2878,22 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             //send email
 
               $unidid = $this->customer->getUniqueid();
-           
+                $agent_company_id = $transaction->getAgentCompanyId();
+        if ($agent_company_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $agent_company_id);
+          
+            $agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $agent_name = '';
+            
+        }
               $message_body = $this->getPartial('payments/order_receipt', array(
                         'customer' => $this->customer,
                         'order' => $order,
                         'transaction' => $transaction,
                         'vat' => $vat,
+                        'agent_name' => $agent_name,
                         'wrap' => false
                     ));
 
