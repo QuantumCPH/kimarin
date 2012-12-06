@@ -667,7 +667,9 @@ $this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
                         'nationality_id'=>'Nationality',
                         'mobile_number'=>'Mobile number<br />0034',
                         'city'=>'Town/city',
-                        'email'=>'E-mail'
+                        'email'=>'E-mail',
+                        'usage_alert_sms'=>'Balance SMS',
+                        'usage_alert_email'=>'Balance e-mail'
 		)
 	);
 	
