@@ -1325,7 +1325,7 @@ class customerActions extends sfActions {
 
 
         $cunt = new Criteria();
-        //$cunt->add(CountryPeer::WEB_SMS_STATUS,3);
+        $cunt->add(CountryPeer::ID, 185, Criteria::LESS_EQUAL);
         $cunt->addAscendingOrderByColumn(CountryPeer::NAME);
         $countries = CountryPeer::doSelect($cunt);
         $this->msgSent = "";
