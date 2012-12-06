@@ -1071,10 +1071,10 @@ class customerActions extends sfActions {
         if ($request->isMethod('post')) {
             $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
             //  echo 'before validation';
- $customer = $this->form->save();
+// $customer = $this->form->save();
             if ($this->form->isValid()) {
                 //	echo 'validated';
-              //  $customer = $this->form->save();
+                $customer = $this->form->save();
 
                 $this->getUser()->setFlash('settings', $this->getContext()->getI18N()->__('Your settings changes have been saved.'));
             }
