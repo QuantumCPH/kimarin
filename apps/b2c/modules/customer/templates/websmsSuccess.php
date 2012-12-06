@@ -116,7 +116,7 @@ if ($msgSent != '') {
 
                                 </td>
                                 <td align="left" style="padding-left:5px;">
-<?php echo __("Characters") ?> <span id="chars">0/432</span>
+<?php echo __("Characters") ?> <span id="chars">0/434</span>
 
                                 </td>
 
