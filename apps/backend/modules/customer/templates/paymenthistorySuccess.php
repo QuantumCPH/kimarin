@@ -78,7 +78,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong>Total</strong></td>
-                        <td  align="right"><?php echo number_format($amount_total,2); ?>
+                        <td  align="right" colspan="2"><?php echo number_format($amount_total,2); ?>
                             <?php 
                                 echo (sfConfig::get('app_currency_code'));
                        ?></td>
