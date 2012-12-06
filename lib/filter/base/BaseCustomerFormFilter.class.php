@@ -34,7 +34,7 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'fonet_customer_id'        => new sfWidgetFormPropelChoice(array('model' => 'FonetCustomer', 'add_empty' => true)),
       'referrer_id'              => new sfWidgetFormPropelChoice(array('model' => 'AgentCompany', 'add_empty' => true)),
       'telecom_operator_id'      => new sfWidgetFormPropelChoice(array('model' => 'TelecomOperator', 'add_empty' => true)),
-      'date_of_birth'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'date_of_birth'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'other'                    => new sfWidgetFormFilterInput(),
       'subscription_type'        => new sfWidgetFormFilterInput(),
       'auto_refill_amount'       => new sfWidgetFormFilterInput(),
