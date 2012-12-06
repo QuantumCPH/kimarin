@@ -104,7 +104,7 @@ class BaseCustomerForm extends BaseFormPropel
       'province_id'              => new sfValidatorPropelChoice(array('model' => 'Province', 'column' => 'id', 'required' => false)),
       'comments'                 => new sfValidatorString(array('required' => false)),
       'block'                    => new sfValidatorInteger(array('required' => false)),
-      'business'                 => new sfValidatorInteger(array('required' => false)),
+      'business'                 => new sfValidatorInteger(),
     ));
 
     $this->widgetSchema->setNameFormat('customer[%s]');

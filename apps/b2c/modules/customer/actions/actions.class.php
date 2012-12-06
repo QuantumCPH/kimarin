@@ -1046,9 +1046,7 @@ class customerActions extends sfActions {
         unset($this->form['device_id']);
         unset($this->form['ticketval']);
         unset($this->form['i_customer']);
-//        unset($this->form['usage_alert_sms']);
-//        unset($this->form['usage_alert_email']);
-        unset($this->form['sim_type_id']);
+          unset($this->form['sim_type_id']);
         unset($this->form['comments']);
         unset($this->form['block']);
           unset($this->form['business']);
@@ -1073,7 +1071,7 @@ class customerActions extends sfActions {
         if ($request->isMethod('post')) {
             $this->form->bind($request->getParameter($this->form->getName()), $request->getFiles($this->form->getName()));
             //  echo 'before validation';
-//$customer = $this->form->save();
+// $customer = $this->form->save();
             if ($this->form->isValid()) {
                 //	echo 'validated';
                 $customer = $this->form->save();

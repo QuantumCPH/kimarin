@@ -19,7 +19,6 @@ class BaseAgentOrderForm extends BaseFormPropel
       'status'            => new sfWidgetFormInput(),
       'created_at'        => new sfWidgetFormDateTime(),
       'order_description' => new sfWidgetFormInput(),
-      'receipt_no'        => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -30,7 +29,6 @@ class BaseAgentOrderForm extends BaseFormPropel
       'status'            => new sfValidatorInteger(array('required' => false)),
       'created_at'        => new sfValidatorDateTime(),
       'order_description' => new sfValidatorInteger(array('required' => false)),
-      'receipt_no'        => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('agent_order[%s]');
