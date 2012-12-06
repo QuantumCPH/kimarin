@@ -2411,7 +2411,7 @@
                 <target>Saldo SMS</target>
             </trans-unit>
             <trans-unit id="595" translate="yes" reformat="yes" xml:space="default">
-                <source>Balance e-mail</source>
+                <source>Balance E-mail</source>
                 <target>Saldo e-mail</target>
             </trans-unit>
         </body>

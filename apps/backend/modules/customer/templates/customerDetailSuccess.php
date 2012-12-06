@@ -99,11 +99,11 @@ $pus=0;
                          <td><?php echo  $customer->getPlainText() ?></td>
                        </tr>
                        <tr>
-                        <td id="sf_admin_list_th_first_name" class="leftHeadign" >Email Alert</td>
+                        <td id="sf_admin_list_th_first_name" class="leftHeadign" >Balance E-mail</td>
                         <td><?php echo  ($customer->getUsageAlertEmail())?"Yes":"No"; ?></td>
                        </tr>
                        <tr >
-                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >SMS Alert</td>
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Balance SMS</td>
                     <td><?php echo  ($customer->getUsageAlertSms())?"Yes":"No"; ?></td>
                           </tr> 
                         <tr>
