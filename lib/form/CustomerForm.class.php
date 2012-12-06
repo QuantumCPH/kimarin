@@ -251,7 +251,7 @@ class CustomerForm extends BaseCustomerForm
                         'city'=>'Town/city',
                         'email'=>'E-mail',
                         'usage_alert_sms'=>'Balance SMS',
-                        'usage_alert_email'=>'Balance e-mail'
+                        'usage_alert_email'=>'Balance E-mail'
 		)
 	);
 	
