@@ -93,7 +93,7 @@
          <tr>
             <td style="padding: 5px;">Nationality</td>
             <td style="padding: 5px;">
-                <select name="nationalityid" class="required">
+                <select name="nationalityid" class="">
                     <option value="">--Select--</option>
                 <?php
                   foreach($nationality_list as $nationality){
