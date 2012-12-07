@@ -280,6 +280,7 @@ class customerActions extends autocustomerActions {
         $nationality = NationalityPeer::doSelect($cn);
         $this->nationality_list = $nationality;
         if ($request->getParameter('customerID')) {
+            $dob="";
             if($request->getParameter('dy')!="" && $request->getParameter('dm')!="" && $request->getParameter('dd')!=""){
               $dob = $request->getParameter('dy') . "-" . $request->getParameter('dm') . "-" . $request->getParameter('dd');
               $dob = date('Y-m-d', strtotime($dob));
@@ -296,12 +297,16 @@ class customerActions extends autocustomerActions {
             $customer->setCity($request->getParameter('city'));
             $customer->setPoBoxNumber($request->getParameter('pob'));
             $customer->setEmail($request->getParameter('email'));
+           if ($dob!="") { 
             $customer->setDateOfBirth($dob);
+           } 
             $customer->setUsageAlertEmail($usage_email);
             $customer->setUsageAlertSMS($usage_sms);
             $customer->setProvinceId($request->getParameter("provinceid"));
             $customer->setPreferredLanguageId($request->getParameter("pLanguageId"));
+           if ($request->getParameter('nationalityid')) { 
             $customer->setNationalityId($request->getParameter("nationalityid"));
+           } 
             $customer->setComments($request->getParameter('comments'));
             $customer->save();
 
