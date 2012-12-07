@@ -168,7 +168,7 @@ if(isset($val) && $val!=""){  ?>
                          <tr>
 
                     <td id="sf_admin_list_th_date_of_birth" class="leftHeadign" >Date Of Birth</td>
-                      <td><?php echo  $customer->getDateOfBirth() ?></td>
+                      <td><?php echo  $customer->getDateOfBirth('d-m-Y') ?></td>
                       </tr>
 <!--                         <tr>
                       <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Auto Refill</td>

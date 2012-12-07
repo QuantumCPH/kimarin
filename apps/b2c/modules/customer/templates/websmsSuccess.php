@@ -116,7 +116,7 @@ if ($msgSent != '') {
 
                                 </td>
                                 <td align="left" style="padding-left:5px;">
-<?php echo __("Characters") ?> <span id="chars">0/432</span>
+<?php echo __("Characters") ?> <span id="chars">0/434</span>
 
                                 </td>
 
@@ -130,7 +130,7 @@ if ($msgSent != '') {
                                     <label for="message"><?php echo __("Message:") ?></label>
                                 </td>
                                 <td colspan="2">
-                                    <TEXTAREA id="message" size="434" name="message" rows="10" cols="30" maxlength="434" onkeydown="countChar(this.value)"></TEXTAREA>
+                                    <TEXTAREA id="message" size="434" name="message" rows="10" cols="30" maxlength="434" onkeyup="countChar(this.value)"></TEXTAREA>
                                 </td>
                             </tr>
                             <tr bgcolor="#ffffff">
