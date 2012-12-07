@@ -404,6 +404,7 @@
 		margin-right:7px;
 		text-align:right;
 		white-space:normal;
+                font-size: 13px;
 	}
 </style>
 <script type="text/javascript">
