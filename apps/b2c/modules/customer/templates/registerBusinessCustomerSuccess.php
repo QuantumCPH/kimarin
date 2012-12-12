@@ -40,7 +40,7 @@ include_stylesheets_for_form($form) ?>
             $error_nie_passport_number = true;
             ?>
             <li>
-             <?php echo $form['nie_passport_number']->renderLabel() ?>
+             <?php echo $form['nie_passport_number']->renderLabel("CIF number") ?>
              <?php echo $form['nie_passport_number'];
               $emailWidget = new sfWidgetFormInput(array(), array());?>
              <?php if ($error_nie_passport_number): ?>
@@ -55,11 +55,11 @@ include_stylesheets_for_form($form) ?>
             </li>
             <!-- end passport number --> 
             <?php
-            $error_nationality_id = false;
-            if($form['nationality_id']->hasError())
-            	$error_nationality_id = true;
+//            $error_nationality_id = false;
+//            if($form['nationality_id']->hasError())
+//            	$error_nationality_id = true;
             ?>
-            <li>
+<!--            <li>
              <?php echo $form['nationality_id']->renderLabel() ?>
              <?php echo $form['nationality_id'] ?>
              <?php if ($error_nationality_id): ?>
@@ -68,7 +68,7 @@ include_stylesheets_for_form($form) ?>
 			 </span>
 			 <?php endif; ?>
              <div class='inline-error-signup'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
-            </li>
+            </li>-->
             <!-- end nationality -->
             <?php
             $error_product = false;;
@@ -242,11 +242,11 @@ include_stylesheets_for_form($form) ?>
             </li>
             <!-- end country -->
             <?php
-            $error_date_of_birth = false;;
-            if($form['date_of_birth']->hasError())
-            	$error_date_of_birth = true;
+//            $error_date_of_birth = false;;
+//            if($form['date_of_birth']->hasError())
+//            	$error_date_of_birth = true;
             ?>
-            <li>
+<!--            <li>
              <?php echo $form['date_of_birth']->renderLabel() ?>
              <?php echo $form['date_of_birth']->render(array('class'=>'shrinked_select_box')) ?>
              <?php if ($error_date_of_birth): ?>
@@ -255,7 +255,7 @@ include_stylesheets_for_form($form) ?>
 			 </span>
 			 <?php endif; ?>
              <div class='inline-error-signup'><?php echo $error_date_of_birth?$form['date_of_birth']->renderError():'&nbsp;'?></div>
-            </li>
+            </li>-->
             <!-- end date of birth -->
             <?php
             $error_password = false;;
