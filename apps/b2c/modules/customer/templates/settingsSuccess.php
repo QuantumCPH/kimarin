@@ -15,6 +15,9 @@
 	<div class="split-form">
 		<div class="fl col">
         <?php echo $form->renderHiddenFields() ?>
+        <?php 
+           $businessCustomer=$customer->getBusiness();
+        ?>
           <ul>
             <?php
             $error_mobile_number = false;
@@ -36,8 +39,8 @@
             if($form['nie_passport_number']->hasError())
             	$error_mobile_number = true;
             ?>
-            <li>
-             <?php echo $form['nie_passport_number']->renderLabel() ?>
+            <li><?php if($businessCustomer){ echo $form['nie_passport_number']->renderLabel('CIF number');  }else{  echo $form['nie_passport_number']->renderLabel();  }?>
+             <?php //echo $form['nie_passport_number']->renderLabel() ?>
              <?php echo $form['nie_passport_number'] ?>
              <?php if ($error_nie_passport_number): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -100,11 +103,7 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_po_box_number?$form['po_box_number']->renderError():'&nbsp;'?></div>
             </li>
-            <?php 
-           $businessCustomer=$customer->getBusiness();
             
-            
-            ?>
             <?php
             $error_first_name = false;;
             if($form['first_name']->hasError())
@@ -212,7 +211,8 @@
              <div class='inline-error'><?php echo $error_city?$form['city']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end city -->
-            <?php
+            <?php if(!$businessCustomer){?>
+                <?php
             $error_nationality_id = false;;
             if($form['nationality_id']->hasError())
             	$error_nationality_id = true;
@@ -227,6 +227,7 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
             </li>
+            <?php } ?>
             <!-- end nationality -->
             <?php
             $error_country_id = false;;
@@ -254,7 +255,8 @@
              <?php echo $form['usage_alert_email']->render(array('class'=>'chkbx')); ?>
             </li>
             <!-- end usage_alert_email -->
-            <?php
+            <?php if(!$businessCustomer){?>
+                <?php
             $error_date_of_birth = false;;
             if($form['date_of_birth']->hasError())
             	$error_date_of_birth = true;
@@ -269,6 +271,7 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_date_of_birth?$form['date_of_birth']->renderError():'&nbsp;'?></div>
             </li>
+            <?php } ?>
             <!-- end date of birth -->
 <?php /*
             <?php

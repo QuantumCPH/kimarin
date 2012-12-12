@@ -2384,6 +2384,10 @@
                 <source>Balance E-mail</source>
                 <target>El seu saldo E-mail</target>
             </trans-unit>
+            <trans-unit id="592" translate="yes" reformat="yes" xml:space="default">
+                <source>CIF number</source>
+                <target>Número CIF</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
