@@ -14,7 +14,9 @@ $pus=0;
 <h1><?php echo  __('Customer Detail') ?></h1>
     <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign">
 
-
+<?php 
+           $businessCustomer=$customer->getBusiness();
+        ?>
 
                           <tr>
                     <td width="17%" class="leftHeadign">Customer Balance</td>
@@ -91,7 +93,13 @@ $pus=0;
                          </tr>
                          
                         <tr>
-		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >N.I.E./Passport Number</td>
+		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >
+                             <?php if($businessCustomer){?>
+                              N.I.E./Passport Number
+                             <?php }else{ ?>
+                                CIF number 
+                             <?php }?> 
+                        </td>
                         <td><?php echo  $customer->getNiePassportNumber() ?></td>
                          </tr>                         
                          <tr>
