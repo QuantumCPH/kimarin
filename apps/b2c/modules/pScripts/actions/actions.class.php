@@ -3383,7 +3383,85 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     return sfView::NONE;
     }
 
+public function executeSaveResellerCallHistory(sfWebRequest $request)
+    {
 
+            
+              $fromdate = mktime(0, 0, 0, 9, 15, 12);
+    echo $this->fromdate = date("Y-m-d", $fromdate);
+    echo "<br/>";
+          $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+       echo $this->todate =date("Y-m-d", $todate);
+       
+       $telintaObj = new Telienta();
+       $tilentaCallHistryResult = $telintaObj->callHistory(82829, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59',true);
+  //  var_dump($tilentaCallHistryResult);
+
+
+         if($tilentaCallHistryResult){
+            foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
+
+
+                $emCalls = new EmployeeCustomerCallhistory();
+                $emCalls->setAccountId($xdr->account_id);
+                $emCalls->setBillStatus($xdr->bill_status);
+                $emCalls->setBillTime($xdr->bill_time);
+                $emCalls->setChargedAmount($xdr->charged_amount);
+                $emCalls->setChargedQuantity($xdr->charged_quantity);
+                $emCalls->setPhoneNumber($xdr->CLD);
+                $emCalls->setCli($xdr->CLI);
+                $emCalls->setConnectTime($xdr->connect_time);
+
+                $country = $xdr->country;
+                $cc = new Criteria();
+                $cc->add(CountryPeer::NAME,$country, Criteria::LIKE);
+                $ccount = CountryPeer::doCount($cc);
+                if($ccount > 0){
+                   $csel = CountryPeer::doSelectOne($cc);
+                   $countryid = $csel->getId();
+                }else{
+                   $cin = new Country();
+                   $cin->setName($country);
+                   $cin->save();
+                   $countryid = $cin->getId();
+                }
+                $emCalls->setParentTable('customer');
+                $emCalls->setCountryId($countryid);
+                    $ce = new Criteria();
+                    $ce->add(TelintaAccountsPeer::ACCOUNT_TITLE,$xdr->account_id);
+                    $ce->addAnd(TelintaAccountsPeer::PARENT_TABLE,'customer');
+                    $ce->add(TelintaAccountsPeer::STATUS,3);
+                    if(TelintaAccountsPeer::doCount($ce)>0){
+                        $emp = TelintaAccountsPeer::doSelectOne($ce);
+                        $emCalls->setParentId($emp->getParentId());
+                    }
+                
+                $emCalls->setDescription($xdr->description);
+                $emCalls->setDisconnectCause($xdr->disconnect_cause);
+                $emCalls->setDisconnectTime($xdr->disconnect_time);
+               // $emCalls->setDurationMinutes($duration_minutes);
+               // $emCalls->setICustomer($customer->getICustomer());
+                $emCalls->setIXdr($xdr->i_xdr);
+                $emCalls->setStatus(3);
+                $emCalls->setSubdivision($xdr->subdivision);
+                $emCalls->setUnixConnectTime($xdr->unix_connect_time);
+                $emCalls->setUnixDisconnectTime($xdr->unix_disconnect_time);
+                $emCalls->save();
+             }
+          }else{
+                $callsHistory = new CallHistoryCallsLog();
+                $callsHistory->setParent('customer');
+                $callsHistory->setParentId($customer->getId());
+                $callsHistory->setTodate($this->todate);
+                $callsHistory->setFromdate($this->fromdate);
+                $callsHistory->save();
+          }
+        
+
+  
+        
+                    return sfView::NONE;
+    }
       public function executeCallHistoryNotFetch(sfWebRequest $request)
     {
 
