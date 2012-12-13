@@ -54,7 +54,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 <table class="" cellspacing="0" width="600px" style=' border:0px solid #fff;font-family:"Times New Roman", Times, serif;'>
   <tr>
     <td colspan="4" class="" style='border:0px solid #fff;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-      <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo 'Dear customer' ?>,</p>
+      <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php //echo 'Dear customer' ?>,</p>
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo $message; ?>
 	</p>
