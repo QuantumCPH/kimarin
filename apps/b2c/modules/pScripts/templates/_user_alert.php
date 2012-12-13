@@ -9,7 +9,6 @@ use_helper('Number');
 	
 	table.receipt {
 		width: 600px;
-		border: 2px solid #ccc;
 	}
 	
 	table.receipt td, table.receipt th {
@@ -52,19 +51,19 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</tr>
 </table>
 
-<table class="receipt" cellspacing="0" width="600px" style='border: 2px solid #ccc;font-family:"Times New Roman", Times, serif;'>
+<table class="" cellspacing="0" width="600px" style=' border:0px solid #fff;font-family:"Times New Roman", Times, serif;'>
   <tr>
-    <td colspan="4" class="payer_summary" style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-      <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear customer') ?>,</p>
+    <td colspan="4" class="" style='border:0px solid #fff;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+      <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php //echo 'Dear customer' ?>,</p>
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-	<?php echo __("Email Alert Sent"); ?>
+	<?php echo $message; ?>
 	</p>
-
+        <br /><br />
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-	<?php echo __('Best regards,') ?>
+	<?php echo 'Best regards,' ?>
 	</p>
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-	<?php echo __(sfConfig::get('app_site_title')) ?>
+	<?php echo sfConfig::get('app_site_title') ?>
 	</p>
 	<br /><br />
       </td>
@@ -80,8 +79,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 
 <p style='font-weight: bold;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-	<?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
-        <br><?php echo __('E-mail') ?>:&nbsp;
+	<?php echo ('If you have any inquiries please contact '. sfConfig::get('app_site_title') .' Customer Support.'); ?>
+        <br><?php echo('E-mail') ?>:&nbsp;
 	<a href="mailto:<?php echo sfConfig::get('app_support_email_id');?>"><?php echo sfConfig::get('app_support_email_id');?></a>
-        <br><?php echo __('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
+        <br><?php echo ('Telephone') ?>:&nbsp;<?php echo sfConfig::get('app_phone_no');?>
 </p>

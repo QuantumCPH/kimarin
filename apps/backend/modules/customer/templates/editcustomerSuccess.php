@@ -93,7 +93,7 @@
          <tr>
             <td style="padding: 5px;">Nationality</td>
             <td style="padding: 5px;">
-                <select name="nationalityid" class="required">
+                <select name="nationalityid" class="">
                     <option value="">--Select--</option>
                 <?php
                   foreach($nationality_list as $nationality){
@@ -135,7 +135,7 @@
                           $dy = date('Y',strtotime($dt));
                          } 
                 ?>
-                <select name="dd" class="required">
+                <select name="dd">
                     <option value="">Day</option>
                     <?php
                     for($d = 1;$d<=31; $d++){
@@ -145,7 +145,7 @@
                     }
                     ?>
                 </select>&nbsp;
-                <select name="dm" class="required">
+                <select name="dm">
                     <option value="">Month</option>
                     <?php
                     for($m = 1;$m<=12; $m++){
@@ -155,7 +155,7 @@
                     }
                     ?>
                 </select>&nbsp;
-                <select name="dy" class="required">
+                <select name="dy">
                     <option value="">Year</option>
                     <?php
                     for($y =1901;$y<=1998; $y++){
@@ -167,20 +167,20 @@
                 </select>
             </td>
         </tr>
-<!--        <tr>
-            <td style="padding: 5px;">Usage Email Alerts</td>
+        <tr>
+            <td style="padding: 5px;">Balance E-mail</td>
             <td style="padding: 5px;">
                 <input type="checkbox" name="usage_email" <?php if($editCust->getUsageAlertEmail()) echo" checked=checked"?> />&nbsp;
                 
             </td>
         </tr>
         <tr>
-            <td style="padding: 5px;">Usage SMS Alerts</td>
+            <td style="padding: 5px;">Balance SMS</td>
             <td style="padding: 5px;">
                 <input type="checkbox" name="usage_sms" <?php if($editCust->getUsageAlertSMS()) echo" checked=checked"?> />&nbsp;
                 
             </td>
-        </tr>-->
+        </tr>
             <tr>
             <td>Comments:</td>
             <td><textarea name="comments"  id="customer_comments"><?php echo $editCust->getComments(); ?></textarea>

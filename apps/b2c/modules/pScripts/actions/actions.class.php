@@ -1706,7 +1706,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $dibsCall->setCallurl($urlval);
         $dibsCall->save();
 
-
+        die;
         $number = $request->getParameter('from');
         $mobileNumber = substr($number, 2, strlen($number) - 2);
         if ($mobileNumber[0] != "0") {
@@ -2558,13 +2558,10 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
 
         $usagealerts = new Criteria();
-        $usagealerts->add(UsageAlertPeer::SMS_ACTIVE, 1);
-        $usagealerts->addAnd(UsageAlertPeer::COUNTRY, $countryId);
+         $usagealerts->add(UsageAlertPeer::COUNTRY, $countryId);
         $usageAlerts = UsageAlertPeer::doSelect($usagealerts);
         $c = new Criteria();
-        $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
-        $c->addJoin(CustomerProductPeer::PRODUCT_ID,ProductPeer::ID, Criteria::LEFT_JOIN);
-        $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $c->addAnd(CustomerPeer::COUNTRY_ID, $countryId);
         $customers = CustomerPeer::doSelect($c);
         $telintaObj = new Telienta();
@@ -2578,7 +2575,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 echo $customer->getId().":".$customer_balance.":".$retries."<br/>";
             } while (!$customer_balance && $retries <= $maxRetries);
 
-            if($retries==$maxRetries){
+            if($retries==++$maxRetries){
                 continue;
             }
 
@@ -2641,17 +2638,18 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                             echo "SMS Active<br/>";
                             $customerMobileNumber = $CallCode . $customer->getMobileNumber();
                             //die($customerMobileNumber);
-                            $customerMobileNumber = "923334414765";
-                            //$sms_text = $usageAlert->getSmsAlertMessage();
+                        //    $customerMobileNumber = "923334414765";
+                             $sms_text = $usageAlert->getSmsAlertMessage();
                             $this->setPreferredCulture($customer);
-                              $sms_text = $this->getContext()->getI18N()->__("Sms Alert Sent");
+                              //$sms_text = $this->getContext()->getI18N()->__("Sms Alert Sent");
                               $response = ROUTED_SMS::Send($customerMobileNumber, $sms_text, $senderName);
                             $this->updatePreferredCulture();
                             if ($response) {
                                 $msgSent->setAlertSent(1);
                             }
+                             
                         }
-                        $msgSent->save();
+                       $msgSent->save();
 
                     }
 
@@ -2879,12 +2877,22 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             //send email
 
               $unidid = $this->customer->getUniqueid();
-           
+                $agent_company_id = $transaction->getAgentCompanyId();
+        if ($agent_company_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $agent_company_id);
+          
+            $agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $agent_name = '';
+            
+        }
               $message_body = $this->getPartial('payments/order_receipt', array(
                         'customer' => $this->customer,
                         'order' => $order,
                         'transaction' => $transaction,
                         'vat' => $vat,
+                        'agent_name' => $agent_name,
                         'wrap' => false
                     ));
 

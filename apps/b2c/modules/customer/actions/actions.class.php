@@ -186,7 +186,7 @@ class customerActions extends sfActions {
             $this->getUser()->setCulture($request->getParameter('lang'));
             $this->sLang = $request->getParameter('lang');
         } else {
-            $this->sLang = 'en';
+            $this->sLang = $this->getUser()->getCulture();
         }
 
 
@@ -812,7 +812,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->transactions = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
     }
 
     public function executeRefillpaymenthistory(sfWebRequest $request) {
@@ -1046,14 +1046,11 @@ class customerActions extends sfActions {
         unset($this->form['device_id']);
         unset($this->form['ticketval']);
         unset($this->form['i_customer']);
-        unset($this->form['usage_alert_sms']);
-        unset($this->form['usage_alert_email']);
-        unset($this->form['sim_type_id']);
+          unset($this->form['sim_type_id']);
         unset($this->form['comments']);
         unset($this->form['block']);
           unset($this->form['business']);
-        unset($this->form['usage_alert_sms']);
-        unset($this->form['usage_alert_email']);
+      
 
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
@@ -1312,7 +1309,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->callRecords = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
     }
 
     public function executeWebsms(sfWebRequest $request) {
@@ -1328,7 +1325,7 @@ class customerActions extends sfActions {
 
 
         $cunt = new Criteria();
-        //$cunt->add(CountryPeer::WEB_SMS_STATUS,3);
+        $cunt->add(CountryPeer::ID, 185, Criteria::LESS_EQUAL);
         $cunt->addAscendingOrderByColumn(CountryPeer::NAME);
         $countries = CountryPeer::doSelect($cunt);
         $this->msgSent = "";
@@ -1343,7 +1340,7 @@ class customerActions extends sfActions {
         if ($message) {
             $this->msgSent = "No";
             $country_code = $request->getParameter('country');
-            $number = $request->getParameter('number');
+            $number = $request->getParameter('pnumber');
             $destination = $country_code . $number;
 
             $c = new Criteria();
@@ -1405,11 +1402,12 @@ class customerActions extends sfActions {
         $c->add(CbfPeer::CUSTOMER_ID, $this->customer->getId());
         $c->add(CbfPeer::STATUS, 3);
         $c->addDescendingOrderByColumn(CbfPeer::CREATED_AT);
+
         $items_per_page = 25; //shouldn't be 0
         $this->page = $request->getParameter('page');
-        if ($this->page == '')
+        if ($this->page == ''){
             $this->page = 1;
-
+        } 
         $pager = new sfPropelPager('Cbf', $items_per_page);
         $pager->setPage($this->page);
 
@@ -1418,7 +1416,8 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->smsRecords = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
+        
     }
 
     public function executeTellAFriend(sfWebRequest $request) {
@@ -2453,7 +2452,7 @@ class customerActions extends sfActions {
             $this->getUser()->setCulture($request->getParameter('lang'));
             $this->sLang = $request->getParameter('lang');
         } else {
-            $this->sLang = 'en';
+            $this->sLang = $this->getUser()->getCulture();
         }
 
 

@@ -71,7 +71,14 @@ use_helper('Number');
   <tr>
     <td><?php echo $agent_order->getCreatedAt('d-m-Y') ?></td>
     <td>
-    <?php echo __('Agent Refill');?>
+        <?php $odid=$agent_order->getOrderDescription();
+        
+          $transactiondescription = TransactionDescriptionPeer::retrieveByPK($odid);
+     echo   $transactiondescription->getTitle();
+        
+        
+        ?>
+    <?php //echo __('Agent Refill');?>
     </td>
     <td>1</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $agent_order->getAmount(),2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>

@@ -60,6 +60,7 @@
         <tr class="headings">
             <th><?php echo __('Sr #') ?></th>
             <th><?php echo __('Date') ?> </th>
+            <th><?php echo __('Receipt No.') ?> </th>
             <?php if($agentidd==0){?>
             <th><?php echo __('Agent Company') ?></th>
             <th><?php echo __('Agent Number') ?></th>
@@ -78,6 +79,7 @@
         <tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
             <td><?PHP echo $i;?></td>
             <td><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
+            <td><?php  echo $agent->getReceiptNo();  ?></td>
              <?php if($agentidd==0){?>
             <td>
                  <?php

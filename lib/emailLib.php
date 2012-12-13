@@ -50,6 +50,9 @@ class emailLib {
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
         //--------------Sent The Email To Kimarin order email
         if (trim($sender_email_orders) != ''):
             $email1 = new EmailQueue();
@@ -102,6 +105,18 @@ class emailLib {
         endif;
         //-----------------------------------------
         
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
+            $email4->setAgentId($agent_company_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
         
     }
 
@@ -174,6 +189,9 @@ class emailLib {
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
         //------------------Sent The Email To Kimarin order email
         if (trim($sender_email_orders) != '') {
             $email1 = new EmailQueue();
@@ -236,6 +254,19 @@ class emailLib {
             $email4->setSubject($subject);
             $email4->setReceipientName($sender_namecdu);
             $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($agent_company_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
             $email4->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
@@ -314,6 +345,9 @@ class emailLib {
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
         //------------------Sent The Email To Kimarin order email
         if (trim($sender_email_orders) != '') {
             $email1 = new EmailQueue();
@@ -375,6 +409,19 @@ class emailLib {
             $email4->setSubject($subject);
             $email4->setReceipientName($sender_namecdu);
             $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($agent_company_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . ' Customer registration via agent');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
             $email4->setEmailType(sfConfig::get('app_site_title') . ' Customer registration via agent');
@@ -466,6 +513,9 @@ class emailLib {
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
         //------------------Sent The Email To Kimarin Order
         if (trim($sender_email_orders) != '') {
             $email1 = new EmailQueue();
@@ -532,6 +582,20 @@ class emailLib {
             $email4->save();
         endif;
         //-----------------------------------------
+        
+        //--------------Sent The Email To CDU
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
+            $email4->setAgentId($referrer_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . ' refill via agent');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
     }
 
     public static function sendCustomerAutoRefillEmail(Customer $customer, $message_body) {
@@ -546,6 +610,9 @@ class emailLib {
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
 
         $recepient_email = trim($customer->getEmail());
       if($customer->getBusiness()){
@@ -610,6 +677,19 @@ class emailLib {
             $email3->setEmailType(sfConfig::get('app_site_title') . ' Customer Auto Refill');
             $email3->save();
         endif;
+        
+        //send to CDU
+        if (trim($sender_emailrs) != ''):
+            $email3 = new EmailQueue();
+            $email3->setSubject($subject);
+            $email3->setMessage($message_body);
+            $email3->setReceipientEmail($sender_emailrs);
+            $email3->setReceipientName($sender_namers);
+            $email3->setCutomerId($customer_id);
+            $email3->setAgentId($referrer_id);
+            $email3->setEmailType(sfConfig::get('app_site_title') . ' Customer Auto Refill');
+            $email3->save();
+        endif;
     }
 
     public static function sendCustomerConfirmPaymentEmail(Customer $customer, $message_body) {
@@ -625,6 +705,9 @@ class emailLib {
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         
         $recepient_email = trim($customer->getEmail());
         if($customer->getBusiness()){
@@ -688,6 +771,18 @@ class emailLib {
             $email3->setEmailType(sfConfig::get('app_site_title') . ' Customer Confirm Payment');
             $email3->save();
         endif;
+        //send to RS
+        if (trim($sender_emailrs) != ''):
+            $email3 = new EmailQueue();
+            $email3->setSubject($subject);
+            $email3->setMessage($message_body);
+            $email3->setReceipientEmail($sender_emailrs);
+            $email3->setReceipientName($sender_namers);
+            $email3->setCutomerId($customer_id);
+            $email3->setAgentId($referrer_id);
+            $email3->setEmailType(sfConfig::get('app_site_title') . ' Customer Confirm Payment');
+            $email3->save();
+        endif;
     }
 
     public static function sendCustomerConfirmRegistrationEmail($inviteuserid, $customerr, $subject=null,$order,$transaction) {
@@ -710,6 +805,9 @@ class emailLib {
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         
         $registered_customer_name = sprintf('%s %s', $customerr->getFirstName(), $customerr->getLastName());
         
@@ -773,6 +871,18 @@ class emailLib {
             $email3->setMessage($message_body);
             $email3->setReceipientName($sender_namecdu);
             $email3->setReceipientEmail($sender_emailcdu);
+            $email3->setCutomerId($customer_id);
+            //$email3->setAgentId($referrer_id);
+            $email3->setEmailType(sfConfig::get('app_site_title') . ' Customer Confirm Bonus');
+            $email3->save();
+        endif;
+        // RS
+        if ($sender_emailrs != ''):
+            $email3 = new EmailQueue();
+            $email3->setSubject($subject);
+            $email3->setMessage($message_body);
+            $email3->setReceipientName($sender_namers);
+            $email3->setReceipientEmail($sender_emailrs);
             $email3->setCutomerId($customer_id);
             //$email3->setAgentId($referrer_id);
             $email3->setEmailType(sfConfig::get('app_site_title') . ' Customer Confirm Bonus');
@@ -860,6 +970,9 @@ class emailLib {
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
         //------------------Sent The Email To Kimarin order
         if ($sender_email_orders != '') {
             $email1 = new EmailQueue();
@@ -898,12 +1011,25 @@ class emailLib {
             $email3->save();
         endif;
         //-----------------------------------------
-        //--------------Sent The Email To Support
+        //--------------Sent The Email To CDU
         if ($sender_emailcdu != ''):
             $email4 = new EmailQueue();
             $email4->setSubject($subject);
             $email4->setReceipientName($sender_namecdu);
             $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . ' Customer registration via link');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
+        
+        //--------------Sent The Email To RS
+        if ($sender_emailrs != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
             $email4->setCutomerId($customer_id);
             $email4->setEmailType(sfConfig::get('app_site_title') . ' Customer registration via link');
             $email4->setMessage($message_body);
@@ -963,6 +1089,9 @@ class emailLib {
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
         //------------------Sent the Email To Kimarin order
 
         if (trim($sender_email_orders) != ''):
@@ -1016,6 +1145,20 @@ class emailLib {
             $email4->setSubject($subject);
             $email4->setReceipientName($sender_namecdu);
             $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($agent_company_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType('Customer registration via agent SMS ');
+
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
             $email4->setEmailType('Customer registration via agent SMS ');
@@ -1085,6 +1228,9 @@ class emailLib {
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
 
         //------------------Sent The Email To Kimarin order
         if (trim($sender_email_orders) != '') {
@@ -1154,6 +1300,19 @@ class emailLib {
             $email4->save();
         endif;
         //-----------------------------------------
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
+            $email4->setAgentId($agent_company_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . ' Customer registration via APP');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
     }
 
     public static function sendvoipemail(Customer $customer, $order, $transaction) {
@@ -1212,6 +1371,9 @@ Med vänlig hälsning<br/><br/>
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
         
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
             $email = new EmailQueue();
@@ -1264,6 +1426,20 @@ Med vänlig hälsning<br/><br/>
             $email4->save();
         endif;
         //-----------------------------------------
+        
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
+            $email4->setAgentId($referrer_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType('Transation for VoIP Purchase');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
     }
 
     public static function sendCustomerBalanceEmail(Customer $customer, $message_body) {
@@ -1304,8 +1480,8 @@ Med vänlig hälsning<br/><br/>
 
         $subject = 'Error In Telinta';
 
-        $recipient_name_rs = sfConfig::get('app_email_sender_name_cdu');
-        $recipient_email_rs = sfConfig::get('app_email_sender_email_cdu');
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
 
         $recipient_name_support = sfConfig::get('app_recipient_name_support');
         $recipient_email_support = sfConfig::get('app_recipient_email_support');
@@ -1340,8 +1516,8 @@ Med vänlig hälsning<br/><br/>
         $subject = 'Unique Ids finished.';
         $message_body = "Uniuqe Ids have been finsihed of SIM Type ".$sim_type. ".<br/><br/>" . sfConfig::get('app_site_title');
                      
-        $recipient_name_rs = sfConfig::get('app_email_sender_name_cdu');
-        $recipient_email_rs = sfConfig::get('app_email_sender_email_cdu');
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
 
         $recipient_name_support = sfConfig::get('app_recipient_name_support');
         $recipient_email_support = sfConfig::get('app_recipient_email_support');
@@ -1376,8 +1552,8 @@ Med vänlig hälsning<br/><br/>
         $subject = 'Unique Ids finished.';
         $message_body = "Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobileNumber() . "<br/><br/>" . sfConfig::get('app_site_title');
 
-        $recipient_name_rs = sfConfig::get('app_email_sender_name_cdu');
-        $recipient_email_rs = sfConfig::get('app_email_sender_email_cdu');
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
 
         $recipient_name_support = sfConfig::get('app_recipient_name_support');
         $recipient_email_support = sfConfig::get('app_recipient_email_support');
@@ -1419,8 +1595,8 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');
 
-        $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         //$sender_emailcdu = sfConfig::get('app_email_sender_email', 'zerocallengineering@googlegroups.com');
         
 
@@ -1439,11 +1615,11 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         endif;
         //-----------------------------------------
         //--------------Sent The Email To CDU
-        if (trim($sender_emailcdu) != ''):
+        if (trim($sender_emailrs) != ''):
             $email4 = new EmailQueue();
             $email4->setSubject($subject);
-            $email4->setReceipientName($sender_namecdu);
-            $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
             $email4->setAgentId($referrer_id);
             $email4->setCutomerId($customer_id);
             $email4->setEmailType('Unique Ids Finished');
@@ -1455,8 +1631,8 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
     public static function sendErrorInTelinta($subject, $message) {
 
-        $recipient_name_rs = sfConfig::get('app_email_sender_name_cdu');
-        $recipient_email_rs = sfConfig::get('app_email_sender_email_cdu');
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
 
         $recipient_name_support = sfConfig::get('app_recipient_name_support');
         $recipient_email_support = sfConfig::get('app_recipient_email_support');
@@ -1533,6 +1709,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
 
         //------------------Sent the Email To Kimarin order
         if (trim($sender_email_orders) != ''):
@@ -1581,6 +1760,18 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->setSubject($subject);
             $email4->setReceipientName($sender_namecdu);
             $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($agent_company_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . ' Agent refill via admin');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
             $email4->setAgentId($agent_company_id);
             $email4->setEmailType(sfConfig::get('app_site_title') . ' Agent refill via admin');
             $email4->setMessage($message_body);
@@ -1657,6 +1848,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
          //------------------Sent The Email To Kimarin order
         if (trim($sender_email_orders) != '') {
             $email1 = new EmailQueue();
@@ -1719,6 +1913,19 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->setSubject($subject);
             $email4->setReceipientName($sender_namecdu);
             $email4->setReceipientEmail($sender_emailcdu);
+            $email4->setAgentId($agent_company_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType('Change Number');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
+        //--------------Sent The Email To cdu
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
             $email4->setAgentId($agent_company_id);
             $email4->setCutomerId($customer_id);
             $email4->setEmailType('Change Number');
@@ -1792,8 +1999,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
-        $sender_name_rs = "Zapna Support";
-        $sender_email_rs = "rs@zapna.com";
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
         
         //------------------Sent The Email To Kimarin Order
         if (trim($sender_email_orders) != '') {
@@ -1865,7 +2073,20 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->save();
         endif;
         //-----------------------------------------
-       
+        
+        //--------------Sent The Email To cdu
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
+            $email4->setAgentId($agent_company_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType(sfConfig::get('app_site_title') . ' Refill/charge via admin');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
         
         
     }
@@ -1897,12 +2118,15 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
 
         $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
         $sender_name = sfConfig::get('app_email_sender_name', 'Kimarin');
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Kimarin');
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         
         /// Email to Kimarin order
         if($sender_email_orders !=""){
@@ -1933,12 +2157,20 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $email3->setMessage($message_body);
         $email3->save();
         //-----------------------------------------
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_namers);
+        $email3->setReceipientEmail($sender_emailrs);
+        $email3->setEmailType('Retail Activation');
+        $email3->setMessage($message_body);
+        $email3->save();
+        //-----------------------------------------
     }
 
         public static function sendErrorInAutoReg($subject, $message) {
 
-        $recipient_name_rs = sfConfig::get('app_email_sender_name_cdu');
-        $recipient_email_rs = sfConfig::get('app_email_sender_email_cdu');
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
 
         $recipient_name_support = sfConfig::get('app_recipient_name_support');
         $recipient_email_support = sfConfig::get('app_recipient_email_support');
@@ -1990,12 +2222,15 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         $subject = __('Payment Confirmation');
         $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
-        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu', 'rs@zapna.com');
+        $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
         $sender_name = sfConfig::get('app_email_sender_name', 'Kimarin');
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu', 'Kimarin');
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         
         if($sender_email_orders !=""){
             $email1 = new EmailQueue();
@@ -2025,7 +2260,13 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $email3->setMessage($message_body);
         $email3->save();
 
-
+        $email3 = new EmailQueue();
+        $email3->setSubject($subject);
+        $email3->setReceipientName($sender_namers);
+        $email3->setReceipientEmail($sender_emailrs);
+        $email3->setEmailType('Retail Refil');
+        $email3->setMessage($message_body);
+        $email3->save();
         //-----------------------------------------
 
     }
@@ -2072,6 +2313,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         
         //------------------Sent The Email To Kimarin order
         if (trim($sender_email_orders) != '') {
@@ -2140,6 +2384,20 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->save();
         endif;
         //-----------------------------------------
+        
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
+            $email4->setAgentId($referrer_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType('New Sim Card Purchase');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
 
     }
     
@@ -2153,7 +2411,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $transaction = TransactionPeer::doSelectOne($tc);
 
         //This Section For Get The Agent Information
-        $agent_company_id = $customer->getReferrerId();
+       // old idea remove by khan muhammad on 06-12-2012
+       // $agent_company_id = $customer->getReferrerId();
+         $agent_company_id =$transaction->getAgentCompanyId();
         if ($agent_company_id != '') {
             $c = new Criteria();
             $c->add(AgentCompanyPeer::ID, $agent_company_id);
@@ -2193,6 +2453,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         
         //------------------Sent The Email To Kimarin order
         if (trim($sender_email_orders) != '') {
@@ -2262,6 +2525,20 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->save();
         endif;
         //-----------------------------------------
+        
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
+            $email4->setAgentId($agent_company_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType('Change number');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
     }
 
   
@@ -2307,11 +2584,14 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
-        $sender_namers = sfConfig::get('app_email_sender_name_sup');
-        $sender_emailrs = sfConfig::get('app_email_sender_email_sup');
+        $sender_namesup = sfConfig::get('app_email_sender_name_sup');
+        $sender_emailsup = sfConfig::get('app_email_sender_email_sup');
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
+        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         
         //------------------Sent The Email To Kimarin order
         if (trim($sender_email_orders) != '') {
@@ -2389,6 +2669,18 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email5->setMessage($message_body);
             $email5->save();
         endif;
+        
+        if (trim($sender_emailsup) != ''):
+            $email5 = new EmailQueue();
+            $email5->setSubject($subject);
+            $email5->setReceipientName($sender_namesup);
+            $email5->setReceipientEmail($sender_emailsup);
+            $email5->setAgentId($referrer_id);
+            $email5->setCutomerId($customer_id);
+            $email5->setEmailType(sfConfig::get('app_site_title') . 'Customer  Change Product');
+            $email5->setMessage($message_body);
+            $email5->save();
+        endif;
     }
   
     
@@ -2435,9 +2727,10 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $sender_email = sfConfig::get('app_email_sender_email');
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
-        $sender_namers = sfConfig::get('app_email_sender_name_sup');
-        $sender_emailrs = sfConfig::get('app_email_sender_email_sup');
-        
+        $sender_namesup = sfConfig::get('app_email_sender_name_sup');
+        $sender_emailsup = sfConfig::get('app_email_sender_email_sup');
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         
         //------------------Sent the Email To Agent
         if (trim($recepient_agent_email) != ''):
@@ -2488,6 +2781,17 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email5->setMessage($message_body);
             $email5->save();
         endif;
+        if (trim($sender_emailsup) != ''):
+            $email5 = new EmailQueue();
+            $email5->setSubject($subject);
+            $email5->setReceipientName($sender_namesup);
+            $email5->setReceipientEmail($sender_emailsup);
+            $email5->setAgentId($referrer_id);
+            $email5->setCutomerId($customer_id);
+            $email5->setEmailType(sfConfig::get('app_site_title') . 'Confirmation of product change');
+            $email5->setMessage($message_body);
+            $email5->save();
+        endif;
     }
   
         
@@ -2518,9 +2822,10 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $sender_email = sfConfig::get('app_email_sender_email');
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
-           $sender_namers = sfConfig::get('app_email_sender_name_sup');
-        $sender_emailrs = sfConfig::get('app_email_sender_email_sup');
-        
+        $sender_namesup = sfConfig::get('app_email_sender_name_sup');
+        $sender_emailsup = sfConfig::get('app_email_sender_email_sup');
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         //------------------Sent The Email To Customer
         if (trim($recepient_email) != '') {
             $email = new EmailQueue();
@@ -2560,11 +2865,22 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->setMessage($message_body);
             $email4->save();
         endif;
-          if (trim($sender_emailrs) != ''):
+        if (trim($sender_emailrs) != ''):
             $email5 = new EmailQueue();
             $email5->setSubject($subject);
             $email5->setReceipientName($sender_namers);
             $email5->setReceipientEmail($sender_emailrs);
+            $email5->setAgentId($referrer_id);
+            $email5->setCutomerId($customer_id);
+            $email5->setEmailType(sfConfig::get('app_site_title') . 'Block account');
+            $email5->setMessage($message_body);
+            $email5->save();
+        endif;
+        if (trim($sender_emailsup) != ''):
+            $email5 = new EmailQueue();
+            $email5->setSubject($subject);
+            $email5->setReceipientName($sender_namesup);
+            $email5->setReceipientEmail($sender_emailsup);
             $email5->setAgentId($referrer_id);
             $email5->setCutomerId($customer_id);
             $email5->setEmailType(sfConfig::get('app_site_title') . 'Block account');
@@ -2637,6 +2953,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
         
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
+        
         //------------------Sent The Email To Kimarin order
         if (trim($sender_email_orders) != '') {
             $email1 = new EmailQueue();
@@ -2704,6 +3023,20 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email4->save();
         endif;
         //-----------------------------------------
+        
+        //--------------Sent The Email To RS
+        if (trim($sender_emailrs) != ''):
+            $email4 = new EmailQueue();
+            $email4->setSubject($subject);
+            $email4->setReceipientName($sender_namers);
+            $email4->setReceipientEmail($sender_emailrs);
+            $email4->setAgentId($referrer_id);
+            $email4->setCutomerId($customer_id);
+            $email4->setEmailType('New Sim Card Purchase');
+            $email4->setMessage($message_body);
+            $email4->save();
+        endif;
+        //-----------------------------------------
 
     }
         
@@ -2761,12 +3094,13 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         $sender_namecdu = sfConfig::get('app_email_sender_name_cdu');
         $sender_emailcdu = sfConfig::get('app_email_sender_email_cdu');
-        $sender_namers = sfConfig::get('app_email_sender_name_sup');
-        $sender_emailrs = sfConfig::get('app_email_sender_email_sup');
+        $sender_namesup = sfConfig::get('app_email_sender_name_sup');
+        $sender_emailsup = sfConfig::get('app_email_sender_email_sup');
         
         $sender_name_orders = sfConfig::get("app_email_sender_name_order");
         $sender_email_orders = sfConfig::get("app_email_sender_email_order");
-        
+        $sender_namers = sfConfig::get('app_email_sender_name_rs');
+        $sender_emailrs = sfConfig::get('app_email_sender_email_rs');
         //------------------Sent The Email To Kimarin order
         if (trim($sender_email_orders) != '') {
             $email1 = new EmailQueue();
@@ -2837,6 +3171,17 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email5->setSubject($subject);
             $email5->setReceipientName($sender_namers);
             $email5->setReceipientEmail($sender_emailrs);
+            $email5->setAgentId($referrer_id);
+            $email5->setCutomerId($customer_id);
+            $email5->setEmailType(sfConfig::get('app_site_title') . 'Customer  Change Product');
+            $email5->setMessage($message_body);
+            $email5->save();
+        endif;
+        if (trim($sender_emailsup) != ''):
+            $email5 = new EmailQueue();
+            $email5->setSubject($subject);
+            $email5->setReceipientName($sender_namesup);
+            $email5->setReceipientEmail($sender_emailsup);
             $email5->setAgentId($referrer_id);
             $email5->setCutomerId($customer_id);
             $email5->setEmailType(sfConfig::get('app_site_title') . 'Customer  Change Product');

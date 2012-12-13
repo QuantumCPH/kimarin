@@ -26,7 +26,6 @@ class BaseTransactionForm extends BaseFormPropel
       'transaction_description_id' => new sfWidgetFormInput(),
       'vat'                        => new sfWidgetFormInput(),
       'email_tempalte'             => new sfWidgetFormTextarea(),
-      'receipt_no'                 => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -44,7 +43,6 @@ class BaseTransactionForm extends BaseFormPropel
       'transaction_description_id' => new sfValidatorInteger(array('required' => false)),
       'vat'                        => new sfValidatorNumber(array('required' => false)),
       'email_tempalte'             => new sfValidatorString(array('required' => false)),
-      'receipt_no'                 => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('transaction[%s]');

@@ -14,7 +14,9 @@ $pus=0;
 <h1><?php echo  __('Customer Detail') ?></h1>
     <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign">
 
-
+<?php 
+           $businessCustomer=$customer->getBusiness();
+        ?>
 
                           <tr>
                     <td width="17%" class="leftHeadign">Customer Balance</td>
@@ -91,13 +93,27 @@ $pus=0;
                          </tr>
                          
                         <tr>
-		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >N.I.E./Passport Number</td>
+		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >
+                             <?php if($businessCustomer){?>
+                              CIF number 
+                             <?php }else{ ?>
+                              N.I.E./Passport Number  
+                             <?php }?> 
+                        </td>
                         <td><?php echo  $customer->getNiePassportNumber() ?></td>
                          </tr>                         
                          <tr>
 		           <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Password</td>
                          <td><?php echo  $customer->getPlainText() ?></td>
                        </tr>
+                       <tr>
+                        <td id="sf_admin_list_th_first_name" class="leftHeadign" >Balance E-mail</td>
+                        <td><?php echo  ($customer->getUsageAlertEmail())?"Yes":"No"; ?></td>
+                       </tr>
+                       <tr >
+                    <td id="sf_admin_list_th_last_name"  class="leftHeadign" >Balance SMS</td>
+                    <td><?php echo  ($customer->getUsageAlertSms())?"Yes":"No"; ?></td>
+                          </tr> 
                         <tr>
 		          <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >Nationality</td>
                           <td><?php echo  $customer->getNationalityTitle(); ?></td>
@@ -160,7 +176,7 @@ if(isset($val) && $val!=""){  ?>
                          <tr>
 
                     <td id="sf_admin_list_th_date_of_birth" class="leftHeadign" >Date Of Birth</td>
-                      <td><?php echo  $customer->getDateOfBirth() ?></td>
+                      <td><?php echo  $customer->getDateOfBirth('d-m-Y') ?></td>
                       </tr>
 <!--                         <tr>
                       <td id="sf_admin_list_th_auto_refill" class="leftHeadign" >Auto Refill</td>
