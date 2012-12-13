@@ -11,8 +11,8 @@
 	}
 </style>
 
-<a href="#" onclick="showCompany()" title="company info" class="external_link"><?php echo __('Agent/Company info') ?></a>
-
+ 
+   <?php echo link_to(__('Agent/Company info'), 'agentcompany/view',array('class'=>'external_link')) ?>
 <?php if($sf_user->isAuthenticated()): ?>
      <?php if($agent_company->getIsPrepaid()): ?>
 
@@ -46,10 +46,10 @@
   if($agents){
   ?> 
   <tr>
-    <th width="21%"><?php echo __('Transaction Type') ?></th>
-    <th width="14%" style="text-align:right;padding-right: 25px;"><?php echo __('Amount') ?> </th>
-    <th width="15%" style="text-align:right;padding-right: 25px;"><?php echo __('Remaining Balance') ?></th>
-    <th width="50%"><?php echo __('Date') ?> </th>
+    <th width="30%"><?php echo __('Transaction Type') ?></th>
+    <th width="20%" style="text-align:right;padding-right: 25px;"><?php echo __('Amount') ?> </th>
+    <th width="20%" style="text-align:right;padding-right: 25px;"><?php echo __('Remaining Balance') ?></th>
+    <th width="30%" style="text-align:right;padding-right: 25px;"><?php echo __('Date') ?> </th>
       
   </tr>
  <?php
@@ -63,9 +63,9 @@
   <tr <?php echo 'class="'.($i%2 == 0?'odd':'even').'"' ?>>
   <td><?php  $expensetype=$agent->getExpeneseType(); 
     if($expensetype==1){  echo __("Customer Registration");  }
-    if($expensetype==2){  echo __("Customer Refill");  }
+    if($expensetype==2){  echo __("Customer Refill  from Shop");  }
     if($expensetype==3){  echo __("Agent Account Refill");  }
-    if($expensetype==4){  echo __("Customer Refill from Shop");  }
+    if($expensetype==4){  echo __("Customer Refill");  }
      if($expensetype==7){  echo __("Change product");  }
       if($expensetype==8){  echo __("New sim sale");  }
     if($expensetype==6){  echo __("Change Number");  }
@@ -78,7 +78,7 @@
      ?></td>
   <td style="text-align:right;padding-right: 25px;"><?php  echo number_format($agent->getAmount(),2);?><?php echo sfConfig::get('app_currency_code')?></td>
     <td style="text-align:right;padding-right: 25px;"><?php  echo number_format($agent->getRemainingBalance(),2);?><?php echo sfConfig::get('app_currency_code')?></td>
-      <td><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
+      <td style="text-align:right;padding-right: 25px;"><?php  echo $agent->getCreatedAt('d-m-Y');  ?></td>
       
   </tr>
   <?php  }

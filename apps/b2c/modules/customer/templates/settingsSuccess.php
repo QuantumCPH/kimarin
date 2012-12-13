@@ -15,6 +15,9 @@
 	<div class="split-form">
 		<div class="fl col">
         <?php echo $form->renderHiddenFields() ?>
+        <?php 
+           $businessCustomer=$customer->getBusiness();
+        ?>
           <ul>
             <?php
             $error_mobile_number = false;
@@ -36,8 +39,8 @@
             if($form['nie_passport_number']->hasError())
             	$error_mobile_number = true;
             ?>
-            <li>
-             <?php echo $form['nie_passport_number']->renderLabel() ?>
+            <li><?php if($businessCustomer){ echo $form['nie_passport_number']->renderLabel('CIF number');  }else{  echo $form['nie_passport_number']->renderLabel();  }?>
+             <?php //echo $form['nie_passport_number']->renderLabel() ?>
              <?php echo $form['nie_passport_number'] ?>
              <?php if ($error_nie_passport_number): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -100,13 +103,14 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_po_box_number?$form['po_box_number']->renderError():'&nbsp;'?></div>
             </li>
+            
             <?php
             $error_first_name = false;;
             if($form['first_name']->hasError())
             	$error_first_name = true;
             ?>
             <li>
-             <?php echo $form['first_name']->renderLabel() ?>
+             <?php if($businessCustomer){ echo $form['first_name']->renderLabel('Company name');  }else{  echo $form['first_name']->renderLabel();  }?>
              <?php echo $form['first_name'] ?>
              <?php if ($error_first_name): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -116,21 +120,7 @@
              <div class='inline-error'><?php echo $error_first_name?$form['first_name']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end first name -->
-            <?php
-            $error_last_name = false;;
-            if($form['last_name']->hasError())
-            	$error_last_name = true;
-            ?>
-            <li>
-             <?php echo $form['last_name']->renderLabel() ?>
-             <?php echo $form['last_name'] ?>
-             <?php if ($error_last_name): ?>
-             <span id="cardno_decl" class="alertstep1">
-			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
-			 </span>
-			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
-            </li>
+              <?php   if(!$businessCustomer){   ?>
             <?php
             $error_second_last_name = false;
             if($form['second_last_name']->hasError())
@@ -146,14 +136,34 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
             </li>
+            <?php }?>
             <!-- end second last name -->
+          <?php   if(!$businessCustomer){   ?>
+            <?php
+            $error_last_name = false;;
+            if($form['last_name']->hasError())
+            	$error_last_name = true;
+            ?>
+            <li>
+             <?php echo $form['last_name']->renderLabel() ?>
+             <?php echo $form['last_name'] ?>
+             <?php if ($error_last_name): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
+            </li>
+            
+            <?php  }?>
+           
             <?php
             $error_address = false;;
             if($form['address']->hasError())
             	$error_address = true;
             ?>
             <li>
-             <?php echo $form['address']->renderLabel() ?>
+             <?php if($businessCustomer){  echo $form['address']->renderLabel('Company address');  }else{  echo $form['address']->renderLabel();   } ?>
              <?php echo $form['address'] ?>
              <?php if ($error_address): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -201,7 +211,8 @@
              <div class='inline-error'><?php echo $error_city?$form['city']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end city -->
-            <?php
+            <?php if(!$businessCustomer){?>
+                <?php
             $error_nationality_id = false;;
             if($form['nationality_id']->hasError())
             	$error_nationality_id = true;
@@ -216,6 +227,7 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
             </li>
+            <?php } ?>
             <!-- end nationality -->
             <?php
             $error_country_id = false;;
@@ -233,12 +245,23 @@
              <div class='inline-error'><?php echo $error_country_id?$form['country_id']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end country -->
-            <?php
+            <li id="custom_mobile_div">
+             <?php echo $form['usage_alert_sms']->renderLabel() ?>
+             <?php echo $form['usage_alert_sms']->render(array('class'=>'chkbx')) ?>
+            </li>
+            <!-- end usage_alert_sms -->
+            <li id="custom_mobile_div">
+             <?php echo $form['usage_alert_email']->renderLabel() ?>
+             <?php echo $form['usage_alert_email']->render(array('class'=>'chkbx')); ?>
+            </li>
+            <!-- end usage_alert_email -->
+            <?php if(!$businessCustomer){?>
+                <?php
             $error_date_of_birth = false;;
             if($form['date_of_birth']->hasError())
             	$error_date_of_birth = true;
             ?>
-            <li >
+            <li>
              <?php echo $form['date_of_birth']->renderLabel() ?>
              <?php echo $form['date_of_birth']->render(array('class'=>'strselect')) ?>
              <?php if ($error_date_of_birth): ?>
@@ -248,6 +271,7 @@
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_date_of_birth?$form['date_of_birth']->renderError():'&nbsp;'?></div>
             </li>
+            <?php } ?>
             <!-- end date of birth -->
 <?php /*
             <?php
@@ -283,13 +307,34 @@
             </li>
             <!-- end confirm password -->
  */ ?>
+            
+            
+             <?php   if($businessCustomer){   ?>
+            <?php
+            $error_last_name = false;;
+            if($form['last_name']->hasError())
+            	$error_last_name = true;
+            ?>
+            <li>
+             <?php  if($businessCustomer){ echo $form['last_name']->renderLabel('Name of<br />contact person'); }else{ echo $form['last_name']->renderLabel();   } ?>
+             <?php echo $form['last_name'] ?>
+             <?php if ($error_last_name): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
+            </li>
+            
+            <?php  }?>
+            
             <?php
             $error_email = false;;
             if($form['email']->hasError())
             	$error_email = true;
             ?>
             <li>
-             <?php echo $form['email']->renderLabel() ?>
+             <?php if($businessCustomer){  echo $form['email']->renderLabel('E-mail of<br />contact person'); }else{ echo $form['email']->renderLabel();   } ?>
              <?php echo $form['email'] ?>
              <?php if ($error_email): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -362,6 +407,7 @@
 		margin-right:7px;
 		text-align:right;
 		white-space:normal;
+                font-size: 13px;
 	}
 </style>
 <script type="text/javascript">

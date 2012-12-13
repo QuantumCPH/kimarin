@@ -34,7 +34,7 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'fonet_customer_id'        => new sfWidgetFormPropelChoice(array('model' => 'FonetCustomer', 'add_empty' => true)),
       'referrer_id'              => new sfWidgetFormPropelChoice(array('model' => 'AgentCompany', 'add_empty' => true)),
       'telecom_operator_id'      => new sfWidgetFormPropelChoice(array('model' => 'TelecomOperator', 'add_empty' => true)),
-      'date_of_birth'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'date_of_birth'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'other'                    => new sfWidgetFormFilterInput(),
       'subscription_type'        => new sfWidgetFormFilterInput(),
       'auto_refill_amount'       => new sfWidgetFormFilterInput(),
@@ -50,13 +50,14 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'to_date'                  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'from_date'                => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'i_customer'               => new sfWidgetFormFilterInput(),
-      'usage_alert_sms'          => new sfWidgetFormFilterInput(),
-      'usage_alert_email'        => new sfWidgetFormFilterInput(),
+      'usage_alert_sms'          => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
+      'usage_alert_email'        => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'sim_type_id'              => new sfWidgetFormFilterInput(),
       'preferred_language_id'    => new sfWidgetFormFilterInput(),
       'province_id'              => new sfWidgetFormPropelChoice(array('model' => 'Province', 'add_empty' => true)),
       'comments'                 => new sfWidgetFormFilterInput(),
       'block'                    => new sfWidgetFormFilterInput(),
+      'business'                 => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -96,13 +97,14 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'to_date'                  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'from_date'                => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'i_customer'               => new sfValidatorPass(array('required' => false)),
-      'usage_alert_sms'          => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'usage_alert_email'        => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'usage_alert_sms'          => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
+      'usage_alert_email'        => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'sim_type_id'              => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'preferred_language_id'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'province_id'              => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Province', 'column' => 'id')),
       'comments'                 => new sfValidatorPass(array('required' => false)),
       'block'                    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'business'                 => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('customer_filters[%s]');
@@ -157,13 +159,14 @@ class BaseCustomerFormFilter extends BaseFormFilterPropel
       'to_date'                  => 'Date',
       'from_date'                => 'Date',
       'i_customer'               => 'Text',
-      'usage_alert_sms'          => 'Number',
-      'usage_alert_email'        => 'Number',
+      'usage_alert_sms'          => 'Boolean',
+      'usage_alert_email'        => 'Boolean',
       'sim_type_id'              => 'Number',
       'preferred_language_id'    => 'Number',
       'province_id'              => 'ForeignKey',
       'comments'                 => 'Text',
       'block'                    => 'Number',
+      'business'                 => 'Number',
     );
   }
 }

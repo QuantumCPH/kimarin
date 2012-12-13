@@ -1,10 +1,15 @@
-<?php include_stylesheets_for_form($form) ?>
+<?php 
+use_helper('I18N');
+	
+	echo $form->renderGlobalErrors();
+
+include_stylesheets_for_form($form) ?>
 <?php include_javascripts_for_form($form) ?>
 
 <form method="post" action="<?php url_for('@signup_step1') ?>" id="newCustomerForm" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
   <div class="left-col">
     <div class="split-form-sign-up">
-        <div class="step-details"> <strong><?php echo __('Become a Customer') ?> <span class="active">- <?php echo __('Step 1') ?>: <?php echo __('Register') ?> </span><span class="inactive">- <?php echo __('Step 2') ?>: <?php echo __('Payment') ?></span></strong>
+        <div class="step-details"> <strong><?php echo __('Become a Business Customer') ?> <span class="active">- <?php echo __('Step 1') ?>: <?php echo __('Register') ?> </span><span class="inactive">- <?php echo __('Step 2') ?>: <?php echo __('Payment') ?></span></strong>
             <br /><br /><br /><br /><span class="requiretofill">* <?php echo __('You must fill in this field.')?></span>  </div>
             <div class="fl col">
         <?php echo $form->renderHiddenFields() ?>
@@ -35,7 +40,7 @@
             $error_nie_passport_number = true;
             ?>
             <li>
-             <?php echo $form['nie_passport_number']->renderLabel() ?>
+             <?php echo $form['nie_passport_number']->renderLabel("CIF number") ?>
              <?php echo $form['nie_passport_number'];
               $emailWidget = new sfWidgetFormInput(array(), array());?>
              <?php if ($error_nie_passport_number): ?>
@@ -50,11 +55,11 @@
             </li>
             <!-- end passport number --> 
             <?php
-            $error_nationality_id = false;
-            if($form['nationality_id']->hasError())
-            	$error_nationality_id = true;
+//            $error_nationality_id = false;
+//            if($form['nationality_id']->hasError())
+//            	$error_nationality_id = true;
             ?>
-            <li>
+<!--            <li>
              <?php echo $form['nationality_id']->renderLabel() ?>
              <?php echo $form['nationality_id'] ?>
              <?php if ($error_nationality_id): ?>
@@ -63,7 +68,7 @@
 			 </span>
 			 <?php endif; ?>
              <div class='inline-error-signup'><?php echo $error_nationality_id?$form['nationality']->renderError():'&nbsp;'?></div>
-            </li>
+            </li>-->
             <!-- end nationality -->
             <?php
             $error_product = false;;
@@ -119,7 +124,7 @@
             	$error_first_name = true;
             ?>
             <li>
-             <?php echo $form['first_name']->renderLabel() ?>
+             <?php echo $form['first_name']->renderLabel('Company name') ?>
              <?php echo $form['first_name'] ?>
              <?php if ($error_first_name): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -130,36 +135,22 @@
             </li>
             <!-- end first name -->
             <?php
-            $error_second_last_name = false;
-            if($form['second_last_name']->hasError())
-            	$error_second_last_name = true;
+//            $error_second_last_name = false;
+//            if($form['second_last_name']->hasError())
+//            	$error_second_last_name = true;
             ?>
-            <li>
-             <?php echo $form['second_last_name']->renderLabel() ?>
-             <?php echo $form['second_last_name'] ?>
-             <?php if ($error_second_last_name): ?>
-             <span id="cardno_decl" class="alertstep1">
-			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
-			 </span>
-			 <?php endif; ?>
-             <div class='inline-error-signup'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
-            </li>
+<!--            <li>-->
+             <?php //echo $form['second_last_name']->renderLabel() ?>
+             <?php //echo $form['second_last_name'] ?>
+             <?php //if ($error_second_last_name): ?>
+<!--             <span id="cardno_decl" class="alertstep1">
+			  	<?php //echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>-->
+			 <?php //endif; ?>
+<!--             <div class='inline-error-signup'><?php //echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
+            </li>-->
             <!-- end second last name -->
-            <?php
-            $error_last_name = false;;
-            if($form['last_name']->hasError())
-            	$error_last_name = true;
-            ?>
-            <li>
-             <?php echo $form['last_name']->renderLabel() ?>
-             <?php echo $form['last_name'] ?>
-             <?php if ($error_last_name): ?>
-             <span id="cardno_decl" class="alertstep1">
-			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
-			 </span>
-			 <?php endif; ?>
-             <div class='inline-error-signup'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
-            </li>
+          
             <!-- end last name -->
             
             
@@ -169,7 +160,7 @@
             	$error_address = true;
             ?>
             <li>
-             <?php echo $form['address']->renderLabel() ?>
+             <?php echo $form['address']->renderLabel('Company address') ?>
              <?php echo $form['address'] ?>
              <?php if ($error_address): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -251,11 +242,11 @@
             </li>
             <!-- end country -->
             <?php
-            $error_date_of_birth = false;;
-            if($form['date_of_birth']->hasError())
-            	$error_date_of_birth = true;
+//            $error_date_of_birth = false;;
+//            if($form['date_of_birth']->hasError())
+//            	$error_date_of_birth = true;
             ?>
-            <li>
+<!--            <li>
              <?php echo $form['date_of_birth']->renderLabel() ?>
              <?php echo $form['date_of_birth']->render(array('class'=>'shrinked_select_box')) ?>
              <?php if ($error_date_of_birth): ?>
@@ -264,7 +255,7 @@
 			 </span>
 			 <?php endif; ?>
              <div class='inline-error-signup'><?php echo $error_date_of_birth?$form['date_of_birth']->renderError():'&nbsp;'?></div>
-            </li>
+            </li>-->
             <!-- end date of birth -->
             <?php
             $error_password = false;;
@@ -307,13 +298,28 @@
              <div class='inline-error-signup'><?php echo $error_password_confirm?$form['password_confirm']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end confirm password -->
+              <?php
+            $error_last_name = false;;
+            if($form['last_name']->hasError())
+            	$error_last_name = true;
+            ?>
+            <li>
+             <?php echo $form['last_name']->renderLabel('Name of<br />contact person') ?>
+             <?php echo $form['last_name'] ?>
+             <?php if ($error_last_name): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error-signup'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
+            </li>
             <?php
             $error_email = false;;
             if($form['email']->hasError())
             	$error_email = true;
             ?>
             <li>
-             <?php echo $form['email']->renderLabel() ?>
+             <?php echo $form['email']->renderLabel('E-mail of<br />contact person') ?>
              <?php echo $form['email'] ?>
              <?php if ($error_email): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -338,7 +344,9 @@
 			 <?php endif; ?>
              <div class='inline-error-signup'><?php echo $error_telecom_operator_id?$form['telecom_operator_id']->renderError():'&nbsp;'?></div>
             </li>
-              <input type="hidden" id="customer_business" name="customer[business]" value="0">
+              
+          <input type="hidden" id="customer_business" name="customer[business]" value="1">
+        
             
             <!-- end telecom operator -->
                         <!-- 

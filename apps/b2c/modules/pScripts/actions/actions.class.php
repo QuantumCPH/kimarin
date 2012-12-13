@@ -114,7 +114,7 @@ class pScriptsActions extends sfActions
 
 	  	$order->save();
 	  	$transaction->save();
-
+                TransactionPeer::AssignReceiptNumber($transaction);
 
 
 	$this->customer = $order->getCustomer();
@@ -528,6 +528,7 @@ class pScriptsActions extends sfActions
 			  			$customer_order->save();
 			  			$customer_product->save();
 			  			$transaction->save();
+                                                TransactionPeer::AssignReceiptNumber($transaction);
 
 
 			  			//save voucher so it can't be reused
@@ -653,7 +654,7 @@ class pScriptsActions extends sfActions
 
 			  			$customer_order->save();
 			  			$transaction->save();
-
+                                                TransactionPeer::AssignReceiptNumber($transaction);
 			  			Fonet::recharge($customer, $transaction->getAmount());
 
 
@@ -765,7 +766,7 @@ class pScriptsActions extends sfActions
 			  			$customer_order->save();
 			  			$customer_product->save();
 			  			$transaction->save();
-
+                                                TransactionPeer::AssignReceiptNumber($transaction);
 
 			  			//save voucher so it can't be reused
 			  			$voucher->setUsedOn(date('Y-m-d'));
@@ -1377,7 +1378,7 @@ public function executeSmsRegistration(sfWebrequest $request) {
     $transaction->setCustomerId($customer->getId());
     $transaction->setTransactionStatusId(1);
     $transaction->save();    
-
+    TransactionPeer::AssignReceiptNumber($transaction);
     $customer_product = new CustomerProduct();
     $customer_product->setCustomer($order->getCustomer());
     $customer_product->setProduct($order->getProduct());
@@ -1433,7 +1434,7 @@ public function executeSmsRegistration(sfWebrequest $request) {
 
     $transaction->setTransactionStatusId(3);
     $transaction->save();
-
+    TransactionPeer::AssignReceiptNumber($transaction);
     $order->setOrderStatusId(3);
     $order->save();
 
@@ -2444,7 +2445,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 	  	 
 	  	$order->save();
 	  	$transaction->save();
-
+                TransactionPeer::AssignReceiptNumber($transaction);
 	$this->customer = $order->getCustomer();
           $c = new Criteria;
 	  	$c->add(CustomerPeer::ID, $order->getCustomerId());
@@ -2551,28 +2552,16 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
         changeLanguageCulture::languageCulture($request, $this);
         //-----------------------
-        $langSym = $this->getUser()->getCulture();
-        $enableCountry = new Criteria();
-        $enableCountry->add(EnableCountryPeer::LANGUAGE_SYMBOL, $langSym);
-        $country_id = EnableCountryPeer::doSelectOne($enableCountry); //->getId();
-        if ($country_id) {
-            $CallCode = $country_id->getCallingCode();
-            $countryId = $country_id->getId();
-        } else {
-            $CallCode = sfConfig::get('app_country_code');
-            $countryId = "2";
-        }
+        
+        $CallCode = sfConfig::get('app_country_code');
+        $countryId = "1";
 
 
         $usagealerts = new Criteria();
-        $usagealerts->add(UsageAlertPeer::SMS_ACTIVE, 1);
-        $usagealerts->addAnd(UsageAlertPeer::COUNTRY, $countryId);
+         $usagealerts->add(UsageAlertPeer::COUNTRY, $countryId);
         $usageAlerts = UsageAlertPeer::doSelect($usagealerts);
         $c = new Criteria();
-        $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
-        $c->addJoin(CustomerProductPeer::PRODUCT_ID,ProductPeer::ID, Criteria::LEFT_JOIN);
-        $c->addAnd(ProductPeer::PRODUCT_COUNTRY_US,1, Criteria::NOT_EQUAL);
-        $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $c->addAnd(CustomerPeer::COUNTRY_ID, $countryId);
         $customers = CustomerPeer::doSelect($c);
         $telintaObj = new Telienta();
@@ -2586,7 +2575,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 echo $customer->getId().":".$customer_balance.":".$retries."<br/>";
             } while (!$customer_balance && $retries <= $maxRetries);
 
-            if($retries==$maxRetries){
+            if($retries==++$maxRetries){
                 continue;
             }
 
@@ -2603,8 +2592,8 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     $sender = new Criteria();
                     $sender->add(UsageAlertSenderPeer::ID, $usageAlert->getSenderName());
                     $senders = UsageAlertSenderPeer::doSelectOne($sender);
-                    echo $senderName = $senders->getName();
-
+                    echo $senderName = $senders->getName();echo "<br />";
+                    echo $usageAlert->getId();
 
                     $regType = RegistrationTypePeer::retrieveByPK($customer->getRegistrationTypeId()); // && $customer->getFonetCustomerId()!=''
                     $referer = $customer->getReferrerId();
@@ -2644,17 +2633,23 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                         /**
                          * SMS Sending Code
                          * */
+                         
                         if ($customer->getUsageAlertSMS()) {
                             echo "SMS Active<br/>";
-                            $customerMobileNumber = $CallCode . substr($customer->getMobileNumber(), 1);
-                            $sms_text = $usageAlert->getSmsAlertMessage();
-                            $response = ROUTED_SMS::Send($customerMobileNumber, $sms_text, $senderName);
-
+                            $customerMobileNumber = $CallCode . $customer->getMobileNumber();
+                            //die($customerMobileNumber);
+                        //    $customerMobileNumber = "923334414765";
+                             $sms_text = $usageAlert->getSmsAlertMessage();
+                            $this->setPreferredCulture($customer);
+                              //$sms_text = $this->getContext()->getI18N()->__("Sms Alert Sent");
+                              $response = ROUTED_SMS::Send($customerMobileNumber, $sms_text, $senderName);
+                            $this->updatePreferredCulture();
                             if ($response) {
                                 $msgSent->setAlertSent(1);
                             }
+                             
                         }
-                        $msgSent->save();
+                       $msgSent->save();
 
                     }
 
@@ -2681,10 +2676,9 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
                         if ($customer->getUsageAlertEmail()) {
                             echo "Email Active<br/>";
-                            $message = '<img src="'.sfConfig::get('app_web_url').'images/logo.png" /><br>' . $usageAlert->getEmailAlertMessage() . '<br>Hilsen <br>' . $senderName;
+                            $message = $usageAlert->getEmailAlertMessage();
                             $this->setPreferredCulture($customer);
-
-                            emailLib::sendCustomerBalanceEmail($customer, $message);
+                              emailLib::sendCustomerBalanceEmail($customer, $message);
                             $this->updatePreferredCulture();
                             $msgSentE->setAlertSent(1);
                         }
@@ -2733,7 +2727,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
            // $agent_order->setAmount($amount);
             $agent_order->setStatus(3);
             $agent_order->save();
-
+            TransactionPeer::AssignAgentReceiptNumber($agent_order);
             $agent = AgentCompanyPeer::retrieveByPK($agent_order->getAgentCompanyId());
             $agent->setBalance($agent->getBalance() + ($agent_order->getAmount()));
             $agent->save();
@@ -2808,7 +2802,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
     
         $order->save();
         $transaction->save();
-
+        TransactionPeer::AssignReceiptNumber($transaction);
         $this->customer = $order->getCustomer();
         $c = new Criteria;
         $c->add(CustomerPeer::ID, $order->getCustomerId());
@@ -2883,12 +2877,22 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
             //send email
 
               $unidid = $this->customer->getUniqueid();
-           
+                $agent_company_id = $transaction->getAgentCompanyId();
+        if ($agent_company_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $agent_company_id);
+          
+            $agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $agent_name = '';
+            
+        }
               $message_body = $this->getPartial('payments/order_receipt', array(
                         'customer' => $this->customer,
                         'order' => $order,
                         'transaction' => $transaction,
                         'vat' => $vat,
+                        'agent_name' => $agent_name,
                         'wrap' => false
                     ));
 
@@ -3039,6 +3043,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
             $order->save();
             $transaction->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
             if ($is_transaction_ok) {
 
                 // echo 'Assigning Customer ID <br/>';
@@ -3184,6 +3189,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                     //This is for Recharge the Account
                   
                     $transaction_i->save();
+                    TransactionPeer::AssignReceiptNumber($transaction_i);
                     $invite->setBonusTransactionId($transaction_i->getId());
                     $invite->save();
 
@@ -3501,6 +3507,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                $transaction->setTransactionDescriptionId($transactiondescription->getId());
                $transaction->setDescription($transactiondescription->getTitle());
                $transaction->save();
+               TransactionPeer::AssignReceiptNumber($transaction);
                $telintaObj = new Telienta();
                $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
            }
@@ -3701,7 +3708,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
         $order->save();
         $transaction->save();
-
+        TransactionPeer::AssignReceiptNumber($transaction);
         $callbacklog = new CallbackLog();
         $callbacklog->setMobileNumber($new_mobile_number);
         $callbacklog->setuniqueId($uniqueId);
@@ -3814,7 +3821,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         }*/
         $order->save();
         $transaction->save();
-
+        TransactionPeer::AssignReceiptNumber($transaction);
         $this->customer = $order->getCustomer();
         /*echo "ag" . $agentid = $this->customer->getReferrerId();
         echo "prid" . $productid = $order->getProductId();
@@ -3930,7 +3937,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
        
         $order->save();
         $transaction->save();
-
+        TransactionPeer::AssignReceiptNumber($transaction);
         $this->customer = $order->getCustomer();
        
        

@@ -72,7 +72,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	
   <tr bgcolor="#CCCCCC" class="receipt_header">   	
     <th colspan="3"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $order->getId() ?></th>
+    <th><?php echo __('Order No.') ?> <?php echo $transaction->getReceiptNo(); ?></th>
   </tr>
   <tr> 
     <td colspan="4" class="payer_summary">

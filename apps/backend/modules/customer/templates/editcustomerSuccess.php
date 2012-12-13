@@ -12,21 +12,37 @@
 <table width="100%" cellspacing="0" cellpadding="2" class="tblAlign" border='0'>
 
         
+ <?php  if($editCust->getBusiness()){    ?>
         <tr>
+            <td style="padding: 5px;">Company Name</td>
+            <td style="padding: 5px;"><input type="text" name="firstName" value="<?php echo $editCust->getFirstName();?>" class="required" />
+            </td>
+        </tr>
+          <tr>
+            <td style="padding: 5px;">Contact Person Name</td>
+            <td style="padding: 5px;"><input type="text" name="lastName" value="<?php echo $editCust->getLastName();?>" class="required" />
+            </td>
+        </tr>
+        <?php   }else{ ?>
+        
+          <tr>
             <td style="padding: 5px;">First Name</td>
             <td style="padding: 5px;"><input type="text" name="firstName" value="<?php echo $editCust->getFirstName();?>" class="required" />
             </td>
         </tr>
-        <tr>
+          <tr>
             <td style="padding: 5px;">Last Name</td>
             <td style="padding: 5px;"><input type="text" name="lastName" value="<?php echo $editCust->getLastName();?>" class="required" />
             </td>
         </tr>
-        <tr>
+         <tr>
             <td style="padding: 5px;">Second Family Name</td>
             <td style="padding: 5px;"><input type="text" name="secondlastName" value="<?php echo $editCust->getSecondLastName();?>" />
             </td>
         </tr>
+        <?php   } ?>
+      
+       
         <tr>
             <td style="padding: 5px;">Address</td>
             <td style="padding: 5px;"><input type="text" name="address" value="<?php echo $editCust->getAddress();?>" class="required" />
@@ -57,15 +73,27 @@
             <td style="padding: 5px;"><input type="text" name="pob" value="<?php echo $editCust->getPoBoxNumber();?>" class="required" />
             </td>
         </tr>
+         <?php  if($editCust->getBusiness()){    ?>
         <tr>
+            <td style="padding: 5px;">Contact Person Email</td>
+            <td style="padding: 5px;"><input type="text" name="email" value="<?php echo $editCust->getEmail();?>"  class="required email"/>
+            </td>
+        </tr>
+        
+        
+        <?php  }else{  ?>
+         <tr>
             <td style="padding: 5px;">Email</td>
             <td style="padding: 5px;"><input type="text" name="email" value="<?php echo $editCust->getEmail();?>"  class="required email"/>
             </td>
         </tr>
+        
+        
+        <?php  } ?>
          <tr>
             <td style="padding: 5px;">Nationality</td>
             <td style="padding: 5px;">
-                <select name="nationalityid" class="required">
+                <select name="nationalityid" class="">
                     <option value="">--Select--</option>
                 <?php
                   foreach($nationality_list as $nationality){
@@ -107,7 +135,7 @@
                           $dy = date('Y',strtotime($dt));
                          } 
                 ?>
-                <select name="dd" class="required">
+                <select name="dd">
                     <option value="">Day</option>
                     <?php
                     for($d = 1;$d<=31; $d++){
@@ -117,7 +145,7 @@
                     }
                     ?>
                 </select>&nbsp;
-                <select name="dm" class="required">
+                <select name="dm">
                     <option value="">Month</option>
                     <?php
                     for($m = 1;$m<=12; $m++){
@@ -127,7 +155,7 @@
                     }
                     ?>
                 </select>&nbsp;
-                <select name="dy" class="required">
+                <select name="dy">
                     <option value="">Year</option>
                     <?php
                     for($y =1901;$y<=1998; $y++){
@@ -139,20 +167,20 @@
                 </select>
             </td>
         </tr>
-<!--        <tr>
-            <td style="padding: 5px;">Usage Email Alerts</td>
+        <tr>
+            <td style="padding: 5px;">Balance E-mail</td>
             <td style="padding: 5px;">
                 <input type="checkbox" name="usage_email" <?php if($editCust->getUsageAlertEmail()) echo" checked=checked"?> />&nbsp;
                 
             </td>
         </tr>
         <tr>
-            <td style="padding: 5px;">Usage SMS Alerts</td>
+            <td style="padding: 5px;">Balance SMS</td>
             <td style="padding: 5px;">
                 <input type="checkbox" name="usage_sms" <?php if($editCust->getUsageAlertSMS()) echo" checked=checked"?> />&nbsp;
                 
             </td>
-        </tr>-->
+        </tr>
             <tr>
             <td>Comments:</td>
             <td><textarea name="comments"  id="customer_comments"><?php echo $editCust->getComments(); ?></textarea>

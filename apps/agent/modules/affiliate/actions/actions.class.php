@@ -61,7 +61,7 @@ class affiliateActions extends sfActions {
         $startdate = $request->getParameter('startdate');
         $enddate = $request->getParameter('enddate');
         if ($startdate != '') {
-            $startdate = date('d-m-Y 00:00:00', strtotime($startdate));
+            $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }else{
             $startdate = date('Y-m-d 00:00:00', strtotime($agent->getCreatedAt()));
@@ -69,12 +69,14 @@ class affiliateActions extends sfActions {
         }
 
         if ($enddate != '') {
-            $enddate = date('d-m-Y 23:59:59', strtotime($enddate));
+            $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
         }else{
            $enddate = date('Y-m-d 23:59:59');
            $this->enddate =$enddate;
         }
+
+ 
 
 
         foreach ($customers as $customer) {
@@ -83,6 +85,7 @@ class affiliateActions extends sfActions {
             $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
             $tc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
             if ($startdate != "" && $enddate != "") {
+               
                 $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                 $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
             }
@@ -105,6 +108,7 @@ class affiliateActions extends sfActions {
         $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,11, Criteria::EQUAL);
         //  $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,13, Criteria::NOT_EQUAL);
         if ($startdate != "" && $enddate != "") {
+            
             $ar->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $ar->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
         }
@@ -354,14 +358,14 @@ $vat=$transaction->getVat();
         $startdate = $request->getParameter('startdate');
         $enddate = $request->getParameter('enddate');
         if ($startdate != '') {
-            $startdate = date('d-m-Y 00:00:00', strtotime($startdate));
+            $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }else{
             $startdate = date('Y-m-d 00:00:00', strtotime($this->agent->getCreatedAt()));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }
         if ($enddate != '') {
-            $enddate = date('d-m-Y 23:59:59', strtotime($enddate));
+            $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
         }else{
             $enddate = date('Y-m-d 23:59:59');
@@ -751,6 +755,8 @@ $vat=$transaction->getVat();
             unset($this->form['terms_conditions']);
             unset($this->form['imsi']);
             unset($this->form['uniqueid']);
+            unset($this->form['usage_alert_sms']);
+            unset($this->form['usage_alert_email']);
 //                        //unset($this->form['password']);
 //                        unset($this->form['terms_conditions']);
             // print_r($this->form);
@@ -766,6 +772,48 @@ $vat=$transaction->getVat();
         sfView::NONE;
     }
 
+  
+       public function executeRegisterBusinessCustomer(sfWebRequest $request) {
+
+
+        $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+        $this->browser = new Browser();
+
+        $c = new Criteria();
+        $c->add(AgentCompanyPeer::ID, $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $referrer_id = AgentCompanyPeer::doSelectOne($c);
+
+        if ($request->isMethod('post')) {
+
+            $this->form = new CustomerForm();
+
+            $this->form->bind($request->getParameter("newCustomerForm"), $request->getFiles("newCustomerForm"));
+            $this->form->setDefault('referrer_id', $referrer_id);
+            unset($this->form['terms_conditions']);
+            unset($this->form['imsi']);
+            unset($this->form['uniqueid']);
+            unset($this->form['usage_alert_sms']);
+            unset($this->form['usage_alert_email']);
+//                        //unset($this->form['password']);
+//                        unset($this->form['terms_conditions']);
+            // print_r($this->form);
+            //  die;
+
+            $this->processForm($request, $this->form);
+        } else {
+
+            $this->form = new CustomerForm();
+        }
+
+        //$this->setLayout();
+        sfView::NONE;
+    }
+
+ 
+    
+    
+    
+    
     protected function processFormone(sfWebRequest $request, sfForm $form) {
         //print_r($request->getParameter($form->getName()));
         $customer = $request->getParameter($form->getName());
@@ -818,6 +866,10 @@ $vat=$transaction->getVat();
         //   var_dump($customer);die;
         if ($form->isValid()) {
             //     $customer->setPlainText($request->getParameter($form->getPassword()));
+            unset(               
+                $this->form['usage_alert_sms'],
+                $this->form['usage_alert_email']
+             );
             $customer = $form->save();
             $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
             $customer->setRegistrationTypeId('2');
@@ -1020,7 +1072,8 @@ $vat=$transaction->getVat();
 
 
             $transaction->save();
-
+            TransactionPeer::AssignReceiptNumber($transaction);
+            
             if ($agent->getIsPrepaid() == true) {
 
                 if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
@@ -1225,6 +1278,7 @@ $vat=$transaction->getVat();
             $agent_order = new AgentOrder();
             $agent_order->setAgentCompanyId($agent->getId());
             $agent_order->setStatus('1');
+              $agent_order->setOrderDescription('7');
             $agent_order->save();
 
             $agent_order->setAgentOrderId('a0' . $agent_order->getId());
@@ -1291,6 +1345,7 @@ $vat=$transaction->getVat();
         $c = new Criteria();
         $c->add(AgentOrderPeer::AGENT_COMPANY_ID, $agent->getId());
         $c->add(AgentOrderPeer::STATUS, 3);
+          $c->addDescendingOrderByColumn(AgentOrderPeer::ID);
         $this->agentOrders = AgentOrderPeer::doSelect($c);
     }
 
@@ -1680,6 +1735,7 @@ $vat=$transaction->getVat();
                 $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
                 $order->save();
                 $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
                 $this->customer = $order->getCustomer();
                 $this->setPreferredCulture($this->customer);
                 emailLib::sendChangeNumberEmail($this->customer, $order);
@@ -1764,14 +1820,14 @@ $vat=$transaction->getVat();
         $startdate = $request->getParameter('startdate');
         $enddate = $request->getParameter('enddate');
         if ($startdate != '') {
-            $startdate = date('d-m-Y 00:00:00', strtotime($startdate));
+            $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }else{
             $startdate = date('Y-m-d 00:00:00', strtotime($this->agent->getCreatedAt()));
             $this->startdate = $startdate;
         }
         if ($enddate != '') {
-            $enddate = date('d-m-Y 23:59:59', strtotime($enddate));
+            $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
         }else{
             $enddate = date('Y-m-d 23:59:59');
@@ -2229,7 +2285,7 @@ $vat=$transaction->getVat();
                 $transactiondescription=TransactionDescriptionPeer::retrieveByPK(11);
                 $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                $transaction->setDescription($transactiondescription->getTitle());
+                $transaction->setDescription($product->getDescription());
                 $transaction->setVat($request->getParameter('vat'));
                 $transaction->setAgentCompanyId($agent->getId());
 
@@ -2299,6 +2355,7 @@ $vat=$transaction->getVat();
                     $order->setExeStatus(1);
                     $order->save();
                     $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
                     $this->customer = $order->getCustomer();
                     //  $this->getUser()->setCulture('de');
                     $this->setPreferredCulture($this->customer);
@@ -2436,6 +2493,7 @@ $vat=$transaction->getVat();
             $transaction->setVat($this->vat);
             $transaction->setTransactionStatusId(1);
             $transaction->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
             /////////////////////////////////////////////
             
             
@@ -2556,6 +2614,7 @@ $vat=$transaction->getVat();
                     $order->setExeStatus(1);
                     $order->save();
                     $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
                     $this->customer = $order->getCustomer();
                     //  $this->getUser()->setCulture('de');
                    
@@ -2564,7 +2623,7 @@ $vat=$transaction->getVat();
             emailLib::sendCustomerNewcardEmailAgent($this->customer, $order, $transaction,$agent_company_id);
             $this->updatePreferredCulture();
                     //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('new sim is purchased successfully '));
+                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('New sim is purchased successfully '));
 //                                      echo 'rehcarged, redirecting';
                     $this->redirect('affiliate/receipts');
                 } else {
@@ -2719,7 +2778,7 @@ $vat=$transaction->getVat();
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
           $transaction->save();
-        
+        TransactionPeer::AssignReceiptNumber($transaction);
         
 ///////////////////agent area //////////////////////////
            $transaction->setAgentCompanyId($agent->getId());
@@ -2796,6 +2855,7 @@ $vat=$transaction->getVat();
        
            
         $transaction->save();
+        TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
         $ccp->setCustomerId($this->customer->getId());
         $ccp->setProductId($product_id);

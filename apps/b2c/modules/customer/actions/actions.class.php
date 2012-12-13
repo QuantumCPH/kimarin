@@ -172,12 +172,21 @@ class customerActions extends sfActions {
             $this->redirect("http://www.kimarin.es/register.html");
         }
 
+        if ($request->getParameter('ref')) {
+            //setcookie("user", "XXXXXXX", time()+3600);
+
+            $this->getResponse()->setCookie('agent_id', $request->getParameter('ref'),time()+36000);
+            //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
+            $this->redirect("http://www.kimarin.es/register.html");
+        }
+        
+        
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
         if ($request->getParameter('lang') != '') {
             $this->getUser()->setCulture($request->getParameter('lang'));
             $this->sLang = $request->getParameter('lang');
         } else {
-            $this->sLang = 'en';
+            $this->sLang = $this->getUser()->getCulture();
         }
 
 
@@ -215,7 +224,17 @@ class customerActions extends sfActions {
                 $this->form->setDefault('referrer_id', $referrer_id);
         }
 
+ if ($this->getRequest()->getCookie('agent_id')) {
+            $referrer_id = $this->getRequest()->getCookie('agent_id');
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $referrer_id);
 
+            if (AgentCompanyPeer::doCount($c)==1){
+                $this->form->setDefault('referrer_id', $referrer_id);
+            }
+        }
+          
+        
         unset($this->form['manufacturer']);
         unset($this->form['device_id']);
 
@@ -409,6 +428,7 @@ class customerActions extends sfActions {
                 $transaction->setCustomerId($customerids);
                 $transaction->setTransactionStatusId(3);
                 echo 'transaction' . $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
                 echo '<br/>';
 
                 $customer = new Criteria();
@@ -792,7 +812,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->transactions = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
     }
 
     public function executeRefillpaymenthistory(sfWebRequest $request) {
@@ -948,6 +968,7 @@ class customerActions extends sfActions {
         unset($this->form['block']);
         unset($this->form['usage_alert_sms']);
         unset($this->form['usage_alert_email']);
+          unset($this->form['business']);
 
         //  unset($this->form['password']);
         // unset($this->form['password_confirm']);
@@ -1025,13 +1046,11 @@ class customerActions extends sfActions {
         unset($this->form['device_id']);
         unset($this->form['ticketval']);
         unset($this->form['i_customer']);
-        unset($this->form['usage_alert_sms']);
-        unset($this->form['usage_alert_email']);
-        unset($this->form['sim_type_id']);
+          unset($this->form['sim_type_id']);
         unset($this->form['comments']);
         unset($this->form['block']);
-        unset($this->form['usage_alert_sms']);
-        unset($this->form['usage_alert_email']);
+          unset($this->form['business']);
+      
 
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
@@ -1191,7 +1210,10 @@ class customerActions extends sfActions {
 
         if ($customer) {
             //change the password to some thing uniuque and complex
-            $new_password = substr(base64_encode($customer->getPassword()), 0, 8);
+            $chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+       
+           // $new_password = substr(base64_encode($customer->getPassword()), 0, 8);
+           $new_password =substr(str_shuffle($chars),0,6);
             //echo $new_password.''.$customer->getPassword();
             $customer->setPlainText($new_password);
             $customer->setPassword($new_password);
@@ -1287,7 +1309,7 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->callRecords = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
     }
 
     public function executeWebsms(sfWebRequest $request) {
@@ -1303,7 +1325,7 @@ class customerActions extends sfActions {
 
 
         $cunt = new Criteria();
-        //$cunt->add(CountryPeer::WEB_SMS_STATUS,3);
+        $cunt->add(CountryPeer::ID, 185, Criteria::LESS_EQUAL);
         $cunt->addAscendingOrderByColumn(CountryPeer::NAME);
         $countries = CountryPeer::doSelect($cunt);
         $this->msgSent = "";
@@ -1318,7 +1340,7 @@ class customerActions extends sfActions {
         if ($message) {
             $this->msgSent = "No";
             $country_code = $request->getParameter('country');
-            $number = $request->getParameter('number');
+            $number = $request->getParameter('pnumber');
             $destination = $country_code . $number;
 
             $c = new Criteria();
@@ -1380,11 +1402,12 @@ class customerActions extends sfActions {
         $c->add(CbfPeer::CUSTOMER_ID, $this->customer->getId());
         $c->add(CbfPeer::STATUS, 3);
         $c->addDescendingOrderByColumn(CbfPeer::CREATED_AT);
+
         $items_per_page = 25; //shouldn't be 0
         $this->page = $request->getParameter('page');
-        if ($this->page == '')
+        if ($this->page == ''){
             $this->page = 1;
-
+        } 
         $pager = new sfPropelPager('Cbf', $items_per_page);
         $pager->setPage($this->page);
 
@@ -1393,7 +1416,8 @@ class customerActions extends sfActions {
         $pager->init();
 
         $this->smsRecords = $pager->getResults();
-        $this->total_pages = $pager->getNbResults() / $items_per_page;
+        $this->total_pages = ceil($pager->getNbResults() / $items_per_page);
+        
     }
 
     public function executeTellAFriend(sfWebRequest $request) {
@@ -1430,9 +1454,18 @@ class customerActions extends sfActions {
             $message_body = "<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>";
             $message_body .= /* $this->getContext()->getI18N()->__('Hi ') . */$recepient_name . ',<br /> ' . $this->getContext()->getI18N()->__("This invitation has been sent to you by") . ' ' . $name . ', ' . $this->getContext()->getI18N()->__("who is a registered %1% customer.", array('%1%' => sfConfig::get('app_site_title')));
             $message_body .= '</p>';
-
-            $message_body_end = "<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>";
+                $message_body_end = "<p style='font-family:\"Times New Roman\", Times, serif;font-size: 14px;'>";
+            if($this->customer->getBusiness()){
+             
+          //  $message_body_end .= /* $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="' . sfConfig::get('app_customer_url') . 'customer/registerBusinessCustomer?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.", array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>' . $this->getContext()->getI18N()->__('Read more') . ' <a href="' . sfConfig::get('app_live_site_url') . '">' . sfConfig::get('app_live_site_url') . '</a>';
+           $message_body_end .= /* $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="' . sfConfig::get('app_customer_url') . 'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.", array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>' . $this->getContext()->getI18N()->__('Read more') . ' <a href="' . sfConfig::get('app_live_site_url') . '">' . sfConfig::get('app_live_site_url') . '</a>';
+      
+            }else{
+        
             $message_body_end .= /* $this->getContext()->getI18N()->__('Please click accept to start saving money immediately with Smartsim.') . */' <a  href="' . sfConfig::get('app_customer_url') . 'customer/signup?invite_id=' . $invite->getId() . '"> ' . $this->getContext()->getI18N()->__("Go to %1%'s web site for registration.", array('%1%' => sfConfig::get('app_site_title'))) . '</a><br/>' . $this->getContext()->getI18N()->__('Read more') . ' <a href="' . sfConfig::get('app_live_site_url') . '">' . sfConfig::get('app_live_site_url') . '</a>';
+      
+            }   
+            
             $message_body_end .= '</p>';
 
             //send email
@@ -1597,6 +1630,7 @@ class customerActions extends sfActions {
                 $transaction->setCustomerId($customer->getId());
                 $transaction->setTransactionStatusId(3);
                 $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
 //        echo 'transaction'.$transaction->save();
 //        echo '<br/>';
 
@@ -1715,6 +1749,7 @@ class customerActions extends sfActions {
             $transaction->setCustomerId($customer->getId());
             $transaction->setTransactionStatusId(3);
             $transaction->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
 
             // Fonet::recharge($customer, $order->getExtraRefill() );
             $this->customer = $customer;
@@ -2021,7 +2056,7 @@ class customerActions extends sfActions {
         $product_id = $request->getParameter('product');
         $this->product = ProductPeer::retrieveByPK($product_id);
 
-        $this->vat = $this->product->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+        $this->vat = $this->product->getRegistrationFee()* sfConfig::get('app_vat_percentage');
 
         $this->amount = $this->product->getRegistrationFee() + $this->vat;
         $amount = $this->amount;
@@ -2326,6 +2361,7 @@ class customerActions extends sfActions {
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
         $transaction->save();
+        TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
         $ccp->setCustomerId($this->customer->getId());
         $ccp->setProductId($product_id);
@@ -2393,4 +2429,93 @@ class customerActions extends sfActions {
         return sfView::NONE;
     }
 
+    
+    public function executeRegisterBusinessCustomer(sfWebRequest $request) {
+	//$this->form = new CustomerForm();
+        if ($request->getParameter('invite_id')) {
+            //setcookie("user", "XXXXXXX", time()+3600);
+            $this->getResponse()->setCookie('invite_id', $request->getParameter('invite_id'),time()+36000);
+            //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
+            $this->redirect("http://www.kimarin.es/register.html");
+        }
+
+          if ($request->getParameter('ref')) {
+            //setcookie("user", "XXXXXXX", time()+3600);
+
+            $this->getResponse()->setCookie('agent_id', $request->getParameter('ref'),time()+36000);
+            //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
+            $this->redirect("http://www.kimarin.es/register.html");
+        }
+
+        //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
+        if ($request->getParameter('lang') != '') {
+            $this->getUser()->setCulture($request->getParameter('lang'));
+            $this->sLang = $request->getParameter('lang');
+        } else {
+            $this->sLang = $this->getUser()->getCulture();
+        }
+
+
+
+        $this->form = new CustomerFormB2C();
+        $id = $request->getParameter('invite_id');
+        $visitor_id = $request->getParameter('visitor');
+        //$this->form->widgetSchema->setLabel('the_field_id', false);
+        if ($visitor_id != NULL) {
+            $c = new Criteria();
+            $c->add(VisitorsPeer::ID, $request->getParameter('visitor'));
+            $visitor = VisitorsPeer::doSelectOne($c);
+            $status = $visitor->getStatus();
+            $visitor->setStatus($status . "> B2C Signup Page ");
+            $visitor->save();
+        }
+
+        if ($this->getRequest()->getCookie('invite_id') != NULL) {
+            $c = new Criteria();
+            //$c->add(InvitePeer::ID,$id);
+            //$c->add(InvitePeer::INVITE_STATUS,'2');
+            $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
+            if ($invite) {
+                $invite->setInviteStatus('2');
+                $invite->save();
+            }
+        }
+
+        //set referrer id
+        if ($referrer_id = $request->getParameter('ref')) {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $referrer_id);
+
+            if (AgentCompanyPeer::doSelectOne($c))
+                $this->form->setDefault('referrer_id', $referrer_id);
+        }
+if ($this->getRequest()->getCookie('agent_id')) {
+            $referrer_id = $this->getRequest()->getCookie('agent_id');
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $referrer_id);
+
+            if (AgentCompanyPeer::doCount($c)==1){
+                $this->form->setDefault('referrer_id', $referrer_id);
+            }
+        }
+
+        unset($this->form['manufacturer']);
+        unset($this->form['device_id']);
+
+
+        if ($request->isMethod('post')) {
+
+            unset($this->form['imsi']);
+            unset($this->form['uniqueid']);
+
+            $this->processForm($request, $this->form, $this->getRequest()->getCookie('invite_id'));
+        }
+    }
+
+  
+    
+    
+    
+    
+    
 }

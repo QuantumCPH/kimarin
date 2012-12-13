@@ -13,7 +13,7 @@ generator:
     list:
       title: Agent Company List
       filters: [id, name, cvr_number ]
-      display: [id, name, cvr_number, first_name, head_phone_number, status , registration_revenue_commissision ,refill_revenue_commissision,revenue_at_shop, registration_revenue,refill_revenue,revenue_at_shop,sms_code]
+      display: [id, name, cvr_number, first_name, head_phone_number, status , registration_revenue_commissision ,refill_revenue_commissision,registration_revenue,refill_revenue,sms_code]
       max_per_page: 500
       object_actions:
         _edit: ~

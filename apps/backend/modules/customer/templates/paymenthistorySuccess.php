@@ -37,7 +37,7 @@
                               
                               <?php    $TDI=$transaction->getTransactionDescriptionId();  ?>
                 <tr <?php echo $class;   ?>>
-                  <td><?php  echo $transaction->getOrderId() ?></td>
+                  <td><?php  echo $transaction->getReceiptNo(); ?></td>
                   <td><?php echo  $transaction->getCreatedAt('d-m-Y H:i:s') ?></td>
                   <td><?php echo $transaction->getDescription() ?> <?php
                    
@@ -78,7 +78,7 @@
                 <?php else: ?>
                 <tr>
                 	<td colspan="3" align="right"><strong>Total</strong></td>
-                        <td  align="right"><?php echo number_format($amount_total,2); ?>
+                        <td  align="right" colspan="2"><?php echo number_format($amount_total,2); ?>
                             <?php 
                                 echo (sfConfig::get('app_currency_code'));
                        ?></td>

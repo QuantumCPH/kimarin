@@ -280,8 +280,11 @@ class customerActions extends autocustomerActions {
         $nationality = NationalityPeer::doSelect($cn);
         $this->nationality_list = $nationality;
         if ($request->getParameter('customerID')) {
-            $dob = $request->getParameter('dy') . "-" . $request->getParameter('dm') . "-" . $request->getParameter('dd');
-            $dob = date('Y-m-d', strtotime($dob));
+            $dob="";
+            if($request->getParameter('dy')!="" && $request->getParameter('dm')!="" && $request->getParameter('dd')!=""){
+              $dob = $request->getParameter('dy') . "-" . $request->getParameter('dm') . "-" . $request->getParameter('dd');
+              $dob = date('Y-m-d', strtotime($dob));
+            }
             $usage_email = $request->getParameter('usage_email');
             ($usage_email == "") ? $usage_email = 0 : $usage_email = 1;
             $usage_sms = $request->getParameter('usage_sms');
@@ -294,12 +297,16 @@ class customerActions extends autocustomerActions {
             $customer->setCity($request->getParameter('city'));
             $customer->setPoBoxNumber($request->getParameter('pob'));
             $customer->setEmail($request->getParameter('email'));
+           if ($dob!="") { 
             $customer->setDateOfBirth($dob);
+           } 
             $customer->setUsageAlertEmail($usage_email);
             $customer->setUsageAlertSMS($usage_sms);
             $customer->setProvinceId($request->getParameter("provinceid"));
             $customer->setPreferredLanguageId($request->getParameter("pLanguageId"));
+           if ($request->getParameter('nationalityid')) { 
             $customer->setNationalityId($request->getParameter("nationalityid"));
+           } 
             $customer->setComments($request->getParameter('comments'));
             $customer->save();
 
@@ -364,6 +371,7 @@ class customerActions extends autocustomerActions {
                 $transaction->setTransactionStatusId(3);
                 $order->save();
                 $transaction->save();
+                TransactionPeer::AssignReceiptNumber($transaction);
                 $this->customer = $order->getCustomer();
                 $this->setPreferredCulture($this->customer);
                 emailLib::sendAdminRefillEmail($this->customer, $order);
@@ -415,7 +423,18 @@ class customerActions extends autocustomerActions {
             //$cc->add(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);
             $customer = CustomerPeer::doSelectOne($cc);
             //echo $customer->getId();
-
+             $telintaObj = new Telienta();
+             $customerBalance = $telintaObj->getBalance($customer);
+            
+            $finalAmount=$customerBalance+$extra_refill;
+            
+            
+              if($finalAmount>249){
+                  $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Your refill has not been accepted as customer account balance will exceed 250'));  
+                  $this->redirect($this->getTargetURL() . 'customer/selectRefillCustomer');  
+                }
+            
+            
             if ($customer and $mobile_number != "") {
                 $validated = true;
                 if($amount<=0){
@@ -481,6 +500,7 @@ class customerActions extends autocustomerActions {
                     $transaction->setTransactionStatusId(3);
                     $order->save();
                     $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
                     $this->customer = $order->getCustomer();
                     $this->setPreferredCulture($this->customer);
                     emailLib::sendAdminRefillEmail($this->customer, $order);
