@@ -20,6 +20,7 @@
 <table width="75%" cellspacing="0" cellpadding="2" class="tblAlign">
 <tr class="headings">
     <th><?php echo __('Date') ?></th>
+    <th><?php echo __('Receipt No.') ?></th>
     <th><?php echo __('Company & Name') ?></th>
     <th><?php echo __('Description') ?></th>
     <th align="right"><?php echo __('Amount') ?> (<?php echo sfConfig::get('app_currency_code');?>)</th>
@@ -41,6 +42,7 @@ $incrment++;
 ?>
 <tr  <?php echo $class;?>>
     <td><?php echo  $transaction->getCreatedAt('d-m-Y') ?></td>
+    <td><?php echo  $transaction->getReceiptNo(); ?></td>
     <td><?php echo ($transaction->getCompany()?$transaction->getCompany():'N/A')?></td>
     <td><?php echo __($transaction->getDescription()) ?></td>
     <td align="right"><?php echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount(); ?><?php echo sfConfig::get('app_currency_code');?></td>
@@ -48,11 +50,11 @@ $incrment++;
 <?php endforeach; ?>
 <?php if(count($transactions)==0): ?>
 <tr>
-    <td colspan="4"><p><?php echo __('There are currently no transactions to show.') ?></p></td>
+    <td colspan="5"><p><?php echo __('There are currently no transactions to show.') ?></p></td>
 </tr>
 <?php else: ?>
 <tr><td>&nbsp;</td>
-    <td colspan="2" align="right"><strong><?php echo __('Total:') ?>&nbsp;&nbsp;</strong></td>
+    <td colspan="3" align="right"><strong><?php echo __('Total:') ?>&nbsp;&nbsp;</strong></td>
     <td align="right"><?php echo number_format($amount_total,2);  ?><?php echo sfConfig::get('app_currency_code');?></td>
     
 </tr>	

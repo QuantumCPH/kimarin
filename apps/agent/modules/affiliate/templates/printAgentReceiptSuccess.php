@@ -44,7 +44,7 @@ use_helper('Number');
 
  <tr bgcolor="#CCCCCC" class="receipt_header">
     <th colspan="3"><?php echo __('Order Receipt') ?></th>
-    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getAgentOrderId(); ?></th>
+    <th><?php echo __('Order No.') ?> <?php echo $agent_order->getReceiptNo(); ?></th>
   </tr>
 
   <tr>
@@ -52,9 +52,7 @@ use_helper('Number');
       <?php echo sprintf("%s ", $agent->getName())?><br/>
       <?php echo $agent->getAddress() ?><br/>
       <?php echo sprintf('%s %s', $agent->getCity(), $agent->getPostCode()) ?><br/>
-      <?php // echo $agent->getCountryName(); ?>
-
-
+    
       <br /><br />
     <?php echo __("CVR Number") ?>: <?php echo sprintf('%s', $agent->getCvrNumber()) ?>
 	<br />
@@ -73,9 +71,16 @@ use_helper('Number');
   <tr>
     <td><?php echo $agent_order->getCreatedAt('d-m-Y') ?></td>
     <td>
-    <?php echo __('Agent Refill');?>
+        <?php $odid=$agent_order->getOrderDescription();
+        
+          $transactiondescription = TransactionDescriptionPeer::retrieveByPK($odid);
+     echo   $transactiondescription->getTitle();
+        
+        
+        ?>
+    <?php //echo __('Agent Refill');?>
     </td>
-    <td>1<?php //echo $agent_order->getQuantity() ?></td>
+    <td>1</td>
     <td align="right" style="padding-right: 65px;"><?php echo number_format($subtotal = $agent_order->getAmount(),2) //($order->getProduct()->getPrice() - $order->getProduct()->getPrice()*.2) * $order->getQuantity()) ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
   <tr>
@@ -100,25 +105,6 @@ use_helper('Number');
     <td align="right" style="padding-right: 65px;"><?php echo number_format($agent_order->getAmount(),2) ?>&nbsp;<?php echo sfConfig::get('app_currency_code')?></td>
   </tr>
 </table>
-<?php if($wrap_content): ?>
-<br />
-<p>
-<?php
-	$c = new  Criteria();
-	$c->add(GlobalSettingPeer::NAME, 'expected_delivery_time_agent_order');
-
-	$global_setting_expected_delivery = GlobalSettingPeer::doSelectOne($c);
-
-	if ($global_setting_expected_delivery)
-		$expected_delivery = $global_setting_expected_delivery->getValue();
-	else
-		$expected_delivery = "3 business days";
-?>
-<p>
-	<?php echo __('You will receive your package within %1%.', array('%1%'=>$expected_delivery)) ?>
-</p>
-<?php endif; ?>
-
 <p style='font-weight: bold;font-family:"Times New Roman", Times, serif;font-size: 14px;'>
     <?php echo __('If you have any inquiries please contact %1% Customer Support.',array('%1%' => sfConfig::get('app_site_title'))); ?>
     <br><?php echo __('E-mail') ?>:&nbsp;

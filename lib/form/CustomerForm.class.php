@@ -62,8 +62,6 @@ class CustomerForm extends BaseCustomerForm
 					//'add_empty' => 'Choose a product',
 	        ));
 	        
-
-	        
 	$this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
     								'model'		=> 'Product',
     								'column'	=> 'id',
@@ -96,7 +94,8 @@ class CustomerForm extends BaseCustomerForm
             //-----------------For get the Nationality---------------------
             $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'Nationality',
-                    'order_by' => array('Title','asc')
+                    'order_by' => array('Title','asc'),
+                     'add_empty' => '-------------',
             ));
             //----------------------------------------------------------
             //
@@ -250,7 +249,9 @@ class CustomerForm extends BaseCustomerForm
                         'nationality_id'=>'Nationality',
                         'mobile_number'=>'Mobile number<br />0034',
                         'city'=>'Town/city',
-                        'email'=>'E-mail'
+                        'email'=>'E-mail',
+                        'usage_alert_sms'=>'Balance SMS',
+                        'usage_alert_email'=>'Balance E-mail'
 		)
 	);
 	

@@ -196,7 +196,7 @@ class employeeActions extends sfActions {
         $transaction->setPaymenttype(4); //Product Registration Fee
         $transaction->setDescription('Product Registration Fee');
         $transaction->save();
-
+        TransactionPeer::AssignReceiptNumber($transaction);
 
      $rtype=$request->getParameter('registration_type');
       if($rtype==1){
@@ -263,6 +263,7 @@ class employeeActions extends sfActions {
                         $transaction->setPaymenttype(3);//Resenummer Charge
                         $transaction->setDescription('Resenummer Charge');
                         $transaction->save();
+                        TransactionPeer::AssignReceiptNumber($transaction);
                   }
                     else{
                     
@@ -386,7 +387,7 @@ class employeeActions extends sfActions {
                         $transaction->setPaymenttype(3);//Resenummer Charge
                         $transaction->setDescription('Resenummer Charge');
                         $transaction->save();
-
+                        TransactionPeer::AssignReceiptNumber($transaction);
                         
 
                     }

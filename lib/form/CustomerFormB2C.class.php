@@ -67,7 +67,9 @@ class CustomerFormB2C extends CustomerForm
                     'province_id',
                     'preferred_language_id',
                     'nie_passport_number',
-                    'sim_type_id'
+                    'sim_type_id',
+                      'business'
+         
                 ));
 
 

@@ -26,6 +26,7 @@ class CustomerFormAgent extends CustomerForm
                         'manufacturer',
                         'other',
                         'subscription_type',
+                     'business',
                     ));
 
 

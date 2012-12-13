@@ -6,8 +6,7 @@
     <input type="hidden" value="<?php echo  $price=$product->getRegistrationFee();  ?>" name="extra_refill" />
     
     <?php  
-    
-    $vat = $price * sfConfig::get('app_vat_percentage');
+        $vat = $price * sfConfig::get('app_vat_percentage');
     $totalAmount=$vat+$price;
     ?>
     <input type="hidden" value="<?php echo  $vat;  ?>" name="vat" />
@@ -19,9 +18,10 @@
             <label>New mobile number:</label>
             <label><?php echo  $newNumber;  ?></label><br />
         </li>
-        <li>
-            <label>Customer name:</label>
-            <label><?php echo  $customer->getFirstName(); ?>&nbsp;<?php echo  $customer->getLastName(); ?></label><br />
+       
+                           <li>
+         <?php if($customer->getBusiness()){ ?>        <label>Name of contact person:</label>  <?php }else{  ?>    <label>Customer Name:</label>   <?php  } ?>
+            <label><?php if($customer->getBusiness()){ echo  $customer->getLastName(); }else{  echo $customer->getFirstName()."&nbsp".$customer->getLastName();  } ?></label><br />
         </li>
         <li>
             <label>Old mobile number:</label>

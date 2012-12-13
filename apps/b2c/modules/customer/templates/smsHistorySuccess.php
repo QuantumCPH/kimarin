@@ -97,7 +97,7 @@
             <li>
             	<ul class="paging">
             	<?php for ($i=1; $i<=$total_pages; $i++): ?>
-            		<li <?php echo $i==$page?'class="selected"':'' ?>><a href="<?php echo url_for('customer/smshistory?page='.$i) ?>"><?php echo $i ?></a></li>
+            		<li <?php echo $i==$page?'class="selected"':'' ?>><a href="<?php echo url_for('customer/smsHistory?page='.$i) ?>"><?php echo $i ?></a></li>
             	<?php endfor; ?>
             	</ul>
             </li>

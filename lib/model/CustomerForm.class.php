@@ -37,24 +37,24 @@ class CustomerForm extends BaseCustomerForm
                $mobileno=$_REQUEST['customer']['mobile_number']; 
                $passportnum=$_REQUEST['customer']['nie_passport_number'];
             }
-            if($passportnum!="" && $passportnum!=0){
-                $cpn = new Criteria();
-                $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
-                $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-                $countnie = CustomerPeer::doCount($cpn);
-
-                 if(isset($countnie) &&  $countnie>=1){
-                    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
-                        array(
-                            'model' => 'customer',
-                            'column' => 'nie_passport_number'
-                        ),array(
-                            'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
-                        ))
-                        ))
-                    );
-                 }
-            }
+//            if($passportnum!="" && $passportnum!=0){
+//                $cpn = new Criteria();
+//                $cpn->add(CustomerPeer::NIE_PASSPORT_NUMBER, $passportnum);
+//                $cpn->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+//                $countnie = CustomerPeer::doCount($cpn);
+//
+//                 if(isset($countnie) &&  $countnie>=1){
+//                    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array(new sfValidatorPropelUnique(
+//                        array(
+//                            'model' => 'customer',
+//                            'column' => 'nie_passport_number'
+//                        ),array(
+//                            'invalid' => sfContext::getInstance()->getI18N()->__('N.I.E/Passport Number already existing.')
+//                        ))
+//                        ))
+//                    );
+//                 }
+//            }
                 
              
             $count=0;
@@ -184,7 +184,8 @@ class CustomerForm extends BaseCustomerForm
              }
           //$this->form->getValues('mobile_number');
    if(sfContext::getInstance()->getRouting()->getCurrentInternalUri()=='customer/settings'){
-
+ 
+  
    }else{ 
 		
                 
@@ -294,7 +295,8 @@ class CustomerForm extends BaseCustomerForm
             //-----------------For get the Nationality---------------------
             $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'Nationality',
-                    'order_by' => array('Title','asc')
+                    'order_by' => array('Title','asc'),
+                    'add_empty' => '-----------',
             ));
             //----------------------------------------------------------
 
@@ -380,7 +382,8 @@ class CustomerForm extends BaseCustomerForm
             //-----------------For get the Nationality---------------------
             $this->widgetSchema['nationality_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'Nationality',
-                    'order_by' => array('Title','asc')
+                    'order_by' => array('Title','asc'),
+                        'add_empty' => '----------',
             ));
             //----------------------------------------------------------
         }
@@ -414,13 +417,13 @@ $this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
     ));
 
 
-$this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
-        'model'		=> 'Nationality',
-        'column'	=> 'id',
-    ),array(
-        'required'	=> sfContext::getInstance()->getI18N()->__('Please choose a nationality'),
-        'invalid'	=> 'Invalid Nationality',
-    ));
+//$this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
+//        'model'		=> 'Nationality',
+//        'column'	=> 'id',
+//    ),array(
+//        'required'	=> sfContext::getInstance()->getI18N()->__('Please choose a nationality'),
+//        'invalid'	=> 'Invalid Nationality',
+//    ));
 
 
 
@@ -594,6 +597,7 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
 
     //terms and conditions
 	$this->setWidget('terms_conditions', new sfWidgetFormInputCheckbox(array(), array('class'=>'chkbx')));
+      
 	$this->setValidator('terms_conditions', new sfValidatorString(array('required' => true), array('required' => sfContext::getInstance()->getI18n()->__('Please accept the terms and conditions'))));
     
 	//news letter subscriber
@@ -663,7 +667,9 @@ $this->validatorSchema['nationality_id'] = new sfValidatorPropelChoice(array(
                         'nationality_id'=>'Nationality',
                         'mobile_number'=>'Mobile number<br />0034',
                         'city'=>'Town/city',
-                        'email'=>'E-mail'
+                        'email'=>'E-mail',
+                        'usage_alert_sms'=>'Balance SMS',
+                        'usage_alert_email'=>'Balance E-mail'
 		)
 	);
 	

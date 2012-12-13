@@ -1,8 +1,8 @@
 <?php include_stylesheets_for_form($form) ?>
 <?php include_javascripts_for_form($form) ?>
 
-<form method="post" action="registerCustomer<?php // url_for('@customer_registration_step1') ?>" name="newCustomerForm"  <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
- <div id="sf_admin_container"><h1><?php echo __('Register a Customer') ?> <span class="active">- <?php echo __('Step 1') ?>: <?php echo __('Register') ?> </span></h1></div>
+<form method="post" action="registerBusinessCustomer" name="newCustomerForm"  <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+ <div id="sf_admin_container"><h1><?php echo __('Register a Business Customer') ?> <span class="active">- <?php echo __('Step 1') ?>: <?php echo __('Register') ?> </span></h1></div>
         
   <div class="borderDiv"> 
        <div class="left-col">
@@ -117,7 +117,7 @@
             	$error_first_name = true;
             ?>
             <li>
-             <?php echo $form['first_name']->renderLabel() ?>
+             <?php echo $form['first_name']->renderLabel('Company name') ?>
              <?php echo $form['first_name'] ?>
              <?php if ($error_first_name): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -127,45 +127,13 @@
              <div class='inline-error'><?php echo $error_first_name?$form['first_name']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end first name -->
-            <?php
-            $error_second_last_name = false;
-            if($form['second_last_name']->hasError())
-            	$error_second_last_name = true;
-            ?>
-            <li>
-             <?php echo $form['second_last_name']->renderLabel() ?>
-             <?php echo $form['second_last_name'] ?>
-             <?php if ($error_second_last_name): ?>
-             <span id="cardno_decl" class="alertstep1">
-			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
-			 </span>
-			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
-            </li>
-            <!-- end second last name -->
-            <?php
-            $error_last_name = false;;
-            if($form['last_name']->hasError())
-            	$error_last_name = true;
-            ?>
-            <li>
-             <?php echo $form['last_name']->renderLabel() ?>
-             <?php echo $form['last_name'] ?>
-             <?php if ($error_last_name): ?>
-             <span id="cardno_decl" class="alertstep1">
-			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
-			 </span>
-			 <?php endif; ?>
-             <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
-            </li>
-            <!-- end last name -->            
-            <?php
+             <?php
             $error_address = false;;
             if($form['address']->hasError())
             	$error_address = true;
             ?>
             <li>
-             <?php echo $form['address']->renderLabel() ?>
+             <?php echo $form['address']->renderLabel('Company address') ?>
              <?php echo $form['address'] ?>
              <?php if ($error_address): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -175,6 +143,24 @@
              <div class='inline-error'><?php echo $error_address?$form['address']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end address -->
+            <?php
+//            $error_second_last_name = false;
+//            if($form['second_last_name']->hasError())
+//            	$error_second_last_name = true;
+            ?>
+<!--            <li>-->
+             <?php //echo $form['second_last_name']->renderLabel() ?>
+             <?php //echo $form['second_last_name'] ?>
+             <?php //if ($error_second_last_name): ?>
+<!--             <span id="cardno_decl" class="alertstep1">
+			  	<?php //echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>-->
+			 <?php //endif; ?>
+<!--             <div class='inline-error'><?php //echo $error_second_last_name?$form['second_last_name']->renderError():'&nbsp;'?></div>
+            </li>-->
+            <!-- end second last name -->
+                   
+           
             <?php
             $error_po_box_number = false;
             if($form['po_box_number']->hasError())
@@ -293,13 +279,29 @@
              <div class='inline-error'><?php echo $error_password_confirm?$form['password_confirm']->renderError():'&nbsp;'?></div>
             </li>
             <!-- end confirm password -->
+              <?php
+            $error_last_name = false;;
+            if($form['last_name']->hasError())
+            	$error_last_name = true;
+            ?>
+            <li>
+             <?php echo $form['last_name']->renderLabel('Name of contact person') ?>
+             <?php echo $form['last_name'] ?>
+             <?php if ($error_last_name): ?>
+             <span id="cardno_decl" class="alertstep1">
+			  	<?php echo image_tag('../zerocall/images/decl.png', array('absolute'=>true)) ?>
+			 </span>
+			 <?php endif; ?>
+             <div class='inline-error'><?php echo $error_last_name?$form['last_name']->renderError():'&nbsp;'?></div>
+            </li>
+            <!-- end last name -->   
             <?php
             $error_email = false;;
             if($form['email']->hasError())
             	$error_email = true;
             ?>
             <li>
-             <?php echo $form['email']->renderLabel() ?>
+             <?php echo $form['email']->renderLabel('E-mail of contact person') ?>
              <?php echo $form['email'] ?>
              <?php if ($error_email): ?>
              <span id="cardno_decl" class="alertstep1">
@@ -349,8 +351,8 @@
              <span><?php echo $form['is_newsletter_subscriber']->renderHelp() ?></span>
             </li>-->
           <!-- end newsletter -->
-              <input type="hidden" id="customer_business" name="customer[business]" value="0">
-            
+           
+          <input type="hidden" id="customer_business" name="customer[business]" value="1">
           <!-- end auto_refill -->
           <?php 
           if( $browser->getBrowser() == Browser::BROWSER_IE  )
