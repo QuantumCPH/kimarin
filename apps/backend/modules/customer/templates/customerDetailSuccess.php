@@ -95,9 +95,9 @@ $pus=0;
                         <tr>
 		        <td id="sf_admin_list_th_mobile_number" class="leftHeadign"  >
                              <?php if($businessCustomer){?>
-                              N.I.E./Passport Number
+                              CIF number 
                              <?php }else{ ?>
-                                CIF number 
+                              N.I.E./Passport Number  
                              <?php }?> 
                         </td>
                         <td><?php echo  $customer->getNiePassportNumber() ?></td>
