@@ -3310,21 +3310,21 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $c = new Criteria;
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
         $customers =CustomerPeer::doSelect($c);
-         $fromdate = mktime(0, 0, 0, 9, 15, 12);
-    echo $this->fromdate = date("Y-m-d", $fromdate);
-    echo "<br/>";
-          $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-       echo $this->todate =date("Y-m-d", $todate);
+//         $fromdate = mktime(0, 0, 0, 9, 15, 12);
+//    echo $this->fromdate = date("Y-m-d", $fromdate);
+//    echo "<br/>";
+//          $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+//       echo $this->todate =date("Y-m-d", $todate);
         foreach($customers as $customer){
 
 //        $fromdate = mktime(0, 0, 0, date("m"), date("d") - 1, date("Y"));
 //        $this->fromdate = date("Y-m-d", $fromdate);
 //        $this->todate = $fromdate;
             
-           /*   $fromdate = mktime(0, 0, 0, date("m"), date("d") - 1, date("Y"));
+             $fromdate = mktime(0, 0, 0, date("m"), date("d") - 1, date("Y"));
     $this->fromdate = date("Y-m-d", $fromdate);
           $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-       $this->todate =date("Y-m-d", $todate); */
+       $this->todate =date("Y-m-d", $todate); 
        $telintaObj = new Telienta();
        $tilentaCallHistryResult = $telintaObj->callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
   //  var_dump($tilentaCallHistryResult);
