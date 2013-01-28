@@ -2556,7 +2556,6 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $CallCode = sfConfig::get('app_country_code');
         $countryId = "1";
 
-
         $usagealerts = new Criteria();
          $usagealerts->add(UsageAlertPeer::COUNTRY, $countryId);
         $usageAlerts = UsageAlertPeer::doSelect($usagealerts);

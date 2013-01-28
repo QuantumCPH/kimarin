@@ -661,7 +661,6 @@ class customerActions extends sfActions {
         $transaction->setOrderId($this->order->getId());
         $transaction->setCustomerId($this->order->getCustomerId());
         $transaction->setVat($this->order->getExtraRefill() * sfConfig::get('app_vat_percentage'));
-
         //save
         $transaction->save();
     }

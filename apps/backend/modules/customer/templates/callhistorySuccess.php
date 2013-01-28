@@ -203,7 +203,7 @@ $numbername=$customer->getUniqueid();
                                 <tr>
                                     <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->connect_time)); ?></td>
                                     <td><?php echo $xdr->CLD; ?></td>
-                                    <td><?php  $callval=$xdr->charged_quantity;
+                                    <td><?php  echo $callval=$xdr->charged_quantity;  echo "<br/>";
 if($callval>3600){
 
  $hval=number_format($callval/3600);
