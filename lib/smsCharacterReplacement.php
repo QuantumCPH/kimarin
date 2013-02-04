@@ -27,7 +27,8 @@ class smsCharacter{
                         '%C3%95' => '%D5',
                          '%C3%9C' => '%C7',
                          '%C3%87' => '%DC',
-                        '%C3%A4' => '%E4'
+                        '%C3%A4' => '%E4',
+                        '%E2%82%AC' => '%80'
 			
 			  );
 		     $from_array = array();
