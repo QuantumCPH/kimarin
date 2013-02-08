@@ -196,7 +196,6 @@
                             echo $minute . ":" . $second;
                         } else {
 
-
                             echo date('i:s', $callval);
                         }
         ?></td>
