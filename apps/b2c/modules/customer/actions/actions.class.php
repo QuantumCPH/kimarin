@@ -1049,7 +1049,7 @@ class customerActions extends sfActions {
         unset($this->form['comments']);
         unset($this->form['block']);
           unset($this->form['business']);
-      
+          unset($this->form['updated_at']);
 
         $this->uniqueidValue = $this->customer->getUniqueId();
         //This Section For Get the Language Symbol For Set Currency -
