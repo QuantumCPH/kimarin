@@ -927,9 +927,9 @@ $vat=$transaction->getVat();
         $customer->save();
 
         $transaction->setAgentCompanyId($customer->getReferrerId());
-
-
-        $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee() + ($order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage')));
+        $finalAmount=$order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee() + ($order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage'));
+        $finalAmount=number_format($finalAmount,2);
+        $transaction->setAmount($finalAmount);
         $transactiondescription=TransactionDescriptionPeer::retrieveByPK(12);
         $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
