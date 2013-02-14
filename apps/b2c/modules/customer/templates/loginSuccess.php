@@ -64,30 +64,30 @@
              
 		<!--	<button style="cursor: pointer;" ><?php //echo __('Log in') ?></button>-->
 	<script language="javascript" type="text/javascript">
-//		jq = jQuery.noConflict();
-//	
-//		jq('#login_form').submit(function(){
-//			var valid = true;
-//
-//			valid = jq('#login_form #mobile_number').val().length>=8?true:false;
-//			
-//			
-//			if (!valid) {  
-//				jq('#login_form #mobile_number').focus();
-//				 jAlert('<?php //echo __('Enter a valid mobile number.') ?>','');
-//				return false;			
-//			}
-//			
-//			valid = jq('#login_form #password').val().length>3?true:false;
-//			
-//			if (!valid) {  
-//				jq('#login_form #password').focus();
-//				 jAlert('<?php //echo __('Please enter your password.') ?>','');
-//				return false;			
-//			}			
-//			
-//
-//		});
+		jq = jQuery.noConflict();
+	
+		jq('#login_form').submit(function(){
+			var valid = true;
+
+			valid = jq('#login_form #mobile_number').val().length>=8?true:false;
+			
+			
+			if (!valid) {  
+				jq('#login_form #mobile_number').focus();
+				 jAlert('<?php echo __('Enter a valid mobile number.') ?>','');
+				return false;			
+			}
+			
+			valid = jq('#login_form #password').val().length>3?true:false;
+			
+			if (!valid) {  
+				jq('#login_form #password').focus();
+				 jAlert('<?php echo __('Please enter your password.') ?>','');
+				return false;			
+			}			
+			
+
+		});
 	</script>
 	</form>
 	</div>
@@ -106,25 +106,25 @@
         
 <!--	<button style="cursor: pointer;">Send</button>-->
 	<script language="javascript" type="text/javascript">
-//		jq = jQuery.noConflict();
-//	
-//		jq('#forgot_password_form').submit(function(){
-//			
-// 
-//                        var valid = true;
-//                        valid = jq('#forgot_password_email').val().length==0?false:true;
-//
-//                     
-//                        if (!valid) {  
-//                            jq('#forgot_password_mobile').focus();
-//                           
-//                            jAlert('<?php //echo __('Enter your mobile number to receive your password.'); ?>', '');
-//                      
-//                            return false;
-//                        }
-//
-// 
-//		});
+		jq = jQuery.noConflict();
+	
+		jq('#forgot_password_form').submit(function(){
+			
+ 
+                        var valid = true;
+                        valid = jq('#forgot_password_email').val().length==0?false:true;
+
+                     
+                        if (!valid) {  
+                            jq('#forgot_password_mobile').focus();
+                           
+                            jAlert('<?php echo __('Enter your mobile number to receive your password.'); ?>', '');
+                      
+                            return false;
+                        }
+
+ 
+		});
 	</script>
 	</form></div>
 	</div>
