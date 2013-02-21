@@ -3486,10 +3486,11 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
         $c->addAnd(CustomerOrderPeer::ORDER_STATUS_ID,3);
         $c->addGroupByColumn(CustomerPeer::ID);
         $c->addDescendingOrderByColumn (CustomerOrderPeer::CREATED_AT);
-        $customers = CustomerPeer::doSelect($c);
+      $customers = CustomerPeer::doSelect($c);
 
         foreach($customers as $customer){
             echo $customer->getId();
+            die;
             $telintaObj = new Telienta();
            $balance =  $telintaObj->getBalance($customer);
            if($balance>0){
