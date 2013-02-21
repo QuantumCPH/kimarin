@@ -3486,7 +3486,6 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
 
         foreach($customers as $customer){
             echo $customer->getId();
-            die;
             $telintaObj = new Telienta();
            $balance =  $telintaObj->getBalance($customer);
            if($balance>0){
