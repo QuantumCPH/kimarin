@@ -4300,7 +4300,7 @@ class pScriptsActions extends sfActions {
         $order = new CustomerOrder();
         $order->setProductId($product->getId());
         $order->setCustomerId($customer->getId());
-        $order->setExtraRefill($order->getProduct()->getInitialBalance()+$order->getProduct()->getBonus());
+        $order->setExtraRefill($order->getProduct()->getInitialBalance() + $order->getProduct()->getBonus());
         $order->setIsFirstOrder(1);
         $order->setOrderStatusId(3);
         $order->save();
@@ -4334,30 +4334,38 @@ class pScriptsActions extends sfActions {
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $telintaObj = new Telienta();
-        $telintaObj->ResgiterCustomer($this->customer, $OpeningBalance);
-        // For Telinta Add Account
+        if ($telintaObj->ResgiterCustomer($this->customer, $OpeningBalance)) {
+            $transaction->setTransactionStatusId(3); // default value 1
+            $transaction->save();
+            $order->setOrderStatusId(3);
+            $order->save();
+            $customer->setCustomerStatusId(3);
+            $customer->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
+            // For Telinta Add Account
 
-        $telintaObj->createAAccount($TelintaMobile, $this->customer);
-        $telintaObj->createCBAccount($TelintaMobile, $this->customer);
+            $telintaObj->createAAccount($TelintaMobile, $this->customer);
+            $telintaObj->createCBAccount($TelintaMobile, $this->customer);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        $this->setPreferredCulture($this->customer);
-        emailLib::sendCustomerRegistrationViaAPPEmail($transaction);
-        $this->updatePreferredCulture();
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerRegistrationViaAPPEmail($transaction);
+            $this->updatePreferredCulture();
 
 
-        echo "OK,customer registered successfully";
-
-        $zerocall_sms = new ZeroCallOutSMS();
-        $zerocall_sms->toCustomerAfterAppReg($customer);
-        if ($applog->getApplicationId() == 1) {
-
-            $zerocall_sms = new ZeroCallOutSMS();
-            $zerocall_sms->SmsAppIphoneRefill($customer->getMobileNumber());
+            echo "OK,customer registered successfully";
+//            $zerocall_sms = new ZeroCallOutSMS();
+//            $zerocall_sms->toCustomerAfterAppReg($customer);
+//            if ($applog->getApplicationId() == 1) {
+//
+//                $zerocall_sms = new ZeroCallOutSMS();
+//                $zerocall_sms->SmsAppIphoneRefill($customer->getMobileNumber());
+//            }
+            $applog->setStatusId(3);
+            $applog->setCustomerId($customer->getId());
+            $applog->setResponse('customer registered successfully');
+            $applog->save();
         }
-        $applog->setStatusId(3);
-        $applog->setCustomerId($customer->getId());
-        $applog->setResponse('customer registered successfully');
-        $applog->save();
+
         return sfView::NONE;
     }
 
