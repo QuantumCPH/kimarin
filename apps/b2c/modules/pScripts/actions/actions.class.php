@@ -3974,7 +3974,7 @@ class pScriptsActions extends sfActions {
         $customer = CustomerPeer::doSelectOne($c);
         if ($customer) {
             $telintaObj = new Telienta();
-            echo $telintaObj->getBalance($customer);
+            echo number_format($telintaObj->getBalance($customer),2);
         } else {
             echo "0.00";
         }
@@ -4021,187 +4021,353 @@ class pScriptsActions extends sfActions {
         return sfView::NONE;
     }
 
+    public function executeAppPasswordRecovery(sfWebrequest $request) {
+
+        $c_mobile_number = $request->getParameter('mobile_number');
+        $mobile_number = $this->mobileNumberWithoutCountryCode($c_mobile_number);
+        $c = new Criteria();
+        $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        //echo $c->toString(); exit;
+        $customer = CustomerPeer::doSelectOne($c);
+
+        if ($customer) {
+            $chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+
+            $new_password = substr(str_shuffle($chars), 0, 6);
+            $customer->setPassword($new_password);
+            $customer->setPlainText($new_password);
+            $customer->save();
+            $this->setPreferredCulture($customer);
+            $message_body = $this->getContext()->getI18N()->__('Dear customer'); //. ' ' . $customer->getFirstName() . '&nbsp;' . $customer->getLastName() . '!';
+            $message_body .= '<br /><br />';
+
+            $message_body .= $this->getContext()->getI18N()->__('Your password has been changed. Please use the following information to enter MY ACCOUNT.', array('%1%' => sfConfig::get('app_site_title')));
+
+            $message_body .= '<br /><br />';
+            $message_body .= sprintf($this->getContext()->getI18N()->__('Mobile number: %s'), $customer->getMobileNumber());
+            $message_body .= '<br />';
+            $message_body .= $this->getContext()->getI18N()->__('Password') . ': ' . $new_password;
+
+            $subject = $this->getContext()->getI18N()->__('Password Request');
+            emailLib::sendForgetPasswordEmail($customer, $message_body, $subject);
+//
+//            //Send Email to User --- when Forget Password Request Come --- 01/15/11
+//            emailLib::sendForgetPasswordEmail($customer, $message_body);
+
+            $sms_text = $this->getContext()->getI18N()->__("New password") . ": " . $new_password;
+
+            ROUTED_SMS::send($c_mobile_number, $sms_text);
+            echo 'OK,Login Information successfully sent to your email.';
+        } else {
+            echo 'error, mobile number does not exists';
+        }
+
+        return sfView::NONE;
+    }
+
+    public function executeAppWebSMS(sfWebrequest $request) {
+
+        $sender = $request->getParameter('sender');
+        $message = $request->getParameter('message');
+        $number = $request->getParameter('number');
+        $destination = $number;
+
+        $mobile = $this->mobileNumberWithoutCountryCode($sender);
+        $cr = new Criteria();
+        $cr->add(CustomerPeer::MOBILE_NUMBER, $mobile);
+        $cr->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $customer = CustomerPeer::doSelectOne($cr);
+        if (!$customer) {
+            echo 'error, Mobile Number Not Registered';
+            return sfView::NONE;
+        }
+
+        $did = 0;
+        ////////////////////Code Review by barankhan.com //////////////////////////
+        $call_charge = 0.00;
+        $destinations = 10;
+        $count = 1;
+        $result = 0;
+        $reversearecode = 0;
+        $return_result = NULL;
+        $sub_result = NULL;
+        //
+        $number = str_replace(' ', '', str_replace('+', '', str_replace(')', '', str_replace('(', '', $number))));
+        while ($destinations > 0) {
+            $nmbr = substr($number, 0, 2);
+            if ($nmbr == '00') {
+                $number = substr($number, 2);
+            } else {
+                $number = $number;
+            }
+
+            $area_code = substr($number, 0, $count);
+
+            $cct = new Criteria();
+            $cct->addOr(CountryPeer::CALLING_CODE, $area_code . '%', Criteria::LIKE);
+            $countrycode = CountryPeer::doCount($cct);
+            $destinations = $countrycode;
+
+            if ($destinations >= 1) {
+
+
+                $cctf = new Criteria();
+                $cctf->addOr(CountryPeer::CALLING_CODE, $area_code . '%', Criteria::LIKE);
+                $countrycodef = CountryPeer::doSelectOne($cctf);
+                $reversearecode = 0;
+                $reversearecode = $area_code;
+                $did = $countrycodef->getId();
+            }
+            $count++;
+        }
+
+        $resverselength = strlen($reversearecode);
+        $cct = new Criteria();
+        $cct->add(CountryPeer::CALLING_CODE, $reversearecode);
+        $countrycode = CountryPeer::doCount($cct);
+        $destinationsr = $countrycode;
+        $reversedir = 0;
+        while ($destinationsr == 0) {
+            $reversearecodes = substr($reversearecode, 0, $resverselength);
+            $cct = new Criteria();
+            $cct->add(CountryPeer::CALLING_CODE, $reversearecodes);
+            $countrycode = CountryPeer::doCount($cct);
+            $destinationsr = $countrycode;
+            if ($destinationsr >= 1) {
+                $cct->add(CountryPeer::CALLING_CODE, $reversearecodes);
+                $countrycodea = CountryPeer::doCount($cct);
+                $did = $countrycodea->getId;
+            }
+            $resverselength--;
+            $reversedir++;
+            if ($reversedir == 4) {
+                $destinationsr = 1;
+            }
+        }
+        //////////////////////////////////////
+        // echo "khan".$did;
+        if (isset($did) && $did > 0) {
+            
+        } else {
+            $did = 183;
+        }
+        $cct = new Criteria();
+        $cct->add(CountryPeer::ID, $did);
+        $country = CountryPeer::doSelectOne($cct);
+        if (!$country) {
+            echo 'error, Country code not recgnized';
+            return sfView::NONE;
+        }
+        if ($customer) {
+            if ($sender and $message and $number) {
+                $messages = array();
+
+                if (strlen($message) < 144) {
+                    $messages[1] = $message . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
+                } else if (strlen($message) > 144 and strlen($message) < 302) {
+                    $messages[1] = substr($message, 1, 144) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
+                    $messages[2] = substr($message, 145) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
+                } else if (strlen($message) > 382) {
+                    $messages[1] = substr($message, 1, 144) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
+                    $messages[2] = substr($message, 145, 302) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
+                    $messages[3] = substr($message, 303, 432) . $this->getContext()->getI18N()->__("-Sent by") . " Kimarin-";
+                }
+                // $cc = CurrencyConversionPeer::retrieveByPK(1);
+                foreach ($messages as $sms_text) {
+                    $cbf = new Cbf();
+                    $cbf->setS('H');
+                    $cbf->setDa($destination);
+                    $cbf->setMessage($sms_text);
+                    $cbf->setCountryId($country->getId());
+
+                    $cbf->setMobileNumber($customer->getMobileNumber());
+
+                    //get balance
+                    $telintaObj = new Telienta();
+                    $balance = $telintaObj->getBalance($customer);
+                    $amt = number_format($country->getCbfRate(), 2);
+                    if ($balance < $amt) {
+                        echo "error, Not Enough Balance, Please Recharge";
+                        return sfView::NONE;
+                    } else {
+                        
+                    }
+                    $res = ROUTED_SMS::Send($request->getParameter('number'), $sms_text, $customer->getMobileNumber());
+                    if ($res) {
+                        $telintaObj = new Telienta();
+                        $description = "SMS Charges";
+                        $telintaObj->charge($customer, $amt, $description);
+                    }
+                }
+
+                if ($res) {
+                    echo "Message successfully sent.";
+                } else {
+                    echo "sms could not be sent";
+                }
+            } else {
+                echo "sms could not be sent";
+            }
+
+            return sfView::NONE;
+        }
+        echo "sms could not be sent";
+
+        return sfView::NONE;
+    }
+
     public function executeAppRegistration(sfWebrequest $request) {
 
-//        //initialize parameter variables
-//        $full_mobile_number = "";
-//        $mobile = "";
-//        $code = "";
-//        $product_code = "";
-//        $agent_code = "";
-//        $name = "";
-//        $password = "";
-//        $email = "";
-//        $var = "";
-//        $agent = NULL;
-//        $product = NULL;
-//        $customer = new Customer();
-//        $order = new CustomerOrder();
-//        $customer_product = new CustomerProduct();
-//        $transaction = new Transaction();
-//        //get request parameters
-//        $name = $request->getParameter('name');
-//        $password = $request->getParameter('pwd');
-//        $email = $request->getParameter('email');
-//        $ccode = $request->getParameter('ccode');
-//        $mobilenumber = $request->getParameter('mobile_number');
-//        if ($ccode == "") {
-//            $ccode = 45;
-//        }
-//        $full_mobile_number = $ccode . $request->getParameter('mobile_number');
-//        $code = $request->getParameter('code');
-//        $app = $request->getParameter('app');
-//        $mobile = $mobilenumber;
-//        ///////////////////////registration parameter////////////////// 
-//        $urlval = "App Registration URL - " . $request->getURI();
-//        $applog = new AppRegistrationLogs();
-//        $applog->setMobileNumber($mobilenumber);
-//        $applog->setPwd($password);
-//        $applog->setEmail($email);
-//        $applog->setCcode($ccode);
-//        $applog->setCode($code);
-//        $applog->setStatusId(1);
-//        $applog->setUrl($urlval);
-//        $applog->setApplicationId($app);
-//        $applog->save();
-//
-////start function execution
-//
-//
-//        $countryId = 1;
-//
-////validate code
-////echo $full_mobile_number;
-//        if ($mobilenumber != "" && $password != "" && $email != "") {
-//
-/////////////////////zeroCall  app product Registration
-//
-//            $customerCount = 0;
-//            $mnc = new Criteria();
-//            $mnc->add(CustomerPeer::MOBILE_NUMBER, $mobilenumber);
-//            $mnc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-//            $customerCount = CustomerPeer::doCount($mnc);
-//            if ($customerCount > 0) {
-//                $existing_customer = CustomerPeer::doSelectOne($mnc);
-//                echo 'Customer already exists.';
-//                die;
-//            }
-//
-//
-//            $product = ProductPeer::retrieveByPK(19);
-//
-//            $customer->setCountryId($countryId);
-//            $customer->setMobileNumber($mobilenumber);
-//            $customer->setFirstName($name);
-//            $customer->setLastName(" ");
-//            $customer->setMobileNumber($mobile);
-//            $customer->setCountryCode($ccode);
-//            $customer->setCountryMobileNumber($full_mobile_number);
-//            $customer->setPassword($password);
-//            $customer->setEmail($email);
-//            $customer->setCity("Application");
-//            $customer->setAddress("not given");
-//            $customer->setTelecomOperatorId(13);
-//            $customer->setDeviceId(2191);
-//            $customer->setCustomerStatusId(1);
-//            $customer->setRegistrationTypeId(5);
-//            $customer->setPlainText($password);
-//            $customer->save();
-//            $order->setProductId($product->getId());
-//            $order->setCustomerId($customer->getId());
-//            $order->setExtraRefill($order->getProduct()->getInitialBalance());
-//            $order->setIsFirstOrder(1);
-//            $order->setOrderStatusId(1);
-//            $order->save();
-//
-//
-//            $customer_product->setCustomerId($order->getCustomerId());
-//            $customer_product->setProductId($order->getProductId());
-//            $customer_product->setProductStatusId(3);
-//            $customer_product->setCustomerProductTypeId($order->getProduct()->getCustomerProductTypeId());
-//            $customer_product->save();
-//            $transaction->setAmount($order->getProduct()->getPrice() - $order->getProduct()->getInitialBalance() + $order->getExtraRefill());
-//            $transaction->setDescription($this->getContext()->getI18N()->__('Registrering inkl. taletid'));
-//            $transaction->setOrderId($order->getId());
-//            $transaction->setCustomerId($customer->getId());
-//            $transaction->setTransactionStatusId(1);
-//            $transaction->save();
-////        echo 'transaction'.$transaction->save();
-////        echo '<br/>';
-//            $sms_text = "Velkommen til Zerocall, dit nummer er hermed aktiveret til at kunne benytte Zerocall Out, og du kan nu ringe til de billigste priser til hele verden.
-//Din login informationer er:
-//Brugernavn:" . $mobile . "  Adgangskode: " . $mobile . "
-//Har du behov for hj?lp er ud velkommen til at kontakte vores kunde service p?: support@zerocall.com
-//Mange hilsner
-//Zerocall ? Support?
-//";
-////////////////////////////////////////////////////////////////////////////////////////
-//            $this->customer = $customer;
-////if (BillingSystem::assignUniqueIdToCustomer($customer, 5)) {
-////
-////} else {
-////
-////    $sms_text = 'Beklager ulejligheden, vi har svært ved i vores database prøv igen i 2 timer';
-////
-////    echo $sms_text;
-////
-////    die;
-////}
-//
-//            $mobileNumber = $customer->getMobileNumber();
-//
-//            if (Fonet::registerAppFonet($this->customer)) {
-//
-//                $customer->save();
-//
-//                //////////////////////////////////
-//                $emailId = $this->customer->getEmail();
-//                $OpeningBalance = $order->getExtraRefill();
-//                $uniqueId = $this->customer->getFonetCustomerId();
-//                //  $mbnumber=$this->customer->getMobileNumber();
-//                $mbnumber = $this->customer->getCountryMobileNumber();
-//                $passwordvar = $var;
-//                //Section For Telinta Add Cusomter
-//                $customer->setCustomerStatusId(3);
-//                $customer->save();
-//                $cc = new Criteria();
-//                $cc->add(CountryPeer::ID, $customer->getCountryId());
-//                $country = CountryPeer::doSelectOne($cc);
-//                $mobile = $country->getCallingCode() . $customer->getMobileNumber();
-//                //              if(strlen($mobile)==11){
-//                ////                 echo 'mobile # = 11' ;
-//                //                 $mobile = '00'.$mobile;
-//                //             }
-//
-//
-//                emailLib::sendCustomerRegistrationViaAgentAPPEmail($customer, $order);
-//                $order->setOrderStatusId(3);
-//                $order->save();
-//                $customer->setTilentaPassword('asdf1asd');
-//                $customer->setCustomerStatusId(3);
-//                $customer->save();
-//                $transaction->setTransactionStatusId(3);
-//                $transaction->save();
-//                echo "OK,customer registered successfully";
+
+        //get request parameters
+        $name = $request->getParameter('name');
+        $password = $request->getParameter('pwd');
+        $email = $request->getParameter('email');
+        $ccode = $request->getParameter('ccode');
+        $mobilenumber = $request->getParameter('mobile_number');
+
+        $full_mobile_number = $ccode . $mobilenumber;
+        $code = $request->getParameter('code');
+        $app = $request->getParameter('app');
+        ///////////////////////registration parameter//////////////////
+        $urlval = "App Registration URL - " . $request->getURI();
+        $applog = new AppRegistrationLogs();
+        $applog->setMobileNumber($full_mobile_number);
+        $applog->setPwd($password);
+        $applog->setEmail($email);
+        $applog->setCcode($ccode);
+        $applog->setCode($code);
+        $applog->setStatusId(1);
+        $applog->setUrl($urlval);
+        $applog->setApplicationId($app);
+        $applog->save();
+
+
+
+
+///////////////////zeroCall app product Registration
+        $mnc = new Criteria();
+        $mnc->add(CustomerPeer::MOBILE_NUMBER, $mobilenumber);
+        $mnc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $customerCount = CustomerPeer::doCount($mnc);
+        if ($customerCount > 0) {
+            echo 'Customer already exists.';
+            die;
+        }
+
+        $ccc = new Criteria();
+        $ccc->add(CountryPeer::CALLING_CODE, $ccode);
+        $CountryCount = CountryPeer::doCount($ccc);
+        if ($CountryCount > 0) {
+            $country = CountryPeer::doSelectOne($ccc);
+        } else {
+            echo 'Country does not exists.';
+            die;
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            echo " The email address is not valid";
+            die;
+        }
+
+        $product = ProductPeer::retrieveByPK(18);
+        $customer = new Customer();
+        $customer->setCountryId($country->getId());
+        $customer->setFirstName($name);
+        $customer->setMobileNumber($mobilenumber);
+        $customer->setPassword($password);
+        $customer->setEmail($email);
+        $customer->setRegistrationTypeId(5);
+        $customer->setPlainText($password);
+        $customer->setPassword($password);
+        $customer->setPreferredLanguageId(3);
+        $customer->setCustomerStatusId(1);
+        $customer->save();
+
+        $agentid = $customer->getReferrerId();
+        if ($agentid) {
+            $commision = TRUE;
+            $agentCompanyId = $agentid;
+        } else {
+            $commision = FALSE;
+            $agentCompanyId = FALSE;
+        }
+        // TransactionProcess::StartTransaction($customer, $productId, $decriptionid, $expenceType, $transactionFrom, $transactionStatus, $commision, $agentCompanyId);
+        $order = new CustomerOrder();
+        $order->setProductId($product->getId());
+        $order->setCustomerId($customer->getId());
+        $order->setExtraRefill($order->getProduct()->getInitialBalance() + $order->getProduct()->getBonus());
+        $order->setIsFirstOrder(1);
+        $order->setOrderStatusId(1);
+        $order->save();
+
+        $transaction = new Transaction();
+        $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee() + (($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(8);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($transactiondescription->getTitle());
+        $transaction->setOrderId($order->getId());
+        $transaction->setCustomerId($customer->getId());
+        $transaction->setTransactionStatusId(1); // default value 1
+        $transaction->setVat((($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
+        $transaction->save();
+
+
+        TransactionPeer::AssignReceiptNumber($transaction);
+
+
+        // echo 'Assigning Customer ID <br/>';
+        //set customer's proudcts in use
+        $customer_product = new CustomerProduct();
+        $customer_product->setCustomerId($transaction->getCustomerId());
+        $customer_product->setProductId($order->getProductId());
+        $customer_product->save();
+
+        $this->customer = $customer;
+        $TelintaMobile = $full_mobile_number;
+        $OpeningBalance = $order->getExtraRefill();
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $telintaObj = new Telienta();
+        if ($telintaObj->ResgiterCustomer($this->customer, $OpeningBalance)) {
+            $transaction->setTransactionStatusId(3); // default value 1
+            $transaction->save();
+            $order->setOrderStatusId(3);
+            $order->save();
+            $customer->setCustomerStatusId(3);
+            $customer->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
+            // For Telinta Add Account
+
+            $telintaObj->createAAccount($TelintaMobile, $this->customer);
+            $telintaObj->createCBAccount($TelintaMobile, $this->customer);
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
+            $this->updatePreferredCulture();
+
+
+            echo "OK,customer registered successfully";
+            $callbacklog = new CallbackLog();
+            $callbacklog->setMobileNumber($TelintaMobile);
+            $callbacklog->setuniqueId($customer->getUniqueid());
+            $callbacklog->setCallingcode(sfConfig::get("app_country_code"));
+            $callbacklog->setCheckStatus(3);
+            $callbacklog->save();
+//            $zerocall_sms = new ZeroCallOutSMS();
+//            $zerocall_sms->toCustomerAfterAppReg($customer);
+//            if ($applog->getApplicationId() == 1) {
 //
 //                $zerocall_sms = new ZeroCallOutSMS();
-//                $zerocall_sms->toCustomerAfterAppReg($customer);
-//                if ($applog->getApplicationId() == 1) {
-//
-//                    $zerocall_sms = new ZeroCallOutSMS();
-//                    $zerocall_sms->SmsAppIphoneRefill($customer->getCountryMobileNumber());
-//                }
-//                $applog->setStatusId(3);
-//                $applog->setCustomerId($customer->getId());
-//                $applog->setResponse('customer registered successfully');
-//                $applog->save();
-//
-//                $applog->save();
+//                $zerocall_sms->SmsAppIphoneRefill($customer->getMobileNumber());
 //            }
-//        } else {
-//            echo "Required parameters are missing.";
-//        }
-
+            $applog->setStatusId(3);
+            $applog->setCustomerId($customer->getId());
+            $applog->setResponse('customer registered successfully');
+            $applog->save();
+        }
 
         return sfView::NONE;
     }
@@ -4222,218 +4388,136 @@ class pScriptsActions extends sfActions {
 
         return $mobile_number;
     }
-    
-        public function executeAppPasswordRecovery(sfWebrequest $request) {
 
-
-        $mobile_number = "";
-        $mobile_number = $request->getParameter('mobile_number');
-
+    public function executeAppRefill(sfWebRequest $request) {
+        $this->target =  sfConfig::get('app_customer_url');
+        $cmobile_number = $request->getParameter('mobile_number');
+        $mobile_number = $this->mobileNumberWithoutCountryCode($cmobile_number);
+        $this->customer = NULL;
         $c = new Criteria();
         $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-        //echo $c->toString(); exit;
         $customer = CustomerPeer::doSelectOne($c);
+        if ($customer != NULL) {
 
-        if ($customer) {
-            $chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+            $customer_id = $customer->getId();
 
-            $new_password = substr(str_shuffle($chars), 0, 6);
-            $customer->setPassword($new_password);
-            $customer->setPlainText($new_password);
-            $customer->save();
-
-//            $message_body = $this->getContext()->getI18N()->__('Hi') . ' ' . $customer->getFirstName() . '!';
-//            $message_body .= '<br /><br />';
-//            $message_body .= $this->getContext()->getI18N()->__('Dit password er blevet ?ndret. Benyt venligst f?lgende oplysninger til at logge p? din Zerocall konto.');
-//            $message_body .= '<br /><br />';
-//            $message_body .= sprintf('Mobil nummer: %s', $customer->getCountryMobileNumber());
-//            $message_body .= '<br />';
-//            $message_body .= $this->getContext()->getI18N()->__('Adgangskode') . ': ' . $new_password;
-//
-//            //Send Email to User --- when Forget Password Request Come --- 01/15/11
-//            emailLib::sendForgetPasswordEmail($customer, $message_body);
-
-            $sms_text = "Mobile Number= " . $customer->getCountryMobileNumber() . " New Password= " . $new_password;
-
-            $zerocall_sms = new ZeroCallOutSMS();
-            $zerocall_sms->SmsLogText($customer->getMobileNumber(), $sms_text);
-            echo 'OK,Login Information successfully sent to your email.';
+            $this->customer = $customer;
+            $this->redirectUnless($this->customer, "@homepage");
+            $this->form = new ManualRefillForm($customer_id);
+            $c = new Criteria();
+            $c->add(ProductPeer::PRODUCT_TYPE_ID, 2);
+            $this->refillProducts = ProductPeer::doSelect($c);
         } else {
-            echo 'error, mobile number does not exists';
-            $this->getUser()->setFlash('send_password_error_message', 'No customer is registered with this email.');
+            echo 'error, customer not found';
+            return sfView::NONE;
         }
+          
+         $this->setLayout('mobile');
+    }
+    
+     public function executeAppRefilTransaction(sfWebRequest $request) {
+        $this->target = sfConfig::get('app_customer_url');
 
-        return sfView::NONE;
-    }
-    
-    public function executeAppRefill(sfWebRequest $request) {
+        $product = ProductPeer::retrieveByPK($request->getParameter('extra_refill'));
+     $request->getParameter('extra_refill');
+ 
+        $this->customer = CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
+        $customer = $this->customer;
+        $this->redirectUnless($this->customer, "@homepage");
+
+        $lang = $this->getUser()->getCulture();
+
+        $agentid = $customer->getReferrerId();
+        $mobileNumber=$customer->getMobileNumber();
+        if ($agentid) {
+            $commision = TRUE;
+            $agentCompanyId = $agentid;
+        } else {
+            $commision = FALSE;
+            $agentCompanyId = FALSE;
+        }
+        //  TransactionProcess::StartTransaction($customer, $productId, $decriptionid, $expenceType, $transactionFrom, $transactionStatus, $commision, $agentCompanyId);
+        //$transaction = TransactionProcess::StartTransaction($this->customer, $product->getId(), 9, 1, 5, 1, $commision, $agentCompanyId);
+        $this->order = new CustomerOrder();
+         $this->order->setProduct($product);
+        $this->order->setCustomer($this->customer);
+        $this->order->setQuantity(1);
+        $this->order->setExtraRefill($product->getInitialBalance()+$product->getBonus());
+        $this->order->setIsFirstOrder(2);
+        $this->order->save();
         
+        $transaction = new Transaction();
+
+        $transaction->setAmount($this->order->getExtraRefill() * (sfConfig::get('app_vat_percentage') + 1));
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(9);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($transactiondescription->getTitle());
+        $transaction->setOrderId($this->order->getId());
+        $transaction->setCustomerId($this->order->getCustomerId());
+        $transaction->setVat($this->order->getExtraRefill() * sfConfig::get('app_vat_percentage'));
+
+        //save
+        $transaction->save();
+        $this->transaction = $transaction;
+        $order_id = $this->order->getId();
+        $item_amount = $transaction->getAmount();
+        
+            $return_url =  $this->target . "pScripts/appRefillThanks";
+            $cancel_url =  $this->target . "pScripts/appRefill?mobile_number=".$mobileNumber;
+        
+
+ 
+        $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
+        $notify_url = $this->target . 'pScripts/calbackrefill?p=' . $callbackparameters;
+
+        $email2 = new DibsCall();
+        $email2->setCallurl($notify_url);
+
+        $email2->save();
+
+        $querystring = '';
+        $_POST["amount"] = number_format($item_amount, 2);
+        if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
+
+            $order = CustomerOrderPeer::retrieveByPK($order_id);
+            $item_name = "Refill";
+
+            //loop for posted values and append to querystring
+            foreach ($_POST as $key => $value) {
+                $value = urlencode(stripslashes($value));
+                $querystring .= "$key=$value&";
+            }
+
+            $querystring .= "item_name=" . urlencode($item_name) . "&";
+            $querystring .= "return=" . urldecode($return_url) . "&";
+            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+            $querystring .= "notify_url=" . urldecode($notify_url);
+
+            $this->queryString = $querystring;
+            $this->customer = $order->getCustomer();
+            $this->order = $order;
+            $telintaObj = new Telienta();
+            $this->customerBalance = $telintaObj->getBalance($this->customer);
+            $this->product = $product;
+        }
+           $this->setLayout('mobile');
     }
+
+    public function executeAppRefilToPaypal(sfWebRequest $request) {
+          $querystring = $request->getParameter('qstr');
+           Payment::SendPayment($querystring);
+        return sfView::NONE;
+    } 
     
+    
+    public function executeAppRefillThanks(sfWebRequest $request) {
+          $this->setLayout('mobile');
+    }
+
     public function executeAppTermsConditions(sfWebRequest $request) {
         $this->setLayout(false);
-    }
-    
-        public function executeAppWebSMS(sfWebrequest $request) {
-
-//        $sender = $request->getParameter('sender');
-//        $message = $request->getParameter('message');
-//        $number = $request->getParameter('number');
-//        $destination = $number;
-//        $mobile = "";
-//        $customer = NULL;
-//        $country_code = "";
-//        $mobile = $sender;
-//        $cr = new Criteria();
-//        $cr->add(CustomerPeer::COUNTRY_MOBILE_NUMBER, $mobile);
-//        $cr->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-//        $customer = CustomerPeer::doSelectOne($cr);
-//        if (!$customer) {
-//            echo 'error, Mobile Number Not Registered';
-//            return sfView::NONE;
-//        }
-//
-//        $did = 0;
-//        ////////////////////Code Review by kmmalik.com //////////////////////////
-//        $call_charge = 0.00;
-//        $destinations = 10;
-//        $count = 1;
-//        $result = 0;
-//        $reversearecode = 0;
-//        $return_result = NULL;
-//        $sub_result = NULL;
-//        //
-//        $number = str_replace(' ', '', str_replace('+', '', str_replace(')', '', str_replace('(', '', $number))));
-//        while ($destinations > 0) {
-//            $nmbr = substr($number, 0, 2);
-//            if ($nmbr == '00') {
-//                $number = substr($number, 2);
-//            } else {
-//                $number = $number;
-//            }
-//
-//            $area_code = substr($number, 0, $count);
-//
-//            $cct = new Criteria();
-//            //  $cct->add(CountryPeer::CALLING_CODE, $area_code);
-//            //    $cct->addOr(CountryPeer::CALLING_CODE, '%' . $area_code. '%', Criteria::LIKE);
-//            $cct->addOr(CountryPeer::CALLING_CODE, $area_code . '%', Criteria::LIKE);
-//            $countrycode = CountryPeer::doCount($cct);
-//            $destinations = $countrycode;
-//
-//            if ($destinations >= 1) {
-//
-//
-//                $cctf = new Criteria();
-//                $cctf->addOr(CountryPeer::CALLING_CODE, $area_code . '%', Criteria::LIKE);
-//                $countrycodef = CountryPeer::doSelectOne($cctf);
-//                $reversearecode = 0;
-//                $reversearecode = $area_code;
-//                $did = $countrycodef->getId();
-//            }
-//            $count++;
-//        }
-//
-//        $resverselength = strlen($reversearecode);
-//        $cct = new Criteria();
-//        $cct->add(CountryPeer::CALLING_CODE, $reversearecode);
-//        $countrycode = CountryPeer::doCount($cct);
-//        $destinationsr = $countrycode;
-//        $reversedir = 0;
-//        while ($destinationsr == 0) {
-//            $reversearecodes = substr($reversearecode, 0, $resverselength);
-//            $cct = new Criteria();
-//            $cct->add(CountryPeer::CALLING_CODE, $reversearecodes);
-//            $countrycode = CountryPeer::doCount($cct);
-//            $destinationsr = $countrycode;
-//            if ($destinationsr >= 1) {
-//                $cct->add(CountryPeer::CALLING_CODE, $reversearecodes);
-//                $countrycodea = CountryPeer::doCount($cct);
-//                $did = $countrycodea->getId;
-//            }
-//            $resverselength--;
-//            $reversedir++;
-//            if ($reversedir == 4) {
-//                $destinationsr = 1;
-//            }
-//        }
-//        //////////////////////////////////////
-//        //   echo "khan".$did;
-//
-//        if (isset($did) && $did > 0) {
-//            
-//        } else {
-//            $did = 183;
-//        }
-//        $cct = new Criteria();
-//        $cct->add(CountryPeer::ID, $did);
-//        $country = CountryPeer::doSelectOne($cct);
-//        if (!$country) {
-//            echo 'error, Country code  not recgnized';
-//            return sfView::NONE;
-//        }
-//        if ($customer) {
-//            if ($sender and $message and $number) {
-//                $messages = array();
-//
-//                if (strlen($message) < 142) {
-//                    $messages[1] = $message . "-Sent by Zerocall";
-//                } else if (strlen($message) > 142 and strlen($message) < 302) {
-//                    $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall-";
-//                    $messages[2] = substr($message, 143) . "-Sent by Zerocall";
-//                } else if (strlen($message) > 382) {
-//                    $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall-";
-//                    $messages[2] = substr($message, 143, 302) . "-Sent by Zerocall-";
-//                    $messages[3] = substr($message, 303, 432) . "-Sent by Zerocall";
-//                }
-//                // $cc = CurrencyConversionPeer::retrieveByPK(1);
-//                foreach ($messages as $sms_text) {
-//                    $cbf = new Cbf();
-//                    $cbf->setS('H');
-//                    $cbf->setDa($destination);
-//                    $cbf->setMessage($sms_text);
-//                    $cbf->setCountryId($country->getId());
-//
-//                    $cbf->setMobileNumber($customer->getMobileNumber());
-//
-//                    //get balance
-//                    $balance = BillingSystem::getBalance($customer);
-//                    $amt = number_format($country->getCbfRate(), 2);
-//                    if ($balance < $amt) {
-//                        echo "error, Not Enough Balance, Please Recharge";
-//                        return sfView::NONE;
-//                    } else {
-//                        
-//                    }
-//                    $zerocall_sms = new ZeroCallOutSMS();
-//                    $res = $zerocall_sms->SmsLogComplete($request->getParameter('number'), $sms_text, $customer->getMobileNumber());
-//
-//                    if ($res) {
-//                        $cbf->setSmsRate($amt);
-//                        $cbf->save();
-//                        //recharge fonet
-//                        BillingSystem::charge($customer, $amt);
-//                    }
-//                }
-//
-//                if ($res) {
-//
-//
-//
-//                    echo "Message successfully sent.";
-//                } else {
-//                    echo "sms could not be sent";
-//                }
-//            } else {
-//                echo "sms could not be sent";
-//            }
-//
-//            return sfView::NONE;
-//        }
-//        echo "sms could not be sent";
-
-        return sfView::NONE;
     }
 
 }
