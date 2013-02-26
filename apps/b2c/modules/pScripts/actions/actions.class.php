@@ -4471,7 +4471,130 @@ class pScriptsActions extends sfActions {
     }
 
     public function executeAppRefill(sfWebRequest $request) {
+        $this->target =  sfConfig::get('app_customer_url');
+        $cmobile_number = $request->getParameter('mobile_number');
+        $mobile_number = $this->mobileNumberWithoutCountryCode($cmobile_number);
+        $this->customer = NULL;
+        $c = new Criteria();
+        $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $customer = CustomerPeer::doSelectOne($c);
+        if ($customer != NULL) {
+
+            $customer_id = $customer->getId();
+
+            $this->customer = $customer;
+            $this->redirectUnless($this->customer, "@homepage");
+            $this->form = new ManualRefillForm($customer_id);
+            $c = new Criteria();
+            $c->add(ProductPeer::PRODUCT_TYPE_ID, 2);
+            $this->refillProducts = ProductPeer::doSelect($c);
+        } else {
+            echo 'error, customer not found';
+            return sfView::NONE;
+        }
+          
+         $this->setLayout('mobile');
+    }
+    
+     public function executeAppRefilTransaction(sfWebRequest $request) {
+        $this->target = sfConfig::get('app_customer_url');
+
+        $product = ProductPeer::retrieveByPK($request->getParameter('extra_refill'));
+     $request->getParameter('extra_refill');
+ 
+        $this->customer = CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
+        $customer = $this->customer;
+        $this->redirectUnless($this->customer, "@homepage");
+
+        $lang = $this->getUser()->getCulture();
+
+        $agentid = $customer->getReferrerId();
+        $mobileNumber=$customer->getMobileNumber();
+        if ($agentid) {
+            $commision = TRUE;
+            $agentCompanyId = $agentid;
+        } else {
+            $commision = FALSE;
+            $agentCompanyId = FALSE;
+        }
+        //  TransactionProcess::StartTransaction($customer, $productId, $decriptionid, $expenceType, $transactionFrom, $transactionStatus, $commision, $agentCompanyId);
+        //$transaction = TransactionProcess::StartTransaction($this->customer, $product->getId(), 9, 1, 5, 1, $commision, $agentCompanyId);
+        $this->order = new CustomerOrder();
+         $this->order->setProduct($product);
+        $this->order->setCustomer($this->customer);
+        $this->order->setQuantity(1);
+        $this->order->setExtraRefill($product->getInitialBalance()+$product->getBonus());
+        $this->order->setIsFirstOrder(2);
+        $this->order->save();
         
+        $transaction = new Transaction();
+
+        $transaction->setAmount($this->order->getExtraRefill() * (sfConfig::get('app_vat_percentage') + 1));
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(9);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($transactiondescription->getTitle());
+        $transaction->setOrderId($this->order->getId());
+        $transaction->setCustomerId($this->order->getCustomerId());
+        $transaction->setVat($this->order->getExtraRefill() * sfConfig::get('app_vat_percentage'));
+
+        //save
+        $transaction->save();
+        $this->transaction = $transaction;
+        $order_id = $this->order->getId();
+        $item_amount = $transaction->getAmount();
+        
+            $return_url =  $this->target . "pScripts/appRefillThanks";
+            $cancel_url =  $this->target . "pScripts/appRefill?mobile_number=".$mobileNumber;
+        
+
+ 
+        $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
+        $notify_url = $this->target . 'pScripts/calbackrefill?p=' . $callbackparameters;
+
+        $email2 = new DibsCall();
+        $email2->setCallurl($notify_url);
+
+        $email2->save();
+
+        $querystring = '';
+        $_POST["amount"] = number_format($item_amount, 2);
+        if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
+
+            $order = CustomerOrderPeer::retrieveByPK($order_id);
+            $item_name = "Refill";
+
+            //loop for posted values and append to querystring
+            foreach ($_POST as $key => $value) {
+                $value = urlencode(stripslashes($value));
+                $querystring .= "$key=$value&";
+            }
+
+            $querystring .= "item_name=" . urlencode($item_name) . "&";
+            $querystring .= "return=" . urldecode($return_url) . "&";
+            $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
+            $querystring .= "notify_url=" . urldecode($notify_url);
+
+            $this->queryString = $querystring;
+            $this->customer = $order->getCustomer();
+            $this->order = $order;
+            $telintaObj = new Telienta();
+            $this->customerBalance = $telintaObj->getBalance($this->customer);
+            $this->product = $product;
+        }
+           $this->setLayout('mobile');
+    }
+
+    public function executeAppRefilToPaypal(sfWebRequest $request) {
+          $querystring = $request->getParameter('qstr');
+           Payment::SendPayment($querystring);
+        return sfView::NONE;
+    } 
+    
+    
+    public function executeAppRefillThanks(sfWebRequest $request) {
+          $this->setLayout('mobile');
     }
 
     public function executeAppTermsConditions(sfWebRequest $request) {
