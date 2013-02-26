@@ -4275,8 +4275,6 @@ class pScriptsActions extends sfActions {
                     }
                     $res = ROUTED_SMS::Send($request->getParameter('number'), $sms_text, $customer->getMobileNumber());
                     if ($res) {
-                        $cbf->setSmsRate($amt);
-                        $cbf->save();
                         $telintaObj = new Telienta();
                         $description = "SMS Charges";
                         $telintaObj->charge($customer, $amt, $description);
