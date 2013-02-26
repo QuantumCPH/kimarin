@@ -4193,7 +4193,7 @@ class pScriptsActions extends sfActions {
                     } else {
                         
                     }
-                    ROUTED_SMS::Send($request->getParameter('number'), $sms_text, $customer->getMobileNumber());
+                    $res = ROUTED_SMS::Send($request->getParameter('number'), $sms_text, $customer->getMobileNumber());
                     if ($res) {
                         $cbf->setSmsRate($amt);
                         $cbf->save();
