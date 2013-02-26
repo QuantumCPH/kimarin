@@ -4348,7 +4348,7 @@ class pScriptsActions extends sfActions {
             $telintaObj->createCBAccount($TelintaMobile, $this->customer);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
             $this->setPreferredCulture($this->customer);
-            emailLib::sendCustomerRegistrationViaAPPEmail($transaction);
+            emailLib::sendCustomerRegistrationViaAPPEmail($transaction,"payments");
             $this->updatePreferredCulture();
 
 
