@@ -3115,6 +3115,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         $customer_id = trim($transaction->getCustomerId());
         $customer = CustomerPeer::retrieveByPK($customer_id);
+        $order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
         
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
@@ -3123,6 +3124,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $message_body = get_partial($app . '/order_receipt_app', array(
             'transaction' => $transaction,
             'customer' => $customer,
+            'order' =>$order,
             'wrap' => false,
                 ));
         $subject = __('Registration Confirmation');
