@@ -3115,7 +3115,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
 
         $customer_id = trim($transaction->getCustomerId());
         $customer = CustomerPeer::retrieveByPK($customer_id);
-        $subject = __('Registration Confirmation');
+        
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
 
@@ -3125,7 +3125,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'customer' => $customer,
             'wrap' => false,
                 ));
-
+        $subject = __('Registration Confirmation');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');
