@@ -4429,11 +4429,17 @@ class pScriptsActions extends sfActions {
             $telintaObj->createCBAccount($TelintaMobile, $this->customer);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
             $this->setPreferredCulture($this->customer);
-            emailLib::sendCustomerRegistrationViaAPPEmail($transaction,"payments");
+            emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
             $this->updatePreferredCulture();
 
 
             echo "OK,customer registered successfully";
+            $callbacklog = new CallbackLog();
+            $callbacklog->setMobileNumber($TelintaMobile);
+            $callbacklog->setuniqueId($customer->getUniqueid());
+            $callbacklog->setCallingcode(sfConfig::get("app_country_code"));
+            $callbacklog->setCheckStatus(3);
+            $callbacklog->save();
 //            $zerocall_sms = new ZeroCallOutSMS();
 //            $zerocall_sms->toCustomerAfterAppReg($customer);
 //            if ($applog->getApplicationId() == 1) {
