@@ -4406,7 +4406,7 @@ class pScriptsActions extends sfActions {
         //set customer's proudcts in use
         $customer_product = new CustomerProduct();
         $customer_product->setCustomerId($transaction->getCustomerId());
-        $customer_product->setProductId($transaction->getProductId());
+        $customer_product->setProductId($order->getProductId());
         $customer_product->save();
 
         $this->customer = $customer;
