@@ -4365,7 +4365,7 @@ class pScriptsActions extends sfActions {
         $customer->setPlainText($password);
         $customer->setPassword($password);
         $customer->setPreferredLanguageId(3);
-        $customer->setCustomerStatusId(3);
+        $customer->setCustomerStatusId(1);
         $customer->save();
         $customer->setUniqueid("app" . $customer->getId());
         $customer->save();
@@ -4383,7 +4383,7 @@ class pScriptsActions extends sfActions {
         $order->setCustomerId($customer->getId());
         $order->setExtraRefill($order->getProduct()->getInitialBalance() + $order->getProduct()->getBonus());
         $order->setIsFirstOrder(1);
-        $order->setOrderStatusId(3);
+        $order->setOrderStatusId(1);
         $order->save();
 
         $transaction = new Transaction();
@@ -4394,7 +4394,7 @@ class pScriptsActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer->getId());
-        $transaction->setTransactionStatusId(3); // default value 1
+        $transaction->setTransactionStatusId(1); // default value 1
         $transaction->setVat((($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
         $transaction->save();
 
