@@ -3974,7 +3974,7 @@ class pScriptsActions extends sfActions {
         $customer = CustomerPeer::doSelectOne($c);
         if ($customer) {
             $telintaObj = new Telienta();
-            echo $telintaObj->getBalance($customer);
+            echo number_format($telintaObj->getBalance($customer),2);
         } else {
             echo "0.00";
         }
