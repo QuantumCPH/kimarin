@@ -19,12 +19,7 @@
                     $country_id = $customer->getCountryId();
 //echo $country_id;
                     //-----------------------------------
-                    $countrylng = new Criteria();
-                    $countrylng->add(EnableCountryPeer::ID, $country_id);
-                    $countrylng = EnableCountryPeer::doSelectOne($countrylng);
-                    $countryRefill = $countrylng->getRefill();
-                    $countryRefill  = $countryRefill;
-                    $countryRefill = explode(",", $countryRefill);
+ 
 
 
                         $c = new Criteria();
@@ -57,10 +52,9 @@
     								'required'	=> 'Please choose product',
     								'invalid'	=> 'Invalid product',
     							));
-
+                        
     		$this->validatorSchema['extra_refill'] = new sfValidatorChoice(array('choices'=>ProductPeer::getRefillChoices()));
-
-    		$this->widgetSchema->setLabels(array(
+                $this->widgetSchema->setLabels(array(
     			'customer_product'=>'Product',
     			'extra_refill'=>'Select refill amount',
     		));
