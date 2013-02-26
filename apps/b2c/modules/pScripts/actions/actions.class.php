@@ -3140,7 +3140,7 @@ public function executeSmsRegisterationwcb(sfWebrequest $request) {
                 $invite_c->add(InvitePeer::INVITE_NUMBER, $this->customer->getMobileNumber());
                 $invite_c->add(InvitePeer::INVITE_STATUS, 2);
                 $invite = InvitePeer::doSelectOne($invite_c);
-                if ($invite) {
+                if ($invite) { 
                     $invite->setInviteStatus(3);
                     $invite->setInvitedCustomerId($this->customer->getId());
                     $products = new Criteria();
