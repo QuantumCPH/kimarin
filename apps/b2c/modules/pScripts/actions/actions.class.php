@@ -4485,7 +4485,7 @@ class pScriptsActions extends sfActions {
 
             $this->customer = $customer;
             $this->redirectUnless($this->customer, "@homepage");
-            $this->form = new ManualRefillForm($customer_id);
+            //$this->form = new ManualRefillForm($customer_id);
             $c = new Criteria();
             $c->add(ProductPeer::PRODUCT_TYPE_ID, 2);
             $this->refillProducts = ProductPeer::doSelect($c);
