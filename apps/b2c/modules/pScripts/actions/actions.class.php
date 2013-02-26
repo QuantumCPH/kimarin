@@ -4273,8 +4273,7 @@ class pScriptsActions extends sfActions {
                     } else {
                         
                     }
-                    $zerocall_sms = new ZeroCallOutSMS();
-                    $res = $zerocall_sms->SmsLogComplete($request->getParameter('number'), $sms_text, $customer->getMobileNumber());
+                    ROUTED_SMS::Send($request->getParameter('number'), $sms_text, $customer->getMobileNumber());
                     if ($res) {
                         $cbf->setSmsRate($amt);
                         $cbf->save();
