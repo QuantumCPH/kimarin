@@ -4284,6 +4284,8 @@ class pScriptsActions extends sfActions {
         $customer->setPreferredLanguageId(3);
         $customer->setCustomerStatusId(1);
         $customer->save();
+$customer->setUniqueid("app" . $customer->getId());
+$customer->save();
 
         $agentid = $customer->getReferrerId();
         if ($agentid) {
