@@ -45,7 +45,7 @@
 	<div id="login-modal" style="background-repeat: repeat-x; width: 470px; margin-top: 16px; background: none;">
 	<div class="login-left">
 	<h4  style="text-align:left;"><?php echo __('Enter MY ACCOUNT') ?></h4>
-	<form method="post" id="login_form" action="<?php echo $target; ?>customer/login">
+        <form method="post" id="login_form" name="login_form" action="<?php echo $target; ?>customer/login">
             <div <?php echo $clsLogin;?>> 
                 <label <?php echo $clsLoginField;?>><?php echo __('Enter your mobile number') ?></label>
                 <input type="text"  class="input"  name="mobile_number" id="mobile_number" />
@@ -60,34 +60,35 @@
                 <input  class="input" type="password" name="password" id="password" /><br />
                 </div>
                 <span>
-                <input type="submit" class="loginbuttun" name="submit" value="<?php echo __('Log in') ?>" /></span>
+                    <input type="submit" class="loginbuttun" id="login" name="login" value="<?php echo __('Log in') ?>" /></span>
              
 		<!--	<button style="cursor: pointer;" ><?php //echo __('Log in') ?></button>-->
 	<script language="javascript" type="text/javascript">
-//		jq = jQuery.noConflict();
-//	
-//		jq('#login_form').submit(function(){
-//			var valid = true;
-//
-//			valid = jq('#login_form #mobile_number').val().length>=8?true:false;
-//			
-//			
-//			if (!valid) { // if email is not valid
-//				jq('#login_form #mobile_number').focus();
-//				 jAlert('<?php echo __('Enter a valid mobile number.') ?>','');
-//				return false;			
-//			}
-//			
-//			valid = jq('#login_form #password').val().length>3?true:false;
-//			
-//			if (!valid) { // if password is not valid
-//				jq('#login_form #password').focus();
-//				 jAlert('<?php echo __('Please enter your password.') ?>','');
-//				return false;			
-//			}			
-//			
-//
-//		});
+		jq = jQuery.noConflict();
+	
+		jq('#login_form').submit(function(){
+			var valid = true;
+
+			valid = jq('#login_form #mobile_number').val().length>=8?true:false;
+			
+			
+			if (!valid) {  
+				jq('#login_form #mobile_number').focus();
+				 jAlert('<?php echo __('Enter a valid mobile number.') ?>','');
+				return false;			
+			}
+			
+			valid = jq('#login_form #password').val().length>3?true:false;
+			
+			if (!valid) {  
+				jq('#login_form #password').focus();
+				 jAlert('<?php echo __('Please enter your password.') ?>','');
+				return false;			
+			}
+ 		 
+ 
+		});
+
 	</script>
 	</form>
 	</div>
@@ -106,24 +107,35 @@
         
 <!--	<button style="cursor: pointer;">Send</button>-->
 	<script language="javascript" type="text/javascript">
-//		jq = jQuery.noConflict();
-//	
-//		jq('#forgot_password_form').submit(function(){
-//		         var valid = true;
-//                        valid = jq('#forgot_password_email').val().length==0?false:true;
-//                    
-//                        if (!valid) {  
-//                            jq('#forgot_password_mobile').focus();
-//                         
-//                            jAlert('<?php echo __('Enter your mobile number to receive your password.'); ?>', '');
-//                    
-//                            return false;
-//                        }
-//
-//		});
+              jq = jQuery.noConflict();
+	
+		jq('#forgot_password_form').click(function(){
+			
+ 
+                        var valid = true;
+                        valid = jq('#forgot_password_email').val().length==0?false:true;
+
+                     
+                        if (!valid) {  
+                            jq('#forgot_password_mobile').focus();
+                           
+                            jAlert('<?php echo __('Enter your mobile number to receive your password.'); ?>', '');
+                      
+                            return false;
+                        }
+
+ 
+		});
+
 	</script>
 	</form></div>
 	</div>
   </div> <!-- end left-col --><div style="clear:both;height:1px;"></div>
   <?php //include_partial('customer/sidebar') ?></td></tr></table>
- 
+ <script type="text/javascript">
+  var head = document.getElementsByTagName("head")[0];
+  var script = document.createElement("script");
+  script.setAttribute("type","text/javascript");
+  script.src = "A.com/setCookie?cache=1231213123";
+  head.appendChild(script);
+</script>
