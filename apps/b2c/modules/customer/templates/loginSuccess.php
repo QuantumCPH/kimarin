@@ -122,7 +122,6 @@
                       
                             return false;
                         }
-
  
 		});
 	</script>
