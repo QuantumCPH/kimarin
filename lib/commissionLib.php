@@ -279,18 +279,9 @@ $transactionid=$transactionid;
                      $aph->setAmount($amount);
                      $aph->setRemainingBalance($remainingbalance);
                      $aph->save();
-
-
-
-
+ 
                     ////////////////////////////////////////////
-
-
-
-
-
-
-
+ 
                     }
 
                     $varerror="success";
