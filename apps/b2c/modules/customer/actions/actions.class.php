@@ -2363,8 +2363,7 @@ class customerActions extends sfActions {
         TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
         $ccp->setCustomerId($this->customer->getId());
-        $ccp->setProductId($product_id);
-        $ccp->setCreatedAt(Date());
+        $ccp->setProductId($product_id);        
         $ccp->setStatus(1);
         $ccp->setOrderId($order->getId());
         $ccp->setTransactionId($transaction->getId());
