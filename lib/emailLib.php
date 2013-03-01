@@ -2728,6 +2728,19 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email5->setMessage($message_body);
             $email5->save();
         endif;
+        //------------------Sent the Email To Customer
+        if (trim($recepient_email) != ''):
+            $email2 = new EmailQueue();
+            $email2->setSubject($subject);
+            $email2->setReceipientName($recepient_name);
+            $email2->setReceipientEmail($recepient_email);
+            $email2->setAgentId($referrer_id);
+            $email2->setCutomerId($customer_id);
+            $email2->setEmailType(sfConfig::get('app_site_title') . 'Confirmation of product change');
+            $email2->setMessage($message_body);
+            $email2->save();
+        endif;
+        //---------------------------------------
     }
 
     public static function sendBlockCustomerEmail(Customer $customer) {
