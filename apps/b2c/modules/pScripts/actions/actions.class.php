@@ -3837,7 +3837,7 @@ class pScriptsActions extends sfActions {
         $Parameters = $request->getURI();
 
         $email2 = new DibsCall();
-        $email2->setCallurl($Parameters);
+        $email2->setCallurl("Received:--".$Parameters);
         $email2->save();
 
         // call back url $p="es-297-100"; lang_orderid_amount
@@ -3881,22 +3881,58 @@ class pScriptsActions extends sfActions {
         $order->save();
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
+        
         $this->customer = $order->getCustomer();
-
-
         $exest = $order->getExeStatus();
-
-
         $uniqueId = $this->customer->getUniqueid();
-
+       
         $this->setPreferredCulture($this->customer);
         emailLib::sendCustomerChangeProduct($this->customer, $order, $transaction);
         $this->updatePreferredCulture();
 
-
         $order->setExeStatus(1);
         $order->save();
         echo 'Yes';
+        
+        /**************Change customer product ******************/
+        $customer = $this->customer;
+        $product = ProductPeer::retrieveByPK($CCP->getProductId());
+        $order = CustomerOrderPeer::retrieveByPK($CCP->getOrderId());
+        $transaction = TransactionPeer::retrieveByPK($CCP->getTransactionId());
+        $Bproducts = BillingProductsPeer::retrieveByPK($product->getBillingProductId());
+        $c = new Criteria;
+        $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
+        $c->add(TelintaAccountsPeer::STATUS, 3);
+        $tilentAccount = TelintaAccountsPeer::doSelectOne($c);
+        //  foreach($tilentAccounts as $tilentAccount){
+        $accountInfo['i_account'] = $tilentAccount->getIAccount();
+        $accountInfo['i_product'] = $Bproducts->getAIproduct();
+        $telintaObj = new Telienta();
+        if ($telintaObj->updateAccount($accountInfo)) {
+            $CCP->setStatus(3);
+            $CCP->Save();
+        }
+        //   }  
+
+        $cp = new Criteria();
+        $cp->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
+        $cp->addAnd(CustomerProductPeer::STATUS_ID, 3);
+        $customerProduct = CustomerProductPeer::doSelectOne($cp);
+        $customerProduct->setStatusId(7);
+        $customerProduct->Save();
+
+        $cProduct = new CustomerProduct();
+        $cProduct->setProductId($CCP->getProductId());
+        $cProduct->setCustomerId($CCP->getCustomerId());
+        $cProduct->setStatusId(3);
+        $cProduct->save();
+
+
+        $this->setPreferredCulture($this->customer);
+        emailLib::sendCustomerChangeProductConfirm($this->customer, $order, $transaction);
+        $this->updatePreferredCulture();
+        
+        
         return sfView::NONE;
     }
 
