@@ -2864,7 +2864,43 @@ $vat=$transaction->getVat();
         $ccp->setOrderId($order->getId());
         $ccp->setTransactionId($transaction->getId());
         $ccp->save();
-               
+        
+        
+        /**************Change customer product ******************/
+        $customer = $this->customer;
+        $product = ProductPeer::retrieveByPK($ccp->getProductId());
+        $order = CustomerOrderPeer::retrieveByPK($ccp->getOrderId());
+        $transaction = TransactionPeer::retrieveByPK($ccp->getTransactionId());
+        $Bproducts = BillingProductsPeer::retrieveByPK($product->getBillingProductId());
+        $c = new Criteria;
+        $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
+        $c->add(TelintaAccountsPeer::STATUS, 3);
+        $tilentAccount = TelintaAccountsPeer::doSelectOne($c);
+        //  foreach($tilentAccounts as $tilentAccount){
+        $accountInfo['i_account'] = $tilentAccount->getIAccount();
+        $accountInfo['i_product'] = $Bproducts->getAIproduct();
+        $telintaObj = new Telienta();
+        if ($telintaObj->updateAccount($accountInfo)) {
+            $ccp->setStatus(3);
+            $ccp->Save();
+        }
+        //   }  
+       
+        $cp = new Criteria();
+        $cp->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
+        $cp->addAnd(CustomerProductPeer::STATUS_ID, 3);
+        if(CustomerProductPeer::doCount($cp) > 0){
+            $customerProduct = CustomerProductPeer::doSelectOne($cp);
+            $customerProduct->setStatusId(7);
+            $customerProduct->Save();
+        }
+        $cProduct = new CustomerProduct();
+        $cProduct->setProductId($ccp->getProductId());
+        $cProduct->setCustomerId($ccp->getCustomerId());
+        $cProduct->setStatusId(3);
+        $cProduct->save();
+        
+        
             $uniqueId=$this->customer->getUniqueid();
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerChangeProductAgent($this->customer, $order, $transaction);
