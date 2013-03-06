@@ -88,6 +88,7 @@
 			
 
 		});
+
 	</script>
 	</form>
 	</div>
@@ -106,8 +107,8 @@
         
 <!--	<button style="cursor: pointer;">Send</button>-->
 	<script language="javascript" type="text/javascript">
-		jq = jQuery.noConflict();
-	
+
+              jq = jQuery.noConflict();
 		jq('#forgot_password_form').submit(function(){
 		         var valid = true;
                         valid = jq('#forgot_password_email').val().length==0?false:true;

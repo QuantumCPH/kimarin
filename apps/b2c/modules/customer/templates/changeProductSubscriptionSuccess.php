@@ -30,7 +30,7 @@ jQuery(function(){
         <form method="post" name="changenumber" id="changeproduct" class="split-form-sign-up" action="<?php echo url_for($targetUrl.'customer/changeProductProcess') ?>">
           
              
-            <p><?php echo __('Your product change will be valid from the first day of the comming month.');?></p><br />
+<!--            <p><?php echo __('Your product change will be valid from the first day of the comming month.');?></p><br />-->
     	<ul class="fl col">
             <li>
                 <label><?php echo __('Product Name') ?></label>
