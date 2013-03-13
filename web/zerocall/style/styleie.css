@@ -688,9 +688,9 @@ margin-top:12px;
 .navigationen a.settings:hover{ background-position:-90px -250px!important}
 .navigationen a.settings-s{ background-position:-90px -250px!important}
 
-.navigationen a.websms{ background-position:-5px -313px!important;}
-.navigationen a.websms:hover{ background-position:-95px -313px!important;}
-.navigationen a.websms-s{ background-position:-95px -313px!important;}
+.navigationen a.websms{ background-position:-5px -313px!important;margin-left: 10px;}
+.navigationen a.websms:hover{ background-position:-95px -313px!important;margin-left: 10px;}
+.navigationen a.websms-s{ background-position:-95px -313px!important;margin-left: 10px;}
 
 .navigationen a.logout{ background-position:3px -380px!important;}
 .navigationen a.logout:hover{ background-position:-87px -380px!important}
