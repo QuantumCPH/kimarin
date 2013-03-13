@@ -637,29 +637,29 @@ margin-top:12px;
 .navegaciones a.dashboard:hover{ background-position:-90px 0px}
 .navegaciones a.dashboard-s{ background-position:-90px 0px}
 
-.navegaciones a.refil{ background-position:0px -64px;}
-.navegaciones a.refil:hover{ background-position:-90px -64px}
-.navegaciones a.refil-s{ background-position:-90px -64px}
+.navegaciones a.refil{ background-position:0px -64px!important;}
+.navegaciones a.refil:hover{ background-position:-90px -64px!important}
+.navegaciones a.refil-s{ background-position:-90px -64px!important}
 
-.navegaciones a.callhistory{ background-position:0px -126px;}
-.navegaciones a.callhistory:hover{ background-position:-90px -126px;}
-.navegaciones a.callhistory-s{ background-position:-90px -126px;}
+.navegaciones a.callhistory{ background-position:0px -126px !important;}
+.navegaciones a.callhistory:hover{ background-position:-90px -126px!important;}
+.navegaciones a.callhistory-s{ background-position:-90px -126px!important;}
 
-.navegaciones a.paymenthistory{ background-position:5px -187px}
-.navegaciones a.paymenthistory:hover{ background-position:-85px -187px}
-.navegaciones a.paymenthistory-s{ background-position:-85px -187px}
+.navegaciones a.paymenthistory{ background-position:5px -187px!important}
+.navegaciones a.paymenthistory:hover{ background-position:-85px -187px!important}
+.navegaciones a.paymenthistory-s{ background-position:-85px -187px!important}
 
 .navegaciones a.settings{ background-position:0px -250px}
 .navegaciones a.settings:hover{ background-position:-90px -250px}
 .navegaciones a.settings-s{ background-position:-90px -250px}
 
-.navegaciones a.websms{ background-position:3px -313px}
-.navegaciones a.websms:hover{ background-position:-87px -313px}
-.navegaciones a.websms-s{ background-position:-87px -313px}
+.navegaciones a.websms{ background-position:3px -313px!important}
+.navegaciones a.websms:hover{ background-position:-87px -313px!important}
+.navegaciones a.websms-s{ background-position:-87px -313px!important}
 
-.navegaciones a.logout{ background-position:3px -380px;}
-.navegaciones a.logout:hover{ background-position:-87px -380px}
-.navegaciones a.logout-s{ background-position:-87px -380px}
+.navegaciones a.logout{ background-position:3px -380px!important;}
+.navegaciones a.logout:hover{ background-position:-87px -380px!important}
+.navegaciones a.logout-s{ background-position:-87px -380px!important}
 
 /****** German ********/
 .navigationen{ width: 657px; float:left;}
