@@ -125,7 +125,7 @@ width:232px;
 
 /****** Spanish ********/
 .navegaciones{ width:575px; float:left;}
-.navegaciones a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-es.gif); background-repeat:no-repeat; margin-right:0px;}
+.navegaciones a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/spanish.jpg); background-repeat:no-repeat; margin-right:0px;}
 .navegaciones a.dashboard{ background-position:-5px 0px}
 .navegaciones a.dashboard:hover{ background-position:-90px 0px}
 .navegaciones a.dashboard-s{ background-position:-90px 0px}
@@ -156,7 +156,7 @@ width:232px;
 
 /****** German ********/
 .navigationen{ width:575px; float:left;}
-.navigationen a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/dash-nav-spriteg-de.gif); background-repeat:no-repeat; margin-right:0px;}
+.navigationen a{ width:78px; height:61px; float:left; overflow:hidden; display:block; text-indent:9000em; white-space:nowrap; background-image:url(../images/german.jpg); background-repeat:no-repeat; margin-right:0px;}
 .navigationen a.dashboard{ background-position:-5px 0px}
 .navigationen a.dashboard:hover{ background-position:-90px 0px}
 .navigationen a.dashboard-s{ background-position:-90px 0px}
