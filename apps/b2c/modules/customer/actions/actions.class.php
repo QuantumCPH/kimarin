@@ -661,7 +661,6 @@ class customerActions extends sfActions {
         $transaction->setOrderId($this->order->getId());
         $transaction->setCustomerId($this->order->getCustomerId());
         $transaction->setVat($this->order->getExtraRefill() * sfConfig::get('app_vat_percentage'));
-
         //save
         $transaction->save();
     }
@@ -2364,8 +2363,7 @@ class customerActions extends sfActions {
         TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
         $ccp->setCustomerId($this->customer->getId());
-        $ccp->setProductId($product_id);
-        $ccp->setCreatedAt(Date());
+        $ccp->setProductId($product_id);        
         $ccp->setStatus(1);
         $ccp->setOrderId($order->getId());
         $ccp->setTransactionId($transaction->getId());
