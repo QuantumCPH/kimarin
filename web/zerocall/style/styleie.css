@@ -653,9 +653,9 @@ margin-top:12px;
 .navegaciones a.settings:hover{ background-position:-90px -250px!important}
 .navegaciones a.settings-s{ background-position:-90px -250px!important}
 
-.navegaciones a.websms{ background-position:3px -313px!important}
-.navegaciones a.websms:hover{ background-position:-87px -313px!important}
-.navegaciones a.websms-s{ background-position:-87px -313px!important}
+.navegaciones a.websms{ background-position:3px -313px!important;width: 90px;}
+.navegaciones a.websms:hover{ background-position:-87px -313px!important;width: 90px;}
+.navegaciones a.websms-s{ background-position:-87px -313px!important;width: 90px;}
 
 .navegaciones a.logout{ background-position:3px -380px!important;}
 .navegaciones a.logout:hover{ background-position:-87px -380px!important}
