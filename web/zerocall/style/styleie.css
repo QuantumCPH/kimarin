@@ -649,9 +649,9 @@ margin-top:12px;
 .navegaciones a.paymenthistory:hover{ background-position:-85px -187px!important}
 .navegaciones a.paymenthistory-s{ background-position:-85px -187px!important}
 
-.navegaciones a.settings{ background-position:0px -250px}
-.navegaciones a.settings:hover{ background-position:-90px -250px}
-.navegaciones a.settings-s{ background-position:-90px -250px}
+.navegaciones a.settings{ background-position:0px -250px!important}
+.navegaciones a.settings:hover{ background-position:-90px -250px!important}
+.navegaciones a.settings-s{ background-position:-90px -250px!important}
 
 .navegaciones a.websms{ background-position:3px -313px!important}
 .navegaciones a.websms:hover{ background-position:-87px -313px!important}
