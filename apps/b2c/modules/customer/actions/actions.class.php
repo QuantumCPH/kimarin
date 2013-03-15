@@ -251,6 +251,7 @@ class customerActions extends sfActions {
             $customer = new Customer();
             $customer->setMobileNumber($request->getParameter('mobile_number'));
             $customer->setCountryId(1);
+            $customer->setNiePassportNumber($request->getParameter('nie'));
             $customer->setPlainText($request->getParameter('password'));
             $customer->setPassword($request->getParameter('password'));
             $customer->setEmail($request->getParameter('email'));
