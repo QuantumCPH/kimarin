@@ -96,11 +96,11 @@ use_helper('I18N');
             //    Cufon.replace('.country-code',{fontFamily: 'Barmeno-Medium', fontSize:'13px'});
         });
         
-        jQuery("#country-select").ready(function(){
-            var c_code =  jQuery("#country-select").find(':selected').attr('calling_code');
-            //  alert(v);
-            jQuery("#country-code").html("+"+c_code);
-        });
+//        jQuery("#country-select").ready(function(){
+//            var c_code =  jQuery("#country-select").find(':selected').attr('calling_code');
+//            //  alert(v);
+//            jQuery("#country-code").html("+"+c_code);
+//        });
         jQuery('.submitbuttun').mousedown(function(){
             jQuery(this).css('color', 'black');
         }); 
@@ -121,18 +121,20 @@ use_helper('I18N');
 <form id="regForm" method="post">
     <div class="regForm">  
         <div class="frmleft">
-            <div class="left">&nbsp;</div>
-            <div class="right">
-                &nbsp;
-            </div>
-            <br clear="all" />
             <div class="left"><?php echo __('Mobile Number') ?><em>*</em>&nbsp;:</div>
             <div class="right">
-                <input name="mobile_number" class="mobile"/><br/>
+                <label class="country-code" id="country-code">+34</label>
+                <input name="mobile_number" class="mobile"/>
+            
+                </div>
+            <br clear="all" />
+             <div class="left"><?php echo __('N.I.E. or passport<br />number') ?><em>*</em>&nbsp;:</div>
+            <div class="right">
+                <input name="nie" class="input1 required"/><br/>
                 
             </div>
             <br clear="all" />
-            <div class="left"><?php echo __('Preferred Language') ?>:</div>
+            <div class="left"><?php echo __('Preferred language') ?>:</div>
             <div class="right">
                 <select name="pref_lang" class="input">
                     <?php
@@ -145,7 +147,7 @@ use_helper('I18N');
                 </select>
             </div>
             <br clear="all" />
-            <div class="left"><?php echo __('Email') ?><em>*</em>&nbsp;:</div>
+            <div class="left"><?php echo __('email') ?><em>*</em>&nbsp;:</div>
             <div class="right">
                 <input type="text" name="email" class="input1" />
             </div>
@@ -158,7 +160,7 @@ use_helper('I18N');
             </div>
             <br clear="all" />
             <div class="left">
-                <?php echo __('Confirm Password') ?><em>*</em>&nbsp;:
+                <?php echo __('Confirm password') ?><em>*</em>&nbsp;:
             </div>
             <div class="right">
                 <input name="confirm_password" class="input1 required" type="text"/>
@@ -186,11 +188,8 @@ use_helper('I18N');
         </div>
         <div class="frmright">
             <fieldset id="postal-info" style="display: none;border:0">
-                <div class="right"> 
-                    <h2><?php echo __('Postal Information') ?>:</h2>
-                </div>
-                <br clear="all" />
-                <div class="left"><?php echo __('SIM Type') ?><em>*</em>&nbsp;:</div>
+                
+                <div class="left"><?php echo __('SIM type') ?><em>*</em>&nbsp;:</div>
                 <div class="right"> 
                     <select name="simtype" class="input">
                         <option value="" > --------- </option>
@@ -205,10 +204,10 @@ use_helper('I18N');
                     </select>
                 </div>   
                 <br clear="all" />
-                <div class="left"><?php echo __('First Name') ?><em>*</em>&nbsp;:</div>
+                <div class="left"><?php echo __('first name') ?><em>*</em>&nbsp;:</div>
                 <div class="right"><input name="first_name" type="text" class="input1"/></div>
                 <br clear="all" />
-                <div class="left"><?php echo __('Last Name') ?><em>*</em>&nbsp;:</div>
+                <div class="left"><?php echo __('last name') ?><em>*</em>&nbsp;:</div>
                 <div class="right"><input name="last_name" type="text" class="input1"/></div>
                 <br clear="all" />
                 <div class="left"><?php echo __('Address') ?><em>*</em>&nbsp;:</div>
@@ -241,6 +240,8 @@ use_helper('I18N');
             ?>
             <a href="<?php echo $url; ?>" target="_blank" style="outline:none"><?php echo __('Please check this box to confirm that you have<br />read and accept the %1% terms and conditions.',array('%1%'=>sfConfig::get("app_site_title"))) ?></a>
         </div>
+        <br clear="all"/>
+        <br/>
         <div class="left">&nbsp;</div>
         <div class="right"><input type="submit" class="butonsigninsmall" value="<?php echo __('Submit') ?>" /></div>
     </div>
