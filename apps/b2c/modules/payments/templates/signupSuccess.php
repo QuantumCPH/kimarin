@@ -203,9 +203,9 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
                 <input type="hidden" name="lc" value="GB" />
                 <input type="hidden" name="currency_code" value="<?php echo sfConfig::get('app_currency_symbol')?>" />
                 <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest" />
-                <input type="hidden" name="firstName" value="<?php echo $order->getCustomer()->getFirstName();?>"  />
-                <input type="hidden" name="lastName" value="<?php echo $order->getCustomer()->getLastName();?>"  />
-                <input type="hidden" name="payer_email" value="<?php echo $order->getCustomer()->getEmail();?>"  />
+                <input type="hidden" name="first_name" value="<?php echo $order->getCustomer()->getFirstName();?>"  />
+                <input type="hidden" name="last_name" value="<?php echo $order->getCustomer()->getLastName();?>"  />
+                <input type="hidden" name="email" value="<?php echo $order->getCustomer()->getEmail();?>"  />
                 <input type="hidden" name="item_number" value="<?php echo $order_id;?>" />
                 <input type="hidden" name="rm" value="2" />
                 

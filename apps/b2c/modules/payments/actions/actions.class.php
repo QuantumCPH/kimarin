@@ -167,6 +167,8 @@ class paymentsActions extends sfActions {
         if ($product_id == '' || $customer_id == '') {
             $this->forward404('Product id not found in session');
         }
+        
+        
         $order = new CustomerOrder();
         $transaction = new Transaction();
         $order->setProductId($product_id);
@@ -178,6 +180,10 @@ class paymentsActions extends sfActions {
         //$order->setExtraRefill($extra_refil_choices[0]);//minumum refill amount
         $order->setIsFirstOrder(1);
         $order->save();
+        
+        if(!$order->getProduct()->getPostageApplicable()){
+            $this->postalcharge = 0;
+        }        
         $transaction->setAmount($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee() + (($this->postalcharge + $order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
         $transactiondescription = TransactionDescriptionPeer::retrieveByPK(8);
         $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
