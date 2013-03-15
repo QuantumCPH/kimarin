@@ -2533,8 +2533,24 @@ class customerActions extends sfActions {
         }
 
 
+ $product_criteria = new Criteria();
+        if ($this->getRequest()->getCookie('agent_id') != NULL) {
+            $dc = new Criteria();
+            $dc->add(AgentProductPeer::AGENT_ID, $this->getRequest()->getCookie('agent_id'));
+            $agentCount = AgentProductPeer::doCount($dc);
+            if ($agentCount > 0) {
+                $product_criteria->add(ProductPeer::IS_IN_STORE, true);
+                $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
+                $product_criteria->add(AgentProductPeer::AGENT_ID, $this->getRequest()->getCookie('agent_id'));
+            } else {
+                $product_criteria->add(ProductPeer::IS_IN_STORE, true);
+            }
+        } else {
+            $product_criteria->add(ProductPeer::INCLUDE_IN_ZEROCALL, true);
+        }
+        $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
+        $this->products = ProductPeer::doSelect($product_criteria);
 
-        $this->form = new CustomerFormB2C();
         $id = $request->getParameter('invite_id');
         $visitor_id = $request->getParameter('visitor');
         //$this->form->widgetSchema->setLabel('the_field_id', false);
@@ -2558,35 +2574,76 @@ class customerActions extends sfActions {
             }
         }
 
-        //set referrer id
-        if ($referrer_id = $request->getParameter('ref')) {
-            $c = new Criteria();
-            $c->add(AgentCompanyPeer::ID, $referrer_id);
-
-            if (AgentCompanyPeer::doSelectOne($c))
-                $this->form->setDefault('referrer_id', $referrer_id);
-        }
-        if ($this->getRequest()->getCookie('agent_id')) {
-            $referrer_id = $this->getRequest()->getCookie('agent_id');
-            $c = new Criteria();
-            $c->add(AgentCompanyPeer::ID, $referrer_id);
-
-            if (AgentCompanyPeer::doCount($c) == 1) {
-                $this->form->setDefault('referrer_id', $referrer_id);
-            }
-        }
-
-        unset($this->form['manufacturer']);
-        unset($this->form['device_id']);
+        $this->simTypes = SimTypesPeer::doSelect(new Criteria());
+        $pl = new Criteria();
+        $this->langs = PreferredLanguagesPeer::doSelect($pl);
 
 
         if ($request->isMethod('post')) {
 
-            unset($this->form['imsi']);
-            unset($this->form['uniqueid']);
 
-            $this->processForm($request, $this->form, $this->getRequest()->getCookie('invite_id'));
+
+            if ($this->getRequest()->getCookie('invite_id') != NULL) {
+                $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
+                if ($invite) {
+                    $invite->setInviteStatus('2');
+                    $invite->setInviteNumber(sfConfig::get('app_country_code') . $request->getParameter('mobile_number'));
+                    $invite->save();
+                }
+            }
+
+            $customer = new Customer();
+            $customer->setMobileNumber($request->getParameter('mobile_number'));
+            $customer->setCountryId(1);
+            $customer->setNiePassportNumber($request->getParameter('nie'));
+            $customer->setPlainText($request->getParameter('password'));
+            $customer->setPassword($request->getParameter('password'));
+            $customer->setEmail($request->getParameter('email'));
+            $customer->setBusiness(1);
+            $customer->setPreferredLanguageId($request->getParameter('pref_lang'));
+
+            if ($this->getRequest()->getCookie('agent_id') != NULL) {
+                $customer->setRegistrationTypeId('3');
+            } else {
+                $customer->setRegistrationTypeId('1');
+            }
+            $customer->save();
+
+            $productObj = ProductPeer::retrieveByPK($request->getParameter('product'));
+            if($productObj->getProductTypeId()== 10){
+                $customer->setUniqueid("Dial".$customer->getId());
+                $customer->save();
+            }elseif ($productObj->getPostageApplicable() == 1) {
+                $customer->setFirstName($request->getParameter('first_name'));
+                $customer->setLastName($request->getParameter('last_name'));
+                $customer->setAddress($request->getParameter('address'));
+                $customer->setPoBoxNumber($request->getParameter('post_code'));
+                $customer->setCity($request->getParameter('city'));
+                $customer->setSimTypeId($request->getParameter('simtype'));
+                $customer->save();
+                $uc = new Criteria();
+                $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+                $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID, $customer->getSimTypeId());
+                $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+                $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+
+                if ($availableUniqueCount == 0) {
+                    echo $customer->getSimTypeId();
+                    // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
+                    emailLib::sendUniqueIdsShortage($customer->getSimTypeId());
+                    $this->redirect($this->getTargetUrl() . 'customer/shortUniqueIds');
+                }
+                $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
+                $uniqueId = $availableUniqueId->getUniqueNumber();
+                $customer->setUniqueid($uniqueId);
+                $customer->save();
+            }
+
+
+            $url = $this->getTargetUrl();
+            $this->redirect($url . 'payments/signup?cid=' . $customer->getId() . '&pid=' . $productObj->getId());
         }
+
     }
 
     public function executeValidateMobileNumber(sfWebRequest $request) {
