@@ -838,6 +838,7 @@ label.error{
    color:#f00 !important;
    font-weight: normal !important;
    margin-left: 5px;
+   display: block;
 }
 input.changeNum{
    margin-left:188px!important;

@@ -920,6 +920,16 @@ class emailLib {
 
         $vat = ($order->getProduct()->getRegistrationFee() + $postalcharge) * sfConfig::get('app_vat_percentage');
 
+        $wrap = true;
+        $dialwrap = true;
+
+        if ($order->getProduct()->getProductTypeId() == 10) {
+            $wrap = false;
+        } else {
+            $dialwrap = false;
+        }
+
+
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('pScripts/order_receipt_web_reg', array(
@@ -929,7 +939,8 @@ class emailLib {
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'postalcharge' => $postalcharge,
-            'wrap' => true,
+            'wrap' => $wrap,
+            'dialwrap'=>$dialwrap
                 ));
 
 
@@ -3129,7 +3140,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $customer_id = trim($transaction->getCustomerId());
         $customer = CustomerPeer::retrieveByPK($customer_id);
         $order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
-        
+
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
 
@@ -3137,7 +3148,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $message_body = get_partial($app . '/order_receipt_app', array(
             'transaction' => $transaction,
             'customer' => $customer,
-            'order' =>$order,
+            'order' => $order,
             'wrap' => false,
                 ));
         $subject = __('Registration Confirmation');
