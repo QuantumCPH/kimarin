@@ -147,7 +147,7 @@ use_helper('I18N');
                 </select>
             </div>
             <br clear="all" />
-            <div class="left"><?php echo __('email') ?><em>*</em>&nbsp;:</div>
+            <div class="left"><?php echo __('E-mail') ?><em>*</em>&nbsp;:</div>
             <div class="right">
                 <input type="text" name="email" class="input1" />
             </div>
