@@ -2390,6 +2390,30 @@
                 <source>CIF number</source>
                 <target>Número CIF</target>
             </trans-unit>
+            <trans-unit id="597" translate="yes" reformat="yes" xml:space="default">
+                <source>Welcome to Kimarin DIAL with telephone number: %1%.</source>
+                <target>Bienvenido a Kimarin DIAL con número de teléphono: %1%.</target>
+            </trans-unit>
+           <trans-unit id="598" translate="yes" reformat="yes" xml:space="default">
+                <source>Thank you for your order of Kimarin DIAL - where you can call to 56 countries for only 0.01 € per minute and the rest of the world at very low prices.</source>
+                <target>Gracias por su pedido a Kimarin DIAL – donde puede llamar a 56 países por sólo 0,01 € por minuto y al resto del mundo a precios muy bajos.</target>
+            </trans-unit>
+            <trans-unit id="599" translate="yes" reformat="yes" xml:space="default">
+                <source>It is very easy to get started.</source>
+                <target>Es muy fácil de empezar.</target>
+            </trans-unit>
+            <trans-unit id="600" translate="yes" reformat="yes" xml:space="default">
+                <source>Call %1% - wait for the tone - dial the country code followed by the foreign telephone number - followed by #.</source>
+                <target>Llame al %1%- espere el tono- anote el prefijo del país seguido del número de teléfono extranjero- seguido de #.</target>
+            </trans-unit>
+            <trans-unit id="601" translate="yes" reformat="yes" xml:space="default">
+                <source>You can see your call history, account balance and personal settings on www. kimarin.es under MY ACCOUNT, where you also can refill your account.</source>
+                <target>Puede ver su historial de llamadas, el saldo de su cuenta y los ajustes personales en www. kimarin.es en MI CUENTA, desde donde también puede recargar su cuenta.</target>
+            </trans-unit>
+            <trans-unit id="602" translate="yes" reformat="yes" xml:space="default">
+                <source>Please notice that in addition to the Kimarin call fees you pay the local call tariffs  to call %1%.</source>
+                <target>Al coste de la llamada Kimarin, se le suma la tarifa local para llamar al %1%.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

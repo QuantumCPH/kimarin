@@ -57,7 +57,7 @@ $dialwrap_content  = isset($dialwrap)?$dialwrap:false;
 	</p>
 	
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-	<?php echo __('Thank you for your order of Kimarin DIAL - where you can call to 56 countries for only 0.01 € per minute and the rest of the world at very low prices.  '); ?>. <?php //echo __(' There, you can use in your dealings with customer service'); ?></p>
+	<?php echo __('Thank you for your order of Kimarin DIAL - where you can call to 56 countries for only 0.01 € per minute and the rest of the world at very low prices.'); ?>. <?php //echo __(' There, you can use in your dealings with customer service'); ?></p>
 	
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;font-weight: bold;'>
 	<?php echo __('It is very easy to get started.') ?>
