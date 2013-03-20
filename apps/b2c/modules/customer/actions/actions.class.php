@@ -268,7 +268,7 @@ class customerActions extends sfActions {
             if($productObj->getProductTypeId()== 10){
                 $customer->setUniqueid("Dial".$customer->getId());
                 $customer->save();
-            }elseif($productObj->getProductTypeId()== 10){
+            }elseif($productObj->getProductTypeId()== 11){
                 $customer->setUniqueid("app".$customer->getId());
                 $customer->save();
             }elseif ($productObj->getPostageApplicable() == 1) {
