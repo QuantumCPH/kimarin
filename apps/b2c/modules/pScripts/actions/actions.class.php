@@ -2944,7 +2944,7 @@ class pScriptsActions extends sfActions {
 
                 $uniqueId = $this->customer->getUniqueid();
                 echo $uniqueId . "<br/>";
-                if ($order->getProduct()->getProductTypeId() != 10) {
+                if ($order->getProduct()->getProductTypeId() != 10 && $order->getProduct()->getProductTypeId() != 11) {
                     $uc = new Criteria();
                     $uc->add(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueId);
                     $selectedUniqueId = UniqueIdsPeer::doSelectOne($uc);

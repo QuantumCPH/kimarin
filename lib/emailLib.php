@@ -293,6 +293,13 @@ class emailLib {
         $postalcharge = 0;
         $customerorder = 1;
         $vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+         $wrap = "normal";
+        
+        if ($order->getProduct()->getProductTypeId() == 10) {
+            $wrap = "dial";
+        } elseif($order->getProduct()->getProductTypeId() == 11) {
+            $wrap = "app";
+        }
         //$this->renderPartial('affiliate/order_receipt', array(
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial('affiliate/order_receipt_web_reg', array(
@@ -303,7 +310,7 @@ class emailLib {
             'agent_name' => $recepient_agent_name,
             'postalcharge' => $postalcharge,
             'customerorder' => $customerorder,
-            'wrap' => false
+            'wrap' => $wrap,
                 ));
 
 
@@ -920,13 +927,12 @@ class emailLib {
 
         $vat = ($order->getProduct()->getRegistrationFee() + $postalcharge) * sfConfig::get('app_vat_percentage');
 
-        $wrap = true;
-        $dialwrap = true;
-
+        $wrap = "normal";
+        
         if ($order->getProduct()->getProductTypeId() == 10) {
-            $wrap = false;
-        } else {
-            $dialwrap = false;
+            $wrap = "dial";
+        } elseif($order->getProduct()->getProductTypeId() == 11) {
+            $wrap = "app";
         }
 
 
@@ -940,7 +946,7 @@ class emailLib {
             'agent_name' => $recepient_agent_name,
             'postalcharge' => $postalcharge,
             'wrap' => $wrap,
-            'dialwrap'=>$dialwrap
+           
                 ));
 
 

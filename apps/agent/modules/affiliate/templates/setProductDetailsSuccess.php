@@ -118,10 +118,12 @@
                     <li>
                         <label><?php echo $order->getProduct()->getName() ?> <?php echo __('details') ?>:</label>
                     </li>
+                    <?php if($order->getProduct()->getProductTypeId()!=10 && $order->getProduct()->getProductTypeId()!=11 ){ ?>
                     <li>
                         <label style="text-align:left"><?php echo __('Unique Id') ?>:</label>
                         <input type="text" id="uniqueid" value="" name="uniqueid" minlength="6" class="required"/>
                     </li>
+                    <?php } ?>
                     <li>
                         <label style="text-align:left">
                             <?php echo __('Registration Fee') ?>
