@@ -3484,6 +3484,16 @@ class pScriptsActions extends sfActions {
                     TransactionPeer::AssignReceiptNumber($transaction);
                     $telintaObj = new Telienta();
                     $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
+                    
+                    
+                    
+                       $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerRefillEmail($customer, $order, $transaction);
+            $this->updatePreferredCulture();
+                    
+                    
+                    
+                    
                 }
             }
         }
