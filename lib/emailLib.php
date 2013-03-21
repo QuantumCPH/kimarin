@@ -466,7 +466,7 @@ class emailLib {
 
 
         $vat = $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
-        $subject = __('Payment Confirmation');
+      
         $recepient_email = trim($customer->getEmail());
         if ($customer->getBusiness()) {
             $recepient_name = $customer->getLastName();
@@ -497,7 +497,7 @@ class emailLib {
             'wrap' => false,
                 ));
 
-
+          $subject = __('Payment Confirmation');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');

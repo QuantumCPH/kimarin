@@ -3440,19 +3440,20 @@ class pScriptsActions extends sfActions {
         $customers = CustomerPeer::doSelect($c);
 
         foreach ($customers as $customer) {
-            echo $customer->getId() . "<br/>";
+         //   echo $customer->getId() . "<br/>";
 
 
 
             $t = new Criteria;
             $t->addAnd(TransactionPeer::CUSTOMER_ID, $customer->getId());
             $t->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+            $t->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
             $t->addAnd(TransactionPeer::CREATED_AT, $date, Criteria::GREATER_THAN);
 
             $countT = TransactionPeer::doCount($t);
             if ($countT > 0) {
-                $transaction = TransactionPeer::doSelectOne($t);
-                echo $transaction->getCreatedAt() . "-----" . $date . "<hr/>";
+             //   $transaction = TransactionPeer::doSelectOne($t);
+                //  echo $transaction->getCreatedAt() . "-----" . $date . "<hr/>";
             } else {
 
 
@@ -3483,17 +3484,13 @@ class pScriptsActions extends sfActions {
                     $transaction->save();
                     TransactionPeer::AssignReceiptNumber($transaction);
                     $telintaObj = new Telienta();
-                    $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
-                    
-                    
-                    
-                       $this->setPreferredCulture($this->customer);
-            emailLib::sendCustomerRefillEmail($customer, $order, $transaction);
-            $this->updatePreferredCulture();
-                    
-                    
-                    
-                    
+                    //    $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
+
+
+
+                    $this->setPreferredCulture($customer);
+                    emailLib::sendCustomerRefillEmail($customer, $order, $transaction);
+                    $this->updatePreferredCulture();
                 }
             }
         }
