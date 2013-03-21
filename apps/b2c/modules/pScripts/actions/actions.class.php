@@ -3489,7 +3489,7 @@ class pScriptsActions extends sfActions {
 
 
                     $this->setPreferredCulture($customer);
-                    emailLib::sendCustomerRefillEmail($customer, $order, $transaction);
+                    emailLib::sendCustomerRemoveBalanceEmail($customer, $order, $transaction);
                     $this->updatePreferredCulture();
                 }
             }
