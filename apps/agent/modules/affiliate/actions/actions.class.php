@@ -798,34 +798,63 @@ class affiliateActions extends sfActions {
         $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
         $this->browser = new Browser();
 
-        $c = new Criteria();
+               $c = new Criteria();
         $c->add(AgentCompanyPeer::ID, $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $referrer_id = AgentCompanyPeer::doSelectOne($c);
 
-        if ($request->isMethod('post')) {
-
-            $this->form = new CustomerForm();
-
-            $this->form->bind($request->getParameter("newCustomerForm"), $request->getFiles("newCustomerForm"));
-            $this->form->setDefault('referrer_id', $referrer_id);
-            unset($this->form['terms_conditions']);
-            unset($this->form['imsi']);
-            unset($this->form['uniqueid']);
-            unset($this->form['usage_alert_sms']);
-            unset($this->form['usage_alert_email']);
-//                        //unset($this->form['password']);
-//                        unset($this->form['terms_conditions']);
-            // print_r($this->form);
-            //  die;
-
-            $this->processForm($request, $this->form);
+        $product_criteria = new Criteria();
+        $dc = new Criteria();
+        $dc->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
+        $agentCount = AgentProductPeer::doCount($dc);
+        if ($agentCount > 0) {
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);
+            $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
+            $product_criteria->add(AgentProductPeer::AGENT_ID, $this->getRequest()->getCookie('agent_id'));
         } else {
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);
+        }
+        $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
+        $this->products = ProductPeer::doSelect($product_criteria);
+        $this->simTypes = SimTypesPeer::doSelect(new Criteria());
+        $pl = new Criteria();
+        $this->langs = PreferredLanguagesPeer::doSelect($pl);
 
-            $this->form = new CustomerForm();
+
+        if ($request->isMethod('post')) {
+            $customer = new Customer();
+            $customer->setMobileNumber($request->getParameter('mobile_number'));
+            $customer->setCountryId(1);
+            $customer->setNiePassportNumber($request->getParameter('nie'));
+            $customer->setPlainText($request->getParameter('password'));
+            $customer->setPassword($request->getParameter('password'));
+            $customer->setEmail($request->getParameter('email'));
+            $customer->setPreferredLanguageId($request->getParameter('pref_lang'));
+            $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+            $customer->setRegistrationTypeId('2');
+            $customer->setBusiness(1);
+            $customer->setBlock('0');
+            $customer->save();
+            $productObj = ProductPeer::retrieveByPK($request->getParameter('product'));
+            if ($productObj->getProductTypeId() == 10) {
+                $customer->setUniqueid("Dial" . $customer->getId());
+                $customer->save();
+            } elseif ($productObj->getProductTypeId() == 11) {
+                $customer->setUniqueid("app" . $customer->getId());
+                $customer->save();
+            } elseif ($productObj->getPostageApplicable() == 1) {
+                $customer->setFirstName($request->getParameter('first_name'));
+                $customer->setLastName($request->getParameter('last_name'));
+                $customer->setAddress($request->getParameter('address'));
+                $customer->setPoBoxNumber($request->getParameter('post_code'));
+                $customer->setCity($request->getParameter('city'));
+                $customer->setSimTypeId($request->getParameter('simtype'));
+                $customer->save();
+            }
+            $this->redirect('@customer_registration_step2?customer_id=' . $customer->getId() . '&product_id=' . $productObj->getId());
+            //$this->processForm($request, $this->form);
         }
 
-        //$this->setLayout();
-        sfView::NONE;
+        
     }
 
     protected function processFormone(sfWebRequest $request, sfForm $form) {
