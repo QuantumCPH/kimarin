@@ -402,11 +402,11 @@ class paymentsActions extends sfActions {
         //  $return_url = "http://www.kimarineurope.com/registration-thanks.html";
 
         if ($lang == 'en') {
-            $return_url = "http://www.kimarin.es/registration-thanks.html";
-            $cancel_url = "http://www.kimarin.es/registration-reject.html";
+            $return_url = "http://www.kimarin.es/registration-thanks.php";
+            $cancel_url = "http://www.kimarin.es/registration-reject.php";
         } else {
-            $return_url = "http://www.kimarin.es/" . $lang . "/registration-thanks_" . $lang . ".html";
-            $cancel_url = "http://www.kimarin.es/" . $lang . "/registration-reject_" . $lang . ".html";
+            $return_url = "http://www.kimarin.es/" . $lang . "/registration-thanks_" . $lang . ".php";
+            $cancel_url = "http://www.kimarin.es/" . $lang . "/registration-reject_" . $lang . ".php";
         }
 
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
@@ -437,6 +437,7 @@ class paymentsActions extends sfActions {
         //$environment = "sandbox";
         if($item_amount==0){
             file_get_contents($notify_url);
+            sleep(0.5);
             header("location:".$return_url);
             exit;
         }
