@@ -435,7 +435,12 @@ class paymentsActions extends sfActions {
         $querystring .= "notify_url=" . urldecode($notify_url);
 
         //$environment = "sandbox";
-        if ($order_id && $item_amount) {
+        if($item_amount==0){
+            file_get_contents($notify_url);
+            header("location:".$return_url);
+            exit;
+        }
+        elseif ($order_id && $item_amount) {
             Payment::SendPayment($querystring);
         } else {
             echo 'error';
