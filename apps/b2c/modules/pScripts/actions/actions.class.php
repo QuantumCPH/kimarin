@@ -157,7 +157,7 @@ class pScriptsActions extends sfActions {
             'transaction' => $transaction,
             'vat' => $vat,
             'wrap' => false
-                ));
+        ));
 
 
 
@@ -340,7 +340,7 @@ class pScriptsActions extends sfActions {
                             'transaction' => $transaction,
                             'vat' => 0,
                             'wrap' => false
-                                ));
+                        ));
 
                         $subject = $this->getContext()->getI18N()->__('Payment Confirmation');
                         $sender_email = sfConfig::get('app_email_sender_email', 'support@landncall.com');
@@ -2407,7 +2407,7 @@ class pScriptsActions extends sfActions {
                 'transaction' => $transaction,
                 'vat' => $vat,
                 'wrap' => false
-                    ));
+            ));
 
 
             $this->setPreferredCulture($this->customer);
@@ -2758,7 +2758,7 @@ class pScriptsActions extends sfActions {
                 'vat' => $vat,
                 'agent_name' => $agent_name,
                 'wrap' => false
-                    ));
+            ));
 
 
             $this->setPreferredCulture($this->customer);
@@ -3104,7 +3104,7 @@ class pScriptsActions extends sfActions {
                     'vat' => $product_price_vat,
                     'postalcharge' => $postalcharge,
                     'wrap' => true
-                        ));
+                ));
 
                 $subject = $this->getContext()->getI18N()->__('Payment Confirmation');
                 $sender_email = sfConfig::get('app_email_sender_email', 'support@kimarin.es');
@@ -3415,45 +3415,86 @@ class pScriptsActions extends sfActions {
     public function executeRemoveRefilBalance(sfWebRequest $request) {
 
         $date = date('Y-m-d 00:00:00', strtotime('-180 Days'));
+
+        //       old Logic 
+//        $c = new Criteria;
+//        $c->addJoin(CustomerPeer::ID, CustomerOrderPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
+//        $c->addJoin(CustomerOrderPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
+//        $c->addJoin(ProductPeer::PRODUCT_TYPE_ID, ProductTypePeer::ID, Criteria::LEFT_JOIN);
+//        $c->addAnd(CustomerOrderPeer::CREATED_AT, $date, Criteria::LESS_THAN);
+//        $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+//        $c->addAnd(ProductTypePeer::ID, 2);
+//      
+//        $c->addAnd(CustomerOrderPeer::ORDER_STATUS_ID, 3);
+//        $c->addGroupByColumn(CustomerPeer::ID);
+//        $c->addDescendingOrderByColumn(CustomerOrderPeer::CREATED_AT);
+//        
+        //       New Logic for geting record  by  kmmalik
         $c = new Criteria;
-        $c->addJoin(CustomerPeer::ID, CustomerOrderPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
-        $c->addJoin(CustomerOrderPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
-        $c->addJoin(ProductPeer::PRODUCT_TYPE_ID, ProductTypePeer::ID, Criteria::LEFT_JOIN);
+        $c->addJoin(CustomerPeer::ID, TransactionPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
+        $c->addAnd(TransactionPeer::CREATED_AT, $date, Criteria::LESS_THAN);
+        $c->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
+        $c->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-        $c->addAnd(ProductTypePeer::ID, 2);
-        $c->addAnd(CustomerOrderPeer::CREATED_AT, $date, Criteria::LESS_THAN);
-        $c->addAnd(CustomerOrderPeer::ORDER_STATUS_ID, 3);
         $c->addGroupByColumn(CustomerPeer::ID);
-        $c->addDescendingOrderByColumn(CustomerOrderPeer::CREATED_AT);
         $customers = CustomerPeer::doSelect($c);
 
         foreach ($customers as $customer) {
-            echo $customer->getId();
-            die;
-            $telintaObj = new Telienta();
-            $balance = $telintaObj->getBalance($customer);
-            if ($balance > 0) {
-                $order = new CustomerOrder();
-                $order->setExtraRefill(-$balance);
-                $order->setCustomerId($customer->getId());
-                $order->setProductId(17);
-                $order->setOrderStatusId(3);
-                $order->setIsFirstOrder(10);  //// product type remove 
-                $order->save();
+            echo $customer->getId() . "<br/>";
 
-                $transaction = new Transaction();
-                $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
-                $transaction->setAmount(-$balance);
-                $transaction->setOrderId($order->getId());
-                $transaction->setTransactionStatusId(3);
-                $transaction->setCustomerId($customer->getId());
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
-                $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                $transaction->setDescription($transactiondescription->getTitle());
-                $transaction->save();
-                TransactionPeer::AssignReceiptNumber($transaction);
+
+
+            $t = new Criteria;
+            $t->addAnd(TransactionPeer::CUSTOMER_ID, $customer->getId());
+            $t->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+            $t->addAnd(TransactionPeer::CREATED_AT, $date, Criteria::GREATER_THAN);
+
+            $countT = TransactionPeer::doCount($t);
+            if ($countT > 0) {
+                $transaction = TransactionPeer::doSelectOne($t);
+                echo $transaction->getCreatedAt() . "-----" . $date . "<hr/>";
+            } else {
+
+
+
+
+
+
                 $telintaObj = new Telienta();
-                $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
+                $balance = $telintaObj->getBalance($customer);
+                if ($balance > 0) {
+                    $order = new CustomerOrder();
+                    $order->setExtraRefill(-$balance);
+                    $order->setCustomerId($customer->getId());
+                    $order->setProductId(17);
+                    $order->setOrderStatusId(3);
+                    $order->setIsFirstOrder(10);  //// product type remove 
+                    $order->save();
+
+                    $transaction = new Transaction();
+                    $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
+                    $transaction->setAmount(-$balance);
+                    $transaction->setOrderId($order->getId());
+                    $transaction->setTransactionStatusId(3);
+                    $transaction->setCustomerId($customer->getId());
+                    $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+                    $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                    $transaction->setDescription($transactiondescription->getTitle());
+                    $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
+                    $telintaObj = new Telienta();
+                    $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
+                    
+                    
+                    
+                       $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerRefillEmail($customer, $order, $transaction);
+            $this->updatePreferredCulture();
+                    
+                    
+                    
+                    
+                }
             }
         }
 
@@ -4000,7 +4041,8 @@ class pScriptsActions extends sfActions {
                     if ($i % 2 == 0)
                         mt_srand(time() % 2147 * 1000000 + (double) microtime() * 1000000);
                     $rand = 48 + mt_rand() % 64;
-                } else
+                }
+                else
                     $rand = 48 + ord($urandom[$i]) % 64;
 
                 if ($rand > 57)
