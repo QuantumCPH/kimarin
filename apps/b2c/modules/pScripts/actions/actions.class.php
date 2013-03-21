@@ -3440,7 +3440,7 @@ class pScriptsActions extends sfActions {
         $customers = CustomerPeer::doSelect($c);
 
         foreach ($customers as $customer) {
-         //   echo $customer->getId() . "<br/>";
+            echo $customer->getId() . "<br/>";
 
 
 
