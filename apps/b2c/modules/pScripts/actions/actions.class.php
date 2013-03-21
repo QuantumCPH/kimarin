@@ -157,7 +157,7 @@ class pScriptsActions extends sfActions {
             'transaction' => $transaction,
             'vat' => $vat,
             'wrap' => false
-                ));
+        ));
 
 
 
@@ -340,7 +340,7 @@ class pScriptsActions extends sfActions {
                             'transaction' => $transaction,
                             'vat' => 0,
                             'wrap' => false
-                                ));
+                        ));
 
                         $subject = $this->getContext()->getI18N()->__('Payment Confirmation');
                         $sender_email = sfConfig::get('app_email_sender_email', 'support@landncall.com');
@@ -2407,7 +2407,7 @@ class pScriptsActions extends sfActions {
                 'transaction' => $transaction,
                 'vat' => $vat,
                 'wrap' => false
-                    ));
+            ));
 
 
             $this->setPreferredCulture($this->customer);
@@ -2758,7 +2758,7 @@ class pScriptsActions extends sfActions {
                 'vat' => $vat,
                 'agent_name' => $agent_name,
                 'wrap' => false
-                    ));
+            ));
 
 
             $this->setPreferredCulture($this->customer);
@@ -3104,7 +3104,7 @@ class pScriptsActions extends sfActions {
                     'vat' => $product_price_vat,
                     'postalcharge' => $postalcharge,
                     'wrap' => true
-                        ));
+                ));
 
                 $subject = $this->getContext()->getI18N()->__('Payment Confirmation');
                 $sender_email = sfConfig::get('app_email_sender_email', 'support@kimarin.es');
@@ -3415,45 +3415,76 @@ class pScriptsActions extends sfActions {
     public function executeRemoveRefilBalance(sfWebRequest $request) {
 
         $date = date('Y-m-d 00:00:00', strtotime('-180 Days'));
+
+        //       old Logic 
+//        $c = new Criteria;
+//        $c->addJoin(CustomerPeer::ID, CustomerOrderPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
+//        $c->addJoin(CustomerOrderPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
+//        $c->addJoin(ProductPeer::PRODUCT_TYPE_ID, ProductTypePeer::ID, Criteria::LEFT_JOIN);
+//        $c->addAnd(CustomerOrderPeer::CREATED_AT, $date, Criteria::LESS_THAN);
+//        $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+//        $c->addAnd(ProductTypePeer::ID, 2);
+//      
+//        $c->addAnd(CustomerOrderPeer::ORDER_STATUS_ID, 3);
+//        $c->addGroupByColumn(CustomerPeer::ID);
+//        $c->addDescendingOrderByColumn(CustomerOrderPeer::CREATED_AT);
+//        
+        //       New Logic for geting record  by  kmmalik
         $c = new Criteria;
-        $c->addJoin(CustomerPeer::ID, CustomerOrderPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
-        $c->addJoin(CustomerOrderPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
-        $c->addJoin(ProductPeer::PRODUCT_TYPE_ID, ProductTypePeer::ID, Criteria::LEFT_JOIN);
+        $c->addJoin(CustomerPeer::ID, TransactionPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
+        $c->addAnd(TransactionPeer::CREATED_AT, $date, Criteria::LESS_THAN);
+        $c->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
+        $c->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-        $c->addAnd(ProductTypePeer::ID, 2);
-        $c->addAnd(CustomerOrderPeer::CREATED_AT, $date, Criteria::LESS_THAN);
-        $c->addAnd(CustomerOrderPeer::ORDER_STATUS_ID, 3);
         $c->addGroupByColumn(CustomerPeer::ID);
-        $c->addDescendingOrderByColumn(CustomerOrderPeer::CREATED_AT);
         $customers = CustomerPeer::doSelect($c);
 
         foreach ($customers as $customer) {
-            echo $customer->getId();
-            die;
-            $telintaObj = new Telienta();
-            $balance = $telintaObj->getBalance($customer);
-            if ($balance > 0) {
-                $order = new CustomerOrder();
-                $order->setExtraRefill(-$balance);
-                $order->setCustomerId($customer->getId());
-                $order->setProductId(17);
-                $order->setOrderStatusId(3);
-                $order->setIsFirstOrder(10);  //// product type remove 
-                $order->save();
+            echo $customer->getId() . "<br/>";
 
-                $transaction = new Transaction();
-                $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
-                $transaction->setAmount(-$balance);
-                $transaction->setOrderId($order->getId());
-                $transaction->setTransactionStatusId(3);
-                $transaction->setCustomerId($customer->getId());
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
-                $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                $transaction->setDescription($transactiondescription->getTitle());
-                $transaction->save();
-                TransactionPeer::AssignReceiptNumber($transaction);
+
+
+            $t = new Criteria;
+            $t->addAnd(TransactionPeer::CUSTOMER_ID, $customer->getId());
+            $t->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
+            $t->addAnd(TransactionPeer::CREATED_AT, $date, Criteria::GREATER_THAN);
+
+            $countT = TransactionPeer::doCount($t);
+            if ($countT > 0) {
+                $transaction = TransactionPeer::doSelectOne($t);
+                echo $transaction->getCreatedAt() . "-----" . $date . "<hr/>";
+            } else {
+
+
+
+
+
+
                 $telintaObj = new Telienta();
-                $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
+                $balance = $telintaObj->getBalance($customer);
+                if ($balance > 0) {
+                    $order = new CustomerOrder();
+                    $order->setExtraRefill(-$balance);
+                    $order->setCustomerId($customer->getId());
+                    $order->setProductId(17);
+                    $order->setOrderStatusId(3);
+                    $order->setIsFirstOrder(10);  //// product type remove 
+                    $order->save();
+
+                    $transaction = new Transaction();
+                    $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
+                    $transaction->setAmount(-$balance);
+                    $transaction->setOrderId($order->getId());
+                    $transaction->setTransactionStatusId(3);
+                    $transaction->setCustomerId($customer->getId());
+                    $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+                    $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                    $transaction->setDescription($transactiondescription->getTitle());
+                    $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
+                    $telintaObj = new Telienta();
+                    $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
+                }
             }
         }
 
@@ -3836,7 +3867,7 @@ class pScriptsActions extends sfActions {
         $Parameters = $request->getURI();
 
         $email2 = new DibsCall();
-        $email2->setCallurl("Received:--".$Parameters);
+        $email2->setCallurl("Received:--" . $Parameters);
         $email2->save();
 
         // call back url $p="es-297-100"; lang_orderid_amount
@@ -3880,11 +3911,11 @@ class pScriptsActions extends sfActions {
         $order->save();
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
-        
+
         $this->customer = $order->getCustomer();
         $exest = $order->getExeStatus();
         $uniqueId = $this->customer->getUniqueid();
-       
+
         $this->setPreferredCulture($this->customer);
         emailLib::sendCustomerChangeProduct($this->customer, $order, $transaction);
         $this->updatePreferredCulture();
@@ -3892,8 +3923,8 @@ class pScriptsActions extends sfActions {
         $order->setExeStatus(1);
         $order->save();
         echo 'Yes';
-        
-        /**************Change customer product ******************/
+
+        /*         * ************Change customer product ***************** */
         $customer = $this->customer;
         $product = ProductPeer::retrieveByPK($CCP->getProductId());
         $order = CustomerOrderPeer::retrieveByPK($CCP->getOrderId());
@@ -3930,8 +3961,8 @@ class pScriptsActions extends sfActions {
         $this->setPreferredCulture($this->customer);
         emailLib::sendCustomerChangeProductConfirm($this->customer, $order, $transaction);
         $this->updatePreferredCulture();
-        
-        
+
+
         return sfView::NONE;
     }
 
@@ -4000,7 +4031,8 @@ class pScriptsActions extends sfActions {
                     if ($i % 2 == 0)
                         mt_srand(time() % 2147 * 1000000 + (double) microtime() * 1000000);
                     $rand = 48 + mt_rand() % 64;
-                } else
+                }
+                else
                     $rand = 48 + ord($urandom[$i]) % 64;
 
                 if ($rand > 57)
@@ -4089,7 +4121,7 @@ class pScriptsActions extends sfActions {
         $customer = CustomerPeer::doSelectOne($c);
         if ($customer) {
             $telintaObj = new Telienta();
-            echo number_format($telintaObj->getBalance($customer),2);
+            echo number_format($telintaObj->getBalance($customer), 2);
         } else {
             echo "0.00";
         }
@@ -4400,8 +4432,8 @@ class pScriptsActions extends sfActions {
         $customer->setCustomerStatusId(1);
         $customer->save();
 
-$customer->setUniqueid("app" . $customer->getId());
-$customer->save();
+        $customer->setUniqueid("app" . $customer->getId());
+        $customer->save();
 
 
         $agentid = $customer->getReferrerId();
@@ -4509,7 +4541,7 @@ $customer->save();
     }
 
     public function executeAppRefill(sfWebRequest $request) {
-        $this->target =  sfConfig::get('app_customer_url');
+        $this->target = sfConfig::get('app_customer_url');
         $cmobile_number = $request->getParameter('mobile_number');
         $mobile_number = $this->mobileNumberWithoutCountryCode($cmobile_number);
         $this->customer = NULL;
@@ -4531,16 +4563,16 @@ $customer->save();
             echo 'error, customer not found';
             return sfView::NONE;
         }
-          
-         $this->setLayout('mobile');
+
+        $this->setLayout('mobile');
     }
-    
-     public function executeAppRefilTransaction(sfWebRequest $request) {
+
+    public function executeAppRefilTransaction(sfWebRequest $request) {
         $this->target = sfConfig::get('app_customer_url');
 
         $product = ProductPeer::retrieveByPK($request->getParameter('extra_refill'));
-     $request->getParameter('extra_refill');
- 
+        $request->getParameter('extra_refill');
+
         $this->customer = CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
         $customer = $this->customer;
         $this->redirectUnless($this->customer, "@homepage");
@@ -4548,7 +4580,7 @@ $customer->save();
         $lang = $this->getUser()->getCulture();
 
         $agentid = $customer->getReferrerId();
-        $mobileNumber=$customer->getMobileNumber();
+        $mobileNumber = $customer->getMobileNumber();
         if ($agentid) {
             $commision = TRUE;
             $agentCompanyId = $agentid;
@@ -4559,13 +4591,13 @@ $customer->save();
         //  TransactionProcess::StartTransaction($customer, $productId, $decriptionid, $expenceType, $transactionFrom, $transactionStatus, $commision, $agentCompanyId);
         //$transaction = TransactionProcess::StartTransaction($this->customer, $product->getId(), 9, 1, 5, 1, $commision, $agentCompanyId);
         $this->order = new CustomerOrder();
-         $this->order->setProduct($product);
+        $this->order->setProduct($product);
         $this->order->setCustomer($this->customer);
         $this->order->setQuantity(1);
-        $this->order->setExtraRefill($product->getInitialBalance()+$product->getBonus());
+        $this->order->setExtraRefill($product->getInitialBalance() + $product->getBonus());
         $this->order->setIsFirstOrder(2);
         $this->order->save();
-        
+
         $transaction = new Transaction();
 
         $transaction->setAmount($this->order->getExtraRefill() * (sfConfig::get('app_vat_percentage') + 1));
@@ -4582,12 +4614,12 @@ $customer->save();
         $this->transaction = $transaction;
         $order_id = $this->order->getId();
         $item_amount = $transaction->getAmount();
-        
-            $return_url =  $this->target . "pScripts/appRefillThanks";
-            $cancel_url =  $this->target . "pScripts/appRefill?mobile_number=".$mobileNumber;
-        
 
- 
+        $return_url = $this->target . "pScripts/appRefillThanks";
+        $cancel_url = $this->target . "pScripts/appRefill?mobile_number=" . $mobileNumber;
+
+
+
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount;
         $notify_url = $this->target . 'pScripts/calbackrefill?p=' . $callbackparameters;
 
@@ -4621,18 +4653,17 @@ $customer->save();
             $this->customerBalance = $telintaObj->getBalance($this->customer);
             $this->product = $product;
         }
-           $this->setLayout('mobile');
+        $this->setLayout('mobile');
     }
 
     public function executeAppRefilToPaypal(sfWebRequest $request) {
-          $querystring = $request->getParameter('qstr');
-           Payment::SendPayment($querystring);
+        $querystring = $request->getParameter('qstr');
+        Payment::SendPayment($querystring);
         return sfView::NONE;
-    } 
-    
-    
+    }
+
     public function executeAppRefillThanks(sfWebRequest $request) {
-          $this->setLayout('mobile');
+        $this->setLayout('mobile');
     }
 
     public function executeAppTermsConditions(sfWebRequest $request) {
