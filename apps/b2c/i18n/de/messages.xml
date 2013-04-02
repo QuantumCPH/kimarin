@@ -2418,6 +2418,34 @@
                 <source>CIF number</source>
                 <target>CIF Nummer</target>
             </trans-unit>
+            <trans-unit id="597" translate="yes" reformat="yes" xml:space="default">
+                <source>Welcome to Kimarin DIAL with telephone number: %1%.</source>
+                <target>Wilkommen bei Kimarin DIAL mit Telefonnummer: %1%.</target>
+            </trans-unit>
+           <trans-unit id="598" translate="yes" reformat="yes" xml:space="default">
+                <source>Thank you for your order of Kimarin DIAL - where you can call to 56 countries for only 0.01 € per minute and the rest of the world at very low prices.</source>
+                <target>Vielen Dank für Ihre Bestellung von Kimarin DIAL - wo man 56 Länder für nur 0,01 € pro Minute und dem Rest der Welt zu sehr niedrigen Preisen anrufen kann.</target>
+            </trans-unit>
+            <trans-unit id="599" translate="yes" reformat="yes" xml:space="default">
+                <source>It is very easy to get started.</source>
+                <target>Es ist sehr einfach anzufangen.</target>
+            </trans-unit>
+            <trans-unit id="600" translate="yes" reformat="yes" xml:space="default">
+                <source>Call %1% - wait for the tone - dial the country code followed by the foreign telephone number - followed by #.</source>
+                <target>Rufen Sie %1% - warten Sie auf den Ton - wählen Sie dann die Landesvorwahl gefolgt von der ausländischen Rufnummer und #.</target>
+            </trans-unit>
+            <trans-unit id="601" translate="yes" reformat="yes" xml:space="default">
+                <source>You can see your call history, account balance and personal settings on www. kimarin.es under MY ACCOUNT, where you also can refill your account.</source>
+                <target>Sie können Anrufliste, Kontostand und persönlichen Einstellungen auf www. kimarin.es unter Mein Konto abrufen, wo Sie auch Ihrem Konto aufladen können.</target>
+            </trans-unit>
+            <trans-unit id="602" translate="yes" reformat="yes" xml:space="default">
+                <source>Please notice that in addition to the Kimarin call fees you pay the local call tariffs  to call %1%.</source>
+                <target>Beachten Sie bitte, dass Sie zusätzlich zu den Kimarin Gesprächsgebühren auch die Lokaltariff  zahlen, wenn Sie %1% anrufen.</target>
+            </trans-unit>
+            <trans-unit id="603" translate="yes" reformat="yes" xml:space="default">
+                <source>The passwords don’t match.</source>
+                <target>Das Passwort stimmt nicht überein.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

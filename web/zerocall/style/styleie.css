@@ -838,6 +838,7 @@ label.error{
    color:#f00 !important;
    font-weight: normal !important;
    margin-left: 5px;
+   display: block;
 }
 input.changeNum{
    margin-left:188px!important;
@@ -882,4 +883,61 @@ div.inline-error-signup{
 }
 label.pcon{
     width:136px !important;
+}
+
+.regForm .left {
+    float: left;
+    font-size: 13px;
+    padding: 5px 5px 0 0;
+    width: 134px;
+}
+
+.regForm .right {
+    float: left;
+    padding: 0;
+    width: 237px;
+}
+
+.regForm .right .input1 {
+    background-color: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    box-shadow: 0 0 2px #F7F7F7 inset, 0 1px 0 #F7F7F7;
+    color: #777777;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    padding: 4px 3px;
+    width: 183px;
+}
+
+.regForm .right .input {
+    background-color: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    box-shadow: 0 0 2px #F7F7F7 inset, 0 1px 0 #F7F7F7;
+    color: #777777;
+    margin-bottom: 3px !important;
+    margin-top: 2px;
+    padding: 3px;
+    width: 191px;
+}
+
+.regForm .right .mobile {
+    background-color: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    box-shadow: 0 0 2px #F7F7F7 inset, 0 1px 0 #F7F7F7;
+    color: #777777;
+    float: right;
+    margin-bottom: 3px;
+    margin-right: 46px;
+    margin-top: 2px;
+    padding: 4px 3px;
+    width: 150px;
+}
+
+.regForm .right .country-code {
+    color: #000000;
+    display: inline-block;
+    font-size: 15px;
+    height: 21px;
+    line-height: 32px;
+    padding-bottom: 0 !important;
 }

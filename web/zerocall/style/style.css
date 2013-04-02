@@ -656,3 +656,12 @@ ul.welcome li{
 div.error_cp{
   margin-left:143px !important;
 }
+
+.frmright {
+    float: left;
+    width: 384px;
+}
+.frmleft {
+    float: left;
+    width: 384px;
+}

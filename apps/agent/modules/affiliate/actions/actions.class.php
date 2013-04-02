@@ -16,7 +16,7 @@ require_once(sfConfig::get('sf_lib_dir') . '/zerocall_out_sms.php');
 class affiliateActions extends sfActions {
 
     private $currentCulture;
-    
+
     private function getTargetUrl() {
         return sfConfig::get('app_agent_url');
     }
@@ -63,7 +63,7 @@ class affiliateActions extends sfActions {
         if ($startdate != '') {
             $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
-        }else{
+        } else {
             $startdate = date('Y-m-d 00:00:00', strtotime($agent->getCreatedAt()));
             $this->startdate = $startdate;
         }
@@ -71,12 +71,12 @@ class affiliateActions extends sfActions {
         if ($enddate != '') {
             $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
-        }else{
-           $enddate = date('Y-m-d 23:59:59');
-           $this->enddate =$enddate;
+        } else {
+            $enddate = date('Y-m-d 23:59:59');
+            $this->enddate = $enddate;
         }
 
- 
+
 
 
         foreach ($customers as $customer) {
@@ -85,12 +85,12 @@ class affiliateActions extends sfActions {
             $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
             $tc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
             if ($startdate != "" && $enddate != "") {
-               
+
                 $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                 $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
             }
             $tc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-            $tc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID,3);
+            $tc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 3);
             if (TransactionPeer::doSelectOne($tc)) {
                 $registrations[$i] = TransactionPeer::doSelectOne($tc);
             }
@@ -105,10 +105,10 @@ class affiliateActions extends sfActions {
         $ar = new Criteria();
         $ar->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
         $ar->add(TransactionPeer::TRANSACTION_TYPE_ID, 3, Criteria::NOT_EQUAL);
-        $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,11, Criteria::EQUAL);
+        $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 11, Criteria::EQUAL);
         //  $ar->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,13, Criteria::NOT_EQUAL);
         if ($startdate != "" && $enddate != "") {
-            
+
             $ar->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $ar->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
         }
@@ -120,30 +120,30 @@ class affiliateActions extends sfActions {
 //                    $transactions[$i]=$refill;
 //                    $i=$i+1;
 //                }
-   $this->registrations = $registrations;
-       $this->refills = $refills;
+        $this->registrations = $registrations;
+        $this->refills = $refills;
         $this->counter = $i - 1;
-        
-          /////////////////// Number Change  Area///////////////////////////////
+
+        /////////////////// Number Change  Area///////////////////////////////
         $cn = new Criteria();
         $cn->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-        $cn->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,13, Criteria::EQUAL);
+        $cn->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 13, Criteria::EQUAL);
         if ($startdate != "" && $enddate != "") {
             $cn->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $cn->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
         }
-        
+
         $cn->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $cn->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
         $numberchange = TransactionPeer::doSelect($cn);
         //var_dump($numberchange);
-     
+
         $this->numberchanges = $numberchange;
-    
+
         /////////////////// Change Product Area///////////////////////////////
         $cp = new Criteria();
         $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-        $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,15, Criteria::EQUAL);
+        $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 15, Criteria::EQUAL);
         if ($startdate != "" && $enddate != "") {
             $cp->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $cp->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -151,13 +151,13 @@ class affiliateActions extends sfActions {
         $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
         $changeProducts = TransactionPeer::doSelect($cp);
-        
-        
-        $this->changeProducts = $changeProducts; 
-         ///////////////////New Sim Sale Area Area///////////////////////////////
+
+
+        $this->changeProducts = $changeProducts;
+        ///////////////////New Sim Sale Area Area///////////////////////////////
         $ns = new Criteria();
         $ns->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-        $ns->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID,14, Criteria::EQUAL);
+        $ns->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 14, Criteria::EQUAL);
         if ($startdate != "" && $enddate != "") {
             $ns->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
             $ns->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -165,27 +165,23 @@ class affiliateActions extends sfActions {
         $ns->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
         $ns->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
         $newSimSales = TransactionPeer::doSelect($ns);
-        
-        
-        $this->newSimSales = $newSimSales; 
-        
+
+
+        $this->newSimSales = $newSimSales;
     }
 
     public function executePrintReceipt(sfWebRequest $request) {
         //is authenticated
         $this->forward404Unless($this->getUser()->isAuthenticated());
-      
+
 
         //check to see if transaction id is there
 
         $transaction_id = $request->getParameter('tid');
         $this->forward404Unless($transaction_id);
-       changeLanguageCulture::languageCulture($request, $this);
+        changeLanguageCulture::languageCulture($request, $this);
 
         //is authenticated
-     
-
-       
         //check to see if transaction id is there
         $lang = sfConfig::get('app_language_symbol');
         $this->lang = $lang;
@@ -219,9 +215,9 @@ class affiliateActions extends sfActions {
         $transaction = TransactionPeer::retrieveByPK($transaction_id);
 
 
-           $this->customer = CustomerPeer::retrieveByPK($transaction->getCustomerId());
-       
-        
+        $this->customer = CustomerPeer::retrieveByPK($transaction->getCustomerId());
+
+
 //        if($transaction_id>93){
 //          $vatValue=sfConfig::get('app_vat_percentage');
 //        }else{
@@ -305,18 +301,17 @@ class affiliateActions extends sfActions {
             $registered_customer_name = $invitedCustomer->getFirstName() . " " . $invitedCustomer->getLastName();
         }
 
-$vat=$transaction->getVat();
+        $vat = $transaction->getVat();
 
 
-     $agent_company_id = $transaction->getAgentCompanyId();
+        $agent_company_id = $transaction->getAgentCompanyId();
         if ($agent_company_id != '') {
             $c = new Criteria();
             $c->add(AgentCompanyPeer::ID, $agent_company_id);
-          
+
             $agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
         } else {
             $agent_name = '';
-            
         }
 
         $this->renderPartial('affiliate/order_receipt', array(
@@ -327,7 +322,7 @@ $vat=$transaction->getVat();
             'registered_customer_name' => $registered_customer_name,
             'postalcharge' => $postalcharge,
             'customerorder' => $customerorder,
-             'agent_name' => $agent_name,
+            'agent_name' => $agent_name,
         ));
 
         return sfView::NONE;
@@ -360,16 +355,16 @@ $vat=$transaction->getVat();
         if ($startdate != '') {
             $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
-        }else{
+        } else {
             $startdate = date('Y-m-d 00:00:00', strtotime($this->agent->getCreatedAt()));
             $this->startdate = date('Y-m-d', strtotime($startdate));
         }
         if ($enddate != '') {
             $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
-        }else{
+        } else {
             $enddate = date('Y-m-d 23:59:59');
-             $this->enddate = $enddate;
+            $this->enddate = $enddate;
         }
 
 
@@ -383,9 +378,9 @@ $vat=$transaction->getVat();
             $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
             $c->add(CustomerPeer::REGISTRATION_TYPE_ID, 4, Criteria::NOT_EQUAL);
             if ($startdate != "" && $enddate != "") {
-                    $c->addAnd(CustomerPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
-                    $c->addAnd(CustomerPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
-                }
+                $c->addAnd(CustomerPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+                $c->addAnd(CustomerPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
+            }
             $c->addDescendingOrderByColumn(CustomerPeer::CREATED_AT);
             $customers = CustomerPeer::doSelect($c);
             $registration_sum = 0.00;
@@ -398,7 +393,7 @@ $vat=$transaction->getVat();
                 //echo $customer->getId();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID, 3);
                 if (TransactionPeer::doSelectOne($tc)) {
                     $registrations[$i] = TransactionPeer::doSelectOne($tc);
                 }
@@ -432,9 +427,9 @@ $vat=$transaction->getVat();
             $cc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
             $cc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             if ($startdate != "" && $enddate != "") {
-                    $cc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
-                    $cc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
-                }
+                $cc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+                $cc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
+            }
 
 
             $cc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
@@ -453,10 +448,10 @@ $vat=$transaction->getVat();
             $efc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
 
 
-             if ($startdate != "" && $enddate != "") {
-                    $efc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
-                    $efc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
-                }
+            if ($startdate != "" && $enddate != "") {
+                $efc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+                $efc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
+            }
 
             $efc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
             $ef = TransactionPeer::doSelect($efc);
@@ -480,9 +475,9 @@ $vat=$transaction->getVat();
             $cs->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
             $cs->add(CustomerPeer::REGISTRATION_TYPE_ID, 4);
             if ($startdate != "" && $enddate != "") {
-                    $cs->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
-                    $cs->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
-                }
+                $cs->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
+                $cs->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
+            }
 
 
             $cs->addDescendingOrderByColumn(CustomerPeer::CREATED_AT);
@@ -495,7 +490,7 @@ $vat=$transaction->getVat();
                 $tc = new Criteria();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $sms_customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID, 3);
                 $sms_registrations[$i] = TransactionPeer::doSelectOne($tc);
                 if (count($sms_registrations) >= 1) {
                     $sms_registration_earnings = $sms_registration_earnings + $sms_registrations[$i]->getAmount();
@@ -507,16 +502,15 @@ $vat=$transaction->getVat();
             $this->sms_registration_earnings = $sms_registration_earnings;
             $this->sms_commission_earnings = $sms_commission_earnings;
             ////////// End SMS registrations
-
 //////////////////// Number  Change/////////////////////////////////////////
             $nc = new Criteria();
             $nc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-           // $nc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
+            // $nc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
             $nc->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 13);
             $nc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $nc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
             $number_changes = TransactionPeer::doSelect($nc);
-            
+
             $numberChange_earnings = 0.00;
             $numberChange_commission = 0.00;
             foreach ($number_changes as $number_change) {
@@ -527,10 +521,10 @@ $vat=$transaction->getVat();
             $this->numberChange_earnings = $numberChange_earnings;
             $this->numberChange_commission = $numberChange_commission;
 ////////////////////////////////Change Product ////////////////////
- 
+
             $cp = new Criteria();
             $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-         //   $cp->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
+            //   $cp->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
             $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 15);
             $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
@@ -546,12 +540,12 @@ $vat=$transaction->getVat();
             $this->changeProduct_earnings = $changeProduct_earnings;
             $this->changeProduct_commission = $changeProduct_commission;
 
-            
+
             ////////////////////////////////New Sim Sale  ////////////////////
- 
+
             $cp = new Criteria();
             $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-           
+
             $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 14);
             $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
@@ -566,8 +560,8 @@ $vat=$transaction->getVat();
             $this->sim_sales = $sim_sales;
             $this->simSale_earnings = $simSale_earnings;
             $this->simSale_commission = $simSale_commission;
-            
-            
+
+
             $this->sf_request = $request;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -590,7 +584,7 @@ $vat=$transaction->getVat();
         $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
-         $c = new Criteria();
+        $c = new Criteria();
         $c->add(ProductPeer::PRODUCT_TYPE_ID, 2);
 
         $this->refillProducts = ProductPeer::doSelect($c);
@@ -607,49 +601,49 @@ $vat=$transaction->getVat();
 
         if ($request->isMethod('post')) {
             $mobile_number = $request->getParameter('mobile_number');
-            
-            if(strlen($mobile_number)==0){
-                 $this->error_mobile_number = $this->getContext()->getI18N()->__('You must fill in this field');
-                   return;
+
+            if (strlen($mobile_number) == 0) {
+                $this->error_mobile_number = $this->getContext()->getI18N()->__('You must fill in this field');
+                return;
             }
             $extra_refill = $request->getParameter('extra_refill');
-           // $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
+            // $extra_refill = $extra_refill*(sfConfig::get('app_vat_percentage')+1);
             $is_recharged = true;
 
-          
-            
-            
-            $customer ="";
+
+
+
+            $customer = "";
             $mobile_number;
             $cc = new Criteria();
             $cc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
             $cc->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
             $cc->add(CustomerPeer::BLOCK, 0);
             //$cc->add(CustomerPeer::FONET_CUSTOMER_ID, NULL, Criteria::ISNOTNULL);  // This Line disable becoz no need of fonet system in landncall -
-        
-            if(CustomerPeer::doCount($cc)>0){
-              $customer = CustomerPeer::doSelectOne($cc);
-              $telintaObj = new Telienta();
-        $telintaGetBalance = $telintaObj->getBalance($customer);
-            $pr= new Criteria();
-            $pr->add(ProductPeer::ID, $extra_refill);
-            $customerProduct = ProductPeer::doSelectOne($pr);
-            
-            
-            
-            
-           
-            //echo $customer->getId();
 
-                   $telintaGetBalanceRe=$telintaGetBalance+$customerProduct->getInitialBalance()+$customerProduct->getBonus();
-          if ($telintaGetBalanceRe>=250) {
-               $this->error_msg = $this->getContext()->getI18N()->__('Sorry ! Unable to refill as customer balance will execced from the upper limit.');
-                return;  
-          }
-            }else{
-                  $customer = CustomerPeer::doSelectOne($cc);
+            if (CustomerPeer::doCount($cc) > 0) {
+                $customer = CustomerPeer::doSelectOne($cc);
+                $telintaObj = new Telienta();
+                $telintaGetBalance = $telintaObj->getBalance($customer);
+                $pr = new Criteria();
+                $pr->add(ProductPeer::ID, $extra_refill);
+                $customerProduct = ProductPeer::doSelectOne($pr);
+
+
+
+
+
+                //echo $customer->getId();
+
+                $telintaGetBalanceRe = $telintaGetBalance + $customerProduct->getInitialBalance() + $customerProduct->getBonus();
+                if ($telintaGetBalanceRe >= 250) {
+                    $this->error_msg = $this->getContext()->getI18N()->__('Sorry ! Unable to refill as customer balance will execced from the upper limit.');
+                    return;
+                }
+            } else {
+                $customer = CustomerPeer::doSelectOne($cc);
             }
-        
+
             if ($customer and $mobile_number != "") {
                 $validated = true;
             } else {
@@ -659,10 +653,8 @@ $vat=$transaction->getVat();
                 return;
             }
             if ($validated) {
-             
-                  $this->redirect('affiliate/refillDetail?pid='.$extra_refill.'&cid='.$customer->getId());
-                
-                
+
+                $this->redirect('affiliate/refillDetail?pid=' . $extra_refill . '&cid=' . $customer->getId());
             } else {
 //                                        echo 'Form Invalid, redirecting';
                 $this->balance_error = 1;
@@ -746,74 +738,125 @@ $vat=$transaction->getVat();
         $c->add(AgentCompanyPeer::ID, $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $referrer_id = AgentCompanyPeer::doSelectOne($c);
 
-        if ($request->isMethod('post')) {
-
-            $this->form = new CustomerForm();
-
-            $this->form->bind($request->getParameter("newCustomerForm"), $request->getFiles("newCustomerForm"));
-            $this->form->setDefault('referrer_id', $referrer_id);
-            unset($this->form['terms_conditions']);
-            unset($this->form['imsi']);
-            unset($this->form['uniqueid']);
-            unset($this->form['usage_alert_sms']);
-            unset($this->form['usage_alert_email']);
-//                        //unset($this->form['password']);
-//                        unset($this->form['terms_conditions']);
-            // print_r($this->form);
-            //  die;
-
-            $this->processForm($request, $this->form);
+        $product_criteria = new Criteria();
+        $dc = new Criteria();
+        $dc->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
+        $agentCount = AgentProductPeer::doCount($dc);
+        if ($agentCount > 0) {
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);
+            $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
+            $product_criteria->add(AgentProductPeer::AGENT_ID, $this->getRequest()->getCookie('agent_id'));
         } else {
-
-            $this->form = new CustomerForm();
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
+        $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
+        $this->products = ProductPeer::doSelect($product_criteria);
+        $this->simTypes = SimTypesPeer::doSelect(new Criteria());
+        $pl = new Criteria();
+        $this->langs = PreferredLanguagesPeer::doSelect($pl);
 
+
+        if ($request->isMethod('post')) {
+            $customer = new Customer();
+            $customer->setMobileNumber($request->getParameter('mobile_number'));
+            $customer->setCountryId(1);
+            $customer->setNiePassportNumber($request->getParameter('nie'));
+            $customer->setPlainText($request->getParameter('password'));
+            $customer->setPassword($request->getParameter('password'));
+            $customer->setEmail($request->getParameter('email'));
+            $customer->setPreferredLanguageId($request->getParameter('pref_lang'));
+            $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+            $customer->setRegistrationTypeId('2');
+            $customer->setBlock('0');
+            $customer->save();
+            $productObj = ProductPeer::retrieveByPK($request->getParameter('product'));
+            if ($productObj->getProductTypeId() == 10) {
+                $customer->setUniqueid("Dial" . $customer->getId());
+                $customer->save();
+            } elseif ($productObj->getProductTypeId() == 11) {
+                $customer->setUniqueid("app" . $customer->getId());
+                $customer->save();
+            } elseif ($productObj->getPostageApplicable() == 1) {
+                $customer->setFirstName($request->getParameter('first_name'));
+                $customer->setLastName($request->getParameter('last_name'));
+                $customer->setAddress($request->getParameter('address'));
+                $customer->setPoBoxNumber($request->getParameter('post_code'));
+                $customer->setCity($request->getParameter('city'));
+                $customer->setSimTypeId($request->getParameter('simtype'));
+                $customer->save();
+            }
+            $this->redirect('@customer_registration_step2?customer_id=' . $customer->getId() . '&product_id=' . $productObj->getId());
+            //$this->processForm($request, $this->form);
+        }
         //$this->setLayout();
         sfView::NONE;
     }
 
-  
-       public function executeRegisterBusinessCustomer(sfWebRequest $request) {
+    public function executeRegisterBusinessCustomer(sfWebRequest $request) {
 
 
         $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
         $this->browser = new Browser();
 
-        $c = new Criteria();
+               $c = new Criteria();
         $c->add(AgentCompanyPeer::ID, $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $referrer_id = AgentCompanyPeer::doSelectOne($c);
 
-        if ($request->isMethod('post')) {
-
-            $this->form = new CustomerForm();
-
-            $this->form->bind($request->getParameter("newCustomerForm"), $request->getFiles("newCustomerForm"));
-            $this->form->setDefault('referrer_id', $referrer_id);
-            unset($this->form['terms_conditions']);
-            unset($this->form['imsi']);
-            unset($this->form['uniqueid']);
-            unset($this->form['usage_alert_sms']);
-            unset($this->form['usage_alert_email']);
-//                        //unset($this->form['password']);
-//                        unset($this->form['terms_conditions']);
-            // print_r($this->form);
-            //  die;
-
-            $this->processForm($request, $this->form);
+        $product_criteria = new Criteria();
+        $dc = new Criteria();
+        $dc->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
+        $agentCount = AgentProductPeer::doCount($dc);
+        if ($agentCount > 0) {
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);
+            $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
+            $product_criteria->add(AgentProductPeer::AGENT_ID, $this->getRequest()->getCookie('agent_id'));
         } else {
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);
+        }
+        $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
+        $this->products = ProductPeer::doSelect($product_criteria);
+        $this->simTypes = SimTypesPeer::doSelect(new Criteria());
+        $pl = new Criteria();
+        $this->langs = PreferredLanguagesPeer::doSelect($pl);
 
-            $this->form = new CustomerForm();
+
+        if ($request->isMethod('post')) {
+            $customer = new Customer();
+            $customer->setMobileNumber($request->getParameter('mobile_number'));
+            $customer->setCountryId(1);
+            $customer->setNiePassportNumber($request->getParameter('nie'));
+            $customer->setPlainText($request->getParameter('password'));
+            $customer->setPassword($request->getParameter('password'));
+            $customer->setEmail($request->getParameter('email'));
+            $customer->setPreferredLanguageId($request->getParameter('pref_lang'));
+            $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+            $customer->setRegistrationTypeId('2');
+            $customer->setBusiness(1);
+            $customer->setBlock('0');
+            $customer->save();
+            $productObj = ProductPeer::retrieveByPK($request->getParameter('product'));
+            if ($productObj->getProductTypeId() == 10) {
+                $customer->setUniqueid("Dial" . $customer->getId());
+                $customer->save();
+            } elseif ($productObj->getProductTypeId() == 11) {
+                $customer->setUniqueid("app" . $customer->getId());
+                $customer->save();
+            } elseif ($productObj->getPostageApplicable() == 1) {
+                $customer->setFirstName($request->getParameter('first_name'));
+                $customer->setLastName($request->getParameter('last_name'));
+                $customer->setAddress($request->getParameter('address'));
+                $customer->setPoBoxNumber($request->getParameter('post_code'));
+                $customer->setCity($request->getParameter('city'));
+                $customer->setSimTypeId($request->getParameter('simtype'));
+                $customer->save();
+            }
+            $this->redirect('@customer_registration_step2?customer_id=' . $customer->getId() . '&product_id=' . $productObj->getId());
+            //$this->processForm($request, $this->form);
         }
 
-        //$this->setLayout();
-        sfView::NONE;
+        
     }
 
- 
-    
-    
-    
-    
     protected function processFormone(sfWebRequest $request, sfForm $form) {
         //print_r($request->getParameter($form->getName()));
         $customer = $request->getParameter($form->getName());
@@ -843,7 +886,7 @@ $vat=$transaction->getVat();
             $customer->save();
 
             if ($customer) {
-
+                
             }
 
             echo "redirecting";
@@ -866,10 +909,9 @@ $vat=$transaction->getVat();
         //   var_dump($customer);die;
         if ($form->isValid()) {
             //     $customer->setPlainText($request->getParameter($form->getPassword()));
-            unset(               
-                $this->form['usage_alert_sms'],
-                $this->form['usage_alert_email']
-             );
+            unset(
+                    $this->form['usage_alert_sms'], $this->form['usage_alert_email']
+            );
             $customer = $form->save();
             $customer->setReferrerId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
             $customer->setRegistrationTypeId('2');
@@ -877,7 +919,7 @@ $vat=$transaction->getVat();
             $customer->setBlock('0');
             $customer->save();
             if ($customer) {
-
+                
             }
             $this->getUser()->setAttribute('customer_id', $customer->getId(), 'usersignup');
             $this->getUser()->setAttribute('product_id', $product, 'usersignup');
@@ -894,11 +936,7 @@ $vat=$transaction->getVat();
         $this->form = new PaymentForm();
         $this->target = $this->getTargetUrl();
         unset(
-                $this->form['cardno'],
-                $this->form['expmonth'],
-                $this->form['expyear'],
-                $this->form['cvc'],
-                $this->form['cardtype']
+                $this->form['cardno'], $this->form['expmonth'], $this->form['expyear'], $this->form['cvc'], $this->form['cardtype']
         );
 
 
@@ -927,18 +965,18 @@ $vat=$transaction->getVat();
         $customer->save();
 
         $transaction->setAgentCompanyId($customer->getReferrerId());
-        $finalAmount=$order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee() + ($order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage'));
-        $finalAmount=number_format($finalAmount,2);
+        $finalAmount = $order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee() + ($order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage'));
+        $finalAmount = number_format($finalAmount, 2);
         $transaction->setAmount($finalAmount);
-        $transactiondescription=TransactionDescriptionPeer::retrieveByPK(12);
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(12);
         $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
-        $vat=$order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
-         $transaction->setVat($vat);
-       //$transaction->setTransactionStatusId() // default value 1
+        $vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
+        $transaction->setVat($vat);
+        //$transaction->setTransactionStatusId() // default value 1
 
         $transaction->save();
         $this->order = $order;
@@ -1038,7 +1076,7 @@ $vat=$transaction->getVat();
             if ($agentcomession) {
 
 
-                if ($order->getIsFirstOrder()==1) {
+                if ($order->getIsFirstOrder() == 1) {
                     if ($agentproductcomesion->getIsRegShareValuePc()) {
                         $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getRegShareValue());
                     } else {
@@ -1054,7 +1092,7 @@ $vat=$transaction->getVat();
                 }
             } else {
 
-                if ($order->getIsFirstOrder()==1) {
+                if ($order->getIsFirstOrder() == 1) {
                     if ($commission_package->getIsRegShareValuePc()) {
                         $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getRegShareValue());
                     } else {
@@ -1073,7 +1111,7 @@ $vat=$transaction->getVat();
 
             $transaction->save();
             TransactionPeer::AssignReceiptNumber($transaction);
-            
+
             if ($agent->getIsPrepaid() == true) {
 
                 if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
@@ -1112,32 +1150,30 @@ $vat=$transaction->getVat();
             $this->customer = $order->getCustomer();
 //	  	Fonet::registerFonet($this->customer);
 //	  	Fonet::recharge($this->customer, $order->getExtraRefill());
-            $uniqueid = $request->getParameter('uniqueid');
-            $uc = new Criteria();
-            $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
-            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID, $this->customer->getSimTypeId());
-            $uc->addAnd(UniqueIdsPeer::STATUS, 0);
-            $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueid);
-            $availableUniqueCount = UniqueIdsPeer::doCount($uc);
-            $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
+
+            if ($order->getProduct()->getProductTypeId() != 10 && $order->getProduct()->getProductTypeId() != 11) {
+
+                $uniqueid = $request->getParameter('uniqueid');
+                $uc = new Criteria();
+                $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
+                $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID, $this->customer->getSimTypeId());
+                $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+                $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueid);
+                $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+                $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
 
 
-            if ($availableUniqueCount == 0) {
-                // Unique Ids are not avaialable.  send email to the support.
-                emailLib::sendUniqueIdsIssueAgent($uniqueid, $this->customer);
-            } else {
-                $availableUniqueId->setStatus(1);
-                $availableUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
-                $availableUniqueId->save();
+                if ($availableUniqueCount == 0) {
+                    // Unique Ids are not avaialable.  send email to the support.
+                    emailLib::sendUniqueIdsIssueAgent($uniqueid, $this->customer);
+                } else {
+                    $availableUniqueId->setStatus(1);
+                    $availableUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
+                    $availableUniqueId->save();
+                }
+                $this->customer->setUniqueid(str_replace(' ', '', $uniqueid));
+                $this->customer->save();
             }
-            $this->customer->setUniqueid(str_replace(' ', '', $uniqueid));
-            $this->customer->save();
-
-            $cc = new Criteria();
-            $cc->add(EnableCountryPeer::ID, $this->customer->getCountryId());
-            $country = EnableCountryPeer::doSelectOne($cc);
-
-            $mobile = $country->getCallingCode() . $this->customer->getMobileNumber();
 
             $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
             if ($getFirstnumberofMobile == 0) {
@@ -1163,12 +1199,11 @@ $vat=$transaction->getVat();
             $this->updatePreferredCulture();
 //            $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //            $zeroCallOutSMSObject->toCustomerAfterReg($customer_product->getProductId(), $this->customer);
-            
+
 
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $this->customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
             $this->redirect('affiliate/receipts');
         }// die('here');
-        
     }
 
     public function executeFaq(sfWebRequest $request) {
@@ -1238,9 +1273,9 @@ $vat=$transaction->getVat();
 
     public function executeNonSupportingHandset(sfWebRequest $request) {
 
-        
+
         $ch = new Criteria();
-        $ch->add(HandsetsPeer::SUPPORTED,0);
+        $ch->add(HandsetsPeer::SUPPORTED, 0);
         $nonsupported = HandsetsPeer::doSelect($ch);
         $this->handsets = $nonsupported;
         $this->browser = new Browser();
@@ -1250,12 +1285,12 @@ $vat=$transaction->getVat();
 
         //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11 - Ahtsham
 
-        $this->target = $this->getTargetUrl().'affiliate/';
+        $this->target = $this->getTargetUrl() . 'affiliate/';
         $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
         $this->agent = $agent;
-          $this->agent_company = $agent;
+        $this->agent_company = $agent;
         $this->forward404Unless($agent);
 
 
@@ -1278,7 +1313,7 @@ $vat=$transaction->getVat();
             $agent_order = new AgentOrder();
             $agent_order->setAgentCompanyId($agent->getId());
             $agent_order->setStatus('1');
-              $agent_order->setOrderDescription('7');
+            $agent_order->setOrderDescription('7');
             $agent_order->save();
 
             $agent_order->setAgentOrderId('a0' . $agent_order->getId());
@@ -1345,7 +1380,7 @@ $vat=$transaction->getVat();
         $c = new Criteria();
         $c->add(AgentOrderPeer::AGENT_COMPANY_ID, $agent->getId());
         $c->add(AgentOrderPeer::STATUS, 3);
-          $c->addDescendingOrderByColumn(AgentOrderPeer::ID);
+        $c->addDescendingOrderByColumn(AgentOrderPeer::ID);
         $this->agentOrders = AgentOrderPeer::doSelect($c);
     }
 
@@ -1368,18 +1403,18 @@ $vat=$transaction->getVat();
 
         $ca = new Criteria();
         $ca->add(AgentPaymentHistoryPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-         $ca->addDescendingOrderByColumn(AgentPaymentHistoryPeer::CREATED_AT);
+        $ca->addDescendingOrderByColumn(AgentPaymentHistoryPeer::CREATED_AT);
         $agent = AgentPaymentHistoryPeer::doSelect($ca);
         //$this->forward404Unless($agent);
-        
+
         $this->agents = $agent;
-        
-         $cag = new Criteria();
+
+        $cag = new Criteria();
         $cag->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agentData = AgentCompanyPeer::doSelectOne($cag);
         $this->forward404Unless($agentData);
 
-       
+
         $this->agent_company = $agentData;
     }
 
@@ -1446,15 +1481,13 @@ $vat=$transaction->getVat();
         $existingNumber = $request->getParameter('existingNumber');
         $this->newNumber = $request->getParameter('newNumber');
         $this->countrycode = $request->getParameter('countrycode');
-        
-        if($request->getParameter('newNumber')==$request->getParameter('existingNumber'))
-        {
-           
-          $this->getUser()->setFlash('decline', 'Both Mobile numbers are same please enter different Mobile number');
-                $this->redirect('affiliate/changenumberservice');    
-            
+
+        if ($request->getParameter('newNumber') == $request->getParameter('existingNumber')) {
+
+            $this->getUser()->setFlash('decline', 'Both Mobile numbers are same please enter different Mobile number');
+            $this->redirect('affiliate/changenumberservice');
         }
-            
+
         if (isset($_REQUEST['existingNumber']) && $_REQUEST['existingNumber'] != "") {
             $mobile = $_REQUEST['existingNumber'];
             $product = $_REQUEST['product'];
@@ -1470,30 +1503,30 @@ $vat=$transaction->getVat();
                 $this->getUser()->setFlash('decline', 'Customer Mobile Number Does not exist');
                 $this->redirect('affiliate/changenumberservice');
             }
-               $customer = CustomerPeer::doSelectOne($cc);
-               
-               ////////////////////////////////////////
-              $change_no_startdate = date('Y-m-1 00:00:00');
-        $change_no_enddate = date('Y-m-t 23:59:59');
+            $customer = CustomerPeer::doSelectOne($cc);
 
-        $cn = new Criteria();
-        $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID, $customer->getId());
-        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT, $change_no_startdate, Criteria::GREATER_EQUAL);
-        $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT, $change_no_enddate, Criteria::LESS_EQUAL);
-        $cn->addAnd(ChangeNumberDetailPeer::STATUS, 1);
-        $change_number_count = ChangeNumberDetailPeer::doCount($cn);
-            
-           if ($change_number_count>=2) {
+            ////////////////////////////////////////
+            $change_no_startdate = date('Y-m-1 00:00:00');
+            $change_no_enddate = date('Y-m-t 23:59:59');
+
+            $cn = new Criteria();
+            $cn->add(ChangeNumberDetailPeer::CUSTOMER_ID, $customer->getId());
+            $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT, $change_no_startdate, Criteria::GREATER_EQUAL);
+            $cn->addAnd(ChangeNumberDetailPeer::CREATED_AT, $change_no_enddate, Criteria::LESS_EQUAL);
+            $cn->addAnd(ChangeNumberDetailPeer::STATUS, 1);
+            $change_number_count = ChangeNumberDetailPeer::doCount($cn);
+
+            if ($change_number_count >= 2) {
                 $this->getUser()->setFlash('decline', 'Customer has already availed his/her limit for this service.');
                 $this->redirect('affiliate/changenumberservice');
-            }  
-            
-            
-            
-            
-            
-            
-         
+            }
+
+
+
+
+
+
+
             if ($customer) {
                 $this->customer = $customer;
                 $this->product = $product;
@@ -1536,9 +1569,9 @@ $vat=$transaction->getVat();
             $mobile_number = $request->getParameter('mobile_number');
             $productid = $request->getParameter('productid');
             $extra_refill = $request->getParameter('extra_refill');
-             $totalAmount = $request->getParameter('totalAmount');
-              $vat = $request->getParameter('vat');
-            
+            $totalAmount = $request->getParameter('totalAmount');
+            $vat = $request->getParameter('vat');
+
             $newnumber = $request->getParameter('newnumber');
             $countrycode = $request->getParameter('countrycode');
 
@@ -1569,21 +1602,21 @@ $vat=$transaction->getVat();
                 $order->setQuantity(1);
                 $order->setExtraRefill($extra_refill);
                 $order->setOrderStatusId(sfConfig::get('app_status_new'));
-                  $order->setIsFirstOrder(3);
+                $order->setIsFirstOrder(3);
                 $order->save();
 
                 //create transaction
                 $transaction->setOrderId($order->getId());
                 $transaction->setCustomerId($customer->getId());
                 $transaction->setAmount($totalAmount);
-                   $transactiondescription=  TransactionDescriptionPeer::retrieveByPK(13);
+                $transactiondescription = TransactionDescriptionPeer::retrieveByPK(13);
                 $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
-            //    $transaction->setDescription('Fee for change number (' . $agent->getName() . ')');
+                //    $transaction->setDescription('Fee for change number (' . $agent->getName() . ')');
                 $transaction->setAgentCompanyId($agent->getId());
-                  $transaction->setVat($vat);
-                          //assign commission to transaction;
+                $transaction->setVat($vat);
+                //assign commission to transaction;
                 /////////////////////////////////////////////////////////////////////////////////////////////////
                 $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
                 ///////////////////////////commision calculation by agent product ///////////////////////////////////////
@@ -1675,7 +1708,7 @@ $vat=$transaction->getVat();
                             $telintaAccountsCB = TelintaAccountsPeer::doSelectOne($cb);
                             $telintaObj->terminateAccount($telintaAccountsCB);
                         }
-                        
+
 
                         $getvoipInfo = new Criteria();
                         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $customerids);
@@ -1694,7 +1727,7 @@ $vat=$transaction->getVat();
                             }
                             $telintaObj->createReseNumberAccount($voipnumbers, $customer, $newMobileNo);
                         } else {
-
+                            
                         }
                     }
 
@@ -1757,16 +1790,16 @@ $vat=$transaction->getVat();
         }
     }
 
-    public function executeAgentRefil(sfWebRequest $request) { 
-        
+    public function executeAgentRefil(sfWebRequest $request) {
+
         $order_id = $request->getParameter('item_number');
         $item_amount = $request->getParameter('amount');
 
         $return_url = $this->getTargetUrl() . 'affiliate/accountRefill';
         $cancel_url = $this->getTargetUrl() . 'affiliate/thankyou/?accept=cancel';
-        
-        $callbackparameters = $order_id.'-'.$item_amount;
-        $notify_url = sfConfig::get('app_customer_url') . 'pScripts/agentRefillThankyou?p='.$callbackparameters;
+
+        $callbackparameters = $order_id . '-' . $item_amount;
+        $notify_url = sfConfig::get('app_customer_url') . 'pScripts/agentRefillThankyou?p=' . $callbackparameters;
 
         $c = new Criteria;
         $c->add(AgentOrderPeer::AGENT_ORDER_ID, $order_id);
@@ -1822,16 +1855,16 @@ $vat=$transaction->getVat();
         if ($startdate != '') {
             $startdate = date('Y-m-d 00:00:00', strtotime($startdate));
             $this->startdate = date('Y-m-d', strtotime($startdate));
-        }else{
+        } else {
             $startdate = date('Y-m-d 00:00:00', strtotime($this->agent->getCreatedAt()));
             $this->startdate = $startdate;
         }
         if ($enddate != '') {
             $enddate = date('Y-m-d 23:59:59', strtotime($enddate));
             $this->enddate = date('Y-m-d', strtotime($enddate));
-        }else{
+        } else {
             $enddate = date('Y-m-d 23:59:59');
-             $this->enddate = $enddate;
+            $this->enddate = $enddate;
         }
         //get All customer registrations from customer table
         try {
@@ -1851,7 +1884,7 @@ $vat=$transaction->getVat();
                 //echo $customer->getId();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID, 3);
                 if ($startdate != "" && $enddate != "") {
                     $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                     $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -1879,7 +1912,7 @@ $vat=$transaction->getVat();
             $this->registration_commission = $registration_commission;
             $cc = new Criteria();
             $cc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-            $cc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID,1);
+            $cc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
             $cc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             if ($startdate != "" && $enddate != "") {
                 $cc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
@@ -1934,7 +1967,7 @@ $vat=$transaction->getVat();
                 $tc = new Criteria();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $sms_customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID, 3);
                 if ($startdate != "" && $enddate != "") {
                     $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                     $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -1949,23 +1982,23 @@ $vat=$transaction->getVat();
             $this->sms_registrations = $sms_registrations;
             $this->sms_registration_earnings = $sms_registration_earnings;
             $this->sms_commission_earnings = $sms_commission_earnings;
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
 
 //////////////////// Number  Change/////////////////////////////////////////
             $nc = new Criteria();
             $nc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-           // $nc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
+            // $nc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
             $nc->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 13);
             $nc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $nc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
             $number_changes = TransactionPeer::doSelect($nc);
-            
+
             $numberChange_earnings = 0.00;
             $numberChange_commission = 0.00;
             foreach ($number_changes as $number_change) {
@@ -1976,10 +2009,10 @@ $vat=$transaction->getVat();
             $this->numberChange_earnings = $numberChange_earnings;
             $this->numberChange_commission = $numberChange_commission;
 ////////////////////////////////Change Product ////////////////////
- 
+
             $cp = new Criteria();
             $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-         //   $cp->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
+            //   $cp->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
             $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 15);
             $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
@@ -1995,12 +2028,12 @@ $vat=$transaction->getVat();
             $this->changeProduct_earnings = $changeProduct_earnings;
             $this->changeProduct_commission = $changeProduct_commission;
 
-            
+
             ////////////////////////////////New Sim Sale  ////////////////////
- 
+
             $cp = new Criteria();
             $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-           
+
             $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 14);
             $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
@@ -2015,10 +2048,10 @@ $vat=$transaction->getVat();
             $this->sim_sales = $sim_sales;
             $this->simSale_earnings = $simSale_earnings;
             $this->simSale_commission = $simSale_commission;
-            
-                        
-            
-            
+
+
+
+
             ////////// End SMS registrations
             $this->sf_request = $request;
         } catch (Exception $e) {
@@ -2067,7 +2100,7 @@ $vat=$transaction->getVat();
                 //echo $customer->getId();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID, 3);
                 if ($startdate != "" && $enddate != "") {
                     $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                     $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -2095,7 +2128,7 @@ $vat=$transaction->getVat();
             $this->registration_commission = $registration_commission;
             $cc = new Criteria();
             $cc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-            $cc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID,1);
+            $cc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
             $cc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             if ($startdate != "" && $enddate != "") {
                 $cc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
@@ -2150,7 +2183,7 @@ $vat=$transaction->getVat();
                 $tc = new Criteria();
                 $tc->add(TransactionPeer::CUSTOMER_ID, $sms_customer->getId());
                 $tc->add(TransactionPeer::TRANSACTION_STATUS_ID, 3);
-                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID,3);
+                $tc->add(TransactionPeer::TRANSACTION_TYPE_ID, 3);
                 if ($startdate != "" && $enddate != "") {
                     $tc->addAnd(TransactionPeer::CREATED_AT, $startdate, Criteria::GREATER_EQUAL);
                     $tc->addAnd(TransactionPeer::CREATED_AT, $enddate, Criteria::LESS_EQUAL);
@@ -2166,18 +2199,15 @@ $vat=$transaction->getVat();
             $this->sms_registration_earnings = $sms_registration_earnings;
             $this->sms_commission_earnings = $sms_commission_earnings;
             ////////// End SMS registrations
-            
-            
-            
 //////////////////// Number  Change/////////////////////////////////////////
             $nc = new Criteria();
             $nc->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-           // $nc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
+            // $nc->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
             $nc->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 13);
             $nc->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $nc->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
             $number_changes = TransactionPeer::doSelect($nc);
-            
+
             $numberChange_earnings = 0.00;
             $numberChange_commission = 0.00;
             foreach ($number_changes as $number_change) {
@@ -2188,10 +2218,10 @@ $vat=$transaction->getVat();
             $this->numberChange_earnings = $numberChange_earnings;
             $this->numberChange_commission = $numberChange_commission;
 ////////////////////////////////Change Product ////////////////////
- 
+
             $cp = new Criteria();
             $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-         //   $cp->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
+            //   $cp->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 2);
             $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 15);
             $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
@@ -2207,12 +2237,12 @@ $vat=$transaction->getVat();
             $this->changeProduct_earnings = $changeProduct_earnings;
             $this->changeProduct_commission = $changeProduct_commission;
 
-            
+
             ////////////////////////////////New Sim Sale  ////////////////////
- 
+
             $cp = new Criteria();
             $cp->add(TransactionPeer::AGENT_COMPANY_ID, $agent_company_id);
-           
+
             $cp->addAnd(TransactionPeer::TRANSACTION_DESCRIPTION_ID, 14);
             $cp->addAnd(TransactionPeer::TRANSACTION_STATUS_ID, 3);
             $cp->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
@@ -2227,14 +2257,14 @@ $vat=$transaction->getVat();
             $this->sim_sales = $sim_sales;
             $this->simSale_earnings = $simSale_earnings;
             $this->simSale_commission = $simSale_commission;
-            
-                        
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
+
             $this->sf_request = $request;
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -2242,6 +2272,7 @@ $vat=$transaction->getVat();
 
         $this->setLayout(false);
     }
+
     private function setPreferredCulture(Customer $customer) {
         $this->currentCulture = $this->getUser()->getCulture();
         $preferredLang = PreferredLanguagesPeer::retrieveByPK($customer->getPreferredLanguageId());
@@ -2251,180 +2282,173 @@ $vat=$transaction->getVat();
     private function updatePreferredCulture() {
         $this->getUser()->setCulture($this->currentCulture);
     }
+
     public function executeRefillProcess(sfWebRequest $request) {
-        
-            $customer=  CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
-        $product=  ProductPeer::retrieveByPK($request->getParameter('product_id'));
-          $is_recharged = true;
-          $agentcomession=FALSE;
-          $ca = new Criteria();
+
+        $customer = CustomerPeer::retrieveByPK($request->getParameter('customer_id'));
+        $product = ProductPeer::retrieveByPK($request->getParameter('product_id'));
+        $is_recharged = true;
+        $agentcomession = FALSE;
+        $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
-         $c = new Criteria();
-       
+        $c = new Criteria();
+
         //get Agent commission package
         $cpc = new Criteria();
         $cpc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
         $commission_package = AgentCommissionPackagePeer::doSelectOne($cpc);
-        
-      $transaction = new Transaction();
-            $order = new CustomerOrder();
-            $extra_refill=$request->getParameter('totalAmount');
-      
-                $order->setCustomerId($customer->getId());
-                $order->setProductId($product->getId());
-                $order->setQuantity(1);
-                $order->setExtraRefill($request->getParameter('productRefillAmount'));
-                $order->setIsFirstOrder(2);
-                $order->setOrderStatusId(sfConfig::get('app_status_new'));
-                $order->save();
 
-                $transaction->setOrderId($order->getId());
-                $transaction->setCustomerId($customer->getId());
-                $transaction->setAmount($extra_refill);
-                $transactiondescription=TransactionDescriptionPeer::retrieveByPK(11);
-                $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
-                $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                $transaction->setDescription($product->getDescription());
-                $transaction->setVat($request->getParameter('vat'));
-                $transaction->setAgentCompanyId($agent->getId());
+        $transaction = new Transaction();
+        $order = new CustomerOrder();
+        $extra_refill = $request->getParameter('totalAmount');
 
-                $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
+        $order->setCustomerId($customer->getId());
+        $order->setProductId($product->getId());
+        $order->setQuantity(1);
+        $order->setExtraRefill($request->getParameter('productRefillAmount'));
+        $order->setIsFirstOrder(2);
+        $order->setOrderStatusId(sfConfig::get('app_status_new'));
+        $order->save();
 
-                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+        $transaction->setOrderId($order->getId());
+        $transaction->setCustomerId($customer->getId());
+        $transaction->setAmount($extra_refill);
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(11);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($product->getDescription());
+        $transaction->setVat($request->getParameter('vat'));
+        $transaction->setAgentCompanyId($agent->getId());
 
-                $cp = new Criteria;
-                $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
-                $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                $agentproductcount = AgentProductPeer::doCount($cp);
-                if ($agentproductcount > 0) {
-                    $p = new Criteria;
-                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                    $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                    $agentproductcomesion = AgentProductPeer::doSelectOne($p);
-                    $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
-                }
+        $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
 
-                ////////   commission setting  through  agent commision//////////////////////
+        $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
 
-                if ($agentcomession) {
-                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
-                    }
-                } else {
-                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
-                    }
-                }
-                //calculated amount for agent commission
-                if ($agent->getIsPrepaid() == true) {
-                    if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
-                        $is_recharged = false;
-                        $balance_error = 1;
-                    }
-                }
+        $cp = new Criteria;
+        $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
+        $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+        $agentproductcount = AgentProductPeer::doCount($cp);
+        if ($agentproductcount > 0) {
+            $p = new Criteria;
+            $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+            $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+            $agentproductcomesion = AgentProductPeer::doSelectOne($p);
+            $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
+        }
 
-                if ($is_recharged) {
-                    $transaction->save();
-                    if ($agent->getIsPrepaid() == true) {
-                        $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
-                        $agent->save();
-                        $remainingbalance = $agent->getBalance();
-                        $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
-                        $amount = -$amount;
-                        $aph = new AgentPaymentHistory();
-                        $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                        $aph->setCustomerId($transaction->getCustomerId());
-                        $aph->setExpeneseType(2);
-                        $aph->setAmount($amount);
-                        $aph->setRemainingBalance($remainingbalance);
-                        $aph->save();
-                    }
+        ////////   commission setting  through  agent commision//////////////////////
 
-                    $uniqueId = $customer->getUniqueid();
-                    $OpeningBalance = $order->getExtraRefill();
-                    $telintaObj = new Telienta();
-                    $telintaObj->recharge($customer, $OpeningBalance,"Refill");
-                    //set status
-                    $order->setOrderStatusId(sfConfig::get('app_status_completed'));
-                    $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
-                    $order->setExeStatus(1);
-                    $order->save();
-                    $transaction->save();
-                    TransactionPeer::AssignReceiptNumber($transaction);
-                    $this->customer = $order->getCustomer();
-                    //  $this->getUser()->setCulture('de');
-                    $this->setPreferredCulture($this->customer);
-                        emailLib::sendRefillEmail($this->customer, $order);
-                    $this->updatePreferredCulture();
-                    //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $order->getExtraRefill(), "%3%" => sfConfig::get('app_currency_code'))));
+        if ($agentcomession) {
+            if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
+                $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
+            } else {
+                $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
+            }
+        } else {
+            if ($commission_package->getIsExtraPaymentsShareValuePc()) {
+                $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
+            } else {
+                $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
+            }
+        }
+        //calculated amount for agent commission
+        if ($agent->getIsPrepaid() == true) {
+            if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
+                $is_recharged = false;
+                $balance_error = 1;
+            }
+        }
+
+        if ($is_recharged) {
+            $transaction->save();
+            if ($agent->getIsPrepaid() == true) {
+                $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
+                $agent->save();
+                $remainingbalance = $agent->getBalance();
+                $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
+                $amount = -$amount;
+                $aph = new AgentPaymentHistory();
+                $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                $aph->setCustomerId($transaction->getCustomerId());
+                $aph->setExpeneseType(2);
+                $aph->setAmount($amount);
+                $aph->setRemainingBalance($remainingbalance);
+                $aph->save();
+            }
+
+            $uniqueId = $customer->getUniqueid();
+            $OpeningBalance = $order->getExtraRefill();
+            $telintaObj = new Telienta();
+            $telintaObj->recharge($customer, $OpeningBalance, "Refill");
+            //set status
+            $order->setOrderStatusId(sfConfig::get('app_status_completed'));
+            $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
+            $order->setExeStatus(1);
+            $order->save();
+            $transaction->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
+            $this->customer = $order->getCustomer();
+            //  $this->getUser()->setCulture('de');
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendRefillEmail($this->customer, $order);
+            $this->updatePreferredCulture();
+            //   $this->getUser()->setCulture('en');
+            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $order->getExtraRefill(), "%3%" => sfConfig::get('app_currency_code'))));
 //                                      echo 'rehcarged, redirecting';
-                    $this->redirect('affiliate/receipts');
-                } else {
+            $this->redirect('affiliate/receipts');
+        } else {
 //                                        echo 'NOT rehcarged, redirecting';
-                    $this->balance_error = 1;
-                    $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
-                } //end else
-    
-     return sfView::NONE;
+            $this->balance_error = 1;
+            $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
+        } //end else
+
+        return sfView::NONE;
     }
-    
-    
-     public function executeRefillDetail(sfWebRequest $request) {
-          changeLanguageCulture::languageCulture($request, $this);
-        $this->targetUrl = $this->getTargetUrl(); 
-        $this->customer=  CustomerPeer::retrieveByPK($request->getParameter('cid'));
-        $this->product=  ProductPeer::retrieveByPK($request->getParameter('pid'));
-     }
-      public function executePurchaseNewSim(sfWebRequest $request) {
-          changeLanguageCulture::languageCulture($request, $this);
-          $this->error_msg="";
-           $this->product_id = '';
+
+    public function executeRefillDetail(sfWebRequest $request) {
+        changeLanguageCulture::languageCulture($request, $this);
+        $this->targetUrl = $this->getTargetUrl();
+        $this->customer = CustomerPeer::retrieveByPK($request->getParameter('cid'));
+        $this->product = ProductPeer::retrieveByPK($request->getParameter('pid'));
+    }
+
+    public function executePurchaseNewSim(sfWebRequest $request) {
+        changeLanguageCulture::languageCulture($request, $this);
+        $this->error_msg = "";
+        $this->product_id = '';
         $cst = new Criteria();
         $cst->add(ProductPeer::PRODUCT_TYPE_ID, 6);
         $this->simtypes = ProductPeer::doSelect($cst);
-       
-     }
-      public function executePurchaseNewSimDetail(sfWebRequest $request) {
-          
-      
-          changeLanguageCulture::languageCulture($request, $this);
-        $simTypeId=$request->getParameter('sim_type');
-         $mobile_number = $request->getParameter('mobile_number');
-            $uc = new Criteria();
-           $uc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
+    }
+
+    public function executePurchaseNewSimDetail(sfWebRequest $request) {
+
+
+        changeLanguageCulture::languageCulture($request, $this);
+        $simTypeId = $request->getParameter('sim_type');
+        $mobile_number = $request->getParameter('mobile_number');
+        $uc = new Criteria();
+        $uc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
         $uc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $uc->addAnd(CustomerPeer::BLOCK, 0);
-         $this->customer = CustomerPeer::doSelectOne($uc);
-         
-         
-         
-          $this->error_msg="";
-           $this->product_id = '';
+        $this->customer = CustomerPeer::doSelectOne($uc);
+
+
+
+        $this->error_msg = "";
+        $this->product_id = '';
         $cst = new Criteria();
         $cst->add(ProductPeer::ID, $simTypeId);
         $simtype = ProductPeer::doSelectOne($cst);
-         $this->product= $simtype;
+        $this->product = $simtype;
         $this->product_id = $simtype->getId();
-           $this->price = $simtype->getRegistrationFee();
-            $this->vat = $this->price * sfConfig::get('app_vat_percentage');
-            $this->total = $this->price + $this->vat;
-        
-        
-        
-        
-        
-        
-        
-        
-       
-     }    
-      public function executeValidateCustomer(sfWebRequest $request){
+        $this->price = $simtype->getRegistrationFee();
+        $this->vat = $this->price * sfConfig::get('app_vat_percentage');
+        $this->total = $this->price + $this->vat;
+    }
+
+    public function executeValidateCustomer(sfWebRequest $request) {
 
         $mobile_number = $request->getParameter('mobile_number');
         $uc = new Criteria();
@@ -2432,79 +2456,79 @@ $vat=$transaction->getVat();
         $uc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $uc->addAnd(CustomerPeer::BLOCK, 0);
         $availableUniqueCount = CustomerPeer::doCount($uc);
-        if($availableUniqueCount == 1){
+        if ($availableUniqueCount == 1) {
             echo "true";
-        }else{
+        } else {
             echo "false";
         }
 
         return sfView::NONE;
-   } 
-   
-   public function executePurchaseNewSimProcess(sfWebRequest $request) { 
-   
-      $NewUniqueId=  $request->getParameter('uniqueId');
-  $st = new Criteria();
-            $st->add(ProductPeer::ID, $request->getParameter('productId'));
-            $simtype = ProductPeer::doSelectOne($st);
-            $this->product_id = $simtype->getId();
-            $this->price = $simtype->getRegistrationFee();
-            $this->vat = $this->price * sfConfig::get('app_vat_percentage');
-            $this->total = $this->price + $this->vat;
-            
-              $this->customer=  CustomerPeer::retrieveByPK($request->getParameter('customerId')); 
-              $customer=$this->customer;
-              $product=$simtype;
+    }
+
+    public function executePurchaseNewSimProcess(sfWebRequest $request) {
+
+        $NewUniqueId = $request->getParameter('uniqueId');
+        $st = new Criteria();
+        $st->add(ProductPeer::ID, $request->getParameter('productId'));
+        $simtype = ProductPeer::doSelectOne($st);
+        $this->product_id = $simtype->getId();
+        $this->price = $simtype->getRegistrationFee();
+        $this->vat = $this->price * sfConfig::get('app_vat_percentage');
+        $this->total = $this->price + $this->vat;
+
+        $this->customer = CustomerPeer::retrieveByPK($request->getParameter('customerId'));
+        $customer = $this->customer;
+        $product = $simtype;
         //////////////////////////////      
-       $is_recharged = true;
-          $agentcomession=FALSE;
-          $ca = new Criteria();
+        $is_recharged = true;
+        $agentcomession = FALSE;
+        $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
-         $c = new Criteria();
-       
+        $c = new Criteria();
+
         //get Agent commission package
         $cpc = new Criteria();
         $cpc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
         $commission_package = AgentCommissionPackagePeer::doSelectOne($cpc);
-        
-      $transaction = new Transaction();
-            $order = new CustomerOrder();
-            $extra_refill=$request->getParameter('totalAmount');
-      
-                $order->setCustomerId($customer->getId());
-                $order->setProductId($product->getId());
-                $order->setQuantity(1);
-               $order->setExtraRefill(0);
-                 $order->setIsFirstOrder(6);
-                $order->setOrderStatusId(sfConfig::get('app_status_new'));
-                $order->save();
-                 
-                 $transaction = new Transaction();
 
-            $transaction->setAmount($this->total);
-            $transaction->setOrderId($order->getId());
-            $transaction->setCustomerId($customer->getId());
-            $transactiondescription = TransactionDescriptionPeer::retrieveByPK(14);
-            $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
-            $transaction->setTransactionDescriptionId($transactiondescription->getId());
-            $this->transaction_title=$transactiondescription->getTitle();
-            $transaction->setDescription($this->transaction_title);
-            $transaction->setVat($this->vat);
-            $transaction->setTransactionStatusId(1);
-            $transaction->save();
-            TransactionPeer::AssignReceiptNumber($transaction);
-            /////////////////////////////////////////////
-            
-            
-             $cst = new Criteria();
+        $transaction = new Transaction();
+        $order = new CustomerOrder();
+        $extra_refill = $request->getParameter('totalAmount');
+
+        $order->setCustomerId($customer->getId());
+        $order->setProductId($product->getId());
+        $order->setQuantity(1);
+        $order->setExtraRefill(0);
+        $order->setIsFirstOrder(6);
+        $order->setOrderStatusId(sfConfig::get('app_status_new'));
+        $order->save();
+
+        $transaction = new Transaction();
+
+        $transaction->setAmount($this->total);
+        $transaction->setOrderId($order->getId());
+        $transaction->setCustomerId($customer->getId());
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(14);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $this->transaction_title = $transactiondescription->getTitle();
+        $transaction->setDescription($this->transaction_title);
+        $transaction->setVat($this->vat);
+        $transaction->setTransactionStatusId(1);
+        $transaction->save();
+        TransactionPeer::AssignReceiptNumber($transaction);
+        /////////////////////////////////////////////
+
+
+        $cst = new Criteria();
         $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
-      $sim_type_id=$simtype->getId();
+        $sim_type_id = $simtype->getId();
         $exest = $order->getExeStatus();
-        if ($exest!=1) {
+        if ($exest != 1) {
 
-            $uniqueId=$this->customer->getUniqueid();
+            $uniqueId = $this->customer->getUniqueid();
             $cb = new Criteria();
             $cb->add(CallbackLogPeer::UNIQUEID, $uniqueId);
             $cb->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
@@ -2513,20 +2537,20 @@ $vat=$transaction->getVat();
             $uc = new Criteria();
             $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
             $uc->addAnd(UniqueIdsPeer::STATUS, 0);
-            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
-            $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER,$NewUniqueId);
-            
-           
+            $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID, $sim_type_id);
+            $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER, $NewUniqueId);
+
+
             $availableUniqueCount = UniqueIdsPeer::doCount($uc);
-            
+
             $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
 
-            if($availableUniqueCount  == 0){
+            if ($availableUniqueCount == 0) {
                 // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
                 emailLib::sendUniqueIdsShortage();
-                $this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
+                $this->redirect($this->getTargetUrl() . 'customer/shortUniqueIds');
             }
-  $callbacklog = new CallbackLog();
+            $callbacklog = new CallbackLog();
             $callbacklog->setMobileNumber($activeNumber->getMobileNumber());
             $callbacklog->setuniqueId($availableUniqueId->getUniqueNumber());
             $callbacklog->setcallingCode(sfConfig::get('app_country_code'));
@@ -2544,195 +2568,188 @@ $vat=$transaction->getVat();
             $this->customer->setUniqueid($availableUniqueId->getUniqueNumber());
             $this->customer->setSimTypeId($sim_type_id);
             $this->customer->save();
-
-          
         }
-            
-            /////////////////////////////////////////////////////
-            
-                $transaction->setAgentCompanyId($agent->getId());
 
-                $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
+        /////////////////////////////////////////////////////
 
-                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+        $transaction->setAgentCompanyId($agent->getId());
 
-                $cp = new Criteria;
-                $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
-                $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                $agentproductcount = AgentProductPeer::doCount($cp);
-                if ($agentproductcount > 0) {
-                    $p = new Criteria;
-                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                    $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                    $agentproductcomesion = AgentProductPeer::doSelectOne($p);
-                    $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
-                }
+        $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
 
-                ////////   commission setting  through  agent commision//////////////////////
+        $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
 
-                if ($agentcomession) {
-                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
-                    }
-                } else {
-                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
-                    }
-                }
-                //calculated amount for agent commission
-                if ($agent->getIsPrepaid() == true) {
-                    if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
-                        $is_recharged = false;
-                        $balance_error = 1;
-                    }
-                }
+        $cp = new Criteria;
+        $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
+        $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+        $agentproductcount = AgentProductPeer::doCount($cp);
+        if ($agentproductcount > 0) {
+            $p = new Criteria;
+            $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+            $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+            $agentproductcomesion = AgentProductPeer::doSelectOne($p);
+            $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
+        }
 
-                if ($is_recharged) {
-                    $transaction->save();
-                    if ($agent->getIsPrepaid() == true) {
-                        $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
-                        $agent->save();
-                        $remainingbalance = $agent->getBalance();
-                        $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
-                        $amount = -$amount;
-                        $aph = new AgentPaymentHistory();
-                        $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                        $aph->setCustomerId($transaction->getCustomerId());
-                        $aph->setExpeneseType(8);
-                        $aph->setAmount($amount);
-                        $aph->setRemainingBalance($remainingbalance);
-                        $aph->save();
-                    }
+        ////////   commission setting  through  agent commision//////////////////////
 
-                  
-                    $order->setOrderStatusId(sfConfig::get('app_status_completed'));
-                    $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
-                    $order->setExeStatus(1);
-                    $order->save();
-                    $transaction->save();
-                    TransactionPeer::AssignReceiptNumber($transaction);
-                    $this->customer = $order->getCustomer();
-                    //  $this->getUser()->setCulture('de');
-                   
-                    
-                      $this->setPreferredCulture($this->customer);
-            emailLib::sendCustomerNewcardEmailAgent($this->customer, $order, $transaction,$agent_company_id);
+        if ($agentcomession) {
+            if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
+                $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
+            } else {
+                $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
+            }
+        } else {
+            if ($commission_package->getIsExtraPaymentsShareValuePc()) {
+                $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
+            } else {
+                $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
+            }
+        }
+        //calculated amount for agent commission
+        if ($agent->getIsPrepaid() == true) {
+            if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
+                $is_recharged = false;
+                $balance_error = 1;
+            }
+        }
+
+        if ($is_recharged) {
+            $transaction->save();
+            if ($agent->getIsPrepaid() == true) {
+                $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
+                $agent->save();
+                $remainingbalance = $agent->getBalance();
+                $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
+                $amount = -$amount;
+                $aph = new AgentPaymentHistory();
+                $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                $aph->setCustomerId($transaction->getCustomerId());
+                $aph->setExpeneseType(8);
+                $aph->setAmount($amount);
+                $aph->setRemainingBalance($remainingbalance);
+                $aph->save();
+            }
+
+
+            $order->setOrderStatusId(sfConfig::get('app_status_completed'));
+            $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
+            $order->setExeStatus(1);
+            $order->save();
+            $transaction->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
+            $this->customer = $order->getCustomer();
+            //  $this->getUser()->setCulture('de');
+
+
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerNewcardEmailAgent($this->customer, $order, $transaction, $agent_company_id);
             $this->updatePreferredCulture();
-                    //   $this->getUser()->setCulture('en');
-                    $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('New sim is purchased successfully '));
+            //   $this->getUser()->setCulture('en');
+            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('New sim is purchased successfully '));
 //                                      echo 'rehcarged, redirecting';
-                    $this->redirect('affiliate/receipts');
-                } else {
+            $this->redirect('affiliate/receipts');
+        } else {
 //                                        echo 'NOT rehcarged, redirecting';
-                    $this->balance_error = 1;
-                    $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
-                } //end else
-    
-     return sfView::NONE;
+            $this->balance_error = 1;
+            $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
+        } //end else
+
+        return sfView::NONE;
 
         ////////////////////////////      
-           
-            //new transaction
-           
-    
-          
-        }
+        //new transaction
+    }
 
-       public function executeValidateUniqeId(sfWebRequest $request){
+    public function executeValidateUniqeId(sfWebRequest $request) {
 
-        $uniqueId= $request->getParameter('uniqueId');
-        $sim_type_id= $request->getParameter('sim_type');
+        $uniqueId = $request->getParameter('uniqueId');
+        $sim_type_id = $request->getParameter('sim_type');
         $uc = new Criteria();
         $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 2);
         $uc->addAnd(UniqueIdsPeer::STATUS, 0);
-        $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID,$sim_type_id);
-         $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER,$uniqueId);
+        $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID, $sim_type_id);
+        $uc->addAnd(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueId);
         $availableUniqueCount = UniqueIdsPeer::doCount($uc);
-        if($availableUniqueCount == 1){
+        if ($availableUniqueCount == 1) {
             echo "true";
-        }else{
+        } else {
             echo "false";
         }
 
         return sfView::NONE;
-   }  
-   public function executeChangeProductService(sfWebRequest $request) {
-          changeLanguageCulture::languageCulture($request, $this);
-          $this->error_msg="";
-           $this->product_id = '';
+    }
+
+    public function executeChangeProductService(sfWebRequest $request) {
+        changeLanguageCulture::languageCulture($request, $this);
+        $this->error_msg = "";
+        $this->product_id = '';
         $cst = new Criteria();
         $cst->add(ProductPeer::PRODUCT_TYPE_ID, 1);
-         $cst->addAnd(ProductPeer::IS_IN_STORE, 1);
+        $cst->addAnd(ProductPeer::IS_IN_STORE, 1);
         $this->simtypes = ProductPeer::doSelect($cst);
-     }
-      public function executeChangeProductServiceDetail(sfWebRequest $request){
-      
-          changeLanguageCulture::languageCulture($request, $this);
-        $simTypeId=$request->getParameter('sim_type');
-         $mobile_number = $request->getParameter('mobile_number');
-            $uc = new Criteria();
-           $uc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
+    }
+
+    public function executeChangeProductServiceDetail(sfWebRequest $request) {
+
+        changeLanguageCulture::languageCulture($request, $this);
+        $simTypeId = $request->getParameter('sim_type');
+        $mobile_number = $request->getParameter('mobile_number');
+        $uc = new Criteria();
+        $uc->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
         $uc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $uc->addAnd(CustomerPeer::BLOCK, 0);
-         $this->customer = CustomerPeer::doSelectOne($uc);
-         
-         
-         
-         
-           $op = new Criteria();
-           $op->add(CustomerProductPeer::CUSTOMER_ID, $this->customer->getId());
+        $this->customer = CustomerPeer::doSelectOne($uc);
+
+
+
+
+        $op = new Criteria();
+        $op->add(CustomerProductPeer::CUSTOMER_ID, $this->customer->getId());
         $op->addAnd(CustomerProductPeer::STATUS_ID, 3);
-    //    $uc->addAnd(CustomerPeer::BLOCK, 0);
-         $opproduct = CustomerProductPeer::doSelectOne($op);
-       
-         if($opproduct->getProductId()==$simTypeId){
-          
-               $this->getUser()->setFlash('decline', 'Customer has already this product.');
-                $this->redirect('affiliate/changeProductService');    
-            
-             
-         }
-         
-            $cop = new Criteria();
-           $cop->add(CustomerChangeProductPeer::CUSTOMER_ID, $this->customer->getId());
+        //    $uc->addAnd(CustomerPeer::BLOCK, 0);
+        $opproduct = CustomerProductPeer::doSelectOne($op);
+
+        if ($opproduct->getProductId() == $simTypeId) {
+
+            $this->getUser()->setFlash('decline', 'Customer has already this product.');
+            $this->redirect('affiliate/changeProductService');
+        }
+
+        $cop = new Criteria();
+        $cop->add(CustomerChangeProductPeer::CUSTOMER_ID, $this->customer->getId());
         $cop->addAnd(CustomerChangeProductPeer::STATUS, 2);
-            $cop->addAnd(CustomerChangeProductPeer::PRODUCT_ID, $simTypeId);
-     
-         $copproductCount = CustomerChangeProductPeer::doCount($cop);
-       
-         if($copproductCount>0){
+        $cop->addAnd(CustomerChangeProductPeer::PRODUCT_ID, $simTypeId);
+
+        $copproductCount = CustomerChangeProductPeer::doCount($cop);
+
+        if ($copproductCount > 0) {
             $this->getUser()->setFlash('decline', 'Customer has already subscribed for this product.');
-                $this->redirect('affiliate/changeProductService');      
-         }
-                  
-          $this->error_msg="";
-           $this->product_id = '';
+            $this->redirect('affiliate/changeProductService');
+        }
+
+        $this->error_msg = "";
+        $this->product_id = '';
         $cst = new Criteria();
         $cst->add(ProductPeer::ID, $simTypeId);
         $simtype = ProductPeer::doSelectOne($cst);
-         $this->product= $simtype;
-           $cstx = new Criteria();
+        $this->product = $simtype;
+        $cstx = new Criteria();
         $cstx->add(ProductPeer::ID, 16);
         $simtypex = ProductPeer::doSelectOne($cstx);
-         $this->productx= $simtypex;
-         
-         
-         
+        $this->productx = $simtypex;
+
+
+
         $this->product_id = $simtype->getId();
-           $this->price = $simtypex->getRegistrationFee();
-            $this->vat = $this->price * sfConfig::get('app_vat_percentage');
-            $this->total = $this->price + $this->vat;
-               
-     }     
-  
+        $this->price = $simtypex->getRegistrationFee();
+        $this->vat = $this->price * sfConfig::get('app_vat_percentage');
+        $this->total = $this->price + $this->vat;
+    }
+
     public function executeChangeProductProcess(sfWebRequest $request) {
 
         $this->customer = CustomerPeer::retrieveByPK($request->getParameter('customerId'));
-      
+
         $this->targetUrl = $this->getTargetUrl();
 
         $product_id = $request->getParameter('productId');
@@ -2745,30 +2762,30 @@ $vat=$transaction->getVat();
         $this->vat = $this->price * sfConfig::get('app_vat_percentage');
         $this->total = $this->price + $this->vat;
 
-        
-         $is_recharged = true;
-          $agentcomession=FALSE;
-          $ca = new Criteria();
+
+        $is_recharged = true;
+        $agentcomession = FALSE;
+        $ca = new Criteria();
         $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $agent = AgentCompanyPeer::doSelectOne($ca);
-         $c = new Criteria();
-       
+        $c = new Criteria();
+
         //get Agent commission package
         $cpc = new Criteria();
         $cpc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
         $commission_package = AgentCommissionPackagePeer::doSelectOne($cpc);
-        
-           $transaction = new Transaction();
+
+        $transaction = new Transaction();
         $order = new CustomerOrder();
         $order->setCustomerId($this->customer->getId());
         $order->setProductId($product->getId());
         $order->setQuantity(1);
         $order->setExtraRefill($product->getInitialBalance());
         $order->setOrderStatusId(1);
-         $order->setExeStatus(1);
+        $order->setExeStatus(1);
         $order->setIsFirstOrder(7);
-          $order->save();
-           $transaction->setOrderId($order->getId());
+        $order->save();
+        $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($this->customer->getId());
         $transaction->setAmount($this->total);
         $transactiondescription = TransactionDescriptionPeer::retrieveByPK(15);
@@ -2777,149 +2794,144 @@ $vat=$transaction->getVat();
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
-          $transaction->save();
-        TransactionPeer::AssignReceiptNumber($transaction);
-        
-///////////////////agent area //////////////////////////
-           $transaction->setAgentCompanyId($agent->getId());
-
-                $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
-
-                $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
-
-                $cp = new Criteria;
-                $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
-                $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                $agentproductcount = AgentProductPeer::doCount($cp);
-                if ($agentproductcount > 0) {
-                    $p = new Criteria;
-                    $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                    $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
-                    $agentproductcomesion = AgentProductPeer::doSelectOne($p);
-                    $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
-                }
-
-                ////////   commission setting  through  agent commision//////////////////////
-
-                if ($agentcomession) {
-                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
-                    }
-                } else {
-                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
-                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
-                    } else {
-                        $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
-                    }
-                }
-                //calculated amount for agent commission
-                if ($agent->getIsPrepaid() == true) {
-                    if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
-                        $is_recharged = false;
-                        $balance_error = 1;
-                    }
-                }
-
-                if ($is_recharged) {
-                    $transaction->save();
-                    if ($agent->getIsPrepaid() == true) {
-                        $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
-                        $agent->save();
-                        $remainingbalance = $agent->getBalance();
-                        $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
-                        $amount = -$amount;
-                        $aph = new AgentPaymentHistory();
-                        $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
-                        $aph->setCustomerId($transaction->getCustomerId());
-                        $aph->setExpeneseType(7);
-                        $aph->setAmount($amount);
-                        $aph->setRemainingBalance($remainingbalance);
-                        $aph->save();
-                    }
-
-        ////////////////////////agent area end/////////////////
-        
-        
-        
-        
-        
-        $order->setOrderStatusId(3);
-        $order->save();
-        $this->order = $order;
-        //create transaction
-     
-       
-        $transaction->setTransactionStatusId(3);
-       
-           
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
-        $ccp = new CustomerChangeProduct();
-        $ccp->setCustomerId($this->customer->getId());
-        $ccp->setProductId($product_id);
-        $ccp->setCreatedAt(Date());
-        $ccp->setStatus(2);
-        $ccp->setOrderId($order->getId());
-        $ccp->setTransactionId($transaction->getId());
-        $ccp->save();
-        
-        
-        /**************Change customer product ******************/
-        $customer = $this->customer;
-        $product = ProductPeer::retrieveByPK($ccp->getProductId());
-        $order = CustomerOrderPeer::retrieveByPK($ccp->getOrderId());
-        $transaction = TransactionPeer::retrieveByPK($ccp->getTransactionId());
-        $Bproducts = BillingProductsPeer::retrieveByPK($product->getBillingProductId());
-        $c = new Criteria;
-        $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
-        $c->add(TelintaAccountsPeer::STATUS, 3);
-        $tilentAccount = TelintaAccountsPeer::doSelectOne($c);
-        //  foreach($tilentAccounts as $tilentAccount){
-        $accountInfo['i_account'] = $tilentAccount->getIAccount();
-        $accountInfo['i_product'] = $Bproducts->getAIproduct();
-        $telintaObj = new Telienta();
-        if ($telintaObj->updateAccount($accountInfo)) {
-            $ccp->setStatus(3);
-            $ccp->Save();
+
+///////////////////agent area //////////////////////////
+        $transaction->setAgentCompanyId($agent->getId());
+
+        $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
+
+        $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+
+        $cp = new Criteria;
+        $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id);
+        $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+        $agentproductcount = AgentProductPeer::doCount($cp);
+        if ($agentproductcount > 0) {
+            $p = new Criteria;
+            $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+            $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+            $agentproductcomesion = AgentProductPeer::doSelectOne($p);
+            $agentcomession = $agentproductcomesion->getExtraPaymentsShareEnable();
         }
-        //   }  
-       
-        $cp = new Criteria();
-        $cp->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
-        $cp->addAnd(CustomerProductPeer::STATUS_ID, 3);
-        if(CustomerProductPeer::doCount($cp) > 0){
-            $customerProduct = CustomerProductPeer::doSelectOne($cp);
-            $customerProduct->setStatusId(7);
-            $customerProduct->Save();
+
+        ////////   commission setting  through  agent commision//////////////////////
+
+        if ($agentcomession) {
+            if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
+                $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
+            } else {
+                $transaction->setCommissionAmount($agentproductcomesion->getExtraPaymentsShareValue());
+            }
+        } else {
+            if ($commission_package->getIsExtraPaymentsShareValuePc()) {
+                $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
+            } else {
+                $transaction->setCommissionAmount($commission_package->getExtraPaymentsShareValue());
+            }
         }
-        $cProduct = new CustomerProduct();
-        $cProduct->setProductId($ccp->getProductId());
-        $cProduct->setCustomerId($ccp->getCustomerId());
-        $cProduct->setStatusId(3);
-        $cProduct->save();
-        
-        
-            $uniqueId=$this->customer->getUniqueid();
+        //calculated amount for agent commission
+        if ($agent->getIsPrepaid() == true) {
+            if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
+                $is_recharged = false;
+                $balance_error = 1;
+            }
+        }
+
+        if ($is_recharged) {
+            $transaction->save();
+            if ($agent->getIsPrepaid() == true) {
+                $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
+                $agent->save();
+                $remainingbalance = $agent->getBalance();
+                $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
+                $amount = -$amount;
+                $aph = new AgentPaymentHistory();
+                $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                $aph->setCustomerId($transaction->getCustomerId());
+                $aph->setExpeneseType(7);
+                $aph->setAmount($amount);
+                $aph->setRemainingBalance($remainingbalance);
+                $aph->save();
+            }
+
+            ////////////////////////agent area end/////////////////
+
+
+
+
+
+            $order->setOrderStatusId(3);
+            $order->save();
+            $this->order = $order;
+            //create transaction
+
+
+            $transaction->setTransactionStatusId(3);
+
+
+            $transaction->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
+            $ccp = new CustomerChangeProduct();
+            $ccp->setCustomerId($this->customer->getId());
+            $ccp->setProductId($product_id);
+            $ccp->setCreatedAt(Date());
+            $ccp->setStatus(2);
+            $ccp->setOrderId($order->getId());
+            $ccp->setTransactionId($transaction->getId());
+            $ccp->save();
+
+
+            /*             * ************Change customer product ***************** */
+            $customer = $this->customer;
+            $product = ProductPeer::retrieveByPK($ccp->getProductId());
+            $order = CustomerOrderPeer::retrieveByPK($ccp->getOrderId());
+            $transaction = TransactionPeer::retrieveByPK($ccp->getTransactionId());
+            $Bproducts = BillingProductsPeer::retrieveByPK($product->getBillingProductId());
+            $c = new Criteria;
+            $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
+            $c->add(TelintaAccountsPeer::STATUS, 3);
+            $tilentAccount = TelintaAccountsPeer::doSelectOne($c);
+            //  foreach($tilentAccounts as $tilentAccount){
+            $accountInfo['i_account'] = $tilentAccount->getIAccount();
+            $accountInfo['i_product'] = $Bproducts->getAIproduct();
+            $telintaObj = new Telienta();
+            if ($telintaObj->updateAccount($accountInfo)) {
+                $ccp->setStatus(3);
+                $ccp->Save();
+            }
+            //   }  
+
+            $cp = new Criteria();
+            $cp->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
+            $cp->addAnd(CustomerProductPeer::STATUS_ID, 3);
+            if (CustomerProductPeer::doCount($cp) > 0) {
+                $customerProduct = CustomerProductPeer::doSelectOne($cp);
+                $customerProduct->setStatusId(7);
+                $customerProduct->Save();
+            }
+            $cProduct = new CustomerProduct();
+            $cProduct->setProductId($ccp->getProductId());
+            $cProduct->setCustomerId($ccp->getCustomerId());
+            $cProduct->setStatusId(3);
+            $cProduct->save();
+
+
+            $uniqueId = $this->customer->getUniqueid();
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerChangeProductAgent($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
-            
+
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Congratulations! Customer has subscribed for new product.'));
 //                                      echo 'rehcarged, redirecting';
-                    $this->redirect('affiliate/receipts');
-               
-        
-            } else {
+            $this->redirect('affiliate/receipts');
+        } else {
 //                                        echo 'NOT rehcarged, redirecting';
-                    $this->balance_error = 1;
-                    $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
-                }  
-                 return sfView::NONE;
+            $this->balance_error = 1;
+            $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
+        }
+        return sfView::NONE;
     }
 
-
-         
-     
 }

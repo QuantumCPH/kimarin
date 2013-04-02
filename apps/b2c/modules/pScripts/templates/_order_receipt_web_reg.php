@@ -41,15 +41,45 @@ use_helper('Number');
 </style>
 
 <?php
-$wrap_content  = isset($wrap)?$wrap:false;
-
 //wrap_content also tells  wheather its a refill or 
 //a product order. we wrap the receipt with extra
 // text only if its a product order.
 
  ?>
- 
-<?php if($wrap_content): ?>
+<?php if($wrap=='dial'): ?>
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear customer') ?>&nbsp;<?php //echo $customer->getFirstName()." ".$customer->getLastName();?></p>
+	
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;font-weight: bold;'>
+	<?php echo __('Welcome to Kimarin DIAL with telephone number: %1%.', array('%1%'=> $customer->getMobileNumber())) ?>
+	</p>
+	
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __('Thank you for your order of Kimarin DIAL - where you can call to 56 countries for only 0.01 € per minute and the rest of the world at very low prices.'); ?>. <?php //echo __(' There, you can use in your dealings with customer service'); ?></p>
+	
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;font-weight: bold;'>
+	<?php echo __('It is very easy to get started.') ?>
+	</p>
+        
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __('Call %1% - wait for the tone - dial the country code followed by the foreign telephone number - followed by #.', array('%1%'=> "+34810101700")) ?>
+	</p>
+        
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __('You can see your call history, account balance and personal settings on www. kimarin.es under MY ACCOUNT, where you also can refill your account.'); ?> </p>
+	
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __('Please notice that in addition to the Kimarin call fees you pay the local call tariffs  to call %1%.', array('%1%'=> "+34810101700")) ?>
+	</p>
+        
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __('Best regards,') ?>
+	</p>
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __(sfConfig::get('app_site_title')) ?>
+	</p>
+	<br />
+<?php endif; ?> 
+<?php if($wrap=='normal'): ?>
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear customer') ?>&nbsp;<?php //echo $customer->getFirstName()." ".$customer->getLastName();?></p>
 	
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
@@ -67,6 +97,24 @@ $wrap_content  = isset($wrap)?$wrap:false;
 	</p>
 	<br />
 <?php endif; ?>
+<?php if($wrap=='app'): ?>
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear customer') ?>&nbsp;<?php //echo $customer->getFirstName()." ".$customer->getLastName();?></p>
+	
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __('Thank you for your order of <b>%1%</b>.', array('%1%'=>$order->getProduct()->getName())) ?>
+	</p>
+	
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __('Your customer number is '); echo $customer->getUniqueid();?>. <?php //echo __(' There, you can use in your dealings with customer service'); ?></p>
+	
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __('Best regards,') ?>
+	</p>
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+	<?php echo __(sfConfig::get('app_site_title')) ?>
+	</p>
+	<br />
+<?php endif; ?>        
 <table width="600px">
 	<tr style="border:0px solid #fff">
 		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>

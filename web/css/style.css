@@ -600,3 +600,72 @@ ul.changenumber li{
 .dateBox-pt input{
     margin:0 10px 0 6px !important;
 }
+
+.regForm .left {
+    float: left;
+    font-size: 13px;
+    padding: 5px 5px 0 0;
+    width: 134px;
+}
+
+.regForm .right {
+    float: left;
+    padding: 0;
+    width: 237px;
+}
+
+.regForm .right .input1 {
+    background-color: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    box-shadow: 0 0 2px #F7F7F7 inset, 0 1px 0 #F7F7F7;
+    color: #777777;
+    margin-bottom: 3px !important;
+    margin-top: 2px !important;
+    padding: 4px 3px !important;
+    width: 183px !important;
+}
+
+.regForm .right .input {
+    background-color: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    box-shadow: 0 0 2px #F7F7F7 inset, 0 1px 0 #F7F7F7;
+    color: #777777;
+    margin-bottom: 3px !important;
+    margin-top: 2px !important;
+    padding: 3px !important;
+    width: 191px !important;
+    height: auto !important;
+}
+
+.regForm .right .mobile {
+    background-color: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    box-shadow: 0 0 2px #F7F7F7 inset, 0 1px 0 #F7F7F7;
+    color: #777777;
+    float: right !important;
+    margin-bottom: 0px !important; 
+    margin-right: 22px !important;
+    margin-top: 0px !important;
+    padding: 4px 3px !important;
+    width: 150px !important;
+}
+
+.regForm .right .country-code {
+    color: #000000;
+    display: inline-block !important;
+    width: auto !important;
+    font-size: 15px;
+    height: 21px;
+    line-height: 32px;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.frmright {
+    float: left;
+    width: 400px;
+}
+.frmleft {
+    float: left;
+    width: 400px;
+}
