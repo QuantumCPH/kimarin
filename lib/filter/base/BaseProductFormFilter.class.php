@@ -38,6 +38,7 @@ class BaseProductFormFilter extends BaseFormFilterPropel
       'product_type_id'       => new sfWidgetFormPropelChoice(array('model' => 'ProductType', 'add_empty' => true)),
       'bonus'                 => new sfWidgetFormFilterInput(),
       'sim_type_id'           => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
+      'postage_applicable'    => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
     ));
 
     $this->setValidators(array(
@@ -65,6 +66,7 @@ class BaseProductFormFilter extends BaseFormFilterPropel
       'product_type_id'       => new sfValidatorPropelChoice(array('required' => false, 'model' => 'ProductType', 'column' => 'id')),
       'bonus'                 => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'sim_type_id'           => new sfValidatorPropelChoice(array('required' => false, 'model' => 'SimTypes', 'column' => 'id')),
+      'postage_applicable'    => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
     ));
 
     $this->widgetSchema->setNameFormat('product_filters[%s]');
@@ -107,6 +109,7 @@ class BaseProductFormFilter extends BaseFormFilterPropel
       'product_type_id'       => 'ForeignKey',
       'bonus'                 => 'Number',
       'sim_type_id'           => 'ForeignKey',
+      'postage_applicable'    => 'Boolean',
     );
   }
 }

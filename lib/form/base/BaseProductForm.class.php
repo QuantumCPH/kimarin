@@ -37,6 +37,7 @@ class BaseProductForm extends BaseFormPropel
       'product_type_id'       => new sfWidgetFormPropelChoice(array('model' => 'ProductType', 'add_empty' => false)),
       'bonus'                 => new sfWidgetFormInput(),
       'sim_type_id'           => new sfWidgetFormPropelChoice(array('model' => 'SimTypes', 'add_empty' => true)),
+      'postage_applicable'    => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -65,6 +66,7 @@ class BaseProductForm extends BaseFormPropel
       'product_type_id'       => new sfValidatorPropelChoice(array('model' => 'ProductType', 'column' => 'id')),
       'bonus'                 => new sfValidatorNumber(array('required' => false)),
       'sim_type_id'           => new sfValidatorPropelChoice(array('model' => 'SimTypes', 'column' => 'id', 'required' => false)),
+      'postage_applicable'    => new sfValidatorBoolean(),
     ));
 
     $this->widgetSchema->setNameFormat('product[%s]');
