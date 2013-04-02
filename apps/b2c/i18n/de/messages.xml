@@ -2442,6 +2442,10 @@
                 <source>Please notice that in addition to the Kimarin call fees you pay the local call tariffs  to call %1%.</source>
                 <target>Beachten Sie bitte, dass Sie zusätzlich zu den Kimarin Gesprächsgebühren auch die Lokaltariff  zahlen, wenn Sie %1% anrufen.</target>
             </trans-unit>
+            <trans-unit id="603" translate="yes" reformat="yes" xml:space="default">
+                <source>The passwords don’t match.</source>
+                <target>Das Passwort stimmt nicht überein.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
