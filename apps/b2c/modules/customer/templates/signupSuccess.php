@@ -75,7 +75,19 @@ use_helper('I18N');
             },
             messages: {
                 mobile_number:{
-                    remote: "<?php echo __("Invalid or Already Registerd Mobile Number"); ?>"
+                    remote: "<?php echo __("Please enter a valid mobile number."); ?>",
+                    minlength: "<?php echo __("Please enter a valid 8 to 14 digit mobile number."); ?>",
+                    maxlength: "<?php echo __("Please enter a valid 8 to 14 digit mobile number."); ?>",
+                    digits: "<?php echo __("Please enter a valid mobile number."); ?>"
+                },
+                password:{
+                    minlength: "<?php echo __("Your password must be at least 6 digits or characters."); ?>"
+                },
+                
+                confirm_password:{
+                    equalTo: "<?php echo __("The passwords don’t match."); ?>"
+                },email:{
+                    email: "<?php echo __("Please enter a valid e-mail address."); ?>"
                 }
             }
  
