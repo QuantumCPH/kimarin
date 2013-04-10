@@ -61,7 +61,7 @@ $customer_form->unsetAllExcept(array('auto_refill_amount', 'auto_refill_min_bala
 		var objForm = document.getElementById("payment");
 		var valid = true;
 		
-		if(isNaN(objForm.amount.value) || objForm.amount.value <=0 )
+		if(isNaN(objForm.amount.value))
 		{
 
 			valid = false;

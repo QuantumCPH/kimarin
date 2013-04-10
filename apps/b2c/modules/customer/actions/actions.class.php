@@ -2007,11 +2007,11 @@ class customerActions extends sfActions {
 
 
         if ($lang == 'en') {
-            $return_url = "http://www.kimarin.es/refill-thanks.html";
-            $cancel_url = "http://www.kimarin.es/refill-reject.html";
+            $return_url = "http://www.kimarin.es/refill-thanks.php";
+            $cancel_url = "http://www.kimarin.es/refill-reject.php";
         } else {
-            $return_url = "http://www.kimarin.es/" . $lang . "/refill-thanks_" . $lang . ".html";
-            $cancel_url = "http://www.kimarin.es/" . $lang . "/refill-reject_" . $lang . ".html";
+            $return_url = "http://www.kimarin.es/" . $lang . "/refill-thanks_" . $lang . ".php";
+            $cancel_url = "http://www.kimarin.es/" . $lang . "/refill-reject_" . $lang . ".php";
         }
 
 //        $return_url = "http://www.kimarin.es/".$langPara."refill-thanks_".$langPara.".html";
@@ -2194,11 +2194,11 @@ class customerActions extends sfActions {
 
         if ($lang == 'en') {
 
-            $return_url = "http://www.kimarin.es/changenumber-payment-thanks.html";
-            $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.html";
+            $return_url = "http://www.kimarin.es/changenumber-payment-thanks.php";
+            $cancel_url = "http://www.kimarin.es/changenumber-payment-reject.php";
         } else {
-            $return_url = "http://www.kimarin.es/" . $lang . "/changenumber-payment-thanks_" . $lang . ".html";
-            $cancel_url = "http://www.kimarin.es/" . $lang . "/changenumber-payment-reject_" . $lang . ".html";
+            $return_url = "http://www.kimarin.es/" . $lang . "/changenumber-payment-thanks_" . $lang . ".php";
+            $cancel_url = "http://www.kimarin.es/" . $lang . "/changenumber-payment-reject_" . $lang . ".php";
         }
 
         $order_id = $request->getParameter('item_number');
@@ -2346,11 +2346,11 @@ class customerActions extends sfActions {
 
 
             if ($lang == 'en') {
-                $return_url = "http://www.kimarin.es/newsim-payment-thanks.html";
-                $cancel_url = "http://www.kimarin.es/newsim-payment-reject.html";
+                $return_url = "http://www.kimarin.es/newsim-payment-thanks.php";
+                $cancel_url = "http://www.kimarin.es/newsim-payment-reject.php";
             } else {
-                $return_url = "http://www.kimarin.es/" . $lang . "/newsim-payment-thanks_" . $lang . ".html";
-                $cancel_url = "http://www.kimarin.es/" . $lang . "/newsim-payment-reject_" . $lang . ".html";
+                $return_url = "http://www.kimarin.es/" . $lang . "/newsim-payment-thanks_" . $lang . ".php";
+                $cancel_url = "http://www.kimarin.es/" . $lang . "/newsim-payment-reject_" . $lang . ".php";
             }
 //            $return_url = $this->targetUrl . "customer/dashboard";
 //            $cancel_url = $this->targetUrl . "customer/dashboard";
@@ -2472,11 +2472,11 @@ class customerActions extends sfActions {
 
         if ($lang == 'en') {
 
-            $return_url = "http://www.kimarin.es/changeproduct-thanks.html";
-            $cancel_url = "http://www.kimarin.es/changeproduct-reject.html";
+            $return_url = "http://www.kimarin.es/changeproduct-thanks.php";
+            $cancel_url = "http://www.kimarin.es/changeproduct-reject.php";
         } else {
-            $return_url = "http://www.kimarin.es/" . $lang . "/changeproduct-thanks_" . $lang . ".html";
-            $cancel_url = "http://www.kimarin.es/" . $lang . "/changeproduct-reject_" . $lang . ".html";
+            $return_url = "http://www.kimarin.es/" . $lang . "/changeproduct-thanks_" . $lang . ".php";
+            $cancel_url = "http://www.kimarin.es/" . $lang . "/changeproduct-reject_" . $lang . ".php";
         }
         $callbackparameters = $lang . '-' . $order_id . '-' . $item_amount . '-' . $ccpid;
         $notify_url = $this->getTargetUrl() . 'pScripts/calbackChangeProduct?p=' . $callbackparameters;
@@ -2615,6 +2615,9 @@ class customerActions extends sfActions {
             $productObj = ProductPeer::retrieveByPK($request->getParameter('product'));
             if($productObj->getProductTypeId()== 10){
                 $customer->setUniqueid("Dial".$customer->getId());
+                $customer->save();
+            }elseif($productObj->getProductTypeId()== 11){
+                $customer->setUniqueid("app".$customer->getId());
                 $customer->save();
             }elseif ($productObj->getPostageApplicable() == 1) {
                 $customer->setFirstName($request->getParameter('first_name'));
