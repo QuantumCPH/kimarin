@@ -34,7 +34,7 @@ class Telienta {
 
         $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Customer');
 
-        $uniqueid = "KB2C" . $customer->getId() . $customer->getUniqueid();
+        $uniqueid = "KB2C".rand(4,4) . $customer->getId() . $customer->getUniqueid();
 
         $Parent = $this->iParentReseller;
 
