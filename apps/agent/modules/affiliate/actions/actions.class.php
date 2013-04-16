@@ -1194,6 +1194,7 @@ class affiliateActions extends sfActions {
             $telintaObj->ResgiterCustomer($this->customer, $order->getExtraRefill());
             $telintaObj->createAAccount($TelintaMobile, $this->customer);
             $telintaObj->createCBAccount($TelintaMobile, $this->customer);
+            $telintaObj->createDialAccount($this->customer->getMobileNumber(), $this->customer);
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerRegistrationViaAgentEmail($this->customer, $order);
             $this->updatePreferredCulture();

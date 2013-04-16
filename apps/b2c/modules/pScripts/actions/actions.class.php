@@ -2999,6 +2999,7 @@ class pScriptsActions extends sfActions {
 
                 $telintaObj->createAAccount($TelintaMobile, $this->customer);
                 $telintaObj->createCBAccount($TelintaMobile, $this->customer);
+                $telintaObj->createDialAccount($this->customer->getMobileNumber(), $this->customer);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //if the customer is invited, Give the invited customer a bonus of 10
                 $invite_c = new Criteria();
@@ -4501,6 +4502,7 @@ class pScriptsActions extends sfActions {
 
             $telintaObj->createAAccount($TelintaMobile, $this->customer);
             $telintaObj->createCBAccount($TelintaMobile, $this->customer);
+            $telintaObj->createDialAccount($this->customer->getMobileNumber(), $customer);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
