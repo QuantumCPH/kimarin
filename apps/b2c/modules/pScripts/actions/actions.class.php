@@ -4690,7 +4690,9 @@ class pScriptsActions extends sfActions {
           foreach($customers as $customer){
               
           echo $customer->getId()."-----------". $customer->getFirstName()."<hr/>";  
-              
+             //   $telintaObj = new Telienta();
+                    
+             //   $telintaObj->createDialAccount($customer->getMobileNumber(), $customer);
           }
           
          return sfView::NONE;
