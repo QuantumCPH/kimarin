@@ -205,7 +205,8 @@ class employeeActions extends sfActions {
         $transactionDesc = TransactionDescriptionPeer::doSelectOne($ct);
         $country = CountryPeer::retrieveByPK($this->companys->getCountryId());
         $vat = ($country->getVatPercentage() / 100);
-        $withvat = $chrageamount + ($chrageamount * $vat);
+        $vat_amount=$chrageamount * $vat;
+        $withvat = $chrageamount + $vat_amount;
         $transaction = new CompanyTransaction();
         $transaction->setAmount(-$withvat);
         $transaction->setCompanyId($request->getParameter('company_id'));
@@ -213,7 +214,7 @@ class employeeActions extends sfActions {
         $transaction->setTransactionStatusId(3);
         $transaction->setPaymenttype($transactionDesc->getId()); //Product Registration Fee
         $transaction->setDescription($transactionDesc->getTitle());
-        $transaction->setVat($vat);
+        $transaction->setVat($vat_amount);
         $transaction->save();
         TransactionPeer::AssignB2bReceiptNumber($transaction);
 
