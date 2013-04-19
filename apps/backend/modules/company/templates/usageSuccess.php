@@ -172,7 +172,7 @@
             $cta->add(TelintaAccountsPeer::PARENT_TABLE, 'employee');
             $cta->addAnd(TelintaAccountsPeer::PARENT_ID, $emp->getId());
             $cta->addAnd(TelintaAccountsPeer::STATUS, 3);
-            $count_ta = TelintaAccountsPeer::doCount($cta);
+       echo     $count_ta = TelintaAccountsPeer::doCount($cta);die;
             if($count_ta > 0){
             $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
             foreach ($telinta_accounts as $telinta_account) {  
