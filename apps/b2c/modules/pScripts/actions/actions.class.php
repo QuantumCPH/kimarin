@@ -4689,7 +4689,7 @@ class pScriptsActions extends sfActions {
           
           foreach($customers as $customer){
               
-          echo $customer->getId()."-----------". $customer->getFisrtName()."<hr/>";  
+          echo $customer->getId()."-----------". $customer->getFirstName()."<hr/>";  
               
           }
           
