@@ -485,29 +485,30 @@ class CompanyEmployeActivation {
         $cta->addAnd(TelintaAccountsPeer::STATUS, 3);
         $count_ta = TelintaAccountsPeer::doCount($cta);
         if($count_ta > 0){
-        $telinta_account = TelintaAccountsPeer::doSelectOne($cta);
-        $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Account');
-     //   var_dump($pb);
-        while (!$xdrList && $retry_count < $max_retries) {
-            try {
-                $xdrList = $pb->get_xdr_list(array('i_account' => $telinta_account->getIAccount(), 'from_date' => $fromDate, 'to_date' => $toDate,'i_service'=>4));
-            } catch (SoapFault $e) {
-                if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                    emailLib::sendErrorInTelinta("Employee Subscription: " . $employee->getId() . " Error!", "We have faced an issue with Employee while Fetching Subscription  this is the error for employee with  Employee ID: " . $employee->getId() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
-                    return false;
+        $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
+        foreach ($telinta_accounts as $telinta_account) {
+            $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Account');
+         //   var_dump($pb);
+            while (!$xdrList && $retry_count < $max_retries) {
+                try {
+                    $xdrList = $pb->get_xdr_list(array('i_account' => $telinta_account->getIAccount(), 'from_date' => $fromDate, 'to_date' => $toDate,'i_service'=>4));
+                } catch (SoapFault $e) {
+                    if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
+                        emailLib::sendErrorInTelinta("Employee Subscription: " . $employee->getId() . " Error!", "We have faced an issue with Employee while Fetching Subscription  this is the error for employee with  Employee ID: " . $employee->getId() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                        return false;
+                    }
                 }
+                sleep(0.5);
+                $retry_count++;
             }
-            sleep(0.5);
-            $retry_count++;
+            if ($retry_count == $max_retries) {
+                emailLib::sendErrorInTelinta("Employee Subscription: " . $employee->getId() . " Error!", "We have faced an issue with Employee while Fetching Subscription on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+                return false;
+            }
+            //var_dump($xdrList);
+            }
+            return $xdrList;
         }
-        if ($retry_count == $max_retries) {
-            emailLib::sendErrorInTelinta("Employee Subscription: " . $employee->getId() . " Error!", "We have faced an issue with Employee while Fetching Subscription on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
-            return false;
-        }
-        //var_dump($xdrList);
-        }
-        return $xdrList;
-        
     }
     
     public function createDialAccount(Employee $employee) {
