@@ -21,7 +21,9 @@ class BaseCompanyTransactionFormFilter extends BaseFormFilterPropel
       'paymentType'           => new sfWidgetFormFilterInput(),
       'description'           => new sfWidgetFormFilterInput(),
       'transaction_status_id' => new sfWidgetFormFilterInput(),
+      'transaction_type_id'   => new sfWidgetFormFilterInput(),
       'receipt_no'            => new sfWidgetFormFilterInput(),
+      'vat'                   => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -32,7 +34,9 @@ class BaseCompanyTransactionFormFilter extends BaseFormFilterPropel
       'paymentType'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'description'           => new sfValidatorPass(array('required' => false)),
       'transaction_status_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'transaction_type_id'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'receipt_no'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'vat'                   => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('company_transaction_filters[%s]');
@@ -58,7 +62,9 @@ class BaseCompanyTransactionFormFilter extends BaseFormFilterPropel
       'paymentType'           => 'Number',
       'description'           => 'Text',
       'transaction_status_id' => 'Number',
+      'transaction_type_id'   => 'Number',
       'receipt_no'            => 'Number',
+      'vat'                   => 'Number',
     );
   }
 }

@@ -22,20 +22,11 @@
 				  	<?php echo ($employee->getCompany()?$employee->getCompany():'N/A') ?>
 				  </div>
 				</div>
-
-
-
-
-
-
-
-
-
                             <div class="form-row">
 				  <label class="required">Employee Balance:</label>
 				  <div class="content">
-				  	<?php  echo (float) $balance ." ";
-                        echo sfConfig::get('app_currency_code'); /*$mobileID= $employee->getCountryMobileNumber();
+				  	<?php  echo sfConfig::get('app_currency_code');echo number_format($balance,2);
+                         /*$mobileID= $employee->getCountryMobileNumber();
         $telintaGetBalance=0;
         $telintaGetBalance = file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?action=getbalance&name=a'.$mobileID.'&type=account');
         $telintaGetBalance = str_replace('success=OK&Balance=', '', $telintaGetBalance);
@@ -83,19 +74,13 @@
 				  <div class="content">
 				  	<?php echo $employee->getMobileNumber() ?>
 				  </div>
-				</div>                               
+				</div>
                                 <div class="form-row">
 				  <label class="required">SIM Type</label>
 				  <div class="content">
 				  	<?php echo $employee->getSimType(); ?>
 				  </div>
 				</div>
-                                 <div class="form-row">
-				  <label class="required">Unique Id:</label>
-				  <div class="content">
-				  	<?php echo $employee->getUniqueId(); ?>
-				  </div>
-				 </div>
 				<div class="form-row">
 				  <label class="required">Product:</label>
 				  <div class="content">
@@ -149,6 +134,12 @@
 				  	<?php echo $employee->getCreatedAt('d-m-Y') ?>
 				  </div>
 				</div>
+<div class="form-row">
+				  <label class="required">Comments:</label>
+				  <div class="content">
+				  	<?php echo $employee->getComments(); ?>
+				  </div>
+				</div>
                 	<!--<div class="form-row">
 				  <label class="required">App Code:</label>
 				  <div class="content">
@@ -158,4 +149,4 @@
 			</fieldset>
 		</div>
 	</div>
-</div>
+</div>ZS

@@ -35,5 +35,19 @@ class TransactionPeer extends BaseTransactionPeer {
             $agent_order->save();
         }
     }
+    
+    static public function AssignB2bReceiptNumber(CompanyTransaction $transaction, PropelPDO $con = null) {
+        if ($con === null) {
+            $con = Propel::getConnection(CompanyTransactionPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+        if ($transaction->getTransactionStatusId() == 3) {
+            $obj = new ReceiptNumbers();
+            $obj->setParentId($transaction->getId());
+            $obj->setDescription($transaction->getDescription());
+            $obj->save();
+            $transaction->setReceiptNo($obj->getId());
+            $transaction->save();
+        }
+    }
 
 }

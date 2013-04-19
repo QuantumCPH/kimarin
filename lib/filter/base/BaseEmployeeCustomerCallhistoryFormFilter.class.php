@@ -34,6 +34,10 @@ class BaseEmployeeCustomerCallhistoryFormFilter extends BaseFormFilterPropel
       'unix_disconnect_time' => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'bill_time'            => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => true)),
       'status'               => new sfWidgetFormFilterInput(),
+      'company_id'           => new sfWidgetFormFilterInput(),
+      'account_type'         => new sfWidgetFormFilterInput(),
+      'vat_included_amount'  => new sfWidgetFormFilterInput(),
+      'charged_vat_value'    => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -57,6 +61,10 @@ class BaseEmployeeCustomerCallhistoryFormFilter extends BaseFormFilterPropel
       'unix_disconnect_time' => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'bill_time'            => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'status'               => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'company_id'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'account_type'         => new sfValidatorPass(array('required' => false)),
+      'vat_included_amount'  => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'charged_vat_value'    => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('employee_customer_callhistory_filters[%s]');
@@ -95,6 +103,10 @@ class BaseEmployeeCustomerCallhistoryFormFilter extends BaseFormFilterPropel
       'unix_disconnect_time' => 'Date',
       'bill_time'            => 'Date',
       'status'               => 'Number',
+      'company_id'           => 'Number',
+      'account_type'         => 'Text',
+      'vat_included_amount'  => 'Number',
+      'charged_vat_value'    => 'Number',
     );
   }
 }

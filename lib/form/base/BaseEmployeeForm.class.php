@@ -31,6 +31,7 @@ class BaseEmployeeForm extends BaseFormPropel
       'sim_type_id'           => new sfWidgetFormPropelChoice(array('model' => 'Employee', 'add_empty' => true)),
       'comments'              => new sfWidgetFormTextarea(),
       'unique_id'             => new sfWidgetFormInput(),
+      'status_id'             => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -53,6 +54,7 @@ class BaseEmployeeForm extends BaseFormPropel
       'sim_type_id'           => new sfValidatorPropelChoice(array('model' => 'Employee', 'column' => 'id', 'required' => false)),
       'comments'              => new sfValidatorString(array('required' => false)),
       'unique_id'             => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'status_id'             => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('employee[%s]');

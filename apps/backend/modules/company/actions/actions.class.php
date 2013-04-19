@@ -86,7 +86,8 @@ class companyActions extends sfActions {
 
         if ($request->isMethod('post')) {
             $this->updateCompanyFromRequest();
-
+          //  $this->saveCompany($this->company);
+           // $this->company->save();
             try {
                 $this->saveCompany($this->company);
             } catch (PropelException $e) {
@@ -143,13 +144,13 @@ class companyActions extends sfActions {
         if ($company->isNew()) {
             $res = $ComtelintaObj->telintaRegisterCompany($company);
         }
+        
         $company->isNew() . ":" . $res;
-
         if ($company->isNew() && $res) {
 
             //var_dump($companyData);
             //var_dump($company);
-            $company->setCreditLimit('5000');
+           // $company->setCreditLimit('5000');
             $company->save();
           
 //            $transaction = new CompanyTransaction();
@@ -183,6 +184,9 @@ class companyActions extends sfActions {
         }
         if (isset($company['vat_no'])) {
             $this->company->setVatNo($company['vat_no']);
+        }
+        if (isset($company['password'])) {
+            $this->company->setPassword($company['password']);
         }
         if (isset($company['address'])) {
             $this->company->setAddress($company['address']);
@@ -290,6 +294,8 @@ class companyActions extends sfActions {
     {
       $this->company->setComments($company['comments']);
     }
+    
+    
     }
 
     protected function getCompanyOrCreate($id = 'id') {
@@ -389,70 +395,117 @@ class companyActions extends sfActions {
     public function executeView($request) {
         $ComtelintaObj = new CompanyEmployeActivation();
         $this->company = CompanyPeer::retrieveByPK($request->getParameter('id'));
-        $this->balance = $ComtelintaObj->getBalance($this->company);
+        if($this->company->getICustomer()!=""){
+            $this->balance = $ComtelintaObj->getBalance($this->company);
+        }else{
+            $this->balance = 0.00;
+        }
+        $ces = new Criteria();
+        $ces->add(EmployeePeer::COMPANY_ID,$this->company->getId());
+        $ces->addAnd(EmployeePeer::STATUS_ID,3);
+        $this->count = EmployeePeer::doCount($ces);
     }
 
     public function executeUsage($request) {
-        $ComtelintaObj = new CompanyEmployeActivation();
+//        $ComtelintaObj = new CompanyEmployeActivation();
+//        $this->company = CompanyPeer::retrieveByPK($request->getParameter('company_id'));
+//        $tomorrow1 = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
+//        $fromdate = date("Y-m-d", $tomorrow1);
+//        $tomorrow = mktime(0, 0, 0, date("m"), date("d") + 1, date("Y"));
+//        $todate = date("Y-m-d", $tomorrow);
+//        $this->callHistory = $ComtelintaObj->callHistory($this->company, $fromdate, $todate);
         $this->company = CompanyPeer::retrieveByPK($request->getParameter('company_id'));
-        $tomorrow1 = mktime(0, 0, 0, date("m"), date("d") - 15, date("Y"));
-        $fromdate = date("Y-m-d", $tomorrow1);
-        $tomorrow = mktime(0, 0, 0, date("m"), date("d") + 1, date("Y"));
-        $todate = date("Y-m-d", $tomorrow);
-        $this->callHistory = $ComtelintaObj->callHistory($this->company, $fromdate, $todate);
-    }
-
-    public function executeRefill(sfWebRequest $request) {
+        $fromdate = $request->getParameter('startdate');
+        $todate = $request->getParameter('enddate');
+        if ($fromdate!="" && $todate!="") {
+            $this->fromdate = $fromdate;
+            $this->todate = $todate;
+        } else {
+          //  $tomorrow1 = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+            $this->fromdate = date("Y-m-1");
+          //  $tomorrow = mktime(0, 0, 0, date("m"), date("t") + 1, date("Y"));
+            $this->todate = date("Y-m-t");
+        }
+               
+        $this->iaccount = $request->getParameter('iaccount');
+        $fromdate = $this->fromdate . " 21:00:00";
+        $fromdate = date('Y-m-d 21:00:00',  strtotime('-1 day',strtotime($fromdate)));
+        $todate = $this->todate. " 21:59:59" ;
         $ComtelintaObj = new CompanyEmployeActivation();
-        $c = new Criteria();
-        $this->companys = CompanyPeer::doSelect($c);
-        if ($request->isMethod('post')) {
+        if (isset($this->iaccount) && $this->iaccount != '') {
+            $ce = new Criteria();
+            $ce->add(TelintaAccountsPeer::ID, $this->iaccount);
+            $ce->addAnd(TelintaAccountsPeer::STATUS, 3);
+            $telintaAccount = TelintaAccountsPeer::doSelectOne($ce);
+            //var_dump($telintaAccount);
+            $this->iAccountTitle = $telintaAccount->getAccountTitle();
+            $this->empl = EmployeePeer::retrieveByPK($telintaAccount->getParentId());
+            $this->callHistory = $ComtelintaObj->getAccountCallHistory($telintaAccount->getIAccount(), $fromdate, $todate);
+        } else {
 
-            $company_id = $request->getParameter('company_id');
-            $refill_amount = $request->getParameter('refill');
-
-            $c1 = new Criteria();
-            $c1->addAnd(CompanyPeer::ID, $company_id);
-            $this->company = CompanyPeer::doSelectOne($c1);
-            $companyCVR = $this->company->getVatNo();
-
-            $transaction = new CompanyTransaction();
-            $transaction->setAmount($refill_amount);
-            $transaction->setCompanyId($company_id);
-            $transaction->setExtraRefill($refill_amount);
-            $transaction->setTransactionStatusId(1);
-            $transaction->setPaymenttype(2); //Refill
-            $transaction->setDescription('Company Refill');
-            $transaction->save();
+            $this->callHistory = $ComtelintaObj->callHistory($this->company, $fromdate, $todate);
             
-            if ($companyCVR != '') {
-                $ComtelintaObj->recharge($this->company, $refill_amount);
-                $transaction->setTransactionStatusId(3);
-                $transaction->save();
-                TransactionPeer::AssignReceiptNumber($transaction);
-                $this->getUser()->setFlash('message', 'B2B Company Refill Successfully');
-                $this->redirect('company/paymenthistory');
-            } else {
-
-                $this->getUser()->setFlash('message', 'Please Select B2B Company');
-            }
-            //$telintaAddAccount='success=OK&Amount=$amount{$cust_info->{iso_4217}}';
-            //parse_str($telintaAddAccount, $success);print_r($success);echo $success['success'];
+        }
+        
+        $ces = new Criteria();
+        $employeeid = $request->getParameter('employee_id');
+        if($employeeid !=""){
+            $ces->add(EmployeePeer::ID,$employeeid);
+        }
+        $c = new Criteria();
+        $c->add(TelintaAccountsPeer::I_CUSTOMER, $this->company->getICustomer());
+        $c->addAnd(TelintaAccountsPeer::STATUS, 3);
+        $this->telintaAccountObj = TelintaAccountsPeer::doSelect($c);
+        
+        $ces = new Criteria();
+        $ces->add(EmployeePeer::COMPANY_ID,$this->company->getId());
+        $ces->addAnd(EmployeePeer::STATUS_ID,3);
+        $this->cnt = EmployeePeer::doCount($ces);
+        if(EmployeePeer::doCount($ces)>0)  {
+             $this->ems = EmployeePeer::doSelect($ces);
         }
     }
 
+    public function executeRefill(sfWebRequest $request) {
+        $c = new Criteria();
+        $this->companys = CompanyPeer::doSelect($c);
+         
+         
+         //// get transaction description for refill
+        $ctd = new Criteria();
+        $ctd->add(TransactionDescriptionPeer::TRANSACTION_TYPE_ID,1);  ///// for Refill 
+        $ctd->addAnd(TransactionDescriptionPeer::TRANSACTION_SECTION_ID,1); ///// for Admin
+        $ctd->addAnd(TransactionDescriptionPeer::B2B,1);
+        $this->descriptions = TransactionDescriptionPeer::doSelect($ctd);
+        $descriptions = $this->descriptions;
+    }
+
     public function executePaymenthistory(sfWebRequest $request) {
+
+        $ct = new Criteria();
+        $ct->add(TransactionDescriptionPeer::ID, 10);
+        $description = TransactionDescriptionPeer::doSelectOne($ct);
 
         $c = new Criteria();
         $companyid = $request->getParameter('company_id');
         $this->companyval = $companyid;
         $c->add(CompanyTransactionPeer::TRANSACTION_STATUS_ID, 3);
+        //$c->add(CompanyTransactionPeer::PAYMENTTYPE,10);
+        //$c->add(CompanyTransactionPeer::DESCRIPTION, '%'.$description->getTitle().'%', Criteria::LIKE);
+        //$c->add(CompanyTransactionPeer::DESCRIPTION, '%Company Refill%', Criteria::LIKE);
+        $c->addJoin(CompanyTransactionPeer::PAYMENTTYPE, TransactionDescriptionPeer::ID, CRITERIA::LEFT_JOIN);
+        //$c->addAnd(CompanyTransactionPeer::PAYMENTTYPE,1);
 
         if (isset($companyid) && $companyid != '') {
             $c->addAnd(CompanyTransactionPeer::COMPANY_ID, $companyid);
         }
         $c->addDescendingOrderByColumn(CompanyTransactionPeer::CREATED_AT);
         $this->transactions = CompanyTransactionPeer::doSelect($c);
+
+        $ces = new Criteria();
+        $ces->add(EmployeePeer::COMPANY_ID,$companyid);
+        $ces->addAnd(EmployeePeer::STATUS_ID,3);
+        $this->count = EmployeePeer::doCount($ces);
     }
 
     public function executeVat(sfWebRequest $request) {
@@ -497,5 +550,221 @@ class companyActions extends sfActions {
              $this->redirect('company/indexAll');
                 return sfView::NONE;
     }
+    public function executeGetCountryCallingCode(sfWebRequest $request){
+        $country_id = $request->getParameter('country_id');
+        $country = CountryPeer::retrieveByPK($country_id);
+        if($country){
+            echo $country->getCallingCode();
+        }
+        return sfView::NONE;
+    }
+    
+    public function executeInvoice($request){
+         $company_id = $request->getParameter('company_id');
+         $c = new Criteria();
+         $c->add(InvoicePeer::COMPANY_ID, $company_id);
+         $c->add(InvoicePeer::INVOICE_STATUS_ID, 2,  Criteria::NOT_EQUAL);
+         $c->addDescendingOrderByColumn(InvoicePeer::INVOICE_NUMBER);
+         $this->invoice = InvoicePeer::doSelect($c);
 
+    }
+    public function executeInvoices(sfWebRequest $request)
+    {
+       $company_id = $request->getParameter('company_id');
+       $this->company_id = $company_id;
+       
+       $billingduration = $request->getParameter('billingduration');
+       $this->statusid = $request->getParameter('statusid');
+
+       $cco = new Criteria();
+       $cco->add(CompanyPeer::STATUS_ID,1);
+       
+       $ci = new Criteria();
+       $ic = new Criteria();
+       if($company_id){
+          $ic->add(InvoicePeer::COMPANY_ID,$company_id);
+          $ci->addAnd(InvoicePeer::COMPANY_ID,$company_id);
+       }
+       $companies = CompanyPeer::doSelect($cco);
+       $this->companies = $companies;
+       
+       $ces = new Criteria();
+       $ces->add(EmployeePeer::COMPANY_ID,$company_id);
+       $ces->addAnd(EmployeePeer::STATUS_ID,3);
+       $this->count = EmployeePeer::doCount($ces);
+       
+       $ic->addGroupByColumn(InvoicePeer::BILLING_STARTING_DATE);
+       $ic->addDescendingOrderByColumn(InvoicePeer::BILLING_STARTING_DATE);
+
+       
+
+       $cis = new Criteria();
+       $cis->add(InvoiceStatusPeer::ID,4 ,CRITERIA::NOT_EQUAL);
+       $this->invoice_status = InvoiceStatusPeer::doSelect($cis);
+       if($this->statusid !='' ){
+         $ci->add(InvoicePeer::INVOICE_STATUS_ID,$this->statusid);  /// pending,paid,expire
+       }else{
+         $ci->add(InvoicePeer::INVOICE_STATUS_ID,4,Criteria::NOT_EQUAL);  /// pending,paid,expire
+       }
+       if($billingduration){
+         $duration = explode("_",$billingduration);
+         $starting = $duration[0];
+         $ending   = $duration[1];
+         $ci->addAnd(InvoicePeer::BILLING_STARTING_DATE, " billing_starting_date >= '" . $starting . "' ", Criteria::CUSTOM);
+         $ci->addAnd(InvoicePeer::BILLING_ENDING_DATE, " billing_ending_date  <= '" . $ending . "' ", Criteria::CUSTOM);
+       }
+     
+       $ci->add(InvoicePeer::TOTALPAYMENT,1,CRITERIA::GREATER_EQUAL);
+
+       $ci->addDescendingOrderByColumn(InvoicePeer::BILLING_STARTING_DATE);
+
+       $this->invoices = InvoicePeer::doSelect($ci);
+       $this->billingduration = $billingduration;
+
+
+
+       $this->invoiceTimings = InvoicePeer::doSelect($ic);
+    }
+
+    public function executeShowInvoice(sfRequest $request){
+       $invoiceid = $request->getParameter('id');
+
+       $invoice = InvoicePeer::retrieveByPK($invoiceid);
+       $this->invoiceHtml = $invoice->getInvoiceHtml();
+       $this->setLayout(false);
+   }
+   
+   public function executeRefillDetail($request){
+        
+        $company_id   = $request->getParameter('company_id');
+        $invoice_id   = $request->getParameter('invoice_id');
+        $recharge     = $request->getParameter('refill');        
+        $descid       = $request->getParameter('descid');
+        
+        $cc = new Criteria();
+        $cc->add(CompanyPeer::ID,$company_id);
+        $company = CompanyPeer::doSelectOne($cc);
+        $cc = new Criteria();
+        $cc->add(CountryPeer::ID,$company->getCountryId());
+        $country = CountryPeer::doSelectOne($cc);
+        $amount_without_vat          = $recharge / (1+($country->getVatPercentage()/100));
+        $vat       = $recharge - $amount_without_vat;
+        
+        $this->company      = $company;
+        $this->refillAmt    = $recharge;
+        $this->refill       = $refill;
+        
+        $cd = new Criteria();
+        $cd->add(TransactionDescriptionPeer::ID,$descid);
+        $description = TransactionDescriptionPeer::doSelectOne($cd);
+             
+        $this->description  = $description;
+        $this->vat          = $vat;
+        
+        
+        if ($request->isMethod('post') && $request->getParameter('refillsave') !="") { 
+             
+             $ComtelintaObj = new CompanyEmployeActivation();
+             $company       = CompanyPeer::retrieveByPk($company_id);   
+             $wihout_vat_recharge      = $request->getParameter('refillAmt');
+             $recharge           = $wihout_vat_recharge * (1+($country->getVatPercentage()/100));
+             $vat = $recharge - $wihout_vat_recharge;
+             
+            
+            $co_transaction = B2BTransactionProcessAdmin::StartTransaction($company, $wihout_vat_recharge, $description,1, 3, 1);
+            if ($ComtelintaObj->recharge($company, $wihout_vat_recharge,$description->getTitle())) {                
+                $co_transaction->setTransactionStatusId(3);
+                $co_transaction->save();
+                TransactionPeer::AssignB2bReceiptNumber($co_transaction);
+                $this->getUser()->setFlash('message', 'B2B Company Payment submitted successfully');
+                $this->redirect('company/paymenthistory');
+            } else {
+                $this->getUser()->setFlash('message', 'Please Select B2B Company');
+            }
+               // emailLib::sendPaymentReceipt($transaction);
+              //  $this->redirect('company/paymenthistory?company_id='.$company_id);
+                $this->redirect('company/refill');
+         }
+    }
+    
+    public function executeCharge(sfWebRequest $request) {
+
+        $c = new Criteria();
+        $this->companys = CompanyPeer::doSelect($c);
+        $ComtelintaObj = new CompanyEmployeActivation();
+        $ctd = new Criteria();
+        $ctd->add(TransactionDescriptionPeer::TRANSACTION_TYPE_ID,2);  ///// for Charge 
+        $ctd->addAnd(TransactionDescriptionPeer::TRANSACTION_SECTION_ID,1); ///// for Admin
+        $ctd->addAnd(TransactionDescriptionPeer::B2B,1);
+        $this->descriptions = TransactionDescriptionPeer::doSelect($ctd);
+    }
+    
+    public function executeShowReceipt (sfWebRequest $request) {
+        //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 02/28/11
+        changeLanguageCulture::languageCulture($request, $this);
+        $transaction_id = $request->getParameter('tid');
+        $transaction = CompanyTransactionPeer::retrieveByPK($transaction_id);
+        $company = CompanyPeer::retrieveByPK($transaction->getCompanyId());
+        
+                
+        $this->renderPartial('company/refill_receipt', array(
+            'company' => $company,
+            'transaction' => $transaction,
+            'vat' => $transaction->getVat(),
+        ));
+
+        return sfView::NONE;
+    }
+    
+    public function executeChargeDetail($request){
+        
+        $company_id   = $request->getParameter('company_id');
+        $charge     = $request->getParameter('charge');        
+        $descid       = $request->getParameter('descid');
+        
+        $cc = new Criteria();
+        $cc->add(CompanyPeer::ID,$company_id);
+        $company = CompanyPeer::doSelectOne($cc);
+        $cc = new Criteria();
+        $cc->add(CountryPeer::ID,$company->getCountryId());
+        $country = CountryPeer::doSelectOne($cc);
+        $vat               = 0;
+        $totalamount       = $charge + $vat;
+        
+        $this->company     = $company;
+        $this->chargeAmt   = $charge;
+        $this->charge      = $charge;
+        
+        $cd = new Criteria();
+        $cd->add(TransactionDescriptionPeer::ID,$descid);
+        $description = TransactionDescriptionPeer::doSelectOne($cd);
+             
+        $this->description  = $description;
+        $this->vat          = $vat;
+        
+        
+        if ($request->isMethod('post') && $request->getParameter('chargesave') !="") { 
+             
+             $ComtelintaObj = new CompanyEmployeActivation();
+             $company       = CompanyPeer::retrieveByPk($company_id);   
+             $charge        = $request->getParameter('chargeAmt');
+             $vat           = 0;
+             $totalamount     = $charge + $vat;
+            
+             $co_transaction = B2BTransactionProcessAdmin::StartTransaction($company, $charge, $description,2, 3, 1);
+            
+            if ($ComtelintaObj->charge($company, $charge,$description->getTitle())) {
+                $co_transaction->setTransactionStatusId(3);
+                $co_transaction->save();
+                TransactionPeer::AssignB2bReceiptNumber($co_transaction);
+                $this->getUser()->setFlash('chargemessage', 'B2B Company Charged Successfully');
+                $this->redirect('company/paymenthistory');
+            } else {
+
+                $this->getUser()->setFlash('message', 'Please Select B2B Company');
+            }
+           // emailLib::sendPaymentReceipt($transaction);
+            $this->redirect('company/charge');
+         }
+    }
 }
