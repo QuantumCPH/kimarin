@@ -175,7 +175,7 @@
             $count_ta = TelintaAccountsPeer::doCount($cta);
             if($count_ta > 0){
             $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
-            foreach ($telinta_accounts as $telinta_account) {  $telinta_accounts->getIAcount();
+            foreach ($telinta_accounts as $telinta_account) {  $telinta_accounts->getIAccount();
                 $tilentaSubResult = $ComtelintaObj->getSubscription($emp,$telinta_account, $fromdate , $todate);
                 echo "<pre>";
                 print_r($tilentaSubResult);echo "</pre>";
