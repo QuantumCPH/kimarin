@@ -478,6 +478,7 @@ class CompanyEmployeActivation {
         $xdrList = false;
         $max_retries = 10;
         $retry_count = 0;
+        $xdrListArray = array();
      //   var_dump($employee);
         $cta = new Criteria();
         $cta->add(TelintaAccountsPeer::PARENT_TABLE, 'employee');
@@ -506,8 +507,9 @@ class CompanyEmployeActivation {
                 return false;
             }
             //var_dump($xdrList);
+              $xdrListArray[] = $xdrList; 
             }
-            return $xdrList;
+            return $xdrListArray;
         }
     }
     

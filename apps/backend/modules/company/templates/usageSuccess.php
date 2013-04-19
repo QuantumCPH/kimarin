@@ -172,12 +172,13 @@
             $cta->add(TelintaAccountsPeer::PARENT_TABLE, 'employee');
             $cta->addAnd(TelintaAccountsPeer::PARENT_ID, $emp->getId());
             $cta->addAnd(TelintaAccountsPeer::STATUS, 3);
-       echo     $count_ta = TelintaAccountsPeer::doCount($cta);
+            $count_ta = TelintaAccountsPeer::doCount($cta);
             if($count_ta > 0){
             $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
             foreach ($telinta_accounts as $telinta_account) {  $telinta_accounts->getIAcount();
-                $tilentaSubResult = $ComtelintaObj->getAccountSubscription($telinta_account, $fromdate , $todate);
-             //   var_dump($tilentaSubResult);
+                $tilentaSubResult = $ComtelintaObj->getSubscription($emp,$telinta_account, $fromdate , $todate);
+                echo "<pre>";
+                print_r($tilentaSubResult);echo "</pre>";
                 if (count($tilentaSubResult) > 0) {
                     foreach ($tilentaSubResult->xdr_list as $xdr) {
                         ?> <tr>
