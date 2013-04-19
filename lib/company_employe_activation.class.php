@@ -604,6 +604,32 @@ class CompanyEmployeActivation {
             //var_dump($xdrList);
             return $xdrList;
         }
+     public function getSubscriptions(Employee $employee,$telinta_account,$fromDate, $toDate) {
+         $xdrList = false;
+        $max_retries = 10;
+        $retry_count = 0;
+        $employee = EmployeePeer::retrieveByPK($telinta_account->getParentId());
+         $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Account');
+         //   var_dump($pb);
+            while (!$xdrList && $retry_count < $max_retries) {
+                try {
+                    $xdrList = $pb->get_xdr_list(array('i_customer' => $telinta_account->getICustomer(), 'from_date' => $fromDate, 'to_date' => $toDate));
+                } catch (SoapFault $e) {
+                    if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
+                        emailLib::sendErrorInTelinta("Employee Subscription: " . $employee->getId() . " Error!", "We have faced an issue with Employee while Fetching Subscription  this is the error for employee with  Employee ID: " . $employee->getId() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                        return false;
+                    }
+                }
+                sleep(0.5);
+                $retry_count++;
+            }
+            if ($retry_count == $max_retries) {
+                emailLib::sendErrorInTelinta("Employee Subscription: " . $employee->getId() . " Error!", "We have faced an issue with Employee while Fetching Subscription on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+                return false;
+            }
+            //var_dump($xdrList);
+            return $xdrList;
+     }
 }
 
 ?>
