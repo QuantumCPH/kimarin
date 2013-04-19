@@ -176,8 +176,13 @@ class employeeActions extends sfActions {
 //            die;
 //        }
         
-        $ComtelintaObj->telintaRegisterEmployeeCT($employee, $employee->getProductId());
-        $ComtelintaObj->createDialAccount($employee);
+        if(!$ComtelintaObj->telintaRegisterEmployeeCT($employee, $employee->getProductId())){
+            
+        }
+        if(!$ComtelintaObj->createDialAccount($employee)){
+            
+        }
+        
         $employee->setStatusId(sfConfig::get('app_status_completed')); //// completed status is 3 defined in backend/config/app.yml
         $employee->save();
         $c = new Criteria();
@@ -208,75 +213,77 @@ class employeeActions extends sfActions {
         $transaction->setTransactionStatusId(3);
         $transaction->setPaymenttype($transactionDesc->getId()); //Product Registration Fee
         $transaction->setDescription($transactionDesc->getTitle());
+        $transaction->setVat($vat);
         $transaction->save();
         TransactionPeer::AssignB2bReceiptNumber($transaction);
 
         $rtype = $request->getParameter('registration_type');
-        if ($rtype == 1) {
-            ////////////////////////////////////////////////
-
-            $this->getbalance = $ComtelintaObj->getBalance($this->companys);
-            $c = new Criteria();
-            $c->setLimit(1);
-            $c->add(SeVoipNumberPeer::IS_ASSIGNED, 0);
-
-            if (SeVoipNumberPeer::doCount($c) < 10) {
-                emailLib::sendErrorInTelinta("Resenumber about to Finis", "Resenumbers in the landncall are lest then 10 . ");
-            }
-
-            if (!$voip_customer = SeVoipNumberPeer::doSelectOne($c)) {
-                emailLib::sendErrorInTelinta("Resenumber Finished", "Resenumbers in the landncall are finished. This error is faced by Employee id: " . $request->getParameter('id'));
-                $msg = "Resenummer is not activate";
-                //return false;
-            } else {
-                $voip_customer->setUpdatedAt(date('Y-m-d H:i:s'));
-                $voip_customer->setCustomerId($contrymobilenumber);
-                $voip_customer->setIsAssigned(1);
-                $voip_customer->save();
-                //--------------------------Telinta------------------/
-                $getvoipInfo = new Criteria();
-                $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $contrymobilenumber);
-                $getvoipInfos = SeVoipNumberPeer::doSelectOne($getvoipInfo); //->getId();
-                if (isset($getvoipInfos)) {
-                    $voipnumbers = $getvoipInfos->getNumber();
-                    $voipnumbers = substr($voipnumbers, 2);
-                    $voip_customer = $getvoipInfos->getCustomerId();
-                    //$TelintaMobile = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
-                    //This Condtion for if IC Active
-
-                    $getFirstnumberofMobile = substr($contrymobilenumber, 0, 1);     // bcdef
-                    if ($getFirstnumberofMobile == 0) {
-                        $TelintaMobile = substr($contrymobilenumber, 1);
-                    } else {
-                        $TelintaMobile = $contrymobilenumber;
-                    }
-
-                    $telintaResenummerAccount = $ComtelintaObj->createReseNumberAccount($voipnumbers, $this->companys, $TelintaMobile);
-                    if ($telintaResenummerAccount) {
-                        $OpeningBalance = 40;
-                        $employee->setRegistrationType($request->getParameter('registration_type'));
-                        //$resenummerCharge=file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?type=account&action=manual_charge&name=' . $voipnumbers . '&amount=40&customer='.$companyCVR);
-                        $ComtelintaObj->charge($this->companys, $OpeningBalance);
-                        $transaction = new CompanyTransaction();
-                        $transaction->setAmount(-40);
-                        $transaction->setCompanyId($request->getParameter('company_id'));
-                        $transaction->setExtraRefill(-40);
-                        $transaction->setTransactionStatusId(3);
-                        $transaction->setPaymenttype(3); //Resenummer Charge
-                        $transaction->setDescription('Resenummer Charge');
-                        $transaction->save();
-                        TransactionPeer::AssignReceiptNumber($transaction);
-                    } else {
-                        $getvoipInfos->setUpdatedAt(Null);
-                        $getvoipInfos->setCustomerId(Null);
-                        $getvoipInfos->setIsAssigned(0);
-                        $getvoipInfos->save();
-                        $employee->setRegistrationType(0);
-                        $msg = "Resenummer is not activate";
-                    }
-                }
-            }
-        }
+        
+//        if ($rtype == 1) {
+//            ////////////////////////////////////////////////
+//
+//            $this->getbalance = $ComtelintaObj->getBalance($this->companys);
+//            $c = new Criteria();
+//            $c->setLimit(1);
+//            $c->add(SeVoipNumberPeer::IS_ASSIGNED, 0);
+//
+//            if (SeVoipNumberPeer::doCount($c) < 10) {
+//                emailLib::sendErrorInTelinta("Resenumber about to Finis", "Resenumbers in the landncall are lest then 10 . ");
+//            }
+//
+//            if (!$voip_customer = SeVoipNumberPeer::doSelectOne($c)) {
+//                emailLib::sendErrorInTelinta("Resenumber Finished", "Resenumbers in the landncall are finished. This error is faced by Employee id: " . $request->getParameter('id'));
+//                $msg = "Resenummer is not activate";
+//                //return false;
+//            } else {
+//                $voip_customer->setUpdatedAt(date('Y-m-d H:i:s'));
+//                $voip_customer->setCustomerId($contrymobilenumber);
+//                $voip_customer->setIsAssigned(1);
+//                $voip_customer->save();
+//                //--------------------------Telinta------------------/
+//                $getvoipInfo = new Criteria();
+//                $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $contrymobilenumber);
+//                $getvoipInfos = SeVoipNumberPeer::doSelectOne($getvoipInfo); //->getId();
+//                if (isset($getvoipInfos)) {
+//                    $voipnumbers = $getvoipInfos->getNumber();
+//                    $voipnumbers = substr($voipnumbers, 2);
+//                    $voip_customer = $getvoipInfos->getCustomerId();
+//                    //$TelintaMobile = sfConfig::get('app_country_code').$this->customer->getMobileNumber();
+//                    //This Condtion for if IC Active
+//
+//                    $getFirstnumberofMobile = substr($contrymobilenumber, 0, 1);     // bcdef
+//                    if ($getFirstnumberofMobile == 0) {
+//                        $TelintaMobile = substr($contrymobilenumber, 1);
+//                    } else {
+//                        $TelintaMobile = $contrymobilenumber;
+//                    }
+//
+//                    $telintaResenummerAccount = $ComtelintaObj->createReseNumberAccount($voipnumbers, $this->companys, $TelintaMobile);
+//                    if ($telintaResenummerAccount) {
+//                        $OpeningBalance = 40;
+//                        $employee->setRegistrationType($request->getParameter('registration_type'));
+//                        //$resenummerCharge=file_get_contents('https://mybilling.telinta.com/htdocs/zapna/zapna.pl?type=account&action=manual_charge&name=' . $voipnumbers . '&amount=40&customer='.$companyCVR);
+//                        $ComtelintaObj->charge($this->companys, $OpeningBalance);
+//                        $transaction = new CompanyTransaction();
+//                        $transaction->setAmount(-40);
+//                        $transaction->setCompanyId($request->getParameter('company_id'));
+//                        $transaction->setExtraRefill(-40);
+//                        $transaction->setTransactionStatusId(3);
+//                        $transaction->setPaymenttype(3); //Resenummer Charge
+//                        $transaction->setDescription('Resenummer Charge');
+//                        $transaction->save();
+//                        TransactionPeer::AssignReceiptNumber($transaction);
+//                    } else {
+//                        $getvoipInfos->setUpdatedAt(Null);
+//                        $getvoipInfos->setCustomerId(Null);
+//                        $getvoipInfos->setIsAssigned(0);
+//                        $getvoipInfos->save();
+//                        $employee->setRegistrationType(0);
+//                        $msg = "Resenummer is not activate";
+//                    }
+//                }
+//            }
+//        }
         $this->getUser()->setFlash('messageAdd', 'Employee has been Add Sucessfully ' . (isset($msg) ? "and " . $msg : ''));
         $this->redirect('employee/index?message=add');
     }
