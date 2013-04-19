@@ -5025,7 +5025,7 @@ class pScriptsActions extends sfActions {
                     if (OdrsPeer::doCount($c2) == 0) {
                          
                         $tilentaSubscriptionResult = $telintaObj->getSubscription($employee, $startdate, $enddate);
-                        var_dump($tilentaSubscriptionResult);
+                      //  var_dump($tilentaSubscriptionResult);
                         if ($tilentaSubscriptionResult) {
                             foreach ($tilentaSubscriptionResult->xdr_list as $xdr) {
                                 $empSub = new Odrs();
