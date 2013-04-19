@@ -515,7 +515,63 @@ class CompanyEmployeActivation {
         $c->addJoin(ProductPeer::BILLING_PRODUCT_ID, BillingProductsPeer::ID, Criteria::LEFT_JOIN);
         $c->addAnd(ProductPeer::ID, $employee->getProductId());
         $product = BillingProductsPeer::doSelectOne($c);
-        return $this->createAccount($employee, '', $product->getAIproduct());
+        return $this->createDAccount($employee, '', $product->getAIproduct());
+    }
+    
+    private function createDAccount(Employee $employee,$accountType, $iProduct, $followMeEnabled='N') {
+        $account = false;
+        $max_retries = 10;
+        $retry_count = 0;
+        $company = CompanyPeer::retrieveByPK($employee->getCompanyId());
+        $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Account');
+        $mobileNumber = $employee->getMobileNumber();
+        $accountName = $accountType . $mobileNumber;
+        while (!$account && $retry_count < $max_retries) {
+            try {
+
+                $account = $pb->add_account(array('account_info' => array(
+                                'i_customer' => $company->getICustomer(),
+                                'name' => $accountName, //75583 03344090514
+                                'id' => $accountName,
+                                'iso_4217' => $this->currency,
+                                'opening_balance' => 0,
+                                'credit_limit' => null,
+                                'i_product' => $iProduct,
+                                'i_routing_plan' => 2782,
+                                'billing_model' => 1,
+                                'password' => 'asdf1asd',
+                                'h323_password' => 'asdf1asd',
+                                'activation_date' => date('Y-m-d'),
+                                'batch_name' => $this->account_prefix.$company->getVatNo(),
+                                'follow_me_enabled' => $followMeEnabled
+                                )));
+            } catch (SoapFault $e) {
+                if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
+                    emailLib::sendErrorInTelinta("Account Creation: " . $accountName . " Error!", "We have faced an issue in Company Account Creation on telinta. This is the error for cusotmer with Company Id: " . $company->getId() . " and on Account " . $accountName . " and error is " . $e->faultstring . ".  <br/> Please Investigate.");
+                    
+                    return false;
+                }
+            }
+            sleep(0.5);
+            $retry_count++;
+        }
+        if ($retry_count == $max_retries) {
+            emailLib::sendErrorInTelinta("Account Creation: " . $accountName . " Error!", "We have faced an issue in Company Account Creation on telinta. This is the error for cusotmer with Company Id: " . $company->getId() . " and on Account " . $accountName . ". Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
+            return false;
+        }
+
+        $telintaAccount = new TelintaAccounts();
+        $telintaAccount->setAccountTitle($accountName);
+        $telintaAccount->setParentId($employee->getId());
+        $telintaAccount->setParentTable("employee");
+        $telintaAccount->setICustomer($company->getICustomer());
+        $telintaAccount->setIAccount($account->i_account);
+         if($accountType==""){
+         $accountType='r';
+        }
+        $telintaAccount->setAccountType($accountType);
+        $telintaAccount->save();
+        return true;
     }
 }
 
