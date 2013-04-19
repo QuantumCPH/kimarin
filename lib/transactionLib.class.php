@@ -321,8 +321,13 @@ class B2BTransactionProcessAdmin {
     
     public static function StartTransaction($company, $amount, $description,$expenceType = 1, $transactionFrom = 1, $transactionStatus = 1) {
         
-        if($expenceType == 1 || $expenceType == 3){
+        if($expenceType == 1){
             $with_vat_amount = $amount * (1+($company->getCountry()->getVatPercentage()/100));
+            $vat = $with_vat_amount - $amount;
+            $vat = number_format($vat,2);
+            $with_vat_amount = number_format($with_vat_amount,2);
+        }elseif($expenceType == 3){
+            $with_vat_amount = -($amount * (1+($company->getCountry()->getVatPercentage()/100)));
             $vat = $with_vat_amount - $amount;
             $vat = number_format($vat,2);
             $with_vat_amount = number_format($with_vat_amount,2);
