@@ -5014,6 +5014,7 @@ class pScriptsActions extends sfActions {
             $count_ta = TelintaAccountsPeer::doCount($cta);
             if ($count_ta > 0) {
                 $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
+                var_dump($telinta_accounts);
                 foreach ($telinta_accounts as $telinta_account) {
                     $c2 = new Criteria();
                     $c2->add(OdrsPeer::PARENT_TABLE, "employee");
