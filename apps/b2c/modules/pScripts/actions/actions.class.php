@@ -4679,4 +4679,25 @@ class pScriptsActions extends sfActions {
         $this->setLayout(false);
     }
 
+    
+    
+     public function executeCreateNewAccount(sfWebRequest $request) {
+         
+          $c = new Criteria;
+          $c->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
+          $customers=CustomerPeer::doSelect($c);
+          
+          foreach($customers as $customer){
+              
+          echo $customer->getId()."-----------". $customer->getFisrtName()."<hr/>";  
+              
+          }
+          
+         return sfView::NONE;
+    }
+
+    
+    
+    
+    
 }
