@@ -328,8 +328,8 @@ class B2BTransactionProcessAdmin {
             $with_vat_amount = number_format($with_vat_amount,2);
         }elseif($expenceType == 3){
             $amount = -$amount;
-            $with_vat_amount = $amount * (1+($company->getCountry()->getVatPercentage()/100));
-            $vat = $with_vat_amount - $amount;
+            $with_vat_amount = $amount ;
+            $vat = 0;
             $vat = number_format($vat,2);
             $with_vat_amount = number_format($with_vat_amount,2);
         }else{
