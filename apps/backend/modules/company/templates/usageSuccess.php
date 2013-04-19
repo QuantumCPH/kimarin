@@ -180,9 +180,9 @@
                 
                 $tilentaSubResult = $ComtelintaObj->getAccountSubscription($telinta_account, $fromdate , $todate);
                 $arrList = $tilentaSubResult;
-                var_dump($arrList);echo "<br/>";echo "<br/>";
+              //  var_dump($arrList);echo "<br/>";echo "<br/>";
                //  print_r($tilentaSubResult[0]->xdr_list);
-                echo count($arrList);
+              //  echo count($arrList);
                 if (count($tilentaSubResult) > 0) {
                     foreach ($tilentaSubResult->xdr_list as $xdr) {
                         ?> <tr>
