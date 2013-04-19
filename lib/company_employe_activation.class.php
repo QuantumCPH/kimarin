@@ -581,7 +581,6 @@ class CompanyEmployeActivation {
         $xdrList = false;
         $max_retries = 10;
         $retry_count = 0;
-        $xdrListArr = array();
      //   var_dump($employee);
         $employee = EmployeePeer::retrieveByPK($telinta_account->getParentId());
         $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Account');
@@ -603,8 +602,7 @@ class CompanyEmployeActivation {
                 return false;
             }
             //var_dump($xdrList);
-            $xdrListArr = $xdrList;
-            return $xdrListArr;
+            return $xdrList;
         }
      public function getSubscriptions(Employee $employee,$telinta_account,$fromDate, $toDate) {
          $xdrList = false;
