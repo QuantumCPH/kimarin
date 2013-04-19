@@ -5014,7 +5014,7 @@ class pScriptsActions extends sfActions {
             $count_ta = TelintaAccountsPeer::doCount($cta);
             if ($count_ta > 0) {
                 $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
-                var_dump($telinta_accounts);
+                
                 foreach ($telinta_accounts as $telinta_account) {
                     $c2 = new Criteria();
                     $c2->add(OdrsPeer::PARENT_TABLE, "employee");
@@ -5025,7 +5025,7 @@ class pScriptsActions extends sfActions {
                     if (OdrsPeer::doCount($c2) == 0) {
                          
                         $tilentaSubscriptionResult = $telintaObj->getSubscription($employee, $startdate, $enddate);
-                       // var_dump($tilentaSubscriptionResult);
+                        var_dump($tilentaSubscriptionResult);die;
                         if ($tilentaSubscriptionResult) {
                             foreach ($tilentaSubscriptionResult->xdr_list as $xdr) {
                                 $empSub = new Odrs();
