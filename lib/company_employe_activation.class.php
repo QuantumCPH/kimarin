@@ -515,7 +515,7 @@ class CompanyEmployeActivation {
         $c->addJoin(ProductPeer::BILLING_PRODUCT_ID, BillingProductsPeer::ID, Criteria::LEFT_JOIN);
         $c->addAnd(ProductPeer::ID, $employee->getProductId());
         $product = BillingProductsPeer::doSelectOne($c);
-        return $this->createAccount($employee, $employee->getMobileNumber(), '', $product->getAIproduct());
+        return $this->createAccount($employee, '', $product->getAIproduct());
     }
 }
 
