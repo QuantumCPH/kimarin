@@ -49,9 +49,6 @@ class pScriptsActions extends sfActions {
         //$order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed', 3)); //completed
         $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
 
-
-
-
         if ($transaction->getAmount() > $order_amount) {
             //error
             $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
@@ -4686,11 +4683,15 @@ class pScriptsActions extends sfActions {
           $c = new Criteria;
           $c->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
           $customers=CustomerPeer::doSelect($c);
-          
-          foreach($customers as $customer){
+   foreach($customers as $customer){
               
-          echo $customer->getId()."-----------". $customer->getFirstName()."<hr/>";  
-              
+          echo "<br/>".$customer->getId()."-----------". $customer->getFirstName()."<hr/>";  
+                $telintaObj = new Telienta();
+               $icustomer=$customer->getICustomer();
+             echo    $telintaObj->getCustomerInfo($icustomer);
+                
+                
+          //   $telintaObj->createDialAccount($customer->getMobileNumber(), $customer);
           }
           
          return sfView::NONE;
