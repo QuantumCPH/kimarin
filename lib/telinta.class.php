@@ -391,7 +391,22 @@ class Telienta {
         $c->addAnd(CustomerPeer::ID, $customer->getId());
         $product = BillingProductsPeer::doSelectOne($c);
         return $this->createAccount($customer, $mobileNumber, '', $product->getAIproduct());
+        
     }
+      public function getCustomerInfo($icustomer) {
+        $cInfo = false;
+        $max_retries = 10;
+        $retry_count = 0;
+        $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Customer');
+
+        $cInfo = $pb->get_customer_info(array(
+                    'i_customer' => $icustomer,
+                ));
+        $customername = $cInfo->customer_info->name;
+
+        return $customername;
+    }
+    
 }
 
 ?>
