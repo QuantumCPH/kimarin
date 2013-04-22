@@ -397,7 +397,8 @@ class Telienta {
         $cInfo = false;
         $max_retries = 10;
         $retry_count = 0;
-        $pb = new PortaBillingSoapClient(self::$telintaSOAPUrl, 'Admin', 'Customer');
+   
+        $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Customer');
 
         $cInfo = $pb->get_customer_info(array(
                     'i_customer' => $icustomer,
