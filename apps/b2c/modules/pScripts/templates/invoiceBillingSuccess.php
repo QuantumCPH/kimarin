@@ -413,11 +413,13 @@
                             <tr height="40px" class="trbg">
                                 <td width="28%" class="border borderleft">Bill Duration</td>
                                 <td width="72%" class="border borderright">Invoice Total (<?php echo sfConfig::get('app_currency_code') ?>)</td>
+                                <td width="72%" class="border borderright">Total Payable Balance (<?php echo sfConfig::get('app_currency_code') ?>)</td>
                             </tr>
                 <?php foreach ($preInvoices as $preInvoice) { ?>
                                 <tr>
                                     <td><?php echo $preInvoice->getBillingStartingDate("M d"); ?> - <?php echo $preInvoice->getBillingEndingDate("M d"); ?></td>
                                     <td><?php echo number_format($preInvoice->getTotalPayment(), 2); ?></td>
+                                    <td><?php echo number_format($preInvoice->getTotalPayableBalance(), 2); ?></td>
                                 </tr>
     <?php } ?>
                         </table>
