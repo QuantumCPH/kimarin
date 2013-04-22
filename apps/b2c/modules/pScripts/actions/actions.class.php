@@ -4682,8 +4682,8 @@ class pScriptsActions extends sfActions {
          
           $c = new Criteria;
           $c->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
-           $c->addAnd(CustomerPeer::ID,181,Criteria::GREATER_EQUAL);
-          $c->addAnd(CustomerPeer::ID,210,Criteria::LESS_EQUAL);
+           $c->addAnd(CustomerPeer::ID,211,Criteria::GREATER_EQUAL);
+          $c->addAnd(CustomerPeer::ID,239,Criteria::LESS_EQUAL);
           $customers=CustomerPeer::doSelect($c);
    foreach($customers as $customer){
               
