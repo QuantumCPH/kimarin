@@ -393,7 +393,7 @@ class Telienta {
         return $this->createAccount($customer, $mobileNumber, '', $product->getAIproduct());
         
     }
-      public function getCustomerInfo($icustomer) {
+      public function getCustomerInfoUnique($icustomer) {
         $cInfo = false;
         $max_retries = 10;
         $retry_count = 0;

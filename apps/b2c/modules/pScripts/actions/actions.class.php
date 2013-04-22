@@ -4688,7 +4688,7 @@ class pScriptsActions extends sfActions {
           echo "<br/>".$customer->getId()."-----------". $customer->getFirstName()."<hr/>";  
                 $telintaObj = new Telienta();
                $icustomer=$customer->getICustomer();
-             echo    $telintaObj->getCustomerInfo($icustomer);
+             echo    $telintaObj->getCustomerInfoUnique($icustomer);
                 
                 
           //   $telintaObj->createDialAccount($customer->getMobileNumber(), $customer);
