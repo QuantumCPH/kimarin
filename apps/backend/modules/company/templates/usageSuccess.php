@@ -167,7 +167,6 @@
             } 
          }else{   
           if($cnt > 0){
-              $arrList = array();
           foreach ($ems as $emp) { 
             $cta = new Criteria();
             $cta->add(TelintaAccountsPeer::PARENT_TABLE, 'employee');
@@ -175,12 +174,11 @@
             $cta->addAnd(TelintaAccountsPeer::STATUS, 3);
             $count_ta = TelintaAccountsPeer::doCount($cta);
             if($count_ta > 0){
-            $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
-            foreach ($telinta_accounts as $telinta_account) { //echo $telinta_account->getIAccount();
+            $telinta_accounts = TelintaAccountsPeer::doSelectOne($cta);
+            //foreach ($telinta_accounts as $telinta_account) { //echo $telinta_account->getIAccount();
                 
-                $tilentaSubResult = $ComtelintaObj->getAccountSubscription($telinta_account, $fromdate , $todate);
-                $arrList = $tilentaSubResult;
-              //  var_dump($arrList);echo "<br/>";echo "<br/>";
+                $tilentaSubResult = $ComtelintaObj->getSubscriptions($telinta_accounts, $fromdate , $todate);                
+                var_dump($tilentaSubResult);echo "<br/>";echo "<br/>";
                //  print_r($tilentaSubResult[0]->xdr_list);
               //  echo count($arrList);
                 if (count($tilentaSubResult) > 0) {
@@ -195,7 +193,7 @@
                     <?php
                     }
                 } 
-            }//end telinta account table foreach loop
+            //}//end telinta account table foreach loop
             }
          }
        }
