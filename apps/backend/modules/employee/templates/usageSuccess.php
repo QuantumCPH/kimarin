@@ -250,21 +250,33 @@ foreach ($callHistoryres->xdr_list as $xdrres) {
         <?php //var_dump($ems);
         $total_sub = 0;
         $ComtelintaObj = new CompanyEmployeActivation(); 
-            $tilentaSubResult = $ComtelintaObj->getSubscription($employee, $fromdate . ' 00:00:00', $todate . ' 23:59:59');
-            if (count($tilentaSubResult) > 0) {
-                foreach ($tilentaSubResult->xdr_list as $xdr) {
-                    ?> <tr>
-                        <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
-                        <td><?php echo __($xdr->account_id); ?></td>
-                        <td><?php echo __($xdr->CLD); ?></td>
-                        <td aligin="right" style="text-align: right;"><?php echo sfConfig::get('app_currency_code') ?><?php echo number_format($xdr->charged_amount, 2); $total_sub += $xdr->charged_amount;?></td>
-                    </tr>
-                <?php
+        $cta = new Criteria();
+        $cta->add(TelintaAccountsPeer::PARENT_TABLE, 'employee');
+        $cta->addAnd(TelintaAccountsPeer::PARENT_ID, $employee->getId());
+        $cta->addAnd(TelintaAccountsPeer::STATUS, 3);
+        $count_ta = TelintaAccountsPeer::doCount($cta);
+        if($count_ta > 0){
+        $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
+           foreach ($telinta_accounts as $telinta_account) {
+              $tilentaSubResult = $ComtelintaObj->getAccountSubscription($employee,$telinta_account, $fromdate . ' 00:00:00', $todate . ' 23:59:59');
+               // var_dump($tilentaSubResult);
+                if (count($tilentaSubResult) > 0) {
+                    foreach ($tilentaSubResult->xdr_list as $xdr) {
+                        ?> <tr>
+                            <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
+                            <td><?php echo __($xdr->account_id); ?></td>
+                            <td><?php echo __($xdr->CLD); ?></td>
+                            <td aligin="right" style="text-align: right;"><?php echo sfConfig::get('app_currency_code') ?><?php echo number_format($xdr->charged_amount, 2); $total_sub += $xdr->charged_amount;?></td>
+                        </tr>
+                    <?php
+                    }
                 }
-            } else {
-
-                echo __('There are currently no call records to show.');
-            }
+           }
+        } else {
+                 echo __('There are currently no call records to show.');
+        } 
+        
+            
         ?>
                     <tr>
                         <td colspan="3" align="right"><strong>Total</strong></td>
