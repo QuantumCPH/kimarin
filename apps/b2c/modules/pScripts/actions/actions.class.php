@@ -4931,73 +4931,73 @@ class pScriptsActions extends sfActions {
 
         $co = new Criteria();
         $companies = CompanyPeer::doSelect($co);
-        foreach ($companies as $company) {
-            ///////// Fetch Other Events /////////////
-//         echo "i customer".$company->getICustomer();echo '<br />';
-         if($company->getICustomer()!=""){ 
-            $vat_percent = $company->getCountry()->getVatPercentage()/100; 
-            if($vat_percent=="") $vat_percent=0;
-            $otherEvents = $telintaObj->callHistory($company, $startdate, $enddate, false, 1);
-           // var_dump($otherEvents);die;
-                if ($otherEvents && count($otherEvents) > 0) {
-                    foreach ($otherEvents->xdr_list as $odr) {
-                        $other = new Odrs();
-                        $other->setParentTable('company');
-                        $other->setParentId($company->getId());
-                        $other->setBillStart($bill_start_date);
-                        $other->setBillEnd($bill_end_date);
-                        $other->setBillTime($odr->bill_time);
-                        $other->setDescription($odr->CLD);
-                        $other->setChargedAmount($odr->charged_amount);
-                        $other->setCompanyId($company->getId());
-                        $other->setVatIncludedAmount($odr->charged_amount + $odr->charged_amount * $vat_percent);
-                        $other->setConnectTime($odr->connect_time);
-                        $other->setDisconnectTime($odr->disconnect_time);
-                        $other->setChargedVatValue($vat_percent);
-                        $other->setIService(1);
-                        $other->save();
-                    }
-                } else {
-                    $otherEventLog = new CallhistoryCallsLog();
-                    $otherEventLog->setParent('company');
-                    $otherEventLog->setParentId($company->getId());
-                    $otherEventLog->setTodate($startdate);
-                    $otherEventLog->setFromdate($enddate);
-                    $otherEventLog->setIService(1);
-                    $otherEventLog->save();
-                }
-            ///////// Payments /////////////
-                $payments = $telintaObj->callHistory($company, $startdate, $enddate, false, 2);
-                if ($payments && count($payments) > 0) {
-                    foreach ($payments->xdr_list as $odrpay) {
-                        $chargedAmount = -$odrpay->charged_amount;
-                        $pay = new Odrs();
-                        $pay->setParentTable('company');
-                        $pay->setParentId($company->getId());
-                        $pay->setCompanyId($company->getId());
-                        $pay->setBillStart($bill_start_date);
-                        $pay->setBillEnd($bill_end_date);
-                        $pay->setBillTime($odrpay->bill_time);
-                        $pay->setDescription($odrpay->CLD);
-                        $pay->setConnectTime($odrpay->connect_time);
-                        $pay->setDisconnectTime($odrpay->disconnect_time);
-                        $pay->setChargedAmount($chargedAmount);
-                        $pay->setVatIncludedAmount($chargedAmount + $chargedAmount * $vat_percent);
-                        $pay->setChargedVatValue($vat_percent);
-                        $pay->setIService(2);
-                        $pay->save();
-                    }
-                } else {
-                    $odrpayLog = new CallhistoryCallsLog();
-                    $odrpayLog->setParent('company');
-                    $odrpayLog->setParentId($company->getId());
-                    $odrpayLog->setTodate($startdate);
-                    $odrpayLog->setFromdate($enddate);
-                    $odrpayLog->setIService(2);
-                    $odrpayLog->save();
-                }
-            }
-        }
+//        foreach ($companies as $company) {
+//            ///////// Fetch Other Events /////////////
+////         echo "i customer".$company->getICustomer();echo '<br />';
+//         if($company->getICustomer()!=""){ 
+//            $vat_percent = $company->getCountry()->getVatPercentage()/100; 
+//            if($vat_percent=="") $vat_percent=0;
+//            $otherEvents = $telintaObj->callHistory($company, $startdate, $enddate, false, 1);
+//           // var_dump($otherEvents);die;
+//                if ($otherEvents && count($otherEvents) > 0) {
+//                    foreach ($otherEvents->xdr_list as $odr) {
+//                        $other = new Odrs();
+//                        $other->setParentTable('company');
+//                        $other->setParentId($company->getId());
+//                        $other->setBillStart($bill_start_date);
+//                        $other->setBillEnd($bill_end_date);
+//                        $other->setBillTime($odr->bill_time);
+//                        $other->setDescription($odr->CLD);
+//                        $other->setChargedAmount($odr->charged_amount);
+//                        $other->setCompanyId($company->getId());
+//                        $other->setVatIncludedAmount($odr->charged_amount + $odr->charged_amount * $vat_percent);
+//                        $other->setConnectTime($odr->connect_time);
+//                        $other->setDisconnectTime($odr->disconnect_time);
+//                        $other->setChargedVatValue($vat_percent);
+//                        $other->setIService(1);
+//                        $other->save();
+//                    }
+//                } else {
+//                    $otherEventLog = new CallhistoryCallsLog();
+//                    $otherEventLog->setParent('company');
+//                    $otherEventLog->setParentId($company->getId());
+//                    $otherEventLog->setTodate($startdate);
+//                    $otherEventLog->setFromdate($enddate);
+//                    $otherEventLog->setIService(1);
+//                    $otherEventLog->save();
+//                }
+//            ///////// Payments /////////////
+//                $payments = $telintaObj->callHistory($company, $startdate, $enddate, false, 2);
+//                if ($payments && count($payments) > 0) {
+//                    foreach ($payments->xdr_list as $odrpay) {
+//                        $chargedAmount = -$odrpay->charged_amount;
+//                        $pay = new Odrs();
+//                        $pay->setParentTable('company');
+//                        $pay->setParentId($company->getId());
+//                        $pay->setCompanyId($company->getId());
+//                        $pay->setBillStart($bill_start_date);
+//                        $pay->setBillEnd($bill_end_date);
+//                        $pay->setBillTime($odrpay->bill_time);
+//                        $pay->setDescription($odrpay->CLD);
+//                        $pay->setConnectTime($odrpay->connect_time);
+//                        $pay->setDisconnectTime($odrpay->disconnect_time);
+//                        $pay->setChargedAmount($chargedAmount);
+//                        $pay->setVatIncludedAmount($chargedAmount + $chargedAmount * $vat_percent);
+//                        $pay->setChargedVatValue($vat_percent);
+//                        $pay->setIService(2);
+//                        $pay->save();
+//                    }
+//                } else {
+//                    $odrpayLog = new CallhistoryCallsLog();
+//                    $odrpayLog->setParent('company');
+//                    $odrpayLog->setParentId($company->getId());
+//                    $odrpayLog->setTodate($startdate);
+//                    $odrpayLog->setFromdate($enddate);
+//                    $odrpayLog->setIService(2);
+//                    $odrpayLog->save();
+//                }
+//            }
+//        }
         $em = new Criteria();
         $em->addAnd(EmployeePeer::STATUS_ID, 3);
         $employees = EmployeePeer::doSelect($em);
@@ -5023,7 +5023,7 @@ class pScriptsActions extends sfActions {
                     $c2->addAnd(OdrsPeer::PARENT_ID, $employee->getId());
                     $c2->addAnd(OdrsPeer::I_ACCOUNT, $telinta_account->getIAccount());
                     if (OdrsPeer::doCount($c2) == 0) {
-                        $tilentaSubscriptionResult = $ComtelintaObj->getAccountSubscription($employee,$telinta_account, $startdate, $enddate); 
+                        $tilentaSubscriptionResult = $telintaObj->getAccountSubscription($employee,$telinta_account, $startdate, $enddate); 
                       //  $tilentaSubscriptionResult = $telintaObj->getSubscription($employee, $startdate, $enddate);
                       //  var_dump($tilentaSubscriptionResult);
                         if ($tilentaSubscriptionResult) {
