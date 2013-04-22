@@ -5124,8 +5124,8 @@ class pScriptsActions extends sfActions {
                     $cl->addAnd(OdrsPeer::BILL_START, $startdate, Criteria::GREATER_EQUAL);
                     $cl->addAnd(OdrsPeer::BILL_END, $enddate, Criteria::LESS_EQUAL);
                     $cl->addAnd(OdrsPeer::COMPANY_ID,$company->getId());        
-                    $calls = OdrsPeer::doCount($cl);
-                    echo "calls---".$calls;
+                echo     $calls = OdrsPeer::doCount($cl);
+                    echo "odrs---".$calls;
                     if($calls>0){ echo "----companyid------".$company->getId(); echo "<br/>";
                     echo    $url1 = sfConfig::get('app_customer_url').'pScripts/invoiceBilling?company_id='.$company->getId().'&start_date='.$start_strtotime.'&end_date='.$end_strototime;
                            $invoice_content = file_get_contents($url1);
