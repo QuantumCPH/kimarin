@@ -582,7 +582,7 @@ class CompanyEmployeActivation {
         $max_retries = 10;
         $retry_count = 0;
         $employee = EmployeePeer::retrieveByPK($telinta_account->getParentId());
-         $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Account');
+         $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Customer');
          //   var_dump($pb);
             while (!$xdrList && $retry_count < $max_retries) {
                 try {
