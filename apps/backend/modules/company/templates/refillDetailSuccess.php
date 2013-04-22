@@ -53,7 +53,7 @@
         </table>
         <div id="sf_admin_container">
             <ul class="sf_admin_actions">
-                <li><input type="submit" name="refillsave" value="Refill" class="sf_admin_action_save" /></li>
+                <li><input type="submit" name="refillsave" value="Pay" class="sf_admin_action_save" /></li>
             </ul>
         </div>
     </div>

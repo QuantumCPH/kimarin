@@ -65,7 +65,7 @@
         </td>
     </tr>
         <tr>
-        <td style="padding: 5px;"><?php echo __('Charge:') ?></td>
+        <td style="padding: 5px;"><?php echo __('Amount:') ?></td>
         <td style="padding: 5px;">
             <input type="text" id="charge" name="charge" class="" style="width:180px;" /><strong><?php echo sfConfig::get('app_currency_code');?></strong>
             <label id="validation_result"></label>
@@ -74,7 +74,7 @@
     </table>
         <div id="sf_admin_container">
           <ul class="sf_admin_actions">
-           <li><input type="submit" name="save" value="<?php echo __('save') ?>" class="sf_admin_action_save" /></li>
+           <li><input type="submit" name="save" value="<?php echo __('Next') ?>" class="sf_admin_action_save" /></li>
            </ul>
         </div>
     </div>

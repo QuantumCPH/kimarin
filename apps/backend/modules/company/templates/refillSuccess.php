@@ -36,7 +36,7 @@
                 </td>
             </tr>
         <tr>
-        <td style="padding: 5px;"><?php echo __('Refill:') ?></td>
+        <td style="padding: 5px;"><?php echo __('Amount:') ?></td>
         <td style="padding: 5px;">
             <input type="text" id="refill" name="refill" class="required decimal" style="width:180px;"> <?php echo sfConfig::get('app_currency_code');?>
         </td>
@@ -44,7 +44,7 @@
     </table>
         <div id="sf_admin_container">
           <ul class="sf_admin_actions">
-           <li><input type="submit" name="save" value="<?php echo __('save') ?>" class="sf_admin_action_save" /></li>
+           <li><input type="submit" name="save" value="<?php echo __('Next') ?>" class="sf_admin_action_save" /></li>
            </ul>
         </div>
     </div>
