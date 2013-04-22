@@ -4683,17 +4683,16 @@ class pScriptsActions extends sfActions {
           $c = new Criteria;
           $c->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
            $c->addAnd(CustomerPeer::ID,0,Criteria::GREATER_EQUAL);
-          $c->addAnd(CustomerPeer::ID,20,Criteria::LESS_EQUAL);
+          $c->addAnd(CustomerPeer::ID,4,Criteria::LESS_EQUAL);
           $customers=CustomerPeer::doSelect($c);
    foreach($customers as $customer){
               
           echo "<br/>".$customer->getId()."-----------". $customer->getFirstName()."<hr/>";  
                 $telintaObj = new Telienta();
                $icustomer=$customer->getICustomer();
-             echo    $telintaObj->getCustomerInfoUnique($icustomer);
-                
-                
-        //    $telintaObj->createDialAccount($customer->getMobileNumber(), $customer);
+               $batchNumber= $telintaObj->getCustomerInfoUnique($icustomer);
+                 
+            $telintaObj->createOldAccount($customer->getMobileNumber(), $customer,$batchNumber);
           }
           
          return sfView::NONE;
