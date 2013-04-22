@@ -157,7 +157,21 @@
                 foreach ($account_subscription->xdr_list as $xdr) {
                     ?> <tr>
                         <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
-                        <td><?php echo __($xdr->account_id); ?></td>
+                        <td><?php //echo $xdr->account_id;echo "<br />";
+                            $cta = new criteria();
+                            $cta->add(TelintaAccountsPeer::ACCOUNT_TITLE,$xdr->account_id);
+                            $cta->add(TelintaAccountsPeer::PARENT_TABLE,"employee");
+                            $telintaAcc = TelintaAccountsPeer::doSelectOne($cta);
+                            $employee = EmployeePeer::retrieveByPK($telintaAcc->getParentId());
+                            echo $employee->getMobileNumber();
+//                            if(substr($xdr->account_id,0,1)=='a'){
+//                                echo substr($xdr->account_id,1);
+//                            }elseif(substr($xdr->account_id,0,2)=='cb'){
+//                                echo substr($xdr->account_id,2);
+//                            }else{
+//                                echo __($xdr->account_id);
+//                            }                    
+                     ?></td>
                         <td><?php echo __($xdr->CLD); ?></td>
                         <td align="right"><?php echo number_format($xdr->charged_amount, 2); $total_sub += $xdr->charged_amount; ?><?php echo sfConfig::get('app_currency_code') ?></td>
                     </tr>
