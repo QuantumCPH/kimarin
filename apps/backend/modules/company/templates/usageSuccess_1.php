@@ -165,25 +165,39 @@
                 <?php
                 }
             } 
-         }else{
-
-            $tilentaSubResult = $ComtelintaObj->getCustomerSubscriptions($company, $fromdate , $todate);                
-           // var_dump($tilentaSubResult);echo "<br/>";echo "<br/>";
-           //  print_r($tilentaSubResult[0]->xdr_list);
-          //  echo count($arrList);
-            if (count($tilentaSubResult) > 0) {
-                foreach ($tilentaSubResult->xdr_list as $xdr) {
-                    ?> <tr>
-                        <td><?php //echo $xdr->bill_time;
-                      echo  date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
-                        <td><?php echo __($xdr->account_id); ?><?php //echo $emp->getMobileNumber();?></td>
-                        <td><?php echo __($xdr->CLD); ?></td>
-                        <td align="right"><?php echo number_format($xdr->charged_amount, 2); $total_sub += $xdr->charged_amount;?><?php echo sfConfig::get('app_currency_code') ?></td>
-                    </tr>
-                <?php
-                }
-            } 
-        }
+         }else{   
+          if($cnt > 0){
+          foreach ($ems as $emp) { 
+            $cta = new Criteria();
+            $cta->add(TelintaAccountsPeer::PARENT_TABLE, 'employee');
+            $cta->addAnd(TelintaAccountsPeer::PARENT_ID, $emp->getId());
+            $cta->addAnd(TelintaAccountsPeer::STATUS, 3);
+            $count_ta = TelintaAccountsPeer::doCount($cta);
+            if($count_ta > 0){
+            $telinta_accounts = TelintaAccountsPeer::doSelectOne($cta);
+            //foreach ($telinta_accounts as $telinta_account) { //echo $telinta_account->getIAccount();
+                
+                $tilentaSubResult = $ComtelintaObj->getSubscriptions($telinta_accounts, $fromdate , $todate);                
+             //   var_dump($tilentaSubResult);echo "<br/>";echo "<br/>";
+               //  print_r($tilentaSubResult[0]->xdr_list);
+              //  echo count($arrList);
+                if (count($tilentaSubResult) > 0) {
+                    foreach ($tilentaSubResult->xdr_list as $xdr) {
+                        ?> <tr>
+                            <td><?php //echo $xdr->bill_time;
+                          echo  date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
+                            <td><?php //echo __($xdr->account_id); ?><?php echo $emp->getMobileNumber();?></td>
+                            <td><?php echo __($xdr->CLD); ?></td>
+                            <td align="right"><?php echo number_format($xdr->charged_amount, 2); $total_sub += $xdr->charged_amount;?><?php echo sfConfig::get('app_currency_code') ?></td>
+                        </tr>
+                    <?php
+                    }
+                } 
+            //}//end telinta account table foreach loop
+            }
+         }
+       }
+       }
         ?>
                     
     <tr>

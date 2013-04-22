@@ -577,19 +577,18 @@ class CompanyEmployeActivation {
         return true;
     }
    
-     public function getSubscriptions($telinta_account,$fromDate, $toDate) {
+     public function getCustomerSubscriptions(Company $company,$fromDate, $toDate) {
          $xdrList = false;
         $max_retries = 10;
         $retry_count = 0;
-        $employee = EmployeePeer::retrieveByPK($telinta_account->getParentId());
          $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Customer');
          //   var_dump($pb);
             while (!$xdrList && $retry_count < $max_retries) {
                 try {
-                    $xdrList = $pb->get_customer_xdr_list(array('i_customer' => $telinta_account->getICustomer(), 'from_date' => $fromDate, 'to_date' => $toDate,'i_service' => 4));
+                    $xdrList = $pb->get_customer_xdr_list(array('i_customer' => $company->getICustomer(), 'from_date' => $fromDate, 'to_date' => $toDate,'i_service' => 4));
                 } catch (SoapFault $e) {
                     if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
-                        emailLib::sendErrorInTelinta("Employee Subscription: " . $employee->getId() . " Error!", "We have faced an issue with Employee while Fetching Subscription  this is the error for employee with  Employee ID: " . $employee->getId() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
+                        emailLib::sendErrorInTelinta("Company Subscription: " . $company->getId() . " Error!", "We have faced an issue with Company while Fetching Subscription  this is the error for company with  Company ID: " . $company->getId() . " error is " . $e->faultstring . "  <br/> Please Investigate.");
                         return false;
                     }
                 }
@@ -597,7 +596,7 @@ class CompanyEmployeActivation {
                 $retry_count++;
             }
             if ($retry_count == $max_retries) {
-                emailLib::sendErrorInTelinta("Employee Subscription: " . $employee->getId() . " Error!", "We have faced an issue with Employee while Fetching Subscription on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
+                emailLib::sendErrorInTelinta("Company Subscription: " . $company->getId() . " Error!", "We have faced an issue with Company while Fetching Subscription on telinta. Error is Even After Max Retries " . $max_retries . "  <br/> Please Investigate.");
                 return false;
             }
             //var_dump($xdrList);
