@@ -22,13 +22,15 @@
                                     $cn = new Criteria();
                                     $cn->add(EmployeePeer::ID, $employeeid);
                                     $employees = EmployeePeer::doSelectOne($cn);
-//                                    if($account->getAccountType()=="a"):
-//                                      $account_type = "CT";
-//                                    else:
-//                                      $account_type = "CB";  
-//                                    endif
+                                    if($account->getAccountType()=="a"):
+                                      $account_type = "CT ";
+                                    elseif($account->getAccountType()=="cb"):
+                                      $account_type = "CB ";    
+                                    else:
+                                      $account_type = "";  
+                                    endif
                                     ?>
-                            <option value="<?PHP echo $account->getId(); ?>" <?PHP echo ($account->getId() == $iaccount) ? 'selected="selected"' : '' ?>><?php echo $employees->getFirstName() . " -- " . $employees->getMobileNumber(); ?></option>
+                            <option value="<?PHP echo $account->getId(); ?>" <?PHP echo ($account->getId() == $iaccount) ? 'selected="selected"' : '' ?>><?php echo $employees->getFirstName() . " -- " . $account_type . $employees->getMobileNumber(); ?></option>
                                 <?php
                                 }
                             }
@@ -151,11 +153,8 @@
 //          echo '<br />';
 //          echo    $todate;
           $ComtelintaObj = new CompanyEmployeActivation();
-         if(isset($empl)){
-           $tilentaSubResult = $ComtelintaObj->getSubscription($empl, $fromdate, $todate);
-          // var_dump($tilentaSubResult);
-            if (count($tilentaSubResult) > 0) {
-                foreach ($tilentaSubResult->xdr_list as $xdr) {
+             if (count($account_subscription) > 0) {
+                foreach ($account_subscription->xdr_list as $xdr) {
                     ?> <tr>
                         <td><?php echo date("d-m-Y H:i:s", strtotime($xdr->bill_time)); ?></td>
                         <td><?php echo __($xdr->account_id); ?></td>
@@ -164,25 +163,24 @@
                     </tr>
                 <?php
                 }
-            } 
          }else{
-
-            $tilentaSubResult = $ComtelintaObj->getCustomerSubscriptions($company, $fromdate , $todate);                
-           // var_dump($tilentaSubResult);echo "<br/>";echo "<br/>";
-           //  print_r($tilentaSubResult[0]->xdr_list);
-          //  echo count($arrList);
-            if (count($tilentaSubResult) > 0) {
-                foreach ($tilentaSubResult->xdr_list as $xdr) {
-                    ?> <tr>
-                        <td><?php //echo $xdr->bill_time;
-                      echo  date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
-                        <td><?php echo __($xdr->account_id); ?><?php //echo $emp->getMobileNumber();?></td>
-                        <td><?php echo __($xdr->CLD); ?></td>
-                        <td align="right"><?php echo number_format($xdr->charged_amount, 2); $total_sub += $xdr->charged_amount;?><?php echo sfConfig::get('app_currency_code') ?></td>
+//
+//            $tilentaSubResult = $ComtelintaObj->getCustomerSubscriptions($company, $fromdate , $todate);                
+//           // var_dump($tilentaSubResult);echo "<br/>";echo "<br/>";
+//           //  print_r($tilentaSubResult[0]->xdr_list);
+//          //  echo count($arrList);
+//            if (count($tilentaSubResult) > 0) {
+//                foreach ($tilentaSubResult->xdr_list as $xdr) {
+//                    ?> <tr>
+                        <td>//<?php //echo $xdr->bill_time;
+//                      echo  date("Y-m-d H:i:s", strtotime($xdr->bill_time)); ?></td>
+                        <td>//<?php echo __($xdr->account_id); ?><?php //echo $emp->getMobileNumber();?></td>
+                        <td>//<?php echo __($xdr->CLD); ?></td>
+                        <td align="right">//<?php echo number_format($xdr->charged_amount, 2); $total_sub += $xdr->charged_amount;?><?php echo sfConfig::get('app_currency_code') ?></td>
                     </tr>
-                <?php
-                }
-            } 
+                //<?php
+//                }
+//            } 
         }
         ?>
                     

@@ -441,8 +441,9 @@ class companyActions extends sfActions {
             $this->iAccountTitle = $telintaAccount->getAccountTitle();
             $this->empl = EmployeePeer::retrieveByPK($telintaAccount->getParentId());
             $this->callHistory = $ComtelintaObj->getAccountCallHistory($telintaAccount->getIAccount(), $fromdate, $todate);
+            $this->account_subscription = $ComtelintaObj->getAccountSubscription($this->empl,$telintaAccount,$fromdate, $todate);
         } else {
-
+            $this->account_subscription = $ComtelintaObj->getCustomerSubscriptions($this->company, $fromdate , $todate); 
             $this->callHistory = $ComtelintaObj->callHistory($this->company, $fromdate, $todate);
             
         }
