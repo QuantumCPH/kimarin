@@ -179,9 +179,9 @@ class employeeActions extends sfActions {
         if(!$ComtelintaObj->telintaRegisterEmployeeCT($employee, $employee->getProductId())){
             
         }
-        if(!$ComtelintaObj->createDialAccount($employee)){
-            
-        }
+//        if(!$ComtelintaObj->createDialAccount($employee)){
+//            
+//        }
         
         $employee->setStatusId(sfConfig::get('app_status_completed')); //// completed status is 3 defined in backend/config/app.yml
         $employee->save();

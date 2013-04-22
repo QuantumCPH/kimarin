@@ -5023,8 +5023,8 @@ class pScriptsActions extends sfActions {
                     $c2->addAnd(OdrsPeer::PARENT_ID, $employee->getId());
                     $c2->addAnd(OdrsPeer::I_ACCOUNT, $telinta_account->getIAccount());
                     if (OdrsPeer::doCount($c2) == 0) {
-                         
-                        $tilentaSubscriptionResult = $telintaObj->getSubscription($employee, $startdate, $enddate);
+                        $tilentaSubscriptionResult = $ComtelintaObj->getAccountSubscription($employee,$telinta_account, $startdate, $enddate); 
+                      //  $tilentaSubscriptionResult = $telintaObj->getSubscription($employee, $startdate, $enddate);
                       //  var_dump($tilentaSubscriptionResult);
                         if ($tilentaSubscriptionResult) {
                             foreach ($tilentaSubscriptionResult->xdr_list as $xdr) {

@@ -178,7 +178,7 @@
                         <td>//<?php echo __($xdr->CLD); ?></td>
                         <td align="right">//<?php echo number_format($xdr->charged_amount, 2); $total_sub += $xdr->charged_amount;?><?php echo sfConfig::get('app_currency_code') ?></td>
                     </tr>
-                //<?php
+                <?php
 //                }
 //            } 
         }
