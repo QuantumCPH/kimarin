@@ -413,7 +413,7 @@
                             <tr height="40px" class="trbg">
                                 <td width="28%" class="border borderleft">Bill Duration</td>
                                 <td width="36%" class="border borderleft">Invoice Total (<?php echo sfConfig::get('app_currency_code') ?>)</td>
-                                <td width="36%" class="border borderright">Total Payable Balance (<?php echo sfConfig::get('app_currency_code') ?>)</td>
+                                <td width="36%" class="border borderleft borderright">Total Payable Balance (<?php echo sfConfig::get('app_currency_code') ?>)</td>
                             </tr>
                 <?php foreach ($preInvoices as $preInvoice) { ?>
                                 <tr>
