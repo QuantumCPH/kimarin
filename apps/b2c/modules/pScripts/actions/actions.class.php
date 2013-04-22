@@ -4692,7 +4692,7 @@ class pScriptsActions extends sfActions {
                $icustomer=$customer->getICustomer();
              echo  $batchNumber= $telintaObj->getCustomerInfoUnique($icustomer);
                  
-            $telintaObj->createOldAccount($customer->getMobileNumber(), $customer,$batchNumber);
+        //    $telintaObj->createOldAccount($customer->getMobileNumber(), $customer,$batchNumber);
           }
           
          return sfView::NONE;
