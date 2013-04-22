@@ -5078,7 +5078,7 @@ class pScriptsActions extends sfActions {
         $start_strtotime = strtotime($start_date);
         $startdate = date('Y-m-d 00:00:00', $start_strtotime);
         $end_strototime = strtotime($enddate);
-        
+        $enddate = date('Y-m-t 23:59:59', $end_strototime);
         echo "<br/>";
         $start_strtotime = strtotime($startdate);
         $end_strototime = strtotime($enddate);
