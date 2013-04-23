@@ -53,7 +53,7 @@
         <td style="padding: 5px;"><?php echo __('Amount:') ?></td>
         <td style="padding: 5px;">
             <input type="text" id="refill" name="refill" class="required decimal" style="width:180px;"> <?php echo sfConfig::get('app_currency_code');?>
-            <label id="validation_result"></label>
+            <span id="validation_result" style="color:#ff1100 !important;"></span>
         </td>
     </tr>
     </table>

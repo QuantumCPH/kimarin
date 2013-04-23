@@ -68,7 +68,7 @@
         <td style="padding: 5px;"><?php echo __('Amount:') ?></td>
         <td style="padding: 5px;">
             <input type="text" id="charge" name="charge" class="" style="width:180px;" /><strong><?php echo sfConfig::get('app_currency_code');?></strong>
-            <label id="validation_result"></label>
+            <span id="validation_result" style="color:#ff1100 !important;"></span>
         </td>
     </tr>
     </table>
