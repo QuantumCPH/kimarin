@@ -7,7 +7,21 @@
 </div>
   
 <?php    }*/   ?>
-
+<script language="javascript" type="text/javascript">
+  jQuery(function(){      
+      jQuery("#sf_admin_form").submit(function(){
+          var valu = jQuery("#refill").val();
+          var t =  /^(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/.test(valu);    
+          if(t==false){
+              jQuery("#validation_result").html('Please enter valid amount');
+              return false;
+          }else if(t==true){
+              jQuery("#validation_result").html('');
+              return true;
+          } 
+      });
+  });
+</script>
 <div id="sf_admin_container"><h1><?php echo __('Payment') ?></h1></div>
 
 <form id="sf_admin_form" name="sf_admin_edit_form" method="post" enctype="multipart/form-data" action="refillDetail">
@@ -39,6 +53,7 @@
         <td style="padding: 5px;"><?php echo __('Amount:') ?></td>
         <td style="padding: 5px;">
             <input type="text" id="refill" name="refill" class="required decimal" style="width:180px;"> <?php echo sfConfig::get('app_currency_code');?>
+            <span id="validation_result" style="color:#ff1100 !important;"></span>
         </td>
     </tr>
     </table>

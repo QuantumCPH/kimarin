@@ -565,7 +565,7 @@
 
     <script type="text/javascript">
   jQuery('#sddm li a').click(function() {
-    $('li:last').addClass('current') ;
+    jQuery('li:last').addClass('current') ;
    });
  
 jQuery(function(){

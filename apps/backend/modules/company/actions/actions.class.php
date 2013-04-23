@@ -644,7 +644,7 @@ class companyActions extends sfActions {
         
         $cc = new Criteria();
         $cc->add(CompanyPeer::ID,$company_id);
-        $company = CompanyPeer::doSelectOne($cc);
+        $company = CompanyPeer::doSelectOne($cc);        
         $cc = new Criteria();
         $cc->add(CountryPeer::ID,$company->getCountryId());
         $country = CountryPeer::doSelectOne($cc);
