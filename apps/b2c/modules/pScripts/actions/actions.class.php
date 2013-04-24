@@ -4760,8 +4760,7 @@ class pScriptsActions extends sfActions {
         $im = new Criteria();
         $im->add(InvoiceMethodPeer::ID, $invoice_id);
         $invoice = InvoiceMethodPeer::doSelectOne($im);
-        $this->invoice_cost = $invoice->getCost();
-
+        $this->invoice_cost = $invoice->getCost(); 
         $new_invoice = new Invoice();
         $new_invoice->setCompany($company);
         $new_invoice->setBillingStartingDate($this->billing_start_date);
