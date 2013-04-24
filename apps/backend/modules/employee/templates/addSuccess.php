@@ -3,7 +3,7 @@
 <?php if(isset($_REQUEST['message']) && $_REQUEST['message']!=""){     
     if($_REQUEST['message']=="error"){ ?> 
         <div class="save-ok">
-        <h2>Employee is not added and  registered on tilinta please check email </h2>
+        <h2>Employee is not added please check email </h2>
         </div>
         
   <?php }else{  ?>
@@ -15,7 +15,7 @@
 <?php if ($sf_user->hasFlash('messageError')): ?>
   <div>
    <span style="color:#FF0000"><?php echo __($sf_user->getFlash('messageError')) ?></span>
-  <div>
+  </div>
 <?php endif; ?><br />
 <h1>New My employee</h1>
 <form id="sf_admin_form" name="sf_admin_edit_form" method="post" enctype="multipart/form-data" action="saveEmployee">
