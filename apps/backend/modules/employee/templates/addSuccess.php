@@ -3,7 +3,7 @@
 <?php if(isset($_REQUEST['message']) && $_REQUEST['message']!=""){     
     if($_REQUEST['message']=="error"){ ?> 
         <div class="save-ok">
-        <h2>Employee is not added and  registered on tilinta please check email </h2>
+        <h2>Employee is not added and  registered please check email </h2>
         </div>
         
   <?php }else{  ?>
