@@ -64,14 +64,14 @@ $dialwrap_content  = isset($dialwrap)?$dialwrap:false;
 	</p>
         
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-	<?php echo __('Call %1% - wait for the tone - dial the country code followed by the foreign telephone number - followed by #.', array('%1%'=> "+34810101700")) ?>
+	<?php echo __('Call %1% - wait for the tone - dial the country code followed by the foreign telephone number - followed by #.', array('%1%'=> "810101700")) ?>
 	</p>
         
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
 	<?php echo __('You can see your call history, account balance and personal settings on www. kimarin.es under MY ACCOUNT, where you also can refill your account.'); ?> </p>
 	
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-	<?php echo __('Please notice that in addition to the Kimarin call fees you pay the local call tariffs  to call %1%.', array('%1%'=> "+34810101700")) ?>
+	<?php echo __('Please notice that in addition to the Kimarin call fees you pay the local call tariffs  to call %1%.', array('%1%'=> "810101700")) ?>
 	</p>
         
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
