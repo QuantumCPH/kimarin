@@ -128,7 +128,7 @@
             </trans-unit>
             <trans-unit id="31" translate="yes" reformat="yes" xml:space="default">
                 <source>Last name</source>
-                <target>Segon cognom</target>
+                <target>Cognom</target>
             </trans-unit>
             <trans-unit id="32" translate="yes" reformat="yes" xml:space="default">
                 <source>address</source>
@@ -522,7 +522,7 @@
             </trans-unit>
                <trans-unit id="128" translate="yes" reformat="yes" xml:space="default">
                 <source>Last name</source>
-                <target>Segon cognom</target>
+                <target>Cognom</target>
             </trans-unit>
                <trans-unit id="129" translate="yes" reformat="yes" xml:space="default">
                 <source>Address</source>
@@ -534,7 +534,7 @@
             </trans-unit>
             <trans-unit id="131" translate="yes" reformat="yes" xml:space="default">
                 <source>City</source>
-                <target>Ciudad</target>
+                <target>Ciutat</target>
             </trans-unit>
             <trans-unit id="132" translate="yes" reformat="yes" xml:space="default">
                 <source>Date of birth&lt;br /&gt;(dd-mm-yyyy)</source>
