@@ -2502,7 +2502,13 @@ class customerActions extends sfActions {
         $querystring .= "return=" . urldecode($return_url) . "&";
         $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
         $querystring .= "notify_url=" . urldecode($notify_url);
-        if ($order_id && $item_amount) {
+        if($item_amount==0){
+            file_get_contents($notify_url);
+            sleep(0.5);
+            header("location:".$return_url);
+            exit;
+        }
+        elseif ($order_id && $item_amount) {
             Payment::SendPayment($querystring);
         } else {
             echo 'error';
