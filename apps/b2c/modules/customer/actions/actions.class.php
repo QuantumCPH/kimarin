@@ -265,13 +265,13 @@ class customerActions extends sfActions {
             $customer->save();
 
             $productObj = ProductPeer::retrieveByPK($request->getParameter('product'));
-            if($productObj->getProductTypeId()== 10){
-                $customer->setUniqueid("Dial".$customer->getId());
+            if ($productObj->getProductTypeId() == 10) {
+                $customer->setUniqueid("Dial" . $customer->getId());
                 $customer->save();
-            }elseif($productObj->getProductTypeId()== 11){
-                $customer->setUniqueid("app".$customer->getId());
+            } elseif ($productObj->getProductTypeId() == 11) {
+                $customer->setUniqueid("app" . $customer->getId());
                 $customer->save();
-            }elseif ($productObj->getPostageApplicable() == 1) {
+            } elseif ($productObj->getPostageApplicable() == 1) {
                 $customer->setFirstName($request->getParameter('first_name'));
                 $customer->setLastName($request->getParameter('last_name'));
                 $customer->setAddress($request->getParameter('address'));
@@ -634,7 +634,7 @@ class customerActions extends sfActions {
                     'transaction' => $transaction,
                     'vat' => $vat,
                     'wrap' => false
-                        ));
+                ));
 
                 //This Seciton For Make The Log History When Complete registration complete - Agent
                 //echo sfConfig::get('sf_data_dir');
@@ -2264,7 +2264,12 @@ class customerActions extends sfActions {
         echo $querystring;
         echo "<br />";
         echo $notify_url;
-        if ($order_id && $item_amount) {
+        if ($item_amount == 0) {
+            file_get_contents($notify_url);
+            sleep(0.5);
+            header("location:" . $return_url);
+            exit;
+        } elseif ($order_id && $item_amount) {
             Payment::SendPayment($querystring);
         } else {
             echo 'error';
@@ -2378,7 +2383,12 @@ class customerActions extends sfActions {
             $querystring .= "return=" . urldecode($return_url) . "&";
             $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
             $querystring .= "notify_url=" . urldecode($notify_url);
-            if ($order_id && $item_amount) {
+            if ($item_amount == 0) {
+                file_get_contents($notify_url);
+                sleep(0.5);
+                header("location:" . $return_url);
+                exit;
+            } elseif ($order_id && $item_amount) {
                 Payment::SendPayment($querystring);
             } else {
                 echo 'error';
@@ -2502,7 +2512,12 @@ class customerActions extends sfActions {
         $querystring .= "return=" . urldecode($return_url) . "&";
         $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
         $querystring .= "notify_url=" . urldecode($notify_url);
-        if ($order_id && $item_amount) {
+        if ($item_amount == 0) {
+            file_get_contents($notify_url);
+            sleep(0.5);
+            header("location:" . $return_url);
+            exit;
+        } elseif ($order_id && $item_amount) {
             Payment::SendPayment($querystring);
         } else {
             echo 'error';
@@ -2536,7 +2551,7 @@ class customerActions extends sfActions {
         }
 
 
- $product_criteria = new Criteria();
+        $product_criteria = new Criteria();
         if ($this->getRequest()->getCookie('agent_id') != NULL) {
             $dc = new Criteria();
             $dc->add(AgentProductPeer::AGENT_ID, $this->getRequest()->getCookie('agent_id'));
@@ -2613,13 +2628,13 @@ class customerActions extends sfActions {
             $customer->save();
 
             $productObj = ProductPeer::retrieveByPK($request->getParameter('product'));
-            if($productObj->getProductTypeId()== 10){
-                $customer->setUniqueid("Dial".$customer->getId());
+            if ($productObj->getProductTypeId() == 10) {
+                $customer->setUniqueid("Dial" . $customer->getId());
                 $customer->save();
-            }elseif($productObj->getProductTypeId()== 11){
-                $customer->setUniqueid("app".$customer->getId());
+            } elseif ($productObj->getProductTypeId() == 11) {
+                $customer->setUniqueid("app" . $customer->getId());
                 $customer->save();
-            }elseif ($productObj->getPostageApplicable() == 1) {
+            } elseif ($productObj->getPostageApplicable() == 1) {
                 $customer->setFirstName($request->getParameter('first_name'));
                 $customer->setLastName($request->getParameter('last_name'));
                 $customer->setAddress($request->getParameter('address'));
@@ -2649,7 +2664,6 @@ class customerActions extends sfActions {
             $url = $this->getTargetUrl();
             $this->redirect($url . 'payments/signup?cid=' . $customer->getId() . '&pid=' . $productObj->getId());
         }
-
     }
 
     public function executeValidateMobileNumber(sfWebRequest $request) {

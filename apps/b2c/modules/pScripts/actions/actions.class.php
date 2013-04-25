@@ -49,9 +49,6 @@ class pScriptsActions extends sfActions {
         //$order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed', 3)); //completed
         $transaction->setTransactionStatusId(sfConfig::get('app_status_completed', 3)); //completed
 
-
-
-
         if ($transaction->getAmount() > $order_amount) {
             //error
             $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
@@ -4502,7 +4499,8 @@ class pScriptsActions extends sfActions {
 
             $telintaObj->createAAccount($TelintaMobile, $this->customer);
             $telintaObj->createCBAccount($TelintaMobile, $this->customer);
-            $telintaObj->createDialAccount($this->customer->getMobileNumber(), $this->customer);
+            $telintaObj->createDialAccount($this->customer->getMobileNumber(), $customer);
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
@@ -5414,4 +5412,30 @@ class pScriptsActions extends sfActions {
         //$this->setLayout(false);
     }
 
+    
+    
+     public function executeCreateNewAccount(sfWebRequest $request) {
+         
+          $c = new Criteria;
+          $c->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
+           $c->addAnd(CustomerPeer::ID,211,Criteria::GREATER_EQUAL);
+          $c->addAnd(CustomerPeer::ID,239,Criteria::LESS_EQUAL);
+          $customers=CustomerPeer::doSelect($c);
+   foreach($customers as $customer){
+              
+          echo "<br/>".$customer->getId()."-----------". $customer->getFirstName()."<hr/>";  
+                $telintaObj = new Telienta();
+               $icustomer=$customer->getICustomer();
+             echo  $batchNumber= $telintaObj->getCustomerInfoUnique($icustomer);
+                 
+        //    $telintaObj->createOldAccount($customer->getMobileNumber(), $customer,$batchNumber);
+          }
+          
+         return sfView::NONE;
+    }
+
+    
+    
+    
+    
 }
