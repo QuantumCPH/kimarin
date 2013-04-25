@@ -33,6 +33,10 @@ class BaseEmployeeCustomerCallhistoryForm extends BaseFormPropel
       'unix_disconnect_time' => new sfWidgetFormDateTime(),
       'bill_time'            => new sfWidgetFormDateTime(),
       'status'               => new sfWidgetFormInput(),
+      'company_id'           => new sfWidgetFormInput(),
+      'account_type'         => new sfWidgetFormInput(),
+      'vat_included_amount'  => new sfWidgetFormInput(),
+      'charged_vat_value'    => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -57,6 +61,10 @@ class BaseEmployeeCustomerCallhistoryForm extends BaseFormPropel
       'unix_disconnect_time' => new sfValidatorDateTime(array('required' => false)),
       'bill_time'            => new sfValidatorDateTime(array('required' => false)),
       'status'               => new sfValidatorInteger(array('required' => false)),
+      'company_id'           => new sfValidatorInteger(array('required' => false)),
+      'account_type'         => new sfValidatorString(array('max_length' => 10, 'required' => false)),
+      'vat_included_amount'  => new sfValidatorNumber(array('required' => false)),
+      'charged_vat_value'    => new sfValidatorNumber(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('employee_customer_callhistory[%s]');

@@ -103,6 +103,13 @@
                       }
                     ?>                    
                     <?php 
+                      if($actionName=='invoices' && $modulName=="company"){
+                          echo link_to(__('Invoices'), 'company/invoices', array('class'=>'subSelect'));
+                      }else{
+                          echo link_to(__('Invoices'), 'company/invoices');
+                      }
+                    ?> 
+                    <?php 
                       if($actionName=='paymenthistory' && $modulName=="company"){
                          echo link_to(__('Payment History'), 'company/paymenthistory', array('class'=>'subSelect'));
                       }else{
@@ -110,9 +117,15 @@
                       }?>
                     <?php 
                       if($actionName=='refill'){
-                         echo link_to(__('Refill'), 'company/refill', array('class'=>'subSelect'));    
+                         echo link_to(__('Payment'), 'company/refill', array('class'=>'subSelect'));    
                       }else{
-                          echo link_to(__('Refill'), 'company/refill');                          
+                          echo link_to(__('Payment'), 'company/refill');                          
+                      } ?>
+                    <?php 
+                      if($actionName=='charge'){
+                         echo link_to(__('Charge'), 'company/charge', array('class'=>'subSelect'));    
+                      }else{
+                          echo link_to(__('Charge'), 'company/charge');                          
                       } ?>
                 </div>
             </li>
@@ -552,7 +565,7 @@
 
     <script type="text/javascript">
   jQuery('#sddm li a').click(function() {
-    $('li:last').addClass('current') ;
+    jQuery('li:last').addClass('current') ;
    });
  
 jQuery(function(){

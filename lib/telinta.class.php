@@ -34,7 +34,9 @@ class Telienta {
 
         $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Customer');
 
-        $uniqueid = "KB2C" . $customer->getId() . $customer->getUniqueid();
+
+        $uniqueid = "KB2C". $customer->getId() . $customer->getUniqueid();
+
 
         $Parent = $this->iParentReseller;
 
@@ -293,13 +295,17 @@ class Telienta {
     }
 
     //// Private Area.
-    private function createAccount(Customer $customer, $mobileNumber, $accountType, $iProduct, $followMeEnabled='N') {
+    private function createAccount(Customer $customer, $mobileNumber, $accountType, $iProduct, $followMeEnabled='N',$batchNumber=false) {
         $account = false;
         $max_retries = 10;
         $retry_count = 0;
 
         $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Account');
-        $uniqueid = "KB2C" . $customer->getId() . $customer->getUniqueid();
+        if($batchNumber){
+        $uniqueid =$batchNumber;
+        }else{
+          $uniqueid = "KB2CC" . $customer->getId() . $customer->getUniqueid();
+        }
         $accountName = $accountType . $mobileNumber;
         while (!$account && $retry_count < $max_retries) {
             try {
@@ -381,6 +387,48 @@ class Telienta {
 
         return true;
     }
+
+    public function createDialAccount($mobileNumber, Customer $customer) {
+        $c = new Criteria();
+        $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
+        $c->addJoin(CustomerProductPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
+        $c->addJoin(ProductPeer::BILLING_PRODUCT_ID, BillingProductsPeer::ID, Criteria::LEFT_JOIN);
+        $c->addAnd(CustomerProductPeer::STATUS_ID, 3);
+        $c->addAnd(CustomerPeer::ID, $customer->getId());
+        $product = BillingProductsPeer::doSelectOne($c);
+        return $this->createAccount($customer, $mobileNumber, '', $product->getAIproduct());
+
+        
+    }
+      public function getCustomerInfoUnique($icustomer) {
+        $cInfo = false;
+        $max_retries = 10;
+        $retry_count = 0;
+   
+        $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Customer');
+
+        $cInfo = $pb->get_customer_info(array(
+                    'i_customer' => $icustomer,
+                ));
+        $customername = $cInfo->customer_info->name;
+
+        return $customername;
+    }
+  
+    
+        public function createOldAccount($mobileNumber, Customer $customer,$batchNumber) {
+        $c = new Criteria();
+        $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
+        $c->addJoin(CustomerProductPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
+        $c->addJoin(ProductPeer::BILLING_PRODUCT_ID, BillingProductsPeer::ID, Criteria::LEFT_JOIN);
+        $c->addAnd(CustomerProductPeer::STATUS_ID, 3);
+        $c->addAnd(CustomerPeer::ID, $customer->getId());
+        $product = BillingProductsPeer::doSelectOne($c);
+        return $this->createAccount($customer, $mobileNumber, '', $product->getAIproduct(),'N',$batchNumber);
+        
+    }
+    
+    
 
 }
 

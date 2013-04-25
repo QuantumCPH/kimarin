@@ -30,6 +30,7 @@ class BaseOdrsFormFilter extends BaseFormFilterPropel
       'i_service'           => new sfWidgetFormFilterInput(),
       'vat_included_amount' => new sfWidgetFormFilterInput(),
       'charged_vat_value'   => new sfWidgetFormFilterInput(),
+      'i_account'           => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -49,6 +50,7 @@ class BaseOdrsFormFilter extends BaseFormFilterPropel
       'i_service'           => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'vat_included_amount' => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'charged_vat_value'   => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'i_account'           => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('odrs_filters[%s]');
@@ -83,6 +85,7 @@ class BaseOdrsFormFilter extends BaseFormFilterPropel
       'i_service'           => 'Number',
       'vat_included_amount' => 'Number',
       'charged_vat_value'   => 'Number',
+      'i_account'           => 'Text',
     );
   }
 }

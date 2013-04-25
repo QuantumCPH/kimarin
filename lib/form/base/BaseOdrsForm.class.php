@@ -29,6 +29,7 @@ class BaseOdrsForm extends BaseFormPropel
       'i_service'           => new sfWidgetFormInput(),
       'vat_included_amount' => new sfWidgetFormInput(),
       'charged_vat_value'   => new sfWidgetFormInput(),
+      'i_account'           => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -49,6 +50,7 @@ class BaseOdrsForm extends BaseFormPropel
       'i_service'           => new sfValidatorInteger(array('required' => false)),
       'vat_included_amount' => new sfValidatorNumber(array('required' => false)),
       'charged_vat_value'   => new sfValidatorNumber(array('required' => false)),
+      'i_account'           => new sfValidatorString(array('max_length' => 50, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('odrs[%s]');
