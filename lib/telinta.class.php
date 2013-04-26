@@ -34,7 +34,9 @@ class Telienta {
 
         $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Customer');
 
-        $uniqueid = "KB2CC" . $customer->getId() . $customer->getUniqueid();
+
+        $uniqueid = "KB2C". $customer->getId() . $customer->getUniqueid();
+
 
         $Parent = $this->iParentReseller;
 
@@ -385,7 +387,7 @@ class Telienta {
 
         return true;
     }
-    
+
     public function createDialAccount($mobileNumber, Customer $customer) {
         $c = new Criteria();
         $c->addJoin(CustomerPeer::ID, CustomerProductPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
@@ -395,6 +397,7 @@ class Telienta {
         $c->addAnd(CustomerPeer::ID, $customer->getId());
         $product = BillingProductsPeer::doSelectOne($c);
         return $this->createAccount($customer, $mobileNumber, '', $product->getAIproduct());
+
         
     }
       public function getCustomerInfoUnique($icustomer) {
@@ -424,8 +427,7 @@ class Telienta {
         return $this->createAccount($customer, $mobileNumber, '', $product->getAIproduct(),'N',$batchNumber);
         
     }
-    
-    
+
 }
 
 ?>

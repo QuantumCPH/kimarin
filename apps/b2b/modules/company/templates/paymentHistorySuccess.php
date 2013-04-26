@@ -1,0 +1,52 @@
+<?php use_helper('I18N') ?>
+<?php use_helper('Number') ?>
+
+
+<div id="sf_admin_container"><h1><?php echo __('Receipts') ?></h1>
+<?php if ($sf_user->hasFlash('message')): ?>
+<div class="save-ok">
+  <h2><?php echo __($sf_user->getFlash('message')) ?></h2>
+</div>
+<?php endif; ?>
+</div><br />
+<table width="100%" cellspacing="0" cellpadding="2" class="tblAlign">
+<tr class="headings">
+    <th><?php echo __('Date & Time') ?></th>
+    <th><?php echo __('Description') ?></th>
+    <th style="text-align: right;padding-right: 3px;"><?php echo __('Amount') ?> </th>
+    <th><?php echo __('Reciept') ?></th>
+</tr>
+<?php 
+$amount_total = 0;
+$incrment=1;
+foreach($transactions as $transaction):
+
+if($incrment%2==0){
+  $colorvalue="#FFFFFF";
+  $class= 'class="even"';
+  }else{
+    $class= 'class="odd"';
+    $colorvalue="#FCD9C9";
+ }
+//                  
+$incrment++;
+?>
+<tr  style="background-color:<?php //echo $colorvalue;?>" <?php echo $class;?>>
+    <td><?php echo  $transaction->getCreatedAt("d-m-Y H:i:s"); ?></td>    
+    <td><?php echo __($transaction->getDescription()) ?></td>
+    <td align="" style="text-align: right;padding-right: 3px;"><?php echo number_format($transaction->getAmount(),2); $amount_total += $transaction->getAmount(); ?><?php echo sfConfig::get('app_currency_code');?></td>
+    <td><a href="<?php echo sfConfig::get('app_b2b_url')."company/ShowReceipt?tid=".$transaction->getId(); ?>" target="_blank"><img src="<?php echo sfConfig::get('app_web_url')?>sf/sf_admin/images/default_icon.png" title=<?php echo __("view")?> alt=<?php echo __("view")?>></a></td>
+</tr>
+<?php endforeach; ?>
+<?php if(count($transactions)==0): ?>
+<tr>
+    <td colspan="5"><p><?php echo __('There are currently no transactions to show.') ?></p></td>
+</tr>
+<?php else: ?>
+<tr><td>&nbsp;</td>
+    <td align="right"><strong><?php echo __('Total:') ?>&nbsp;&nbsp;</strong></td>
+    <td  align="right"><strong><?php echo number_format($amount_total,2);  ?><?php echo sfConfig::get('app_currency_code');?></strong></td>
+    <td>&nbsp;</td>
+</tr>	
+<?php endif; ?>
+</table>

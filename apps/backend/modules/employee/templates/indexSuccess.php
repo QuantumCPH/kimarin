@@ -121,17 +121,22 @@
         $accountInfo = $ComtelintaObj->getAccountInfo($telintaAccount->getIAccount());
         $telintaGetBalance = $accountInfo->account_info->balance;
        
-        /*
+       
         $cb = new Criteria();
         $cb->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'cb'.$mobileID);
         $cb->addAnd(TelintaAccountsPeer::STATUS, 3);
         $telintaAccountcb = TelintaAccountsPeer::doSelectOne($cb);
-        $accountInfocb = $ComtelintaObj->getAccountInfo($telintaAccountcb->getIAccount());
-        $telintaGetBalancecb = $accountInfocb->account_info->balance;
-        */
+        if($telintaAccountcb){
+            $accountInfocb = $ComtelintaObj->getAccountInfo($telintaAccountcb->getIAccount());
+            $telintaGetBalancecb = $accountInfocb->account_info->balance;
+        }else{
+            $telintaGetBalancecb=0; 
+        }
+            
+        
 
          $regtype=$employee->getRegistrationType();
-        
+        $telintaGetBalanceres = 0;
         if(isset($regtype) && $regtype==1){
         $voip = new Criteria();
 
@@ -139,19 +144,22 @@
         $voip->addAnd(SeVoipNumberPeer::IS_ASSIGNED, 1);
         $voipv = SeVoipNumberPeer::doSelectOne($voip);
 
-        if(isset ($voipv)){
+            if(isset ($voipv)){
 
-        $resenummer=$voipv->getNumber();
-        $resenummer = substr($resenummer, 2);
+                $resenummer=$voipv->getNumber();
+                $resenummer = substr($resenummer, 2);
 
-        $res = new Criteria();
-        $res->add(TelintaAccountsPeer::ACCOUNT_TITLE, $resenummer);
-        $res->addAnd(TelintaAccountsPeer::STATUS, 3);
-        $telintaAccountres = TelintaAccountsPeer::doSelectOne($res);
-        $accountInfores = $ComtelintaObj->getAccountInfo($telintaAccountres->getIAccount());
-        $telintaGetBalanceres = $accountInfores->account_info->balance;
-
-        }
+                $res = new Criteria();
+                $res->add(TelintaAccountsPeer::ACCOUNT_TITLE, $resenummer);
+                $res->addAnd(TelintaAccountsPeer::STATUS, 3);
+                $telintaAccountres = TelintaAccountsPeer::doSelectOne($res);
+                if($telintaAccountres){
+                  $accountInfores = $ComtelintaObj->getAccountInfo($telintaAccountres->getIAccount());
+                    $telintaGetBalanceres = $accountInfores->account_info->balance;  
+                }else{
+                    $telintaGetBalanceres = 0;
+                }
+            }
         }
       echo  $balnc=(float)$telintaGetBalance+(float)$telintaGetBalancecb+(float)$telintaGetBalanceres;
           echo sfConfig::get('app_currency_code');
@@ -165,8 +173,8 @@
     <!--  <td align="center">  <?php //$appval=$employee->getIsAppRegistered();  if(isset($appval) && $appval==1){   ?> <img alt="Tick" src="/sf/sf_admin/images/tick.png">  <?php //} ?></td>
        <td><?php //echo $employee->getAppCode() ?></td>
        <td><?php //echo $employee->getPassword() ?></td>-->
-       <td><a href="<?php echo url_for('employee/edit?id='.$employee->getId()) ?>"><img src="/sf/sf_admin/images/edit_icon.png" title="edit" alt="edit"></a><a href="employee/del?id=<?php echo $employee->getId(); if(isset($companyval) && $companyval!=""){echo "&company_id=".$companyval;} ?>" ><img src="/sf/sf_admin/images/delete_icon.png" title="delete" alt="delete"></a>
-       <a href="<?php echo url_for('employee/view?id='.$employee->getId()) ?>"><img src="/sf/sf_admin/images/default_icon.png" title="view" alt="view"></a>
+       <td><a href="<?php echo url_for('employee/edit?id='.$employee->getId()) ?>"><img src="<?php echo sfConfig::get('app_web_url') ?>/sf/sf_admin/images/edit_icon.png" title="edit" alt="edit" /></a><a href="employee/del?id=<?php echo $employee->getId(); if(isset($companyval) && $companyval!=""){echo "&company_id=".$companyval;} ?>" ><img src="<?php echo sfConfig::get('app_web_url') ?>/sf/sf_admin/images/delete_icon.png" title="delete" alt="delete" /></a>
+       <a href="<?php echo url_for('employee/view?id='.$employee->getId()) ?>"><img src="<?php echo sfConfig::get('app_web_url') ?>/sf/sf_admin/images/default_icon.png" title="view" alt="view" /></a>
         <!--    <a href="<?php echo url_for('employee/view?id='.$employee->getId()) ?>"><img src="/sf/sf_admin/images/default_icon.png" title="view" alt="call history"></a>
      -->  </td>
     </tr>
