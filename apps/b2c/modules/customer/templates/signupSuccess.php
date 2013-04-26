@@ -152,7 +152,7 @@ use_helper('I18N');
                     <?php
                     foreach ($langs as $lang) {
                         ?>
-                        <option value="<?php echo $lang->getId(); ?>" > <?php echo $lang->getLanguage(); ?></option>
+                        <option value="<?php echo $lang->getId(); ?>" > <?php echo __($lang->getLanguage()); ?></option>
                         <?php
                     }
                     ?>
@@ -216,10 +216,10 @@ use_helper('I18N');
                     </select>
                 </div>   
                 <br clear="all" />
-                <div class="left"><?php echo __('first name') ?><em>*</em>&nbsp;:</div>
+                <div class="left"><?php echo __('First name') ?><em>*</em>&nbsp;:</div>
                 <div class="right"><input name="first_name" type="text" class="input1"/></div>
                 <br clear="all" />
-                <div class="left"><?php echo __('last name') ?><em>*</em>&nbsp;:</div>
+                <div class="left"><?php echo __('Last name') ?><em>*</em>&nbsp;:</div>
                 <div class="right"><input name="last_name" type="text" class="input1"/></div>
                 <br clear="all" />
                 <div class="left"><?php echo __('Address') ?><em>*</em>&nbsp;:</div>
