@@ -162,7 +162,8 @@ class employeeActions extends sfActions {
         $employee->setEmail($request->getParameter('email'));
         $employee->setProductId($request->getParameter('productid'));
         $employee->setSimTypeId($request->getParameter('sim_type_id'));
-        // $employee->setProductPrice($request->getParameter('price'));
+        $employee->setPlainText($request->getParameter('password'));
+        $employee->setPassword($request->getParameter('password'));
         $employee->setComments($request->getParameter('comments'));
         $employee->setUniqueId($request->getParameter('uniqueid'));
         $employee->setStatusId(sfConfig::get('app_status_new'));
