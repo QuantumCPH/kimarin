@@ -3377,7 +3377,30 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         endif;
         //-----------------------------------------
     }
+   
+    public static function sendEmployeeForgetPasswordEmail(Employee $employee, $message_body, $subject) {
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
 
+        // $subject = __("Request for password");
+        $recepient_email = trim($employee->getEmail());
+       
+        $recepient_name = sprintf('%s %s', $employee->getFirstName(), $employee->getLastName());
+        
+        $employee_id = trim($employee->getId());
+ 
+        //------------------Sent The Email To Employee
+        if (trim($recepient_email) != '') {
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recepient_name);
+            $email->setReceipientEmail($recepient_email);
+            $email->setCutomerId($employee_id);
+            $email->setEmailType(sfConfig::get('app_site_title') . 'Employee Forget Password');
+            $email->setMessage($message_body);
+            $email->save();
+        }
+        //----------------------------------------
+    }
 }
 
 ?>

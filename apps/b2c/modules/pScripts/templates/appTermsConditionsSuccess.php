@@ -21,7 +21,7 @@
         <div style="" class="article">
   <div style="margin-bottom:45px" class="title">
     <h2>KIMARIN · Terms and Conditions</h2></div>
-  <br>
+  <br />
 <h3>1.- General</h3>
 <p><strong>1.1 </strong>This document establishes the terms and conditions under which
 Kimarin Europe SL, with registered address in Urbanización Rio Real,
@@ -65,192 +65,165 @@ mobile number, at the KIMARIN web site.</p>
 <p>The Customer shall have to pay a fee for this change, which is specified
 in the abovementioned site, and which will be automatically deducted
 from the credit available in the Customer’s account.</p>
-<p><strong>2.8 </strong>The account may not be used:<br>
+<p><strong>2.8 </strong>The account may not be used:<br />
   - To make international calls if the Customer account’s balance falls
-below 0.05 €.<br>
-  - To make national calls in Spain.<br>
+below 0.05 €.<br />
+  - To make national calls in Spain.<br />
   - To make international calls to special numbers. In this case, the call
 price will be increased by KIMARIN according to the current prices
 published.</p>
 
 
 
-
-<br>
-<h3>3. Account refill and credit availability</h3>
-<p><strong>3.1</strong>  In order to make outgoing international calls, Customers shall have
-a minimum balance of +0.05€ available in their account.</p>
-<p><strong>3.2</strong> The refill of the Customers’ account shall be carried out from
-KIMARIN web site.</p><p>The minimum amount for manual refills is 10.00 €.</p><p>The maximum credit balance any Customer’s account may hold
-amounts to 250.00€ at any time.</p>
-<p><strong>3.3</strong>  The different amounts available for refills are published at
-KIMARIN’s web site.</p>
-<p><strong>3.4</strong>  Any refills shall be used within 180 days.</p>
-<p><strong>3.5</strong>  The Customer may obtain information about his/her current balance
-through the section “My account”, at KIMARIN web site.</p>
-<p>&nbsp;</p>
-
-
-<h3>4. Payment</h3>
-<p><strong>4.1</strong> As the Customer uses the service provided by KIMARIN, the cost for
+<h3>3. Payment</h3>
+<p><strong>3.1</strong> As the Customer uses the service provided by KIMARIN, the cost for
 the calls will be automatically deducted from the credit available in his/
 her account.</p>
-<p><strong>4.2</strong> The Customer is obliged to ensure that the credit available in his/
+<p><strong>3.2</strong> The Customer is obliged to ensure that the credit available in his/
 her account is sufficient to make a call, and always, the minimum
 balance of 0.05€.</p>
-<p><strong>4.3</strong>  In case the credit available in the Customer’s account falls below the
+<p><strong>3.3</strong>  In case the credit available in the Customer’s account falls below the
 minimum balance (0.05 €) during a phone call, such call will be cut off
 or.</p>
-<p><strong>4.4</strong>  Customers shall pay for both the Initial Package and any further
-refills at the KIMARIN’s web site by PayPal.
-Customer’s account will be immediately and automatically updated with
-any refills made.</p>
 
-<h3>5. Pricing and invoicing proceduresn</h3>
-<p><strong>5.1</strong> By accepting the terms and conditions of this document, the
+
+<h3>4. Pricing and invoicing proceduresn</h3>
+<p><strong>4.1</strong> By accepting the terms and conditions of this document, the
 Customer also acknowledges to be familiarized with KIMARIM’s prices
 and rates structure, which the Customer hereby accepts. The current
 prices for the services provided by KIMARIN and for the individual price
 plans are available at KIMARIN web site at any
 time.</p>
-<p><strong>5.2</strong> Prices published at KIMARIN web page only
+<p><strong>4.2</strong> Prices published at KIMARIN web page only
 cover the international part of the phone calls.</p><p>Therefore, the Customer shall pay, apart from the amount to be paid to
 KIMARIN for the international part of the calls, the relevant amount
 invoiced by his/her local mobile provider according to the prices fixed
 by the latter for calls within the national territory.</p>
-<p><strong>5.3</strong>  KIMARIN shall be entitled to amend such prices with a prior notice of
+<p><strong>4.3</strong>  KIMARIN shall be entitled to amend such prices with a prior notice of
 30 days which will be published in its web site.</p>
-<p><strong>5.4</strong>  All prices published at KIMARIN web site are exclusive of VAT, so the
+<p><strong>4.4</strong>  All prices published at KIMARIN web site are exclusive of VAT, so the
 relevant VAT will be added to any amounts invoiced to the Customer for
 his/her use.</p>
-<p><strong>5.5</strong>  All calls shall be invoiced per seconds.</p>
-<p><strong>5.6</strong> The Customer shall have access to a detailed statement specifying
-each refill and the cost of each individual call, which will be available at
-My account from the KIMARIN site.</p>
+<p><strong>4.5</strong>  All calls shall be invoiced per seconds.</p>
 
-<h3>6. Service quality</h3>
+
+<h3>5. Service quality</h3>
 <p>KIMARIN will be liable only for the quality of its services and not for the
 services rendered by the national mobile provider to the Customer. The
 quality of the services rendered by KIMARIN will be in accordance with
 the law and the regulations on telecommunication services..</p>
 
-<h3>7. Customer Service</h3>
-<p><strong>7.1</strong> The Customer may contact KIMARIN Customer Service
+<h3>6. Customer Service</h3>
+<p><strong>6.1</strong> The Customer may contact KIMARIN Customer Service
 Department by e-mail: <a href="mailto:support@kimarin.es">support@kimarin.es</a> or by
 telephone: 951 404 653.</p>
 
-<p><strong>7.2</strong> The Customer Service Department’s opening times are
+<p><strong>6.2</strong> The Customer Service Department’s opening times are
 published at KIMARIN web site</p>
 
-<h3>8.  Complaints and claims by the Customers</h3>
-<p><strong>8.1</strong> Should the Customer wish to make any claim or complaint
+<h3>7.  Complaints and claims by the Customers</h3>
+<p><strong>7.1</strong> Should the Customer wish to make any claim or complaint
 regarding the products or services purchased from KIMARIN, the
 Customer shall contact KIMARIN’s Customer Service Department,
 either by telephone or by e-mail, as stated in paragraph 7.1
 above, as soon as possible and not later than 30 days from the
 date he became aware of the relevant fault or event.</p>
-
-<p><strong>8.2</strong>  If the problem is a fault of the Starter Package, the latter shall
+<p><strong>7.2</strong>  If the problem is a fault of the Starter Package, the latter shall
 be sent to the KIMARIN’s Customer Service Department within the
 abovementioned term of 30 days (article 8.1).</p>
-<p><strong>8.3</strong>   KIMARIN shall reply to the Customer’s complaint within 10
+<p><strong>7.3</strong>   KIMARIN shall reply to the Customer’s complaint within 10
 working days from the reception of the complaint and/or claim by
 KIMARIN.</p>
-<p><strong>8.4</strong>   If the Customer is dissatisfied with the reply or the solution
+<p><strong>7.4</strong>   If the Customer is dissatisfied with the reply or the solution
 given by KIMARIN, he/she will be entitled to sent his/her
 complaint to the Secretary of State for Telecommunications,
 according to the applicable regulations and laws.</p>
 
-<h3>9.  Data Protection and Register of Customers</h3>
-<p><strong>9.1 </strong>To register as a Customer of KIMARIN and to purchase an
+<h3>8.  Data Protection and Register of Customers</h3>
+<p><strong>8.1 </strong>To register as a Customer of KIMARIN and to purchase an
 Starter Package, KIMARIN requires the following details from the
-Customer:<br>
-<br>
-Individuals:<br>
-  - Name<br>
-  - NIE number (If the Customer does not have a NIE number, he/<br>
-  she can provide his/her passport number)<br>
-  - Date of birth<br>
-  - Nationality<br>
-  - Address in Spain<br>
-  - Mobile phone number connected to KIMARIN’s account<br>
-  - E-mail<br>
-  - Password chosen by the Customer<br>
-  <br>
-  Legal entity:<br>
-  - Company’s name- Tax Identification Number<br>
-  - Registration date &ndash; Address in Spain &ndash; Contact person’s name<br>
-  - Contact person’s e-mail address<br>
+Customer:<br />
+<br />
+Individuals:<br />
+  - Name<br />
+  - NIE number (If the Customer does not have a NIE number, he/she can provide his/her passport number)<br/>
+  - Date of birth<br />
+  - Nationality<br />
+  - Address in Spain<br />
+  - Mobile phone number connected to KIMARIN’s account<br/>
+  - E-mail<br />
+  - Password chosen by the Customer<br />
+  <br/>
+  Legal entity:<br/>
+  - Company’s name- Tax Identification Number<br/>
+  - Registration date &ndash; Address in Spain &ndash; Contact person’s name<br/>
+  - Contact person’s e-mail address<br/>
   - Mobile phone numbers for each KIMARIN</p>
-<p><strong>9.2</strong> All the personal details provided by the Customer will be
+<p><strong>8.2</strong> All the personal details provided by the Customer will be
 treated as confidential information and in accordance with the
 Spanish Data Protection Act (Organic Law 15/1999 of the 13th
 December, on the Protection of Personal Data).</p>
-<p><strong>9.3</strong>   All the records kept in connection with the calls made by the
+<p><strong>8.3</strong>   All the records kept in connection with the calls made by the
 Customer will be also treated as confidential information and
 stored pursuant to all the applicable laws regarding data
 protection, in accordance with Organic Law 15/1999 of the 13th
 December, on the Protection of Personal Data.</p>
 
-<h3>10.   Amendment of this document</h3>
-<p><strong>10.1 </strong>KIMARIN may unilaterally amend the contents of this
+<h3>9.   Amendment of this document</h3>
+<p><strong>9.1 </strong>KIMARIN may unilaterally amend the contents of this
 document, at its entire discretion, with a prior notice of 30 days to
 the Customers, in accordance with the requisites of the competent
 authorities, new regulations, technological developments or any
-other authority. <br>
+other authority. <br />
   Notwithstanding the above, additionally the notice regarding any
 changes shall be published at KIMARIN web site.</p>
 
-<p><strong>10.2 </strong>The Customers are obliged to be updated regarding any
-changes of this offer, which is published at KIMARIN web site.<br>
-  <br>
+<p><strong>9.2 </strong>The Customers are obliged to be updated regarding any
+changes of this offer, which is published at KIMARIN web site.<br />
+  <br />
   Changes are considered as accepted by the Customer if, once
 those changes have been notified to him/her or duly published
 before coming into effect, the Customer has not notified any
 objection thereto to KIMARIN.</p>
-<p><strong>10.3</strong>    If the Customer does not agree to the changes made by
+<p><strong>9.3</strong>    If the Customer does not agree to the changes made by
 KIMARIN, this document will be rescinded by mutual consent,
-once the Customer has fully used the credit available in his/her
-6
-account, without having any right to any claim and/or
+once the Customer has fully used the credit available in his/her account, without having any right to any claim and/or
 compensation.</p>
 
-<h3>11.   Execution of the document</h3>
-<p><strong>11.1 </strong>The Customer may terminate this agreement in writing, by
+<h3>10.   Execution of the document</h3>
+<p><strong>10.1 </strong>The Customer may terminate this agreement in writing, by
 sending an email to the KIMARIN’s Customer Service Department :
 <a href="mailto:support@kimarin.es">support@kimarin.es</a> or directly at the section “My
-Account” of KIMARIN’s web site. The
-termination of the Agreement and the disconnection of the SIM
+Account” of KIMARIN’s web site. The termination of the Agreement and the disconnection of the SIM
 card and of the Customer account will come into effect at the end
 of the month following the notice of cancellation.</p>
 
-<p><strong>11.2 </strong>Provisionally, the Customer may disconnect his/her SIM card
+<p><strong>10.2 </strong>Provisionally, the Customer may disconnect his/her SIM card
 if it has been stolen at the section “My Account” of KIMARIN web
 site, or through the KIMARIN’s
 Customer Service Department (tel.: 951 404 653, e-mail: <a href="mailto:support@kimarin.es">support@kimarin.es</a>).</p>
-<p><strong>11.3</strong>    KIMARIN is entitled to disconnect the Customer’s account
+<p><strong>10.3</strong>    KIMARIN is entitled to disconnect the Customer’s account
 and his/her SIM card, either provisionally or definitively, in the
 event of fraud, alleged fraud, misuse of the service, or any breach
 of contract by the Customer. This decision will be left to the
 discretion of KIMARIN.</p>
-<p><strong>11.4</strong>    If the Customer’s account has not been used or refilled for
+<p><strong>10.4</strong>    If the Customer’s account has not been used or refilled for
 360 days, KIMARIN is entitled to permanently disconnect the
 Customer’s account, by sending a notification to him or her. In
 this case, the available credit, if any, will not be refundable. 
 </p>
 
-<p><strong>11.5</strong>     If the Customer does not agree with the changes made by
+<p><strong>10.5</strong>     If the Customer does not agree with the changes made by
 KIMARIN, this document will be terminated by mutual consent,
 once the Customer has used any credit available in his/her
 account, without being entitled to any claim or compensation.</p>
-<h3>12.   Applicable Law</h3>
+<h3>11.   Applicable Law</h3>
 <p> This agreement will be governed by the Spanish laws that apply to
 the services provided and, especially, by the provisions of the
 General Telecommunication Law 32/2003, of 3rd November.</p>
 <h3>12.   Jurisdiction</h3>
 <p> For any issues and disputes derived from the interpreting and
 compliance of this agreement, the parties hereto, expressly
-7
 waiving any jurisdiction that, either at this moment or in the
 future might correspond to them, submit themselves to the
 jurisdiction and competence of the Courts of Marbella.</p>
