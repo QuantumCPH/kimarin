@@ -4602,7 +4602,7 @@ class pScriptsActions extends sfActions {
 
             $telintaObj->createAAccount($TelintaMobile, $this->customer);
             $telintaObj->createCBAccount($TelintaMobile, $this->customer);
-            $telintaObj->createDialAccount($this->customer->getMobileNumber(), $this->customer);
+            $telintaObj->createDialAccount($this->customer->getMobileNumber(), $customer);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
             $this->setPreferredCulture($this->customer);

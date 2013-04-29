@@ -427,7 +427,6 @@ class Telienta {
         return $this->createAccount($customer, $mobileNumber, '', $product->getAIproduct(),'N',$batchNumber);
         
     }
-
 }
 
 ?>
