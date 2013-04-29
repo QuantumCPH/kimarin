@@ -679,6 +679,44 @@ class CompanyEmployeActivation {
         
         return true;
     }
+    
+    public function getCompanyBalanceUsingEmployee(Employee $employee) {
+        
+        $cInfo = false;
+        $max_retries = 10;
+        $retry_count = 0;
+
+        $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Customer');
+        
+        while (!$cInfo && $retry_count < $max_retries) {
+            try {
+
+                $cInfo = $pb->get_customer_info(array(
+                            'i_customer' => $employee->getCompany()->getICustomer(),
+                        ));
+                $Balance = $cInfo->customer_info->balance;
+                $CreditLimit = $cInfo->customer_info->credit_limit;
+                
+            } catch (SoapFault $e) {
+                if ($e->faultstring != 'Could not connect to host' && $e->faultstring != 'Internal Server Error') {
+                    emailLib::sendErrorInTelinta("getCompanyBalanceUsingEmployee: " . $employee->getId() . " Error!", "We have faced an issue in Company Account Balance Fetch on telinta. This is the error for cusotmer with Company Id: " . $employee->getId() . " and error is " . $e->faultstring . ".  <br/> Please Investigate.");
+                    
+                    return false;
+                }
+            }
+            sleep(0.5);
+            $retry_count++;
+        }
+        if ($retry_count == $max_retries) {
+            emailLib::sendErrorInTelinta("getCompanyBalanceUsingEmployee: " . $employee->getId() . " Error!", "We have faced an issue in Company Account Balance Fetch on telinta. This is the error for cusotmer with Company Id: " . $employee->getId() . ". Error is Even After Max Retries " . $max_retries . ".  <br/> Please Investigate.");
+            return false;
+        }
+        
+        if ($CreditLimit-$Balance == 0)
+            return 0.001;
+        else
+            return $CreditLimit-$Balance;
+    }
 }
 
 ?>

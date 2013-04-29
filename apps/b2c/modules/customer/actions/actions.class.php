@@ -2679,5 +2679,10 @@ class customerActions extends sfActions {
 
         return sfView::NONE;
     }
-
+   public function executeAppRegistration(sfWebRequest $request){
+       $cc = new Criteria();
+       $cc->add(CountryPeer::ENABLED,1);
+       $countries = CountryPeer::doSelect($cc);
+       $this->countries = $countries;
+   }
 }

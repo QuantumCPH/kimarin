@@ -4431,8 +4431,7 @@ class pScriptsActions extends sfActions {
                       $ComtelintaObj = new CompanyEmployeActivation();  
                       $balance = 0.00;
                       if($telinta_account){
-                        $account_info = $ComtelintaObj->getAccountInfo($telinta_account->getIAccount());
-                        $balance = $account_info->account_info->balance;
+                        $balance = $ComtelintaObj->getCompanyBalanceUsingEmployee($employee);
                       }  
                     }
                     $amt = number_format($country->getCbfRate(), 2);
