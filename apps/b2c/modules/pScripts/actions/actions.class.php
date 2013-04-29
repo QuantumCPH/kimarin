@@ -4124,9 +4124,28 @@ class pScriptsActions extends sfActions {
         $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
         $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $customer = CustomerPeer::doSelectOne($c);
+        
+        $ec = new Criteria();
+        $ec->add(EmployeePeer::MOBILE_NUMBER, $mobile_number);
+        $ec->addAnd(EmployeePeer::STATUS_ID, 3);
+        $employee = EmployeePeer::doSelectOne($ec);
+        
         if ($customer) {
             $telintaObj = new Telienta();
             echo number_format($telintaObj->getBalance($customer), 2);
+            
+        } elseif ($employee) {
+            $cta = new Criteria();
+            $cta->add(TelintaAccountsPeer::PARENT_TABLE,"employee");
+            $cta->addAnd(TelintaAccountsPeer::PARENT_ID,$employee->getId());
+            $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
+            $ComtelintaObj = new CompanyEmployeActivation();  
+            $balance = 0.00;
+            foreach($telinta_accounts as $telinta_account){
+                $account_info = $ComtelintaObj->getAccountInfo($telinta_account->getIAccount());
+                $balance += $account_info->account_info->balance;
+            }
+            echo number_format($balance, 2);
         } else {
             echo "0.00";
         }
@@ -4159,12 +4178,30 @@ class pScriptsActions extends sfActions {
         //  $c->add(CustomerPeer::BLOCK,0);
         $customer = CustomerPeer::doSelectOne($c);
         //  var_dump($customer);
+        
+        $ec = new Criteria();
+        $ec->add(EmployeePeer::MOBILE_NUMBER, $mobile_number);
+        $ec->addAnd(EmployeePeer::PASSWORD, $password);
+        $ec->addAnd(EmployeePeer::STATUS_ID, 3);
+        $employee = EmployeePeer::doSelectOne($ec);
+        
         if ($customer) {
             $uid = $customer->getUniqueid();
             echo $reponseVar = "OK;Port=6000;VoipIP=208.89.105.21;uid=1393238;Username=$mobile_number;";
             //    echo "OK;Port=6000;VoipIP=208.89.105.21;uid=$uid;isoCode=$isocode;Username=$mbnumber;Password=".$tilintapassword.";name=".$customer->getFirstName().";mobile_number=".$customer->getMobileNumber().";email=".$customer->getEmail();
             $applog->setStatusId(3);
-            $applog->setCustomerId($customer->getId());
+            $applog->setParentId($customer->getId());
+            $applog->setParentTable("customer");
+            $applog->setResponse($reponseVar);
+            $applog->save();
+            
+        } if ($employee) {
+            $uid = $employee->getUniqueid();
+            echo $reponseVar = "OK;Port=6000;VoipIP=208.89.105.21;uid=1393238;Username=$mobile_number;";
+            //    echo "OK;Port=6000;VoipIP=208.89.105.21;uid=$uid;isoCode=$isocode;Username=$mbnumber;Password=".$tilintapassword.";name=".$customer->getFirstName().";mobile_number=".$customer->getMobileNumber().";email=".$customer->getEmail();
+            $applog->setStatusId(3);
+            $applog->setParentId($employee->getId());
+            $applog->setParentTable("employee");
             $applog->setResponse($reponseVar);
             $applog->save();
         } else {
@@ -4182,7 +4219,12 @@ class pScriptsActions extends sfActions {
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         //echo $c->toString(); exit;
         $customer = CustomerPeer::doSelectOne($c);
-
+        
+        $ec = new Criteria();
+        $ec->add(EmployeePeer::MOBILE_NUMBER, $mobile_number);
+        $ec->addAnd(EmployeePeer::STATUS_ID, 3);
+        $employee = EmployeePeer::doSelectOne($ec);
+        
         if ($customer) {
             $chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
 
@@ -4211,6 +4253,36 @@ class pScriptsActions extends sfActions {
 
             ROUTED_SMS::send($c_mobile_number, $sms_text);
             echo 'OK,Login Information successfully sent to your email.';
+            
+        } elseif ($employee) {
+            $chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+
+            $new_password = substr(str_shuffle($chars), 0, 6);
+            $employee->setPassword($new_password);
+            $employee->setPlainText($new_password);
+            $employee->save();
+            
+            $message_body = $this->getContext()->getI18N()->__('Hi') . ' ' . $employee->getFirstName() . '!'; //. ' ' . $customer->getFirstName() . '&nbsp;' . $customer->getLastName() . '!';
+            $message_body .= '<br /><br />';
+
+            $message_body .= $this->getContext()->getI18N()->__('Your password has been changed. Please use the following information to use App.', array('%1%' => sfConfig::get('app_site_title')));
+
+            $message_body .= '<br /><br />';
+            $message_body .= sprintf($this->getContext()->getI18N()->__('Mobile number: %s'), $employee->getMobileNumber());
+            $message_body .= '<br />';
+            $message_body .= $this->getContext()->getI18N()->__('Password') . ': ' . $new_password;
+
+            $subject = $this->getContext()->getI18N()->__('Password Request');
+            emailLib::sendEmployeeForgetPasswordEmail($employee, $message_body, $subject);
+//
+//            //Send Email to User --- when Forget Password Request Come --- 01/15/11
+//            emailLib::sendForgetPasswordEmail($customer, $message_body);
+
+            $sms_text = $this->getContext()->getI18N()->__("New password") . ": " . $new_password;
+
+            ROUTED_SMS::send($c_mobile_number, $sms_text);
+            echo 'OK,Login Information successfully sent to your email.';
+            
         } else {
             echo 'error, mobile number does not exists';
         }
@@ -4230,7 +4302,13 @@ class pScriptsActions extends sfActions {
         $cr->add(CustomerPeer::MOBILE_NUMBER, $mobile);
         $cr->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $customer = CustomerPeer::doSelectOne($cr);
-        if (!$customer) {
+        
+        $ec = new Criteria();
+        $ec->add(EmployeePeer::MOBILE_NUMBER, $mobile);
+        $ec->addAnd(EmployeePeer::STATUS_ID, 3);
+        $employee = EmployeePeer::doSelectOne($ec);
+        
+        if (!$customer && !$employee) {
             echo 'error, Mobile Number Not Registered';
             return sfView::NONE;
         }
@@ -4311,7 +4389,12 @@ class pScriptsActions extends sfActions {
             echo 'error, Country code not recgnized';
             return sfView::NONE;
         }
-        if ($customer) {
+        if ($customer || $employee) {
+            if($customer){
+                 $user = $customer;
+            }else{
+                 $user = $employee;
+            }
             if ($sender and $message and $number) {
                 $messages = array();
 
@@ -4333,11 +4416,25 @@ class pScriptsActions extends sfActions {
                     $cbf->setMessage($sms_text);
                     $cbf->setCountryId($country->getId());
 
-                    $cbf->setMobileNumber($customer->getMobileNumber());
+                    $cbf->setMobileNumber($user->getMobileNumber());
 
                     //get balance
-                    $telintaObj = new Telienta();
-                    $balance = $telintaObj->getBalance($customer);
+                    if($customer){
+                      $telintaObj = new Telienta();
+                      $balance = $telintaObj->getBalance($customer);
+                    } else {
+                      $cta = new Criteria();
+                      $cta->add(TelintaAccountsPeer::PARENT_TABLE,"employee");
+                      $cta->addAnd(TelintaAccountsPeer::PARENT_ID,$employee->getId());
+                      $cta->addAnd(TelintaAccountsPeer::ACCOUNT_TYPE,"a");
+                      $telinta_account = TelintaAccountsPeer::doSelectOne($cta);
+                      $ComtelintaObj = new CompanyEmployeActivation();  
+                      $balance = 0.00;
+                      if($telinta_account){
+                        $account_info = $ComtelintaObj->getAccountInfo($telinta_account->getIAccount());
+                        $balance = $account_info->account_info->balance;
+                      }  
+                    }
                     $amt = number_format($country->getCbfRate(), 2);
                     if ($balance < $amt) {
                         echo "error, Not Enough Balance, Please Recharge";
@@ -4345,11 +4442,17 @@ class pScriptsActions extends sfActions {
                     } else {
                         
                     }
-                    $res = ROUTED_SMS::Send($request->getParameter('number'), $sms_text, $customer->getMobileNumber());
+                    $res = ROUTED_SMS::Send($request->getParameter('number'), $sms_text, $user->getMobileNumber());
                     if ($res) {
+                      if($customer){  
                         $telintaObj = new Telienta();
                         $description = "SMS Charges";
                         $telintaObj->charge($customer, $amt, $description);
+                      }else{
+                        $ComtelintaObj = new CompanyEmployeActivation();  
+                        $description = "SMS Charges";
+                        $ComtelintaObj->chargeAccount($employee, $amt, $description);
+                      }
                     }
                 }
 
