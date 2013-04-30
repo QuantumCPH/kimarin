@@ -3170,7 +3170,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'agent_name'=>$recepient_agent_name,
             'wrap' => true,
                 ));
-        $subject = __('Registration Confirmation');
+        $subject = 'Registration Confirmation - Confirmación de registro';
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');
