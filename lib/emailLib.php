@@ -3146,16 +3146,29 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $customer_id = trim($transaction->getCustomerId());
         $customer = CustomerPeer::retrieveByPK($customer_id);
         $order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
-
+        $referrer_id =$customer->getReferrerId();
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
-
+        
+        if ($referrer_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $referrer_id);
+            $recepient_agent_email = AgentCompanyPeer::doSelectOne($c)->getEmail();
+            $recepient_agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $recepient_agent_email = '';
+            $recepient_agent_name = '';
+        }
+        $vat = $transaction->getVat();
+        
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial($app . '/order_receipt_app', array(
             'transaction' => $transaction,
             'customer' => $customer,
             'order' => $order,
-            'wrap' => false,
+            'vat'=> $vat,
+            'agent_name'=>$recepient_agent_name,
+            'wrap' => true,
                 ));
         $subject = __('Registration Confirmation');
         //Support Information

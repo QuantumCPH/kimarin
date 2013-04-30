@@ -748,7 +748,7 @@ input[type=text], input[type=password] {
 	padding:10px 20px 10px 20px;
 	margin: 0px;
 	color: #808080;
-	font-size: 17px;
+	font-size: 16px;
 	-webkit-border-radius: 7px;
 	-khtml-border-radius: 7px;
 	-moz-border-radius: 7px;
@@ -757,7 +757,7 @@ input[type=text], input[type=password] {
 .appbody select {
 	width:100%;
 	line-height: 78px;
-        height:41px;
+        height:42px;
 	border: #848484 solid 1px;
 	padding:10px 20px 10px 20px;
 	margin: 0px;
@@ -830,18 +830,18 @@ input[type=text], input[type=password] {
 	background: url(../images/head_bg.jpg) repeat left top;
 }
 
-.appbody .change_passwrod {
+.appbody .app_reg_fields {
 	float: left;
 	width: 100%;
 	min-height: 329px;
 }
-.appbody .change_passwrod ul {
+.appbody .app_reg_fields ul {
 	width: 99%;
 	margin: 0 auto;
 	height: auto;
 	display: block;
 }
-.appbody .change_passwrod ul li {
+.appbody .app_reg_fields ul li {
 	float: left;
 	width: 100%;
 	height: auto;
@@ -851,7 +851,7 @@ input[type=text], input[type=password] {
 	color:#FFF;
 	
 }
-.appbody .change_passwrod ul li a {
+.appbody .app_reg_fields ul li a {
 	width: auto;
 	text-decoration: none;
 	font-weight: normal;
@@ -859,13 +859,21 @@ input[type=text], input[type=password] {
 	color: #fff;
 	display: block;
 }
-.appbody .change_passwrod ul li a:hover {
+.appbody .app_reg_fields ul li a:hover {
 	color: #fff;
+}
+.appbody label.cc_code{
+    float:left;
+    line-height: 40px;
+}
+.appbody input.mnumber{
+    float:right;
+    width:268px;
 }
 .appbody .register {
 	height:110px;
 }
-.appbody .register input[type="button"] {
+.appbody .register input[type="submit"] {
     background: none repeat scroll 0 0 #E78F2F;
     border: 1px solid #945104;
     border-radius: 7px 7px 7px 7px;
@@ -881,6 +889,9 @@ input[type=text], input[type=password] {
     font-size:16px;
     line-height: 25px;
 }
-
+.appbody .app_reg_fields label.error{
+    font-size: 12px;
+    font-weight: bold !important;
+}
 .appbody .footer { width:100%; height:40px; text-align:center; font-size:98%; padding-top:17px; color:#FFF; float:left; background:#00a8e1;}
 /*********************** End App registration ******************/

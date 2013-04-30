@@ -25,6 +25,7 @@ class BaseAppRegistrationLogsFormFilter extends BaseFormFilterPropel
       'url'            => new sfWidgetFormFilterInput(),
       'application_id' => new sfWidgetFormFilterInput(),
       'response'       => new sfWidgetFormFilterInput(),
+      'register_from'  => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -39,6 +40,7 @@ class BaseAppRegistrationLogsFormFilter extends BaseFormFilterPropel
       'url'            => new sfValidatorPass(array('required' => false)),
       'application_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'response'       => new sfValidatorPass(array('required' => false)),
+      'register_from'  => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('app_registration_logs_filters[%s]');
@@ -68,6 +70,7 @@ class BaseAppRegistrationLogsFormFilter extends BaseFormFilterPropel
       'url'            => 'Text',
       'application_id' => 'Number',
       'response'       => 'Text',
+      'register_from'  => 'Text',
     );
   }
 }

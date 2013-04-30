@@ -12,7 +12,7 @@ use_helper('I18N');
 <script type="text/javascript">
     jQuery(function(){
         postage = 0;
-        jQuery("#regForm").validate({
+        jQuery("#appRegForm").validate({
             focusCleanup: true,
            
             rules: {
@@ -29,49 +29,22 @@ use_helper('I18N');
                         }
                     } 
                 },
-                password:{
+                pwd:{
                     required: true,
                     minlength: 6
-                },
-                
+                },                
                 confirm_password:{
                     required: true,
-                    equalTo: "#password"
-                },email:{
+                    equalTo: "#pwd"
+                },
+                email:{
                     required: true,
                     email: true
                   
                 },
-                simtype:{
-                    required:  function(){
-                        return ($('option:selected', "#product-select").attr('postage')==1)
-                    }
-                },
-                first_name:{
-                    required:  function(){
-                        return ($('option:selected', "#product-select").attr('postage')==1)
-                    }
-                },
-                last_name:{
-                    required:  function(){
-                        return ($('option:selected', "#product-select").attr('postage')==1)
-                    }
-                },
-                address:{
-                    required:  function(){
-                        return ($('option:selected', "#product-select").attr('postage')==1)
-                    }
-                },
-                city:{
-                    required:  function(){
-                        return ($('option:selected', "#product-select").attr('postage')==1)
-                    }
-                },
-                post_code:{
-                    required:  function(){
-                        return ($('option:selected', "#product-select").attr('postage')==1)
-                    }
-                }
+                name:{
+                    required:  true
+                }                
             },
             messages: {
                 mobile_number:{
@@ -80,77 +53,50 @@ use_helper('I18N');
                     maxlength: "<?php echo __("Please enter a valid 8 to 14 digit mobile number."); ?>",
                     digits: "<?php echo __("Please enter a valid mobile number."); ?>"
                 },
-                password:{
+                pwd:{
                     minlength: "<?php echo __("Your password must be at least 6 digits or characters."); ?>"
                 },
                 
                 confirm_password:{
                     equalTo: "<?php echo __("The passwords don’t match."); ?>"
-                },email:{
+                },
+                email:{
                     email: "<?php echo __("Please enter a valid e-mail address."); ?>"
                 }
             }
  
         });
         
-        jQuery("#product-select").change(function(){
-            if($('option:selected', this).attr('postage')==1){
-                jQuery("#postal-info").show();
-            }else{
-                jQuery("#postal-info").hide(); 
-            }
-        });
-        
-        jQuery("#country-select").change(function(){
-            var c_code =  jQuery("#country-select").find(':selected').attr('calling_code');
-            //  alert(v);
-            jQuery("#country-code").html("+"+c_code);
-            //    Cufon.replace('.country-code',{fontFamily: 'Barmeno-Medium', fontSize:'13px'});
-        });
-        
-//        jQuery("#country-select").ready(function(){
-//            var c_code =  jQuery("#country-select").find(':selected').attr('calling_code');
-//            //  alert(v);
-//            jQuery("#country-code").html("+"+c_code);
-//        });
-        jQuery('.submitbuttun').mousedown(function(){
-            jQuery(this).css('color', 'black');
-        }); 
-        jQuery('.submitbuttun').mouseup(function(){
-            jQuery(this).css('color', 'white');
-        });
-        if(jQuery('option:selected', "#product-select").attr('postage')==1){
-            jQuery("#postal-info").show();
-        }else{
-            jQuery("#postal-info").hide(); 
-        }
-        
     });
   
 </script>
 <div class="appbody">
-<form action="#">
+<form action="<?php echo $target;?>pScripts/appRegistration" method="post" id="appRegForm">
     <?php //echo image_tag(sfConfig::get('app_web_url').'zerocall/images/Screenshot_2013-04-25-10-19-32.png');?>
 <div class="gridContainer clearfix">
   <div id="LayoutDiv1">
    	<div class="intro_wrapper">
    	  <div class="dashboard_logo"><?php echo image_tag(sfConfig::get('app_web_url').'zerocall/images/app-heading.jpg');?></div>
-   	  <div class="change_passwrod">
+   	  <div class="app_reg_fields">
             	<ul>
                 <li style=" text-align:center; line-height:50px">Enter your information and press Register</li>
                   <li>
-                    <select name="select" id="select">
-                      <option>Denmark(+45)</option>
+                    <select name="ccode" id="country-select">
+                     <?php foreach($countries as $country){ ?>
+                       <option value="<?php echo $country->getCallingCode();?>" calling_code="<?php echo $country->getCallingCode();?>"><?php echo $country->getName();?></option>  
+                     <?php }?>   
                     </select>
                   </li>
-                  <li><input name="input" type="text" placeholder="Enter phone number:" /><br /><span class="exphone">e.g. 6133243242</span></li>
-                  <li><input name="input3" type="text" placeholder="Enter email:" /></li>
-                  <li><input name="input3" type="text" placeholder="Enter name:" /></li>
-                  <li><input name="input3" type="password" placeholder="Enter password:" /></li>
-                  <li><input name="input3" type="password" placeholder="Confirm password:" /></li>
-                  <li><div class="register"><input type="button" value="REGISTER" /></div></li>
+                  <li><label class="cc_code">+34</label><input name="mobile_number" id="mobile_number" type="text" placeholder="Phone number / Número de telefóno" class="mnumber" />
+                      <span class="exphone">e.g. 6133243242</span></li>
+                  <li><input name="email" type="text" placeholder="Enter email:" /></li>
+                  <li><input name="name" type="text" placeholder="Name / Nombre y apellido" /></li>
+                  <li><input id="pwd" name="pwd" type="password" placeholder="Password / Contraseña" /></li>
+                  <li><input name="confirm_password" type="password" placeholder="Confirm password / Confirma contraseña" /></li>
+                  <li><div class="register"><input type="submit" value="REGISTER" /></div></li>
                   <div style="clear:both;"></div>
                 </ul>
+              <input type="hidden" value="Web" name="registerFrom" />
       </div>
       
    	</div>
@@ -158,6 +104,6 @@ use_helper('I18N');
     </div> 
     <br clear="all" />
   </div>
-  <div class="footer">2013 Kimarin Europe S.L Privacy policy</div>
+  <div class="footer"><?php echo date("Y");?> Kimarin Europe S.L Privacy policy</div>
 </form>
 </div><br clear="all" />
