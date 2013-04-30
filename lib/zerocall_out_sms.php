@@ -154,7 +154,7 @@ class ZeroCallOutSMS {
         
         $sms_dk_object = SmsTextPeer::retrieveByPK(13);
         $sms_text_dk = $sms_dk_object->getMessageText();
-        $this->carbordfishSMS($da, $sms_text_dk);
+        ROUTED_SMS::Send($da, $sms_text_dk);
     }
 }
 

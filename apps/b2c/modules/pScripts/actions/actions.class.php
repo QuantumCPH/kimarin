@@ -4574,10 +4574,6 @@ class pScriptsActions extends sfActions {
         $transaction->setVat((($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
         $transaction->save();
 
-
-        TransactionPeer::AssignReceiptNumber($transaction);
-
-
         // echo 'Assigning Customer ID <br/>';
         //set customer's proudcts in use
         $customer_product = new CustomerProduct();
