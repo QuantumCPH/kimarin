@@ -147,7 +147,8 @@ class ZeroCallOutSMS {
     
     public function toCustomerAppRegViaWeb($customer){
         
-        $countryCode = $customer->getCountryCode();
+        $country = CountryPeer::retrieveByPK($customer->getCountryId());
+        $countryCode = $country->getCallingCode();
         $cMobile = $customer->getMobileNumber();
         $da = $countryCode.$cMobile;
         
