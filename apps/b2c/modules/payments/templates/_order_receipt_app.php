@@ -48,6 +48,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
+   <table width="600px" cellspacing="0" cellpadding="0">
+    <tr><td>       
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
                <?php echo $customer->getFirstName(); ?><br /><?php echo $customer->getEmail(); ?>
         </p>
@@ -67,7 +69,14 @@ $wrap_content  = isset($wrap)?$wrap:false;
             For information on price plans, tariffs, etc. go to www.kimarin.es, where you on MY ACCOUNT also can update your personal information, see your call history, payment history, refill your account, change your price plan or use other services.
         </p>
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Please remember that you pay local mobile call charges in Spain in addition to the Kimarin tariffs.</p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Best regards</p>
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Best regards,</p>
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>            
+            <?php echo sfConfig::get('app_postal_address_app');?>
+            Tel.: <?php echo sfConfig::get('app_phone_no');?><br />
+            E-mail: <?php echo sfConfig::get('app_support_email_id');?>
+        </p>
+        <br />
+        <hr /><br />
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
             Para más información sobre tarifas, visite www.kimarin.es En MI CUENTA  puede  actualizar y corregir sus datos, ver el historial de llamadas efectuadas, los pagos realizados, cargar su cuenta, cambiar el producto contratado al que mejor se ajuste a sus necesidades u otros servicios.
         </p>            
@@ -84,6 +93,8 @@ $wrap_content  = isset($wrap)?$wrap:false;
         </p>
         
 	<br />
+      </td></tr>
+</table>   
 <?php endif; ?>
 <table width="600px">
 <tr style="border:0px solid #fff">
