@@ -48,41 +48,15 @@ $wrap_content  = isset($wrap)?$wrap:false;
  ?>
  
 <?php if($wrap_content): ?>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-               <?php echo $customer->getFirstName(); ?><br /><?php echo $customer->getEmail(); ?>
-        </p>
-	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>APP</p>        
-	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear Customer') ?></p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;text-align: right'>Marbella, <?php echo date("d-m-Y",strtotime($transaction->getCreatedAt()));?> </p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Welcome to Kimarin APP connected to telephone number:</p>
-	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Thank you for your order of Kimarin APP, where you can call friends, family and business partners abroad at very low prices.</p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>It is very easy to get started.<br />
-            Your Kimarin account balance starts with 1.00 € of free airtime, but you must refill your account within 3 days to be able to continue to use the APP. You can refill your Kimarin account in different ways:</p>
-        <ul style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-            <li>Go to  www.kimarin.es and enter MY ACCOUNT</li>
-            <li>Via the APP if you use an Android telephone</li>
-            <li>Go to a Kimarin dealer</li>
-        </ul>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-            For information on price plans, tariffs, etc. go to www.kimarin.es, where you on MY ACCOUNT also can update your personal information, see your call history, payment history, refill your account, change your price plan or use other services.
-        </p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Please remember that you pay local mobile call charges in Spain in addition to the Kimarin tariffs.</p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Best regards</p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-            Para más información sobre tarifas, visite www.kimarin.es En MI CUENTA  puede  actualizar y corregir sus datos, ver el historial de llamadas efectuadas, los pagos realizados, cargar su cuenta, cambiar el producto contratado al que mejor se ajuste a sus necesidades u otros servicios.
-        </p>            
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-           Por favor recuerde que llamando al extranjero, a parte del pago correspondiente a las tarifas de Kimarin, pagará una llamada local con su contrato del móvil existente.
-        </p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
-             Saludos cordiales,
-        </p>
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>            
-            <?php echo sfConfig::get('app_postal_address_app');?>
-            Tel.: <?php echo sfConfig::get('app_phone_no');?><br />
-            E-mail: <?php echo sfConfig::get('app_support_email_id');?>
-        </p>
-        
+	<p><?php echo __('Dear Customer') ?></p>
+	<p>
+	<?php echo __('Thank you for ordering <b>%1%</b> and becoming %2% Customer. We welcome you to a new and huge mobile world. ',array('%1%'=>$order->getProduct()->getName(),'%2%'=>sfConfig::get('app_site_title'))); echo __('Your customer number is '); ?>  <?php echo $customer->getUniqueid();?>. <?php echo __(' There, you can use in your dealings with customer service')?>
+	</p>
+	<p>
+	<?php echo __('With <b>%1%</b>, you can easily call your friends and family for free.', array('%1%'=>$order->getProduct()->getName())) ?></p>
+	<p>
+	<?php echo __('Below is the receipt of the product indicated.') ?>
+	</p>
 	<br />
 <?php endif; ?>
 <table width="600px">
@@ -90,7 +64,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
 
 		<td colspan="4" align="right" style="text-align:right; border:0px solid #fff"><?php echo image_tag(sfConfig::get('app_web_url').'images/logo.png',array('width' => '170'));?></td>
 
-</tr>
+	</tr>
 </table>
 <table class="receipt" cellspacing="0" width="600px">
 	
@@ -133,7 +107,13 @@ $wrap_content  = isset($wrap)?$wrap:false;
       <?php  
       $order=CustomerOrderPeer::retrieveByPK($transaction->getOrderId()); 
       $TDI=$transaction->getTransactionDescriptionId();   ?>
-      <br />
+      <br /><br />
+      <?php if($registered_customer_name) {?>
+      <b><?php echo __('Registered friend')?>:</b> <?php echo $registered_customer_name;?>
+      <br /><br />
+      <?php } ?>
+
+
       <?php    $unid=$customer->getUniqueid(); ?>
      <?php     $customer->getMobileNumber()    ?>
       <?php echo __('Mobile number') ?>: <br />

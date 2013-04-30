@@ -4367,7 +4367,7 @@ class pScriptsActions extends sfActions {
             if ($destinationsr >= 1) {
                 $cct->add(CountryPeer::CALLING_CODE, $reversearecodes);
                 $countrycodea = CountryPeer::doCount($cct);
-                $did = $countrycodea->getId;
+                $did = $countrycodea->getId();
             }
             $resverselength--;
             $reversedir++;
@@ -4480,7 +4480,8 @@ class pScriptsActions extends sfActions {
         $email = $request->getParameter('email');
         $ccode = $request->getParameter('ccode');
         $mobilenumber = $request->getParameter('mobile_number');
-
+        $registration_from = $request->getParameter('registerFrom');
+        if($registration_from=="") $registration_from = "app";
         $full_mobile_number = $ccode . $mobilenumber;
         $code = $request->getParameter('code');
         $app = $request->getParameter('app');
@@ -4495,12 +4496,13 @@ class pScriptsActions extends sfActions {
         $applog->setStatusId(1);
         $applog->setUrl($urlval);
         $applog->setApplicationId($app);
+        $applog->setRegisterFrom($registration_from);
         $applog->save();
 
 
 
 
-///////////////////zeroCall app product Registration
+///////////////////app product Registration
         $mnc = new Criteria();
         $mnc->add(CustomerPeer::MOBILE_NUMBER, $mobilenumber);
         $mnc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
@@ -4627,6 +4629,10 @@ class pScriptsActions extends sfActions {
             $applog->setCustomerId($customer->getId());
             $applog->setResponse('customer registered successfully');
             $applog->save();
+            $url = sfConfig::get('app_customer_url');
+            if($applog->getRegisterFrom()=="Web"){
+                $this->redirect($url."customer/appThanks");
+            }
         }
 
         return sfView::NONE;

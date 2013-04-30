@@ -679,6 +679,7 @@ class CompanyEmployeActivation {
         
         return true;
     }
+
     public function getCompanyBalanceUsingEmployee(Employee $employee) {
         
         $cInfo = false;
