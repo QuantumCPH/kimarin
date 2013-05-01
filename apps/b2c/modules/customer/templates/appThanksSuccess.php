@@ -3,7 +3,7 @@ use_helper('I18N');
 ?>
 <div class="">
     <?php 
-   echo $os = strtolower($_SERVER['HTTP_USER_AGENT']);
+   //echo $os = strtolower($_SERVER['HTTP_USER_AGENT']);
    
     if(strpos($os, "android")!== false){ ?>
     <p>
