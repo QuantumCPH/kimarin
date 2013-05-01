@@ -62,9 +62,7 @@ registered by the customer at KIMARIN.</p>
 <p><strong>2.7</strong> The Customer may change his/her Spanish mobile number
 registered in the KIMARIN Customers’ account for any another Spanish
 mobile number, at the KIMARIN web site.</p>
-<p>The Customer shall have to pay a fee for this change, which is specified
-in the abovementioned site, and which will be automatically deducted
-from the credit available in the Customer’s account.</p>
+
 <p><strong>2.8 </strong>The account may not be used:<br />
   - To make international calls if the Customer account’s balance falls
 below 0.05 €.<br />
