@@ -51,7 +51,7 @@
 // set alert if customer is not yet registered with fonet
 
 //$alert_fonet_customer = CustomerPeer::
-echo "----- ".$_SERVER['HTTP_USER_AGENT'];
+//echo "----- ".$_SERVER['HTTP_USER_AGENT'];
 ?>
 
 <!-- end header --> <?php echo $sf_content; ?></div>
