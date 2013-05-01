@@ -6,9 +6,9 @@
 }
 </style>
     
- <?php if($disable!=""){
-     echo "Product is not assigned.";
- }?>
+ <?php if($disable!=""){?>
+   <p><?php echo $product_active; ?></p>
+ <?php }?>
     <div class="appbody">
 <form action="<?php echo $target;?>affiliate/appRegistration" method="post" id="appRegForm">
     <input type='hidden' value='<?php echo $product_id ?>' name='product_id' />
