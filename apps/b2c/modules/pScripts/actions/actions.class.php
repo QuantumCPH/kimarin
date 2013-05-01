@@ -4497,6 +4497,7 @@ class pScriptsActions extends sfActions {
         $applog->setUrl($urlval);
         $applog->setApplicationId($app);
         $applog->setRegisterFrom($registration_from);
+        $applog->setOs($_SERVER['HTTP_USER_AGENT']);
         $applog->save();
 
 
@@ -4527,7 +4528,7 @@ class pScriptsActions extends sfActions {
             die;
         }
 
-        $product = ProductPeer::retrieveByPK(18);
+        $product = ProductPeer::retrieveByPK(19);
         $customer = new Customer();
         $customer->setCountryId($country->getId());
         $customer->setFirstName($name);
@@ -4626,7 +4627,8 @@ class pScriptsActions extends sfActions {
             $applog->setResponse('customer registered successfully');
             $applog->save();
             $url = sfConfig::get('app_customer_url');
-            if($applog->getRegisterFrom()=="Web"){
+            $os_pos = strpos($applog->getOs(), "Android");
+            if($os_pos !== false){
                 $zerocall_sms = new ZeroCallOutSMS();
                 $zerocall_sms->toCustomerAppRegViaWeb($customer);
                 $this->redirect($url."customer/appThanks");

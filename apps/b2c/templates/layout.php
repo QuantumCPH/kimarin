@@ -51,7 +51,12 @@
 // set alert if customer is not yet registered with fonet
 
 //$alert_fonet_customer = CustomerPeer::
-//echo "----- ".$_SERVER['HTTP_USER_AGENT'];
+$os = $_SERVER['HTTP_USER_AGENT'];
+strpos($os, "Android");
+if(strpos($os, "Android")!== false || strpos($os, "Iphone") !==false){
+    echo " Android -- ". strpos($os, "Android");echo "<br />";
+    echo " Iphone -- ". strpos($os, "Iphone");
+}
 ?>
 
 <!-- end header --> <?php echo $sf_content; ?></div>

@@ -2935,5 +2935,258 @@ class affiliateActions extends sfActions {
         }
         return sfView::NONE;
     }
+    
+    public function executeRegisterAppCustomer(sfWebRequest $request){
+       $this->forward404Unless($this->getUser()->isAuthenticated());
+       
+       $this->target = $this->getTargetUrl();
+       $cc = new Criteria();
+       $cc->add(CountryPeer::ENABLED,1);
+       $countries = CountryPeer::doSelect($cc);
+       $this->countries = $countries;
+       //$this->setLayout('mobile');
+   }
+    public function executeAppRegistration(sfWebrequest $request) {
+
+        //get agent
+        $ca = new Criteria();
+        $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $agent = AgentCompanyPeer::doSelectOne($ca);
+        //echo $agent->getId();
+        //getting agent commission
+        $cc = new Criteria();
+        $cc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
+        $commission_package = AgentCommissionPackagePeer::doSelectOne($cc);
+        
+        //get request parameters
+        $name = $request->getParameter('name');
+        $password = $request->getParameter('pwd');
+        $email = $request->getParameter('email');
+        $ccode = $request->getParameter('ccode');
+        $mobilenumber = $request->getParameter('mobile_number');
+        $registration_from = $request->getParameter('registerFrom');
+        if($registration_from=="") $registration_from = "app";
+        $full_mobile_number = $ccode . $mobilenumber;
+        $code = $request->getParameter('code');
+        $app = $request->getParameter('app');
+        ///////////////////////registration parameter//////////////////
+        $urlval = "App Registration URL - " . $request->getURI();
+        $applog = new AppRegistrationLogs();
+        $applog->setMobileNumber($full_mobile_number);
+        $applog->setPwd($password);
+        $applog->setEmail($email);
+        $applog->setCcode($ccode);
+        $applog->setCode($code);
+        $applog->setStatusId(1);
+        $applog->setUrl($urlval);
+        $applog->setApplicationId($app);
+        $applog->setRegisterFrom($registration_from);
+        $applog->save();
+        
+///////////////////app product Registration
+        $mnc = new Criteria();
+        $mnc->add(CustomerPeer::MOBILE_NUMBER, $mobilenumber);
+        $mnc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $customerCount = CustomerPeer::doCount($mnc);
+        if ($customerCount > 0) {
+            echo 'Customer already exists.';
+            die;
+        }
+        $ccc = new Criteria();
+        $ccc->add(CountryPeer::CALLING_CODE, $ccode);
+        $CountryCount = CountryPeer::doCount($ccc);
+        if ($CountryCount > 0) {
+            $country = CountryPeer::doSelectOne($ccc);
+        } else {
+            echo 'Country does not exists.';
+            die;
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            echo " The email address is not valid";
+            die;
+        }
+        
+        $product = ProductPeer::retrieveByPK(18);
+        
+        $customer = new Customer();
+        $customer->setCountryId($country->getId());
+        $customer->setFirstName($name);
+        $customer->setMobileNumber($mobilenumber);
+        $customer->setPassword($password);
+        $customer->setEmail($email);
+        $customer->setRegistrationTypeId(5);
+        $customer->setPlainText($password);
+        $customer->setPassword($password);
+        $customer->setPreferredLanguageId(3);
+        $customer->setCustomerStatusId(1);
+        $customer->save();
+
+        $customer->setUniqueid("app" . $customer->getId());
+        $customer->save();
+
+
+        $agentid = $customer->getReferrerId();
+        if ($agentid) {
+            $commision = TRUE;
+            $agentCompanyId = $agentid;
+        } else {
+            $commision = FALSE;
+            $agentCompanyId = FALSE;
+        }
+        // TransactionProcess::StartTransaction($customer, $productId, $decriptionid, $expenceType, $transactionFrom, $transactionStatus, $commision, $agentCompanyId);
+        $order = new CustomerOrder();
+        $order->setProductId($product->getId());
+        $order->setCustomerId($customer->getId());
+        $order->setExtraRefill($order->getProduct()->getInitialBalance() + $order->getProduct()->getBonus());
+        $order->setIsFirstOrder(1);
+        $order->setOrderStatusId(1);
+        $order->save();
+
+        $transaction = new Transaction();
+        $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee() + (($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(8);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($transactiondescription->getTitle());
+        $transaction->setOrderId($order->getId());
+        $transaction->setCustomerId($customer->getId());
+        $transaction->setTransactionStatusId(1); // default value 1
+        $transaction->setVat((($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
+        $transaction->save();
+
+        // echo 'Assigning Customer ID <br/>';
+        //set customer's proudcts in use
+        $customer_product = new CustomerProduct();
+        $customer_product->setCustomerId($transaction->getCustomerId());
+        $customer_product->setProductId($order->getProductId());
+        $customer_product->save();
+
+        $this->customer = $customer;
+        
+            $product_price = $order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee();
+            $product_price_vat = sfConfig::get('app_vat_percentage') * $order->getProduct()->getRegistrationFee();
+            $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
+            ///////////////////////////commision calculation by agent product ///////////////////////////////////////
+            $cp = new Criteria;
+            $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+            $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+            $agentproductcount = AgentProductPeer::doCount($cp);
+
+            if ($agentproductcount > 0) {
+                $p = new Criteria;
+                $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+
+                $agentproductcomesion = AgentProductPeer::doSelectOne($p);
+                $agentcomession = $agentproductcomesion->getRegShareEnable();
+            }
+
+            ////////   commission setting  through  agent commision//////////////////////
+
+            if ($agentcomession) {
+
+                if ($order->getIsFirstOrder() == 1) {
+                    if ($agentproductcomesion->getIsRegShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getRegShareValue());
+                    } else {
+                        $transaction->setCommissionAmount($agentproductcomesion->getRegShareValue());
+                    }
+                } else {
+                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setAgentCommission(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setAgentCommission($agentproductcomesion->getExtraPaymentsShareValue());
+                    }
+                }
+            } else {
+
+                if ($order->getIsFirstOrder() == 1) {
+                    if ($commission_package->getIsRegShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getRegShareValue());
+                    } else {
+
+                        $transaction->setCommissionAmount($commission_package->getRegShareValue());
+                    }
+                } else {
+                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setAgentCommission(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setAgentCommission($commission_package->getExtraPaymentsShareValue());
+                    }
+                }
+            }
+
+
+            $transaction->save();
+            
+            if ($agent->getIsPrepaid() == true) {
+
+                if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
+                    $this->redirect('affiliate/setProductDetails?product_id=' . $order->getProductId() . '&customer_id=' . $transaction->getCustomerId() . '&balance_error=1');
+                } else {
+                    $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
+                    $agent->save();
+                    ////////////////////////////////////
+                    $remainingbalance = $agent->getBalance();
+                    $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
+                    $amount = -$amount;
+                    $aph = new AgentPaymentHistory();
+                    $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                    $aph->setCustomerId($transaction->getCustomerId());
+                    $aph->setExpeneseType(1);
+                    $aph->setAmount($amount);
+                    $aph->setRemainingBalance($remainingbalance);
+                    $aph->save();
+
+                    ////////////////////////////////////////////
+                }
+            }
+            
+        $TelintaMobile = $full_mobile_number;
+        $OpeningBalance = $order->getExtraRefill();
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $telintaObj = new Telienta();
+        if ($telintaObj->ResgiterCustomer($this->customer, $OpeningBalance)) {
+            $transaction->setTransactionStatusId(3); // default value 1
+            $transaction->save();
+            $order->setOrderStatusId(3);
+            $order->save();
+            $customer->setCustomerStatusId(3);
+            $customer->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
+            // For Telinta Add Account
+
+            $telintaObj->createAAccount($TelintaMobile, $this->customer);
+            $telintaObj->createCBAccount($TelintaMobile, $this->customer);
+            $telintaObj->createDialAccount($this->customer->getMobileNumber(), $customer);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
+            $this->updatePreferredCulture();
+
+
+            echo "OK,customer registered successfully";
+            $callbacklog = new CallbackLog();
+            $callbacklog->setMobileNumber($TelintaMobile);
+            $callbacklog->setuniqueId($customer->getUniqueid());
+            $callbacklog->setCallingcode(sfConfig::get("app_country_code"));
+            $callbacklog->setCheckStatus(3);
+            $callbacklog->save();
+            
+            $applog->setStatusId(3);
+            $applog->setCustomerId($customer->getId());
+            $applog->setResponse('customer registered successfully');
+            $applog->save();
+            $url = sfConfig::get('app_customer_url');
+            
+            $zerocall_sms = new ZeroCallOutSMS();
+            $zerocall_sms->toCustomerAppRegViaWeb($customer);
+        }
+
+        return sfView::NONE;
+    }
 
 }
