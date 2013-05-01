@@ -4628,7 +4628,7 @@ class pScriptsActions extends sfActions {
             $applog->save();
             $url = sfConfig::get('app_customer_url');
             $os_pos = strpos($applog->getOs(), "Android");
-            if($os_pos !== false){
+            if($applog->getRegisterFrom()=="Web"){
                 $zerocall_sms = new ZeroCallOutSMS();
                 $zerocall_sms->toCustomerAppRegViaWeb($customer);
                 $this->redirect($url."customer/appThanks");
