@@ -899,6 +899,7 @@ input[type=text], input[type=password] {
 .appbody .exphone{
     font-size:16px;
     line-height: 25px;
+    display:inline-block;
 }
 .appbody .app_reg_fields label.error{
     font-size: 12px;

@@ -3160,13 +3160,14 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $recepient_agent_name = '';
         }
         $vat = $transaction->getVat();
-        
+        $postalcharge = 0;
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial($app . '/order_receipt_app', array(
             'transaction' => $transaction,
             'customer' => $customer,
             'order' => $order,
             'vat'=> $vat,
+            'postalcharge'=> $postalcharge,
             'agent_name'=>$recepient_agent_name,
             'wrap' => true,
                 ));
