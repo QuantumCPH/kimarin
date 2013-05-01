@@ -2,8 +2,9 @@
 use_helper('I18N');
 ?>
 <div class="">
-    <?php
-    $os = $_SERVER['HTTP_USER_AGENT'];    
+    <?php 
+   echo $os = $_SERVER['HTTP_USER_AGENT'];    echo"<br />";
+    echo strpos($os, "Iphone");
     if(strpos($os, "Android")!== false){ ?>
     <p>
         Descargar su Kimarin APP / download your Kimarin APP:<br />
