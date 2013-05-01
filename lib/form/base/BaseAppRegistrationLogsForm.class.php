@@ -25,6 +25,7 @@ class BaseAppRegistrationLogsForm extends BaseFormPropel
       'application_id' => new sfWidgetFormInput(),
       'response'       => new sfWidgetFormTextarea(),
       'register_from'  => new sfWidgetFormInput(),
+      'os'             => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -41,6 +42,7 @@ class BaseAppRegistrationLogsForm extends BaseFormPropel
       'application_id' => new sfValidatorInteger(array('required' => false)),
       'response'       => new sfValidatorString(array('required' => false)),
       'register_from'  => new sfValidatorString(array('max_length' => 50, 'required' => false)),
+      'os'             => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('app_registration_logs[%s]');
