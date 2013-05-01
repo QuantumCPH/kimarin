@@ -750,6 +750,7 @@ class affiliateActions extends sfActions {
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
+        $product_criteria->addAnd(ProductPeer::ID, 19, Criteria::NOT_EQUAL);
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
@@ -2937,8 +2938,36 @@ class affiliateActions extends sfActions {
     }
     
     public function executeRegisterAppCustomer(sfWebRequest $request){
-       $this->forward404Unless($this->getUser()->isAuthenticated());
-       
+       $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+        $this->browser = new Browser();
+
+        $c = new Criteria();
+        $c->add(AgentCompanyPeer::ID, $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $referrer_id = AgentCompanyPeer::doSelectOne($c);
+
+        $product_criteria = new Criteria();
+        $dc = new Criteria();
+        $dc->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
+        $agentCount = AgentProductPeer::doCount($dc);
+        
+        if ($agentCount > 0) {
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);
+            $product_criteria->addAnd(ProductPeer::ID, 19);
+            $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
+            $product_criteria->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());            
+        } else {
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);
+            $product_criteria->addAnd(ProductPeer::ID, 19);
+        }        
+        $pcount = ProductPeer::doCount($product_criteria);
+        if($pcount > 0){   
+          $product = ProductPeer::doSelectOne($product_criteria);
+          $this->product_id = $product->getId(); 
+          $this->disable = '';             
+        }else{      
+          $this->disable = "disabled='disabled'";
+          $this->product_id = ''; 
+        }
        $this->target = $this->getTargetUrl();
        $cc = new Criteria();
        $cc->add(CountryPeer::ENABLED,1);
@@ -2965,7 +2994,9 @@ class affiliateActions extends sfActions {
         $ccode = $request->getParameter('ccode');
         $mobilenumber = $request->getParameter('mobile_number');
         $registration_from = $request->getParameter('registerFrom');
+        $prod_id = $request->getParameter('product_id');
         if($registration_from=="") $registration_from = "app";
+        
         $full_mobile_number = $ccode . $mobilenumber;
         $code = $request->getParameter('code');
         $app = $request->getParameter('app');
@@ -3007,7 +3038,7 @@ class affiliateActions extends sfActions {
             die;
         }
         
-        $product = ProductPeer::retrieveByPK(18);
+        $product = ProductPeer::retrieveByPK($prod_id);
         
         $customer = new Customer();
         $customer->setCountryId($country->getId());
@@ -3015,11 +3046,12 @@ class affiliateActions extends sfActions {
         $customer->setMobileNumber($mobilenumber);
         $customer->setPassword($password);
         $customer->setEmail($email);
-        $customer->setRegistrationTypeId(5);
+        $customer->setRegistrationTypeId(2);
         $customer->setPlainText($password);
         $customer->setPassword($password);
         $customer->setPreferredLanguageId(3);
         $customer->setCustomerStatusId(1);
+        $customer->setReferrerId($agent->getId());
         $customer->save();
 
         $customer->setUniqueid("app" . $customer->getId());
@@ -3051,6 +3083,8 @@ class affiliateActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer->getId());
+        $transaction->setTransactionFrom(2);
+        $transaction->setAgentCompanyId($agent->getId());
         $transaction->setTransactionStatusId(1); // default value 1
         $transaction->setVat((($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
         $transaction->save();
@@ -3164,7 +3198,7 @@ class affiliateActions extends sfActions {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
             $this->setPreferredCulture($this->customer);
-            emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
+            emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "affiliate");
             $this->updatePreferredCulture();
 
 
@@ -3180,10 +3214,11 @@ class affiliateActions extends sfActions {
             $applog->setCustomerId($customer->getId());
             $applog->setResponse('customer registered successfully');
             $applog->save();
-            $url = sfConfig::get('app_customer_url');
             
             $zerocall_sms = new ZeroCallOutSMS();
             $zerocall_sms->toCustomerAppRegViaWeb($customer);
+            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
+            $this->redirect('affiliate/receipts');
         }
 
         return sfView::NONE;
