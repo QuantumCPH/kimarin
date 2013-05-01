@@ -2954,16 +2954,19 @@ class affiliateActions extends sfActions {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
             $product_criteria->addAnd(ProductPeer::ID, 19);
             $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
-            $product_criteria->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());            
+            $product_criteria->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
+            $this->product_active = "Product is not assigned.";
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
             $product_criteria->addAnd(ProductPeer::ID, 19);
+            $this->product_active = "Product is not active for agent portal.";
         }        
         $pcount = ProductPeer::doCount($product_criteria);
         if($pcount > 0){   
           $product = ProductPeer::doSelectOne($product_criteria);
           $this->product_id = $product->getId(); 
-          $this->disable = '';             
+          $this->disable = '';  
+          $this->product_active = "";
         }else{      
           $this->disable = "disabled='disabled'";
           $this->product_id = ''; 
