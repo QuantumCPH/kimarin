@@ -151,10 +151,15 @@ $sf_user->setCulture('en');
                             } else {
                                 echo link_to(__('Register a Customer'), '@customer_registration_step1');
                             }
-                                 if ($modulName == "affiliate" && $actionName == 'registerBusinessCustomer' || $actionName == 'setProductDetails') {
+                            if ($modulName == "affiliate" && $actionName == 'registerBusinessCustomer' || $actionName == 'setProductDetails') {
                                 echo link_to(__('Register a Business Customer'), 'affiliate/registerBusinessCustomer', array('class' => 'subSelect'));
                             } else {
                                 echo link_to(__('Register a Business Customer'), 'affiliate/registerBusinessCustomer');
+                            }
+                            if ($modulName == "affiliate" && $actionName == 'registerAppCustomer') {
+                                echo link_to(__('Register a App Customer'), 'affiliate/registerAppCustomer', array('class' => 'subSelect'));
+                            } else {
+                                echo link_to(__('Register a App Customer'), 'affiliate/registerAppCustomer');
                             }
                             if ($modulName == "affiliate" && $actionName == 'refill') {
                                 echo link_to(__('Refill'), 'affiliate/refill', array('class' => 'subSelect'));
