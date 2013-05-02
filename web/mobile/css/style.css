@@ -1,0 +1,279 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*********************** App registration ******************/
+.gridContainer {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+#LayoutDiv1 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+@media only screen and (min-width: 480px) {
+.gridContainer {
+	width: 90.675%;
+	padding-left: 1.1625%;
+	padding-right: 1.1625%;
+}
+#LayoutDiv1 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+.appbody input.mnumber{
+    float:right;
+    width:90%;
+}
+.radio_show_list ul li h1, .radio_show_list ul li p {
+
+	width:76% !important;
+
+}
+.our_guest { width:76% !important;}
+
+}
+@media only screen and (min-width: 400px) {
+.gridContainer {
+	width: 90.675%;
+	padding-left: 1.1625%;
+	padding-right: 1.1625%;
+}
+#LayoutDiv1 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+.appbody input.mnumber{
+    float:right;
+    width:89%;
+}
+.radio_show_list ul li h1, .radio_show_list ul li p {
+
+	width:76% !important;
+
+}
+.our_guest { width:76% !important;}
+
+}
+
+/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+
+@media only screen and (min-width: 768px) {
+.gridContainer {
+	width: 88.2%;
+	max-width: 1232px;
+	padding-left: 0.9%;
+	padding-right: 0.9%;
+	margin: auto;
+}
+input[type=text], input[type=password] {
+}
+.appbody input.mnumber{
+    width:96%;
+}
+#LayoutDiv1 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
+}
+
+.radio_show_list ul li h1, .radio_show_list ul li p {
+
+	width:83% !important;
+
+}
+.our_guest { width:90% !important;}
+}
+/******************** Intro page *********************/
+.appbody {
+	margin: 0px 0px 0px 0px;
+	font-family: Verdana, Geneva, sans-serif;
+	background:#0a6590 url(../images/head_bg.jpg) repeat-x left top;
+	color:#b0cbd3 !important;
+}
+/*h1, h2, h3, h4, h5, ul, li, ol, table, td, tr, p {
+	padding: 0px;
+	margin: 0px;
+}*/
+.appbody input[type=text], .appbody input[type=password] {
+	border: #848484 solid 1px;
+	padding:10px 20px 10px 20px;
+	margin: 0px;
+	color: #808080;
+	font-size: 16px;
+	-webkit-border-radius: 7px;
+	-khtml-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+}
+.appbody select {
+	width:100%;
+	line-height: 78px;
+        height:42px;
+	border: #848484 solid 1px;
+	padding:10px 20px 10px 20px;
+	margin: 0px;
+	color: #808080;
+	font-size: 17px;
+	-webkit-border-radius: 7px;
+	-khtml-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+}
+
+.appbody .fleft {
+	float: left;
+}
+.appbody .fright {
+	float: right;
+}
+.appbody .border {
+	border-right: #FFF solid 1px !important;
+}
+.appbody .border_none {
+	border-right: none !important;
+}
+.appbody .no_border {
+	border: none !important;
+}
+.appbody .no_margin {
+	margin: 0px !important;
+}
+.appbody .margin_right {
+	margin: 0px !important;
+}
+.appbody .margin {
+	margin: 10px 0px !important;
+}
+.appbody .bg_color {
+	background: #f5f5f5 !important;
+}
+.appbody .background {
+	background: #FFF !important;
+}
+.appbody .width {width:100%;}
+
+
+.appbody .intro_wrapper {
+	min-height: 480px;
+	width: 100%;
+	float: left;
+}
+.appbody .logo {
+	float: left;
+	width: 100%;
+	margin: 0 0 0 0;
+	text-align: center;
+}
+.appbody .dashboard_logo {
+	float: left;
+	width: 100%;
+	height: 74px;
+	background: url(../images/head_bg.jpg) repeat-x left top;
+	text-align:center;
+}
+.appbody .dashboard_logo img{ 
+        margin:23px 0px 0px 0px;
+}
+.appbody .dashboard_head {
+	float: left;
+	width: 100%;
+	height: 50px;
+	background: url(../images/head_bg.jpg) repeat left top;
+}
+
+.appbody .app_reg_fields {
+	float: left;
+	width: 100%;
+	min-height: 329px;
+}
+.appbody .app_reg_fields ul {
+	width: 99%;
+	margin: 0 auto;
+        padding:0;
+	height: auto;
+	display: block;
+}
+.appbody .app_reg_fields ul li {
+	float: left;
+	width: 100%;
+	height: auto;
+	margin: 0 0 10px 0;
+	list-style-type: none;
+	font-size:16px;
+	color:#FFF;
+	
+}
+.appbody .app_reg_fields ul li a {
+	width: auto;
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 18px;
+	color: #fff;
+	display: block;
+}
+.appbody .app_reg_fields ul li a:hover {
+	color: #fff;
+}
+.appbody label.cc_code{
+    float:left;
+    line-height: 40px;
+}
+.appbody input.mnumber{
+    float:right;
+}
+.appbody .register {
+	height:110px;
+}
+.appbody .register input[type="submit"] {
+    border-radius: 7px 7px 7px 7px;
+    color: #FFFFFF;
+    font-size: 24px;
+    height: 40px;
+    margin: 0 0 0 103px;
+    padding: 0;
+    text-shadow: 2px 2px #80490C;
+    width: 42%;
+}
+.appbody .register .ui-btn { 
+    display: block; 
+    text-align: center; 
+    cursor:pointer; position: relative; 
+    margin: .5em 0; padding: 0;
+    background:none repeat scroll 0 0 #E78F2F; 
+    color: #FFFFFF !important;
+    text-shadow: 2px 2px #80490C;
+}
+.appbody .exphone{
+    clear: both;
+    display: inline-block;
+    float: none;
+    font-size: 16px;
+    line-height: 25px;
+    margin-left: 50px;
+}
+.appbody .app_reg_fields label.error{
+   color:#f00 !important;
+   font-weight: bold;
+   margin-left: 5px;
+   display: block;
+   font-size: 12px;
+   float:none;
+   clear: both;
+   text-shadow:0 0;
+}
+
+.appbody .footer { width:100%; height:40px; text-align:center; font-size:98%; padding-top:17px; color:#FFF; float:left; background:#00a8e1;}
+
+/*********************** End App registration ******************/
