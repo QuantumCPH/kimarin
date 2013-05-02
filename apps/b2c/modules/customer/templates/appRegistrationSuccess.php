@@ -70,7 +70,7 @@ use_helper('I18N');
     });
   
 </script>
-<div class="appbody">
+<div class="appbody" data-role="page"  data-theme="c">
 <form action="<?php echo $target;?>pScripts/appRegistration" method="post" id="appRegForm">
     <?php //echo image_tag(sfConfig::get('app_web_url').'zerocall/images/Screenshot_2013-04-25-10-19-32.png');?>
 <div class="gridContainer clearfix">
