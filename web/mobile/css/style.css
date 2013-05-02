@@ -12,23 +12,13 @@ and (max-device-width : 480px) {
    }
 }
 
-/* Smartphones (landscape) ----------- */
-@media only screen 
-and (min-width : 321px) {
-/* Styles */
-    .appbody input.mnumber{
-    float:right;
-    width:92%
-    }
-}
-
 /* Smartphones (portrait) ----------- */
 @media only screen 
 and (max-width : 320px) {
 /* Styles */
     .appbody input.mnumber{
       float:right;
-      width:92%
+      width:89%
     }
 }
 
