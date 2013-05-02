@@ -377,6 +377,7 @@ class CustomerForm extends BaseCustomerForm
             //-----------------For get the Province---------------------
             $this->widgetSchema['province_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'Province',
+                    'add_empty' => '-----------', 
                     'order_by' => array('Province','asc')
             ));
             //----------------------------------------------------------
