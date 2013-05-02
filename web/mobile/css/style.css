@@ -39,7 +39,12 @@
 .our_guest { width:76% !important;}
 
 }
-
+@media only screen and (min-width: 320px) {
+  .appbody input.mnumber{
+    float:right;
+    width:88%;
+  }  
+}
 /* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
 
 @media only screen and (min-width: 768px) {
