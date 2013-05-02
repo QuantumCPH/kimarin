@@ -7,7 +7,7 @@
 </style>
     
  <?php if($disable!=""){?>
-   <p class="save-decl"><?php echo $product_active; ?></p>
+   <p class="err-msg"><?php echo $product_active; ?></p>
  <?php }?><br />
     <div class="appbody">
 <form action="<?php echo $target;?>affiliate/appRegistration" method="post" id="appRegForm">
