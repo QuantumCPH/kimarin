@@ -289,6 +289,7 @@ class CustomerForm extends BaseCustomerForm
             //-----------------For get the Province---------------------
             $this->widgetSchema['province_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'Province',
+                    'add_empty' => '-----------',
                     'order_by' => array('Province','asc')
             ));
             //----------------------------------------------------------
@@ -461,6 +462,7 @@ $this->validatorSchema['product'] = new sfValidatorPropelChoice(array(
          //-----------------For get the Products---------------------
             $this->widgetSchema['telecom_operator_id'] = new sfWidgetFormPropelChoice(array(
                     'model' => 'TelecomOperator',
+                    'add_empty' => '-----------',
                     'order_by' => array('Name','asc'),
                                     'criteria'	=>	$manufacturer_oper,
                                     //'add_empty' => 'Choose a product',
