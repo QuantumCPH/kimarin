@@ -17,8 +17,8 @@
 @media only screen and (min-width: 480px) {
 .gridContainer {
 	width: 90.675%;
-	padding-left: 0.1625%;
-	padding-right: 0.1625%;
+	padding-left: 1.1625%;
+	padding-right: 1.1625%;
 }
 #LayoutDiv1 {
 	clear: both;
@@ -30,33 +30,6 @@
 .appbody input.mnumber{
     float:right;
     width:90%;
-}
-.radio_show_list ul li h1, .radio_show_list ul li p {
-
-	width:76% !important;
-
-}
-.our_guest { width:76% !important;}
-
-}
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 400px){
-.gridContainer {
-	width: 90.675%;
-	padding-left: 0.1625%;
-	padding-right: 0.1625%;
-}
-#LayoutDiv1 {
-	clear: both;
-	float: left;
-	margin-left: 0;
-	width: 100%;
-	display: block;
-}
-.appbody input.mnumber{
-    float:right;
-    width:89%;
 }
 .radio_show_list ul li h1, .radio_show_list ul li p {
 
