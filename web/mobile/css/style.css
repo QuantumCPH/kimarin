@@ -7,25 +7,11 @@
 	margin-right: auto;
 	width: 100%;
 }
-#LayoutDiv1 {
-	clear: both;
-	float: left;
-	margin-left: 0;
-	width: 100%;
-	display: block;
-}
 @media only screen and (min-width: 480px) {
 .gridContainer {
 	width: 90.675%;
 /*	padding-left: 1.1625%;
 	padding-right: 1.1625%;*/
-}
-#LayoutDiv1 {
-	clear: both;
-	float: left;
-	margin-left: 0;
-	width: 100%;
-	display: block;
 }
 .appbody input.mnumber{
     float:right;
@@ -48,13 +34,6 @@
 	margin: auto;
 }
 
-#LayoutDiv1 {
-	clear: both;
-	float: left;
-	margin-left: 0;
-	width: auto;
-	display: block;
-}
   .appbody input.mnumber{
     float:right;
     width:88%;
@@ -75,13 +54,7 @@ input[type=text], input[type=password] {
 .appbody input.mnumber{
     width:96%;
 }
-#LayoutDiv1 {
-	clear: both;
-	float: left;
-	margin-left: 0;
-	width: 100%;
-	display: block;
-}
+
 
 .radio_show_list ul li h1, .radio_show_list ul li p {
 
@@ -93,6 +66,13 @@ input[type=text], input[type=password] {
 /******************** Intro page *********************/
 .ui-mobile [data-role="page"], .ui-mobile [data-role="dialog"], .ui-page{
     background: url("../images/head_bg.jpg") repeat-x scroll left top #0A6590;
+}
+#LayoutDiv1 {
+	clear: both;
+	float: left;
+	margin-left: 0;
+	width: 100%;
+	display: block;
 }
 .appbody {
 	margin: 0px 0px 0px 0px;
@@ -196,7 +176,7 @@ input[type=text], input[type=password] {
 	min-height: 329px;
 }
 .appbody .app_reg_fields ul {
-	width: 99%;
+	width: 100%;
 	margin: 0 auto;
         padding:0;
 	height: auto;
