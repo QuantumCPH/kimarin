@@ -41,7 +41,7 @@
 }
 @media only screen and (min-width: 320px) {
   .gridContainer {
-	width: 88.2%;
+	width: 90%;
 	max-width: 1232px;
 	padding-left: 0;
 	padding-right: 0;
