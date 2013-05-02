@@ -78,8 +78,8 @@ use_helper('I18N');
    	<div class="intro_wrapper">
    	  <div class="dashboard_logo"><?php echo image_tag(sfConfig::get('app_web_url').'zerocall/images/app-heading.jpg');?></div>
    	  <div class="app_reg_fields">
+                <p style="text-align:center;color:#fff;">Enter your information and press Register</p>
             	<ul>
-                <li style=" text-align:center; line-height:50px">Enter your information and press Register</li>
                   <li>
                     <select name="ccode" id="country-select">
                      <?php foreach($countries as $country){ ?>
