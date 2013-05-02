@@ -895,6 +895,10 @@ input[type=text], input[type=password] {
     padding: 0 !important;
     text-shadow: 2px 2px #80490C !important;
     width: 42% !important;
+    cursor: pointer;
+}
+.appbody .register input[type="submit"].appregbtn:hover {
+    background-color: #0C74A5 !important;
 }
 .appbody .exphone{
     font-size:16px;
