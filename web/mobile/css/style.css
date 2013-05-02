@@ -88,7 +88,7 @@ input[type=text], input[type=password] {
 }*/
 .appbody input[type=text], .appbody input[type=password] {
 	border: #848484 solid 1px;
-	padding:10px 20px 10px 20px;
+	padding:10px 20px 10px 5px;
 	margin: 0px;
 	color: #808080;
 	font-size: 16px;
