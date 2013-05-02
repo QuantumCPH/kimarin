@@ -39,7 +39,8 @@
 .our_guest { width:76% !important;}
 
 }
-@media only screen and (min-width: 400px) {
+@media only screen 
+and (min-device-width : 320px){
 .gridContainer {
 	width: 90.675%;
 	padding-left: 1.1625%;
