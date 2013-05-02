@@ -12,10 +12,29 @@ and (max-device-width : 480px) {
    }
 }
 
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px) and (orientation : landscape){
+/* Styles */
+    .appbody input.mnumber{
+    float:right;
+    width:92%
+    }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+/* Styles */
+    .appbody input.mnumber{
+      float:right;
+      width:92%
+    }
+}
 
 @media only screen 
 and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
+and (max-device-width : 1024px) and (orientation : landscape){
 /* Styles */
    .appbody input.mnumber{
     float:right;
@@ -203,7 +222,7 @@ and (min-width : 1824px) {
     font-size: 16px;
     line-height: 25px;
     margin-left: 50px;
-    width: auto;
+    width: 93% !important;
 }
 .appbody .app_reg_fields label.error{
    color:#f00 !important;
