@@ -144,6 +144,18 @@ class ZeroCallOutSMS {
         $res = file_get_contents('http://sms1.cardboardfish.com:9001/HTTPSMS?' . $queryString);
         sleep(0.25);
     }
+    
+    public function toCustomerAppRegViaWeb($customer){
+        
+        $country = CountryPeer::retrieveByPK($customer->getCountryId());
+        $countryCode = $country->getCallingCode();
+        $cMobile = $customer->getMobileNumber();
+        $da = $countryCode.$cMobile;
+        
+        $sms_dk_object = SmsTextPeer::retrieveByPK(13);
+        $sms_text_dk = $sms_dk_object->getMessageText();
+        ROUTED_SMS::Send($da, $sms_text_dk);
+    }
 }
 
 ?>

@@ -65,6 +65,10 @@
         <td style="padding: 5px;">Mobile number:</td>
         <td style="padding: 5px;"> <input type="text" name="mobile_number" id="employee_mobile_number"  size="25"   class="required digits"  minlength="8" /><span id="msgbox" style="display:none"></span> </td>
       </tr>
+      <tr>
+        <td style="padding: 5px;">Password:</td>
+        <td style="padding: 5px;"> <input type="text" name="password" id="employee_password"  size="25"   class="required" /><span id="msgbox" style="display:none"></span> </td>
+      </tr>
                  <tr>
         <td style="padding: 5px;">Email:</td>
         <td style="padding: 5px;"> <input type="text" name="email" id="employee_email"   class="required email"  size="25" /> </td>

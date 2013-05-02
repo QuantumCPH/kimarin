@@ -19,11 +19,13 @@ class Telienta {
     private $currency;
     private $iParentReseller;
     private $telintaSOAPUrl;
+    private $telinta_account_prefix;
 
     public function __construct() {
         $this->iParentReseller = sfConfig::get("app_telinta_reseller");
         $this->currency = sfConfig::get("app_telinta_currency");
         $this->telintaSOAPUrl = sfConfig::get("app_telinta_soap_uri");
+        $this->telinta_account_prefix = sfConfig::get("app_telinta_account_prefix");
     }
 
     public function ResgiterCustomer(Customer $customer, $OpeningBalance, $creditLimit=0) {
@@ -35,7 +37,7 @@ class Telienta {
         $pb = new PortaBillingSoapClient($this->telintaSOAPUrl, 'Admin', 'Customer');
 
 
-        $uniqueid = "KB2C". $customer->getId() . $customer->getUniqueid();
+        $uniqueid = $this->telinta_account_prefix. $customer->getId() . $customer->getUniqueid();
 
 
         $Parent = $this->iParentReseller;
@@ -304,7 +306,7 @@ class Telienta {
         if($batchNumber){
         $uniqueid =$batchNumber;
         }else{
-          $uniqueid = "KB2CC" . $customer->getId() . $customer->getUniqueid();
+          $uniqueid = $this->telinta_account_prefix . $customer->getId() . $customer->getUniqueid();
         }
         $accountName = $accountType . $mobileNumber;
         while (!$account && $retry_count < $max_retries) {
@@ -427,7 +429,6 @@ class Telienta {
         return $this->createAccount($customer, $mobileNumber, '', $product->getAIproduct(),'N',$batchNumber);
         
     }
-
 }
 
 ?>

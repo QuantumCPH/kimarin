@@ -2679,5 +2679,17 @@ class customerActions extends sfActions {
 
         return sfView::NONE;
     }
-
+   public function executeAppRegistration(sfWebRequest $request){
+       $this->getUser()->setCulture("en");
+       $this->target = $this->getTargetUrl();
+       $cc = new Criteria();
+       $cc->add(CountryPeer::ENABLED,1);
+       $countries = CountryPeer::doSelect($cc);
+       $this->countries = $countries;
+       $this->setLayout('mobile_app_reg');
+   }
+   
+   public function executeAppThanks() {
+       $this->setLayout('mobile_app_reg');       
+   } 
 }
