@@ -73,8 +73,8 @@ and (max-device-width : 400px){
 .gridContainer {
 	width: 88.2%;
 	max-width: 1232px;
-	padding-left: 0.9%;
-	padding-right: 0.9%;
+/*	padding-left: 0.9%;
+	padding-right: 0.9%;*/
 	margin: auto;
 }
 input[type=text], input[type=password] {
