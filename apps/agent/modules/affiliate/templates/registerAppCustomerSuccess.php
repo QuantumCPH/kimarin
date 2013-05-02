@@ -6,10 +6,12 @@
 }
 </style>
     
- 
+ <?php if($disable!=""){?>
+   <p class="err-msg"><?php echo $product_active; ?></p>
+ <?php }?><br />
     <div class="appbody">
 <form action="<?php echo $target;?>affiliate/appRegistration" method="post" id="appRegForm">
-    <?php //echo image_tag(sfConfig::get('app_web_url').'zerocall/images/Screenshot_2013-04-25-10-19-32.png');?>
+    <input type='hidden' value='<?php echo $product_id ?>' name='product_id' />
 <div class="gridContainer clearfix">
   <div id="LayoutDiv1">
    	<div class="intro_wrapper">
@@ -30,10 +32,11 @@
                   <li><input name="name" type="text" placeholder="Name / Nombre y apellido" /></li>
                   <li><input id="pwd" name="pwd" type="password" placeholder="Password / Contraseña" /></li>
                   <li><input name="confirm_password" type="password" placeholder="Confirm password / Confirma contraseña" /></li>
-                  <li><div class="register"><input type="submit" value="REGISTER" class="appregbtn" /></div></li>
+                  <li><div class="register"><input type="submit" value="REGISTER" class="appregbtn" <?php echo $disable;?> /></div></li>
                   <div style="clear:both;"></div>
                 </ul>
-              <input type="hidden" value="Web" name="registerFrom" />
+              
+              <input type="hidden" value="Agent" name="registerFrom" />
       </div>
       
    	</div>

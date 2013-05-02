@@ -200,7 +200,7 @@ margin-bottom:10px;
 -moz-background-inline-policy:continuous;
 -moz-background-origin:padding;
 background:#FF0000 url(../images/alert.png) no-repeat scroll 5px 2px;
-color:#FFFFFF;
+color:#FFFFFF !important;
 font-size:11px;
 margin:0 !important;
 padding:5px 20px 5px 25px;
@@ -895,14 +895,22 @@ input[type=text], input[type=password] {
     padding: 0 !important;
     text-shadow: 2px 2px #80490C !important;
     width: 42% !important;
+    cursor: pointer;
+}
+.appbody .register input[type="submit"].appregbtn:hover {
+    background-color: #0C74A5 !important;
 }
 .appbody .exphone{
     font-size:16px;
     line-height: 25px;
+    display:inline-block;
 }
 .appbody .app_reg_fields label.error{
     font-size: 12px;
     font-weight: bold !important;
 }
 .appbody .footer { width:100%; height:40px; text-align:center; font-size:98%; padding-top:17px; color:#FFF; float:left; background:#00a8e1;}
+.err-msg{
+    color:red !important;
+}
 /*********************** End App registration ******************/

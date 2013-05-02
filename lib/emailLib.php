@@ -3160,15 +3160,25 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $recepient_agent_name = '';
         }
         $vat = $transaction->getVat();
-        
+        $postalcharge = 0;
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial($app . '/order_receipt_app', array(
             'transaction' => $transaction,
             'customer' => $customer,
             'order' => $order,
             'vat'=> $vat,
+            'postalcharge'=> $postalcharge,
             'agent_name'=>$recepient_agent_name,
             'wrap' => true,
+                ));
+        $agent_message_body = get_partial($app . '/order_receipt_app', array(
+            'transaction' => $transaction,
+            'customer' => $customer,
+            'order' => $order,
+            'vat'=> $vat,
+            'postalcharge'=> $postalcharge,
+            'agent_name'=>$recepient_agent_name,
+            'wrap' => false,
                 ));
         $subject = 'Registration Confirmation - Confirmación de registro';
         //Support Information
@@ -3218,7 +3228,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email2->setAgentId($referrer_id);
             $email2->setCutomerId($customer_id);
             $email2->setEmailType(sfConfig::get('app_site_title') . 'App registration');
-            $email2->setMessage($message_body);
+            $email2->setMessage($agent_message_body);
             $email2->save();
         endif;
         //---------------------------------------
