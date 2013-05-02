@@ -7,8 +7,8 @@
 </style>
     
  <?php if($disable!=""){?>
-   <p><?php echo $product_active; ?></p>
- <?php }?>
+   <p class="err-msg"><?php echo $product_active; ?></p>
+ <?php }?><br />
     <div class="appbody">
 <form action="<?php echo $target;?>affiliate/appRegistration" method="post" id="appRegForm">
     <input type='hidden' value='<?php echo $product_id ?>' name='product_id' />
