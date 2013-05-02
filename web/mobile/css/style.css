@@ -4,7 +4,7 @@
 /*********************** App registration ******************/
 @media only screen 
 and (min-device-width : 320px) 
-and (max-device-width : 480.99px) {
+and (max-device-width : 480px) {
 /* Styles */
    .appbody input.mnumber{
     float:right;
@@ -12,24 +12,7 @@ and (max-device-width : 480.99px) {
    }
 }
 
-/* Smartphones (portrait) ----------- */
-@media only screen 
-and (max-width : 320px) {
-/* Styles */
-    .appbody input.mnumber{
-      float:right;
-      width:89%
-    }
-}
-@media only screen 
-and (min-device-width : 481px) 
-and (max-device-width : 767.99px) {
-/* Styles */
-   .appbody input.mnumber{
-    float:right;
-    width:95%
-   }
-}
+
 @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px) {
