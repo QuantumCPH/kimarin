@@ -17,8 +17,8 @@
 @media only screen and (min-width: 480px) {
 .gridContainer {
 	width: 90.675%;
-	padding-left: 1.1625%;
-	padding-right: 1.1625%;
+/*	padding-left: 1.1625%;
+	padding-right: 1.1625%;*/
 }
 #LayoutDiv1 {
 	clear: both;
@@ -242,6 +242,7 @@ input[type=text], input[type=password] {
     font-size: 16px;
     line-height: 25px;
     margin-left: 50px;
+    width: 93%;
 }
 .appbody .app_reg_fields label.error{
    color:#f00 !important;
