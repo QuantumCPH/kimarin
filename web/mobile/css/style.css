@@ -40,11 +40,12 @@
 
 }
 @media only screen 
-and (min-device-width : 380px){
+and (min-device-width : 320px) 
+and (max-device-width : 400px){
 .gridContainer {
 	width: 90.675%;
-	padding-left: 1.1625%;
-	padding-right: 1.1625%;
+/*	padding-left: 1.1625%;
+	padding-right: 1.1625%;*/
 }
 #LayoutDiv1 {
 	clear: both;
