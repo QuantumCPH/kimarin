@@ -73,11 +73,8 @@ use_helper('I18N');
 <div class="appbody" data-role="page"  data-theme="c">
 <form action="<?php echo $target;?>pScripts/appRegistration" method="post" id="appRegForm">
     <?php //echo image_tag(sfConfig::get('app_web_url').'zerocall/images/Screenshot_2013-04-25-10-19-32.png');?>
-<div class="gridContainer clearfix">
-  <div id="LayoutDiv1">
-   	<div class="intro_wrapper">
-   	  <div class="dashboard_logo"><?php echo image_tag(sfConfig::get('app_web_url').'zerocall/images/app-heading.jpg');?></div>
-   	  <div class="app_reg_fields">
+   	  <div class="dashboard_logo" data-role="header"  data-theme="c"><?php echo image_tag(sfConfig::get('app_web_url').'zerocall/images/app-heading.jpg');?></div>
+   	  <div class="app_reg_fields" data-role="content"  data-theme="c">
                 <p style="text-align:center;color:#fff;">Enter your information and press Register</p>
             	<ul>
                   <li>
@@ -97,13 +94,9 @@ use_helper('I18N');
                   <div style="clear:both;"></div>
                 </ul>
               <input type="hidden" value="Web" name="registerFrom" />
+              
+              
       </div>
-      
-   	</div>
-    
-    </div> 
-    <br clear="all" />
-  </div>
-  <div class="footer"><?php echo date("Y");?> Kimarin Europe S.L Privacy policy</div>
+       <div class="footer" data-role="header"  data-theme="c"><?php echo date("Y");?> Kimarin Europe S.L Privacy policy</div>
 </form>
 </div><br clear="all" />
