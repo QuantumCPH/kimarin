@@ -30,7 +30,7 @@ $pus=0;
                                    $p->add(ProductPeer::ID, $custmpr->getProductId());
                                    $products=ProductPeer::doSelectOne($p);
                                    $pus = 0;
-
+                                   var_dump($products);
                                   $pus=$products->getProductCountryUs();
                if($pus==1){
                             $Tes=ForumTel::getBalanceForumtel($customer->getId());
