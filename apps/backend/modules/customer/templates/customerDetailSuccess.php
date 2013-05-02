@@ -30,19 +30,17 @@ $pus=0;
                                    $p->add(ProductPeer::ID, $custmpr->getProductId());
                                    $products=ProductPeer::doSelectOne($p);
                                    $pus = 0;
-                                   var_dump($products);
+                                   if($products){
                                   $pus=$products->getProductCountryUs();
-               if($pus==1){
-                            $Tes=ForumTel::getBalanceForumtel($customer->getId());
-                               echo  $amt=CurrencyConverter::convertUsdToSek($Tes);
-   echo sfConfig::get('app_currency_code');
-                            }else{
-
-
-        echo   number_format($customer_balance,2);
-          echo sfConfig::get('app_currency_code');
-                            }
-                          
+                                    if($pus==1){
+                                            $Tes=ForumTel::getBalanceForumtel($customer->getId());
+                                            echo  $amt=CurrencyConverter::convertUsdToSek($Tes);
+                                            echo sfConfig::get('app_currency_code');
+                                    }else{
+                                          echo   number_format($customer_balance,2);
+                                          echo sfConfig::get('app_currency_code');
+                                    }
+                                   }  
                      ?> </td>
                       </tr>
 
