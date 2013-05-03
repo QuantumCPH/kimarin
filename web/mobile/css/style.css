@@ -10,6 +10,9 @@ and (max-device-width : 480px) {
     float:right;
     width:93%
    }
+   .appbody .register .ui-btn{
+       width:25%;
+   }
 }
 
 /* Smartphones (landscape) ----------- */
@@ -20,6 +23,9 @@ and (min-width : 321px) and (orientation : landscape){
     float:right;
     width:92%
     }
+    .appbody .register .ui-btn{
+       width:25%;
+   }
 }
 
 /* Smartphones (portrait) ----------- */
@@ -30,6 +36,9 @@ and (max-width : 320px) {
       float:right;
       width:90%
     }
+    .appbody .register .ui-btn{
+       width:25%;
+   }
 }
 
 @media only screen 
@@ -39,6 +48,9 @@ and (max-device-width : 1024px) and (orientation : landscape){
    .appbody input.mnumber{
     float:right;
     width:97%
+   }
+   .appbody .register .ui-btn{
+       width:17%;
    }
 }
 
@@ -50,6 +62,9 @@ and (min-width : 1224px) {
     float:right;
     width:97%
    }
+   .appbody .register .ui-btn{
+       width:17%;
+   }
 }
 
 /* Large screens ----------- */
@@ -60,6 +75,9 @@ and (min-width : 1824px) {
    .appbody input.mnumber{
     float:right;
     width:97%
+   }
+   .appbody .register .ui-btn{
+       width:17%;
    }
 }
 /******************** Intro page *********************/
@@ -210,7 +228,8 @@ and (min-width : 1824px) {
     display: block; 
     text-align: center; 
     cursor:pointer; position: relative; 
-    margin: .5em 0; padding: 0;
+    margin: .5em auto; 
+    padding: 0;
     background:none repeat scroll 0 0 #E78F2F; 
     color: #FFFFFF !important;
     text-shadow: 2px 2px #80490C;
@@ -229,10 +248,10 @@ and (min-width : 1824px) {
    font-weight: bold;
    margin-left: 5px;
    display: block;
-   font-size: 12px;
+   font-size: 13px;
    float:none;
    clear: both;
-   text-shadow:0 0;
+   text-shadow:0 0 0 #ff0000;
 }
 
 .appbody .footer { width:100%; height:40px; text-align:center; font-size:98%; padding-top:17px; color:#FFF; float:left; background:#00a8e1;text-shadow: 0 0!important; }
