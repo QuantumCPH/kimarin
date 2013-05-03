@@ -765,7 +765,7 @@ input[type=text], input[type=password] {
 	line-height: 30px;
         height:42px;
 	border: #848484 solid 1px;
-	padding:10px 5px 10px 5px;
+	padding:10px 5px 10px 2px;
 	margin: 0px;
 	color: #808080;
 	font-size: 17px;
