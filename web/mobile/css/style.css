@@ -221,7 +221,7 @@ and (min-width : 1824px) {
     height: 40px;    
     padding: 0;
     text-shadow: 2px 2px #80490C;
-    width: 42%;
+    width: 100%;
 }
 .appbody .register .ui-btn { 
     display: block; 
