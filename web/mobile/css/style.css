@@ -13,6 +13,9 @@ and (max-device-width : 480px) {
    .appbody .register .ui-btn{
        width:25%;
    }
+   .appbody .app_reg_fields label.error{
+      font-size:14px; 
+   }
 }
 
 /* Smartphones (landscape) ----------- */
@@ -24,7 +27,10 @@ and (min-width : 321px) and (orientation : landscape){
     width:92%
     }
     .appbody .register .ui-btn{
-       width:25%;
+       width:45%;
+   }
+   .appbody .app_reg_fields label.error{
+       font-size:14px;
    }
 }
 
@@ -38,6 +44,9 @@ and (max-width : 320px) {
     }
     .appbody .register .ui-btn{
        width:45%;
+   }
+   .appbody .app_reg_fields label.error{
+       font-size:14px;
    }
 }
 
@@ -234,13 +243,13 @@ and (min-width : 1824px) {
     text-shadow: 2px 2px #80490C;
 }
 .appbody .exphone{
-    clear: both;
-    
-    float: none;
-    font-size: 16px;
+    clear: both !important;    
+    float: none !important;
+    font-size: 14px;
     line-height: 25px;
     margin-left: 50px;
     width: 93% !important;
+    text-shadow:none !important;
 }
 .appbody .app_reg_fields label.error{
    color:#f00 !important;
