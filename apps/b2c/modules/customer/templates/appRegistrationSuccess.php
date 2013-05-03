@@ -85,7 +85,7 @@ use_helper('I18N');
                     </select>
                   </li>
                   <li><label class="cc_code">+34</label><input name="mobile_number" id="mobile_number" type="text" placeholder="Phone number / Número de telefóno" class="mnumber" />
-                      <span class="exphone">e.g. 6133243242</span></li>
+                      <br clear="all" /><span class="exphone">e.g. 6133243242</span></li>
                   <li><input name="email" type="text" placeholder="Email" /></li>
                   <li><input name="name" type="text" placeholder="Name / Nombre y apellido" /></li>
                   <li><input id="pwd" name="pwd" type="password" placeholder="Password / Contraseña" /></li>
