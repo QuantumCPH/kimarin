@@ -2881,7 +2881,7 @@ class pScriptsActions extends sfActions {
                 $transaction->setTransactionStatusId(sfConfig::get('app_status_error')); //error in amount
                 $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_error')); //error in amount
                 echo 'setting error <br /> ';
-            } elseif (number_format($transaction->getAmount(), 2) < $order_amount) {
+            } elseif (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
                 $transaction->setAmount($order_amount);
             }
 
@@ -3553,7 +3553,7 @@ class pScriptsActions extends sfActions {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if (number_format($transaction->getAmount(), 2) < $order_amount) {
+        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
             //$extra_refill_amount = $order_amount;
             // $order->setExtraRefill($order_amount);
             $transaction->setAmount($order_amount);
@@ -3791,7 +3791,7 @@ class pScriptsActions extends sfActions {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if (number_format($transaction->getAmount(), 2) < $order_amount) {
+        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
             $transaction->setAmount($order_amount);
         }
         //set active agent_package in case customer was registerred by an affiliate
@@ -3909,7 +3909,7 @@ class pScriptsActions extends sfActions {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if (number_format($transaction->getAmount(), 2) < $order_amount) {
+        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
             $transaction->setAmount($order_amount);
         }
 
