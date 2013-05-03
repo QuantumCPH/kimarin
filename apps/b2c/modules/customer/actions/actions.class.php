@@ -2692,4 +2692,8 @@ class customerActions extends sfActions {
    public function executeAppThanks() {
        $this->setLayout('mobile_app_reg');       
    } 
+   
+   public function executeInIframe() {
+           
+   } 
 }
