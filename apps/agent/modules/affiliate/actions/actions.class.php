@@ -1046,7 +1046,7 @@ class affiliateActions extends sfActions {
             $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_error', 5)); //error in amount
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < number_format($order_amount,2)) {
             $transaction->setAmount($order_amount);
         }
 
