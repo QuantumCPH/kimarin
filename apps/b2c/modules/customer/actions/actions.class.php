@@ -2693,4 +2693,8 @@ class customerActions extends sfActions {
        
        
    } 
+   public function executeInIframe() {
+       
+       
+   } 
 }
