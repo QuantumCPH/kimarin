@@ -2686,11 +2686,11 @@ class customerActions extends sfActions {
        $cc->add(CountryPeer::ENABLED,1);
        $countries = CountryPeer::doSelect($cc);
        $this->countries = $countries;
-       $this->setLayout('mobile_app_reg');
+      // $this->setLayout('mobile_app_reg');
    }
    
    public function executeAppThanks() {
-       $this->setLayout('mobile_app_reg');       
+      // $this->setLayout('mobile_app_reg');       
    } 
    
    public function executeInIframe() {
