@@ -234,6 +234,7 @@ class customerActions extends sfActions {
 
             if ($this->getRequest()->getCookie('agent_id') != NULL) {
                 $customer->setRegistrationTypeId('3');
+                $customer->setReferrerId($this->getRequest()->getCookie('agent_id'));
             } else {
                 $customer->setRegistrationTypeId('1');
             }
