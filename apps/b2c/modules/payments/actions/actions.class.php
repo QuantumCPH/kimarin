@@ -184,6 +184,7 @@ class paymentsActions extends sfActions {
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
         //$transaction->setTransactionStatusId() // default value 1
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
         $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee());
         $transaction->setVat((($this->postalcharge + $order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
         $transaction->save();

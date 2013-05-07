@@ -2960,7 +2960,7 @@ class pScriptsActions extends sfActions {
                 $telintaObj->createDialAccount($this->customer->getMobileNumber(), $this->customer);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+                
                 $telintaGetBalance = $telintaObj->getBalance($this->customer);
                 $transaction->setCustomerCurrentBalance($telintaGetBalance);
                 $transaction->save();
