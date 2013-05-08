@@ -2662,7 +2662,6 @@ class pScriptsActions extends sfActions {
             $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
         }
         $ticket_id = $request->getParameter('transact');
-
         $order->save();
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
@@ -3484,15 +3483,12 @@ class pScriptsActions extends sfActions {
                     $telintaObj = new Telienta();
                     $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
 
-
-
                     $this->setPreferredCulture($customer);
                     emailLib::sendCustomerRemoveBalanceEmail($customer, $order, $transaction);
                     $this->updatePreferredCulture();
                 }
             }
         }
-
 
         return sfView::NONE;
     }
@@ -3659,13 +3655,11 @@ class pScriptsActions extends sfActions {
             $tc->add(TelintaAccountsPeer::STATUS, 3);
             if (TelintaAccountsPeer::doCount($tc) > 0) {
                 $telintaAccountR = TelintaAccountsPeer::doSelectOne($tc);
-
                 $accountInfo = array('i_account' => $telintaAccountR->getIAccount(), "id" => $voipnumbers);
                 $telintaObj = new Telienta();
                 if ($telintaObj->updateAccount($accountInfo)) {
                     $telintaAccountR->setStatus(5);
                     $telintaAccountR->save();
-
                     $tcb = new TelintaAccounts();
                     $tcb->setParentTable("customer");
                     $tcb->setParentId($customer->getId());
