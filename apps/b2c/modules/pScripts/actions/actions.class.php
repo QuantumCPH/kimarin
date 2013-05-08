@@ -3792,6 +3792,9 @@ class pScriptsActions extends sfActions {
         }
 
         $order->save();
+        $telintaObj = new Telienta();
+        $telintaGetBalance = $telintaObj->getBalance($customer);
+        $transaction->setCustomerCurrentBalance($telintaGetBalance);
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
 
