@@ -3510,7 +3510,7 @@ class pScriptsActions extends sfActions {
                 $tcb->setIAccount($telintaAccountsCD->getIAccount());
                 $tcb->setICustomer($customer->getICustomer());
                 $tcb->setAccountTitle($cd_acount);
-                $tcb->setAccountType('d');
+                $tcb->setAccountType('r');
                 $tcb->setStatus(3);
                 $tcb->save();
             }
@@ -5420,7 +5420,9 @@ class pScriptsActions extends sfActions {
          return sfView::NONE;
     }
 
-    
+   public function executeAppThanks() {
+      // $this->setLayout('mobile_app_reg');       
+   }
     
     
     

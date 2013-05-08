@@ -1939,6 +1939,7 @@ class customerActions extends sfActions {
         $transaction->setDescription($product->getDescription());
         $transaction->setVat($product->getRegistrationFee() * sfConfig::get('app_vat_percentage'));
         $transaction->setInitialBalance($product->getInitialBalance() + $product->getBonus());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee() + $product->getPrice());
         $transaction->save();
 
 
@@ -2118,6 +2119,7 @@ class customerActions extends sfActions {
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setVat($this->vat);
                 $transaction->setInitialBalance($this->product->getInitialBalance());
+                $transaction->setAmountWithoutVat($this->product->getRegistrationFee()+$this->product->getPrice());
                 $transaction->save();
             }
         }
@@ -2393,6 +2395,7 @@ class customerActions extends sfActions {
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
         $transaction->setInitialBalance($product->getInitialBalance());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee()+$product->getPrice());
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
@@ -2630,9 +2633,7 @@ class customerActions extends sfActions {
       // $this->setLayout('mobile_app_reg');
    }
    
-   public function executeAppThanks() {
-      // $this->setLayout('mobile_app_reg');       
-   } 
+    
    
    public function executeInIframe() {
            
