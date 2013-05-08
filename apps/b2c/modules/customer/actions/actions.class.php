@@ -2689,10 +2689,7 @@ class customerActions extends sfActions {
        //$this->setLayout('mobile');
    }
    
-   public function executeAppThanks() {
-       
-       
-   } 
+   
    public function executeInIframe() {
        
        

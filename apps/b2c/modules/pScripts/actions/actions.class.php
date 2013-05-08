@@ -4631,7 +4631,7 @@ class pScriptsActions extends sfActions {
             if($applog->getRegisterFrom()=="Web"){
                 $zerocall_sms = new ZeroCallOutSMS();
                 $zerocall_sms->toCustomerAppRegViaWeb($customer);
-                $this->redirect($url."customer/appThanks");
+                $this->redirect($url."pScripts/appThanks");
             }
         }
 
@@ -5543,7 +5543,10 @@ class pScriptsActions extends sfActions {
     }
 
     
-    
+    public function executeAppThanks() {
+       
+       
+   } 
     
     
 }
