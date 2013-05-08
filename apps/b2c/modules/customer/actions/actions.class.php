@@ -2392,7 +2392,7 @@ class customerActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
-        $transaction->setInitialBalance($this->product->getInitialBalance());
+        $transaction->setInitialBalance($product->getInitialBalance());
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
