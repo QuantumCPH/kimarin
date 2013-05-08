@@ -2762,7 +2762,11 @@ class pScriptsActions extends sfActions {
             emailLib::sendCustomerRefillEmail($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
         }
-
+        
+        $telintaGetBalance = $telintaObj->getBalance($this->customer);
+        $transaction->setCustomerCurrentBalance($telintaGetBalance);
+        $transaction->save();
+        
         $order->setExeStatus(1);
         $order->save();
         echo 'Yes';
@@ -3430,8 +3434,10 @@ class pScriptsActions extends sfActions {
         if ($getFirstnumberofMobile == 0) {
             $TelintaMobile = substr($new_mobile, 1);
             $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
+            $d_mobile = $TelintaMobile;
         } else {
             $TelintaMobile = sfConfig::get('app_country_code') . $new_mobile;
+            $d_mobile = $new_mobile;
         }
         $new_mobile_number = $TelintaMobile;
 
@@ -3466,7 +3472,7 @@ class pScriptsActions extends sfActions {
             $telintaAccountsCB = TelintaAccountsPeer::doSelectOne($cb);
             $cb_acount = "cb" . $new_mobile_number;
 
-            $accountInfo = array('i_account' => $telintaAccount->getIAccount(), "id" => $cb_acount);
+            $accountInfo = array('i_account' => $telintaAccountsCB->getIAccount(), "id" => $cb_acount);
             $telintaObj = new Telienta();
             if ($telintaObj->updateAccount($accountInfo)) {
                 $telintaAccountsCB->setStatus(5);
@@ -3484,6 +3490,32 @@ class pScriptsActions extends sfActions {
             }
         }
 
+        $cd = new Criteria;
+        $cd->add(TelintaAccountsPeer::ACCOUNT_TITLE, $customer->getMobileNumber());
+        $cd->addAnd(TelintaAccountsPeer::STATUS, 3);
+
+        if (TelintaAccountsPeer::doCount($cd) > 0) {
+            $telintaAccountsCD = TelintaAccountsPeer::doSelectOne($cd);
+            $cd_acount = $d_mobile;
+
+            $accountInfo = array('i_account' => $telintaAccountsCD->getIAccount(), "id" => $cd_acount);
+            $telintaObj = new Telienta();
+            if ($telintaObj->updateAccount($accountInfo)) {
+                $telintaAccountsCD->setStatus(5);
+                $telintaAccountsCD->save();
+
+                $tcb = new TelintaAccounts();
+                $tcb->setParentTable("customer");
+                $tcb->setParentId($customer->getId());
+                $tcb->setIAccount($telintaAccountsCD->getIAccount());
+                $tcb->setICustomer($customer->getICustomer());
+                $tcb->setAccountTitle($cd_acount);
+                $tcb->setAccountType('d');
+                $tcb->setStatus(3);
+                $tcb->save();
+            }
+        }
+        
         $getvoipInfo = new Criteria();
         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $customer->getId());
         $getvoipInfo->addAnd(SeVoipNumberPeer::IS_ASSIGNED, 1);
@@ -3530,6 +3562,9 @@ class pScriptsActions extends sfActions {
 
 
         $order->save();
+        $telintaObj = new Telienta();
+        $telintaGetBalance = $telintaObj->getBalance($customer);
+        $transaction->setCustomerCurrentBalance($telintaGetBalance);
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
         $callbacklog = new CallbackLog();

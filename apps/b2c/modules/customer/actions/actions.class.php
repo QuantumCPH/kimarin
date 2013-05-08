@@ -1938,6 +1938,7 @@ class customerActions extends sfActions {
         $transaction->setAmount($item_amount);
         $transaction->setDescription($product->getDescription());
         $transaction->setVat($product->getRegistrationFee() * sfConfig::get('app_vat_percentage'));
+        $transaction->setInitialBalance($product->getInitialBalance() + $product->getBonus());
         $transaction->save();
 
 
@@ -1960,7 +1961,7 @@ class customerActions extends sfActions {
         $notify_url = $this->getTargetUrl() . 'pScripts/calbackrefill?p=' . $callbackparameters;
 
         $email2 = new DibsCall();
-        $email2->setCallurl($notify_url);
+        $email2->setCallurl("Send to paypal---".$notify_url);
 
         $email2->save();
 
@@ -2116,6 +2117,7 @@ class customerActions extends sfActions {
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setVat($this->vat);
+                $transaction->setInitialBalance($this->product->getInitialBalance());
                 $transaction->save();
             }
         }
@@ -2165,10 +2167,10 @@ class customerActions extends sfActions {
 
         $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
 
-//        $email2 = new DibsCall();
-//        $email2->setCallurl($notify_url);
-//
-//        $email2->save();
+        $email2 = new DibsCall();
+        $email2->setCallurl("Send to paypal--".$notify_url);
+
+        $email2->save();
 
         $mobile_number = $request->getParameter('mobile_number');
         $newnumber = $request->getParameter('newnumber');
@@ -2390,6 +2392,7 @@ class customerActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
+        $transaction->setInitialBalance($this->product->getInitialBalance());
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
