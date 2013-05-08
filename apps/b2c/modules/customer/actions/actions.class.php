@@ -273,48 +273,10 @@ class customerActions extends sfActions {
                 $customer->save();
             }
 
-
             $url = $this->getTargetUrl();
             $this->redirect($url . 'payments/signup?cid=' . $customer->getId() . '&pid=' . $productObj->getId());
         }
 
-
-
-
-
-
-//
-//        //set referrer id
-//        if ($referrer_id = $request->getParameter('ref')) {
-//            $c = new Criteria();
-//            $c->add(AgentCompanyPeer::ID, $referrer_id);
-//
-//            if (AgentCompanyPeer::doSelectOne($c))
-//                $this->form->setDefault('referrer_id', $referrer_id);
-//        }
-//
-//        if ($this->getRequest()->getCookie('agent_id')) {
-//            $referrer_id = $this->getRequest()->getCookie('agent_id');
-//            $c = new Criteria();
-//            $c->add(AgentCompanyPeer::ID, $referrer_id);
-//
-//            if (AgentCompanyPeer::doCount($c) == 1) {
-//                $this->form->setDefault('referrer_id', $referrer_id);
-//            }
-//        }
-//
-//
-//        unset($this->form['manufacturer']);
-//        unset($this->form['device_id']);
-//
-//
-//        if ($request->isMethod('post')) {
-//
-//            unset($this->form['imsi']);
-//            unset($this->form['uniqueid']);
-//
-//            $this->processForm($request, $this->form, $this->getRequest()->getCookie('invite_id'));
-//        }
     }
 
     public function executeGetmobilemodel(sfWebRequest $request) {

@@ -1501,11 +1501,13 @@ Med vänlig hälsning<br/><br/>
         //**********************************************************************
     }
 
-    public static function sendUniqueIdsShortage($sim_type) {
+    public static function sendUniqueIdsShortage($sim_type , $message=NULL) {
 
         $subject = 'Unique Ids finished.';
+        
         $message_body = "Uniuqe Ids have been finsihed of SIM Type " . $sim_type . ".<br/><br/>" . sfConfig::get('app_site_title');
-
+        if($message!=NULL) $message.$message_body;
+            
         $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
         $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
 
@@ -3423,6 +3425,38 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email->save();
         }
         //----------------------------------------
+    }
+    
+    public static function sendError($subject, $message) {
+
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
+
+        $recipient_name_support = sfConfig::get('app_recipient_name_support');
+        $recipient_email_support = sfConfig::get('app_recipient_email_support');
+
+        //********************Sent The Email To RS******************************
+        if (trim($recipient_email_rs) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_rs);
+            $email->setReceipientEmail($recipient_email_rs);
+            $email->setEmailType('Telinta Error');
+            $email->setMessage($message);
+            $email->save();
+        endif;
+        //**********************************************************************
+        //********************Sent The Email To Support*************************
+        if (trim($recipient_email_support) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_support);
+            $email->setReceipientEmail($recipient_email_support);
+            $email->setEmailType('Telinta Error');
+            $email->setMessage($message);
+            $email->save();
+        endif;
+        //**********************************************************************
     }
 }
 

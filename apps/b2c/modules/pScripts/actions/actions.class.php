@@ -2771,7 +2771,7 @@ class pScriptsActions extends sfActions {
 
     public function executeConfirmpayment(sfWebRequest $request) {
 
-        $Parameters = $request->getURI();
+        $Parameters = "PayPal Responded--".$request->getURI();
 
         // $Parameters=$Parameters.$request->getParameter('amount');
         $email2 = new DibsCall();
@@ -2792,79 +2792,29 @@ class pScriptsActions extends sfActions {
         $order_amount = $params[2];
         $this->getUser()->setCulture($lang);
 
-        $ticket_id = "";
-        //  $this->getUser()->setCulture($request->getParameter('lng'));
-
-
+        
         if ($order_id != '') {
-
-            $this->logMessage(print_r($_GET, true));
-
-            $is_transaction_ok = false;
-            $subscription_id = '';
-
-            //$this->forward404Unless($order_id || $order_amount);
-            //get order object
+       
+                      
             $order = CustomerOrderPeer::retrieveByPK($order_id);
 
-            if (isset($ticket_id) && $ticket_id != "") {
-
-                $subscriptionvalue = 0;
-
-                $subscriptionvalue = $request->getParameter('subscriptionid');
-
-
-                if (isset($subscriptionvalue) && $subscriptionvalue > 1) {
-//  echo 'is autorefill activated';
-                    //auto_refill_amount
-                    $auto_refill_amount_choices = array_keys(ProductPeer::getRefillHashChoices());
-
-                    $auto_refill_amount = in_array($request->getParameter('user_attr_2'), $auto_refill_amount_choices) ? $request->getParameter('user_attr_2') : $auto_refill_amount_choices[0];
-                    $order->getCustomer()->setAutoRefillAmount($auto_refill_amount);
-
-
-                    //auto_refill_lower_limit
-                    $auto_refill_lower_limit_choices = array_keys(ProductPeer::getAutoRefillLowerLimitHashChoices());
-
-                    $auto_refill_min_balance = in_array($request->getParameter('user_attr_3'), $auto_refill_lower_limit_choices) ? $request->getParameter('user_attr_3') : $auto_refill_lower_limit_choices[0];
-                    $order->getCustomer()->setAutoRefillMinBalance($auto_refill_min_balance);
-
-                    $order->getCustomer()->setTicketval($ticket_id);
-                    $order->save();
-                    $auto_refill_amount = "refill amount" . $auto_refill_amount;
-                    $email2d = new DibsCall();
-                    $email2d->setCallurl($auto_refill_amount);
-                    $email2d->save();
-                    $minbalance = "min balance" . $auto_refill_min_balance;
-                    $email2dm = new DibsCall();
-                    $email2dm->setCallurl($minbalance);
-                    $email2dm->save();
-                }
+           
+            if(is_null($order) || $order->getOrderStatusId() == sfConfig::get('app_status_completed')){
+                $subject = $order->getId()." already successfull";
+                $message = $order->getId()." already successfull";
+                emailLib::sendError($subject, $message);
+                return sfView::NONE;
             }
-            //check to see if that customer has already purchased this product
             
-            //set subscription id
-            //$order->getCustomer()->setSubscriptionId($subscription_id);
-            //set auto_refill amount
-            //if order is already completed > 404
-            $this->forward404Unless($order->getOrderStatusId() != sfConfig::get('app_status_completed'));
-            $this->forward404Unless($order);
-
-            //  echo 'processing order <br />';
-
             $c = new Criteria;
             $c->add(TransactionPeer::ORDER_ID, $order_id);
             $transaction = TransactionPeer::doSelectOne($c);
             $order_amount = $transaction->getAmount();
-            //  echo 'retrieved transaction<br />';
 
             $order->setOrderStatusId(sfConfig::get('app_status_completed')); //completed
             $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed')); //completed
             $transaction->setTransactionStatusId(3); //completed
             
-            $is_transaction_ok = true;
-
-            $order->setQuantity(1);
             //set active agent_package in case customer
             if ($order->getCustomer()->getAgentCompany()) {
                 $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
@@ -2874,39 +2824,25 @@ class pScriptsActions extends sfActions {
             $order->save();
             $transaction->save();
             TransactionPeer::AssignReceiptNumber($transaction);
-            if ($is_transaction_ok) {
-
-                // echo 'Assigning Customer ID <br/>';
-                //set customer's proudcts in use
+            
+                
                 $customer_product = new CustomerProduct();
-
                 $customer_product->setCustomer($order->getCustomer());
                 $customer_product->setProduct($order->getProduct());
-
                 $customer_product->save();
+              
+                $customer = $order->getCustomer();
 
-                $this->customer = $order->getCustomer();
-
-                //Fonet::registerFonet($this->customer);
-                //recharge the extra_refill/initial balance of the prouduct
-                //Fonet::recharge($this->customer, $order->getExtraRefill());
-
-                $cc = new Criteria();
-                $cc->add(EnableCountryPeer::ID, $this->customer->getCountryId());
-                $country = EnableCountryPeer::doSelectOne($cc);
-
-                $mobile = $country->getCallingCode() . $this->customer->getMobileNumber();
-
-                $getFirstnumberofMobile = substr($this->customer->getMobileNumber(), 0, 1);     // bcdef
+                
+                $getFirstnumberofMobile = substr($customer->getMobileNumber(), 0, 1);     // bcdef
                 if ($getFirstnumberofMobile == 0) {
-                    $TelintaMobile = substr($this->customer->getMobileNumber(), 1);
+                    $TelintaMobile = substr($customer->getMobileNumber(), 1);
                     $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
                 } else {
-                    $TelintaMobile = sfConfig::get('app_country_code') . $this->customer->getMobileNumber();
+                    $TelintaMobile = sfConfig::get('app_country_code') . $customer->getMobileNumber();
                 }
 
-
-                $uniqueId = $this->customer->getUniqueid();
+                $uniqueId = $customer->getUniqueid();
                 if ($order->getProduct()->getProductTypeId() != 10 && $order->getProduct()->getProductTypeId() != 11) {
                     $uc = new Criteria();
                     $uc->add(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueId);
@@ -2922,19 +2858,19 @@ class pScriptsActions extends sfActions {
                         $uc = new Criteria();
                         $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
                         $uc->addAnd(UniqueIdsPeer::STATUS, 0);
-                        $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID, $this->customer->getSimTypeId());
+                        $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID, $customer->getSimTypeId());
                         $availableUniqueCount = UniqueIdsPeer::doCount($uc);
                         $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
 
                         if ($availableUniqueCount == 0) {
                             // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                            emailLib::sendUniqueIdsShortage($this->customer->getSimTypeId());
+                            $message = $customer->getId()." could not get unique id.";
+                            emailLib::sendUniqueIdsShortage($customer->getSimTypeId(),$message);
                             exit;
-                            //$this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
                         }
                         $uniqueId = $availableUniqueId->getUniqueNumber();
-                        $this->customer->setUniqueid($uniqueId);
-                        $this->customer->save();
+                        $customer->setUniqueid($uniqueId);
+                        $customer->save();
                         $availableUniqueId->setStatus(1);
                         $availableUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
                         $availableUniqueId->save();
@@ -2947,41 +2883,39 @@ class pScriptsActions extends sfActions {
                 $callbacklog->setCallingcode(sfConfig::get("app_country_code"));
                 $callbacklog->setCheckStatus(3);
                 $callbacklog->save();
-
+               
                 $OpeningBalance = $order->getExtraRefill();
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //Section For Telinta Add Cusomter
                 $telintaObj = new Telienta();
-                $telintaObj->ResgiterCustomer($this->customer, $OpeningBalance);
+                $telintaObj->ResgiterCustomer($customer, $OpeningBalance);
                 // For Telinta Add Account
                 
-                $telintaObj->createAAccount($TelintaMobile, $this->customer);
-                $telintaObj->createCBAccount($TelintaMobile, $this->customer);
-                $telintaObj->createDialAccount($this->customer->getMobileNumber(), $this->customer);
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+                $telintaObj->createAAccount($TelintaMobile, $customer);
+                $telintaObj->createCBAccount($TelintaMobile, $customer);
+                $telintaObj->createDialAccount($customer->getMobileNumber(), $customer);
                 
-                $telintaGetBalance = $telintaObj->getBalance($this->customer);
+                $telintaGetBalance = $telintaObj->getBalance($customer);
                 $transaction->setCustomerCurrentBalance($telintaGetBalance);
                 $transaction->save();
                 //if the customer is invited, Give the invited customer a bonus of 10
                 $invite_c = new Criteria();
-                $invite_c->add(InvitePeer::INVITE_NUMBER, $this->customer->getMobileNumber());
+                $invite_c->add(InvitePeer::INVITE_NUMBER, $customer->getMobileNumber());
                 $invite_c->add(InvitePeer::INVITE_STATUS, 2);
                 $invite = InvitePeer::doSelectOne($invite_c);
                 if ($invite) {
                     $invite->setInviteStatus(3);
-                    $invite->setInvitedCustomerId($this->customer->getId());
+                    $invite->setInvitedCustomerId($customer->getId());
                     $products = new Criteria();
                     $products->add(ProductPeer::ID, 2);
                     $products = ProductPeer::doSelectOne($products);
                     $extrarefill = $products->getInitialBalance();
-                    //if the customer is invited, Give the invited customer a bonus of 10
+                    
                     $inviteOrder = new CustomerOrder();
                     $inviteOrder->setProductId(2);
                     $inviteOrder->setQuantity(1);
                     $inviteOrder->setOrderStatusId(3);
-                    $inviteOrder->setIsFirstOrder(4);
+                    $inviteOrder->setIsFirstOrder(4); //// transaction types
+                    
                     $inviteOrder->setCustomerId($invite->getCustomerId());
                     $inviteOrder->setExtraRefill($extrarefill);
                     $inviteOrder->save();
@@ -2998,22 +2932,15 @@ class pScriptsActions extends sfActions {
                     $transaction_i->setCustomerId($invite->getCustomerId());
                     $transaction_i->setOrderId($OrderId);
                     $transaction_i->setTransactionStatusId(3);
+                    
+                    $invited_customer = CustomerPeer::retrieveByPK($invite->getCustomerId());
 
-                    $this->customers = CustomerPeer::retrieveByPK($invite->getCustomerId());
-
-                    //send Telinta query to update the balance of invite by 10
-                    $getFirstnumberofMobile = substr($this->customers->getMobileNumber(), 0, 1);     // bcdef
-                    if ($getFirstnumberofMobile == 0) {
-                        $TelintaMobile = substr($this->customers->getMobileNumber(), 1);
-                        $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
-                    } else {
-                        $TelintaMobile = sfConfig::get('app_country_code') . $this->customers->getMobileNumber();
-                    }
-                    $uniqueId = $this->customers->getUniqueid();
+                    $uniqueId = $invited_customer->getUniqueid();                    
+                    
                     $OpeningBalance = $extrarefill;
                     //This is for Recharge the Customer
                     $telintaObj = new Telienta();
-                    $telintaObj->recharge($this->customers, $OpeningBalance, $transactiondescriptionB->getTitle());
+                    $telintaObj->recharge($invited_customer, $OpeningBalance, $transactiondescriptionB->getTitle());
 
                     //This is for Recharge the Account
 
@@ -3026,12 +2953,12 @@ class pScriptsActions extends sfActions {
                     if (isset($invitevar)) {
                         $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
                         $this->setPreferredCulture($inviterCustomer);
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(), $this->customer, NULL, $inviteOrder, $transaction_i);
+                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(), $customer, NULL, $inviteOrder, $transaction_i);
                         $this->updatePreferredCulture();
                     }
                 }
                 
-                $agentid = $this->customer->getReferrerId();
+                $agentid = $customer->getReferrerId();
 
                 $cp = new Criteria;
                 $cp->add(CustomerProductPeer::CUSTOMER_ID, $order->getCustomerId());
@@ -3042,16 +2969,13 @@ class pScriptsActions extends sfActions {
                 if (isset($agentid) && $agentid != "") {
                     commissionLib::registrationCommissionCustomer($agentid, $productid, $transactionid);
                 }
-                $this->setPreferredCulture($this->customer);
-                emailLib::sendCustomerRegistrationViaWebEmail($this->customer, $order);
+                $this->setPreferredCulture($customer);
+                emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
                 $this->updatePreferredCulture();
 //                $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
                
-            }//end if
-            else {
-                $this->logMessage('Error in transaction.');
-            }
+           
         }
         //header('HTTP/1.1 200 OK');
         return sfView::NONE;
