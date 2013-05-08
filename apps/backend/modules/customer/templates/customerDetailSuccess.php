@@ -196,8 +196,7 @@ provider</td>
             $un->add(TelecomOperatorPeer::ID, $tcid);
           
              $vounumber = TelecomOperatorPeer::doSelectOne($un);
-            
-            echo $vounumber->getName();
+            if($vounumber) echo $vounumber->getName();
              
           ?> </td>
                          </tr>  

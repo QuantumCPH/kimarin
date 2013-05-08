@@ -207,38 +207,13 @@ class customerActions extends sfActions {
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
 
-        $id = $request->getParameter('invite_id');
-        $visitor_id = $request->getParameter('visitor');
-        //$this->form->widgetSchema->setLabel('the_field_id', false);
-        if ($visitor_id != NULL) {
-            $c = new Criteria();
-            $c->add(VisitorsPeer::ID, $request->getParameter('visitor'));
-            $visitor = VisitorsPeer::doSelectOne($c);
-            $status = $visitor->getStatus();
-            $visitor->setStatus($status . "> B2C Signup Page ");
-            $visitor->save();
-        }
-
-        if ($this->getRequest()->getCookie('invite_id') != NULL) {
-            $c = new Criteria();
-            //$c->add(InvitePeer::ID,$id);
-            //$c->add(InvitePeer::INVITE_STATUS,'2');
-            $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
-            if ($invite) {
-                $invite->setInviteStatus('2');
-                $invite->save();
-            }
-        }
-
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
         $pl = new Criteria();
         $this->langs = PreferredLanguagesPeer::doSelect($pl);
 
 
         if ($request->isMethod('post')) {
-
-
-
+            
             if ($this->getRequest()->getCookie('invite_id') != NULL) {
                 $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
                 if ($invite) {
@@ -259,6 +234,7 @@ class customerActions extends sfActions {
 
             if ($this->getRequest()->getCookie('agent_id') != NULL) {
                 $customer->setRegistrationTypeId('3');
+                $customer->setReferrerId($this->getRequest()->getCookie('agent_id'));
             } else {
                 $customer->setRegistrationTypeId('1');
             }
@@ -2686,11 +2662,11 @@ class customerActions extends sfActions {
        $cc->add(CountryPeer::ENABLED,1);
        $countries = CountryPeer::doSelect($cc);
        $this->countries = $countries;
-       $this->setLayout('mobile_app_reg');
+      // $this->setLayout('mobile_app_reg');
    }
    
    public function executeAppThanks() {
-       $this->setLayout('mobile_app_reg');       
+      // $this->setLayout('mobile_app_reg');       
    } 
    
    public function executeInIframe() {

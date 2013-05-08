@@ -2802,11 +2802,9 @@ class pScriptsActions extends sfActions {
             $is_transaction_ok = false;
             $subscription_id = '';
 
-            $this->forward404Unless($order_id);
             //$this->forward404Unless($order_id || $order_amount);
             //get order object
             $order = CustomerOrderPeer::retrieveByPK($order_id);
-
 
             if (isset($ticket_id) && $ticket_id != "") {
 
@@ -2843,22 +2841,7 @@ class pScriptsActions extends sfActions {
                 }
             }
             //check to see if that customer has already purchased this product
-            $c = new Criteria();
-            $c->add(CustomerProductPeer::CUSTOMER_ID, $order->getCustomerId());
-            $c->addAnd(CustomerProductPeer::PRODUCT_ID, $order->getProductId());
-            $c->addJoin(CustomerProductPeer::CUSTOMER_ID, CustomerPeer::ID);
-            $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, sfConfig::get('app_status_new'), Criteria::NOT_EQUAL);
-
-            // echo 'retrieve order id: '.$order->getId().'<br />';
-
-            if (CustomerProductPeer::doCount($c) != 0) {
-
-                //Customer is already registered.
-                //echo __('The customer is already registered.');
-                //exit the script successfully
-                return sfView::NONE;
-            }
-
+            
             //set subscription id
             //$order->getCustomer()->setSubscriptionId($subscription_id);
             //set auto_refill amount
@@ -2874,28 +2857,13 @@ class pScriptsActions extends sfActions {
             $order_amount = $transaction->getAmount();
             //  echo 'retrieved transaction<br />';
 
-            if ($transaction->getAmount() > $order_amount) {
-                //error
-                $order->setOrderStatusId(sfConfig::get('app_status_error')); //error in amount
-                $transaction->setTransactionStatusId(sfConfig::get('app_status_error')); //error in amount
-                $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_error')); //error in amount
-                echo 'setting error <br /> ';
-            } elseif (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
-                $transaction->setAmount($order_amount);
-            }
-
             $order->setOrderStatusId(sfConfig::get('app_status_completed')); //completed
             $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed')); //completed
             $transaction->setTransactionStatusId(3); //completed
-            $transactiondescription = TransactionDescriptionPeer::retrieveByPK(8);
-            $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
-            $transaction->setTransactionDescriptionId($transactiondescription->getId());
-            $transaction->setDescription($transactiondescription->getTitle());
-            // echo 'transaction=ok <br /> ';
+            
             $is_transaction_ok = true;
 
             $order->setQuantity(1);
-            // $order->getCustomer()->getAgentCompany();
             //set active agent_package in case customer
             if ($order->getCustomer()->getAgentCompany()) {
                 $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
@@ -2916,7 +2884,6 @@ class pScriptsActions extends sfActions {
 
                 $customer_product->save();
 
-                //register to fonet
                 $this->customer = $order->getCustomer();
 
                 //Fonet::registerFonet($this->customer);
@@ -2939,7 +2906,6 @@ class pScriptsActions extends sfActions {
 
 
                 $uniqueId = $this->customer->getUniqueid();
-                echo $uniqueId . "<br/>";
                 if ($order->getProduct()->getProductTypeId() != 10 && $order->getProduct()->getProductTypeId() != 11) {
                     $uc = new Criteria();
                     $uc->add(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueId);
@@ -2981,22 +2947,22 @@ class pScriptsActions extends sfActions {
                 $callbacklog->setCheckStatus(3);
                 $callbacklog->save();
 
-
-
-
-                $emailId = $this->customer->getEmail();
                 $OpeningBalance = $order->getExtraRefill();
-                $customerPassword = $this->customer->getPlainText();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //Section For Telinta Add Cusomter
                 $telintaObj = new Telienta();
                 $telintaObj->ResgiterCustomer($this->customer, $OpeningBalance);
                 // For Telinta Add Account
-
+                
                 $telintaObj->createAAccount($TelintaMobile, $this->customer);
                 $telintaObj->createCBAccount($TelintaMobile, $this->customer);
                 $telintaObj->createDialAccount($this->customer->getMobileNumber(), $this->customer);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                
+                $telintaGetBalance = $telintaObj->getBalance($this->customer);
+                $transaction->setCustomerCurrentBalance($telintaGetBalance);
+                $transaction->save();
                 //if the customer is invited, Give the invited customer a bonus of 10
                 $invite_c = new Criteria();
                 $invite_c->add(InvitePeer::INVITE_NUMBER, $this->customer->getMobileNumber());
@@ -3057,66 +3023,19 @@ class pScriptsActions extends sfActions {
 
                     $invitevar = $invite->getCustomerId();
                     if (isset($invitevar)) {
-
-
                         $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
                         $this->setPreferredCulture($inviterCustomer);
-
-
-
-
                         emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(), $this->customer, NULL, $inviteOrder, $transaction_i);
                         $this->updatePreferredCulture();
                     }
                 }
-                $lang = sfConfig::get('app_language_symbol');
-                $this->lang = $lang;
-
-                $countrylng = new Criteria();
-                $countrylng->add(EnableCountryPeer::LANGUAGE_SYMBOL, $lang);
-                $countrylng = EnableCountryPeer::doSelectOne($countrylng);
-                if ($countrylng) {
-                    $countryName = $countrylng->getName();
-                    $languageSymbol = $countrylng->getLanguageSymbol();
-                    $lngId = $countrylng->getId();
-
-                    $postalcharges = new Criteria();
-                    $postalcharges->add(PostalChargesPeer::COUNTRY, $lngId);
-                    $postalcharges->add(PostalChargesPeer::STATUS, 1);
-                    $postalcharges = PostalChargesPeer::doSelectOne($postalcharges);
-                    if ($postalcharges) {
-                        $postalcharge = $postalcharges->getCharges();
-                    } else {
-                        $postalcharge = '';
-                    }
-                }
-                //$product_price = $order->getProduct()->getPrice() - $order->getExtraRefill();
-                $product_price = $order->getProduct()->getPrice() - $order->getExtraRefill();
-
-                $product_price_vat = sfConfig::get('app_vat_percentage') * ($order->getProduct()->getRegistrationFee() + $postalcharge);
-                $message_body = $this->getPartial('payments/order_receipt', array(
-                    'customer' => $this->customer,
-                    'order' => $order,
-                    'transaction' => $transaction,
-                    'vat' => $product_price_vat,
-                    'postalcharge' => $postalcharge,
-                    'wrap' => true
-                ));
-
-                $subject = $this->getContext()->getI18N()->__('Payment Confirmation');
-                $sender_email = sfConfig::get('app_email_sender_email', 'support@kimarin.es');
-                $sender_name = sfConfig::get('app_email_sender_name', 'Kimarin support');
-
-                $recepient_email = trim($this->customer->getEmail());
-                $recepient_name = sprintf('%s %s', $this->customer->getFirstName(), $this->customer->getLastName());
-
-
+                
                 $agentid = $this->customer->getReferrerId();
 
                 $cp = new Criteria;
                 $cp->add(CustomerProductPeer::CUSTOMER_ID, $order->getCustomerId());
                 $customerproduct = CustomerProductPeer::doSelectOne($cp);
-                $productid = $customerproduct->getId();
+                $productid = $customerproduct->getProductId();
 
                 $transactionid = $transaction->getId();
                 if (isset($agentid) && $agentid != "") {
@@ -3127,7 +3046,7 @@ class pScriptsActions extends sfActions {
                 $this->updatePreferredCulture();
 //                $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
-                $this->order = $order;
+               
             }//end if
             else {
                 $this->logMessage('Error in transaction.');
