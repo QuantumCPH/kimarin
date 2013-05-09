@@ -2636,7 +2636,6 @@ class customerActions extends sfActions {
                 $customer->save();
             }
 
-
             $url = $this->getTargetUrl();
             $this->redirect($url . 'payments/signup?cid=' . $customer->getId() . '&pid=' . $productObj->getId());
         }
