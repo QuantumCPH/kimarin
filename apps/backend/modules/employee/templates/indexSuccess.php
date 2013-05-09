@@ -133,7 +133,16 @@
             $telintaGetBalancecb=0; 
         }
             
-        
+        $cd = new Criteria();
+        $cd->add(TelintaAccountsPeer::ACCOUNT_TITLE, $employee->getMobileNumber());
+        $cd->addAnd(TelintaAccountsPeer::STATUS, 3);
+        $telintaAccountcd = TelintaAccountsPeer::doSelectOne($cd);
+        if($telintaAccountcd){
+            $accountInfocb = $ComtelintaObj->getAccountInfo($telintaAccountcd->getIAccount());
+            $telintaGetBalancecd = $accountInfocb->account_info->balance;
+        }else{
+            $telintaGetBalancecd=0; 
+        }
 
          $regtype=$employee->getRegistrationType();
         $telintaGetBalanceres = 0;
@@ -161,9 +170,9 @@
                 }
             }
         }
-      echo  $balnc=(float)$telintaGetBalance+(float)$telintaGetBalancecb+(float)$telintaGetBalanceres;
+      echo  $balnc=(float)$telintaGetBalance+(float)$telintaGetBalancecb+(float)$telintaGetBalancecd+(float)$telintaGetBalanceres;
           echo sfConfig::get('app_currency_code');
-                                                ?></td>
+     ?></td>
 
       
       <?php } ?>

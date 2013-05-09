@@ -118,11 +118,7 @@ class paymentsActions extends sfActions {
     }
 
     public function executeSignup(sfWebRequest $request) {
-        //call Culture Method For Get Current Set Culture - Against Feature# 6.1 --- 01/24/11
-        //$this->getUser()->setCulture('en');
-        //$getCultue = $this->getUser()->getCulture();
-        // Store data in the user session
-        //$this->getUser()->setAttribute('activelanguage', $getCultue);
+        
         $this->targetUrl = $this->getTargetUrl();
         $this->form = new PaymentForm();
 
@@ -149,23 +145,14 @@ class paymentsActions extends sfActions {
             }
         }
 
-
-
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////
         $product_id = $request->getParameter('pid');
         $customer_id = $request->getParameter('cid');
 
-        $this->getUser()->setAttribute('product_ids', $product_id);
-        $this->getUser()->setAttribute('cusid', $customer_id);
 
         if ($product_id == '' || $customer_id == '') {
-            $this->forward404('Product id not found in session');
+            return sfView::NONE;
+            exit;
         }
         
         
@@ -174,11 +161,8 @@ class paymentsActions extends sfActions {
         $order->setProductId($product_id);
         $order->setCustomerId($customer_id);
         $order->setExtraRefill($order->getProduct()->getInitialBalance());
-        //$extra_refil_choices = ProductPeer::getRefillChoices();
-        //TODO: restrict quantity to be 1
         $order->setQuantity(1);
-        //$order->setExtraRefill($extra_refil_choices[0]);//minumum refill amount
-        $order->setIsFirstOrder(1);
+        $order->setIsFirstOrder(1);//// transaction types
         $order->save();
         
         if(!$order->getProduct()->getPostageApplicable()){
@@ -191,11 +175,12 @@ class paymentsActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
-        //$transaction->setTransactionStatusId() // default value 1
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $this->postalcharge + $order->getProduct()->getRegistrationFee());
         $transaction->setVat((($this->postalcharge + $order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
         $transaction->save();
         $this->order = $order;
-        $this->forward404Unless($this->order);
+        
         $this->order_id = $order->getId();
         $this->amount = $transaction->getAmount();
     }
@@ -413,7 +398,7 @@ class paymentsActions extends sfActions {
         $notify_url = $this->getTargetUrl() . 'pScripts/confirmpayment?p=' . $callbackparameters;
 
         $email2 = new DibsCall();
-        $email2->setCallurl($notify_url);
+        $email2->setCallurl("Send Request to Paypal--".$notify_url);
 
         $email2->save();
 

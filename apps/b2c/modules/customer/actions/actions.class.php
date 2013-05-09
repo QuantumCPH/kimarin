@@ -207,38 +207,13 @@ class customerActions extends sfActions {
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
 
-        $id = $request->getParameter('invite_id');
-        $visitor_id = $request->getParameter('visitor');
-        //$this->form->widgetSchema->setLabel('the_field_id', false);
-        if ($visitor_id != NULL) {
-            $c = new Criteria();
-            $c->add(VisitorsPeer::ID, $request->getParameter('visitor'));
-            $visitor = VisitorsPeer::doSelectOne($c);
-            $status = $visitor->getStatus();
-            $visitor->setStatus($status . "> B2C Signup Page ");
-            $visitor->save();
-        }
-
-        if ($this->getRequest()->getCookie('invite_id') != NULL) {
-            $c = new Criteria();
-            //$c->add(InvitePeer::ID,$id);
-            //$c->add(InvitePeer::INVITE_STATUS,'2');
-            $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
-            if ($invite) {
-                $invite->setInviteStatus('2');
-                $invite->save();
-            }
-        }
-
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
         $pl = new Criteria();
         $this->langs = PreferredLanguagesPeer::doSelect($pl);
 
 
         if ($request->isMethod('post')) {
-
-
-
+            
             if ($this->getRequest()->getCookie('invite_id') != NULL) {
                 $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
                 if ($invite) {
@@ -259,6 +234,7 @@ class customerActions extends sfActions {
 
             if ($this->getRequest()->getCookie('agent_id') != NULL) {
                 $customer->setRegistrationTypeId('3');
+                $customer->setReferrerId($this->getRequest()->getCookie('agent_id'));
             } else {
                 $customer->setRegistrationTypeId('1');
             }
@@ -297,48 +273,10 @@ class customerActions extends sfActions {
                 $customer->save();
             }
 
-
             $url = $this->getTargetUrl();
             $this->redirect($url . 'payments/signup?cid=' . $customer->getId() . '&pid=' . $productObj->getId());
         }
 
-
-
-
-
-
-//
-//        //set referrer id
-//        if ($referrer_id = $request->getParameter('ref')) {
-//            $c = new Criteria();
-//            $c->add(AgentCompanyPeer::ID, $referrer_id);
-//
-//            if (AgentCompanyPeer::doSelectOne($c))
-//                $this->form->setDefault('referrer_id', $referrer_id);
-//        }
-//
-//        if ($this->getRequest()->getCookie('agent_id')) {
-//            $referrer_id = $this->getRequest()->getCookie('agent_id');
-//            $c = new Criteria();
-//            $c->add(AgentCompanyPeer::ID, $referrer_id);
-//
-//            if (AgentCompanyPeer::doCount($c) == 1) {
-//                $this->form->setDefault('referrer_id', $referrer_id);
-//            }
-//        }
-//
-//
-//        unset($this->form['manufacturer']);
-//        unset($this->form['device_id']);
-//
-//
-//        if ($request->isMethod('post')) {
-//
-//            unset($this->form['imsi']);
-//            unset($this->form['uniqueid']);
-//
-//            $this->processForm($request, $this->form, $this->getRequest()->getCookie('invite_id'));
-//        }
     }
 
     public function executeGetmobilemodel(sfWebRequest $request) {
@@ -2000,6 +1938,8 @@ class customerActions extends sfActions {
         $transaction->setAmount($item_amount);
         $transaction->setDescription($product->getDescription());
         $transaction->setVat($product->getRegistrationFee() * sfConfig::get('app_vat_percentage'));
+        $transaction->setInitialBalance($product->getInitialBalance() + $product->getBonus());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee() + $product->getPrice());
         $transaction->save();
 
 
@@ -2022,7 +1962,7 @@ class customerActions extends sfActions {
         $notify_url = $this->getTargetUrl() . 'pScripts/calbackrefill?p=' . $callbackparameters;
 
         $email2 = new DibsCall();
-        $email2->setCallurl($notify_url);
+        $email2->setCallurl("Send to paypal---".$notify_url);
 
         $email2->save();
 
@@ -2178,6 +2118,8 @@ class customerActions extends sfActions {
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setVat($this->vat);
+                $transaction->setInitialBalance($this->product->getInitialBalance());
+                $transaction->setAmountWithoutVat($this->product->getRegistrationFee()+$this->product->getPrice());
                 $transaction->save();
             }
         }
@@ -2227,10 +2169,10 @@ class customerActions extends sfActions {
 
         $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
 
-//        $email2 = new DibsCall();
-//        $email2->setCallurl($notify_url);
-//
-//        $email2->save();
+        $email2 = new DibsCall();
+        $email2->setCallurl("Send to paypal--".$notify_url);
+
+        $email2->save();
 
         $mobile_number = $request->getParameter('mobile_number');
         $newnumber = $request->getParameter('newnumber');
@@ -2323,6 +2265,8 @@ class customerActions extends sfActions {
             $this->transaction_title = $transactiondescription->getTitle();
             $transaction->setDescription($this->transaction_title);
             $transaction->setVat($this->vat);
+            $transaction->setInitialBalance($this->order->getExtraRefill());
+            $transaction->setAmountWithoutVat($simtype->getRegistrationFee()+$simtype->getPrice());
             $transaction->save();
 
             $cst = new Criteria();
@@ -2452,6 +2396,8 @@ class customerActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
+        $transaction->setInitialBalance($product->getInitialBalance());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee()+$product->getPrice());
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
@@ -2513,7 +2459,7 @@ class customerActions extends sfActions {
         $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
         $querystring .= "notify_url=" . urldecode($notify_url);
         if ($item_amount == 0) {
-            file_get_contents($notify_url);
+            $content =  file_get_contents($notify_url);
             sleep(0.5);
             header("location:" . $return_url);
             exit;
@@ -2660,7 +2606,6 @@ class customerActions extends sfActions {
                 $customer->save();
             }
 
-
             $url = $this->getTargetUrl();
             $this->redirect($url . 'payments/signup?cid=' . $customer->getId() . '&pid=' . $productObj->getId());
         }
@@ -2686,12 +2631,10 @@ class customerActions extends sfActions {
        $cc->add(CountryPeer::ENABLED,1);
        $countries = CountryPeer::doSelect($cc);
        $this->countries = $countries;
-       //$this->setLayout('mobile');
+      // $this->setLayout('mobile_app_reg');
    }
-   
-   
-   public function executeInIframe() {
-       
-       
+
+   public function executeInIframe() {       
+
    } 
 }
