@@ -32,7 +32,7 @@ else
                    
             <td style="border:0 !important;">
                 <select name="sentby"  style="width:350px;height:25px;">
-                <option value="Kimarin">Kimarin</option>
+                <option value="KIMARIN">KIMARIN</option>
                 
                 </select>
             </td>
