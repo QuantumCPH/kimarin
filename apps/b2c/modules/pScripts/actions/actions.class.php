@@ -3710,7 +3710,7 @@ class pScriptsActions extends sfActions {
             $callbacklog->save();
 
             $uniqueidlog = new UniqueidLog();
-            $uniqueidlog->setCustomerId($this->customer->getId());
+            $uniqueidlog->setCustomerId($customer->getId());
             $uniqueidlog->setUniqueNumber($uniqueId);
             $uniqueidlog->save();
 
