@@ -119,7 +119,7 @@ class smsActions extends sfActions {
 
                     //////////
 
-                    $mobilenumber = $agentid->getMobileNumber();
+                    $mobilenumber = "34".$agentid->getMobileNumber();
 
                     if (isset($mobilenumber) && $mobilenumber != "") {
                         $message = $massage_body;
@@ -198,7 +198,7 @@ class smsActions extends sfActions {
 
                     //////////
 
-                    $mobilenumber = $agentid->getMobileNumber();
+                    $mobilenumber = "34".$agentid->getMobileNumber();
 
                     if (isset($mobilenumber) && $mobilenumber != "") {
                         $message = $massage_body;
@@ -290,7 +290,7 @@ class smsActions extends sfActions {
                     $agentid = CustomerPeer::doSelectOne($c);
 
                     //////////
-                    $mobilenumber = $agentid->getMobileNumber();
+                    $mobilenumber = "34".$agentid->getMobileNumber();
                     if (isset($mobilenumber) && $mobilenumber != "") {
                         $message = $massage_body;
                         if (isset($message) && $message != "") {
@@ -350,7 +350,7 @@ class smsActions extends sfActions {
                         $c->add(CustomerPeer::ID, $item);
                         $agentid = CustomerPeer::doSelectOne($c);
                         //////////
-                        $mobilenumber = $agentid->getMobileNumber();
+                        $mobilenumber = "34".$agentid->getMobileNumber();
                         if (isset($mobilenumber) && $mobilenumber != "") {
                             $message = $massage_body;
                             if (isset($message) && $message != "") {
