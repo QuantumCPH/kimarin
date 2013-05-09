@@ -164,35 +164,51 @@ class employeeActions extends sfActions {
         $employee->setSimTypeId($request->getParameter('sim_type_id'));
         $employee->setPlainText($request->getParameter('password'));
         $employee->setPassword($request->getParameter('password'));
-        $employee->setComments($request->getParameter('comments'));
-        $employee->setUniqueId($request->getParameter('uniqueid'));
+        $employee->setComments($request->getParameter('comments'));        
         $employee->setStatusId(sfConfig::get('app_status_new'));
         $employee->save();
 
 //        if(!$ComtelintaObj->telintaRegisterEmployeeCB($employeMobileNumber, $this->companys)){
 //            $employee->setStatusId(sfConfig::get('app_status_error')); //// error status is 5 defined in backend/config/app.yml
 //            $employee->save();
-//            $this->getUser()->setFlash('messageError', 'Employee  Call Back account is not registered on Telinta please check email');
+//            $this->getUser()->setFlash('messageError', 'Employee  Call Back account is not registered please check email');
 //            $this->redirect('employee/add');
 //            die;
 //        }
         
         if(!$ComtelintaObj->telintaRegisterEmployeeCT($employee, $employee->getProductId())){
-            
+          $employee->setStatusId(sfConfig::get('app_status_error')); //// error status is 5 defined in backend/config/app.yml
+            $employee->save();
+            $this->getUser()->setFlash('messageError', 'Employee  Call Back account is not registered please check email');
+            $this->redirect('employee/add');
+            die;  
         }
-//        if(!$ComtelintaObj->createDialAccount($employee)){
-//            
-//        }
+        if(!$ComtelintaObj->createDialAccount($employee)){
+           $employee->setStatusId(sfConfig::get('app_status_error')); //// error status is 5 defined in backend/config/app.yml
+            $employee->save();
+            $this->getUser()->setFlash('messageError', 'Employee  Dial account is not registered please check email');
+            $this->redirect('employee/add');
+            die; 
+        }
+        
+        $product = ProductPeer::retrieveByPK($request->getParameter('productid'));
+        if ($product->getProductTypeId() == 10) {
+            $employee->setUniqueId("Dial" . $employee->getId());
+        } elseif ($product->getProductTypeId() == 11) {
+            $employee->setUniqueId("app" . $employee->getId());
+        }else{
+            $employee->setUniqueId($request->getParameter('uniqueid'));
+            $employee->save();
+            $c = new Criteria();
+            $c->add(UniqueIdsPeer::UNIQUE_NUMBER, $employee->getUniqueId());
+            $uniqueIdObj = UniqueIdsPeer::doSelectOne($c);
+            $uniqueIdObj->setAssignedAt(date("Y-m-d H:i:s"));
+            $uniqueIdObj->setStatus(1);
+            $uniqueIdObj->save();              
+        }
         
         $employee->setStatusId(sfConfig::get('app_status_completed')); //// completed status is 3 defined in backend/config/app.yml
         $employee->save();
-        $c = new Criteria();
-        $c->add(UniqueIdsPeer::UNIQUE_NUMBER, $employee->getUniqueId());
-        $uniqueIdObj = UniqueIdsPeer::doSelectOne($c);
-        $uniqueIdObj->setAssignedAt(date("Y-m-d H:i:s"));
-        $uniqueIdObj->setStatus(1);
-        $uniqueIdObj->save();
-        $product = ProductPeer::retrieveByPK($request->getParameter('productid'));
         $chrageamount = $product->getInitialBalance();
         // $chrageamount=$product->getRegistrationFee()+$product->getRegistrationFee()*sfConfig::get('app_vat_percentage');
 
