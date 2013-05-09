@@ -72,14 +72,7 @@ else
 ?></td></tr>
 
 
-<tr><td style="border:0 !important;">Select Agent's  Country</td>  <td style="border:0 !important;"> <select id="dynamic_select"><?php  foreach($enablecountrys as $enablecountry){  ?>
-	
-    <option value="sendBulkMessages?countryid=<?php  echo $idcountry=$enablecountry->getId(); ?>"  
-     <?php if(isset($idcountry) && $idcountry==$countryid){ ?> selected="selected"  <?php  } ?>  > <?php  echo $enablecountry->getName();   ?></option > 
-    
-   
-<?php	
-} ?>  </select>  </td>  </tr>
+ 
 
 <tr><td colspan="2" style="border:0 !important;">
   
@@ -88,7 +81,7 @@ else
 <tr class="headings"> <th>Action </th> <th> Agent Name</th><th>Agent  Email </th><th>Mobile Number </th></tr>
 <?php 
   $c = new Criteria();
-     $c->add(AgentCompanyPeer::COUNTRY_ID, $countryid); 
+    
 		$agents=AgentCompanyPeer::doSelect($c);  ?>
         <?php  foreach($agents as $agentt){  ?>
 				<tr> 
