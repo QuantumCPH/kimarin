@@ -145,7 +145,7 @@ class smsActions extends sfActions {
 
 
 
-                                $sentby = "Kimarin";
+                                $sentby = "KIMARIN";
                                 if (ROUTED_SMS::send($mobilenumber, $sms_text, $sentby)) {
                                     $status = "deliverd";
                                 } else {
@@ -222,7 +222,7 @@ class smsActions extends sfActions {
 
                             foreach ($messages as $sms_text) {
 
-                                $sentby = "Kimarin";
+                                $sentby = "KIMARIN";
                                 if (ROUTED_SMS::send($mobilenumber, $sms_text, $sentby)) {
                                     $status = "deliverd";
                                 } else {
@@ -308,7 +308,7 @@ class smsActions extends sfActions {
                             foreach ($messages as $sms_text) {
 
 
-                                $sentby = "Kimarin";
+                                $sentby = "KIMARIN";
                                 if (ROUTED_SMS::send($mobilenumber, $sms_text, $sentby)) {
                                     $status = "deliverd";
                                 } else {
@@ -367,7 +367,7 @@ class smsActions extends sfActions {
                                 }
 
                                 foreach ($messages as $sms_text) {
-                                    $sentby = "kimarin";
+                                    $sentby = "KIMARIN";
                                     if (ROUTED_SMS::send($mobilenumber, $sms_text, $sentby)) {
                                         $status = "deliverd";
                                     } else {
