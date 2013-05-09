@@ -273,48 +273,10 @@ class customerActions extends sfActions {
                 $customer->save();
             }
 
-
             $url = $this->getTargetUrl();
             $this->redirect($url . 'payments/signup?cid=' . $customer->getId() . '&pid=' . $productObj->getId());
         }
 
-
-
-
-
-
-//
-//        //set referrer id
-//        if ($referrer_id = $request->getParameter('ref')) {
-//            $c = new Criteria();
-//            $c->add(AgentCompanyPeer::ID, $referrer_id);
-//
-//            if (AgentCompanyPeer::doSelectOne($c))
-//                $this->form->setDefault('referrer_id', $referrer_id);
-//        }
-//
-//        if ($this->getRequest()->getCookie('agent_id')) {
-//            $referrer_id = $this->getRequest()->getCookie('agent_id');
-//            $c = new Criteria();
-//            $c->add(AgentCompanyPeer::ID, $referrer_id);
-//
-//            if (AgentCompanyPeer::doCount($c) == 1) {
-//                $this->form->setDefault('referrer_id', $referrer_id);
-//            }
-//        }
-//
-//
-//        unset($this->form['manufacturer']);
-//        unset($this->form['device_id']);
-//
-//
-//        if ($request->isMethod('post')) {
-//
-//            unset($this->form['imsi']);
-//            unset($this->form['uniqueid']);
-//
-//            $this->processForm($request, $this->form, $this->getRequest()->getCookie('invite_id'));
-//        }
     }
 
     public function executeGetmobilemodel(sfWebRequest $request) {
@@ -1976,6 +1938,8 @@ class customerActions extends sfActions {
         $transaction->setAmount($item_amount);
         $transaction->setDescription($product->getDescription());
         $transaction->setVat($product->getRegistrationFee() * sfConfig::get('app_vat_percentage'));
+        $transaction->setInitialBalance($product->getInitialBalance() + $product->getBonus());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee() + $product->getPrice());
         $transaction->save();
 
 
@@ -1998,7 +1962,7 @@ class customerActions extends sfActions {
         $notify_url = $this->getTargetUrl() . 'pScripts/calbackrefill?p=' . $callbackparameters;
 
         $email2 = new DibsCall();
-        $email2->setCallurl($notify_url);
+        $email2->setCallurl("Send to paypal---".$notify_url);
 
         $email2->save();
 
@@ -2154,6 +2118,8 @@ class customerActions extends sfActions {
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 $transaction->setVat($this->vat);
+                $transaction->setInitialBalance($this->product->getInitialBalance());
+                $transaction->setAmountWithoutVat($this->product->getRegistrationFee()+$this->product->getPrice());
                 $transaction->save();
             }
         }
@@ -2203,10 +2169,10 @@ class customerActions extends sfActions {
 
         $notify_url = $this->getTargetUrl() . 'pScripts/CalbackChangeNumber?p=' . $callbackparameters;
 
-//        $email2 = new DibsCall();
-//        $email2->setCallurl($notify_url);
-//
-//        $email2->save();
+        $email2 = new DibsCall();
+        $email2->setCallurl("Send to paypal--".$notify_url);
+
+        $email2->save();
 
         $mobile_number = $request->getParameter('mobile_number');
         $newnumber = $request->getParameter('newnumber');
@@ -2428,6 +2394,8 @@ class customerActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
         $transaction->setVat($this->vat);
+        $transaction->setInitialBalance($product->getInitialBalance());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee()+$product->getPrice());
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
         $ccp = new CustomerChangeProduct();
@@ -2664,9 +2632,7 @@ class customerActions extends sfActions {
       // $this->setLayout('mobile_app_reg');
    }
    
-   public function executeAppThanks() {
-      // $this->setLayout('mobile_app_reg');       
-   } 
+    
    
    public function executeInIframe() {
            
