@@ -3685,12 +3685,12 @@ class pScriptsActions extends sfActions {
      $exest = $order->getExeStatus();
         if ($exest != 1) {
 echo   "here";
-echo"<br />".            $uniqueId = $customer->getUniqueid();
+            $uniqueId = $customer->getUniqueid();
             $cb = new Criteria();
             $cb->add(CallbackLogPeer::UNIQUEID, $uniqueId);
             $cb->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
             $activeNumber = CallbackLogPeer::doSelectOne($cb);
-
+var_dump($activeNumber);
             $uc = new Criteria();
             $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
             $uc->addAnd(UniqueIdsPeer::STATUS, 0);
@@ -3704,7 +3704,7 @@ echo"<br />".            $uniqueId = $customer->getUniqueid();
                 exit;
                 //$this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
             }
-
+echo"<br />".$availableUniqueCount;
             $callbacklog = new CallbackLog();
             $callbacklog->setMobileNumber($activeNumber->getMobileNumber());
             $callbacklog->setuniqueId($availableUniqueId->getUniqueNumber());
@@ -3712,7 +3712,7 @@ echo"<br />".            $uniqueId = $customer->getUniqueid();
             $callbacklog->save();
 
             $uniqueidlog = new UniqueidLog();
-            $uniqueidlog->setCustomerId($this->customer->getId());
+            $uniqueidlog->setCustomerId($customer->getId());
             $uniqueidlog->setUniqueNumber($uniqueId);
             $uniqueidlog->save();
 
