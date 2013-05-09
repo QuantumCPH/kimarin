@@ -3648,7 +3648,8 @@ class pScriptsActions extends sfActions {
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
         $this->forward404Unless($order);
-
+        $customer = $order->getCustomer();
+        
         $c = new Criteria;
         $c->add(TransactionPeer::ORDER_ID, $order_id);
         $transaction = TransactionPeer::doSelectOne($c);
@@ -3668,9 +3669,12 @@ class pScriptsActions extends sfActions {
         }
        
         $order->save();
+        $telintaObj = new Telienta();
+        $telintaGetBalance = $telintaObj->getBalance($customer);
+        $transaction->setCustomerCurrentBalance($telintaGetBalance);
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
-        $customer = $order->getCustomer();
+        
         
         $cst = new Criteria();
         $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
@@ -3722,10 +3726,7 @@ class pScriptsActions extends sfActions {
             $this->updatePreferredCulture();
         }
         
-        $telintaObj = new Telienta();
-        $telintaGetBalance = $telintaObj->getBalance($customer);
-        $transaction->setCustomerCurrentBalance($telintaGetBalance);
-        $transaction->save();
+       
         
         $order->setExeStatus(1);
         $order->save();
