@@ -3668,7 +3668,13 @@ class pScriptsActions extends sfActions {
         }
        
         $order->save();
+        $customer = $order->getCustomer();
+        
+        $telintaObj = new Telienta();
+        $telintaGetBalance = $telintaObj->getBalance($customer);
+        $transaction->setCustomerCurrentBalance($telintaGetBalance);
         $transaction->save();
+        
         TransactionPeer::AssignReceiptNumber($transaction);
         $customer = $order->getCustomer();
         
@@ -3722,10 +3728,7 @@ class pScriptsActions extends sfActions {
             $this->updatePreferredCulture();
         }
         
-        $telintaObj = new Telienta();
-        $telintaGetBalance = $telintaObj->getBalance($customer);
-        $transaction->setCustomerCurrentBalance($telintaGetBalance);
-        $transaction->save();
+        
         
         $order->setExeStatus(1);
         $order->save();
