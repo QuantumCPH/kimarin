@@ -209,7 +209,7 @@ class employeeActions extends sfActions {
         
         $employee->setStatusId(sfConfig::get('app_status_completed')); //// completed status is 3 defined in backend/config/app.yml
         $employee->save();
-        $chrageamount = $product->getInitialBalance();
+        $chrageamount = $product->getRegistrationFee();
         // $chrageamount=$product->getRegistrationFee()+$product->getRegistrationFee()*sfConfig::get('app_vat_percentage');
 
         if ($chrageamount > 0) {
