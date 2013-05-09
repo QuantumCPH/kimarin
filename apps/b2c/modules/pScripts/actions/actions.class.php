@@ -3682,15 +3682,15 @@ class pScriptsActions extends sfActions {
         $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
          $sim_type_id = $simtype->getId();
-     $exest = $order->getExeStatus();
+         $exest = $order->getExeStatus();
         if ($exest != 1) {
-echo   "here";
+
             $uniqueId = $customer->getUniqueid();
             $cb = new Criteria();
             $cb->add(CallbackLogPeer::UNIQUEID, $uniqueId);
             $cb->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
             $activeNumber = CallbackLogPeer::doSelectOne($cb);
-var_dump($activeNumber);
+
             $uc = new Criteria();
             $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
             $uc->addAnd(UniqueIdsPeer::STATUS, 0);
@@ -3704,7 +3704,7 @@ var_dump($activeNumber);
                 exit;
                 //$this->redirect($this->getTargetUrl().'customer/shortUniqueIds');
             }
-echo"<br />".$availableUniqueCount;
+
             $callbacklog = new CallbackLog();
             $callbacklog->setMobileNumber($activeNumber->getMobileNumber());
             $callbacklog->setuniqueId($availableUniqueId->getUniqueNumber());
