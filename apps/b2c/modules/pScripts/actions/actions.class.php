@@ -3666,23 +3666,12 @@ class pScriptsActions extends sfActions {
         } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
             $transaction->setAmount($order_amount);
         }
-        //set active agent_package in case customer was registerred by an affiliate
-        /* if ($order->getCustomer()->getAgentCompany()) {
-          $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
-          } */
+       
         $order->save();
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
-        $this->customer = $order->getCustomer();
-        /* echo "ag" . $agentid = $this->customer->getReferrerId();
-          echo "prid" . $productid = $order->getProductId();
-          echo "trid" . $transactionid = $transaction->getId();
-          if (isset($agentid) && $agentid != "") {
-          echo "getagentid";
-          commissionLib::refilCustomer($agentid, $productid, $transactionid);
-          $transaction->setAgentCompanyId($agentid);
-          $transaction->save();
-          } */
+        $customer = $order->getCustomer();
+        
         $cst = new Criteria();
         $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
@@ -3690,7 +3679,7 @@ class pScriptsActions extends sfActions {
         $exest = $order->getExeStatus();
         if ($exest != 1) {
 
-            $uniqueId = $this->customer->getUniqueid();
+            $uniqueId = $customer->getUniqueid();
             $cb = new Criteria();
             $cb->add(CallbackLogPeer::UNIQUEID, $uniqueId);
             $cb->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
@@ -3724,15 +3713,20 @@ class pScriptsActions extends sfActions {
             $availableUniqueId->setStatus(1);
             $availableUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
             $availableUniqueId->save();
-            $this->customer->setUniqueid($availableUniqueId->getUniqueNumber());
-            $this->customer->setSimTypeId($sim_type_id);
-            $this->customer->save();
+            $customer->setUniqueid($availableUniqueId->getUniqueNumber());
+            $customer->setSimTypeId($sim_type_id);
+            $customer->save();
 
-            $this->setPreferredCulture($this->customer);
-            emailLib::sendCustomerNewcardEmail($this->customer, $order, $transaction);
+            $this->setPreferredCulture($customer);
+            emailLib::sendCustomerNewcardEmail($customer, $order, $transaction);
             $this->updatePreferredCulture();
         }
-
+        
+        $telintaObj = new Telienta();
+        $telintaGetBalance = $telintaObj->getBalance($customer);
+        $transaction->setCustomerCurrentBalance($telintaGetBalance);
+        $transaction->save();
+        
         $order->setExeStatus(1);
         $order->save();
         echo 'Yes';
@@ -3812,7 +3806,7 @@ class pScriptsActions extends sfActions {
         $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
         $c->add(TelintaAccountsPeer::STATUS, 3);
         $tilentAccounts = TelintaAccountsPeer::doSelect($c);
-        echo count($tilentAccounts);
+        //echo count($tilentAccounts);
         $telintaObj = new Telienta();
         foreach($tilentAccounts as $tilentAccount){
             $accountInfo['i_account'] = $tilentAccount->getIAccount();

@@ -2265,6 +2265,8 @@ class customerActions extends sfActions {
             $this->transaction_title = $transactiondescription->getTitle();
             $transaction->setDescription($this->transaction_title);
             $transaction->setVat($this->vat);
+            $transaction->setInitialBalance($this->order->getExtraRefill());
+            $transaction->setAmountWithoutVat($simtype->getRegistrationFee()+$simtype->getPrice());
             $transaction->save();
 
             $cst = new Criteria();
