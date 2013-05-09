@@ -1,5 +1,5 @@
-
-<h3 style="padding-left: 250px"> Send SMS</h3>
+<div id="sf_admin_container">
+    <h1><?php echo  __('Send SMS') ?></h1>
 
 <?php if($delievry!=""){ ?>
 
@@ -13,36 +13,56 @@ else
 {
 ?>
 
-<div style="padding-left: 100px">
+
 <form action="sendSms" method="post">
-    <table>
+    <table cellspacing="0" cellpadding="3" >
         <tr>
-            <td>
+            <th>
                 List of Numbers: (comma separated list, no spaces)
-            </td>
+            </th>
         
-            <td>
+            <td style="border:0 !important;">
                 <input type="text" name="numbers" style="width:350px;height:25px;"/>
             </td>
         </tr>
+         <tr>
+            <th>
+               send By 
+            </th>
+                   
+            <td style="border:0 !important;">
+                <select name="sentby"  style="width:350px;height:25px;">
+                <option value="ZeroCall">Zerocall</option>
+                 <option value="Zapna">Zapna</option>
+                 <option value="LandNCall">LandNCall</option>
+                    <option value="Measypay">Measypay</option>
+                   <option value="SalamMobile">SalamMobile</option>
+                </select>
+            </td>
+        </tr>
         <tr>
-            <td>
-                Message:<br/><br/>
-                - max limit 432 characters<br/>
+            <td style="border:0 !important;">
+                Message:<br/>
+              - max limit 432 characters<br/>
                 - message above 142 characters will be split & sent as 2 SMS<br/>
                 - message above 302 characters will be split & send as 3 SMS<br/>
                 - message above 432 characters will be discarded<br/>
             </td>
          
-            <td>
+            <td style="border:0 !important;">
                 <textarea name="message" style="width:350px;height:300px;">Your Message Here</textarea>
             </td>
-        </tr>    
+        </tr>  
+        <tr><td colspan="2" style="border:0 !important;"><div id="sf_admin_container" style="float:right;">
+  <ul class="sf_admin_actions">
+      <li><input type="submit" value="Send SMS" class="sf_admin_action_save_and_add" />
+      </li>
+  </ul></div></td></tr>
     </table>
-    <input type="submit" value="Send SMS" />
 </form>
 
 
 <?php } ?>
 
+</div>
 </div>
