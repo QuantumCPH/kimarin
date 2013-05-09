@@ -666,19 +666,19 @@ div.error_cp{
     width: 384px;
 }
 /*********************** App registration ******************/
-.gridContainer {
+/*.gridContainer {
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
-}
+}*/
 #LayoutDiv1 {
 	clear: both;
-	float: left;
-	margin-left: 0;
+/*	float: left;
+	margin-left: 0;*/
 	width: 100%;
 	display: block;
 }
-@media only screen and (min-width: 480px) {
+/*@media only screen and (min-width: 480px) {
 .gridContainer {
 	width: 90.675%;
 	padding-left: 1.1625%;
@@ -701,7 +701,7 @@ div.error_cp{
 
 }
 
-/* Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. */
+ Desktop Layout: 769px to a max of 1232px.  Inherits styles from: Mobile Layout and Tablet Layout. 
 
 @media only screen and (min-width: 768px) {
 .gridContainer {
@@ -728,8 +728,14 @@ input[type=text], input[type=password] {
 
 }
 .our_guest { width:90% !important;}
-}
+}*/
 /******************** Intro page *********************/
+.gridContainer {
+	width: 90.675%;
+	padding-left: 1.1625%;
+	padding-right: 1.1625%;
+        margin:0 auto;
+}
 .appbody {
 	margin: 0px 0px 0px 0px;
 	font-family: Verdana, Geneva, sans-serif;
@@ -742,10 +748,10 @@ input[type=text], input[type=password] {
 	margin: 0px;
 }*/
 .appbody input[type=text], .appbody input[type=password] {
-	width:90%;
+	width:97%;
 	height:18px;
 	border: #848484 solid 1px;
-	padding:10px 20px 10px 20px;
+	padding:10px 5px 10px 5px;
 	margin: 0px;
 	color: #808080;
 	font-size: 16px;
@@ -756,10 +762,10 @@ input[type=text], input[type=password] {
 }
 .appbody select {
 	width:100%;
-	line-height: 78px;
+	line-height: 30px;
         height:42px;
 	border: #848484 solid 1px;
-	padding:10px 20px 10px 20px;
+	padding:10px 5px 10px 2px;
 	margin: 0px;
 	color: #808080;
 	font-size: 17px;
@@ -868,7 +874,7 @@ input[type=text], input[type=password] {
 }
 .appbody input.mnumber{
     float:right;
-    width:268px;
+    width:305px;
 }
 .appbody .register {
 	height:110px;
@@ -884,15 +890,20 @@ input[type=text], input[type=password] {
     padding: 0;
     text-shadow: 2px 2px #80490C;
     width: 42%;
+    cursor: pointer;
+}
+.appbody .register input[type="submit"]:hover {
+    background-color: #0C74A5 !important;
+    border: 1px solid #0C74A5;
 }
 .appbody .exphone{
     font-size:16px;
     line-height: 25px;
+    margin-left: 42px;
 }
 .appbody .app_reg_fields label.error{
     font-size: 12px;
     font-weight: bold !important;
 }
 .appbody .footer { width:100%; height:40px; text-align:center; font-size:98%; padding-top:17px; color:#FFF; float:left; background:#00a8e1;}
-
 /*********************** End App registration ******************/

@@ -3766,7 +3766,8 @@ class pScriptsActions extends sfActions {
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
         $this->forward404Unless($order);
-
+        
+        
         $c = new Criteria;
         $c->add(TransactionPeer::ORDER_ID, $order_id);
         $transaction = TransactionPeer::doSelectOne($c);
@@ -3786,26 +3787,23 @@ class pScriptsActions extends sfActions {
         }
 
         $order->save();
-        $telintaObj = new Telienta();
-        $telintaGetBalance = $telintaObj->getBalance($customer);
-        $transaction->setCustomerCurrentBalance($telintaGetBalance);
-        $transaction->save();
+        
         TransactionPeer::AssignReceiptNumber($transaction);
 
-        $this->customer = $order->getCustomer();
+        $customer = $order->getCustomer();
         $exest = $order->getExeStatus();
-        $uniqueId = $this->customer->getUniqueid();
+        $uniqueId = $customer->getUniqueid();
 
-        $this->setPreferredCulture($this->customer);
-        emailLib::sendCustomerChangeProduct($this->customer, $order, $transaction);
+        $this->setPreferredCulture($customer);
+        emailLib::sendCustomerChangeProduct($customer, $order, $transaction);
         $this->updatePreferredCulture();
 
         $order->setExeStatus(1);
         $order->save();
         echo 'Yes';
 
-        /*         * ************Change customer product ***************** */
-        $customer = $this->customer;
+        /*         * ************Change customer product ***************** */        
+        
         $product = ProductPeer::retrieveByPK($CCP->getProductId());
         $order = CustomerOrderPeer::retrieveByPK($CCP->getOrderId());
         $transaction = TransactionPeer::retrieveByPK($CCP->getTransactionId());
@@ -3813,17 +3811,23 @@ class pScriptsActions extends sfActions {
         $c = new Criteria;
         $c->add(TelintaAccountsPeer::I_CUSTOMER, $customer->getICustomer());
         $c->add(TelintaAccountsPeer::STATUS, 3);
-        $tilentAccount = TelintaAccountsPeer::doSelectOne($c);
-        //  foreach($tilentAccounts as $tilentAccount){
-        $accountInfo['i_account'] = $tilentAccount->getIAccount();
-        $accountInfo['i_product'] = $Bproducts->getAIproduct();
+        $tilentAccounts = TelintaAccountsPeer::doSelect($c);
+        echo count($tilentAccounts);
         $telintaObj = new Telienta();
-        if ($telintaObj->updateAccount($accountInfo)) {
-            $CCP->setStatus(3);
-            $CCP->Save();
-        }
-        //   }  
-
+        foreach($tilentAccounts as $tilentAccount){
+            $accountInfo['i_account'] = $tilentAccount->getIAccount();
+            $accountInfo['i_product'] = $Bproducts->getAIproduct();
+            
+            if ($telintaObj->updateAccount($accountInfo)) {
+                $CCP->setStatus(3);
+                $CCP->Save();
+            }
+        }  
+                
+        $telintaGetBalance = $telintaObj->getBalance($customer);
+        $transaction->setCustomerCurrentBalance($telintaGetBalance);
+        $transaction->save();
+        
         $cp = new Criteria();
         $cp->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
         $cp->addAnd(CustomerProductPeer::STATUS_ID, 3);
@@ -3838,8 +3842,8 @@ class pScriptsActions extends sfActions {
         $cProduct->save();
 
 
-        $this->setPreferredCulture($this->customer);
-        emailLib::sendCustomerChangeProductConfirm($this->customer, $order, $transaction);
+        $this->setPreferredCulture($customer);
+        emailLib::sendCustomerChangeProductConfirm($customer, $order, $transaction);
         $this->updatePreferredCulture();
 
 
