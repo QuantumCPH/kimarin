@@ -33,16 +33,16 @@ class smsActions extends sfActions {
             $numbers = explode(',', $list);
 
             $messages = array();
-            if (strlen($message) < 142) {
-                $messages[1] = $message . "";
-            } else if (strlen($message) > 142 and strlen($message) < 302) {
+            if (strlen($message) < 160) {
+                $messages[1] = $message;
+            } else if (strlen($message) > 160 and strlen($message) < 320) {
 
-                $messages[1] = substr($message, 1, 142) . "";
-                $messages[2] = substr($message, 143) . "";
+                $messages[1] = substr($message, 1, 160) . "";
+                $messages[2] = substr($message, 161) . "";
             } else if (strlen($message) > 382) {
-                $messages[1] = substr($message, 1, 142) . "";
-                $messages[2] = substr($message, 143, 302) . "";
-                $messages[3] = substr($message, 303, 432) . "";
+                $messages[1] = substr($message, 1, 160) . "";
+                $messages[2] = substr($message, 161, 320) . "";
+                $messages[3] = substr($message, 321, 480) . "";
             }
 
             foreach ($messages as $sms_text) {
@@ -53,7 +53,7 @@ class smsActions extends sfActions {
                     $cbf->setDa($number);
                     $cbf->setMessage($sms_text);
                     $cbf->setCountryId(53);
-                    $cbf->setMobileNumber('Zerocall Backend');
+                    $cbf->setMobileNumber('kimarin Backend');
 
 //$sms_text='ø  æ å  Æ Ø Å Ö ö';
                     $cbf->save();
@@ -88,7 +88,7 @@ class smsActions extends sfActions {
                     $c = new Criteria();
                     $c->add(AgentCompanyPeer::ID, $item);
                     $agentid = AgentCompanyPeer::doSelectOne($c);
-                    $sender_email = "okhan@zapna.com";
+                    $sender_email = "support@kimarin.es";
                     $receiver_email = $agentid->getEmail();
                     $receipientname = $agentid->getName();
                     $receiver_email = trim($receiver_email);
@@ -99,7 +99,7 @@ class smsActions extends sfActions {
                         $email4->setSubject($subject);
                         $email4->setReceipientName($receipientname);
                         $email4->setReceipientEmail($receiver_email);
-                        $email4->setEmailType('Zerocall  Agent SMS Via Support');
+                        $email4->setEmailType('kimarin  Agent SMS Via Support');
                         $email4->setMessage($massage_body);
                         $email4->save();
                     }
@@ -129,23 +129,23 @@ class smsActions extends sfActions {
 
 
                             $messages = array();
-                            if (strlen($message) < 142) {
-                                $messages[1] = $message . "-Sent by Zerocall-";
-                            } else if (strlen($message) > 142 and strlen($message) < 302) {
+                            if (strlen($message) < 160) {
+                                $messages[1] = $message;
+                            } else if (strlen($message) > 160 and strlen($message) < 320) {
 
-                                $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall-";
-                                $messages[2] = substr($message, 143) . "-Sent by Zerocall-";
-                            } else if (strlen($message) > 382) {
-                                $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall";
-                                $messages[2] = substr($message, 143, 302) . "-Sent by Zerocall";
-                                $messages[3] = substr($message, 303, 432) . "-Sent by Zerocall";
+                                $messages[1] = substr($message, 1, 160);
+                                $messages[2] = substr($message, 161);
+                            } else if (strlen($message) > 320) {
+                                $messages[1] = substr($message, 1, 160);
+                                $messages[2] = substr($message, 161, 320);
+                                $messages[3] = substr($message, 321, 480);
                             }
 
                             foreach ($messages as $sms_text) {
 
 
 
-                                $sentby = "Zerocall";
+                                $sentby = "Kimarin";
                                 if (ROUTED_SMS::send($mobilenumber, $sms_text, $sentby)) {
                                     $status = "deliverd";
                                 } else {
@@ -169,7 +169,7 @@ class smsActions extends sfActions {
                     $c = new Criteria();
                     $c->add(AgentCompanyPeer::ID, $item);
                     $agentid = AgentCompanyPeer::doSelectOne($c);
-                    $sender_email = "okhan@zapna.com";
+                    $sender_email = "support@kimarin.es";
                     $receiver_email = $agentid->getEmail();
                     $receipientname = $agentid->getName();
                     $receiver_email = trim($receiver_email);
@@ -181,7 +181,7 @@ class smsActions extends sfActions {
                         $email4->setReceipientName($receipientname);
                         $email4->setReceipientEmail($receiver_email);
 
-                        $email4->setEmailType('Zerocall  Agent SMS Via Support');
+                        $email4->setEmailType('kimarin  Agent SMS Via Support');
                         $email4->setMessage($massage_body);
                         $email4->save();
                     }
@@ -208,21 +208,21 @@ class smsActions extends sfActions {
 
 
                             $messages = array();
-                            if (strlen($message) < 142) {
-                                $messages[1] = $message . "-Sent by Zerocall-";
-                            } else if (strlen($message) > 142 and strlen($message) < 302) {
+                            if (strlen($message) < 160) {
+                                $messages[1] = $message;
+                            } else if (strlen($message) > 161 and strlen($message) < 320) {
 
-                                $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall-";
-                                $messages[2] = substr($message, 143) . "-Sent by Zerocall-";
-                            } else if (strlen($message) > 382) {
-                                $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall";
-                                $messages[2] = substr($message, 143, 302) . "-Sent by Zerocall";
-                                $messages[3] = substr($message, 303, 432) . "-Sent by Zerocall";
+                                $messages[1] = substr($message, 1, 160);
+                                $messages[2] = substr($message, 161);
+                            } else if (strlen($message) > 320) {
+                                $messages[1] = substr($message, 1, 160);
+                                $messages[2] = substr($message, 161, 320);
+                                $messages[3] = substr($message, 321, 480);
                             }
 
                             foreach ($messages as $sms_text) {
 
-                                $sentby = "Zerocall";
+                                $sentby = "Kimarin";
                                 if (ROUTED_SMS::send($mobilenumber, $sms_text, $sentby)) {
                                     $status = "deliverd";
                                 } else {
@@ -260,18 +260,18 @@ class smsActions extends sfActions {
                     $c = new Criteria();
                     $c->add(CustomerPeer::ID, $item);
                     $agentid = CustomerPeer::doSelectOne($c);
-                    $sender_email = "okhan@zapna.com";
+                    $sender_email = "support@kimarin.es";
                     $receiver_email = $agentid->getEmail();
                     $receipientname = $agentid->getFirstName();
                     $receiver_email = trim($receiver_email);
-                    $subject = "Zerocall Update";
+                    $subject = "Kimarin Update";
 
                     if (isset($receiver_email) && $receiver_email != '') {
                         $email4 = new EmailQueue();
                         $email4->setSubject($subject);
                         $email4->setReceipientName($receipientname);
                         $email4->setReceipientEmail($receiver_email);
-                        $email4->setEmailType('Zerocall   SMS Via Support');
+                        $email4->setEmailType('kimarin   SMS Via Support');
                         $email4->setMessage($massage_body);
                         $email4->save();
                     }
@@ -295,20 +295,20 @@ class smsActions extends sfActions {
                         $message = $massage_body;
                         if (isset($message) && $message != "") {
                             $messages = array();
-                            if (strlen($message) < 142) {
-                                $messages[1] = $message . "-Sent by Zerocall-";
-                            } else if (strlen($message) > 142 and strlen($message) < 302) {
-                                $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall-";
-                                $messages[2] = substr($message, 143) . "-Sent by Zerocall-";
+                            if (strlen($message) < 160) {
+                                $messages[1] = $message;
+                            } else if (strlen($message) > 160 and strlen($message) < 320) {
+                                $messages[1] = substr($message, 1, 160);
+                                $messages[2] = substr($message, 161);
                             } else if (strlen($message) > 382) {
-                                $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall";
-                                $messages[2] = substr($message, 143, 302) . "-Sent by Zerocall";
-                                $messages[3] = substr($message, 303, 432) . "-Sent by Zerocall";
+                                $messages[1] = substr($message, 1, 160);
+                                $messages[2] = substr($message, 161, 320);
+                                $messages[3] = substr($message, 321, 480);
                             }
                             foreach ($messages as $sms_text) {
 
 
-                                $sentby = "Zerocall";
+                                $sentby = "Kimarin";
                                 if (ROUTED_SMS::send($mobilenumber, $sms_text, $sentby)) {
                                     $status = "deliverd";
                                 } else {
@@ -332,13 +332,13 @@ class smsActions extends sfActions {
                         $receiver_email = $agentid->getEmail();
                         $receipientname = $agentid->getFirstName();
                         $receiver_email = trim($receiver_email);
-                        $subject = "Zerocall Update";
+                        $subject = "Kimarin Update";
                         if (isset($receiver_email) && $receiver_email != '') {
                             $email4 = new EmailQueue();
                             $email4->setSubject($subject);
                             $email4->setReceipientName($receipientname);
                             $email4->setReceipientEmail($receiver_email);
-                            $email4->setEmailType('Zerocall   SMS Via Support');
+                            $email4->setEmailType('Kimarin   SMS Via Support');
                             $email4->setMessage($massage_body);
                             $email4->save();
                         }
@@ -355,19 +355,19 @@ class smsActions extends sfActions {
                             $message = $massage_body;
                             if (isset($message) && $message != "") {
                                 $messages = array();
-                                if (strlen($message) < 142) {
-                                    $messages[1] = $message . "-Sent by Zerocall-";
-                                } else if (strlen($message) > 142 and strlen($message) < 302) {
-                                    $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall-";
-                                    $messages[2] = substr($message, 143) . "-Sent by Zerocall-";
+                                if (strlen($message) < 160) {
+                                    $messages[1] = $message;
+                                } else if (strlen($message) > 161 and strlen($message) < 320) {
+                                    $messages[1] = substr($message, 1, 160);
+                                    $messages[2] = substr($message, 161);
                                 } else if (strlen($message) > 382) {
-                                    $messages[1] = substr($message, 1, 142) . "-Sent by Zerocall";
-                                    $messages[2] = substr($message, 143, 302) . "-Sent by Zerocall";
-                                    $messages[3] = substr($message, 303, 432) . "-Sent by Zerocall";
+                                    $messages[1] = substr($message, 1, 160);
+                                    $messages[2] = substr($message, 161, 320);
+                                    $messages[3] = substr($message, 321, 480);
                                 }
 
                                 foreach ($messages as $sms_text) {
-                                    $sentby = "Zerocall";
+                                    $sentby = "kimarin";
                                     if (ROUTED_SMS::send($mobilenumber, $sms_text, $sentby)) {
                                         $status = "deliverd";
                                     } else {

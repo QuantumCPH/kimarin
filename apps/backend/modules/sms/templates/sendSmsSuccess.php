@@ -32,11 +32,8 @@ else
                    
             <td style="border:0 !important;">
                 <select name="sentby"  style="width:350px;height:25px;">
-                <option value="ZeroCall">Zerocall</option>
-                 <option value="Zapna">Zapna</option>
-                 <option value="LandNCall">LandNCall</option>
-                    <option value="Measypay">Measypay</option>
-                   <option value="SalamMobile">SalamMobile</option>
+                <option value="Kimarin">Kimarin</option>
+                
                 </select>
             </td>
         </tr>
