@@ -4446,6 +4446,8 @@ class pScriptsActions extends sfActions {
         $transaction->setCustomerId($customer->getId());
         $transaction->setTransactionStatusId(1); // default value 1
         $transaction->setVat((($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
+        $transaction->setInitialBalance($order->getExtraRefill());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee()+$product->getPrice());
         $transaction->save();
 
         // echo 'Assigning Customer ID <br/>';
@@ -4463,6 +4465,9 @@ class pScriptsActions extends sfActions {
         $telintaObj = new Telienta();
         if ($telintaObj->ResgiterCustomer($this->customer, $OpeningBalance)) {
             $transaction->setTransactionStatusId(3); // default value 1
+            $telintaObj = new Telienta();
+            $telintaGetBalance = $telintaObj->getBalance($this->customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
             $transaction->save();
             $order->setOrderStatusId(3);
             $order->save();
@@ -4596,7 +4601,9 @@ class pScriptsActions extends sfActions {
         $transaction->setOrderId($this->order->getId());
         $transaction->setCustomerId($this->order->getCustomerId());
         $transaction->setVat($this->order->getExtraRefill() * sfConfig::get('app_vat_percentage'));
-
+        $telintaGetBalance = $telintaObj->getBalance($this->customer);
+        $transaction->setInitialBalance($this->order->getExtraRefill());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee()+$product->getPrice());
         //save
         $transaction->save();
         $this->transaction = $transaction;
