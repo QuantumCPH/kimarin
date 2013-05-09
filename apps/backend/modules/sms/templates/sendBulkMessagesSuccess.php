@@ -54,10 +54,10 @@ $enablecountrys=EnableCountryPeer::doSelect($c);
 
       <form action="" method="post" id="massageform" >
         
-<table cellspacing="0" cellpadding="2" >
+<table cellspacing="0" cellpadding="2"  width="100%">
 
 
-<tr><td colspan="2" style="border:0 !important;">
+<tr><td colspan="2" style="border:0 !important;" >
  <?php if(isset($delievry) && $delievry!=""){ ?>
 
 <h6>  
