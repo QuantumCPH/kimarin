@@ -2457,7 +2457,7 @@ class customerActions extends sfActions {
         $querystring .= "cancel_return=" . urldecode($cancel_url) . "&";
         $querystring .= "notify_url=" . urldecode($notify_url);
         if ($item_amount == 0) {
-            file_get_contents($notify_url);
+            $content =  file_get_contents($notify_url);
             sleep(0.5);
             header("location:" . $return_url);
             exit;

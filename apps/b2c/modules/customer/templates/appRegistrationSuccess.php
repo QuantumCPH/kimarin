@@ -70,13 +70,16 @@ use_helper('I18N');
     });
   
 </script>
-<div class="appbody" data-role="page"  data-theme="c">
+<div class="appbody">
 <form action="<?php echo $target;?>pScripts/appRegistration" method="post" id="appRegForm">
     <?php //echo image_tag(sfConfig::get('app_web_url').'zerocall/images/Screenshot_2013-04-25-10-19-32.png');?>
-   	  <div class="dashboard_logo" data-role="header"  data-theme="c"><?php echo image_tag(sfConfig::get('app_web_url').'zerocall/images/app-heading.jpg');?></div>
-   	  <div class="app_reg_fields" data-role="content"  data-theme="c">
-                <p style="text-align:center;color:#fff;">Enter your information and press Register</p>
+<div class="gridContainer clearfix">
+  <div id="LayoutDiv1">
+   	<div class="intro_wrapper">
+   	  <div class="dashboard_logo"><?php echo image_tag(sfConfig::get('app_web_url').'zerocall/images/app-heading.jpg');?></div>
+   	  <div class="app_reg_fields">
             	<ul>
+                <li style=" text-align:center; line-height:50px">Enter your information and press Register</li>
                   <li>
                     <select name="ccode" id="country-select">
                      <?php foreach($countries as $country){ ?>
@@ -85,8 +88,8 @@ use_helper('I18N');
                     </select>
                   </li>
                   <li><label class="cc_code">+34</label><input name="mobile_number" id="mobile_number" type="text" placeholder="Phone number / Número de telefóno" class="mnumber" />
-                      <br clear="all" /><span class="exphone">e.g. 6133243242</span></li>
-                  <li><input name="email" type="text" placeholder="Email" /></li>
+                      <span class="exphone">e.g. 6133243242</span></li>
+                  <li><input name="email" type="text" placeholder="Email" class="email" /></li>
                   <li><input name="name" type="text" placeholder="Name / Nombre y apellido" /></li>
                   <li><input id="pwd" name="pwd" type="password" placeholder="Password / Contraseña" /></li>
                   <li><input name="confirm_password" type="password" placeholder="Confirm password / Confirma contraseña" /></li>
@@ -94,9 +97,13 @@ use_helper('I18N');
                   <div style="clear:both;"></div>
                 </ul>
               <input type="hidden" value="Web" name="registerFrom" />
-              
-              
       </div>
-       <div class="footer" data-role="header"  data-theme="c"><?php echo date("Y");?> Kimarin Europe S.L Privacy policy</div>
+      
+   	</div>
+    
+    </div> 
+    <br clear="all" />
+  </div>
+  <div class="footer"><?php echo date("Y");?> Kimarin Europe S.L Privacy policy</div>
 </form>
 </div><br clear="all" />
