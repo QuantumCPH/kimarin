@@ -76,7 +76,7 @@ else
 
 <tr><td colspan="2" style="border:0 !important;">
   
-<table cellspacing="0" cellpadding="3" class="tblAlign">
+<table cellspacing="0" cellpadding="3" class="tblAlign" width="100%">
 
 <tr class="headings"> <th>Action </th> <th> Agent Name</th><th>Agent  Email </th><th>Mobile Number </th></tr>
 <?php 
