@@ -3681,11 +3681,11 @@ class pScriptsActions extends sfActions {
         $cst = new Criteria();
         $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
-        echo $sim_type_id = $simtype->getId();
-        $exest = $order->getExeStatus();
+         $sim_type_id = $simtype->getId();
+     $exest = $order->getExeStatus();
         if ($exest != 1) {
-
-            $uniqueId = $customer->getUniqueid();
+echo   "here";
+echo"<br />".            $uniqueId = $customer->getUniqueid();
             $cb = new Criteria();
             $cb->add(CallbackLogPeer::UNIQUEID, $uniqueId);
             $cb->addDescendingOrderByColumn(CallbackLogPeer::CREATED);
