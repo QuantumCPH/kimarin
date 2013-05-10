@@ -750,7 +750,7 @@ class affiliateActions extends sfActions {
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
-        $product_criteria->addAnd(ProductPeer::ID, 19, Criteria::NOT_EQUAL);   /////Not equal to app product
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID, 11, Criteria::NOT_EQUAL);   /////Not equal to app product
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
@@ -815,7 +815,7 @@ class affiliateActions extends sfActions {
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
-        $product_criteria->addAnd(ProductPeer::ID, 19, Criteria::NOT_EQUAL);   ////// Not equal to app customer
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID, 11, Criteria::NOT_EQUAL);   /////Not equal to app product
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
@@ -2953,15 +2953,14 @@ class affiliateActions extends sfActions {
         
         if ($agentCount > 0) {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
-            $product_criteria->addAnd(ProductPeer::ID, 19);
             $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
             $product_criteria->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
             $this->product_active = "Product is not assigned.";
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
-            $product_criteria->addAnd(ProductPeer::ID, 19);
             $this->product_active = "Product is not active for agent portal.";
-        }        
+        }
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11);
         $pcount = ProductPeer::doCount($product_criteria);
         if($pcount > 0){   
           $product = ProductPeer::doSelectOne($product_criteria);

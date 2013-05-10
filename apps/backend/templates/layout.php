@@ -238,7 +238,7 @@
             </li>
 
           
-                <li>
+<!--                <li>
                 <a href="#"
                 onmouseover="mopen('m23')"
                 onmouseout="mclosetime()" <?php echo $modulName=="agent_user" ?'class="current"':''?>><?php echo __('SMS') ?></a>
@@ -269,7 +269,7 @@
                  ?>    
           
           </div>
-            </li>
+            </li>-->
 
           
 
