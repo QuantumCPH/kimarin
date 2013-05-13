@@ -52,7 +52,7 @@ class smsActions extends sfActions {
                     $cbf->setS('H');
                     $cbf->setDa($number);
                     $cbf->setMessage($sms_text);
-                    $cbf->setCountryId(53);
+                    $cbf->setCountryId(185);
                     $cbf->setMobileNumber('kimarin Backend');
 
 //$sms_text='ø  æ å  Æ Ø Å Ö ö';
