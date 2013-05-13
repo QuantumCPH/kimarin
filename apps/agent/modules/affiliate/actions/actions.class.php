@@ -750,7 +750,7 @@ class affiliateActions extends sfActions {
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
-        $product_criteria->addAnd(ProductPeer::ID, 19, Criteria::NOT_EQUAL);   /////Not equal to app product
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11, Criteria::NOT_EQUAL);   /////Not equal to app product
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
@@ -815,7 +815,7 @@ class affiliateActions extends sfActions {
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
-        $product_criteria->addAnd(ProductPeer::ID, 19, Criteria::NOT_EQUAL);   ////// Not equal to app customer
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11, Criteria::NOT_EQUAL);   /////Not equal to app product
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
