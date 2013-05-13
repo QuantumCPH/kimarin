@@ -737,7 +737,7 @@ class affiliateActions extends sfActions {
         $c = new Criteria();
         $c->add(AgentCompanyPeer::ID, $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $referrer_id = AgentCompanyPeer::doSelectOne($c);
-        var_dump($referrer_id);
+        var_dump($referrer_id->getId());
         $product_criteria = new Criteria();
         $dc = new Criteria();
         $dc->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
