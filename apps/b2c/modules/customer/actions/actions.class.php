@@ -2633,10 +2633,8 @@ class customerActions extends sfActions {
        $this->countries = $countries;
       // $this->setLayout('mobile_app_reg');
    }
-   
-    
-   
-   public function executeInIframe() {
-           
+
+   public function executeInIframe() {       
+
    } 
 }
