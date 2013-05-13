@@ -3669,18 +3669,21 @@ class pScriptsActions extends sfActions {
         }
        
         $order->save();
+        
+
         $telintaObj = new Telienta();
         $telintaGetBalance = $telintaObj->getBalance($customer);
         $transaction->setCustomerCurrentBalance($telintaGetBalance);
         $transaction->save();
+        
         TransactionPeer::AssignReceiptNumber($transaction);
         
         
         $cst = new Criteria();
         $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
-        echo $sim_type_id = $simtype->getId();
-        $exest = $order->getExeStatus();
+         $sim_type_id = $simtype->getId();
+         $exest = $order->getExeStatus();
         if ($exest != 1) {
 
             $uniqueId = $customer->getUniqueid();
@@ -3725,8 +3728,7 @@ class pScriptsActions extends sfActions {
             emailLib::sendCustomerNewcardEmail($customer, $order, $transaction);
             $this->updatePreferredCulture();
         }
-        
-       
+
         
         $order->setExeStatus(1);
         $order->save();
