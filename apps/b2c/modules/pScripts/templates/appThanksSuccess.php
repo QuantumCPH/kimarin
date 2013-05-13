@@ -18,7 +18,7 @@ Gracias por su solicitud de Kimarin APP.</p><br />
 *	Si usted tiene un teléfono Android puedes descargar la aplicación aquí (link to Google Play)<br />
 *	Si usted tiene un iPhone puedes descargar la aplicación aquí (link to App Store)<br />
 
-    </p>
+    </p><br />
     <?php
     }else{
     ?>
