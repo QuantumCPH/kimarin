@@ -3458,6 +3458,43 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         endif;
         //**********************************************************************
     }
+    public static function smsNotSentEmail($employeList)
+    {
+
+        $subject="SMS Not Working";
+        $message_body= "Please investigate <br/>".$employeList;
+
+        $recipient_name_rs = sfConfig::get('app_recipient_name_rs');
+        $recipient_email_rs = sfConfig::get('app_recipient_email_rs');
+
+        $recipient_name_support = sfConfig::get('app_recipient_name_support');
+        $recipient_email_support = sfConfig::get('app_recipient_email_support');
+
+        //**********************Sent The Email To RS****************************
+        if ($recipient_email_rs != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_rs);
+            $email->setReceipientEmail($recipient_email_rs);
+            $email->setEmailType('SMS not sent issue');
+            $email->setMessage($message_body);
+            $email->save();
+        endif;
+        //**********************************************************************
+
+        //*******************Sent The Email To Support**************************
+         if ($recipient_email_support != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_support);
+            $email->setReceipientEmail($recipient_email_support);
+            $email->setEmailType('SMS not sent issue');
+            $email->setMessage($message_body);
+            $email->save();
+         endif;
+        //**********************************************************************
+
+    }
 }
 
 ?>

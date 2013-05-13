@@ -14,23 +14,27 @@ class BaseSmsLogFormFilter extends BaseFormFilterPropel
   public function setup()
   {
     $this->setWidgets(array(
-      'mobile_number' => new sfWidgetFormFilterInput(),
-      'message'       => new sfWidgetFormFilterInput(),
-      'sender_name'   => new sfWidgetFormFilterInput(),
-      'status'        => new sfWidgetFormFilterInput(),
-      'created_at'    => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
-      'customer_id'   => new sfWidgetFormFilterInput(),
-      'sms_type'      => new sfWidgetFormFilterInput(),
+      'mobile_number'  => new sfWidgetFormFilterInput(),
+      'message'        => new sfWidgetFormFilterInput(),
+      'sender_name'    => new sfWidgetFormFilterInput(),
+      'status'         => new sfWidgetFormFilterInput(),
+      'created_at'     => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
+      'customer_id'    => new sfWidgetFormFilterInput(),
+      'sms_type'       => new sfWidgetFormFilterInput(),
+      'api_name'       => new sfWidgetFormFilterInput(),
+      'transaction_id' => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
-      'mobile_number' => new sfValidatorPass(array('required' => false)),
-      'message'       => new sfValidatorPass(array('required' => false)),
-      'sender_name'   => new sfValidatorPass(array('required' => false)),
-      'status'        => new sfValidatorPass(array('required' => false)),
-      'created_at'    => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
-      'customer_id'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'sms_type'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'mobile_number'  => new sfValidatorPass(array('required' => false)),
+      'message'        => new sfValidatorPass(array('required' => false)),
+      'sender_name'    => new sfValidatorPass(array('required' => false)),
+      'status'         => new sfValidatorPass(array('required' => false)),
+      'created_at'     => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
+      'customer_id'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'sms_type'       => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'api_name'       => new sfValidatorPass(array('required' => false)),
+      'transaction_id' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('sms_log_filters[%s]');
@@ -48,14 +52,16 @@ class BaseSmsLogFormFilter extends BaseFormFilterPropel
   public function getFields()
   {
     return array(
-      'id'            => 'Number',
-      'mobile_number' => 'Text',
-      'message'       => 'Text',
-      'sender_name'   => 'Text',
-      'status'        => 'Text',
-      'created_at'    => 'Date',
-      'customer_id'   => 'Number',
-      'sms_type'      => 'Number',
+      'id'             => 'Number',
+      'mobile_number'  => 'Text',
+      'message'        => 'Text',
+      'sender_name'    => 'Text',
+      'status'         => 'Text',
+      'created_at'     => 'Date',
+      'customer_id'    => 'Number',
+      'sms_type'       => 'Number',
+      'api_name'       => 'Text',
+      'transaction_id' => 'Number',
     );
   }
 }

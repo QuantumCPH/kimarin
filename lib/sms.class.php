@@ -25,7 +25,7 @@ class CARBORDFISH_SMS {
      * @param $Sender will be the sender name of the SMS;
      */
 
-    public static function Send($mobileNumber, $smsText, $senderName=null, $smsType=null) {
+    public static function Send($mobileNumber, $smsText, $senderName=null, $smsType=null,$transaction_id=null) {
         if ($senderName == null)
             $senderName = self::$SA;
             if ($smsType == null)
@@ -52,6 +52,8 @@ class CARBORDFISH_SMS {
          $smsLog->setSmsType($smsType);
         $smsLog->setSenderName($senderName);
         $smsLog->setMobileNumber($mobileNumber);
+        $smsLog->setApiName('Cardbordfish');
+        $smsLog->setTransactionId($transaction_id);
         $smsLog->save();
         if (substr($res, 0, 2) == 'OK')
             return true;
@@ -75,7 +77,7 @@ class SMSNU {
      * @param $Sender will be the sender name of the SMS;
      */
 
-    public static function Send($mobileNumber, $smsText, $senderName=null, $smsType=null) {
+    public static function Send($mobileNumber, $smsText, $senderName=null, $smsType=null,$transaction_id=null) {
         if ($senderName == null)
             $senderName = self::$id;
         if ($smsType == null)
@@ -105,7 +107,48 @@ class SMSNU {
         if (substr($res, 10, 2) == 'OK') {
             return true;
         } else {
-            $message.="SMS not sent to this mobile numberc On WLS2 <br/>Mobile number =" . $mobileNumber . "<br/> Message is =" . $smsText . "<br/> and Time is " . $smsLog->getCreatedAt();
+            $message="SMS not sent to this mobile numberc On Kimarin <br/>Mobile number =" . $mobileNumber . "<br/> Message is =" . $smsText . "<br/> and Time is " . $smsLog->getCreatedAt();
+            emailLib::smsNotSentEmail($message);
+            return false;
+        }
+    }
+
+}
+class ROUTE_API_Regular {
+
+    private static $id = 'Kimarin';
+
+    public static function Send($mobileNumber, $smsText, $senderName = null, $smsType = null,$transaction_id=null) {
+
+        if ($senderName == null)
+            $senderName = self::$id;
+        if ($smsType == null)
+            $smsType = 1;
+        $data1 = array(
+            'username' => 'zapna',
+            'password' => 'bc366nf',
+            'dlr' => '1',
+            'destination' => $mobileNumber,
+            'source' => $senderName,
+            'message' => $smsText,
+            'type' => '0'
+        );
+        $queryString = http_build_query($data1, '', '&');
+        $queryString = smsCharacter::smsCharacterReplacementReverse($queryString);
+        $res = file_get_contents('http://smsplus3.routesms.com:8080/bulksms/bulksms?' . $queryString);
+        $smsLog = new SmsLog();
+        $smsLog->setMessage($smsText);
+        $smsLog->setStatus($res);
+        $smsLog->setSmsType($smsType);
+        $smsLog->setSenderName($senderName);
+        $smsLog->setMobileNumber($mobileNumber);
+        $smsLog->setApiName('Route API Regular');
+        $smsLog->setTransactionId($transaction_id);
+        $smsLog->save();
+        if (substr($res, 0, 4) == 1701) {
+            return true;
+        } else {
+            $message="SMS not sent via ROUTE_API_Regular to this mobile numberc On Kimarin <br/>Mobile number =" . $mobileNumber . "<br/> Message is =" . $smsText . "<br/> Response from API =" . $res;
             emailLib::smsNotSentEmail($message);
             return false;
         }
@@ -113,30 +156,89 @@ class SMSNU {
 
 }
 
+class ROUTE_API_Premium {
+
+    //put your code here
+
+    private static $username = 'zapna1';
+    private static $password = 'lghanymb';
+    private static $source = 'Kimarin';
+    private static $dlr = 1;
+    private static $type = 0;
+
+    public static function Send($mobileNumber, $smsText, $senderName = null, $smsType = null,$transaction_id=null) {
+
+        $message = "";
+        if ($senderName == null)
+            $senderName = self::$source;
+        if ($smsType == null)
+            $smsType = 1;
+        $data = array(
+            'username' => self::$username,
+            'password' => self::$password,
+            'dlr' => self::$dlr,
+            'destination' => $mobileNumber,
+            'source' => $senderName,
+            'message' => $smsText,
+            'type' => self::$type
+        );
+        $queryString = http_build_query($data, '', '&');
+        $queryString = smsCharacter::smsCharacterReplacementReverse($queryString);
+        $res = file_get_contents('http://smpp5.routesms.com:8080/bulksms/sendsms?' . $queryString);
+        // sleep(0.25);
+
+        if (substr($res, 0, 4) == 1701) {
+
+            $smsLog = new SmsLog();
+            $smsLog->setMessage($smsText);
+            $smsLog->setStatus($res);
+            $smsLog->setSmsType($smsType);
+            $smsLog->setSenderName($senderName);
+            $smsLog->setMobileNumber($mobileNumber);
+            $smsLog->setApiName('Route API Premium');
+            $smsLog->setTransactionId($transaction_id);
+            $smsLog->save();
+
+            return true;
+        } else {
+            $message="SMS not sent via ROUTE_API_Premium to this mobile numberc On Kimarin <br/>Mobile number =" . $mobileNumber . "<br/> Message is =" . $smsText . "<br/> Response from API =" . $res;
+            emailLib::smsNotSentEmail($message);
+            return false;
+        }
+    }
+
+}
 class ROUTED_SMS {
 
-    public static function Send($mobileNumber, $smsText, $senderName=null, $smsType=null) {
-        if (!CARBORDFISH_SMS::Send($mobileNumber, $smsText, $senderName)) {
-            if (!SMSNU::Send($mobileNumber, $smsText, $senderName)) {
-                if ($senderName == null)
-                    $senderName = "Kimarin";
-                 if ($smsType == null)
-                    $smsType =1;
-                $smsLog = new SmsLog();
-                $smsLog->setMessage($smsText);
-                $smsLog->setSmsType($smsType);
-                $smsLog->setStatus("Unable to send from both");
-                $smsLog->setSenderName($senderName);
-                $smsLog->setMobileNumber($mobileNumber);
-                $smsLog->save();
-                 return false;
-            }else{
-                return true; 
-            }
-            
-        }else{
-                return true; 
-            }
+    public static function Send($mobileNumber, $smsText, $senderName=null, $smsType=null,$transaction_id=null) {
+//         if (!CARBORDFISH_SMS::Send($mobileNumber, $smsText, $senderName, $smsType,$transaction_id)) {
+//            if (!SMSNU::Send($mobileNumber, $smsText, $senderName, $smsType,$transaction_id)) {
+              if(!ROUTE_API_Regular::Send($mobileNumber, $smsText, $senderName, $smsType, $transaction_id)){    
+                 if(!ROUTE_API_Premium::Send($mobileNumber, $smsText, $senderName, $smsType, $transaction_id)){                    
+                    if ($senderName == null)
+                        $senderName = "Kimarin";
+                     if ($smsType == null)
+                        $smsType =1;
+                    $smsLog = new SmsLog();
+                    $smsLog->setMessage($smsText);
+                    $smsLog->setSmsType($smsType);
+                    $smsLog->setStatus("Unable to send from both");
+                    $smsLog->setSenderName($senderName);
+                    $smsLog->setMobileNumber($mobileNumber);
+                    $smsLog->save();
+                     return false;
+                }else{
+                  return true;  
+                }
+             }else{
+                    return true;
+                }                
+//           }else{
+//                return true; 
+//            }
+//        }else{ ///// cardboard fish else
+//                return true; 
+//        }
     }
 
 }
