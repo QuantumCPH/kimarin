@@ -4403,8 +4403,9 @@ class pScriptsActions extends sfActions {
             echo " The email address is not valid";
             die;
         }
-
-        $product = ProductPeer::retrieveByPK(19);
+        $product_criteria = new Criteria();
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11);
+        $product = ProductPeer::doSelectOne($product_criteria);
         $customer = new Customer();
         $customer->setCountryId($country->getId());
         $customer->setFirstName($name);
