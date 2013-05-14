@@ -491,8 +491,8 @@ class customerActions extends autocustomerActions {
                     $transaction->setTransactionDescriptionId($transactiondescription->getId());
                     $transaction->setDescription($transactiondescription->getTitle());
                     $transaction->setTransactionFrom('2');
-                    $transaction->setInitialBalance($order->getProduct()->getInitialBalance()+$order->getProduct()->getBonus());
-                    $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
+                    $transaction->setInitialBalance($amount);
+                    $transaction->setAmountWithoutVat($amount);
                     $transaction->setVat($request->getParameter('refill_amount')*sfConfig::get('app_vat_percentage'));
                     $transaction->save();
                     $this->customer = $order->getCustomer();
