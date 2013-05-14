@@ -17,13 +17,11 @@
                 <div class="right">
                     <label class="country-code" id="country-code">+34</label>
                     <input name="mobile_number" class="mobile"/>
-
                 </div>
                 <br clear="all" />
                 <div class="left"><?php echo __('N.I.E. or passport<br />number') ?><em>*</em>&nbsp;:</div>
                 <div class="right">
-                    <input name="nie" class="input1 required"/><br/>
-
+                    <input name="nie" class="input1 required"/>
                 </div>
                 <br clear="all" />
                 <div class="left"><?php echo __('Preferred language') ?>:</div>

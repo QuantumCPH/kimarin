@@ -610,7 +610,6 @@ ul.changenumber li{
 
 .regForm .right {
     float: left;
-    padding: 0;
     width: 237px;
 }
 
@@ -643,7 +642,7 @@ ul.changenumber li{
     box-shadow: 0 0 2px #F7F7F7 inset, 0 1px 0 #F7F7F7;
     color: #777777;
     float: right !important;
-    margin-bottom: 0px !important; 
+    margin-bottom: 5px !important; 
     margin-right: 22px !important;
     margin-top: 0px !important;
     padding: 4px 3px !important;
