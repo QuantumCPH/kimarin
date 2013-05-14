@@ -1,7 +1,7 @@
  <div id="sf_admin_container"><h1><?php echo __('Refill') ?></h1></div>
         
   <div class="borderDiv"> 
-<form method="post"  class="split-form-sign-up" id="refill_form" action="<?php url_for('affiliate/refill') ?>">
+<form method="post"  class="split-form-sign-up" id="refill_form" action="<?php url_for('affiliate/refill') ?>" style="float:none !important;">
       
              <div class="refillhead"><?php echo __('Manual refill.') ?></div>
           <p> <?php echo __('You can refill your %1% Account with the following amounts:',array("%1%"=>sfConfig::get('app_site_title')))?></p>
@@ -66,7 +66,8 @@
 	          </li>
 	<?php }?>
 		<br clear="all" />	  
-	</ul><br clear="all" />
+	</ul>
+         <div class="clr"></div>
 </form>
-      <div class="clr"><br clear="all" /></div>
+      <div class="clr"></div>
   </div>
