@@ -23,7 +23,7 @@
         <?php if($error_msg){?>
             <strong><?php echo $error_msg ?></strong>
         <?php } ?>
-             <div class="refillhead"><?php echo __('Change Customer Product.') ?></div>
+             <div class="refillhead"><?php //echo __('Change Customer Product.') ?></div>
         	<ul class="fl col">
                     <li>
                        <label>Customer Mobile Number</label>  
