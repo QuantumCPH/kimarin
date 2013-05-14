@@ -21,6 +21,7 @@
          </ul> 
          <p><?php echo __("All amounts are excl. IVA.");?></p>
          <p><?php echo __("The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. ",array("%1%"=>sfConfig::get('app_currency_code')));echo __("The refill amount is valid for 180 days.");?></p>
+         <br clear="all" />
          <?php if($error_msg){?>
          <div id="error-message" class="grid_9 save-decl"><?php echo $error_msg ?></div><br/><br/>
         <?php } ?> 
@@ -50,6 +51,7 @@
 			 </span>
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_extra_refill?></div>
+            </li>
              <?php
           if( $browser->getBrowser() == Browser::BROWSER_IE  )
           {
@@ -63,8 +65,8 @@
 	            <button onclick="$('#refill_form').submit();" style="cursor: pointer;margin-left: 15px !important;"><?php echo __('Refill') ?></button>
 	          </li>
 	<?php }?>
-			  
-	</ul>
+		<br clear="all" />	  
+	</ul><br clear="all" />
 </form>
-      <div class="clr"></div>
+      <div class="clr"><br clear="all" /></div>
   </div>
