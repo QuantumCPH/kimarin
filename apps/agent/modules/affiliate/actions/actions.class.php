@@ -2816,7 +2816,7 @@ class affiliateActions extends sfActions {
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
-        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+      //  $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
         $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $transaction->setVat($this->vat);
         $transaction->save();
