@@ -167,21 +167,7 @@ class employeeActions extends sfActions {
         $employee->setComments($request->getParameter('comments'));        
         $employee->setStatusId(sfConfig::get('app_status_new'));
         $employee->save();
-        $product = ProductPeer::retrieveByPK($request->getParameter('productid'));
-        if ($product->getProductTypeId() == 10) {
-            $employee->setUniqueId("Dial" . $employee->getId());
-        } elseif ($product->getProductTypeId() == 11) {
-            $employee->setUniqueId("app" . $employee->getId());
-        }else{
-            $employee->setUniqueId($request->getParameter('uniqueid'));
-            $employee->save();
-            $c = new Criteria();
-            $c->add(UniqueIdsPeer::UNIQUE_NUMBER, $employee->getUniqueId());
-            $uniqueIdObj = UniqueIdsPeer::doSelectOne($c);
-            $uniqueIdObj->setAssignedAt(date("Y-m-d H:i:s"));
-            $uniqueIdObj->setStatus(1);
-            $uniqueIdObj->save();              
-        }
+        
 //        if(!$ComtelintaObj->telintaRegisterEmployeeCB($employeMobileNumber, $this->companys)){
 //            $employee->setStatusId(sfConfig::get('app_status_error')); //// error status is 5 defined in backend/config/app.yml
 //            $employee->save();
@@ -205,7 +191,21 @@ class employeeActions extends sfActions {
             die; 
         }
         
-        
+        $product = ProductPeer::retrieveByPK($request->getParameter('productid'));
+        if ($product->getProductTypeId() == 10) {
+            $employee->setUniqueId("Dial" . $employee->getId());
+        } elseif ($product->getProductTypeId() == 11) {
+            $employee->setUniqueId("app" . $employee->getId());
+        }else{
+            $employee->setUniqueId($request->getParameter('uniqueid'));
+            $employee->save();
+            $c = new Criteria();
+            $c->add(UniqueIdsPeer::UNIQUE_NUMBER, $employee->getUniqueId());
+            $uniqueIdObj = UniqueIdsPeer::doSelectOne($c);
+            $uniqueIdObj->setAssignedAt(date("Y-m-d H:i:s"));
+            $uniqueIdObj->setStatus(1);
+            $uniqueIdObj->save();              
+        }
         
         $employee->setStatusId(sfConfig::get('app_status_completed')); //// completed status is 3 defined in backend/config/app.yml
         $employee->save();
