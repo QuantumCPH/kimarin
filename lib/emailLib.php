@@ -1501,11 +1501,13 @@ Med vänlig hälsning<br/><br/>
         //**********************************************************************
     }
 
-    public static function sendUniqueIdsShortage($sim_type) {
+    public static function sendUniqueIdsShortage($sim_type , $message=NULL) {
 
         $subject = 'Unique Ids finished.';
+        
         $message_body = "Uniuqe Ids have been finsihed of SIM Type " . $sim_type . ".<br/><br/>" . sfConfig::get('app_site_title');
-
+        if($message!=NULL) $message.$message_body;
+            
         $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
         $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
 
@@ -3146,18 +3148,41 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $customer_id = trim($transaction->getCustomerId());
         $customer = CustomerPeer::retrieveByPK($customer_id);
         $order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
-
+        $referrer_id =$customer->getReferrerId();
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
-
+        
+        if ($referrer_id != '') {
+            $c = new Criteria();
+            $c->add(AgentCompanyPeer::ID, $referrer_id);
+            $recepient_agent_email = AgentCompanyPeer::doSelectOne($c)->getEmail();
+            $recepient_agent_name = AgentCompanyPeer::doSelectOne($c)->getName();
+        } else {
+            $recepient_agent_email = '';
+            $recepient_agent_name = '';
+        }
+        $vat = $transaction->getVat();
+        $postalcharge = 0;
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $message_body = get_partial($app . '/order_receipt_app', array(
             'transaction' => $transaction,
             'customer' => $customer,
             'order' => $order,
+            'vat'=> $vat,
+            'postalcharge'=> $postalcharge,
+            'agent_name'=>$recepient_agent_name,
+            'wrap' => true,
+                ));
+        $agent_message_body = get_partial($app . '/order_receipt_app', array(
+            'transaction' => $transaction,
+            'customer' => $customer,
+            'order' => $order,
+            'vat'=> $vat,
+            'postalcharge'=> $postalcharge,
+            'agent_name'=>$recepient_agent_name,
             'wrap' => false,
                 ));
-        $subject = __('Registration Confirmation');
+        $subject = 'Registration Confirmation - Confirmación de registro';
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');
@@ -3205,7 +3230,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email2->setAgentId($referrer_id);
             $email2->setCutomerId($customer_id);
             $email2->setEmailType(sfConfig::get('app_site_title') . 'App registration');
-            $email2->setMessage($message_body);
+            $email2->setMessage($agent_message_body);
             $email2->save();
         endif;
         //---------------------------------------
@@ -3377,7 +3402,99 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         endif;
         //-----------------------------------------
     }
+   
+    public static function sendEmployeeForgetPasswordEmail(Employee $employee, $message_body, $subject) {
+        sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
 
+        // $subject = __("Request for password");
+        $recepient_email = trim($employee->getEmail());
+       
+        $recepient_name = sprintf('%s %s', $employee->getFirstName(), $employee->getLastName());
+        
+        $employee_id = trim($employee->getId());
+ 
+        //------------------Sent The Email To Employee
+        if (trim($recepient_email) != '') {
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recepient_name);
+            $email->setReceipientEmail($recepient_email);
+            $email->setCutomerId($employee_id);
+            $email->setEmailType(sfConfig::get('app_site_title') . 'Employee Forget Password');
+            $email->setMessage($message_body);
+            $email->save();
+        }
+        //----------------------------------------
+    }
+    
+    public static function sendError($subject, $message) {
+
+        $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
+        $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
+
+        $recipient_name_support = sfConfig::get('app_recipient_name_support');
+        $recipient_email_support = sfConfig::get('app_recipient_email_support');
+
+        //********************Sent The Email To RS******************************
+        if (trim($recipient_email_rs) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_rs);
+            $email->setReceipientEmail($recipient_email_rs);
+            $email->setEmailType('Telinta Error');
+            $email->setMessage($message);
+            $email->save();
+        endif;
+        //**********************************************************************
+        //********************Sent The Email To Support*************************
+        if (trim($recipient_email_support) != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_support);
+            $email->setReceipientEmail($recipient_email_support);
+            $email->setEmailType('Telinta Error');
+            $email->setMessage($message);
+            $email->save();
+        endif;
+        //**********************************************************************
+    }
+    public static function smsNotSentEmail($employeList)
+    {
+
+        $subject="SMS Not Working";
+        $message_body= "Please investigate <br/>".$employeList;
+
+        $recipient_name_rs = sfConfig::get('app_recipient_name_rs');
+        $recipient_email_rs = sfConfig::get('app_recipient_email_rs');
+
+        $recipient_name_support = sfConfig::get('app_recipient_name_support');
+        $recipient_email_support = sfConfig::get('app_recipient_email_support');
+
+        //**********************Sent The Email To RS****************************
+        if ($recipient_email_rs != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_rs);
+            $email->setReceipientEmail($recipient_email_rs);
+            $email->setEmailType('SMS not sent issue');
+            $email->setMessage($message_body);
+            $email->save();
+        endif;
+        //**********************************************************************
+
+        //*******************Sent The Email To Support**************************
+         if ($recipient_email_support != ''):
+            $email = new EmailQueue();
+            $email->setSubject($subject);
+            $email->setReceipientName($recipient_name_support);
+            $email->setReceipientEmail($recipient_email_support);
+            $email->setEmailType('SMS not sent issue');
+            $email->setMessage($message_body);
+            $email->save();
+         endif;
+        //**********************************************************************
+
+    }
 }
 
 ?>

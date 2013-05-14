@@ -28,6 +28,9 @@ class BaseTransactionFormFilter extends BaseFormFilterPropel
       'vat'                        => new sfWidgetFormFilterInput(),
       'email_tempalte'             => new sfWidgetFormFilterInput(),
       'receipt_no'                 => new sfWidgetFormFilterInput(),
+      'amount_without_vat'         => new sfWidgetFormFilterInput(),
+      'initial_balance'            => new sfWidgetFormFilterInput(),
+      'customer_current_balance'   => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -45,6 +48,9 @@ class BaseTransactionFormFilter extends BaseFormFilterPropel
       'vat'                        => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
       'email_tempalte'             => new sfValidatorPass(array('required' => false)),
       'receipt_no'                 => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'amount_without_vat'         => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'initial_balance'            => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
+      'customer_current_balance'   => new sfValidatorSchemaFilter('text', new sfValidatorNumber(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('transaction_filters[%s]');
@@ -77,6 +83,9 @@ class BaseTransactionFormFilter extends BaseFormFilterPropel
       'vat'                        => 'Number',
       'email_tempalte'             => 'Text',
       'receipt_no'                 => 'Number',
+      'amount_without_vat'         => 'Number',
+      'initial_balance'            => 'Number',
+      'customer_current_balance'   => 'Number',
     );
   }
 }

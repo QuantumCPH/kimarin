@@ -750,6 +750,7 @@ class affiliateActions extends sfActions {
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11, Criteria::NOT_EQUAL);   /////Not equal to app product
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
@@ -814,6 +815,7 @@ class affiliateActions extends sfActions {
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11, Criteria::NOT_EQUAL);   /////Not equal to app product
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
@@ -975,11 +977,14 @@ class affiliateActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
         $transaction->setVat($vat);
         //$transaction->setTransactionStatusId() // default value 1
 
         $transaction->save();
+        
         $this->order = $order;
         $this->forward404Unless($this->order);
 
@@ -1046,7 +1051,7 @@ class affiliateActions extends sfActions {
             $order->setOrderStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_error', 5)); //error in amount
-        } else if ($transaction->getAmount() < $order_amount) {
+        } else if (number_format($transaction->getAmount(),2) < number_format($order_amount,2)) {
             $transaction->setAmount($order_amount);
         }
 
@@ -1201,7 +1206,10 @@ class affiliateActions extends sfActions {
             $this->updatePreferredCulture();
 //            $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //            $zeroCallOutSMSObject->toCustomerAfterReg($customer_product->getProductId(), $this->customer);
-
+            
+            $telintaGetBalance = $telintaObj->getBalance($this->customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
 
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $this->customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
             $this->redirect('affiliate/receipts');
@@ -1522,13 +1530,6 @@ class affiliateActions extends sfActions {
                 $this->getUser()->setFlash('decline', 'Customer has already availed his/her limit for this service.');
                 $this->redirect('affiliate/changenumberservice');
             }
-
-
-
-
-
-
-
             if ($customer) {
                 $this->customer = $customer;
                 $this->product = $product;
@@ -1616,6 +1617,8 @@ class affiliateActions extends sfActions {
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 //    $transaction->setDescription('Fee for change number (' . $agent->getName() . ')');
+                $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+                $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
                 $transaction->setAgentCompanyId($agent->getId());
                 $transaction->setVat($vat);
                 //assign commission to transaction;
@@ -1777,6 +1780,11 @@ class affiliateActions extends sfActions {
                 $this->updatePreferredCulture();
                 $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% Mobile Number is changed successfully  with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
 
+                $telintaObj = new Telienta();
+                $telintaGetBalance = $telintaObj->getBalance($this->customer);
+                $transaction->setCustomerCurrentBalance($telintaGetBalance);
+                $transaction->save();
+            
                 $this->redirect('affiliate/receipts');
             } else {
 
@@ -2321,6 +2329,8 @@ class affiliateActions extends sfActions {
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($product->getDescription());
         $transaction->setVat($request->getParameter('vat'));
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $transaction->setAgentCompanyId($agent->getId());
 
         $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
@@ -2395,6 +2405,10 @@ class affiliateActions extends sfActions {
             $this->setPreferredCulture($this->customer);
             emailLib::sendRefillEmail($this->customer, $order);
             $this->updatePreferredCulture();
+            
+            $telintaGetBalance = $telintaObj->getBalance($this->customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
             //   $this->getUser()->setCulture('en');
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $order->getExtraRefill(), "%3%" => sfConfig::get('app_currency_code'))));
 //                                      echo 'rehcarged, redirecting';
@@ -2518,6 +2532,8 @@ class affiliateActions extends sfActions {
         $transaction->setDescription($this->transaction_title);
         $transaction->setVat($this->vat);
         $transaction->setTransactionStatusId(1);
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
         /////////////////////////////////////////////
@@ -2634,7 +2650,7 @@ class affiliateActions extends sfActions {
 
 
             $order->setOrderStatusId(sfConfig::get('app_status_completed'));
-            $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
+            $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));            
             $order->setExeStatus(1);
             $order->save();
             $transaction->save();
@@ -2646,6 +2662,10 @@ class affiliateActions extends sfActions {
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerNewcardEmailAgent($this->customer, $order, $transaction, $agent_company_id);
             $this->updatePreferredCulture();
+            $telintaObj = new Telienta();
+            $telintaGetBalance = $telintaObj->getBalance($this->customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
             //   $this->getUser()->setCulture('en');
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('New sim is purchased successfully '));
 //                                      echo 'rehcarged, redirecting';
@@ -2687,6 +2707,7 @@ class affiliateActions extends sfActions {
         $this->product_id = '';
         $cst = new Criteria();
         $cst->add(ProductPeer::PRODUCT_TYPE_ID, 1);
+        $cst->addOr(ProductPeer::PRODUCT_TYPE_ID, 10);
         $cst->addAnd(ProductPeer::IS_IN_STORE, 1);
         $this->simtypes = ProductPeer::doSelect($cst);
     }
@@ -2795,6 +2816,8 @@ class affiliateActions extends sfActions {
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $transaction->setVat($this->vat);
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
@@ -2924,7 +2947,12 @@ class affiliateActions extends sfActions {
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerChangeProductAgent($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
-
+            
+            
+            $telintaGetBalance = $telintaObj->getBalance($this->customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
+            
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Congratulations! Customer has subscribed for new product.'));
 //                                      echo 'rehcarged, redirecting';
             $this->redirect('affiliate/receipts');
@@ -2933,6 +2961,302 @@ class affiliateActions extends sfActions {
             $this->balance_error = 1;
             $this->getUser()->setFlash('error', 'You do not have enough balance, please recharge');
         }
+        return sfView::NONE;
+    }
+    
+    public function executeRegisterAppCustomer(sfWebRequest $request){
+       $this->getUser()->getAttribute('agent_company_id', '', 'agentsession');
+        $this->browser = new Browser();
+
+        $c = new Criteria();
+        $c->add(AgentCompanyPeer::ID, $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $referrer_id = AgentCompanyPeer::doSelectOne($c);
+
+        $product_criteria = new Criteria();
+        $dc = new Criteria();
+        $dc->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
+        $agentCount = AgentProductPeer::doCount($dc);
+        
+        if ($agentCount > 0) {
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);            
+            $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
+            $product_criteria->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
+            $this->product_active = "Product is not assigned.";
+        } else {
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);            
+            $this->product_active = "Product is not active for agent portal.";
+        }   
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11);
+        $pcount = ProductPeer::doCount($product_criteria);
+        if($pcount > 0){   
+          $product = ProductPeer::doSelectOne($product_criteria);
+          $this->product_id = $product->getId(); 
+          $this->disable = '';  
+          $this->product_active = "";
+        }else{      
+          $this->disable = "disabled='disabled'";
+          $this->product_id = ''; 
+        }
+       $this->target = $this->getTargetUrl();
+       $cc = new Criteria();
+       $cc->add(CountryPeer::ENABLED,1);
+       $countries = CountryPeer::doSelect($cc);
+       $this->countries = $countries;
+       //$this->setLayout('mobile');
+   }
+    public function executeAppRegistration(sfWebrequest $request) {
+
+        //get agent
+        $ca = new Criteria();
+        $ca->add(AgentCompanyPeer::ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+        $agent = AgentCompanyPeer::doSelectOne($ca);
+        //echo $agent->getId();
+        //getting agent commission
+        $cc = new Criteria();
+        $cc->add(AgentCommissionPackagePeer::ID, $agent->getAgentCommissionPackageId());
+        $commission_package = AgentCommissionPackagePeer::doSelectOne($cc);
+        
+        //get request parameters
+        $name = $request->getParameter('name');
+        $password = $request->getParameter('pwd');
+        $email = $request->getParameter('email');
+        $ccode = $request->getParameter('ccode');
+        $mobilenumber = $request->getParameter('mobile_number');
+        $registration_from = $request->getParameter('registerFrom');
+        $prod_id = $request->getParameter('product_id');
+        if($registration_from=="") $registration_from = "app";
+        
+        $full_mobile_number = $ccode . $mobilenumber;
+        $code = $request->getParameter('code');
+        $app = $request->getParameter('app');
+        ///////////////////////registration parameter//////////////////
+        $urlval = "App Registration URL - " . $request->getURI();
+        $applog = new AppRegistrationLogs();
+        $applog->setMobileNumber($full_mobile_number);
+        $applog->setPwd($password);
+        $applog->setEmail($email);
+        $applog->setCcode($ccode);
+        $applog->setCode($code);
+        $applog->setStatusId(1);
+        $applog->setUrl($urlval);
+        $applog->setApplicationId($app);
+        $applog->setRegisterFrom($registration_from);
+        $applog->save();
+        
+///////////////////app product Registration
+        $mnc = new Criteria();
+        $mnc->add(CustomerPeer::MOBILE_NUMBER, $mobilenumber);
+        $mnc->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $customerCount = CustomerPeer::doCount($mnc);
+        if ($customerCount > 0) {
+            echo 'Customer already exists.';
+            die;
+        }
+        $ccc = new Criteria();
+        $ccc->add(CountryPeer::CALLING_CODE, $ccode);
+        $CountryCount = CountryPeer::doCount($ccc);
+        if ($CountryCount > 0) {
+            $country = CountryPeer::doSelectOne($ccc);
+        } else {
+            echo 'Country does not exists.';
+            die;
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            echo " The email address is not valid";
+            die;
+        }
+        
+        $product = ProductPeer::retrieveByPK($prod_id);
+        
+        $customer = new Customer();
+        $customer->setCountryId($country->getId());
+        $customer->setFirstName($name);
+        $customer->setMobileNumber($mobilenumber);
+        $customer->setPassword($password);
+        $customer->setEmail($email);
+        $customer->setRegistrationTypeId(2);
+        $customer->setPlainText($password);
+        $customer->setPassword($password);
+        $customer->setPreferredLanguageId(3);
+        $customer->setCustomerStatusId(1);
+        $customer->setReferrerId($agent->getId());
+        $customer->save();
+
+        $customer->setUniqueid("app" . $customer->getId());
+        $customer->save();
+
+
+        $agentid = $customer->getReferrerId();
+        if ($agentid) {
+            $commision = TRUE;
+            $agentCompanyId = $agentid;
+        } else {
+            $commision = FALSE;
+            $agentCompanyId = FALSE;
+        }
+        // TransactionProcess::StartTransaction($customer, $productId, $decriptionid, $expenceType, $transactionFrom, $transactionStatus, $commision, $agentCompanyId);
+        $order = new CustomerOrder();
+        $order->setProductId($product->getId());
+        $order->setCustomerId($customer->getId());
+        $order->setExtraRefill($order->getProduct()->getInitialBalance() + $order->getProduct()->getBonus());
+        $order->setIsFirstOrder(1);
+        $order->setOrderStatusId(1);
+        $order->save();
+
+        $transaction = new Transaction();
+        $transaction->setAmount($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee() + (($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
+        $transactiondescription = TransactionDescriptionPeer::retrieveByPK(8);
+        $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+        $transaction->setTransactionDescriptionId($transactiondescription->getId());
+        $transaction->setDescription($transactiondescription->getTitle());
+        $transaction->setOrderId($order->getId());
+        $transaction->setCustomerId($customer->getId());
+        $transaction->setTransactionFrom(2);
+        $transaction->setAgentCompanyId($agent->getId());
+        $transaction->setTransactionStatusId(1); // default value 1
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
+        $transaction->setVat((($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
+        $transaction->save();
+
+        // echo 'Assigning Customer ID <br/>';
+        //set customer's proudcts in use
+        $customer_product = new CustomerProduct();
+        $customer_product->setCustomerId($transaction->getCustomerId());
+        $customer_product->setProductId($order->getProductId());
+        $customer_product->save();
+
+        $this->customer = $customer;
+        
+            $product_price = $order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee();
+            $product_price_vat = sfConfig::get('app_vat_percentage') * $order->getProduct()->getRegistrationFee();
+            $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
+            ///////////////////////////commision calculation by agent product ///////////////////////////////////////
+            $cp = new Criteria;
+            $cp->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+            $cp->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+            $agentproductcount = AgentProductPeer::doCount($cp);
+
+            if ($agentproductcount > 0) {
+                $p = new Criteria;
+                $p->add(AgentProductPeer::AGENT_ID, $agent_company_id = $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                $p->add(AgentProductPeer::PRODUCT_ID, $order->getProductId());
+
+                $agentproductcomesion = AgentProductPeer::doSelectOne($p);
+                $agentcomession = $agentproductcomesion->getRegShareEnable();
+            }
+
+            ////////   commission setting  through  agent commision//////////////////////
+
+            if ($agentcomession) {
+
+                if ($order->getIsFirstOrder() == 1) {
+                    if ($agentproductcomesion->getIsRegShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $agentproductcomesion->getRegShareValue());
+                    } else {
+                        $transaction->setCommissionAmount($agentproductcomesion->getRegShareValue());
+                    }
+                } else {
+                    if ($agentproductcomesion->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setAgentCommission(($transaction->getAmount() / 100) * $agentproductcomesion->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setAgentCommission($agentproductcomesion->getExtraPaymentsShareValue());
+                    }
+                }
+            } else {
+
+                if ($order->getIsFirstOrder() == 1) {
+                    if ($commission_package->getIsRegShareValuePc()) {
+                        $transaction->setCommissionAmount(($transaction->getAmount() / 100) * $commission_package->getRegShareValue());
+                    } else {
+
+                        $transaction->setCommissionAmount($commission_package->getRegShareValue());
+                    }
+                } else {
+                    if ($commission_package->getIsExtraPaymentsShareValuePc()) {
+                        $transaction->setAgentCommission(($transaction->getAmount() / 100) * $commission_package->getExtraPaymentsShareValue());
+                    } else {
+                        $transaction->setAgentCommission($commission_package->getExtraPaymentsShareValue());
+                    }
+                }
+            }
+
+
+            $transaction->save();
+            
+            if ($agent->getIsPrepaid() == true) {
+
+                if ($agent->getBalance() < ($transaction->getAmount() - $transaction->getCommissionAmount())) {
+                    $this->redirect('affiliate/setProductDetails?product_id=' . $order->getProductId() . '&customer_id=' . $transaction->getCustomerId() . '&balance_error=1');
+                } else {
+                    $agent->setBalance($agent->getBalance() - ($transaction->getAmount() - $transaction->getCommissionAmount()));
+                    $agent->save();
+                    ////////////////////////////////////
+                    $remainingbalance = $agent->getBalance();
+                    $amount = $transaction->getAmount() - $transaction->getCommissionAmount();
+                    $amount = -$amount;
+                    $aph = new AgentPaymentHistory();
+                    $aph->setAgentId($this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
+                    $aph->setCustomerId($transaction->getCustomerId());
+                    $aph->setExpeneseType(1);
+                    $aph->setAmount($amount);
+                    $aph->setRemainingBalance($remainingbalance);
+                    $aph->save();
+
+                    ////////////////////////////////////////////
+                }
+            }
+            
+        $TelintaMobile = $full_mobile_number;
+        $OpeningBalance = $order->getExtraRefill();
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $telintaObj = new Telienta();
+        if ($telintaObj->ResgiterCustomer($this->customer, $OpeningBalance)) {
+            $transaction->setTransactionStatusId(3); // default value 1
+            $transaction->save();
+            $order->setOrderStatusId(3);
+            $order->save();
+            $customer->setCustomerStatusId(3);
+            $customer->save();
+            TransactionPeer::AssignReceiptNumber($transaction);
+            // For Telinta Add Account
+
+            $telintaObj->createAAccount($TelintaMobile, $this->customer);
+            $telintaObj->createCBAccount($TelintaMobile, $this->customer);
+            $telintaObj->createDialAccount($this->customer->getMobileNumber(), $customer);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+            $this->setPreferredCulture($this->customer);
+            emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "affiliate");
+            $this->updatePreferredCulture();
+
+
+            echo "OK,customer registered successfully";
+            $callbacklog = new CallbackLog();
+            $callbacklog->setMobileNumber($TelintaMobile);
+            $callbacklog->setuniqueId($customer->getUniqueid());
+            $callbacklog->setCallingcode(sfConfig::get("app_country_code"));
+            $callbacklog->setCheckStatus(3);
+            $callbacklog->save();
+            
+            $applog->setStatusId(3);
+            $applog->setCustomerId($customer->getId());
+            $applog->setResponse('customer registered successfully');
+            $applog->save();
+            
+            $zerocall_sms = new ZeroCallOutSMS();
+            $zerocall_sms->toCustomerAppRegViaWeb($customer);
+            
+            $telintaGetBalance = $telintaObj->getBalance($customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
+            
+            $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
+            $this->redirect('affiliate/receipts');
+        }
+
         return sfView::NONE;
     }
 

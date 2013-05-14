@@ -152,7 +152,7 @@ use_helper('I18N');
                     <?php
                     foreach ($langs as $lang) {
                         ?>
-                        <option value="<?php echo $lang->getId(); ?>" > <?php echo $lang->getLanguage(); ?></option>
+                        <option value="<?php echo $lang->getId(); ?>" > <?php echo __($lang->getLanguage()); ?></option>
                         <?php
                     }
                     ?>

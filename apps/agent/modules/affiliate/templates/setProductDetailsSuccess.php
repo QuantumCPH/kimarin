@@ -116,7 +116,7 @@
                 <ul>
                     <!-- payment details -->
                     <li>
-                        <label><?php echo $order->getProduct()->getName() ?> <?php echo __('details') ?>:</label>
+                        <label style="text-align:left;"><?php echo $order->getProduct()->getName() ?> <?php echo __('details') ?>:</label>
                     </li>
                     <?php if($order->getProduct()->getProductTypeId()!=10 && $order->getProduct()->getProductTypeId()!=11 ){ ?>
                     <li>
@@ -125,7 +125,7 @@
                     </li>
                     <?php } ?>
                     <li>
-                        <label style="text-align:left">
+                        <label style="text-align:left; margin-bottom: 0!important">
                             <?php echo __('Registration Fee') ?>
 <!--                            <br/>
                             <br/>-->
@@ -133,7 +133,7 @@
                         </label>
 
 
-                        <label style="width:180px; padding-right: 0px"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?> <?php echo sfConfig::get('app_currency_code')?>
+                        <label style="width:180px; padding-right: 0px; margin-bottom: 0!important"><?php echo number_format($order->getProduct()->getRegistrationFee(),2); ?> <?php echo sfConfig::get('app_currency_code')?>
 <!--                            <br/>
                             <br/>-->
                             <?php //echo number_format(format_number($order->getProduct()->getPrice()),2); ?> <?php //echo sfConfig::get('app_currency_code')?>

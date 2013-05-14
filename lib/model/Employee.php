@@ -21,4 +21,16 @@ class Employee extends BaseEmployee
               if(SimTypesPeer::doCount($cst)>0) $simTypeTitle = $simTypes->getTitle();
             return $simTypeTitle;
         }
+       public function save(PropelPDO $con = null)
+	{
+		
+	    if (($this->isModified() && $this->isColumnModified(EmployeePeer::PASSWORD)) ||
+	    	($this->isNew() && $this->getPassword())
+	    	)
+	    {
+	    	$this->setPassword(sha1($this->getPassword()));
+	    }
+	    
+	    parent::save($con);
+	} 
 }

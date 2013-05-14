@@ -237,6 +237,41 @@
                 </div>
             </li>
 
+          
+                <li>
+                <a href="#"
+                onmouseover="mopen('m23')"
+                onmouseout="mclosetime()" <?php echo $modulName=="agent_user" ?'class="current"':''?>><?php echo __('SMS') ?></a>
+                <div id="m23" onmouseover="mcancelclosetime()" onmouseout="mclosetime()">    
+                       
+      
+                 <?php 
+                    if($actionName=='sendSms' && $modulName=="sms"){
+                       echo link_to(__('Send Single SMS'), 'sms/sendSms', array('class'=>'subSelect'));
+                    }else{
+                       echo link_to(__('Send Single SMS'), 'sms/sendSms'); 
+                    }          
+                 ?>
+                   
+                 <?php 
+                    if($actionName=='sendBulkMessagesCustomer' && $modulName=="sms"){
+                       echo link_to(__('Send Bulk Messages to Customer'), 'sms/sendBulkMessagesCustomer', array('class'=>'subSelect'));
+                    }else{
+                       echo link_to(__('Send Bulk Messages to Customer'), 'sms/sendBulkMessagesCustomer'); 
+                    }          
+                 ?>  
+                 <?php 
+                    if($actionName=='sendBulkMessages' && $modulName=="sms"){
+                       echo link_to(__('Send Bulk Messages to Agents'), 'sms/sendBulkMessages', array('class'=>'subSelect'));
+                    }else{
+                       echo link_to(__('Send Bulk Messages to Agents'), 'sms/sendBulkMessages'); 
+                    }          
+                 ?>    
+          
+          </div>
+            </li>
+
+          
 
 
             <li>

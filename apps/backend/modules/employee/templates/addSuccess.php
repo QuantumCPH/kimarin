@@ -1,9 +1,42 @@
+<script language="javascript" type="text/javascript">
+   // is_applied   product_price
+  
+  jQuery(document).ready(function () {
+   jQuery("#products").change(function(){
+        if(jQuery('option:selected', this).attr('postage')==1){
+            jQuery("#simtypes").show();
+            jQuery("#uniqueids").show();
+        }else{
+            jQuery("#simtypes").hide(); 
+            jQuery("#uniqueids").hide();
+        }
+   });
+   jQuery("#sf_admin_form").validate({
+            focusCleanup: true,
+           
+            rules: {
+                sim_type_id:{
+                    required:  function(){
+                        return (jQuery('option:selected', "#products").attr('postage')==1)
+                    }
+                },
+                uniqueid:{
+                    required:  function(){
+                        return (jQuery('option:selected', "#products").attr('postage')==1)
+                    }
+                }                
+            } 
+        });
+   jQuery("#products").trigger("change");
+});
 
+
+</script>
 <div id="sf_admin_container">
 <?php if(isset($_REQUEST['message']) && $_REQUEST['message']!=""){     
     if($_REQUEST['message']=="error"){ ?> 
         <div class="save-ok">
-        <h2>Employee is not added and  registered please check email </h2>
+        <h2>Employee is not added please check email </h2>
         </div>
         
   <?php }else{  ?>
@@ -15,7 +48,7 @@
 <?php if ($sf_user->hasFlash('messageError')): ?>
   <div>
    <span style="color:#FF0000"><?php echo __($sf_user->getFlash('messageError')) ?></span>
-  <div>
+  </div>
 <?php endif; ?><br />
 <h1>New My employee</h1>
 <form id="sf_admin_form" name="sf_admin_edit_form" method="post" enctype="multipart/form-data" action="saveEmployee">
@@ -39,11 +72,20 @@
 <?php   }  ?>
 </select>  </td>
                 </tr>
+                <tr>
+        <td style="padding: 5px;">Product:</td>
+        <td style="padding: 5px;"> <select name="productid" id="products" class="required">
+              <?php foreach($products as $product){  ?>
+                    <option value="<?php echo $product->getId();   ?>" postage="<?php echo $product->getPostageApplicable(); ?>"><?php echo $product->getName()   ?></option>
+        <?php   }  ?>
+            </select>
+        </td>
+                </tr>
 <!--                  <tr>
         <td style="padding: 5px;">Country Code:</td>
         <td style="padding: 5px;"> <input type="text" name="country_code" id="employee_country_code"   size="25"   class="required digits" /> </td>
                 </tr>-->
-      <tr>
+      <tr id="simtypes">
         <td style="padding: 5px;">SIM Type:</td>
         <td style="padding: 5px;"> 
            <select name="sim_type_id" id="employee_sim_type_id"    class="required"  style="width:190px;">
@@ -54,7 +96,7 @@
            </select>
         </td>
       </tr>
-        <tr>
+        <tr id="uniqueids">
             <td style="padding: 5px;">UniqueId:</td>
             <td style="padding: 5px;">
                 <select name="uniqueid" id="uniqueid-select"    class="required"  >
@@ -64,6 +106,10 @@
       <tr>
         <td style="padding: 5px;">Mobile number:</td>
         <td style="padding: 5px;"> <input type="text" name="mobile_number" id="employee_mobile_number"  size="25"   class="required digits"  minlength="8" /><span id="msgbox" style="display:none"></span> </td>
+      </tr>
+      <tr>
+        <td style="padding: 5px;">Password:</td>
+        <td style="padding: 5px;"> <input type="text" name="password" id="employee_password"  size="25"   class="required" /><span id="msgbox" style="display:none"></span> </td>
       </tr>
                  <tr>
         <td style="padding: 5px;">Email:</td>
@@ -96,15 +142,7 @@
         <td style="padding: 5px;">Product Price:</td>
         <td style="padding: 5px;"> <input type="text" name="price" id="employee_password"   size="25" />  </td>
                 </tr>-->
-                  <tr>
-        <td style="padding: 5px;">Product:</td>
-        <td style="padding: 5px;"> <select name="productid" id="productid"    class="required"  >
-<!--      <option value="" selected="selected"></option>-->
-      <?php foreach($products as $product){  ?>
-<option value="<?php echo $product->getId();   ?>"><?php echo $product->getName()   ?></option>
-<?php   }  ?>
-</select></td>
-                </tr>
+                  
 
      <tr>
                     <td>Comments:</td>
