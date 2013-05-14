@@ -491,17 +491,22 @@ class customerActions extends autocustomerActions {
                     $transaction->setTransactionDescriptionId($transactiondescription->getId());
                     $transaction->setDescription($transactiondescription->getTitle());
                     $transaction->setTransactionFrom('2');
+                    $transaction->setInitialBalance($order->getProduct()->getInitialBalance()+$order->getProduct()->getBonus());
+                    $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
                     $transaction->setVat($request->getParameter('refill_amount')*sfConfig::get('app_vat_percentage'));
                     $transaction->save();
+                    $this->customer = $order->getCustomer();
                     $telintaObj = new Telienta();
                     $telintaObj->recharge($customer, $transaction->getAmount()/(sfConfig::get('app_vat_percentage')+1),$transactiondescription->getTitle());
+                    $telintaGetBalance = $telintaObj->getBalance($this->customer);
+                    $transaction->setCustomerCurrentBalance($telintaGetBalance);             
                     //set status
                     $order->setOrderStatusId(3);
                     $transaction->setTransactionStatusId(3);
                     $order->save();
                     $transaction->save();
                     TransactionPeer::AssignReceiptNumber($transaction);
-                    $this->customer = $order->getCustomer();
+                    
                     $this->setPreferredCulture($this->customer);
                     emailLib::sendAdminRefillEmail($this->customer, $order);
                     $this->updatePreferredCulture();
