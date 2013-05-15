@@ -169,7 +169,7 @@ class customerActions extends sfActions {
             //setcookie("user", "XXXXXXX", time()+3600);
             $this->getResponse()->setCookie('invite_id', $request->getParameter('invite_id'), time() + 36000);
             //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
-            $this->redirect("http://www.kimarin.es/register.html");
+            $this->redirect("http://www.kimarin.es/register.php");
         }
 
         if ($request->getParameter('ref')) {
@@ -177,7 +177,7 @@ class customerActions extends sfActions {
 
             $this->getResponse()->setCookie('agent_id', $request->getParameter('ref'), time() + 36000);
             //$this->getResponse()->setCookie('reffer_id', $request->getParameter('ref'),360000);
-            $this->redirect("http://www.kimarin.es/register.html");
+            $this->redirect("http://www.kimarin.es/register.php");
         }
 
 
