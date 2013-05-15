@@ -71,9 +71,6 @@ else
 }
 ?></td></tr>
 
-
- 
-
 <tr><td colspan="2" style="border:0 !important;">
   
 <table cellspacing="0" cellpadding="3" class="tblAlign" width="100%">
