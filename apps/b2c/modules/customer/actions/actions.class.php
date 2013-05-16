@@ -218,7 +218,7 @@ class customerActions extends sfActions {
                 $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
                 if ($invite) {
                     $invite->setInviteStatus('2');
-                    $invite->setInviteNumber(sfConfig::get('app_country_code') . $request->getParameter('mobile_number'));
+                    $invite->setInviteNumber($request->getParameter('mobile_number'));
                     $invite->save();
                 }
             }
