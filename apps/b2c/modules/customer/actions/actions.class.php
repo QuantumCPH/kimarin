@@ -218,7 +218,7 @@ class customerActions extends sfActions {
                 $invite = InvitePeer::retrieveByPK($this->getRequest()->getCookie('invite_id'));
                 if ($invite) {
                     $invite->setInviteStatus('2');
-                    $invite->setInviteNumber(sfConfig::get('app_country_code') . $request->getParameter('mobile_number'));
+                    $invite->setInviteNumber($request->getParameter('mobile_number'));
                     $invite->save();
                 }
             }
@@ -1402,7 +1402,7 @@ class customerActions extends sfActions {
                 $amt = number_format($amt, 2);
 
 
-                if (CARBORDFISH_SMS::Send($destination, $sms_text, $this->customer->getMobileNumber())) {
+                if (ROUTED_SMS::Send($destination, $sms_text, $this->customer->getMobileNumber())) {
                     $cbf->setStatus(3);
                     $cbf->save();
                     $description = "SMS charges";
