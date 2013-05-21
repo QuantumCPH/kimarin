@@ -4071,7 +4071,7 @@ class pScriptsActions extends sfActions {
             $applog->setResponse($reponseVar);
             $applog->save();
             
-        } if ($employee) {
+        } elseif ($employee) {
             $uid = $employee->getUniqueid();
             echo $reponseVar = "OK;Port=6000;VoipIP=208.89.105.21;uid=1393238;Username=$mobile_number;";
             //    echo "OK;Port=6000;VoipIP=208.89.105.21;uid=$uid;isoCode=$isocode;Username=$mbnumber;Password=".$tilintapassword.";name=".$customer->getFirstName().";mobile_number=".$customer->getMobileNumber().";email=".$customer->getEmail();
