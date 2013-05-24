@@ -71,7 +71,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Please remember that you pay local mobile call charges in Spain in addition to the Kimarin tariffs.</p>
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Best regards,</p>
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>            
-            <?php echo sfConfig::get('app_postal_address_app');?>
+            <?php echo sfConfig::get('app_postal_address_app');?><br /><br />
             Tel.: <?php echo sfConfig::get('app_phone_no');?><br />
             E-mail: <?php echo sfConfig::get('app_support_email_id');?>
         </p>
@@ -98,7 +98,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
              Saludos cordiales,
         </p>
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>            
-            <?php echo sfConfig::get('app_postal_address_app');?>
+            <?php echo sfConfig::get('app_postal_address_app');?><br /><br />
             Tel.: <?php echo sfConfig::get('app_phone_no');?><br />
             E-mail: <?php echo sfConfig::get('app_support_email_id');?>
         </p>
