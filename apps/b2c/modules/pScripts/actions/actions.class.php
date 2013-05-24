@@ -2973,7 +2973,11 @@ class pScriptsActions extends sfActions {
                     commissionLib::registrationCommissionCustomer($agentid, $productid, $transactionid);
                 }
                 $this->setPreferredCulture($customer);
-                emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
+                if($order->getProduct()->getProductTypeId() == 11){
+                  emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
+                }else{
+                  emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);  
+                }
                 $this->updatePreferredCulture();
 //                $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
