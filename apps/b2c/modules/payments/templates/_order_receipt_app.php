@@ -51,7 +51,11 @@ $wrap_content  = isset($wrap)?$wrap:false;
    <table width="600px" cellspacing="0" cellpadding="0">
     <tr><td>       
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>
+            <?php if($customer->getBusiness()){  ?>
+                  <?php echo $customer->getLastName(); ?><br /><?php echo $customer->getEmail(); ?>
+            <?php }else{?>
                <?php echo $customer->getFirstName(); ?><br /><?php echo $customer->getEmail(); ?>
+            <?php } ?>   
         </p>
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>APP</p>        
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Dear Customer,</p>
@@ -137,7 +141,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
     <td colspan="4" class="payer_summary">
       <?php echo __('Customer number') ?>:   <?php echo $customer->getUniqueId(); ?><br/>
       <?php    if($customer->getBusiness()){  ?>
-      <?php echo $customer->getFirstName(); ?><br/>
+      <?php echo $customer->getLastName(); ?><br/>
         <?php echo $customer->getNiePassportNumber(); ?><br/>
 <?php      }else{  ?>
           <?php echo sprintf("%s %s", $customer->getFirstName(), $customer->getLastName())?><br/>

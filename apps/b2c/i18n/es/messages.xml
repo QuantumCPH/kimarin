@@ -2418,6 +2418,10 @@
                 <source>The passwords don’t match.</source>
                 <target>Las contraseñas no coinciden.</target>
             </trans-unit>
+            <trans-unit id="604" translate="yes" reformat="yes" xml:space="default">
+                <source>Name</source>
+                <target>Nombre</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

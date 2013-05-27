@@ -140,6 +140,9 @@ use_helper('I18N');
             
                 </div>
             <br clear="all" />
+                <div class="left"><?php echo __('Name of<br />contact person') ?><em>*</em>&nbsp;:</div>
+                <div class="right"><input name="last_name" type="text" class="input1"/></div>
+            <br clear="all" />
              <div class="left"><?php echo __('CIF number') ?><em>*</em>&nbsp;:</div>
             <div class="right">
                 <input name="nie" class="input1 required"/><br/>
@@ -217,10 +220,7 @@ use_helper('I18N');
                 </div>   
                 <br clear="all" />
                 <div class="left"><?php echo __('Company name') ?><em>*</em>&nbsp;:</div>
-                <div class="right"><input name="first_name" type="text" class="input1"/></div>
-                <br clear="all" />
-                <div class="left"><?php echo __('Name of<br />contact person') ?><em>*</em>&nbsp;:</div>
-                <div class="right"><input name="last_name" type="text" class="input1"/></div>
+                <div class="right"><input name="first_name" type="text" class="input1"/></div>                
                 <br clear="all" />
                 <div class="left"><?php echo __('Company address') ?><em>*</em>&nbsp;:</div>
                 <div class="right"><input name="address" type="text" class="input1"/></div>

@@ -2976,7 +2976,7 @@ class pScriptsActions extends sfActions {
                 if($order->getProduct()->getProductTypeId() == 11){
                   emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
                 }else{
-                  emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
+                   emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
                 }
                 $this->updatePreferredCulture();
 //                $zeroCallOutSMSObject = new ZeroCallOutSMS();

@@ -2446,6 +2446,10 @@
                 <source>The passwords don’t match.</source>
                 <target>Das Passwort stimmt nicht überein.</target>
             </trans-unit>
+            <trans-unit id="604" translate="yes" reformat="yes" xml:space="default">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

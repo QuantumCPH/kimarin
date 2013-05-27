@@ -48,9 +48,7 @@ use_helper('I18N');
                     }
                 },
                 first_name:{
-                    required:  function(){
-                        return ($('option:selected', "#product-select").attr('postage')==1)
-                    }
+                    required:  true
                 },
                 last_name:{
                     required:  function(){
@@ -140,6 +138,9 @@ use_helper('I18N');
             
                 </div>
             <br clear="all" />
+                <div class="left"><?php echo __('First name') ?><em>*</em>&nbsp;:</div>
+                <div class="right"><input name="first_name" type="text" class="input1"/></div>
+            <br clear="all" />
              <div class="left"><?php echo __('N.I.E. or passport<br />number') ?><em>*</em>&nbsp;:</div>
             <div class="right">
                 <input name="nie" class="input1 required"/><br/>
@@ -214,10 +215,7 @@ use_helper('I18N');
                         }
                         ?>
                     </select>
-                </div>   
-                <br clear="all" />
-                <div class="left"><?php echo __('First name') ?><em>*</em>&nbsp;:</div>
-                <div class="right"><input name="first_name" type="text" class="input1"/></div>
+                </div>                   
                 <br clear="all" />
                 <div class="left"><?php echo __('Last name') ?><em>*</em>&nbsp;:</div>
                 <div class="right"><input name="last_name" type="text" class="input1"/></div>
