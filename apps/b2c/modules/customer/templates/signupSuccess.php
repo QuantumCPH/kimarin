@@ -138,7 +138,7 @@ use_helper('I18N');
             
                 </div>
             <br clear="all" />
-                <div class="left"><?php echo __('Name') ?><em>*</em>&nbsp;:</div>
+                <div class="left"><?php echo __('First name') ?><em>*</em>&nbsp;:</div>
                 <div class="right"><input name="first_name" type="text" class="input1"/></div>
             <br clear="all" />
              <div class="left"><?php echo __('N.I.E. or passport<br />number') ?><em>*</em>&nbsp;:</div>
