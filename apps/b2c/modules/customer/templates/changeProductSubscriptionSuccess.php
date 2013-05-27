@@ -36,6 +36,7 @@ jQuery(function(){
                 <label><?php echo __('Product Name') ?></label>
                 <?php  $c = new Criteria();
                 $c->add(ProductPeer::PRODUCT_TYPE_ID, 1);
+                $c->addOr(ProductPeer::PRODUCT_TYPE_ID, 10);
                  $c->addAnd(ProductPeer::INCLUDE_IN_ZEROCALL, 1);
                   $c->addAnd(ProductPeer::ID, $customerProduct->getProductId(),Criteria::NOT_EQUAL);
                 $products = ProductPeer::doSelect($c);  ?>

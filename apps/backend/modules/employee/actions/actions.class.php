@@ -167,7 +167,7 @@ class employeeActions extends sfActions {
         $employee->setComments($request->getParameter('comments'));        
         $employee->setStatusId(sfConfig::get('app_status_new'));
         $employee->save();
-
+        
 //        if(!$ComtelintaObj->telintaRegisterEmployeeCB($employeMobileNumber, $this->companys)){
 //            $employee->setStatusId(sfConfig::get('app_status_error')); //// error status is 5 defined in backend/config/app.yml
 //            $employee->save();

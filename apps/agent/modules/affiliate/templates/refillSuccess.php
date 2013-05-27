@@ -1,7 +1,7 @@
  <div id="sf_admin_container"><h1><?php echo __('Refill') ?></h1></div>
         
   <div class="borderDiv"> 
-<form method="post"  class="split-form-sign-up" id="refill_form" action="<?php url_for('affiliate/refill') ?>">
+<form method="post"  class="split-form-sign-up" id="refill_form" action="<?php url_for('affiliate/refill') ?>" style="float:none !important;">
       
              <div class="refillhead"><?php echo __('Manual refill.') ?></div>
           <p> <?php echo __('You can refill your %1% Account with the following amounts:',array("%1%"=>sfConfig::get('app_site_title')))?></p>
@@ -21,6 +21,7 @@
          </ul> 
          <p><?php echo __("All amounts are excl. IVA.");?></p>
          <p><?php echo __("The value of airtime on your account balance cannot  exceed 250.00%1% at any moment in time. ",array("%1%"=>sfConfig::get('app_currency_code')));echo __("The refill amount is valid for 180 days.");?></p>
+         <br clear="all" />
          <?php if($error_msg){?>
          <div id="error-message" class="grid_9 save-decl"><?php echo $error_msg ?></div><br/><br/>
         <?php } ?> 
@@ -50,6 +51,7 @@
 			 </span>
 			 <?php endif; ?>
              <div class='inline-error'><?php echo $error_extra_refill?></div>
+            </li>
              <?php
           if( $browser->getBrowser() == Browser::BROWSER_IE  )
           {
@@ -63,8 +65,9 @@
 	            <button onclick="$('#refill_form').submit();" style="cursor: pointer;margin-left: 15px !important;"><?php echo __('Refill') ?></button>
 	          </li>
 	<?php }?>
-			  
+		<br clear="all" />	  
 	</ul>
+         <div class="clr"></div>
 </form>
       <div class="clr"></div>
   </div>

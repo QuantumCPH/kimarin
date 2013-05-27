@@ -978,11 +978,14 @@ class affiliateActions extends sfActions {
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setOrderId($order->getId());
         $transaction->setCustomerId($customer_id);
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
         $transaction->setVat($vat);
         //$transaction->setTransactionStatusId() // default value 1
 
         $transaction->save();
+        
         $this->order = $order;
         $this->forward404Unless($this->order);
 
@@ -1204,7 +1207,10 @@ class affiliateActions extends sfActions {
             $this->updatePreferredCulture();
 //            $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //            $zeroCallOutSMSObject->toCustomerAfterReg($customer_product->getProductId(), $this->customer);
-
+            
+            $telintaGetBalance = $telintaObj->getBalance($this->customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
 
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $this->customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
             $this->redirect('affiliate/receipts');
@@ -1525,13 +1531,6 @@ class affiliateActions extends sfActions {
                 $this->getUser()->setFlash('decline', 'Customer has already availed his/her limit for this service.');
                 $this->redirect('affiliate/changenumberservice');
             }
-
-
-
-
-
-
-
             if ($customer) {
                 $this->customer = $customer;
                 $this->product = $product;
@@ -1619,6 +1618,8 @@ class affiliateActions extends sfActions {
                 $transaction->setTransactionDescriptionId($transactiondescription->getId());
                 $transaction->setDescription($transactiondescription->getTitle());
                 //    $transaction->setDescription('Fee for change number (' . $agent->getName() . ')');
+                $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+                $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
                 $transaction->setAgentCompanyId($agent->getId());
                 $transaction->setVat($vat);
                 //assign commission to transaction;
@@ -1780,6 +1781,11 @@ class affiliateActions extends sfActions {
                 $this->updatePreferredCulture();
                 $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% Mobile Number is changed successfully  with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $transaction->getAmount(), "%3%" => sfConfig::get('app_currency_code'))));
 
+                $telintaObj = new Telienta();
+                $telintaGetBalance = $telintaObj->getBalance($this->customer);
+                $transaction->setCustomerCurrentBalance($telintaGetBalance);
+                $transaction->save();
+            
                 $this->redirect('affiliate/receipts');
             } else {
 
@@ -2324,6 +2330,8 @@ class affiliateActions extends sfActions {
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($product->getDescription());
         $transaction->setVat($request->getParameter('vat'));
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $transaction->setAgentCompanyId($agent->getId());
 
         $order->setAgentCommissionPackageId($agent->getAgentCommissionPackageId());
@@ -2398,6 +2406,10 @@ class affiliateActions extends sfActions {
             $this->setPreferredCulture($this->customer);
             emailLib::sendRefillEmail($this->customer, $order);
             $this->updatePreferredCulture();
+            
+            $telintaGetBalance = $telintaObj->getBalance($this->customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
             //   $this->getUser()->setCulture('en');
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('%1% account is successfully refilled with %2% %3%.', array("%1%" => $customer->getMobileNumber(), "%2%" => $order->getExtraRefill(), "%3%" => sfConfig::get('app_currency_code'))));
 //                                      echo 'rehcarged, redirecting';
@@ -2521,6 +2533,8 @@ class affiliateActions extends sfActions {
         $transaction->setDescription($this->transaction_title);
         $transaction->setVat($this->vat);
         $transaction->setTransactionStatusId(1);
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
         /////////////////////////////////////////////
@@ -2637,7 +2651,7 @@ class affiliateActions extends sfActions {
 
 
             $order->setOrderStatusId(sfConfig::get('app_status_completed'));
-            $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));
+            $transaction->setTransactionStatusId(sfConfig::get('app_status_completed'));            
             $order->setExeStatus(1);
             $order->save();
             $transaction->save();
@@ -2649,6 +2663,10 @@ class affiliateActions extends sfActions {
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerNewcardEmailAgent($this->customer, $order, $transaction, $agent_company_id);
             $this->updatePreferredCulture();
+            $telintaObj = new Telienta();
+            $telintaGetBalance = $telintaObj->getBalance($this->customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
             //   $this->getUser()->setCulture('en');
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('New sim is purchased successfully '));
 //                                      echo 'rehcarged, redirecting';
@@ -2690,6 +2708,7 @@ class affiliateActions extends sfActions {
         $this->product_id = '';
         $cst = new Criteria();
         $cst->add(ProductPeer::PRODUCT_TYPE_ID, 1);
+        $cst->addOr(ProductPeer::PRODUCT_TYPE_ID, 10);
         $cst->addAnd(ProductPeer::IS_IN_STORE, 1);
         $this->simtypes = ProductPeer::doSelect($cst);
     }
@@ -2798,6 +2817,8 @@ class affiliateActions extends sfActions {
         $transaction->setTransactionDescriptionId($transactiondescription->getId());
         $transaction->setDescription($transactiondescription->getTitle());
         $transaction->setTransactionStatusId(1);
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $transaction->setVat($this->vat);
         $transaction->save();
         TransactionPeer::AssignReceiptNumber($transaction);
@@ -2927,7 +2948,12 @@ class affiliateActions extends sfActions {
             $this->setPreferredCulture($this->customer);
             emailLib::sendCustomerChangeProductAgent($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
-
+            
+            
+            $telintaGetBalance = $telintaObj->getBalance($this->customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
+            
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Congratulations! Customer has subscribed for new product.'));
 //                                      echo 'rehcarged, redirecting';
             $this->redirect('affiliate/receipts');
@@ -3091,6 +3117,8 @@ class affiliateActions extends sfActions {
         $transaction->setTransactionFrom(2);
         $transaction->setAgentCompanyId($agent->getId());
         $transaction->setTransactionStatusId(1); // default value 1
+        $transaction->setInitialBalance($order->getProduct()->getInitialBalance());
+        $transaction->setAmountWithoutVat($order->getProduct()->getPrice() + $order->getProduct()->getRegistrationFee());
         $transaction->setVat((($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
         $transaction->save();
 
@@ -3222,6 +3250,11 @@ class affiliateActions extends sfActions {
             
             $zerocall_sms = new ZeroCallOutSMS();
             $zerocall_sms->toCustomerAppRegViaWeb($customer);
+            
+            $telintaGetBalance = $telintaObj->getBalance($customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
+            
             $this->getUser()->setFlash('message', $this->getContext()->getI18N()->__('Customer ') . $customer->getMobileNumber() . $this->getContext()->getI18N()->__(' is registered successfully'));
             $this->redirect('affiliate/receipts');
         }

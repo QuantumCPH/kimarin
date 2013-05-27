@@ -54,7 +54,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
                <?php echo $customer->getFirstName(); ?><br /><?php echo $customer->getEmail(); ?>
         </p>
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>APP</p>        
-	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'><?php echo __('Dear Customer') ?></p>
+	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Dear Customer,</p>
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;text-align: right'>Marbella, <?php echo date("d-m-Y",strtotime($transaction->getCreatedAt()));?> </p>
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Welcome to Kimarin APP connected to telephone number: <?php echo $transaction->getCustomer()->getMobileNumber();?></p>
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Thank you for your order of Kimarin APP, where you can call friends, family and business partners abroad at very low prices.</p>
@@ -77,7 +77,7 @@ $wrap_content  = isset($wrap)?$wrap:false;
         </p>
         <br />
         <hr /><br />
-        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Estimado cliente de Kimarin</p>
+        <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Estimado client,</p>
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;text-align: right'>Marbella, <?php echo date("d-m-Y",strtotime($transaction->getCreatedAt()));?> </p>
         <p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Bienvenido a Kimarin APP conectada  al número de teléfono: <?php echo $transaction->getCustomer()->getMobileNumber();?></p>
 	<p style='font-family:"Times New Roman", Times, serif;font-size: 14px;'>Gracias por su solicitud de Kimarin APP, con la cual puede llamar a sus amigos, familia o  compañeros de trabajo por precios muy reducidos.</p>
