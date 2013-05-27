@@ -2708,6 +2708,7 @@ class affiliateActions extends sfActions {
         $cst = new Criteria();
         $cst->add(ProductPeer::PRODUCT_TYPE_ID, 1);
         $cst->addOr(ProductPeer::PRODUCT_TYPE_ID, 10);
+        $cst->addOr(ProductPeer::PRODUCT_TYPE_ID, 11);
         $cst->addAnd(ProductPeer::IS_IN_STORE, 1);
         $this->simtypes = ProductPeer::doSelect($cst);
     }
