@@ -140,7 +140,7 @@ use_helper('I18N');
             
                 </div>
             <br clear="all" />
-                <div class="left"><?php echo __('Name of<br />contact person') ?><em>*</em>&nbsp;:</div>
+                <div class="left" style="padding-top: 0!important;"><?php echo __('Name of<br />contact person') ?><em>*</em>&nbsp;:</div>
                 <div class="right"><input name="last_name" type="text" class="input1"/></div>
             <br clear="all" />
              <div class="left"><?php echo __('CIF number') ?><em>*</em>&nbsp;:</div>
