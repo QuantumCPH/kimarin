@@ -2412,6 +2412,10 @@
                 <source>Please notice that in addition to the Kimarin call fees you pay the local call tariffs  to call %1%.</source>
                 <target>Al cost de la trucada Kimarin, se li suma la tarifa local per trucar al %1%.</target>
             </trans-unit>
+            <trans-unit id="603" translate="yes" reformat="yes" xml:space="default">
+                <source>Name</source>
+                <target>Nom</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -226,6 +226,7 @@ class customerActions extends sfActions {
             $customer = new Customer();
             $customer->setMobileNumber($request->getParameter('mobile_number'));
             $customer->setCountryId(1);
+            $customer->setFirstName($request->getParameter('first_name'));
             $customer->setNiePassportNumber($request->getParameter('nie'));
             $customer->setPlainText($request->getParameter('password'));
             $customer->setPassword($request->getParameter('password'));
@@ -2560,6 +2561,7 @@ class customerActions extends sfActions {
             $customer->setMobileNumber($request->getParameter('mobile_number'));
             $customer->setCountryId(1);
             $customer->setNiePassportNumber($request->getParameter('nie'));
+            $customer->setLastName($request->getParameter('last_name'));
             $customer->setPlainText($request->getParameter('password'));
             $customer->setPassword($request->getParameter('password'));
             $customer->setEmail($request->getParameter('email'));
@@ -2580,9 +2582,8 @@ class customerActions extends sfActions {
             } elseif ($productObj->getProductTypeId() == 11) {
                 $customer->setUniqueid("app" . $customer->getId());
                 $customer->save();
-            } elseif ($productObj->getPostageApplicable() == 1) {
-                $customer->setFirstName($request->getParameter('first_name'));
-                $customer->setLastName($request->getParameter('last_name'));
+            } elseif ($productObj->getPostageApplicable() == 1) {  
+                $customer->setFirstName($request->getParameter('first_name'));                
                 $customer->setAddress($request->getParameter('address'));
                 $customer->setPoBoxNumber($request->getParameter('post_code'));
                 $customer->setCity($request->getParameter('city'));
