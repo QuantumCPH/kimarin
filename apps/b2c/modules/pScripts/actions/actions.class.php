@@ -3037,7 +3037,7 @@ class pScriptsActions extends sfActions {
             $fromdate = mktime(0, 0, 0, date("m"), date("d") - 1, date("Y"));
             $this->fromdate = date("Y-m-1", $fromdate);
             $todate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
-            $this->todate = date("Y-m-31", $todate);
+            $this->todate = date("Y-m-30", $todate);
             $telintaObj = new Telienta();
             $tilentaCallHistryResult = $telintaObj->callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
             //  var_dump($tilentaCallHistryResult);
