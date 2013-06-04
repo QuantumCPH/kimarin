@@ -812,7 +812,7 @@ class affiliateActions extends sfActions {
         if ($agentCount > 0) {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
             $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
-            $product_criteria->add(AgentProductPeer::AGENT_ID, $this->getRequest()->getCookie('agent_id'));
+            $product_criteria->add(AgentProductPeer::AGENT_ID, $referrer_id);
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
