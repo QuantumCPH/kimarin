@@ -2979,6 +2979,8 @@ class pScriptsActions extends sfActions {
                    emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
                 }
                 $this->updatePreferredCulture();
+                
+                
 //                $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
                
