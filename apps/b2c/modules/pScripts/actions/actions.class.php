@@ -3040,7 +3040,7 @@ class pScriptsActions extends sfActions {
             $this->todate = date("Y-m-d", $todate);
             $telintaObj = new Telienta();
             $tilentaCallHistryResult = $telintaObj->callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
-            //  var_dump($tilentaCallHistryResult);
+             var_dump($tilentaCallHistryResult);
 
 
             if ($tilentaCallHistryResult) {
@@ -3094,12 +3094,15 @@ class pScriptsActions extends sfActions {
                     $emCalls->save();
                 }
             } else {
-                $callsHistory = new CallHistoryCallsLog();
+                $callsHistory = new CallhistoryCallsLog();
                 $callsHistory->setParent('customer');
                 $callsHistory->setParentId($customer->getId());
                 $callsHistory->setTodate($this->todate);
                 $callsHistory->setFromdate($this->fromdate);
                 $callsHistory->save();
+                $subject = "Country stat report issue";
+                $message = "Customer Callhistory didn't fetch. Download manually.";
+                emailLib::sendError($subject, $message);
             }
         }
         return sfView::NONE;
