@@ -37,5 +37,5 @@ Gracias por su solicitud de Kimarin APP.</p><br />
     <?php
     }
     ?>
-    
+   <?php echo sfConfig::get("app_conversion_code")?> 
 </div><br clear="all" />
