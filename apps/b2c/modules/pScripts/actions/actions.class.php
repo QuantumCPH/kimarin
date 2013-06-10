@@ -4607,14 +4607,15 @@ class pScriptsActions extends sfActions {
 
         $transaction = new Transaction();
 
-        $transaction->setAmount($this->order->getExtraRefill() * (sfConfig::get('app_vat_percentage') + 1));
+        $transaction->setAmount(($product->getRegistrationFee()+$product->getPrice()) * (sfConfig::get('app_vat_percentage') + 1));
         $transactiondescription = TransactionDescriptionPeer::retrieveByPK(9);
-        $transaction->setTransactionTypeId($transactiondescription->getTransactionType());
-        $transaction->setTransactionDescriptionId($transactiondescription->getId());
-        $transaction->setDescription($transactiondescription->getTitle());
+        $transaction->setTransactionTypeId(1);
+        $transaction->setTransactionFrom(5);
+        $transaction->setTransactionDescriptionId(9);
+        $transaction->setDescription($product->getDescription());
         $transaction->setOrderId($this->order->getId());
         $transaction->setCustomerId($this->order->getCustomerId());
-        $transaction->setVat($this->order->getExtraRefill() * sfConfig::get('app_vat_percentage'));
+        $transaction->setVat(($product->getRegistrationFee()+$product->getPrice()) * sfConfig::get('app_vat_percentage'));
         
         $transaction->setInitialBalance($this->order->getExtraRefill());
         $transaction->setAmountWithoutVat($product->getRegistrationFee()+$product->getPrice());
