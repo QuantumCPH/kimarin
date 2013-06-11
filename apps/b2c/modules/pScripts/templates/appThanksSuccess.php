@@ -5,7 +5,7 @@ use_helper('I18N');
     <?php 
     $os = strtolower($_SERVER['HTTP_USER_AGENT']);
     
-    if(strpos($os, "android")!== false || strpos($os, "iphone") !==false){ ?>
+    //if(strpos($os, "android")!== false || strpos($os, "iphone") !==false){ ?>
     <p style='font-size: 14px;'>
        Thank you for your order of Kimarin APP.</p><br />
     <p style='font-size: 14px;'>
@@ -20,7 +20,7 @@ Gracias por su solicitud de Kimarin APP.</p><br />
 
     </p>
     <?php
-    }else{
+   // }else{
     ?>
     <p style='font-size: 14px;'>Thank you for your order of Kimarin APP.</p><br />
     <p style='font-size: 14px;'>
@@ -35,7 +35,7 @@ Gracias por su solicitud de Kimarin APP.</p><br />
 
     </p>
     <?php
-    }
+  //  }
     ?>
     
 </div><br clear="all" />
