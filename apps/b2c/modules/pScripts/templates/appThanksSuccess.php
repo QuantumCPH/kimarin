@@ -1,7 +1,7 @@
 <?php
 use_helper('I18N');
 ?>
-<div style="width:650px;">
+<div style="width:400px;">
     <?php 
     $os = strtolower($_SERVER['HTTP_USER_AGENT']);
     
