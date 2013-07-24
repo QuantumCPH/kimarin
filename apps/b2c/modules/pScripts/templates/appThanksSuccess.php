@@ -1,7 +1,9 @@
 <?php
 use_helper('I18N');
 ?>
-<div style="width: 410px">
+
+<div style="width:400px;">
+
     <?php 
     $os = strtolower($_SERVER['HTTP_USER_AGENT']);
     
@@ -18,7 +20,7 @@ Gracias por su solicitud de Kimarin APP.</p><br />
 *	Si usted tiene un teléfono Android puedes descargar la aplicación aquí (link to Google Play)<br />
 *	Si usted tiene un iPhone puedes descargar la aplicación aquí (link to App Store)<br />
 
-    </p>
+    </p><br />
     <?php
     }else{
     ?>
@@ -37,5 +39,5 @@ Gracias por su solicitud de Kimarin APP.</p><br />
     <?php
     }
     ?>
-    
+   <?php echo sfConfig::get("app_conversion_code")?> 
 </div><br clear="all" />

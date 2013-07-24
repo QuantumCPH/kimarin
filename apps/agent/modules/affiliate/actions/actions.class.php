@@ -737,7 +737,7 @@ class affiliateActions extends sfActions {
         $c = new Criteria();
         $c->add(AgentCompanyPeer::ID, $this->getUser()->getAttribute('agent_company_id', '', 'agentsession'));
         $referrer_id = AgentCompanyPeer::doSelectOne($c);
-
+        
         $product_criteria = new Criteria();
         $dc = new Criteria();
         $dc->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
@@ -750,7 +750,8 @@ class affiliateActions extends sfActions {
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
-        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11, Criteria::NOT_EQUAL);   /////Not equal to app product
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID, 11, Criteria::NOT_EQUAL);   /////Not equal to app product
+
         $product_criteria->addAscendingOrderByColumn(ProductPeer::PRODUCT_ORDER);
         $this->products = ProductPeer::doSelect($product_criteria);
         $this->simTypes = SimTypesPeer::doSelect(new Criteria());
@@ -812,6 +813,7 @@ class affiliateActions extends sfActions {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
             $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
             $product_criteria->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
+
         } else {
             $product_criteria->add(ProductPeer::IS_IN_STORE, true);
         }
@@ -2979,14 +2981,15 @@ class affiliateActions extends sfActions {
         $agentCount = AgentProductPeer::doCount($dc);
         
         if ($agentCount > 0) {
-            $product_criteria->add(ProductPeer::IS_IN_STORE, true);            
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true); 
             $product_criteria->addJoin(ProductPeer::ID, AgentProductPeer::PRODUCT_ID, Criteria::LEFT_JOIN);
             $product_criteria->add(AgentProductPeer::AGENT_ID, $referrer_id->getId());
             $this->product_active = "Product is not assigned.";
         } else {
-            $product_criteria->add(ProductPeer::IS_IN_STORE, true);            
+            $product_criteria->add(ProductPeer::IS_IN_STORE, true);
             $this->product_active = "Product is not active for agent portal.";
-        }   
+        }
+
         $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11);
         $pcount = ProductPeer::doCount($product_criteria);
         if($pcount > 0){   

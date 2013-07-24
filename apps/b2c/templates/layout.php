@@ -79,5 +79,6 @@
 <?php }else{  ?>
   <script type="text/javascript" src="<?php echo sfConfig::get('app_web_url')?>js/jquery.validatede.js"></script>
  <?php  } ?>
+  <?php echo sfConfig::get("app_clicky_code")?>
 </body>
 </html>
