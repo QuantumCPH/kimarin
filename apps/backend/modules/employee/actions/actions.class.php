@@ -486,7 +486,10 @@ class employeeActions extends sfActions {
 
         $this->fromdate = $fromdate;
         $this->todate = $todate;
-
+        
+        $fromdate = $fromdate . " 00:00:00";
+        $todate = $todate . " 23:59:59";
+        
         $mobilenumber = $this->employee->getCountryMobileNumber();
         $ct = new Criteria();
         $ct->add(TelintaAccountsPeer::ACCOUNT_TITLE, 'a' . $mobilenumber);
