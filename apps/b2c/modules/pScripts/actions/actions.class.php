@@ -3279,7 +3279,7 @@ ORDER BY customer.uniqueid";
             $telintaObj = new Telienta();
             $customer = CustomerPeer::retrieveByPK($rowObj->id);
             $balance = $telintaObj->getBalance($customer);
-            if ($balance > 0) {
+            if (number_format($balance,2) > 0) {
                 echo "<hr/>";
                 echo $customer->getUniqueid() . "::" . $balance;
                 echo "<hr/>";
