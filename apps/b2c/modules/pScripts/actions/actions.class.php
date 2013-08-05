@@ -2652,9 +2652,9 @@ class pScriptsActions extends sfActions {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
+        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount, 2)) {
             //$extra_refill_amount = $order_amount;
-          //  $order->setExtraRefill($order_amount);
+            //  $order->setExtraRefill($order_amount);
             $transaction->setAmount($order_amount);
         }
         //set active agent_package in case customer was registerred by an affiliate
@@ -2761,11 +2761,11 @@ class pScriptsActions extends sfActions {
             emailLib::sendCustomerRefillEmail($this->customer, $order, $transaction);
             $this->updatePreferredCulture();
         }
-        
+
         $telintaGetBalance = $telintaObj->getBalance($this->customer);
         $transaction->setCustomerCurrentBalance($telintaGetBalance);
         $transaction->save();
-        
+
         $order->setExeStatus(1);
         $order->save();
         echo 'Yes';
@@ -2774,7 +2774,7 @@ class pScriptsActions extends sfActions {
 
     public function executeConfirmpayment(sfWebRequest $request) {
 
-        $Parameters = "PayPal Responded--".$request->getURI();
+        $Parameters = "PayPal Responded--" . $request->getURI();
 
         // $Parameters=$Parameters.$request->getParameter('amount');
         $email2 = new DibsCall();
@@ -2795,20 +2795,20 @@ class pScriptsActions extends sfActions {
         $order_amount = $params[2];
         $this->getUser()->setCulture($lang);
 
-        
+
         if ($order_id != '') {
-       
-                      
+
+
             $order = CustomerOrderPeer::retrieveByPK($order_id);
 
-           
-            if(is_null($order) || $order->getOrderStatusId() == sfConfig::get('app_status_completed')){
-                $subject = $order->getId()." already successfull";
-                $message = $order->getId()." already successfull";
+
+            if (is_null($order) || $order->getOrderStatusId() == sfConfig::get('app_status_completed')) {
+                $subject = $order->getId() . " already successfull";
+                $message = $order->getId() . " already successfull";
                 emailLib::sendError($subject, $message);
                 return sfView::NONE;
             }
-            
+
             $c = new Criteria;
             $c->add(TransactionPeer::ORDER_ID, $order_id);
             $transaction = TransactionPeer::doSelectOne($c);
@@ -2817,7 +2817,6 @@ class pScriptsActions extends sfActions {
             $order->setOrderStatusId(sfConfig::get('app_status_completed')); //completed
             $order->getCustomer()->setCustomerStatusId(sfConfig::get('app_status_completed')); //completed
             $transaction->setTransactionStatusId(3); //completed
-            
             //set active agent_package in case customer
             if ($order->getCustomer()->getAgentCompany()) {
                 $order->setAgentCommissionPackageId($order->getCustomer()->getAgentCompany()->getAgentCommissionPackageId());
@@ -2827,164 +2826,162 @@ class pScriptsActions extends sfActions {
             $order->save();
             $transaction->save();
             TransactionPeer::AssignReceiptNumber($transaction);
-            
-                
-                $customer_product = new CustomerProduct();
-                $customer_product->setCustomer($order->getCustomer());
-                $customer_product->setProduct($order->getProduct());
-                $customer_product->save();
-              
-                $customer = $order->getCustomer();
 
-                
-                $getFirstnumberofMobile = substr($customer->getMobileNumber(), 0, 1);     // bcdef
-                if ($getFirstnumberofMobile == 0) {
-                    $TelintaMobile = substr($customer->getMobileNumber(), 1);
-                    $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
+
+            $customer_product = new CustomerProduct();
+            $customer_product->setCustomer($order->getCustomer());
+            $customer_product->setProduct($order->getProduct());
+            $customer_product->save();
+
+            $customer = $order->getCustomer();
+
+
+            $getFirstnumberofMobile = substr($customer->getMobileNumber(), 0, 1);     // bcdef
+            if ($getFirstnumberofMobile == 0) {
+                $TelintaMobile = substr($customer->getMobileNumber(), 1);
+                $TelintaMobile = sfConfig::get('app_country_code') . $TelintaMobile;
+            } else {
+                $TelintaMobile = sfConfig::get('app_country_code') . $customer->getMobileNumber();
+            }
+
+            $uniqueId = $customer->getUniqueid();
+            if ($order->getProduct()->getProductTypeId() != 10 && $order->getProduct()->getProductTypeId() != 11) {
+                $uc = new Criteria();
+                $uc->add(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueId);
+                $selectedUniqueId = UniqueIdsPeer::doSelectOne($uc);
+                echo $selectedUniqueId->getStatus() . "<br/>";
+
+                if ($selectedUniqueId->getStatus() == 0) {
+                    echo "inside";
+                    $selectedUniqueId->setStatus(1);
+                    $selectedUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
+                    $selectedUniqueId->save();
                 } else {
-                    $TelintaMobile = sfConfig::get('app_country_code') . $customer->getMobileNumber();
-                }
-
-                $uniqueId = $customer->getUniqueid();
-                if ($order->getProduct()->getProductTypeId() != 10 && $order->getProduct()->getProductTypeId() != 11) {
                     $uc = new Criteria();
-                    $uc->add(UniqueIdsPeer::UNIQUE_NUMBER, $uniqueId);
-                    $selectedUniqueId = UniqueIdsPeer::doSelectOne($uc);
-                    echo $selectedUniqueId->getStatus() . "<br/>";
+                    $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
+                    $uc->addAnd(UniqueIdsPeer::STATUS, 0);
+                    $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID, $customer->getSimTypeId());
+                    $availableUniqueCount = UniqueIdsPeer::doCount($uc);
+                    $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
 
-                    if ($selectedUniqueId->getStatus() == 0) {
-                        echo "inside";
-                        $selectedUniqueId->setStatus(1);
-                        $selectedUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
-                        $selectedUniqueId->save();
-                    } else {
-                        $uc = new Criteria();
-                        $uc->add(UniqueIdsPeer::REGISTRATION_TYPE_ID, 1);
-                        $uc->addAnd(UniqueIdsPeer::STATUS, 0);
-                        $uc->addAnd(UniqueIdsPeer::SIM_TYPE_ID, $customer->getSimTypeId());
-                        $availableUniqueCount = UniqueIdsPeer::doCount($uc);
-                        $availableUniqueId = UniqueIdsPeer::doSelectOne($uc);
-
-                        if ($availableUniqueCount == 0) {
-                            // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
-                            $message = $customer->getId()." could not get unique id.";
-                            emailLib::sendUniqueIdsShortage($customer->getSimTypeId(),$message);
-                            exit;
-                        }
-                        $uniqueId = $availableUniqueId->getUniqueNumber();
-                        $customer->setUniqueid($uniqueId);
-                        $customer->save();
-                        $availableUniqueId->setStatus(1);
-                        $availableUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
-                        $availableUniqueId->save();
+                    if ($availableUniqueCount == 0) {
+                        // Unique Ids are not avaialable. Then Redirect to the sorry page and send email to the support.
+                        $message = $customer->getId() . " could not get unique id.";
+                        emailLib::sendUniqueIdsShortage($customer->getSimTypeId(), $message);
+                        exit;
                     }
+                    $uniqueId = $availableUniqueId->getUniqueNumber();
+                    $customer->setUniqueid($uniqueId);
+                    $customer->save();
+                    $availableUniqueId->setStatus(1);
+                    $availableUniqueId->setAssignedAt(date('Y-m-d H:i:s'));
+                    $availableUniqueId->save();
                 }
+            }
 
-                $callbacklog = new CallbackLog();
-                $callbacklog->setMobileNumber($TelintaMobile);
-                $callbacklog->setuniqueId($uniqueId);
-                $callbacklog->setCallingcode(sfConfig::get("app_country_code"));
-                $callbacklog->setCheckStatus(3);
-                $callbacklog->save();
-               
-                $OpeningBalance = $order->getExtraRefill();
-                //Section For Telinta Add Cusomter
+            $callbacklog = new CallbackLog();
+            $callbacklog->setMobileNumber($TelintaMobile);
+            $callbacklog->setuniqueId($uniqueId);
+            $callbacklog->setCallingcode(sfConfig::get("app_country_code"));
+            $callbacklog->setCheckStatus(3);
+            $callbacklog->save();
+
+            $OpeningBalance = $order->getExtraRefill();
+            //Section For Telinta Add Cusomter
+            $telintaObj = new Telienta();
+            $telintaObj->ResgiterCustomer($customer, $OpeningBalance);
+            // For Telinta Add Account
+
+            $telintaObj->createAAccount($TelintaMobile, $customer);
+            $telintaObj->createCBAccount($TelintaMobile, $customer);
+            $telintaObj->createDialAccount($customer->getMobileNumber(), $customer);
+
+            $telintaGetBalance = $telintaObj->getBalance($customer);
+            $transaction->setCustomerCurrentBalance($telintaGetBalance);
+            $transaction->save();
+            //if the customer is invited, Give the invited customer a bonus of 10
+            $invite_c = new Criteria();
+            $invite_c->add(InvitePeer::INVITE_NUMBER, $customer->getMobileNumber());
+            $invite_c->add(InvitePeer::INVITE_STATUS, 2);
+            $invite = InvitePeer::doSelectOne($invite_c);
+            if ($invite) {
+                $invite->setInviteStatus(3);
+                $invite->setInvitedCustomerId($customer->getId());
+                $products = new Criteria();
+                $products->add(ProductPeer::ID, 2);
+                $products = ProductPeer::doSelectOne($products);
+                $extrarefill = $products->getInitialBalance();
+
+                $inviteOrder = new CustomerOrder();
+                $inviteOrder->setProductId(2);
+                $inviteOrder->setQuantity(1);
+                $inviteOrder->setOrderStatusId(3);
+                $inviteOrder->setIsFirstOrder(4); //// transaction types
+
+                $inviteOrder->setCustomerId($invite->getCustomerId());
+                $inviteOrder->setExtraRefill($extrarefill);
+                $inviteOrder->save();
+                $OrderId = $inviteOrder->getId();
+                // make a new transaction to show in payment history
+                $transaction_i = new Transaction();
+
+                $transaction_i->setAmount($extrarefill);
+                $transactiondescriptionB = TransactionDescriptionPeer::retrieveByPK(10);
+                $transaction_i->setTransactionTypeId($transactiondescriptionB->getTransactionType());
+                $transaction_i->setTransactionDescriptionId($transactiondescriptionB->getId());
+                $transaction_i->setDescription($transactiondescriptionB->getTitle());
+
+                $transaction_i->setCustomerId($invite->getCustomerId());
+                $transaction_i->setOrderId($OrderId);
+                $transaction_i->setTransactionStatusId(3);
+
+                $invited_customer = CustomerPeer::retrieveByPK($invite->getCustomerId());
+
+                $uniqueId = $invited_customer->getUniqueid();
+
+                $OpeningBalance = $extrarefill;
+                //This is for Recharge the Customer
                 $telintaObj = new Telienta();
-                $telintaObj->ResgiterCustomer($customer, $OpeningBalance);
-                // For Telinta Add Account
-                
-                $telintaObj->createAAccount($TelintaMobile, $customer);
-                $telintaObj->createCBAccount($TelintaMobile, $customer);
-                $telintaObj->createDialAccount($customer->getMobileNumber(), $customer);
-                
-                $telintaGetBalance = $telintaObj->getBalance($customer);
-                $transaction->setCustomerCurrentBalance($telintaGetBalance);
-                $transaction->save();
-                //if the customer is invited, Give the invited customer a bonus of 10
-                $invite_c = new Criteria();
-                $invite_c->add(InvitePeer::INVITE_NUMBER, $customer->getMobileNumber());
-                $invite_c->add(InvitePeer::INVITE_STATUS, 2);
-                $invite = InvitePeer::doSelectOne($invite_c);
-                if ($invite) {
-                    $invite->setInviteStatus(3);
-                    $invite->setInvitedCustomerId($customer->getId());
-                    $products = new Criteria();
-                    $products->add(ProductPeer::ID, 2);
-                    $products = ProductPeer::doSelectOne($products);
-                    $extrarefill = $products->getInitialBalance();
-                    
-                    $inviteOrder = new CustomerOrder();
-                    $inviteOrder->setProductId(2);
-                    $inviteOrder->setQuantity(1);
-                    $inviteOrder->setOrderStatusId(3);
-                    $inviteOrder->setIsFirstOrder(4); //// transaction types
-                    
-                    $inviteOrder->setCustomerId($invite->getCustomerId());
-                    $inviteOrder->setExtraRefill($extrarefill);
-                    $inviteOrder->save();
-                    $OrderId = $inviteOrder->getId();
-                    // make a new transaction to show in payment history
-                    $transaction_i = new Transaction();
+                $telintaObj->recharge($invited_customer, $OpeningBalance, $transactiondescriptionB->getTitle());
 
-                    $transaction_i->setAmount($extrarefill);
-                    $transactiondescriptionB = TransactionDescriptionPeer::retrieveByPK(10);
-                    $transaction_i->setTransactionTypeId($transactiondescriptionB->getTransactionType());
-                    $transaction_i->setTransactionDescriptionId($transactiondescriptionB->getId());
-                    $transaction_i->setDescription($transactiondescriptionB->getTitle());
+                //This is for Recharge the Account
 
-                    $transaction_i->setCustomerId($invite->getCustomerId());
-                    $transaction_i->setOrderId($OrderId);
-                    $transaction_i->setTransactionStatusId(3);
-                    
-                    $invited_customer = CustomerPeer::retrieveByPK($invite->getCustomerId());
+                $transaction_i->save();
+                TransactionPeer::AssignReceiptNumber($transaction_i);
+                $invite->setBonusTransactionId($transaction_i->getId());
+                $invite->save();
 
-                    $uniqueId = $invited_customer->getUniqueid();                    
-                    
-                    $OpeningBalance = $extrarefill;
-                    //This is for Recharge the Customer
-                    $telintaObj = new Telienta();
-                    $telintaObj->recharge($invited_customer, $OpeningBalance, $transactiondescriptionB->getTitle());
-
-                    //This is for Recharge the Account
-
-                    $transaction_i->save();
-                    TransactionPeer::AssignReceiptNumber($transaction_i);
-                    $invite->setBonusTransactionId($transaction_i->getId());
-                    $invite->save();
-
-                    $invitevar = $invite->getCustomerId();
-                    if (isset($invitevar)) {
-                        $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
-                        $this->setPreferredCulture($inviterCustomer);
-                        emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(), $customer, NULL, $inviteOrder, $transaction_i);
-                        $this->updatePreferredCulture();
-                    }
+                $invitevar = $invite->getCustomerId();
+                if (isset($invitevar)) {
+                    $inviterCustomer = CustomerPeer::retrieveByPK($invitevar);
+                    $this->setPreferredCulture($inviterCustomer);
+                    emailLib::sendCustomerConfirmRegistrationEmail($invite->getCustomerId(), $customer, NULL, $inviteOrder, $transaction_i);
+                    $this->updatePreferredCulture();
                 }
-                
-                $agentid = $customer->getReferrerId();
+            }
 
-                $cp = new Criteria;
-                $cp->add(CustomerProductPeer::CUSTOMER_ID, $order->getCustomerId());
-                $customerproduct = CustomerProductPeer::doSelectOne($cp);
-                $productid = $customerproduct->getProductId();
+            $agentid = $customer->getReferrerId();
 
-                $transactionid = $transaction->getId();
-                if (isset($agentid) && $agentid != "") {
-                    commissionLib::registrationCommissionCustomer($agentid, $productid, $transactionid);
-                }
-                $this->setPreferredCulture($customer);
-                if($order->getProduct()->getProductTypeId() == 11){
-                  emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
-                }else{
-                   emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
-                }
-                $this->updatePreferredCulture();
-                
-                
+            $cp = new Criteria;
+            $cp->add(CustomerProductPeer::CUSTOMER_ID, $order->getCustomerId());
+            $customerproduct = CustomerProductPeer::doSelectOne($cp);
+            $productid = $customerproduct->getProductId();
+
+            $transactionid = $transaction->getId();
+            if (isset($agentid) && $agentid != "") {
+                commissionLib::registrationCommissionCustomer($agentid, $productid, $transactionid);
+            }
+            $this->setPreferredCulture($customer);
+            if ($order->getProduct()->getProductTypeId() == 11) {
+                emailLib::sendCustomerRegistrationViaAPPEmail($transaction, "payments");
+            } else {
+                emailLib::sendCustomerRegistrationViaWebEmail($customer, $order);
+            }
+            $this->updatePreferredCulture();
+
+
 //                $zeroCallOutSMSObject = new ZeroCallOutSMS();
 //                $zeroCallOutSMSObject->toCustomerAfterReg($order->getProductId(), $this->customer);
-               
-           
         }
         //header('HTTP/1.1 200 OK');
         return sfView::NONE;
@@ -3042,7 +3039,7 @@ class pScriptsActions extends sfActions {
             $this->todate = date("Y-m-d", $todate);
             $telintaObj = new Telienta();
             $tilentaCallHistryResult = $telintaObj->callHistory($customer, $this->fromdate . ' 00:00:00', $this->todate . ' 23:59:59');
-             var_dump($tilentaCallHistryResult);
+            var_dump($tilentaCallHistryResult);
 
 
             if ($tilentaCallHistryResult) {
@@ -3267,82 +3264,25 @@ class pScriptsActions extends sfActions {
 
     public function executeRemoveRefilBalance(sfWebRequest $request) {
 
-        $date = date('Y-m-d 00:00:00', strtotime('-180 Days'));
+        $dateFrom = date('Y-m-d 00:00:00', strtotime('-180 Days'));
+        $dateTo = date('Y-m-d 00:00:00');
+        $query = "SELECT customer.id as id FROM `customer` 
+Right JOIN transaction ON (customer.ID=transaction.CUSTOMER_ID) 
+WHERE transaction.CREATED_AT NOT Between '" . $dateFrom . "' AND '" . $dateTo . "' AND (transaction.TRANSACTION_TYPE_ID=1 or transaction.TRANSACTION_TYPE_ID=3) AND transaction.transaction_status_id=3 AND customer.CUSTOMER_STATUS_ID=3 
+GROUP BY customer.ID 
+ORDER BY customer.uniqueid";
+        $conn = Propel::getConnection();
+        $statement = $conn->prepare($query);
+        $statement->execute();
 
-        //       old Logic 
-//        $c = new Criteria;
-//        $c->addJoin(CustomerPeer::ID, CustomerOrderPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
-//        $c->addJoin(CustomerOrderPeer::PRODUCT_ID, ProductPeer::ID, Criteria::LEFT_JOIN);
-//        $c->addJoin(ProductPeer::PRODUCT_TYPE_ID, ProductTypePeer::ID, Criteria::LEFT_JOIN);
-//        $c->addAnd(CustomerOrderPeer::CREATED_AT, $date, Criteria::LESS_THAN);
-//        $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-//        $c->addAnd(ProductTypePeer::ID, 2);
-//      
-//        $c->addAnd(CustomerOrderPeer::ORDER_STATUS_ID, 3);
-//        $c->addGroupByColumn(CustomerPeer::ID);
-//        $c->addDescendingOrderByColumn(CustomerOrderPeer::CREATED_AT);
-//        
-        //       New Logic for geting record  by  kmmalik
-        $c = new Criteria;
-        $c->addJoin(CustomerPeer::ID, TransactionPeer::CUSTOMER_ID, Criteria::LEFT_JOIN);
-        $c->addAnd(TransactionPeer::CREATED_AT, $date, Criteria::LESS_THAN);
-        $c->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
-        $c->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
-        $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
-        $c->addGroupByColumn(CustomerPeer::ID);
-        $customers = CustomerPeer::doSelect($c);
-
-        foreach ($customers as $customer) {
-            echo $customer->getId() . "<br/>";
-
-
-
-            $t = new Criteria;
-            $t->addAnd(TransactionPeer::CUSTOMER_ID, $customer->getId());
-            $t->addDescendingOrderByColumn(TransactionPeer::CREATED_AT);
-            $t->addAnd(TransactionPeer::TRANSACTION_TYPE_ID, 1);
-            $t->addAnd(TransactionPeer::CREATED_AT, $date, Criteria::GREATER_THAN);
-
-            $countT = TransactionPeer::doCount($t);
-            if ($countT > 0) {
-             //   $transaction = TransactionPeer::doSelectOne($t);
-                //  echo $transaction->getCreatedAt() . "-----" . $date . "<hr/>";
-            } else {
-
-
-
-
-
-
-                $telintaObj = new Telienta();
-                $balance = $telintaObj->getBalance($customer);
-                if ($balance > 0) {
-                    $order = new CustomerOrder();
-                    $order->setExtraRefill(-$balance);
-                    $order->setCustomerId($customer->getId());
-                    $order->setProductId(17);
-                    $order->setOrderStatusId(3);
-                    $order->setIsFirstOrder(10);  //// product type remove 
-                    $order->save();
-
-                    $transaction = new Transaction();
-                    $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
-                    $transaction->setAmount(-$balance);
-                    $transaction->setOrderId($order->getId());
-                    $transaction->setTransactionStatusId(3);
-                    $transaction->setCustomerId($customer->getId());
-                    $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
-                    $transaction->setTransactionDescriptionId($transactiondescription->getId());
-                    $transaction->setDescription($transactiondescription->getTitle());
-                    $transaction->save();
-                    TransactionPeer::AssignReceiptNumber($transaction);
-                    $telintaObj = new Telienta();
-                    $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
-
-                    $this->setPreferredCulture($customer);
-                    emailLib::sendCustomerRemoveBalanceEmail($customer, $order, $transaction);
-                    $this->updatePreferredCulture();
-                }
+        while ($rowObj = $statement->fetch(PDO::FETCH_OBJ)) {
+            $telintaObj = new Telienta();
+            $customer = CustomerPeer::retrieveByPK($rowObj->id);
+            $balance = $telintaObj->getBalance($customer);
+            if ($balance > 0) {
+                echo "<hr/>";
+                echo $customer->getUniqueid() . "::" . $balance;
+                echo "<hr/>";
             }
         }
 
@@ -3405,7 +3345,7 @@ class pScriptsActions extends sfActions {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
+        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount, 2)) {
             //$extra_refill_amount = $order_amount;
             // $order->setExtraRefill($order_amount);
             $transaction->setAmount($order_amount);
@@ -3520,7 +3460,7 @@ class pScriptsActions extends sfActions {
                 $tcb->save();
             }
         }
-        
+
         $getvoipInfo = new Criteria();
         $getvoipInfo->add(SeVoipNumberPeer::CUSTOMER_ID, $customer->getId());
         $getvoipInfo->addAnd(SeVoipNumberPeer::IS_ASSIGNED, 1);
@@ -3658,7 +3598,7 @@ class pScriptsActions extends sfActions {
         $order = CustomerOrderPeer::retrieveByPK($order_id);
         $this->forward404Unless($order);
         $customer = $order->getCustomer();
-        
+
         $c = new Criteria;
         $c->add(TransactionPeer::ORDER_ID, $order_id);
         $transaction = TransactionPeer::doSelectOne($c);
@@ -3673,26 +3613,26 @@ class pScriptsActions extends sfActions {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
+        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount, 2)) {
             $transaction->setAmount($order_amount);
         }
-       
+
         $order->save();
-        
+
 
         $telintaObj = new Telienta();
         $telintaGetBalance = $telintaObj->getBalance($customer);
         $transaction->setCustomerCurrentBalance($telintaGetBalance);
         $transaction->save();
-        
+
         TransactionPeer::AssignReceiptNumber($transaction);
-        
-        
+
+
         $cst = new Criteria();
         $cst->add(SimTypesPeer::ID, $order->getProduct()->getSimTypeId());
         $simtype = SimTypesPeer::doSelectOne($cst);
-         $sim_type_id = $simtype->getId();
-         $exest = $order->getExeStatus();
+        $sim_type_id = $simtype->getId();
+        $exest = $order->getExeStatus();
         if ($exest != 1) {
 
             $uniqueId = $customer->getUniqueid();
@@ -3738,7 +3678,7 @@ class pScriptsActions extends sfActions {
             $this->updatePreferredCulture();
         }
 
-        
+
         $order->setExeStatus(1);
         $order->save();
         echo 'Yes';
@@ -3772,8 +3712,8 @@ class pScriptsActions extends sfActions {
 
         $order = CustomerOrderPeer::retrieveByPK($order_id);
         $this->forward404Unless($order);
-        
-        
+
+
         $c = new Criteria;
         $c->add(TransactionPeer::ORDER_ID, $order_id);
         $transaction = TransactionPeer::doSelectOne($c);
@@ -3788,12 +3728,12 @@ class pScriptsActions extends sfActions {
             $transaction->setTransactionStatusId(sfConfig::get('app_status_error', 5)); //error in amount
             $transaction->save();
             die;
-        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount,2)) {
+        } else if (number_format($transaction->getAmount(), 2) < number_format($order_amount, 2)) {
             $transaction->setAmount($order_amount);
         }
 
         $order->save();
-        
+
         TransactionPeer::AssignReceiptNumber($transaction);
 
         $customer = $order->getCustomer();
@@ -3808,8 +3748,8 @@ class pScriptsActions extends sfActions {
         $order->save();
         echo 'Yes';
 
-        /*         * ************Change customer product ***************** */        
-        
+        /*         * ************Change customer product ***************** */
+
         $product = ProductPeer::retrieveByPK($CCP->getProductId());
         $order = CustomerOrderPeer::retrieveByPK($CCP->getOrderId());
         $transaction = TransactionPeer::retrieveByPK($CCP->getTransactionId());
@@ -3820,20 +3760,20 @@ class pScriptsActions extends sfActions {
         $tilentAccounts = TelintaAccountsPeer::doSelect($c);
         //echo count($tilentAccounts);
         $telintaObj = new Telienta();
-        foreach($tilentAccounts as $tilentAccount){
+        foreach ($tilentAccounts as $tilentAccount) {
             $accountInfo['i_account'] = $tilentAccount->getIAccount();
             $accountInfo['i_product'] = $Bproducts->getAIproduct();
-            
+
             if ($telintaObj->updateAccount($accountInfo)) {
                 $CCP->setStatus(3);
                 $CCP->Save();
             }
-        }  
-                
+        }
+
         $telintaGetBalance = $telintaObj->getBalance($customer);
         $transaction->setCustomerCurrentBalance($telintaGetBalance);
         $transaction->save();
-        
+
         $cp = new Criteria();
         $cp->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
         $cp->addAnd(CustomerProductPeer::STATUS_ID, 3);
@@ -4009,24 +3949,23 @@ class pScriptsActions extends sfActions {
         $c->add(CustomerPeer::MOBILE_NUMBER, $mobile_number);
         $c->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $customer = CustomerPeer::doSelectOne($c);
-        
+
         $ec = new Criteria();
         $ec->add(EmployeePeer::MOBILE_NUMBER, $mobile_number);
         $ec->addAnd(EmployeePeer::STATUS_ID, 3);
         $employee = EmployeePeer::doSelectOne($ec);
-        
+
         if ($customer) {
             $telintaObj = new Telienta();
             echo number_format($telintaObj->getBalance($customer), 2);
-            
         } elseif ($employee) {
             $cta = new Criteria();
-            $cta->add(TelintaAccountsPeer::PARENT_TABLE,"employee");
-            $cta->addAnd(TelintaAccountsPeer::PARENT_ID,$employee->getId());
+            $cta->add(TelintaAccountsPeer::PARENT_TABLE, "employee");
+            $cta->addAnd(TelintaAccountsPeer::PARENT_ID, $employee->getId());
             $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
-            $ComtelintaObj = new CompanyEmployeActivation();  
+            $ComtelintaObj = new CompanyEmployeActivation();
             $balance = 0.00;
-            foreach($telinta_accounts as $telinta_account){
+            foreach ($telinta_accounts as $telinta_account) {
                 $account_info = $ComtelintaObj->getAccountInfo($telinta_account->getIAccount());
                 $balance += $account_info->account_info->balance;
             }
@@ -4063,13 +4002,13 @@ class pScriptsActions extends sfActions {
         //  $c->add(CustomerPeer::BLOCK,0);
         $customer = CustomerPeer::doSelectOne($c);
         //  var_dump($customer);
-        
+
         $ec = new Criteria();
         $ec->add(EmployeePeer::MOBILE_NUMBER, $mobile_number);
         $ec->addAnd(EmployeePeer::PASSWORD, $password);
         $ec->addAnd(EmployeePeer::STATUS_ID, 3);
         $employee = EmployeePeer::doSelectOne($ec);
-        
+
         if ($customer) {
             $uid = $customer->getUniqueid();
             echo $reponseVar = "OK;Port=6000;VoipIP=208.89.105.21;uid=1393238;Username=$mobile_number;";
@@ -4079,7 +4018,6 @@ class pScriptsActions extends sfActions {
             $applog->setParentTable("customer");
             $applog->setResponse($reponseVar);
             $applog->save();
-            
         } elseif ($employee) {
             $uid = $employee->getUniqueid();
             echo $reponseVar = "OK;Port=6000;VoipIP=208.89.105.21;uid=1393238;Username=$mobile_number;";
@@ -4104,12 +4042,12 @@ class pScriptsActions extends sfActions {
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         //echo $c->toString(); exit;
         $customer = CustomerPeer::doSelectOne($c);
-        
+
         $ec = new Criteria();
         $ec->add(EmployeePeer::MOBILE_NUMBER, $mobile_number);
         $ec->addAnd(EmployeePeer::STATUS_ID, 3);
         $employee = EmployeePeer::doSelectOne($ec);
-        
+
         if ($customer) {
             $chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
 
@@ -4138,7 +4076,6 @@ class pScriptsActions extends sfActions {
 
             ROUTED_SMS::send($c_mobile_number, $sms_text);
             echo 'OK,Login Information successfully sent to your email.';
-            
         } elseif ($employee) {
             $chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
 
@@ -4146,7 +4083,7 @@ class pScriptsActions extends sfActions {
             $employee->setPassword($new_password);
             $employee->setPlainText($new_password);
             $employee->save();
-            
+
             $message_body = $this->getContext()->getI18N()->__('Hi') . ' ' . $employee->getFirstName() . '!'; //. ' ' . $customer->getFirstName() . '&nbsp;' . $customer->getLastName() . '!';
             $message_body .= '<br /><br />';
 
@@ -4167,7 +4104,6 @@ class pScriptsActions extends sfActions {
 
             ROUTED_SMS::send($c_mobile_number, $sms_text);
             echo 'OK,Login Information successfully sent to your email.';
-            
         } else {
             echo 'error, mobile number does not exists';
         }
@@ -4187,12 +4123,12 @@ class pScriptsActions extends sfActions {
         $cr->add(CustomerPeer::MOBILE_NUMBER, $mobile);
         $cr->addAnd(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $customer = CustomerPeer::doSelectOne($cr);
-        
+
         $ec = new Criteria();
         $ec->add(EmployeePeer::MOBILE_NUMBER, $mobile);
         $ec->addAnd(EmployeePeer::STATUS_ID, 3);
         $employee = EmployeePeer::doSelectOne($ec);
-        
+
         if (!$customer && !$employee) {
             echo 'error, Mobile Number Not Registered';
             return sfView::NONE;
@@ -4275,10 +4211,10 @@ class pScriptsActions extends sfActions {
             return sfView::NONE;
         }
         if ($customer || $employee) {
-            if($customer){
-                 $user = $customer;
-            }else{
-                 $user = $employee;
+            if ($customer) {
+                $user = $customer;
+            } else {
+                $user = $employee;
             }
             if ($sender and $message and $number) {
                 $messages = array();
@@ -4304,20 +4240,20 @@ class pScriptsActions extends sfActions {
                     $cbf->setMobileNumber($user->getMobileNumber());
 
                     //get balance
-                    if($customer){
-                      $telintaObj = new Telienta();
-                      $balance = $telintaObj->getBalance($customer);
+                    if ($customer) {
+                        $telintaObj = new Telienta();
+                        $balance = $telintaObj->getBalance($customer);
                     } else {
-                      $cta = new Criteria();
-                      $cta->add(TelintaAccountsPeer::PARENT_TABLE,"employee");
-                      $cta->addAnd(TelintaAccountsPeer::PARENT_ID,$employee->getId());
-                      $cta->addAnd(TelintaAccountsPeer::ACCOUNT_TYPE,"a");
-                      $telinta_account = TelintaAccountsPeer::doSelectOne($cta);
-                      $ComtelintaObj = new CompanyEmployeActivation();  
-                      $balance = 0.00;
-                      if($telinta_account){
-                        $balance = $ComtelintaObj->getCompanyBalanceUsingEmployee($employee);
-                      }  
+                        $cta = new Criteria();
+                        $cta->add(TelintaAccountsPeer::PARENT_TABLE, "employee");
+                        $cta->addAnd(TelintaAccountsPeer::PARENT_ID, $employee->getId());
+                        $cta->addAnd(TelintaAccountsPeer::ACCOUNT_TYPE, "a");
+                        $telinta_account = TelintaAccountsPeer::doSelectOne($cta);
+                        $ComtelintaObj = new CompanyEmployeActivation();
+                        $balance = 0.00;
+                        if ($telinta_account) {
+                            $balance = $ComtelintaObj->getCompanyBalanceUsingEmployee($employee);
+                        }
                     }
                     $amt = number_format($country->getCbfRate(), 2);
                     if ($balance < $amt) {
@@ -4328,15 +4264,15 @@ class pScriptsActions extends sfActions {
                     }
                     $res = ROUTED_SMS::Send($request->getParameter('number'), $sms_text, $user->getMobileNumber());
                     if ($res) {
-                      if($customer){  
-                        $telintaObj = new Telienta();
-                        $description = "SMS Charges";
-                        $telintaObj->charge($customer, $amt, $description);
-                      }else{
-                        $ComtelintaObj = new CompanyEmployeActivation();  
-                        $description = "SMS Charges";
-                        $ComtelintaObj->chargeAccount($employee, $amt, $description);
-                      }
+                        if ($customer) {
+                            $telintaObj = new Telienta();
+                            $description = "SMS Charges";
+                            $telintaObj->charge($customer, $amt, $description);
+                        } else {
+                            $ComtelintaObj = new CompanyEmployeActivation();
+                            $description = "SMS Charges";
+                            $ComtelintaObj->chargeAccount($employee, $amt, $description);
+                        }
                     }
                 }
 
@@ -4366,7 +4302,8 @@ class pScriptsActions extends sfActions {
         $ccode = $request->getParameter('ccode');
         $mobilenumber = $request->getParameter('mobile_number');
         $registration_from = $request->getParameter('registerFrom');
-        if($registration_from=="") $registration_from = "app";
+        if ($registration_from == "")
+            $registration_from = "app";
         $full_mobile_number = $ccode . $mobilenumber;
         $code = $request->getParameter('code');
         $app = $request->getParameter('app');
@@ -4414,7 +4351,7 @@ class pScriptsActions extends sfActions {
         }
 
         $product_criteria = new Criteria();
-        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID,11);
+        $product_criteria->addAnd(ProductPeer::PRODUCT_TYPE_ID, 11);
         $product = ProductPeer::doSelectOne($product_criteria);
         $customer = new Customer();
         $customer->setCountryId($country->getId());
@@ -4461,7 +4398,7 @@ class pScriptsActions extends sfActions {
         $transaction->setTransactionStatusId(1); // default value 1
         $transaction->setVat((($order->getProduct()->getRegistrationFee()) * sfConfig::get('app_vat_percentage')));
         $transaction->setInitialBalance($order->getExtraRefill());
-        $transaction->setAmountWithoutVat($product->getRegistrationFee()+$product->getPrice());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee() + $product->getPrice());
         $transaction->save();
 
         // echo 'Assigning Customer ID <br/>';
@@ -4520,10 +4457,10 @@ class pScriptsActions extends sfActions {
             $applog->save();
             $url = sfConfig::get('app_customer_url');
             $os_pos = strpos($applog->getOs(), "Android");
-            if($applog->getRegisterFrom()=="Web"){
+            if ($applog->getRegisterFrom() == "Web") {
                 $zerocall_sms = new ZeroCallOutSMS();
                 $zerocall_sms->toCustomerAppRegViaWeb($customer);
-                $this->redirect($url."pScripts/appThanks");
+                $this->redirect($url . "pScripts/appThanks");
             }
         }
 
@@ -4607,7 +4544,7 @@ class pScriptsActions extends sfActions {
 
         $transaction = new Transaction();
 
-        $transaction->setAmount(($product->getRegistrationFee()+$product->getPrice()) * (sfConfig::get('app_vat_percentage') + 1));
+        $transaction->setAmount(($product->getRegistrationFee() + $product->getPrice()) * (sfConfig::get('app_vat_percentage') + 1));
         $transactiondescription = TransactionDescriptionPeer::retrieveByPK(9);
         $transaction->setTransactionTypeId(1);
         $transaction->setTransactionFrom(5);
@@ -4615,10 +4552,10 @@ class pScriptsActions extends sfActions {
         $transaction->setDescription($product->getDescription());
         $transaction->setOrderId($this->order->getId());
         $transaction->setCustomerId($this->order->getCustomerId());
-        $transaction->setVat(($product->getRegistrationFee()+$product->getPrice()) * sfConfig::get('app_vat_percentage'));
-        
+        $transaction->setVat(($product->getRegistrationFee() + $product->getPrice()) * sfConfig::get('app_vat_percentage'));
+
         $transaction->setInitialBalance($this->order->getExtraRefill());
-        $transaction->setAmountWithoutVat($product->getRegistrationFee()+$product->getPrice());
+        $transaction->setAmountWithoutVat($product->getRegistrationFee() + $product->getPrice());
         //save
         $transaction->save();
         $this->transaction = $transaction;
@@ -4679,57 +4616,58 @@ class pScriptsActions extends sfActions {
     public function executeAppTermsConditions(sfWebRequest $request) {
         $this->setLayout(false);
     }
-    
-    public function executeCompanyNetBalance(sfWebRequest $request) {               
-     
+
+    public function executeCompanyNetBalance(sfWebRequest $request) {
+
 //        $start_date =  date('Y-m-1 00:00:00', strtotime("last month"));
 //        $end_date = date('Y-m-t 23:59:59', strtotime("last month"));
 
-        $start_date =  date('Y-m-1 00:00:00');
+        $start_date = date('Y-m-1 00:00:00');
         $end_date = date('Y-m-t 23:59:59');
 
         $cco = new Criteria();
         $companies = CompanyPeer::doSelect($cco);
         $net_balance = 0.00;
-                foreach ($companies as $company) {
-                    $ci = new Criteria();
-                    $ci->add(InvoicePeer::COMPANY_ID, $company->getId());
-                    $ci->add(InvoicePeer::BILLING_ENDING_DATE, $end_date, Criteria::LESS_EQUAL);
-                    $ci->addSelectColumn('sum(' . InvoicePeer::TOTALPAYMENT . ') AS total_payment');
-                    $sum = InvoicePeer::doSelectStmt($ci);
-                    $resultset = $sum->fetch(PDO::FETCH_OBJ);
-                    $total_payment = $resultset->total_payment;
+        foreach ($companies as $company) {
+            $ci = new Criteria();
+            $ci->add(InvoicePeer::COMPANY_ID, $company->getId());
+            $ci->add(InvoicePeer::BILLING_ENDING_DATE, $end_date, Criteria::LESS_EQUAL);
+            $ci->addSelectColumn('sum(' . InvoicePeer::TOTALPAYMENT . ') AS total_payment');
+            $sum = InvoicePeer::doSelectStmt($ci);
+            $resultset = $sum->fetch(PDO::FETCH_OBJ);
+            $total_payment = $resultset->total_payment;
 
-                    $co = new Criteria();
-                    $co->add(OdrsPeer::COMPANY_ID, $company->getId());
-                    $co->addAnd(OdrsPeer::BILL_END, $end_date, Criteria::LESS_EQUAL);
-                    $co->addAnd(OdrsPeer::I_SERVICE, 2);
-                    $co->addSelectColumn('sum(' . OdrsPeer::VAT_INCLUDED_AMOUNT . ') AS total_charged_amount');
-                    $sum_camount = OdrsPeer::doSelectStmt($co);
-                    $rs = $sum_camount->fetch(PDO::FETCH_OBJ);
-                    $total_charged_amount = $rs->total_charged_amount;
+            $co = new Criteria();
+            $co->add(OdrsPeer::COMPANY_ID, $company->getId());
+            $co->addAnd(OdrsPeer::BILL_END, $end_date, Criteria::LESS_EQUAL);
+            $co->addAnd(OdrsPeer::I_SERVICE, 2);
+            $co->addSelectColumn('sum(' . OdrsPeer::VAT_INCLUDED_AMOUNT . ') AS total_charged_amount');
+            $sum_camount = OdrsPeer::doSelectStmt($co);
+            $rs = $sum_camount->fetch(PDO::FETCH_OBJ);
+            $total_charged_amount = $rs->total_charged_amount;
 
-                    echo 'companyid-' . $company->getId() . ' - ' . $total_payment . ' - ' . $total_charged_amount;
-                    echo '<br />';
-                    echo $net_balance = $total_payment - $total_charged_amount;            
+            echo 'companyid-' . $company->getId() . ' - ' . $total_payment . ' - ' . $total_charged_amount;
+            echo '<br />';
+            echo $net_balance = $total_payment - $total_charged_amount;
 
-                    $cnb = new CompanyNetBalance();
-                    $cnb->setBillStart($start_date);
-                    $cnb->setBillEnd($end_date);
-                    $cnb->setCompanyId($company->getId());
-                    $cnb->setNetBalance($net_balance);
-                    $cnb->save();
-                }
+            $cnb = new CompanyNetBalance();
+            $cnb->setBillStart($start_date);
+            $cnb->setBillEnd($end_date);
+            $cnb->setCompanyId($company->getId());
+            $cnb->setNetBalance($net_balance);
+            $cnb->save();
+        }
         return sfView::NONE;
     }
+
     public function executeInvoiceBilling(sfWebRequest $request) {
         $company_id = $request->getParameter('company_id');
 
         $this->billing_start_date = date('Y-m-d 00:00:00', $request->getParameter('start_date'));
         $this->billing_end_date = date('Y-m-d 23:59:59', $request->getParameter('end_date'));
         $this->forward404Unless($company_id && $this->billing_start_date && $this->billing_end_date);
-        
-        
+
+
         if (!($company = CompanyPeer::retrieveByPK($company_id))) {
             $this->forward404();
         }
@@ -4761,7 +4699,7 @@ class pScriptsActions extends sfActions {
         $im = new Criteria();
         $im->add(InvoiceMethodPeer::ID, $invoice_id);
         $invoice = InvoiceMethodPeer::doSelectOne($im);
-        $this->invoice_cost = $invoice->getCost(); 
+        $this->invoice_cost = $invoice->getCost();
         $new_invoice = new Invoice();
         $new_invoice->setCompany($company);
         $new_invoice->setBillingStartingDate($this->billing_start_date);
@@ -4780,7 +4718,7 @@ class pScriptsActions extends sfActions {
         //   var_dump($new_invoice);
         $this->invoice_meta = $new_invoice;
         $this->company_meta = $company;
-        
+
         $this->vatPercentage = CountryPeer::retrieveByPK($company->getCountryId())->getVatPercentage();
 
         $cother = new Criteria();
@@ -4789,7 +4727,7 @@ class pScriptsActions extends sfActions {
         $cother->addAnd(OdrsPeer::BILL_START, $this->billing_start_date, Criteria::GREATER_EQUAL);
         $cother->addAnd(OdrsPeer::BILL_END, $this->billing_end_date, Criteria::LESS_EQUAL);
         $othercount = OdrsPeer::doCount($cother);
-        $this->otherCount = $othercount; 
+        $this->otherCount = $othercount;
         if ($othercount > 0) {
             $this->otherevents = OdrsPeer::doSelect($cother);
         }
@@ -4813,17 +4751,17 @@ class pScriptsActions extends sfActions {
         $cip->setLimit(10);
         $cip->addDescendingOrderByColumn(InvoicePeer::BILLING_STARTING_DATE);
         $invoiceCount = InvoicePeer::doCount($cip);
-        
+
         $this->invoiceCount = $invoiceCount;
-        if($invoiceCount>0){
+        if ($invoiceCount > 0) {
             $preInvoices = InvoicePeer::doSelect($cip);
             $this->preInvoices = $preInvoices;
         }
-        
+
         $this->setLayout(false);
     }
-    public function executeUpdateInvoiceBilling(sfWebRequest $request)
-    {
+
+    public function executeUpdateInvoiceBilling(sfWebRequest $request) {
         $invoiceId = $request->getParameter('invoiceid');
         $invoice = InvoicePeer::retrieveByPK($invoiceId);
         $company = $invoice->getCompany();
@@ -4850,7 +4788,7 @@ class pScriptsActions extends sfActions {
         $this->vatPercentage = CountryPeer::retrieveByPK($company->getCountryId())->getVatPercentage();
         $ec = new Criteria();
         $ec->add(EmployeePeer::COMPANY_ID, $company->getId());
-       // $ec->add(EmployeePeer::STATUS_ID, 3);
+        // $ec->add(EmployeePeer::STATUS_ID, 3);
         $this->employees = EmployeePeer::doSelect($ec);
 
         $billing_details = array();
@@ -4875,7 +4813,7 @@ class pScriptsActions extends sfActions {
         $cother->addAnd(OdrsPeer::BILL_START, $this->billing_start_date, Criteria::GREATER_EQUAL);
         $cother->addAnd(OdrsPeer::BILL_END, $this->billing_end_date, Criteria::LESS_EQUAL);
         $othercount = OdrsPeer::doCount($cother);
-        $this->otherCount = $othercount; 
+        $this->otherCount = $othercount;
         if ($othercount > 0) {
             $this->otherevents = OdrsPeer::doSelect($cother);
         }
@@ -4900,16 +4838,17 @@ class pScriptsActions extends sfActions {
         $cip->setLimit(10);
         $cip->addDescendingOrderByColumn(InvoicePeer::BILLING_STARTING_DATE);
         $invoiceCount = InvoicePeer::doCount($cip);
-        
+
         $this->invoiceCount = $invoiceCount;
-        if($invoiceCount>0){
+        if ($invoiceCount > 0) {
             $preInvoices = InvoicePeer::doSelect($cip);
             $this->preInvoices = $preInvoices;
         }
         $this->setLayout(false);
     }
+
     public function executeOdrChargesMonthly(sfWebRequest $request) {
-        
+
         ////////////////////////////////////////////////////////////
         $telintaObj = new CompanyEmployeActivation();
         $bill_start_date = date('Y-m-1 00:00:00');
@@ -4925,7 +4864,7 @@ class pScriptsActions extends sfActions {
 //        // echo $end_date = date('Y-m-t 21:59:59', strtotime("last month"));
 //        echo $enddate = date('Y-m-t 21:59:59', strtotime("last month"));
 //        $bill_end_date = date('Y-m-t 23:59:59', strtotime("last month"));
-        
+
         $start_strtotime = strtotime($startdate);
         $end_strototime = strtotime($enddate);
 
@@ -4934,11 +4873,12 @@ class pScriptsActions extends sfActions {
         foreach ($companies as $company) {
             ///////// Fetch Other Events /////////////
 //         echo "i customer".$company->getICustomer();echo '<br />';
-         if($company->getICustomer()!=""){ 
-            $vat_percent = $company->getCountry()->getVatPercentage()/100; 
-            if($vat_percent=="") $vat_percent=0;
-            $otherEvents = $telintaObj->callHistory($company, $startdate, $enddate, false, 1);
-           // var_dump($otherEvents);die;
+            if ($company->getICustomer() != "") {
+                $vat_percent = $company->getCountry()->getVatPercentage() / 100;
+                if ($vat_percent == "")
+                    $vat_percent = 0;
+                $otherEvents = $telintaObj->callHistory($company, $startdate, $enddate, false, 1);
+                // var_dump($otherEvents);die;
                 if ($otherEvents && count($otherEvents) > 0) {
                     foreach ($otherEvents->xdr_list as $odr) {
                         $other = new Odrs();
@@ -4966,7 +4906,7 @@ class pScriptsActions extends sfActions {
                     $otherEventLog->setIService(1);
                     $otherEventLog->save();
                 }
-            ///////// Payments /////////////
+                ///////// Payments /////////////
                 $payments = $telintaObj->callHistory($company, $startdate, $enddate, false, 2);
                 if ($payments && count($payments) > 0) {
                     foreach ($payments->xdr_list as $odrpay) {
@@ -5003,78 +4943,79 @@ class pScriptsActions extends sfActions {
         $employees = EmployeePeer::doSelect($em);
         foreach ($employees as $employee) {
             $company = CompanyPeer::retrieveByPK($employee->getCompanyId());
-            $vat_percent = $company->getCountry()->getVatPercentage()/100;
-            if($vat_percent=="") $vat_percent=0;
+            $vat_percent = $company->getCountry()->getVatPercentage() / 100;
+            if ($vat_percent == "")
+                $vat_percent = 0;
             $prdPrice = 0;
-         if($employee->getUniqueId()!=""){
-            $cta = new Criteria();
-            $cta->add(TelintaAccountsPeer::PARENT_TABLE, 'employee');
-            $cta->addAnd(TelintaAccountsPeer::PARENT_ID, $employee->getId());
-            $cta->addAnd(TelintaAccountsPeer::STATUS, 3);
-            $count_ta = TelintaAccountsPeer::doCount($cta);
-            if ($count_ta > 0) {
-                $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
-                
-                foreach ($telinta_accounts as $telinta_account) {
-                    $c2 = new Criteria();
-                    $c2->add(OdrsPeer::PARENT_TABLE, "employee");
-                    $c2->add(OdrsPeer::BILL_START, $bill_start_date);
-                    $c2->addAnd(OdrsPeer::BILL_END, $bill_end_date);
-                    $c2->addAnd(OdrsPeer::PARENT_ID, $employee->getId());
-                    $c2->addAnd(OdrsPeer::I_ACCOUNT, $telinta_account->getIAccount());
-                    if (OdrsPeer::doCount($c2) == 0) {
-                        $tilentaSubscriptionResult = $telintaObj->getAccountSubscription($employee,$telinta_account, $startdate, $enddate); 
-                      //  $tilentaSubscriptionResult = $telintaObj->getSubscription($employee, $startdate, $enddate);
-                      //  var_dump($tilentaSubscriptionResult);
-                        if ($tilentaSubscriptionResult) {
-                            foreach ($tilentaSubscriptionResult->xdr_list as $xdr) {
-                                $empSub = new Odrs();
-                                $empSub->setChargedAmount($xdr->charged_amount);
-                                $empSub->setIXdr($xdr->i_xdr);
-                                $empSub->setAccountId($xdr->account_id);
-                                $empSub->setConnectTime($xdr->connect_time);
-                                $empSub->setDisconnectTime($xdr->disconnect_time);
-                                $empSub->setBillTime($xdr->bill_time);
-                                $empSub->setDescription($xdr->CLD);
-                                $empSub->setBillStart($bill_start_date);
-                                $empSub->setBillEnd($bill_end_date);
-                                $empSub->setParentTable('employee');
-                                $empSub->setParentId($employee->getId());
-                                $empSub->setCompanyId($employee->getCompanyId());
-                                $empSub->setVatIncludedAmount($xdr->charged_amount + $xdr->charged_amount * $vat_percent);
-                                $empSub->setChargedVatValue($vat_percent);
-                                $empSub->setIService(4);
-                                $empSub->save();
+            if ($employee->getUniqueId() != "") {
+                $cta = new Criteria();
+                $cta->add(TelintaAccountsPeer::PARENT_TABLE, 'employee');
+                $cta->addAnd(TelintaAccountsPeer::PARENT_ID, $employee->getId());
+                $cta->addAnd(TelintaAccountsPeer::STATUS, 3);
+                $count_ta = TelintaAccountsPeer::doCount($cta);
+                if ($count_ta > 0) {
+                    $telinta_accounts = TelintaAccountsPeer::doSelect($cta);
+
+                    foreach ($telinta_accounts as $telinta_account) {
+                        $c2 = new Criteria();
+                        $c2->add(OdrsPeer::PARENT_TABLE, "employee");
+                        $c2->add(OdrsPeer::BILL_START, $bill_start_date);
+                        $c2->addAnd(OdrsPeer::BILL_END, $bill_end_date);
+                        $c2->addAnd(OdrsPeer::PARENT_ID, $employee->getId());
+                        $c2->addAnd(OdrsPeer::I_ACCOUNT, $telinta_account->getIAccount());
+                        if (OdrsPeer::doCount($c2) == 0) {
+                            $tilentaSubscriptionResult = $telintaObj->getAccountSubscription($employee, $telinta_account, $startdate, $enddate);
+                            //  $tilentaSubscriptionResult = $telintaObj->getSubscription($employee, $startdate, $enddate);
+                            //  var_dump($tilentaSubscriptionResult);
+                            if ($tilentaSubscriptionResult) {
+                                foreach ($tilentaSubscriptionResult->xdr_list as $xdr) {
+                                    $empSub = new Odrs();
+                                    $empSub->setChargedAmount($xdr->charged_amount);
+                                    $empSub->setIXdr($xdr->i_xdr);
+                                    $empSub->setAccountId($xdr->account_id);
+                                    $empSub->setConnectTime($xdr->connect_time);
+                                    $empSub->setDisconnectTime($xdr->disconnect_time);
+                                    $empSub->setBillTime($xdr->bill_time);
+                                    $empSub->setDescription($xdr->CLD);
+                                    $empSub->setBillStart($bill_start_date);
+                                    $empSub->setBillEnd($bill_end_date);
+                                    $empSub->setParentTable('employee');
+                                    $empSub->setParentId($employee->getId());
+                                    $empSub->setCompanyId($employee->getCompanyId());
+                                    $empSub->setVatIncludedAmount($xdr->charged_amount + $xdr->charged_amount * $vat_percent);
+                                    $empSub->setChargedVatValue($vat_percent);
+                                    $empSub->setIService(4);
+                                    $empSub->save();
+                                }
+                            } else {
+                                $odrSubLog = new CallhistoryCallsLog();
+                                $odrSubLog->setParent('employee');
+                                $odrSubLog->setParentId($employee->getId());
+                                $odrSubLog->setIAccount($telinta_account->getIAccount());
+                                $odrSubLog->setTodate($startdate);
+                                $odrSubLog->setFromdate($enddate);
+                                $odrSubLog->setIService(4);
+                                $odrSubLog->save();
                             }
-                        } else {
-                            $odrSubLog = new CallhistoryCallsLog();
-                            $odrSubLog->setParent('employee');
-                            $odrSubLog->setParentId($employee->getId());
-                            $odrSubLog->setIAccount($telinta_account->getIAccount());
-                            $odrSubLog->setTodate($startdate);
-                            $odrSubLog->setFromdate($enddate);
-                            $odrSubLog->setIService(4);
-                            $odrSubLog->save();
+                            // 
                         }
-                        // 
                     }
                 }
             }
-          }
         }
         return sfView::NONE;
     }
-        
-    function executeGenerateInvoiceMonthly(sfWebRequest $request){
+
+    function executeGenerateInvoiceMonthly(sfWebRequest $request) {
 //       $start_date = date('Y-m-1',strtotime('last month'));
 //       
 //        $enddate = date('Y-m-t',strtotime('last month'));        
-     
-        
+
+
         $start_date = date('Y-m-1 00:00:00');
-        
+
         $enddate = date('Y-m-t 23:59:59');
-        
+
         $start_strtotime = strtotime($start_date);
         $startdate = date('Y-m-d 00:00:00', $start_strtotime);
         $end_strototime = strtotime($enddate);
@@ -5082,63 +5023,64 @@ class pScriptsActions extends sfActions {
         echo "<br/>";
         $start_strtotime = strtotime($startdate);
         $end_strototime = strtotime($enddate);
-        echo $startdate ;
+        echo $startdate;
         echo ' - ';
         echo $enddate;
         echo '<br />';
         $c = new Criteria();
         $companies = CompanyPeer::doSelect($c);
-       
-        foreach($companies as $company){
-            echo $company->getId()."::::";
+
+        foreach ($companies as $company) {
+            echo $company->getId() . "::::";
             echo $created_date = $company->getCreatedAt();
 
             echo "<br/>";
             $company_id = $company->getId();
             $ci = new Criteria();
-            $ci->add(InvoicePeer::COMPANY_ID,$company_id);
-            $ci->addAnd(InvoicePeer::START_TIME,$start_strtotime);
-            $ci->addAnd(InvoicePeer::END_TIME,$end_strototime);
+            $ci->add(InvoicePeer::COMPANY_ID, $company_id);
+            $ci->addAnd(InvoicePeer::START_TIME, $start_strtotime);
+            $ci->addAnd(InvoicePeer::END_TIME, $end_strototime);
             $in_count = InvoicePeer::doCount($ci);
-            if($in_count > 0){
+            if ($in_count > 0) {
                 $invoice = InvoicePeer::doSelectOne($ci);
-                if($invoice){
-                echo  $url1 = sfConfig::get('app_customer_url').'pScripts/updateInvoiceBilling?invoiceid='.$invoice->getId();
-                $invoice_content = file_get_contents($url1);
-                } 
-            }else{
+                if ($invoice) {
+                    echo $url1 = sfConfig::get('app_customer_url') . 'pScripts/updateInvoiceBilling?invoiceid=' . $invoice->getId();
+                    $invoice_content = file_get_contents($url1);
+                }
+            } else {
                 $cl = new Criteria();
                 $cl->addAnd(EmployeeCustomerCallhistoryPeer::CONNECT_TIME, $startdate, Criteria::GREATER_EQUAL);
                 $cl->addAnd(EmployeeCustomerCallhistoryPeer::DISCONNECT_TIME, $enddate, Criteria::LESS_EQUAL);
-                $cl->addJoin(EmployeeCustomerCallhistoryPeer::COMPANY_ID,OdrsPeer::COMPANY_ID, Criteria::LEFT_JOIN);
-                $cl->addAnd(EmployeeCustomerCallhistoryPeer::COMPANY_ID, $company->getId());            
+                $cl->addJoin(EmployeeCustomerCallhistoryPeer::COMPANY_ID, OdrsPeer::COMPANY_ID, Criteria::LEFT_JOIN);
+                $cl->addAnd(EmployeeCustomerCallhistoryPeer::COMPANY_ID, $company->getId());
                 $calls = EmployeeCustomerCallhistoryPeer::doCount($cl);
-                echo "calls---".$calls;
-                if($calls>0){ echo "----companyid------".$company->getId(); echo "<br/>";
-                echo    $url1 = sfConfig::get('app_customer_url').'pScripts/invoiceBilling?company_id='.$company->getId().'&start_date='.$start_strtotime.'&end_date='.$end_strototime;
-                         $invoice_content = file_get_contents($url1);
-
-               }echo "<br/>";
-               if($calls == 0){
+                echo "calls---" . $calls;
+                if ($calls > 0) {
+                    echo "----companyid------" . $company->getId();
+                    echo "<br/>";
+                    echo $url1 = sfConfig::get('app_customer_url') . 'pScripts/invoiceBilling?company_id=' . $company->getId() . '&start_date=' . $start_strtotime . '&end_date=' . $end_strototime;
+                    $invoice_content = file_get_contents($url1);
+                }echo "<br/>";
+                if ($calls == 0) {
                     $cl = new Criteria();
                     $cl->addAnd(OdrsPeer::BILL_START, $startdate, Criteria::GREATER_EQUAL);
                     $cl->addAnd(OdrsPeer::BILL_END, $enddate, Criteria::LESS_EQUAL);
-                    $cl->addAnd(OdrsPeer::COMPANY_ID,$company->getId());        
-                echo     $calls = OdrsPeer::doCount($cl);
-                    echo "odrs---".$calls;
-                    if($calls>0){ echo "----companyid------".$company->getId(); echo "<br/>";
-                    echo    $url1 = sfConfig::get('app_customer_url').'pScripts/invoiceBilling?company_id='.$company->getId().'&start_date='.$start_strtotime.'&end_date='.$end_strototime;
-                           $invoice_content = file_get_contents($url1);
-
-                   }echo "<br/>";
-               }
-            }    
+                    $cl->addAnd(OdrsPeer::COMPANY_ID, $company->getId());
+                    echo $calls = OdrsPeer::doCount($cl);
+                    echo "odrs---" . $calls;
+                    if ($calls > 0) {
+                        echo "----companyid------" . $company->getId();
+                        echo "<br/>";
+                        echo $url1 = sfConfig::get('app_customer_url') . 'pScripts/invoiceBilling?company_id=' . $company->getId() . '&start_date=' . $start_strtotime . '&end_date=' . $end_strototime;
+                        $invoice_content = file_get_contents($url1);
+                    }echo "<br/>";
+                }
+            }
         }
-        return sfView::NONE;   
+        return sfView::NONE;
+    }
 
-   }
-   public function executeSaveCompanyCallHistory(sfWebRequest $request)
-    {
+    public function executeSaveCompanyCallHistory(sfWebRequest $request) {
         $telintaObj = new CompanyEmployeActivation();
         $c = new Criteria;
         $c->add(CompanyPeer::STATUS_ID, 1);  // active
@@ -5150,7 +5092,7 @@ class pScriptsActions extends sfActions {
         echo "<hr/>";
         $end_date = date('Y-m-t 21:59:59');
         $bill_end_date = date('Y-m-t 23:59:59');
-        
+
 //        $bill_start_date = date('Y-m-1 00:00:00', strtotime("last month"));
 //        $start_date = date('Y-m-1 00:00:00');
 //        echo $start_date = date('Y-m-d 21:59:59', strtotime("-1 day", strtotime($bill_start_date)));
@@ -5159,91 +5101,91 @@ class pScriptsActions extends sfActions {
 //        // echo $end_date = date('Y-m-t 21:59:59', strtotime("last month"));
 //        echo $end_date = date('Y-m-t 21:59:59', strtotime("last month"));
 //        $bill_end_date = date('Y-m-t 23:59:59', strtotime("last month"));
-        
+
         echo "<hr/>";
         foreach ($companies as $company) {
-           if($company->getICustomer()!=""){ 
-            $vat_percent = $company->getCountry()->getVatPercentage()/100; 
-            if($vat_percent=="") $vat_percent=0;            
-            $tilentaCallHistryResult = $telintaObj->callHistory($company, $start_date, $end_date);
+            if ($company->getICustomer() != "") {
+                $vat_percent = $company->getCountry()->getVatPercentage() / 100;
+                if ($vat_percent == "")
+                    $vat_percent = 0;
+                $tilentaCallHistryResult = $telintaObj->callHistory($company, $start_date, $end_date);
 //     var_dump($tilentaCallHistryResult);
 //     die;
-            if ($tilentaCallHistryResult) {                
-                foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
+                if ($tilentaCallHistryResult) {
+                    foreach ($tilentaCallHistryResult->xdr_list as $xdr) {
 
 
-                    $emCalls = new EmployeeCustomerCallhistory();
-                    $emCalls->setAccountId($xdr->account_id);
-                    $type = substr($xdr->account_id, 0, 1);
-                    if ($type == 'a') {
-                        $emCalls->setAccountType('a');
-                    } elseif ($type == 'c') {
-                        $emCalls->setAccountType('cb');
-                    } elseif (is_int($type)) {
-                        $emCalls->setAccountType('r');
+                        $emCalls = new EmployeeCustomerCallhistory();
+                        $emCalls->setAccountId($xdr->account_id);
+                        $type = substr($xdr->account_id, 0, 1);
+                        if ($type == 'a') {
+                            $emCalls->setAccountType('a');
+                        } elseif ($type == 'c') {
+                            $emCalls->setAccountType('cb');
+                        } elseif (is_int($type)) {
+                            $emCalls->setAccountType('r');
+                        }
+                        $emCalls->setBillStatus($xdr->bill_status);
+                        $emCalls->setBillTime($xdr->bill_time);
+                        $emCalls->setChargedAmount($xdr->charged_amount);
+                        $emCalls->setChargedQuantity($xdr->charged_quantity);
+                        $emCalls->setPhoneNumber($xdr->CLD);
+                        $emCalls->setCli($xdr->CLI);
+                        $emCalls->setConnectTime($xdr->connect_time);
+                        //$emCalls->setCountry($xdr->country);
+                        $country = $xdr->country;
+                        $cc = new Criteria();
+                        $cc->add(CountryPeer::NAME, $country, Criteria::LIKE);
+                        $ccount = CountryPeer::doCount($cc);
+                        if ($ccount > 0) {
+                            $csel = CountryPeer::doSelectOne($cc);
+                            $countryid = $csel->getId();
+                        } else {
+                            $cin = new Country();
+                            $cin->setName($country);
+                            $cin->save();
+                            $countryid = $cin->getId();
+                        }
+                        $emCalls->setParentTable('employee');
+                        $emCalls->setCountryId($countryid);
+                        $ce = new Criteria();
+                        $ce->add(TelintaAccountsPeer::ACCOUNT_TITLE, $xdr->account_id);
+                        #$ce->addAnd(TelintaAccountsPeer::PARENT_TABLE, 'employee');
+                        $ce->add(TelintaAccountsPeer::STATUS, 3);
+                        if (TelintaAccountsPeer::doCount($ce) > 0) {
+                            $emp = TelintaAccountsPeer::doSelectOne($ce);
+                            $emCalls->setParentId($emp->getParentId());
+                        }
+                        $emCalls->setCompanyId($company->getId());
+                        $emCalls->setDescription($xdr->description);
+                        $emCalls->setDisconnectCause($xdr->disconnect_cause);
+                        $emCalls->setDisconnectTime($xdr->disconnect_time);
+                        // $emCalls->setDurationMinutes($duration_minutes);
+                        $emCalls->setICustomer($company->getICustomer());
+                        $emCalls->setIXdr($xdr->i_xdr);
+                        $emCalls->setStatus(3);
+                        $emCalls->setSubdivision($xdr->subdivision);
+                        $emCalls->setUnixConnectTime($xdr->unix_connect_time);
+                        $emCalls->setUnixDisconnectTime($xdr->unix_disconnect_time);
+                        $emCalls->setVatIncludedAmount($xdr->charged_amount + $xdr->charged_amount * $vat_percent);
+                        $emCalls->setChargedVatValue($vat_percent);
+                        $emCalls->save();
                     }
-                    $emCalls->setBillStatus($xdr->bill_status);
-                    $emCalls->setBillTime($xdr->bill_time);
-                    $emCalls->setChargedAmount($xdr->charged_amount);
-                    $emCalls->setChargedQuantity($xdr->charged_quantity);
-                    $emCalls->setPhoneNumber($xdr->CLD);
-                    $emCalls->setCli($xdr->CLI);
-                    $emCalls->setConnectTime($xdr->connect_time);                   
-                    //$emCalls->setCountry($xdr->country);
-                    $country = $xdr->country;
-                    $cc = new Criteria();
-                    $cc->add(CountryPeer::NAME, $country, Criteria::LIKE);
-                    $ccount = CountryPeer::doCount($cc);
-                    if ($ccount > 0) {
-                        $csel = CountryPeer::doSelectOne($cc);
-                        $countryid = $csel->getId();
-                    } else {
-                        $cin = new Country();
-                        $cin->setName($country);
-                        $cin->save();
-                        $countryid = $cin->getId();
-                    }
-                    $emCalls->setParentTable('employee');
-                    $emCalls->setCountryId($countryid);
-                    $ce = new Criteria();
-                    $ce->add(TelintaAccountsPeer::ACCOUNT_TITLE, $xdr->account_id);
-                    #$ce->addAnd(TelintaAccountsPeer::PARENT_TABLE, 'employee');
-                    $ce->add(TelintaAccountsPeer::STATUS, 3);
-                    if (TelintaAccountsPeer::doCount($ce) > 0) {
-                        $emp = TelintaAccountsPeer::doSelectOne($ce);
-                        $emCalls->setParentId($emp->getParentId());
-                    }
-                    $emCalls->setCompanyId($company->getId());
-                    $emCalls->setDescription($xdr->description);
-                    $emCalls->setDisconnectCause($xdr->disconnect_cause);
-                    $emCalls->setDisconnectTime($xdr->disconnect_time);
-                    // $emCalls->setDurationMinutes($duration_minutes);
-                    $emCalls->setICustomer($company->getICustomer());
-                    $emCalls->setIXdr($xdr->i_xdr);
-                    $emCalls->setStatus(3);
-                    $emCalls->setSubdivision($xdr->subdivision);
-                    $emCalls->setUnixConnectTime($xdr->unix_connect_time);
-                    $emCalls->setUnixDisconnectTime($xdr->unix_disconnect_time);
-                    $emCalls->setVatIncludedAmount($xdr->charged_amount + $xdr->charged_amount * $vat_percent);
-                    $emCalls->setChargedVatValue($vat_percent);
-                    $emCalls->save();
+                } else {
+                    $callsHistory = new CallhistoryCallsLog();
+                    $callsHistory->setParent('company');
+                    $callsHistory->setParentId($company->getId());
+                    $callsHistory->setTodate($start_date);
+                    $callsHistory->setIService(3);
+                    $callsHistory->setFromdate($end_date);
+                    $callsHistory->save();
                 }
-            } else {
-                $callsHistory = new CallhistoryCallsLog();
-                $callsHistory->setParent('company');
-                $callsHistory->setParentId($company->getId());
-                $callsHistory->setTodate($start_date);
-                $callsHistory->setIService(3);
-                $callsHistory->setFromdate($end_date);
-                $callsHistory->save();
             }
-           }  
         }
         return sfView::NONE;
     }
-    
-    public function executeSaveCompanyCallHistoryNotFetch(sfWebRequest $request)
-    {
+
+    public function executeSaveCompanyCallHistoryNotFetch(sfWebRequest $request) {
         $telintaObj = new CompanyEmployeActivation();
         $c = new Criteria;
         $c->add(CallhistoryCallsLogPeer::PARENT, 'company');
@@ -5259,10 +5201,11 @@ class pScriptsActions extends sfActions {
 
 
             $company = CompanyPeer::retrieveByPK($callLog->getParentId());
-            if($company->getICustomer()!=""){
-            $vat_percent = $company->getCountry()->getVatPercentage()/100; 
-            if($vat_percent=="") $vat_percent=0;
-            $tilentaCallHistryResult = $telintaObj->callHistory($company, $this->fromdate, $this->todate, false, $callLog->getIService());
+            if ($company->getICustomer() != "") {
+                $vat_percent = $company->getCountry()->getVatPercentage() / 100;
+                if ($vat_percent == "")
+                    $vat_percent = 0;
+                $tilentaCallHistryResult = $telintaObj->callHistory($company, $this->fromdate, $this->todate, false, $callLog->getIService());
 //     var_dump($tilentaCallHistryResult);
 //     die;
                 if ($tilentaCallHistryResult) {
@@ -5337,7 +5280,7 @@ class pScriptsActions extends sfActions {
                     $callLog->setStatus(3);
                     $callLog->save();
                 }
-            }  
+            }
         }
 
         $c = new Criteria;
@@ -5351,8 +5294,9 @@ class pScriptsActions extends sfActions {
             $this->todate = $callLog->getTodate();
             $employee = EmployeePeer::retrieveByPK($callLog->getParentId());
             $company = CompanyPeer::retrieveByPK($employee->getCompanyId());
-            $vat_percent = $company->getCountry()->getVatPercentage()/100; 
-            if($vat_percent=="") $vat_percent=0;
+            $vat_percent = $company->getCountry()->getVatPercentage() / 100;
+            if ($vat_percent == "")
+                $vat_percent = 0;
             $tilentaCallHistryResult = $tilentaSubscriptionResult = $telintaObj->getSubscription($employee, $callLog->getIAccount(), $this->fromdate, $this->todate);
             if ($tilentaCallHistryResult) {
                 foreach ($tilentaCallHistryResult->xdr_list as $odr) {
@@ -5379,33 +5323,33 @@ class pScriptsActions extends sfActions {
         }
         return sfView::NONE;
     }
-    public function executeB2bcalbackrefill(sfWebRequest $request)
-    {
+
+    public function executeB2bcalbackrefill(sfWebRequest $request) {
         $Parameters = $request->getURI();
-        
+
         $email2 = new DibsCall();
         $email2->setCallurl($Parameters);
         $email2->save();
-        
+
         $callbackparameters = $request->getParameter("p");
-        $params = explode("-",$callbackparameters);
-        
-        $order_id  = $params[0];
-        $amount    = $params[1];
-        $vat       = $params[2];
+        $params = explode("-", $callbackparameters);
+
+        $order_id = $params[0];
+        $amount = $params[1];
+        $vat = $params[2];
         $companyid = $params[3];
-                
+
         $cct = new Criteria();
-        $cct->add(CompanyTransactionPeer::ID,$order_id);
-        $cct->addAnd(CompanyTransactionPeer::TRANSACTION_STATUS_ID,2);
+        $cct->add(CompanyTransactionPeer::ID, $order_id);
+        $cct->addAnd(CompanyTransactionPeer::TRANSACTION_STATUS_ID, 2);
         $transaction = CompanyTransactionPeer::doSelectOne($cct);
-        
+
         $company = CompanyPeer::retrieveByPK($companyid);
         $description = $transaction->getDescription();
-        $amount      = $transaction->getExtraRefill();
+        $amount = $transaction->getExtraRefill();
         $ComtelintaObj = new CompanyEmployeActivation();
-        
-        if($ComtelintaObj->recharge($company, $amount, $description)){
+
+        if ($ComtelintaObj->recharge($company, $amount, $description)) {
             $transaction->setTransactionStatusId(3);
             $transaction->save();
             TransactionPeer::AssignB2bReceiptNumber($transaction);
@@ -5415,31 +5359,28 @@ class pScriptsActions extends sfActions {
         //$this->setLayout(false);
     }
 
-    
-    
-     public function executeCreateNewAccount(sfWebRequest $request) {
-         
-          $c = new Criteria;
-          $c->add(CustomerPeer::CUSTOMER_STATUS_ID,3);
-           $c->addAnd(CustomerPeer::ID,211,Criteria::GREATER_EQUAL);
-          $c->addAnd(CustomerPeer::ID,239,Criteria::LESS_EQUAL);
-          $customers=CustomerPeer::doSelect($c);
-   foreach($customers as $customer){
-              
-          echo "<br/>".$customer->getId()."-----------". $customer->getFirstName()."<hr/>";  
-                $telintaObj = new Telienta();
-               $icustomer=$customer->getICustomer();
-             echo  $batchNumber= $telintaObj->getCustomerInfoUnique($icustomer);
-                 
-        //    $telintaObj->createOldAccount($customer->getMobileNumber(), $customer,$batchNumber);
-          }
-          
-         return sfView::NONE;
+    public function executeCreateNewAccount(sfWebRequest $request) {
+
+        $c = new Criteria;
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $c->addAnd(CustomerPeer::ID, 211, Criteria::GREATER_EQUAL);
+        $c->addAnd(CustomerPeer::ID, 239, Criteria::LESS_EQUAL);
+        $customers = CustomerPeer::doSelect($c);
+        foreach ($customers as $customer) {
+
+            echo "<br/>" . $customer->getId() . "-----------" . $customer->getFirstName() . "<hr/>";
+            $telintaObj = new Telienta();
+            $icustomer = $customer->getICustomer();
+            echo $batchNumber = $telintaObj->getCustomerInfoUnique($icustomer);
+
+            //    $telintaObj->createOldAccount($customer->getMobileNumber(), $customer,$batchNumber);
+        }
+
+        return sfView::NONE;
     }
 
     public function executeAppThanks() {
-       
-       
-   } 
-   
+        
+    }
+
 }
