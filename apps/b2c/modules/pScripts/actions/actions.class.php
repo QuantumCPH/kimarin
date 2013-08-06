@@ -3266,25 +3266,23 @@ class pScriptsActions extends sfActions {
 
         $dateFrom = date('Y-m-d 00:00:00', strtotime('-180 Days'));
         $dateTo = date('Y-m-d 00:00:00');
-        $query = "SELECT customer.id as id FROM `customer` 
-Right JOIN transaction ON (customer.ID=transaction.CUSTOMER_ID) 
-WHERE transaction.CREATED_AT NOT Between '" . $dateFrom . "' AND '" . $dateTo . "' AND (transaction.TRANSACTION_TYPE_ID=1 or transaction.TRANSACTION_TYPE_ID=3) AND transaction.transaction_status_id=3 AND customer.CUSTOMER_STATUS_ID=3 
-GROUP BY customer.ID 
-ORDER BY customer.uniqueid";
-        $conn = Propel::getConnection();
-        $statement = $conn->prepare($query);
-        $statement->execute();
-
-        while ($rowObj = $statement->fetch(PDO::FETCH_OBJ)) {
-            $telintaObj = new Telienta();
-            $customer = CustomerPeer::retrieveByPK($rowObj->id);
-            $balance = $telintaObj->getBalance($customer);
-            if (number_format($balance,2) > 0) {
-                echo "<hr/>";
+        $c = new Criteria();
+        $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
+        $customers = CustomerPeer::doSelect($c);
+        $telintaObj = new Telienta();
+        foreach ($customers as $customer) {
+            $query = "select count(id) as count from transaction where customer_id='" . $customer->getId() . "' and CREATED_AT Between '" . $dateFrom . "' AND '" . $dateTo . "' AND (transaction.TRANSACTION_TYPE_ID=3 or transaction.TRANSACTION_TYPE_ID=1 ) AND transaction.TRANSACTION_STATUS_ID=3 ;";
+            $conn = Propel::getConnection();
+            $statement = $conn->prepare($query);
+            $statement->execute();
+            $rowObj = $statement->fetch(PDO::FETCH_OBJ);
+            $balance = number_format($telintaObj->getBalance($customer), 2);
+            if ($balance > 0 &&  $rowObj->count>0) {
                 echo $customer->getUniqueid() . "::" . $balance;
-                echo "<hr/>";
+                echo "<br/>";
             }
         }
+
 
         return sfView::NONE;
     }
