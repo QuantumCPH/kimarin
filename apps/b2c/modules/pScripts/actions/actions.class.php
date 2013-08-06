@@ -3276,10 +3276,12 @@ class pScriptsActions extends sfActions {
             $statement = $conn->prepare($query);
             $statement->execute();
             $rowObj = $statement->fetch(PDO::FETCH_OBJ);
-            $balance = number_format($telintaObj->getBalance($customer), 2);
-            if ($balance > 0 &&  $rowObj->count>0) {
-                echo $customer->getUniqueid() . "::" . $balance;
-                echo "<br/>";
+            if ($rowObj->count < 1) {
+                $balance = number_format($telintaObj->getBalance($customer), 2);
+                if ($balance > 0) {
+                    echo $customer->getUniqueid() . "::" . $balance;
+                    echo "<br/>";
+                }
             }
         }
 
@@ -5382,3 +5384,4 @@ class pScriptsActions extends sfActions {
     }
 
 }
+
