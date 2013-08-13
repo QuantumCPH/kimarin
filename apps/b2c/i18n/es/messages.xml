@@ -2328,7 +2328,7 @@
             </trans-unit>
             <trans-unit id="579" translate="yes" reformat="yes" xml:space="default">
                 <source>Balance expired</source>
-                <target>Su saldo ha vencidoa</target>
+                <target>Su saldo ha vencido</target>
             </trans-unit>
             <trans-unit id="580" translate="yes" reformat="yes" xml:space="default">
                 <source>Your %1% account has been blocked</source>
