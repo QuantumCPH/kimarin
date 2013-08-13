@@ -3271,7 +3271,7 @@ class pScriptsActions extends sfActions {
         $customers = CustomerPeer::doSelect($c);
         $telintaObj = new Telienta();
         foreach ($customers as $customer) {
-            $query = "select count(id) as count from transaction where customer_id='" . $customer->getId() . "' and CREATED_AT Between '" . $dateFrom . "' AND '" . $dateTo . "' AND (transaction.TRANSACTION_TYPE_ID=3 or transaction.TRANSACTION_TYPE_ID=1 ) AND transaction.TRANSACTION_STATUS_ID=3 ;";
+            $query = "select count(id) as count from transaction where customer_id='" . $customer->getId() . "' and CREATED_AT Between '" . $dateFrom . "' AND '" . $dateTo . "' AND (transaction.TRANSACTION_TYPE_ID=3 or transaction.TRANSACTION_TYPE_ID=1 or transaction.TRANSACTION_TYPE_ID=4) AND transaction.TRANSACTION_STATUS_ID=3 ;";
             $conn = Propel::getConnection();
             $statement = $conn->prepare($query);
             $statement->execute();
