@@ -3278,7 +3278,7 @@ class pScriptsActions extends sfActions {
             $statement->execute();
            $rowObj = $statement->fetch(PDO::FETCH_OBJ);
 //           echo "result".$rowObj->count;
-           echo "<br/>";
+//           echo "<br/>";
             if ($rowObj->count < 1) {
                 $balance = number_format($telintaObj->getBalance($customer), 2);
                 if ($balance > 0) {
