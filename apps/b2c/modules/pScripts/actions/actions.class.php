@@ -3271,13 +3271,13 @@ class pScriptsActions extends sfActions {
         $customers = CustomerPeer::doSelect($c);
         $telintaObj = new Telienta();
         foreach ($customers as $customer) {
-            echo $query = "select count(id) as count from transaction where customer_id='" . $customer->getId() . "' and CREATED_AT Between '" . $dateFrom . "' AND '" . $dateTo . "' AND (transaction.TRANSACTION_TYPE_ID=3 or transaction.TRANSACTION_TYPE_ID=1 or transaction.TRANSACTION_TYPE_ID=4) AND transaction.TRANSACTION_STATUS_ID=3 ;";
-            echo "<br/>";
+             $query = "select count(id) as count from transaction where customer_id='" . $customer->getId() . "' and CREATED_AT Between '" . $dateFrom . "' AND '" . $dateTo . "' AND (transaction.TRANSACTION_TYPE_ID=3 or transaction.TRANSACTION_TYPE_ID=1 or transaction.TRANSACTION_TYPE_ID=4) AND transaction.TRANSACTION_STATUS_ID=3 ;";
+//            echo "<br/>";
             $conn = Propel::getConnection();
             $statement = $conn->prepare($query);
             $statement->execute();
            $rowObj = $statement->fetch(PDO::FETCH_OBJ);
-           echo "result".$rowObj->count;
+//           echo "result".$rowObj->count;
            echo "<br/>";
             if ($rowObj->count < 1) {
                 $balance = number_format($telintaObj->getBalance($customer), 2);
