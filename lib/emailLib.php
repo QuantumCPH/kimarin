@@ -35,7 +35,7 @@ class emailLib {
             'wrap' => false,
             'agent' => $agent,
             'orderdescription' => $agentOrderDescription
-                ));
+        ));
 
 
         $subject = __('Agent Payment Confirmation');
@@ -164,7 +164,7 @@ class emailLib {
             'vat' => $vat,
             'agent_name' => $agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
@@ -293,11 +293,11 @@ class emailLib {
         $postalcharge = 0;
         $customerorder = 1;
         $vat = $order->getProduct()->getRegistrationFee() * sfConfig::get('app_vat_percentage');
-         $wrap = "normal";
-        
+        $wrap = "normal";
+
         if ($order->getProduct()->getProductTypeId() == 10) {
             $wrap = "dial";
-        } elseif($order->getProduct()->getProductTypeId() == 11) {
+        } elseif ($order->getProduct()->getProductTypeId() == 11) {
             $wrap = "app";
         }
         //$this->renderPartial('affiliate/order_receipt', array(
@@ -311,7 +311,7 @@ class emailLib {
             'postalcharge' => $postalcharge,
             'customerorder' => $customerorder,
             'wrap' => $wrap,
-                ));
+        ));
 
 
         $message_body_agent = get_partial('affiliate/order_receipt_web_reg', array(
@@ -323,7 +323,7 @@ class emailLib {
             'postalcharge' => $postalcharge,
             'customerorder' => $customerorder,
             'wrap' => false
-                ));
+        ));
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
         if ($customer->getBusiness()) {
@@ -466,7 +466,7 @@ class emailLib {
 
 
         $vat = $transaction->getAmount() - ($transaction->getAmount() / (sfConfig::get('app_vat_percentage') + 1));
-      
+
         $recepient_email = trim($customer->getEmail());
         if ($customer->getBusiness()) {
             $recepient_name = $customer->getLastName();
@@ -495,9 +495,9 @@ class emailLib {
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
-          $subject = __('Payment Confirmation');
+        $subject = __('Payment Confirmation');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');
@@ -811,7 +811,7 @@ class emailLib {
             'transaction' => $transaction,
             'vat' => $vat,
             'wrap' => true,
-                ));
+        ));
         $subject = __('Bonus awarded');
 
         //send to Kimarin order
@@ -928,10 +928,10 @@ class emailLib {
         $vat = ($order->getProduct()->getRegistrationFee() + $postalcharge) * sfConfig::get('app_vat_percentage');
 
         $wrap = "normal";
-        
+
         if ($order->getProduct()->getProductTypeId() == 10) {
             $wrap = "dial";
-        } elseif($order->getProduct()->getProductTypeId() == 11) {
+        } elseif ($order->getProduct()->getProductTypeId() == 11) {
             $wrap = "app";
         }
 
@@ -946,8 +946,7 @@ class emailLib {
             'agent_name' => $recepient_agent_name,
             'postalcharge' => $postalcharge,
             'wrap' => $wrap,
-           
-                ));
+        ));
 
 
         $subject = __('Registration Confirmation');
@@ -1064,7 +1063,7 @@ class emailLib {
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Registration  Confirmation');
         $recepient_email = trim($customer->getEmail());
@@ -1206,7 +1205,7 @@ class emailLib {
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Registration Confirmation');
         $recepient_email = trim($customer->getEmail());
@@ -1439,7 +1438,7 @@ Med vänlig hälsning<br/><br/>
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
         $email_content = get_partial('pScripts/user_alert', array(
             'message' => $message_body
-                ));
+        ));
 
         $subject = __('Balance Email');
         $recepient_name = '';
@@ -1501,13 +1500,14 @@ Med vänlig hälsning<br/><br/>
         //**********************************************************************
     }
 
-    public static function sendUniqueIdsShortage($sim_type , $message=NULL) {
+    public static function sendUniqueIdsShortage($sim_type, $message = NULL) {
 
         $subject = 'Unique Ids finished.';
-        
+
         $message_body = "Uniuqe Ids have been finsihed of SIM Type " . $sim_type . ".<br/><br/>" . sfConfig::get('app_site_title');
-        if($message!=NULL) $message.$message_body;
-            
+        if ($message != NULL)
+            $message . $message_body;
+
         $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
         $recipient_email_rs = sfConfig::get('app_email_sender_email_rs');
 
@@ -1679,7 +1679,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
             'agent' => $agent
-                ));
+        ));
 
 
         $subject = __('Agent Payment Confirmation');
@@ -1806,7 +1806,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Change number - payment confirmation');
 
@@ -1955,7 +1955,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Payment Confirmation');
         $recepient_email = trim($customer->getEmail());
@@ -2084,7 +2084,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Payment Confirmation');
 
@@ -2189,7 +2189,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Payment Confirmation');
         $sender_email = sfConfig::get('app_email_sender_email', 'okhan@zapna.com');
@@ -2270,7 +2270,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
                 /* 'vat' => $vat,
                   'agent_name' => $recepient_agent_name,
                   'wrap' => false, */
-                ));
+        ));
 
         $subject = __('New SIM-card confirmation');
         //Support Information
@@ -2397,7 +2397,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Change number - payment confirmation');
         $recepient_email = trim($customer->getEmail());
@@ -2535,7 +2535,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Change product - payment confirmation');
         //Support Information
@@ -2674,7 +2674,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Confirmation of product change');
         //Support Information
@@ -2779,7 +2779,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $message_body = get_partial('customer/block_customer', array(
             'customer' => $customer,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Block account');
         //Support Information
@@ -2893,7 +2893,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'wrap' => true,
             'agent_name' => $agent_name,
                 /* 'wrap' => false, */
-                ));
+        ));
         $message_bodyAgent = get_partial('affiliate/newcard_receipt', array(
             'customer' => $customer,
             'order' => $order,
@@ -2901,7 +2901,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('New SIM-card confirmation');
         //Support Information
@@ -3039,7 +3039,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $agent_name,
             'wrap' => false,
-                ));
+        ));
 
         $subject = __('Change product - payment confirmation');
         //Support Information
@@ -3148,10 +3148,10 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         $customer_id = trim($transaction->getCustomerId());
         $customer = CustomerPeer::retrieveByPK($customer_id);
         $order = CustomerOrderPeer::retrieveByPK($transaction->getOrderId());
-        $referrer_id =$customer->getReferrerId();
+        $referrer_id = $customer->getReferrerId();
         $recepient_email = trim($customer->getEmail());
         $recepient_name = sprintf('%s %s', $customer->getFirstName(), $customer->getLastName());
-        
+
         if ($referrer_id != '') {
             $c = new Criteria();
             $c->add(AgentCompanyPeer::ID, $referrer_id);
@@ -3168,20 +3168,20 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'transaction' => $transaction,
             'customer' => $customer,
             'order' => $order,
-            'vat'=> $vat,
-            'postalcharge'=> $postalcharge,
-            'agent_name'=>$recepient_agent_name,
+            'vat' => $vat,
+            'postalcharge' => $postalcharge,
+            'agent_name' => $recepient_agent_name,
             'wrap' => true,
-                ));
+        ));
         $agent_message_body = get_partial($app . '/order_receipt_app', array(
             'transaction' => $transaction,
             'customer' => $customer,
             'order' => $order,
-            'vat'=> $vat,
-            'postalcharge'=> $postalcharge,
-            'agent_name'=>$recepient_agent_name,
+            'vat' => $vat,
+            'postalcharge' => $postalcharge,
+            'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
         $subject = 'Registration Confirmation - Confirmación de registro';
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
@@ -3277,8 +3277,8 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         //set vat
 
 
-        $vat =0;
-      
+        $vat = 0;
+
         $recepient_email = trim($customer->getEmail());
         if ($customer->getBusiness()) {
             $recepient_name = $customer->getLastName();
@@ -3307,9 +3307,9 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             'vat' => $vat,
             'agent_name' => $recepient_agent_name,
             'wrap' => false,
-                ));
+        ));
 
-          $subject = __('Payment Confirmation');
+        $subject = __('Balance expired');
         //Support Information
         $sender_name = sfConfig::get('app_email_sender_name');
         $sender_email = sfConfig::get('app_email_sender_email');
@@ -3402,17 +3402,17 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         endif;
         //-----------------------------------------
     }
-   
+
     public static function sendEmployeeForgetPasswordEmail(Employee $employee, $message_body, $subject) {
         sfContext::getInstance()->getConfiguration()->loadHelpers('Partial');
 
         // $subject = __("Request for password");
         $recepient_email = trim($employee->getEmail());
-       
+
         $recepient_name = sprintf('%s %s', $employee->getFirstName(), $employee->getLastName());
-        
+
         $employee_id = trim($employee->getId());
- 
+
         //------------------Sent The Email To Employee
         if (trim($recepient_email) != '') {
             $email = new EmailQueue();
@@ -3426,7 +3426,7 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         }
         //----------------------------------------
     }
-    
+
     public static function sendError($subject, $message) {
 
         $recipient_name_rs = sfConfig::get('app_email_sender_name_rs');
@@ -3458,11 +3458,11 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
         endif;
         //**********************************************************************
     }
-    public static function smsNotSentEmail($employeList)
-    {
 
-        $subject="SMS Not Working";
-        $message_body= "Please investigate <br/>".$employeList;
+    public static function smsNotSentEmail($employeList) {
+
+        $subject = "SMS Not Working";
+        $message_body = "Please investigate <br/>" . $employeList;
 
         $recipient_name_rs = sfConfig::get('app_recipient_name_rs');
         $recipient_email_rs = sfConfig::get('app_recipient_email_rs');
@@ -3481,9 +3481,8 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email->save();
         endif;
         //**********************************************************************
-
         //*******************Sent The Email To Support**************************
-         if ($recipient_email_support != ''):
+        if ($recipient_email_support != ''):
             $email = new EmailQueue();
             $email->setSubject($subject);
             $email->setReceipientName($recipient_name_support);
@@ -3491,10 +3490,10 @@ Uniuqe Id " . $uniqueid . " has issue while assigning on " . $customer->getMobil
             $email->setEmailType('SMS not sent issue');
             $email->setMessage($message_body);
             $email->save();
-         endif;
+        endif;
         //**********************************************************************
-
     }
+
 }
 
 ?>
