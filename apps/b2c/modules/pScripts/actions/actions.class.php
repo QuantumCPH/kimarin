@@ -3284,32 +3284,32 @@ class pScriptsActions extends sfActions {
                 if ($balance > 0) {
                     echo $customer->getUniqueid() . "::" . $balance;
                     echo "<br/>";
-//                    $cp = new Criteria();
-//                    $cp->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
-//                    $customer_product = CustomerProductPeer::doSelectOne($cp)->getProduct();
-//                    $order = new CustomerOrder();
-//                    $order->setExtraRefill(-$balance);
-//                    $order->setCustomerId($customer->getId());
-//                    $order->setProductId($customer_product->getId());
-//                    $order->setOrderStatusId(3);
-//                    $order->setIsFirstOrder(10);  //// product type remove 
-//                    $order->save();
-//                    $transaction = new Transaction();
-//                    $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
-//                    $transaction->setAmount(-$balance);
-//                    $transaction->setOrderId($order->getId());
-//                    $transaction->setTransactionStatusId(3);
-//                    $transaction->setCustomerId($customer->getId());
-//                    $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
-//                    $transaction->setTransactionDescriptionId($transactiondescription->getId());
-//                    $transaction->setDescription($transactiondescription->getTitle());
-//                    $transaction->save();
-//                    TransactionPeer::AssignReceiptNumber($transaction);
-//                    $telintaObj = new Telienta();
-//                    $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
-//                    $this->setPreferredCulture($customer);
-//                    emailLib::sendCustomerRemoveBalanceEmail($customer, $order, $transaction);
-//                    $this->updatePreferredCulture();
+                    $cp = new Criteria();
+                    $cp->add(CustomerProductPeer::CUSTOMER_ID, $customer->getId());
+                    $customer_product = CustomerProductPeer::doSelectOne($cp)->getProduct();
+                    $order = new CustomerOrder();
+                    $order->setExtraRefill(-$balance);
+                    $order->setCustomerId($customer->getId());
+                    $order->setProductId($customer_product->getId());
+                    $order->setOrderStatusId(3);
+                    $order->setIsFirstOrder(10);  //// product type remove 
+                    $order->save();
+                    $transaction = new Transaction();
+                    $transactiondescription = TransactionDescriptionPeer::retrieveByPK(17);
+                    $transaction->setAmount(-$balance);
+                    $transaction->setOrderId($order->getId());
+                    $transaction->setTransactionStatusId(3);
+                    $transaction->setCustomerId($customer->getId());
+                    $transaction->setTransactionTypeId($transactiondescription->getTransactionTypeId());
+                    $transaction->setTransactionDescriptionId($transactiondescription->getId());
+                    $transaction->setDescription($transactiondescription->getTitle());
+                    $transaction->save();
+                    TransactionPeer::AssignReceiptNumber($transaction);
+                    $telintaObj = new Telienta();
+                    $telintaObj->charge($customer, $balance, $transactiondescription->getTitle());
+                    $this->setPreferredCulture($customer);
+                    emailLib::sendCustomerRemoveBalanceEmail($customer, $order, $transaction);
+                    $this->updatePreferredCulture();
                 }
             }
         }
