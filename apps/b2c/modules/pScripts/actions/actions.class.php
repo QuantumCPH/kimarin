@@ -3265,7 +3265,7 @@ class pScriptsActions extends sfActions {
     public function executeRemoveRefilBalance(sfWebRequest $request) {
 
         $dateFrom = date('Y-m-d 00:00:00', strtotime('-180 Days'));
-        $dateTo = date('Y-m-d 00:00:00');
+        $dateTo = date('Y-m-d 23:59:59');
         $c = new Criteria();
         $c->add(CustomerPeer::CUSTOMER_STATUS_ID, 3);
         $customers = CustomerPeer::doSelect($c);
